@@ -2,10 +2,6 @@
   <img src="assets/GopiAI_Logo.png" alt="GopiAI logo" width="300"/>
 </p>
 
-<p align="center">
-  <img src="assets/GopiAI_Logo.png" alt="GopiAI logo" width="300"/>
-</p>
-
 **GopiAI** — это мой персональный AI-ассистент,
 созданный как альтернатива подпискам, в которых всегда чего-то не хватает.
 
