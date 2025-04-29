@@ -1,0 +1,36 @@
+# Global LLM configuration
+[llm]
+api_type = "openai"
+model = "mistralai/mistral-small-3.1-24b-instruct:free"         # Модель с поддержкой изображений
+base_url = "https://openrouter.ai/api/v1"
+api_key = "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"
+temperature = 0.0
+max_tokens = 8192
+
+# Vision-модель (основная!)
+[llm.vision]
+api_type = "openai"
+model = "mistralai/mistral-small-3.1-24b-instruct:free"         # Здесь тоже та же модель
+base_url = "https://openrouter.ai/api/v1"
+api_key = "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"
+temperature = 0.0
+max_tokens = 8192
+
+[browser]
+headless = false
+disable_security = true
+extra_chromium_args = []
+chrome_instance_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+wss_url = ""
+cdp_url = ""
+
+[tavily]
+api_key = "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"
+
+[search]
+engine = "duckduckgo"
+fallback_engines = ["Google"]
+lang = "ru"
+country = "ru"
+retry_delay = 60
+max_retries = 3

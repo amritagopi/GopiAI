@@ -1,0 +1,91 @@
+from pathlib import Path
+
+# Пути к исходным темам
+dark_theme_path = Path("/mnt/data/dark_theme.qss")
+light_theme_path = Path("/mnt/data/light_theme.qss")
+
+# Загрузка содержимого
+with open(dark_theme_path, encoding="utf-8") as f:
+    dark_theme = f.read()
+
+with open(light_theme_path, encoding="utf-8") as f:
+    light_theme = f.read()
+
+# Стратегия объединения:
+# - Из тёмной темы: цвета, градиенты, фоны
+# - Из светлой темы: размеры, скругления, отступы
+# Ничего не выбрасываем! Просто аккуратно переносим стили друг к другу.
+
+import re
+
+def extract_blocks(qss_text):
+    blocks = {}
+    current_selector = None
+    current_rules = []
+
+    for line in qss_text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if line.endswith("{"):
+            current_selector = line[:-1].strip()
+            current_rules = []
+        elif line == "}":
+            if current_selector:
+                blocks[current_selector] = "\n".join(current_rules)
+            current_selector = None
+            current_rules = []
+        elif current_selector:
+            current_rules.append(line)
+
+    return blocks
+
+def merge_styles(light_block, dark_block):
+    light_rules = dict(re.findall(r"(.*?):(.*?);", light_block))
+    dark_rules = dict(re.findall(r"(.*?):(.*?);", dark_block))
+
+    merged = {}
+    # Переносим цвета из тёмной темы
+    for prop, value in dark_rules.items():
+        if any(color_word in prop.lower() for color_word in ["color", "background", "border", "gradient"]):
+            merged[prop.strip()] = value.strip()
+
+    # Переносим всё остальное из светлой темы
+    for prop, value in light_rules.items():
+        if prop.strip() not in merged:
+            merged[prop.strip()] = value.strip()
+
+    # Формируем результат
+    merged_rules = [f"{prop}: {val};" for prop, val in merged.items()]
+    return "\n    ".join(merged_rules)
+
+# Разбиваем темы на блоки
+light_blocks = extract_blocks(light_theme)
+dark_blocks = extract_blocks(dark_theme)
+
+# Объединяем
+merged_blocks = {}
+all_selectors = set(light_blocks.keys()).union(dark_blocks.keys())
+
+for selector in all_selectors:
+    light_block = light_blocks.get(selector, "")
+    dark_block = dark_blocks.get(selector, "")
+
+    if light_block and dark_block:
+        merged_blocks[selector] = merge_styles(light_block, dark_block)
+    elif light_block:
+        merged_blocks[selector] = light_block
+    elif dark_block:
+        merged_blocks[selector] = dark_block
+
+# Формируем итоговый текст
+merged_theme = "\n\n".join([
+    f"{selector} {{\n    {rules}\n}}" for selector, rules in merged_blocks.items()
+])
+
+# Сохраняем файл
+output_path = Path("/mnt/data/merged_theme.qss")
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(merged_theme)
+
+print(f"Тема успешно объединена! Файл сохранён: {output_path}")
