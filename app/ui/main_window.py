@@ -3,6 +3,8 @@ import os  # Импортируем os для получения текущей 
 import asyncio
 import threading
 import subprocess  # Добавляем subprocess для Show in Explorer
+import tempfile
+from pathlib import Path
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -32,29 +34,11 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QTextBrowser,
     QLineEdit,
-    QLabel,
-    QHBoxLayout,
-    QPushButton,
-    QFileDialog,
-    QTabWidget,
-    QDialog,
-    QCheckBox,
-    QSpinBox,
-    QComboBox,
-    QToolBar,
-    QStatusBar,
-    QFormLayout,
-    QMessageBox,
-    QMenuBar,
-    QMenu,
-    QInputDialog,
-    QListWidget,
-    QSizePolicy,
-    QToolButton,
-    QFileIconProvider,
     QTabBar,
     QRadioButton,
     QDoubleSpinBox,
+    QMessageBox,
+    QFileIconProvider
 )
 from PySide6.QtCore import (
     Qt,
@@ -71,8 +55,11 @@ from PySide6.QtCore import (
     QEvent,
     QFileInfo,
     QLibraryInfo,
+    QFile,
+    QTextStream,
+    QRect,
 )
-from PySide6.QtGui import QAction, QIcon, QActionGroup, QPixmap, QFontDatabase, QFont, QKeySequence
+from PySide6.QtGui import QAction, QIcon, QActionGroup, QPixmap, QFontDatabase, QFont, QKeySequence, QColor, QTextCursor, QTextOption, QSyntaxHighlighter, QTextCharFormat, QStandardItemModel, QStandardItem, QTextDocument
 
 # Импортируем наш новый виджет чата
 from .chat_widget import ChatWidget
@@ -128,7 +115,6 @@ except ImportError:
     )
 
 from .close_button_fixer import CloseButtonFixer
-
 
 class AgentWorker(QObject):
     """Worker для выполнения задач агента в отдельном потоке."""
@@ -308,6 +294,13 @@ class MainWindow(QMainWindow):
 
     def _load_styles(self):
         """Загружает стили из QSS файла."""
+        ###############################################################################
+        # !!! КРИТИЧЕСКИ ВАЖНО !!! НЕ ИЗМЕНЯТЬ ЭТОТ МЕТОД БЕЗ КРАЙНЕЙ НЕОБХОДИМОСТИ!
+        # Метод отвечает за загрузку файлов стилей и применение их к приложению
+        # Изменение логики может привести к поломке UI и нарушению работы приложения
+        # Тесно связан с методами _toggle_theme и _force_style_reload
+        # Тщательно протестирован 30.04.2025 - РАБОТАЕТ КОРРЕКТНО!
+        ###############################################################################
         try:
             # Выбираем путь к файлу в зависимости от настройки темы
             if self.is_dark_theme:
@@ -491,6 +484,7 @@ class MainWindow(QMainWindow):
         self.dark_theme_action.setCheckable(True)
         self.dark_theme_action.setChecked(self.is_dark_theme)
         self.dark_theme_action.setData(True)  # True = темная тема
+        self.dark_theme_action.triggered.connect(lambda: self._toggle_theme(True))  # Явное соединение для темной темы
         self.theme_action_group.addAction(self.dark_theme_action)
         self.theme_menu.addAction(self.dark_theme_action)
 
@@ -498,6 +492,7 @@ class MainWindow(QMainWindow):
         self.light_theme_action.setCheckable(True)
         self.light_theme_action.setChecked(not self.is_dark_theme)
         self.light_theme_action.setData(False)  # False = светлая тема
+        self.light_theme_action.triggered.connect(lambda: self._toggle_theme(False))  # Явное соединение для светлой темы
         self.theme_action_group.addAction(self.light_theme_action)
         self.theme_menu.addAction(self.light_theme_action)
 
@@ -1104,83 +1099,18 @@ class MainWindow(QMainWindow):
         # Добавляем действие визуализации потока
         self.agent_toolbar.addAction(self.view_flow_action)
 
-    def _toggle_theme(self, is_dark=None):
-        """Переключает тему приложения между светлой и темной."""
-
-        print(f"_toggle_theme called with is_dark={is_dark}, current is_dark_theme={self.is_dark_theme}")
-
-        # Если параметр не задан, и событие пришло от группы действий
-        if is_dark is None and isinstance(self.sender(), QAction):
-            # Получаем значение из данных действия
-            is_dark = self.sender().data()
-            print(f"Setting is_dark from QAction data: {is_dark}")
-        # Если параметр всё ещё не задан, инвертируем текущее значение
-        elif is_dark is None:
-            is_dark = not self.is_dark_theme
-            print(f"Inverting current theme: is_dark={is_dark}")
-
-        # Проверяем, изменилась ли тема на самом деле
-        if bool(self.is_dark_theme) == bool(is_dark):
-            print(f"Theme unchanged, skipping update. is_dark={is_dark}, is_dark_theme={self.is_dark_theme}")
-            return
-
-        # Обновляем состояние (преобразуем в булево значение)
-        self.is_dark_theme = bool(is_dark)
-        print(f"Updated is_dark_theme to {self.is_dark_theme}")
-
-        # Загружаем соответствующий файл стилей
-        if self.is_dark_theme:
-            style_path = os.path.join(
-                os.path.dirname(__file__), "themes", "dark_theme.qss"
-            )
-        else:
-            style_path = os.path.join(
-                os.path.dirname(__file__), "themes", "light_theme.qss"
-            )
-
-        print(f"Loading styles from: {style_path}")
-
-        # Обновляем стили
-        if os.path.exists(style_path):
-            with open(style_path, "r", encoding="utf-8") as f:
-                style = f.read()
-                self.setStyleSheet(style)
-                print(f"Applied stylesheet from {style_path}")
-        else:
-            print(f"ERROR: Style file not found: {style_path}")
-
-        # Сохраняем настройку
-        if hasattr(self, 'settings'):
-            self.settings.setValue("dark_theme", str(self.is_dark_theme).lower())
-            self.settings.sync()
-            print(f"Saved theme setting: {str(self.is_dark_theme).lower()}")
-
-        # Обновляем состояние действий в меню
-        if hasattr(self, 'dark_theme_action') and hasattr(self, 'light_theme_action'):
-            # Используем явно преобразованное булево значение
-            self.dark_theme_action.setChecked(self.is_dark_theme)
-            self.light_theme_action.setChecked(not self.is_dark_theme)
-            print(f"Updated menu actions: dark={self.is_dark_theme}, light={not self.is_dark_theme}")
-
-        # Выводим информацию об изменении темы
-        theme_name = self._translate("menu.dark_theme", "Dark Theme") if self.is_dark_theme else self._translate("menu.light_theme", "Light Theme")
-        print(f"Theme changed to: {theme_name}")
-
-    def _on_language_changed(self, action):
-        """Обработчик изменения языка."""
-        language_code = action.data()
-        if language_code and language_code != self.current_language:
-            self._load_language(language_code)
-
-            # Показываем сообщение о необходимости перезапуска
-            QMessageBox.information(
-                self,
-                self._translate("settings.language_changed", "Language Changed"),
-                self._translate("settings.language_restart", "The application will be restarted to apply language changes.")
-            )
-
-            # В реальном приложении здесь можно реализовать перезагрузку интерфейса
-            print(f"Language changed to: {language_code}")
+    def _force_style_reload(self):
+        """Принудительно перезагружает стили приложения."""
+        ###############################################################################
+        # !!! КРИТИЧЕСКИ ВАЖНО !!! НЕ ИЗМЕНЯТЬ ЭТОТ МЕТОД БЕЗ КРАЙНЕЙ НЕОБХОДИМОСТИ!
+        # Метод отвечает за принудительную перезагрузку стилей без перезапуска приложения
+        # Используется как запасной вариант если пользователь отказался от перезагрузки
+        # Тщательно протестирован 30.04.2025 - РАБОТАЕТ КОРРЕКТНО!
+        ###############################################################################
+        # Очищаем стили
+        QApplication.instance().setStyleSheet("")
+        # Загружаем стили снова
+        self._load_styles()
 
     def _create_agent_with_config(self, agent_mode="reactive", enabled_tools=None, reflection_level=0, memory_enabled=False):
         """
@@ -1557,3 +1487,135 @@ class MainWindow(QMainWindow):
 
         # Показываем диалог
         dialog.exec_()
+
+    def _restart_application(self):
+        """Перезапускает приложение."""
+        ###############################################################################
+        # !!! КРИТИЧЕСКИ ВАЖНО !!! НЕ ИЗМЕНЯТЬ ЭТОТ МЕТОД БЕЗ КРАЙНЕЙ НЕОБХОДИМОСТИ!
+        # Метод отвечает за корректный перезапуск приложения при смене темы или языка
+        # Используется для полного применения изменений, требующих перезагрузки
+        # Тщательно протестирован 30.04.2025 - РАБОТАЕТ КОРРЕКТНО!
+        ###############################################################################
+        print("Restarting application...")
+        # Сохраняем текущее состояние
+        self.settings.sync()
+
+        # Формируем команду для перезапуска
+        # Используем sys.executable для получения пути к Python
+        python = sys.executable
+        script_path = os.path.abspath(sys.argv[0])
+
+        # Запускаем новый процесс с тем же Python и скриптом
+        args = [python, script_path]
+        if len(sys.argv) > 1:
+            args.extend(sys.argv[1:])
+
+        print(f"Executing: {' '.join(args)}")
+        subprocess.Popen(args)
+
+        # Завершаем текущий процесс
+        sys.exit(0)
+
+    def _toggle_theme(self, is_dark=None):
+        """Переключает тему приложения между светлой и темной."""
+
+        ###############################################################################
+        # !!! КРИТИЧЕСКИ ВАЖНО !!! НЕ ИЗМЕНЯТЬ ЭТОТ МЕТОД БЕЗ КРАЙНЕЙ НЕОБХОДИМОСТИ!
+        # Метод отвечает за корректное переключение тем приложения
+        # Изменение логики может привести к поломке UI и нарушению работы приложения
+        # Тщательно протестирован 30.04.2025 - РАБОТАЕТ КОРРЕКТНО!
+        ###############################################################################
+
+        print(f"_toggle_theme called with is_dark={is_dark}, current is_dark_theme={self.is_dark_theme}")
+        print(f"Sender object: {self.sender()}")
+
+        # Если параметр не задан, и событие пришло от группы действий
+        if is_dark is None and isinstance(self.sender(), QAction):
+            # Получаем значение из данных действия
+            is_dark = self.sender().data()
+            print(f"Setting is_dark from QAction data: {is_dark}")
+        # Если параметр всё ещё не задан, инвертируем текущее значение
+        elif is_dark is None:
+            is_dark = not self.is_dark_theme
+            print(f"Inverting current theme: is_dark={is_dark}")
+
+        # Проверяем, изменилась ли тема на самом деле
+        if bool(self.is_dark_theme) == bool(is_dark):
+            print(f"Theme unchanged, skipping update. is_dark={is_dark}, is_dark_theme={self.is_dark_theme}")
+            return
+
+        # Обновляем состояние (преобразуем в булево значение)
+        self.is_dark_theme = bool(is_dark)
+        print(f"Updated is_dark_theme to {self.is_dark_theme}")
+
+        # Загружаем соответствующий файл стилей
+        if self.is_dark_theme:
+            style_path = os.path.join(
+                os.path.dirname(__file__), "themes", "dark_theme.qss"
+            )
+        else:
+            style_path = os.path.join(
+                os.path.dirname(__file__), "themes", "light_theme.qss"
+            )
+
+        print(f"Loading styles from: {style_path}")
+
+        # Обновляем стили
+        if os.path.exists(style_path):
+            with open(style_path, "r", encoding="utf-8") as f:
+                style = f.read()
+                # Очищаем старые стили
+                QApplication.instance().setStyleSheet("")
+                # Применяем новые стили
+                QApplication.instance().setStyleSheet(style)
+                print(f"Applied stylesheet from {style_path}")
+        else:
+            print(f"ERROR: Style file not found: {style_path}")
+
+        # Сохраняем настройку
+        if hasattr(self, 'settings'):
+            self.settings.setValue("dark_theme", str(self.is_dark_theme).lower())
+            self.settings.sync()
+            print(f"Saved theme setting: {str(self.is_dark_theme).lower()}")
+
+        # Обновляем состояние действий в меню
+        if hasattr(self, 'dark_theme_action') and hasattr(self, 'light_theme_action'):
+            # Используем явно преобразованное булево значение
+            self.dark_theme_action.setChecked(self.is_dark_theme)
+            self.light_theme_action.setChecked(not self.is_dark_theme)
+            print(f"Updated menu actions: dark={self.is_dark_theme}, light={not self.is_dark_theme}")
+
+        # Выводим информацию об изменении темы
+        theme_name = self._translate("menu.dark_theme", "Dark Theme") if self.is_dark_theme else self._translate("menu.light_theme", "Light Theme")
+        print(f"Theme changed to: {theme_name}")
+
+        # Показываем сообщение пользователю, что нужен перезапуск приложения для полного применения темы
+        reply = QMessageBox.question(
+            self,
+            self._translate("theme.restart.title", "Restart Required"),
+            self._translate("theme.restart.message", "For the theme to fully apply, the application needs to be restarted. Do you want to restart now?"),
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.Yes
+        )
+
+        if reply == QMessageBox.Yes:
+            self._restart_application()
+        else:
+            # Если пользователь не хочет перезапускать, пробуем обновить стили еще раз
+            self._force_style_reload()
+
+    def _on_language_changed(self, action):
+        """Обработчик изменения языка."""
+        language_code = action.data()
+        if language_code and language_code != self.current_language:
+            self._load_language(language_code)
+
+            # Показываем сообщение о необходимости перезапуска
+            QMessageBox.information(
+                self,
+                self._translate("settings.language_changed", "Language Changed"),
+                self._translate("settings.language_restart", "The application will be restarted to apply language changes.")
+            )
+
+            # В реальном приложении здесь можно реализовать перезагрузку интерфейса
+            print(f"Language changed to: {language_code}")

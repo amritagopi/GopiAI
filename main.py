@@ -2,6 +2,11 @@ import sys
 import os
 from PySide6.QtWidgets import QApplication
 from app.ui.styles import load_styles  # Импортируем новый модуль стилей
+import icons_rc  # Импортируем ресурсы иконок
+
+# Добавляем вывод информации о версии Python
+print(f"Запуск с Python: {sys.version}")
+print(f"sys.version_info: {sys.version_info}")
 
 def main():
     # Включаем функцию High DPI для лучшего отображения на мониторах с высоким разрешением

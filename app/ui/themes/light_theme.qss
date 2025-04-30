@@ -1,91 +1,190 @@
-from pathlib import Path
+/* Базовый фон */
+QWidget {
+    background-color: #B6F2EC;
+    color: #402826;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
 
-# Пути к исходным темам
-dark_theme_path = Path("/mnt/data/dark_theme.qss")
-light_theme_path = Path("/mnt/data/light_theme.qss")
+/* Главное окно */
+QMainWindow {
+    background-color: #F5F5F5;
+    color: #303030;
+}
 
-# Загрузка содержимого
-with open(dark_theme_path, encoding="utf-8") as f:
-    dark_theme = f.read()
+/* Центральный виджет */
+QTabWidget {
+    background-color: #FFFFFF;
+    color: #402826;
+}
 
-with open(light_theme_path, encoding="utf-8") as f:
-    light_theme = f.read()
+QTabWidget::pane {
+    border: 1px solid #8DC3F2;
+    background-color: #FFFFFF;
+}
 
-# Стратегия объединения:
-# - Из тёмной темы: цвета, градиенты, фоны
-# - Из светлой темы: размеры, скругления, отступы
-# Ничего не выбрасываем! Просто аккуратно переносим стили друг к другу.
+QTabBar::tab {
+    background-color: #B6F2EC;
+    color: #402826;
+    border: 1px solid #8DC3F2;
+    border-bottom: none;
+    padding: 5px 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
 
-import re
+QTabBar::tab:selected {
+    background-color: #7EF2E7;
+    color: #402826;
+}
 
-def extract_blocks(qss_text):
-    blocks = {}
-    current_selector = None
-    current_rules = []
+QTabBar::tab:hover:!selected {
+    background-color: #D97855;
+}
 
-    for line in qss_text.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        if line.endswith("{"):
-            current_selector = line[:-1].strip()
-            current_rules = []
-        elif line == "}":
-            if current_selector:
-                blocks[current_selector] = "\n".join(current_rules)
-            current_selector = None
-            current_rules = []
-        elif current_selector:
-            current_rules.append(line)
+/* Кнопки */
+QPushButton {
+    background-color: #D97855;
+    color: #FFFFFF;
+    border: 1px solid #8DC3F2;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-width: 70px;
+    text-align: center;
+}
+QPushButton:hover {
+    background-color: #8C4C35;
+    border: 1px solid #7EF2E7;
+}
+QPushButton:pressed {
+    background-color: #402826;
+    border: 1px solid #7EF2E7;
+}
 
-    return blocks
+/* Поля ввода */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: #FFFFFF;
+    color: #402826;
+    border: 1px solid #7EF2E7;
+    border-radius: 4px;
+    padding: 4px;
+}
 
-def merge_styles(light_block, dark_block):
-    light_rules = dict(re.findall(r"(.*?):(.*?);", light_block))
-    dark_rules = dict(re.findall(r"(.*?):(.*?);", dark_block))
+/* Метки */
+QLabel {
+    color: #402826;
+}
 
-    merged = {}
-    # Переносим цвета из тёмной темы
-    for prop, value in dark_rules.items():
-        if any(color_word in prop.lower() for color_word in ["color", "background", "border", "gradient"]):
-            merged[prop.strip()] = value.strip()
+/* Скроллбар */
+QScrollBar:vertical {
+    background-color: #E8E8E8;
+    width: 10px;
+    margin: 0px;
+}
+QScrollBar::handle:vertical {
+    background-color: #8DC3F2;
+    border-radius: 4px;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
 
-    # Переносим всё остальное из светлой темы
-    for prop, value in light_rules.items():
-        if prop.strip() not in merged:
-            merged[prop.strip()] = value.strip()
+/* Комбобокс */
+QComboBox {
+    background-color: #FFFFFF;
+    color: #402826;
+    border: 1px solid #8DC3F2;
+    border-radius: 4px;
+    padding: 4px;
+}
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    selection-background-color: #D97855;
+    color: #402826;
+}
 
-    # Формируем результат
-    merged_rules = [f"{prop}: {val};" for prop, val in merged.items()]
-    return "\n    ".join(merged_rules)
+/* Меню */
+QMenuBar {
+    background-color: #B6F2EC;
+    color: #402826;
+}
 
-# Разбиваем темы на блоки
-light_blocks = extract_blocks(light_theme)
-dark_blocks = extract_blocks(dark_theme)
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+}
 
-# Объединяем
-merged_blocks = {}
-all_selectors = set(light_blocks.keys()).union(dark_blocks.keys())
+QMenuBar::item:selected {
+    background-color: #7EF2E7;
+    color: #402826;
+}
 
-for selector in all_selectors:
-    light_block = light_blocks.get(selector, "")
-    dark_block = dark_blocks.get(selector, "")
+QMenu {
+    background-color: #B6F2EC;
+    color: #402826;
+    border: 1px solid #8DC3F2;
+}
 
-    if light_block and dark_block:
-        merged_blocks[selector] = merge_styles(light_block, dark_block)
-    elif light_block:
-        merged_blocks[selector] = light_block
-    elif dark_block:
-        merged_blocks[selector] = dark_block
+QMenu::item {
+    padding: 5px 20px 5px 20px;
+}
 
-# Формируем итоговый текст
-merged_theme = "\n\n".join([
-    f"{selector} {{\n    {rules}\n}}" for selector, rules in merged_blocks.items()
-])
+QMenu::item:selected {
+    background-color: #7EF2E7;
+    color: #402826;
+}
 
-# Сохраняем файл
-output_path = Path("/mnt/data/merged_theme.qss")
-with open(output_path, "w", encoding="utf-8") as f:
-    f.write(merged_theme)
+/* Доки */
+QDockWidget {
+    background-color: #B6F2EC;
+    color: #402826;
+}
 
-print(f"Тема успешно объединена! Файл сохранён: {output_path}")
+QDockWidget::title {
+    background-color: #7EF2E7;
+    padding-left: 5px;
+    padding-top: 3px;
+}
+
+/* Панель инструментов */
+QToolBar {
+    background-color: #B6F2EC;
+    border: none;
+    spacing: 3px;
+}
+
+QToolBar::separator {
+    width: 1px;
+    background-color: #C0C0C0;
+    margin: 3px 5px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+QToolButton:hover {
+    background-color: #7EF2E7;
+    border: 1px solid #8DC3F2;
+}
+
+QToolButton:pressed {
+    background-color: #D97855;
+}
+
+/* Чат */
+QTextBrowser {
+    background-color: #FFFFFF;
+    color: #303030;
+}
+
+/* Статус бар */
+QStatusBar {
+    background-color: #9BE9E9;
+    color: #402826;
+    border-top: 1px solid #8DC3F2;
+}

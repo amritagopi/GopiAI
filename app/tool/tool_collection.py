@@ -1,6 +1,8 @@
 """Collection classes for managing multiple tools."""
 from typing import Any, Dict, List
 
+from pydantic import ConfigDict
+
 from app.exceptions import ToolError
 from app.tool.base import BaseTool, ToolFailure, ToolResult
 
@@ -8,8 +10,7 @@ from app.tool.base import BaseTool, ToolFailure, ToolResult
 class ToolCollection:
     """A collection of defined tools."""
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def __init__(self, *tools: BaseTool):
         self.tools = tools

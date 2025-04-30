@@ -13,6 +13,9 @@
         <file>assets/icons/new_document.svg</file>
         <file>assets/icons/new_chat.svg</file>
         <file>assets/icons/save.svg</file>
+        <file>assets/icons/save_config.svg</file>
+        <file>assets/icons/load_config.svg</file>
+        <file>assets/icons/flow.svg</file>
         <file>assets/icons/open.svg</file>
         <file>assets/icons/close.svg</file>
         <file>assets/icons/zip.svg</file>
@@ -25,5 +28,22 @@
         <file>assets/icons/message.svg</file>
         <file>assets/icons/document.svg</file>
         <file>assets/icons/folder.svg</file>
+        <file>assets/icons/log.svg</file>
+        <file>assets/icons/bat.svg</file>
+        <file>assets/icons/css.svg</file>
+        <file>assets/icons/env.svg</file>
+        <file>assets/icons/exe.svg</file>
+        <file>assets/icons/html.svg</file>
+        <file>assets/icons/ini.svg</file>
+        <file>assets/icons/jpg.svg</file>
+        <file>assets/icons/pdf.svg</file>
+        <file>assets/icons/png.svg</file>
+        <file>assets/icons/sh.svg</file>
+        <file>assets/icons/svg.svg</file>
+        <file>assets/icons/ts.svg</file>
+        <file>assets/icons/js.svg</file>
+        <file>assets/icons/copy.svg</file>
+        <file>assets/icons/cut.svg</file>
+        <file>assets/icons/paste.svg</file>
     </qresource>
 </RCC>

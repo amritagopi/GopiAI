@@ -30,6 +30,9 @@ mcp>=1.5.0
 httpx>=0.27.0
 tomli>=2.0.0
 
+# PocketFlow Framework
+pocketflow_framework>=0.0.1
+
 boto3>=1.37.18
 
 # Web server

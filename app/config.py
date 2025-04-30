@@ -3,7 +3,7 @@ import tomllib
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class TavilySettings(BaseModel):
@@ -117,8 +117,7 @@ class AppConfig(BaseModel):
     mcp_config: Optional[MCPSettings] = Field(None, description="MCP configuration")
     tavily: Optional[TavilySettings] = Field(None, description="Tavily configuration")
 
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 
 class Config:
