@@ -1,0 +1,148 @@
+import sys
+from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTabWidget, QScrollArea,
+                             QWidget, QPushButton, QLabel, QLineEdit, QGridLayout)
+from PySide6.QtCore import Qt, Signal, QSize
+from PySide6.QtGui import QFont
+
+class EmojiButton(QPushButton):
+    """Кнопка с эмодзи."""
+    def __init__(self, emoji, parent=None):
+        super().__init__(emoji, parent)
+        self.setFont(QFont("Segoe UI Emoji", 16))
+        self.setFixedSize(40, 40)
+        self.setCursor(Qt.PointingHandCursor)
+        self.setToolTip(emoji)
+
+class EmojiDialog(QDialog):
+    """Диалог выбора эмодзи."""
+    emoji_selected = Signal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Выбор эмодзи")
+        self.setMinimumSize(400, 300)
+
+        # Категории эмодзи
+        self.emoji_categories = {
+            "Смайлы": [
+                "😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "☺️", "😊",
+                "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙",
+                "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎"
+            ],
+            "Люди": [
+                "👶", "👧", "🧒", "👦", "👩", "🧑", "👨", "👵", "🧓", "👴",
+                "👮", "🕵️", "💂", "👷", "🤴", "👸", "👳", "👲", "🧕", "🤵",
+                "👰", "🤰", "🤱", "👼", "🎅", "🤶", "🦸", "🦹", "🧙", "🧚"
+            ],
+            "Животные": [
+                "🐵", "🐒", "🦍", "🦧", "🐶", "🐕", "🦮", "🐩", "🐺", "🦊",
+                "🦝", "🐱", "🐈", "🦁", "🐯", "🐅", "🐆", "🐴", "🐎", "🦄",
+                "🦓", "🦌", "🐮", "🐂", "🐃", "🐄", "🐷", "🐖", "🐗", "🐽"
+            ],
+            "Еда": [
+                "🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈",
+                "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🥑", "🥦",
+                "🥬", "🥒", "🌶", "🌽", "🥕", "🧄", "🧅", "🥔", "🍠", "🥐"
+            ],
+            "Активности": [
+                "⚽", "🏀", "🏈", "⚾", "🥎", "🎾", "🏐", "🏉", "🥏", "🎱",
+                "🪀", "🏓", "🏸", "🏒", "🏑", "🥍", "🏏", "🥅", "⛳", "🪁",
+                "🏹", "🎣", "🤿", "🥊", "🥋", "🎽", "🛹", "🛼", "🛷", "⛸"
+            ],
+            "Предметы": [
+                "⌚", "📱", "📲", "💻", "⌨️", "🖥", "🖨", "🖱", "🖲", "🕹",
+                "🗜", "💽", "💾", "💿", "📀", "📼", "📷", "📸", "📹", "🎥",
+                "📽", "🎞", "📞", "☎️", "📟", "📠", "📺", "📻", "🎙", "🎚"
+            ],
+            "Символы": [
+                "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔",
+                "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "☮️",
+                "✝️", "☪️", "🕉", "☸️", "✡️", "🔯", "🕎", "☯️", "☦️", "🛐"
+            ],
+            "Флаги": [
+                "🏁", "🚩", "🎌", "🏴", "🏳️", "🏳️‍🌈", "🏳️‍⚧️", "🏴‍☠️", "🇦🇫", "🇦🇽",
+                "🇦🇱", "🇩🇿", "🇦🇸", "🇦🇩", "🇦🇴", "🇦🇮", "🇦🇶", "🇦🇬", "🇦🇷", "🇦🇲",
+                "🇦🇼", "🇦🇺", "🇦🇹", "🇦🇿", "🇧🇸", "🇧🇭", "🇧🇩", "🇧🇧", "🇧🇾", "🇧🇪"
+            ]
+        }
+
+        self.setup_ui()
+
+    def setup_ui(self):
+        """Настройка интерфейса диалога."""
+        main_layout = QVBoxLayout(self)
+
+        # Строка поиска
+        search_layout = QHBoxLayout()
+        search_label = QLabel("Поиск:")
+        self.search_input = QLineEdit()
+        self.search_input.setPlaceholderText("Введите запрос...")
+        self.search_input.textChanged.connect(self.search_emoji)
+        search_layout.addWidget(search_label)
+        search_layout.addWidget(self.search_input)
+        main_layout.addLayout(search_layout)
+
+        # Вкладки категорий эмодзи
+        self.tabs = QTabWidget()
+
+        # Добавление вкладок для каждой категории
+        for category, emojis in self.emoji_categories.items():
+            tab = QWidget()
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+            scroll_content = QWidget()
+
+            grid_layout = QGridLayout(scroll_content)
+            grid_layout.setSpacing(4)
+
+            # Расположение эмодзи в сетке
+            row, col = 0, 0
+            max_cols = 8  # Максимум 8 эмодзи в строке
+
+            for emoji in emojis:
+                button = EmojiButton(emoji)
+                button.clicked.connect(lambda checked=False, e=emoji: self.on_emoji_clicked(e))
+                grid_layout.addWidget(button, row, col)
+
+                col += 1
+                if col >= max_cols:
+                    col = 0
+                    row += 1
+
+            scroll_area.setWidget(scroll_content)
+            tab_layout = QVBoxLayout(tab)
+            tab_layout.addWidget(scroll_area)
+
+            self.tabs.addTab(tab, category)
+
+        main_layout.addWidget(self.tabs)
+
+        # Кнопки внизу диалога
+        buttons_layout = QHBoxLayout()
+        close_button = QPushButton("Закрыть")
+        close_button.clicked.connect(self.reject)
+        buttons_layout.addStretch()
+        buttons_layout.addWidget(close_button)
+
+        main_layout.addLayout(buttons_layout)
+
+    def on_emoji_clicked(self, emoji):
+        """Обработчик нажатия на эмодзи."""
+        self.emoji_selected.emit(emoji)
+        self.accept()
+
+    def search_emoji(self, text):
+        """Поиск эмодзи (заглушка)."""
+        # В реальном приложении здесь можно добавить логику поиска
+        # и отображения найденных эмодзи
+        pass
+
+# Для тестирования
+if __name__ == "__main__":
+    from PySide6.QtWidgets import QApplication
+
+    app = QApplication(sys.argv)
+    dialog = EmojiDialog()
+    if dialog.exec() == QDialog.Accepted:
+        print("Selected emoji:", dialog.selected_emoji)
+    sys.exit(app.exec())
