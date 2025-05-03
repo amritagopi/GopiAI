@@ -1,0 +1,65 @@
+{
+    "autostart": [
+        "MCP Serena"
+    ],
+    "agentMode": "autonomous",
+    "autoPlan": true,
+    "autoCommit": true,
+    "autoTest": true,
+    "autoDoc": true,
+    "autoTranslate": true,
+    "autoReview": true,
+    "autoRefactor": true,
+    "knowledgeGraph": {
+        "enabled": true,
+        "autoSync": true,
+        "fileIndexing": "recursive",
+        "includePatterns": [
+            "**/*.py",
+            "**/*.html",
+            "**/*.js",
+            "**/*.css",
+            "**/*.md"
+        ],
+        "excludePatterns": [
+            "node_modules/**",
+            "venv/**",
+            "__pycache__/**"
+        ]
+    },
+    "projectContext": {
+        "name": "GopiAI",
+        "type": "python-desktop-app",
+        "architecture": "MVC",
+        "mainComponents": [
+            "UI",
+            "Agents",
+            "Tools",
+            "Flow-System"
+        ]
+    },
+    "developmentFocus": [
+        "UI-Backend Integration",
+        "Browser Components",
+        "Settings System",
+        "Internationalization",
+        "Icon System"
+    ],
+    "toolTimeouts": {
+        "default": 600,
+        "edit": 600,
+        "search_replace": 600,
+        "run": 600,
+        "terminal": 600
+    },
+    "largeFileHandling": {
+        "maxFileSize": 10000000,
+        "chunkSize": 500000,
+        "incrementalEditing": true
+    },
+    "retryOptions": {
+        "maxRetries": 3,
+        "retryDelay": 1000,
+        "exponentialBackoff": true
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "commands": [
+        {
+            "name": "continue-development",
+            "description": "Продолжить автоматическую разработку по плану",
+            "instruction": "Продолжи разработку проекта GopiAI согласно текущей задаче в .serena/memories/workflow_state.md. Работай автономно, следуя правилам в .cursorrules и планам в .serena/memories/development_plan.md. Минимизируй запросы к пользователю."
+        },
+        {
+            "name": "implement-next-task",
+            "description": "Реализовать следующую задачу из плана",
+            "instruction": "Определи следующую задачу из .serena/memories/component_tasks.md, которая еще не реализована. Реализуй ее, следуя архитектурным принципам проекта. После завершения обнови .serena/memories/workflow_state.md."
+        },
+        {
+            "name": "fix-current-issues",
+            "description": "Исправить текущие проблемы в коде",
+            "instruction": "Проанализируй текущий код на наличие ошибок, несоответствий стилю или архитектурным принципам. Исправь найденные проблемы. Обнови документацию при необходимости."
+        }
+    ]
+}
