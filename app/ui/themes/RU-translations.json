@@ -1,0 +1,295 @@
+{
+    "main_window": "GopiAI",
+    "menu": {
+        "file": "Файл",
+        "new": "Новый",
+        "new.tooltip": "Создать новый файл",
+        "open_file": "Открыть файл...",
+        "open_file.tooltip": "Открыть существующий файл",
+        "save": "Сохранить",
+        "save.tooltip": "Сохранить текущий файл",
+        "save_as": "Сохранить как...",
+        "save_as.tooltip": "Сохранить текущий файл под новым именем",
+        "exit": "Выход",
+        "exit.tooltip": "Выйти из приложения",
+        "edit": "Правка",
+        "cut": "Вырезать",
+        "cut.tooltip": "Вырезать выделенный текст в буфер обмена",
+        "copy": "Копировать",
+        "copy.tooltip": "Копировать выделенный текст в буфер обмена",
+        "paste": "Вставить",
+        "paste.tooltip": "Вставить содержимое из буфера обмена",
+        "insert_emoji": "Вставить эмодзи...",
+        "insert_emoji.tooltip": "Открыть диалог выбора эмодзи",
+        "view": "Вид",
+        "theme": "Тема",
+        "theme.customize": "Настроить тему...",
+        "language": "Язык",
+        "tools": "Инструменты",
+        "tools.terminal": "Терминал",
+        "tools.terminal.tooltip": "Открыть встроенный терминал",
+        "tools.browser": "Веб-браузер",
+        "tools.browser.tooltip": "Открыть встроенный веб-браузер",
+        "tools.open_url": "Открыть URL...",
+        "tools.open_url.tooltip": "Открыть URL в браузере",
+        "configure_agent": "Настроить агента...",
+        "configure_agent.tooltip": "Настроить параметры агента",
+        "view_flow": "Показать визуализацию потока",
+        "view_flow.tooltip": "Визуализировать поток агента",
+        "preferences": "Настройки...",
+        "preferences.tooltip": "Редактировать настройки приложения",
+        "help": "Справка",
+        "about": "О программе GopiAI",
+        "documentation": "Документация",
+        "settings": "Настройки",
+        "theme_settings": "Настройки темы"
+    },
+    "language": {
+        "english": "Английский",
+        "russian": "Русский"
+    },
+    "dock": {
+        "project_explorer": "Проводник проекта",
+        "project_explorer.tooltip": "Проводник файлов проекта",
+        "project_explorer.toggle": "Показать проводник проекта",
+        "chat": "ИИ-чат",
+        "chat.tooltip": "Общение с ИИ-ассистентом",
+        "chat.toggle": "Показать чат",
+        "tools": "Инструменты",
+        "tools.tooltip": "Инструменты и утилиты",
+        "output": "Вывод",
+        "output.tooltip": "Вывод сообщений и логов",
+        "browser": "Веб-браузер",
+        "browser.tooltip": "Встроенный веб-браузер",
+        "terminal": "Терминал",
+        "terminal.tooltip": "Встроенный терминал",
+        "terminal.toggle": "Показать терминал"
+    },
+    "status": {
+        "ready": "Готов",
+        "theme_changing": "Меняется тема...",
+        "theme_changed": "Тема изменена",
+        "file_opened": "Файл открыт",
+        "file_saved": "Файл сохранён",
+        "url_opened": "URL открыт"
+    },
+    "agent": {
+        "status": {
+            "idle": "Бездействует",
+            "ready": "Готов",
+            "error": "Ошибка"
+        },
+        "status_title": "Агент:",
+        "config": {
+            "dialog_title": "Настройка агента",
+            "applied_title": "Настройки применены",
+            "applied_message": "Настройки агента успешно обновлены!",
+            "load_dialog": "Загрузить конфигурацию агента",
+            "loaded": "Конфигурация загружена",
+            "loaded_from": "Конфигурация загружена из",
+            "load_error": "Ошибка загрузки конфигурации",
+            "load_error_message": "Произошла ошибка при загрузке конфигурации:"
+        },
+        "mode": {
+            "title": "Режим агента",
+            "reactive": "Реактивный режим",
+            "planning": "Планирование"
+        },
+        "tools": {
+            "title": "Инструменты",
+            "developing": "Настройка инструментов в разработке"
+        },
+        "advanced": {
+            "title": "Расширенные настройки"
+        },
+        "reflection": {
+            "level": "Уровень рефлексии:"
+        },
+        "memory": {
+            "enable": "Включить память"
+        },
+        "not_initialized": "Агент не инициализирован",
+        "not_initialized_message": "Пожалуйста, сначала инициализируйте агента."
+    },
+    "flow": {
+        "no_flow": "Нет доступного потока",
+        "no_flow_message": "Текущий агент не имеет доступного потока для визуализации.",
+        "visualizer": {
+            "title": "Визуализатор потока",
+            "header": "Визуализация структуры потока",
+            "close": "Закрыть"
+        }
+    },
+    "dialogs": {
+        "ok": "ОК",
+        "cancel": "Отмена",
+        "apply": "Применить",
+        "save_changes": "Сохранить изменения?",
+        "unsaved_changes": "У вас есть несохраненные изменения. Вы хотите сохранить их?",
+        "close_others": "Закрыть другие вкладки",
+        "close_all": "Закрыть все вкладки",
+        "error": {
+            "title": "Ошибка"
+        },
+        "file": {
+            "open": "Открыть файл",
+            "open_error": "Ошибка открытия файла",
+            "save": "Сохранить файл",
+            "save_error": "Ошибка сохранения файла"
+        },
+        "open_url": "Открыть URL",
+        "enter_url": "Введите URL для открытия:",
+        "preferences": {
+            "title": "Настройки",
+            "restart_now": "Перезапустить сейчас",
+            "restart_later": "Перезапустить позже",
+            "language": "Выбрать язык..."
+        },
+        "close": "Закрыть",
+        "close_tooltip": "Закрыть диалог выбора эмодзи"
+    },
+    "settings": {
+        "appearance": "Внешний вид",
+        "theme": {
+            "label": "Тема:",
+            "light": "Светлая",
+            "dark": "Тёмная"
+        },
+        "language": {
+            "label": "Язык:",
+            "title": "Настройки языка",
+            "restart_required": "Некоторые изменения требуют перезапуска приложения",
+            "changed_title": "Язык изменен",
+            "changed_message": "Язык изменен на:"
+        },
+        "font_size": "Размер шрифта:",
+        "font_family": "Шрифт:",
+        "advanced": "Расширенные",
+        "general": "Общие",
+        "restart_required": "Некоторые изменения требуют перезапуска приложения",
+        "changes_applied": "Настройки применены",
+        "changes_applied_text": "Успешно изменены:",
+        "theme_changed": "визуальная тема",
+        "language_changed": "язык интерфейса"
+    },
+    "about": {
+        "title": "О программе GopiAI",
+        "description": "ИИ-ассистент с продвинутыми возможностями."
+    },
+    "documentation": {
+        "title": "Документация",
+        "not_implemented": "Документация пока не реализована."
+    },
+    "tool": {
+        "python": "Выполнение Python",
+        "web": "Поиск в интернете",
+        "browser": "Использование браузера",
+        "file": "Файловые операции",
+        "terminal": "Терминал",
+        "bash": "Bash",
+        "str_replace": "Редактор строк",
+        "terminate": "Завершить"
+    },
+    "app": {
+        "title": "ГопиИИ",
+        "version": "Версия"
+    },
+    "code": {
+        "new_file": "новый_файл.py"
+    },
+    "tabs": {
+        "central": "Редактирование файлов и кода"
+    },
+    "project_explorer": {
+        "search_placeholder": "Поиск по проекту..."
+    },
+    "theme_settings_dialog": {
+        "title": "Настройки темы и языка",
+        "theme_tab": "Тема и язык",
+        "visual_theme": "Визуальная тема",
+        "visual_theme_label": "Визуальная тема:",
+        "light_theme": "Светлая тема",
+        "dark_theme": "Тёмная тема",
+        "language": "Язык интерфейса",
+        "language_label": "Язык:",
+        "colors_tab": "Цветовая схема",
+        "theme_colors": "Цвета темы",
+        "colors_error": "Ошибка загрузки цветов:"
+    },
+    "main_window": {
+        "settings_applied": "Настройки применены",
+        "theme_settings_success": "Настройки темы и языка успешно применены."
+    },
+    "file_types": {
+        "python": "Python скрипт",
+        "javascript": "JavaScript",
+        "html": "HTML",
+        "css": "CSS",
+        "json": "JSON",
+        "markdown": "Markdown",
+        "text": "Текстовый файл",
+        "xml": "XML",
+        "yaml": "YAML",
+        "csv": "CSV",
+        "sql": "SQL"
+    },
+    "browser": {
+        "back": "Назад",
+        "forward": "Вперед",
+        "refresh": "Обновить",
+        "stop": "Остановить",
+        "home": "Домашняя страница",
+        "new_tab": "Новая вкладка",
+        "new_tab_title": "Новая вкладка",
+        "url_placeholder": "Введите URL или поисковый запрос...",
+        "loading": "Загрузка страницы...",
+        "loading_complete": "Загрузка завершена",
+        "js_execution_error": "Ошибка: Метод execute_javascript не найден в браузере"
+    },
+    "dock_title_bar": {
+        "float": "Открепить панель",
+        "maximize": "Развернуть панель",
+        "close": "Закрыть панель"
+    },
+    "emoji_dialog": {
+        "title": "Выбор эмодзи",
+        "search": "Поиск:",
+        "search_placeholder": "Введите эмодзи или категорию...",
+        "search_tooltip": "Поиск по эмодзи и категориям",
+        "search_btn_tooltip": "Начать поиск",
+        "category": {
+            "recent": "Недавние",
+            "smileys": "Смайлы и эмоции",
+            "people": "Люди и тело",
+            "animals": "Животные и природа",
+            "food": "Еда и напитки",
+            "travel": "Путешествия и места",
+            "activities": "Активности",
+            "objects": "Объекты",
+            "symbols": "Символы",
+            "flags": "Флаги"
+        }
+    },
+    "flow_visualizer": {
+        "node": {
+            "agent": "Агент",
+            "tool": "Инструмент",
+            "flow": "Поток",
+            "default": "Узел"
+        },
+        "title": "Визуализатор потока",
+        "close": "Закрыть"
+    },
+    "browser_agent_demo": {
+        "title": "ГопиИИ - Демонстрация Браузерного Агента",
+        "stop": "Остановить",
+        "ready": "Готов к работе",
+        "processing": "Агент обрабатывает запрос...",
+        "error": "Ошибка",
+        "chat_title": "Браузерный Агент",
+        "input_placeholder": "Введите запрос для агента...",
+        "send": "Отправить",
+        "you": "Вы",
+        "agent": "Агент"
+    }
+}

@@ -1,0 +1,259 @@
+/* Светлая тема для GopiAI */
+
+
+
+/* Основные стили */
+
+
+
+/* Кнопки */
+
+
+
+/* Поля ввода */
+
+
+
+/* Вкладки */
+
+
+
+/* Полосы прокрутки */
+
+
+
+/* Списки и таблицы */
+
+
+
+/* Меню */
+
+
+
+/* Док-виджеты */
+
+
+
+/* Терминал */
+
+
+
+/* Редактор кода */
+
+
+
+/* Строка состояния */
+
+
+
+/* Панель инструментов */
+
+
+
+QWidget {
+    background-color: #F5F5F5;
+    color: #333333;
+}
+
+QPushButton {
+    background-color: #DDDDDD;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980B9;
+    color: #FFFFFF;
+}
+
+QPushButton:pressed {
+    background-color: #3498DB;
+    color: #FFFFFF;
+}
+
+QLineEdit {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QTextEdit {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QPlainTextEdit {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QTabWidget::pane {
+    border: 1px solid #CCCCCC;
+}
+
+QTabBar::tab {
+    background-color: #DDDDDD;
+    color: #333333;
+    padding: 6px 12px;
+    margin-right: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #2980B9;
+    color: #FFFFFF;
+}
+
+QScrollBar:vertical {
+    background-color: #F5F5F5;
+    width: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #DDDDDD;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #2980B9;
+}
+
+QScrollBar:horizontal {
+    background-color: #F5F5F5;
+    height: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #DDDDDD;
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #2980B9;
+}
+
+QListView {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    selection-background-color: #2980B9;
+    selection-color: #FFFFFF;
+}
+
+QTreeView {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    selection-background-color: #2980B9;
+    selection-color: #FFFFFF;
+}
+
+QTableView {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    selection-background-color: #2980B9;
+    selection-color: #FFFFFF;
+}
+
+QHeaderView::section {
+    background-color: #DDDDDD;
+    color: #333333;
+    padding: 4px;
+    border: 1px solid #CCCCCC;
+}
+
+QMenuBar {
+    background-color: #F5F5F5;
+    color: #333333;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+QMenuBar::item:selected {
+    background-color: #2980B9;
+    color: #FFFFFF;
+}
+
+QMenu {
+    background-color: #F5F5F5;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+}
+
+QMenu::item:selected {
+    background-color: #2980B9;
+    color: #FFFFFF;
+}
+
+QDockWidget {
+    titlebar-close-icon: url(:/icons/close_light.png);
+    titlebar-normal-icon: url(:/icons/undock_light.png);
+}
+
+QDockWidget::title {
+    background-color: #DDDDDD;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+QPlainTextEdit#terminal {
+    background-color: #F0F0F0;
+    color: #000000;
+    font-family: "Consolas", "Courier New", monospace;
+}
+
+QPlainTextEdit#codeEditor {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "Consolas", "Courier New", monospace;
+    selection-background-color: #ADD6FF;
+    selection-color: #000000;
+}
+
+QStatusBar {
+    background-color: #DDDDDD;
+    color: #333333;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+QToolBar {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #CCCCCC;
+    spacing: 3px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QToolButton:hover {
+    background-color: #2980B9;
+    border: 1px solid #CCCCCC;
+    color: #FFFFFF;
+}
+
+QToolButton:pressed {
+    background-color: #3498DB;
+    color: #FFFFFF;
+}

@@ -1,0 +1,252 @@
+/* Темная тема для GopiAI */
+
+
+
+/* Основные стили */
+
+
+
+/* Кнопки */
+
+
+
+/* Поля ввода */
+
+
+
+/* Вкладки */
+
+
+
+/* Полосы прокрутки */
+
+
+
+/* Списки и таблицы */
+
+
+
+/* Меню */
+
+
+
+/* Док-виджеты */
+
+
+
+/* Терминал */
+
+
+
+/* Редактор кода */
+
+
+
+/* Строка состояния */
+
+
+
+/* Панель инструментов */
+
+
+
+QWidget {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+}
+
+QPushButton {
+    background-color: #555555;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #3498DB;
+}
+
+QPushButton:pressed {
+    background-color: #2980B9;
+}
+
+QLineEdit {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QTextEdit {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QPlainTextEdit {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QTabWidget::pane {
+    border: 1px solid #444444;
+}
+
+QTabBar::tab {
+    background-color: #555555;
+    color: #FFFFFF;
+    padding: 6px 12px;
+    margin-right: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #3498DB;
+}
+
+QScrollBar:vertical {
+    background-color: #2D2D2D;
+    width: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #555555;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #3498DB;
+}
+
+QScrollBar:horizontal {
+    background-color: #2D2D2D;
+    height: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #555555;
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #3498DB;
+}
+
+QListView {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+    selection-background-color: #3498DB;
+    selection-color: #FFFFFF;
+}
+
+QTreeView {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+    selection-background-color: #3498DB;
+    selection-color: #FFFFFF;
+}
+
+QTableView {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+    selection-background-color: #3498DB;
+    selection-color: #FFFFFF;
+}
+
+QHeaderView::section {
+    background-color: #555555;
+    color: #FFFFFF;
+    padding: 4px;
+    border: 1px solid #444444;
+}
+
+QMenuBar {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+    border-bottom: 1px solid #444444;
+}
+
+QMenuBar::item:selected {
+    background-color: #3498DB;
+}
+
+QMenu {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+    border: 1px solid #444444;
+}
+
+QMenu::item:selected {
+    background-color: #3498DB;
+}
+
+QDockWidget {
+    titlebar-close-icon: url(:/icons/close_dark.png);
+    titlebar-normal-icon: url(:/icons/undock_dark.png);
+}
+
+QDockWidget::title {
+    background-color: #555555;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+QPlainTextEdit#terminal {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    font-family: "Consolas", "Courier New", monospace;
+}
+
+QPlainTextEdit#codeEditor {
+    background-color: #3D3D3D;
+    color: #FFFFFF;
+    font-family: "Consolas", "Courier New", monospace;
+    selection-background-color: #264F78;
+    selection-color: #FFFFFF;
+}
+
+QStatusBar {
+    background-color: #555555;
+    color: #FFFFFF;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+QToolBar {
+    background-color: #2D2D2D;
+    border-bottom: 1px solid #444444;
+    spacing: 3px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QToolButton:hover {
+    background-color: #3498DB;
+    border: 1px solid #444444;
+}
+
+QToolButton:pressed {
+    background-color: #2980B9;
+}

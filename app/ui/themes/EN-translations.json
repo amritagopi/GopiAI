@@ -1,0 +1,318 @@
+{
+    "main_window": "GopiAI",
+    "menu": {
+        "file": "File",
+        "new": "New",
+        "new.tooltip": "Create a new file",
+        "open_file": "Open File...",
+        "open_file.tooltip": "Open an existing file",
+        "save": "Save",
+        "save.tooltip": "Save the current file",
+        "save_as": "Save As...",
+        "save_as.tooltip": "Save the current file under a new name",
+        "exit": "Exit",
+        "exit.tooltip": "Exit the application",
+        "edit": "Edit",
+        "cut": "Cut",
+        "cut.tooltip": "Cut the selected content to the clipboard",
+        "copy": "Copy",
+        "copy.tooltip": "Copy the selected content to the clipboard",
+        "paste": "Paste",
+        "paste.tooltip": "Paste content from the clipboard",
+        "insert_emoji": "Insert Emoji...",
+        "insert_emoji.tooltip": "Open emoji selection dialog",
+        "view": "View",
+        "theme": "Theme",
+        "theme.customize": "Customize Theme...",
+        "language": "Language",
+        "tools": "Tools",
+        "tools.terminal": "Terminal",
+        "tools.terminal.tooltip": "Open the integrated terminal",
+        "tools.browser": "Web Browser",
+        "tools.browser.tooltip": "Open the integrated web browser",
+        "tools.open_url": "Open URL...",
+        "tools.open_url.tooltip": "Open URL in browser",
+        "configure_agent": "Configure Agent...",
+        "configure_agent.tooltip": "Configure agent settings",
+        "view_flow": "Show Flow Visualization",
+        "view_flow.tooltip": "Visualize agent's flow",
+        "preferences": "Preferences...",
+        "preferences.tooltip": "Edit application preferences",
+        "help": "Help",
+        "about": "About GopiAI",
+        "documentation": "Documentation",
+        "settings": "Settings",
+        "theme_settings": "Theme Settings",
+        "file.new": "New File",
+        "file.open": "Open...",
+        "file.save": "Save",
+        "file.save_as": "Save As...",
+        "file.exit": "Exit",
+        "edit.undo": "Undo",
+        "edit.redo": "Redo",
+        "edit.select_all": "Select All",
+        "edit.emoji": "Insert Emoji...",
+        "view.project_explorer": "Project Explorer",
+        "view.chat": "Chat",
+        "view.terminal": "Terminal",
+        "view.browser": "Browser",
+        "view.reset_layout": "Reset Layout",
+        "view.reset_ui": "Reset All UI",
+        "view.themes": "Themes",
+        "view.language": "Language",
+        "tools.configure_agent": "Configure Agent",
+        "tools.view_flow": "View Flow",
+        "help.about": "About GopiAI",
+        "help.documentation": "Documentation"
+    },
+    "language": {
+        "english": "English",
+        "russian": "Russian",
+        "en_US": "English",
+        "ru_RU": "Russian"
+    },
+    "dock": {
+        "project_explorer": "Project Explorer",
+        "project_explorer.tooltip": "Project file explorer",
+        "project_explorer.toggle": "Show Project Explorer",
+        "chat": "AI Chat",
+        "chat.tooltip": "Chat with AI assistant",
+        "chat.toggle": "Show Chat",
+        "tools": "Tools",
+        "tools.tooltip": "Tools and utilities",
+        "output": "Output",
+        "output.tooltip": "Output messages and logs",
+        "browser": "Web Browser",
+        "browser.tooltip": "Integrated web browser",
+        "terminal": "Terminal",
+        "terminal.tooltip": "Integrated terminal",
+        "terminal.toggle": "Show Terminal"
+    },
+    "status": {
+        "ready": "Ready",
+        "theme_changing": "Changing theme...",
+        "theme_changed": "Theme changed",
+        "file_opened": "File opened",
+        "file_saved": "File saved",
+        "url_opened": "URL opened"
+    },
+    "agent": {
+        "status": {
+            "idle": "Idle",
+            "ready": "Ready",
+            "error": "Error"
+        },
+        "status_title": "Agent:",
+        "config": {
+            "dialog_title": "Agent Configuration",
+            "applied_title": "Settings Applied",
+            "applied_message": "Agent settings have been updated!",
+            "load_dialog": "Load Agent Configuration",
+            "loaded": "Configuration Loaded",
+            "loaded_from": "Configuration loaded from",
+            "load_error": "Error Loading Configuration",
+            "load_error_message": "An error occurred while loading configuration:"
+        },
+        "mode": {
+            "title": "Agent Mode",
+            "reactive": "Reactive Mode",
+            "planning": "Planning"
+        },
+        "tools": {
+            "title": "Tools",
+            "developing": "Tools configuration is under development"
+        },
+        "advanced": {
+            "title": "Advanced Settings"
+        },
+        "reflection": {
+            "level": "Reflection Level:"
+        },
+        "memory": {
+            "enable": "Enable Memory"
+        },
+        "not_initialized": "Agent Not Initialized",
+        "not_initialized_message": "Please initialize the agent first."
+    },
+    "flow": {
+        "no_flow": "No Flow Available",
+        "no_flow_message": "The current agent does not have an available flow to visualize.",
+        "visualizer": {
+            "title": "Flow Visualizer",
+            "header": "Flow Structure Visualization",
+            "close": "Close"
+        }
+    },
+    "dialogs": {
+        "ok": "OK",
+        "cancel": "Cancel",
+        "apply": "Apply",
+        "save_changes": "Save Changes?",
+        "unsaved_changes": "You have unsaved changes. Do you want to save them?",
+        "close_others": "Close Other Tabs",
+        "close_all": "Close All Tabs",
+        "error": {
+            "title": "Error"
+        },
+        "file": {
+            "open": "Open File",
+            "open_error": "Error opening file",
+            "save": "Save File",
+            "save_error": "Error saving file"
+        },
+        "open_url": "Open URL",
+        "enter_url": "Enter URL to open:",
+        "preferences": {
+            "title": "Preferences",
+            "restart_now": "Restart Now",
+            "restart_later": "Restart Later",
+            "language": "Select Language..."
+        },
+        "close": "Close",
+        "close_tooltip": "Close emoji selection dialog"
+    },
+    "settings": {
+        "appearance": "Appearance",
+        "theme": {
+            "label": "Theme:",
+            "light": "Light",
+            "dark": "Dark"
+        },
+        "language": {
+            "label": "Language:",
+            "title": "Language Settings",
+            "restart_required": "Some changes require restarting the application",
+            "changed_title": "Language Changed",
+            "changed_message": "Language changed to:"
+        },
+        "font_size": "Font Size:",
+        "font_family": "Font Family:",
+        "advanced": "Advanced",
+        "general": "General",
+        "restart_required": "Some changes require restarting the application",
+        "changes_applied": "Settings Applied",
+        "changes_applied_text": "Successfully changed:",
+        "theme_changed": "visual theme",
+        "language_changed": "interface language"
+    },
+    "about": {
+        "title": "About GopiAI",
+        "description": "An AI assistant with advanced capabilities."
+    },
+    "documentation": {
+        "title": "Documentation",
+        "not_implemented": "Documentation is not implemented yet."
+    },
+    "tool": {
+        "python": "Python Execute",
+        "web": "Web Search",
+        "browser": "Browser Use",
+        "file": "File Operations",
+        "terminal": "Terminal",
+        "bash": "Bash",
+        "str_replace": "String Replace Editor",
+        "terminate": "Terminate"
+    },
+    "app": {
+        "title": "GopiAI",
+        "version": "Version"
+    },
+    "code": {
+        "new_file": "new_file.py"
+    },
+    "tabs": {
+        "central": "File and code editing"
+    },
+    "project_explorer": {
+        "search_placeholder": "Search in project..."
+    },
+    "theme_settings_dialog": {
+        "title": "Theme and Language Settings",
+        "theme_tab": "Theme and Language",
+        "visual_theme": "Visual Theme",
+        "visual_theme_label": "Visual theme:",
+        "light_theme": "Light Theme",
+        "dark_theme": "Dark Theme",
+        "language": "Interface Language",
+        "language_label": "Language:",
+        "colors_tab": "Color Scheme",
+        "theme_colors": "Theme Colors",
+        "colors_error": "Error loading colors:"
+    },
+    "main_window": {
+        "settings_applied": "Settings Applied",
+        "theme_settings_success": "Theme and language settings successfully applied."
+    },
+    "file_types": {
+        "python": "Python Script",
+        "javascript": "JavaScript",
+        "html": "HTML",
+        "css": "CSS",
+        "json": "JSON",
+        "markdown": "Markdown",
+        "text": "Text File",
+        "xml": "XML",
+        "yaml": "YAML",
+        "csv": "CSV",
+        "sql": "SQL"
+    },
+    "browser": {
+        "back": "Back",
+        "forward": "Forward",
+        "refresh": "Refresh",
+        "stop": "Stop",
+        "home": "Home Page",
+        "new_tab": "New Tab",
+        "new_tab_title": "New Tab",
+        "url_placeholder": "Enter URL or search query...",
+        "loading": "Loading page...",
+        "loading_complete": "Loading complete",
+        "js_execution_error": "Error: execute_javascript method not found in browser"
+    },
+    "dock_title_bar": {
+        "float": "Undock panel",
+        "maximize": "Maximize panel",
+        "close": "Close panel"
+    },
+    "emoji_dialog": {
+        "title": "Select Emoji",
+        "search": "Search:",
+        "search_placeholder": "Enter emoji or category...",
+        "search_tooltip": "Search for emojis and categories",
+        "search_btn_tooltip": "Start search",
+        "category": {
+            "recent": "Recent",
+            "smileys": "Smileys & Emotion",
+            "people": "People & Body",
+            "animals": "Animals & Nature",
+            "food": "Food & Drink",
+            "travel": "Travel & Places",
+            "activities": "Activities",
+            "objects": "Objects",
+            "symbols": "Symbols",
+            "flags": "Flags"
+        }
+    },
+    "flow_visualizer": {
+        "node": {
+            "agent": "Agent",
+            "tool": "Tool",
+            "flow": "Flow",
+            "default": "Node"
+        },
+        "title": "Flow Visualizer",
+        "close": "Close"
+    },
+    "browser_agent_demo": {
+        "title": "GopiAI - Browser Agent Demo",
+        "stop": "Stop",
+        "ready": "Ready to work",
+        "processing": "Agent is processing request...",
+        "error": "Error",
+        "chat_title": "Browser Agent",
+        "input_placeholder": "Enter a request for the agent...",
+        "send": "Send",
+        "you": "You",
+        "agent": "Agent"
+    }
+}
