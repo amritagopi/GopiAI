@@ -1,0 +1,141 @@
+Запуск аудита UI...
+
+Найдено 20192 файлов для анализа.
+Файлы собраны: 760 Python, 16 QSS/CSS, 0 UI
+
+=== Анализ Python файлов ===
+
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\browser_agent_demo.py: Нелокализованная строка: "GopiAI - Демонстрация Браузерного Агента"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\browser_agent_demo.py: Нелокализованная строка: "Ошибка"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\browser_agent_demo.py: Нелокализованная строка: "Агент обрабатывает запрос..."
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\browser_agent_demo.py: Нелокализованная строка: "Готов к работе"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Назад"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Вперед"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Перезагрузить"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Домашняя страница"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Назад"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Вперед"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Обновить"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Домашняя страница"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Остановить"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Обновить"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\browser_tab_widget.py: Нелокализованная строка: "Новая вкладка"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\dock_title_bar.py: Нелокализованная строка: "Открепить панель"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\dock_title_bar.py: Нелокализованная строка: "Развернуть панель"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\dock_title_bar.py: Нелокализованная строка: "Закрыть панель"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\emoji_dialog.py: Нелокализованная строка: "Выбор эмодзи"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\flow_visualizer.py: Нелокализованная строка: "Flow Visualizer"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\emoji_dialog.py: Нелокализованная строка: "Выбор эмодзи"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\flow_visualizer.py: Нелокализованная строка: "Flow Visualizer"
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_19-50-48\app\ui\reasoning_settings_dialog.py: Нелокализованная строка: "Настройки рассуждений"
+  ⚠️ C:\Users\amritagopi\GopiAI\tests\test_permissions.py: Нелокализованная строка: "Plan View Test"
+
+  ⚠️ Найдено 145 различных хардкодированных цветов:
+    - #2ca9bc: 161 использований
+    - #CCCCCC: 46 использований
+    - #333333: 42 использований
+    - #FFFFFF: 37 использований
+    - #555555: 34 использований
+    - #cccccc: 34 использований
+    - #2980B9: 30 использований
+    - #DDDDDD: 24 использований
+    - #3498DB: 22 использований
+    - #90A4AE: 18 использований
+
+=== Анализ QSS/CSS файлов ===
+
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\themes\dark_en\theme.qss: Дублирующиеся селекторы: pane, tab, selected, hover, pressed
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\themes\dark_ru\theme.qss: Дублирующиеся селекторы: pane, tab, selected, hover, pressed
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\themes\light_en\theme.qss: Дублирующиеся селекторы: selected, hover, vertical, item
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\app\ui\themes\light_ru\theme.qss: Дублирующиеся селекторы: selected, hover, vertical, item
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_02-52-22\assets\fonts\fonts.css: Дублирующиеся селекторы: face
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\themes\dark_en\theme.qss: Дублирующиеся селекторы: pane, tab, selected, hover, pressed
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\themes\dark_ru\theme.qss: Дублирующиеся селекторы: pane, tab, selected, hover, pressed
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\themes\light_en\theme.qss: Дублирующиеся селекторы: selected, hover, vertical, item
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\app\ui\themes\light_ru\theme.qss: Дублирующиеся селекторы: selected, hover, vertical, item
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_12-48-37\assets\fonts\fonts.css: Дублирующиеся селекторы: face
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_19-50-48\app\ui\themes\DARK-theme.qss: Дублирующиеся селекторы: hover, pressed, selected, vertical, horizontal
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_19-50-48\app\ui\themes\LIGHT-theme.qss: Дублирующиеся селекторы: hover, pressed, selected, vertical, horizontal
+  ⚠️ C:\Users\amritagopi\GopiAI\.backup\-5.-02_19-50-48\assets\fonts\fonts.css: Дублирующиеся селекторы: face
+  ⚠️ C:\Users\amritagopi\GopiAI\app\ui\themes\DARK-theme.qss: Дублирующиеся селекторы: hover, pressed, selected, vertical, horizontal
+  ⚠️ C:\Users\amritagopi\GopiAI\app\ui\themes\LIGHT-theme.qss: Дублирующиеся селекторы: hover, pressed, selected, vertical, horizontal
+  ⚠️ C:\Users\amritagopi\GopiAI\assets\fonts\fonts.css: Дублирующиеся селекторы: face
+
+=== Анализ UI файлов ===
+
+UI файлы не найдены.
+
+Аудит завершен.
+
+Аудит завершен.
+
+# Отчет по аудиту UI GopiAI
+
+## Основные проблемы и их решения
+
+### 1. Дублирующиеся селекторы в CSS/QSS файлах
+
+**Проблема**: Обнаружены дублирующиеся селекторы в файлах стилей, что приводит к неконсистентному отображению UI
+и потенциальным конфликтам стилей.
+
+**Решение**:
+- Создан инструмент `css_fixer.py` для автоматического обнаружения и исправления дублирующихся селекторов
+- Разработан более продвинутый инструмент `css_refactor.py` для комплексного рефакторинга CSS файлов
+- Добавлена поддержка извлечения цветовых переменных для последующей централизации управления цветами
+- Создан скрипт `fix_duplicate_selectors.py` для обработки различных вариаций селекторов
+
+### 2. Проблемы с шрифтами
+
+**Проблема**: Файлы CSS шрифтов содержат некорректные пути и дублирующиеся объявления.
+
+**Решение**:
+- Разработан инструмент `fonts_fixer.py` для автоматического исправления путей к шрифтам
+- Добавлена поддержка обнаружения и удаления дублирующихся определений шрифтов
+
+### 3. Управление темами
+
+**Проблема**: Механизм управления темами и их компиляции был неоптимальным.
+
+**Решение**:
+- Создан компилятор тем `theme_compiler.py` для генерации готовых стилей
+- Добавлена поддержка цветовых переменных через систему подстановки
+- Реализован механизм автоматической генерации вариаций для темных/светлых тем
+
+### 4. Организация утилит CSS и UI
+
+**Проблема**: Утилиты CSS и UI были разбросаны по проекту, что затрудняло их поддержку и использование.
+
+**Решение**:
+- Создана централизованная директория `app/ui/utils/css_tools` для всех CSS-утилит
+- Перемещены в нее все инструменты для работы с CSS/QSS
+- Добавлен пакетный файл `fix_css.bat` для запуска всех утилит вместе
+- Добавлен скрипт `cleanup.py` для очистки проекта от временных файлов
+- Перемещены файлы `theme_manager.py` и `simple_ui_auditor_final.py` в директорию `app/ui/utils`
+- Создана структура модуля Python для удобного импорта утилит в код
+- Добавлена подробная документация по использованию всех инструментов
+
+### 5. Доступ к утилитам
+
+**Проблема**: Отсутствовал удобный механизм запуска утилит CSS из корневой директории проекта.
+
+**Решение**:
+- Создан пакетный файл `css_tools.bat` в корневой директории для быстрого доступа ко всем утилитам
+- Добавлено меню с выбором необходимого действия
+- Реализована возможность запуска утилит непосредственно из IDE
+
+### 6. Прочие проблемы UI
+
+**Проблема**: При аудите были обнаружены проблемы с хардкодированными цветами и нелокализованными строками в UI.
+
+**Решение**:
+- Обновлен аудитор UI для обнаружения этих проблем
+- Добавлены инструкции по исправлению нелокализованных строк
+- Создан механизм для извлечения и централизации цветовых констант
+
+## Рекомендации по дальнейшему улучшению
+
+1. Полностью перевести все хардкодированные цвета на систему цветовых переменных
+2. Автоматизировать процесс проверки корректности CSS при каждом коммите
+3. Создать визуальный редактор тем для более удобной настройки цветовых схем
+4. Интегрировать систему проверки контраста цветов для соответствия стандартам доступности
+5. Добавить автоматические тесты для проверки корректного отображения UI при смене темы

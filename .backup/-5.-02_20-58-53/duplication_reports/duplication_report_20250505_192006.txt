@@ -1,0 +1,151 @@
+ОТЧЕТ О ДУБЛИРОВАНИИ КОДА В ПРОЕКТЕ GOPIAI
+Дата: 2025-05-05 19:20:35
+
+ОБЩАЯ СТАТИСТИКА:
+- Проанализировано файлов: 288
+- Проанализировано строк кода: 78067
+- Найдено дублирующихся фрагментов: 29804
+- Найдено дублирующихся функций: 251
+- Найдено дублирующихся классов: 38
+- Общее количество дублированных строк: 373466
+- Файлов с дубликатами: 240
+
+РЕКОМЕНДАЦИИ ПО РЕФАКТОРИНГУ:
+1. [HIGH] Вынести функцию 'init_ui' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 88 строк кода
+   - Местоположения: app\ui\browser_agent_dialog.py:84-171, app\ui\coding_agent_dialog.py:86-173
+
+2. [HIGH] Вынести функцию 'self_evaluate' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 66 строк кода
+   - Местоположения: app\agent\planning_strategy.py:679-744, app\agent\planning_strategy.py:855-920
+
+3. [HIGH] Вынести функцию 'run' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 65 строк кода
+   - Местоположения: DONT_TOUCH_MY_AUDITOR.PY:29-93, app\ui\utils\simple_ui_auditor_final.py:40-104
+
+4. [HIGH] Вынести функцию '_on_language_changed_event' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 59 строк кода
+   - Местоположения: app\ui\main_window.py:1848-1906, app\ui\main_window.py:2838-2896
+
+5. [HIGH] Вынести функцию 'analyze_python_files' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 55 строк кода
+   - Местоположения: DONT_TOUCH_MY_AUDITOR.PY:99-153, app\ui\utils\simple_ui_auditor_final.py:110-164
+
+6. [HIGH] Вынести функцию 'explore_' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 55 строк кода
+   - Местоположения: app\agent\reasoning.py:380-434, app\agent\reasoning.py:436-490
+
+7. [HIGH] Вынести функцию 'create_flow_from_tools' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 53 строк кода
+   - Местоположения: app\pocketflow\adapters.py:232-284, app\pocketflow\adapters.py:287-339
+
+8. [HIGH] Вынести функцию '_extract_improvement_areas' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 39 строк кода
+   - Местоположения: app\agent\planning_strategy.py:773-816, app\agent\planning_strategy.py:947-985
+
+9. [HIGH] Вынести функцию '_on_home_clicked' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 3 местах, 39 строк кода
+   - Местоположения: app\ui\browser_tab_widget.py:237-239, app\ui\browser_tab_widget.py:401-403, app\ui\dock_title_bar.py:93-131
+
+10. [HIGH] Вынести функцию 'update_' в общий модуль utilities.py
+   - Влияние: Устранит дублирование в 2 местах, 36 строк кода
+   - Местоположения: app\agent\browser_agent.py:80-114, app\agent\coding_agent.py:74-109
+
+11. [HIGH] Создать базовый класс 'TreePlanningStrategyBase' в общем модуле
+   - Влияние: Устранит дублирование в 2 местах, 167 строк кода
+   - Местоположения: app\agent\planning_strategy.py:643-816, app\agent\planning_strategy.py:819-985
+
+12. [HIGH] Создать базовый класс 'EnhancedBrowserAgentBase' в общем модуле
+   - Влияние: Устранит дублирование в 2 местах, 128 строк кода
+   - Местоположения: app\agent\browser_agent.py:15-147, app\agent\coding_agent.py:15-142
+
+13. [HIGH] Создать базовый класс 'ContentGenerationNodeBase' в общем модуле
+   - Влияние: Устранит дублирование в 2 местах, 41 строк кода
+   - Местоположения: examples\pocketflow_marketing\custom_flow.py:101-141, examples\pocketflow_marketing\fixed_example.py:89-129
+
+14. [HIGH] Создать базовый класс 'FixedNodeBase' в общем модуле
+   - Влияние: Устранит дублирование в 2 местах, 40 строк кода
+   - Местоположения: examples\pocketflow_marketing\custom_flow.py:23-62, examples\pocketflow_marketing\fixed_example.py:11-50
+
+15. [HIGH] Создать базовый класс 'OptimizationNodeBase' в общем модуле
+   - Влияние: Устранит дублирование в 2 местах, 38 строк кода
+   - Местоположения: examples\pocketflow_marketing\custom_flow.py:144-181, examples\pocketflow_marketing\fixed_example.py:132-169
+
+ОБНАРУЖЕННЫЕ ШАБЛОНЫ ДУБЛИРОВАНИЯ:
+
+Файловые операции (7821 дубликатов):
+- Function, 65 строк
+  Имена: run, run
+- Function, 55 строк
+  Имена: analyze_python_files, analyze_python_files
+- Function, 55 строк
+  Имена: explore_web, explore_files
+- Function, 36 строк
+  Имена: update_browser_state, update_editor_state
+- Function, 33 строк
+  Имена: add_allowed_directory, add_allowed_directory
+
+API-вызовы (6389 дубликатов):
+- Function, 88 строк
+  Имена: init_ui, init_ui
+- Function, 66 строк
+  Имена: self_evaluate, self_evaluate
+- Function, 36 строк
+  Имена: create_content_planning_workflow, create_content_planning_workflow
+- Function, 29 строк
+  Имена: __init__, __init__
+- Function, 26 строк
+  Имена: main, main
+
+GUI-элементы (957 дубликатов):
+- Function, 59 строк
+  Имена: _on_language_changed_event, _on_language_changed_event
+- Function, 39 строк
+  Имена: _on_home_clicked, go_home, _setup_styles
+- Function, 17 строк
+  Имена: __init__, __init__
+- Fragment, 29 строк
+- Fragment, 29 строк
+
+Обработка данных (1518 дубликатов):
+- Function, 53 строк
+  Имена: create_flow_from_tools, create_flow_from_agents
+- Function, 19 строк
+  Имена: test_map_reduce_sum, test_uneven_chunks, test_custom_chunk_size, test_single_element_chunks
+- Function, 18 строк
+  Имена: to_dict, to_dict
+- Function, 14 строк
+  Имена: send_message, send_message
+- Function, 14 строк
+  Имена: exec, exec, exec
+
+Утилитарные функции (721 дубликатов):
+- Function, 18 строк
+  Имена: _open_coding_agent, _open_browsing_agent
+- Function, 13 строк
+  Имена: adapt_plan, adapt_plan
+- Function, 7 строк
+  Имена: _toggle_project_explorer, _toggle_chat
+- Function, 5 строк
+  Имена: append_stdout, append_stderr, append_debug
+- Function, 4 строк
+  Имена: tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown
+
+ДИРЕКТОРИИ С НАИБОЛЬШИМ ДУБЛИРОВАНИЕМ:
+- app\agent: 37 файлов с дубликатами
+- app\ui: 31 файлов с дубликатами
+- .: 28 файлов с дубликатами
+- tests: 25 файлов с дубликатами
+- app\tool: 20 файлов с дубликатами
+- app\marketing: 11 файлов с дубликатами
+- GopiAI_Flow\tests: 10 файлов с дубликатами
+- examples\pocketflow_marketing: 9 файлов с дубликатами
+- examples\use_case: 8 файлов с дубликатами
+- app\ui\utils\css_tools: 7 файлов с дубликатами
+
+РЕКОМЕНДАЦИИ ПО ОРГАНИЗАЦИИ КОДА:
+1. Создать модуль utils/common.py для общих утилитарных функций
+2. Вынести повторяющиеся операции работы с файлами в utils/file_operations.py
+3. Создать базовые классы в соответствующих модулях
+4. Использовать абстрактные классы и интерфейсы для стандартизации API
+5. Внедрить принцип DRY (Don't Repeat Yourself) в процесс разработки

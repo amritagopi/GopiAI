@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчет о дублировании кода - GopiAI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .stats { background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .recommendations { margin-bottom: 30px; }
+        .recommendation { border-left: 4px solid #ccc; padding-left: 15px; margin-bottom: 15px; }
+        .recommendation.high { border-color: #dc3545; }
+        .recommendation.medium { border-color: #ffc107; }
+        .recommendation.low { border-color: #28a745; }
+        .code { background-color: #f8f9fa; padding: 10px; border-radius: 3px; font-family: monospace; white-space: pre; overflow-x: auto; }
+        .locations { font-size: 0.9em; color: #6c757d; }
+        .pattern-category { margin-top: 20px; }
+        .pattern-item { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Отчет о дублировании кода в проекте GopiAI</h1>
+    <p>Дата: 2025-05-05 19:20:35</p>
+    <div class="stats">
+        <h2>Общая статистика</h2>
+        <p>Проанализировано файлов: <strong>288</strong></p>
+        <p>Проанализировано строк кода: <strong>78067</strong></p>
+        <p>Найдено дублирующихся фрагментов: <strong>29804</strong></p>
+        <p>Найдено дублирующихся функций: <strong>251</strong></p>
+        <p>Найдено дублирующихся классов: <strong>38</strong></p>
+        <p>Общее количество дублированных строк: <strong>373466</strong></p>
+        <p>Файлов с дубликатами: <strong>240</strong></p>
+    </div>
+    <h2>Рекомендации по рефакторингу</h2>
+    <div class="recommendations">
+        <div class="recommendation high">
+            <h3>FUNC_1: Вынести функцию 'init_ui' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 88 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\ui\browser_agent_dialog.py:84-171</li>
+                <li>app\ui\coding_agent_dialog.py:86-173</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def init_ui(self):
+        &quot;&quot;&quot;Инициализирует интерфейс пользователя.&quot;&quot;&quot;
+        # Главный лейаут
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
+
+        # Создаем сплиттер для разделения редактора и чата
+        self.splitter = QSplitter(Qt.Horizontal)
+
+        # Левая часть - редактор кода
+        self.editor_widget = MultiEditorWidget(self, self.theme_manager)
+
+        # Устанавливаем ссылку на редактор в интерфейс агента
+        self.agent_interface.set_editor_widget(self.editor_widget)
+
+        # Правая часть - чат с агентом
+        chat_widget = QWidget()
+        chat_layout = QVBoxLayout(chat_widget)
+        chat_layout.setContentsMargins(10, 10, 10, 10)
+        chat_layout.setSpacing(10)
+
+        # Заголовок чата
+        chat_header = QLabel(tr(&quot;coding_agent_dialog.chat_header&quot;, &quot;Coding Agent Chat&quot;))
+        chat_header.setAlignment(Qt.AlignCenter)
+        chat_layout.addWidget(chat_header)
+
+        # История чата с расширенным функционалом
+        self.chat_history = ChatHistoryWidget(self)
+        self.chat_history.setPlaceholderText(
+            tr(&quot;coding_agent_dialog.chat_placeholder&quot;, &quot;Chat with the coding agent here...&quot;)
+        )
+        chat_layout.addWidget(self.chat_history)
+
+        # Панель инструментов для взаимодействия с кодом
+        code_actions_layout = QHBoxLayout()
+
+        # Кнопка для отправки выделенного кода в чат
+        self.send_code_button = QPushButton(tr(&quot;coding_agent_dialog.send_code&quot;, &quot;Send Code to Chat&quot;))
+        self.send_code_button.setIcon(get_icon(&quot;send_to_chat&quot;))
+        self.send_code_button.clicked.connect(self.send_selected_code_to_chat)
+        code_actions_layout.addWidget(self.send_code_button)
+
+        # Кнопка для проверки кода
+        self.check_code_button = QPushButton(tr(&quot;coding_agent_dialog.check_code&quot;, &quot;Check Code&quot;))
+        self.check_code_button.setIcon(get_icon(&quot;check&quot;))
+        self.check_code_button.clicked.connect(self.check_selected_code)
+        code_actions_layout.addWidget(self.check_code_button)
+
+        chat_layout.addLayout(code_actions_layout)
+
+        # Прогресс-бар для индикации работы агента
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setRange(0, 0)  # Бесконечный прогресс
+        self.progress_bar.setVisible(False)
+        chat_layout.addWidget(self.progress_bar)
+
+        # Поле ввода и кнопка отправки
+        input_layout = QHBoxLayout()
+
+        self.message_input = QLineEdit()
+        self.message_input.setPlaceholderText(
+            tr(&quot;coding_agent_dialog.input_placeholder&quot;, &quot;Type your message here...&quot;)
+        )
+        self.message_input.returnPressed.connect(self.send_message)
+        input_layout.addWidget(self.message_input)
+
+        self.send_button = QPushButton(tr(&quot;coding_agent_dialog.send&quot;, &quot;Send&quot;))
+        self.send_button.clicked.connect(self.send_message)
+        input_layout.addWidget(self.send_button)
+
+        chat_layout.addLayout(input_layout)
+
+        # Кнопка остановки выполнения агента
+        self.stop_button = QPushButton(tr(&quot;coding_agent_dialog.stop&quot;, &quot;Stop&quot;))
+        self.stop_button.clicked.connect(self.stop_agent)
+        self.stop_button.setEnabled(False)
+        chat_layout.addWidget(self.stop_button)
+
+        # Добавляем виджеты в сплиттер
+        self.splitter.addWidget(self.editor_widget)
+        self.splitter.addWidget(chat_widget)
+
+        # Устанавливаем начальные размеры для сплиттера (70% слева, 30% справа)
+        self.splitter.setSizes([int(self.width() * 0.7), int(self.width() * 0.3)])
+
+        # Добавляем сплиттер в основной лейаут
+        main_layout.addWidget(self.splitter)</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_2: Вынести функцию 'self_evaluate' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 66 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\planning_strategy.py:679-744</li>
+                <li>app\agent\planning_strategy.py:855-920</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    async def self_evaluate(
+        self,
+        task: str,
+        plan: Dict[str, Any],
+        execution_result: Dict[str, Any],
+        sequential_thinking: SequentialThinking
+    ) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;
+        Выполняет самооценку стратегии с учетом неопределенностей
+
+        Args:
+            task: Описание задачи
+            plan: План выполнения
+            execution_result: Результаты выполнения плана
+            sequential_thinking: Модуль последовательного мышления
+
+        Returns:
+            Результаты самооценки стратегии
+        &quot;&quot;&quot;
+        logger.info(f&quot;Self-evaluating uncertainty strategy for task: {task[:50]}...&quot;)
+
+        evaluation_prompt = (
+            f&quot;Проведи самооценку стратегии планирования с учетом неопределенностей для задачи: &#x27;{task}&#x27;\n\n&quot;
+            f&quot;План:\n{json.dumps(plan.get(&#x27;plan_text&#x27;, plan), indent=2)}\n\n&quot;
+            f&quot;Результаты выполнения:\n{json.dumps(execution_result, indent=2)}\n\n&quot;
+            f&quot;Оцени следующие аспекты стратегии:\n&quot;
+            f&quot;1. Идентификация источников неопределенности\n&quot;
+            f&quot;2. Разработка альтернативных планов\n&quot;
+            f&quot;3. Механизмы адаптации при неопределенности\n&quot;
+            f&quot;4. Устойчивость к непредвиденным ситуациям\n\n&quot;
+            f&quot;Для каждого аспекта дай числовую оценку (0-10) и краткое обоснование.&quot;
+        )
+
+        evaluation_result = await sequential_thinking.run_thinking_chain(
+            initial_thought=evaluation_prompt,
+            max_steps=3
+        )
+
+        final_thought = evaluation_result[-1][&quot;thought&quot;] if evaluation_result else &quot;&quot;
+
+        # Анализируем текст для извлечения оценок
+        scores = {}
+        aspects = [
+            (&quot;uncertainty_identification&quot;, [&quot;идентификаци&quot;, &quot;источник&quot;, &quot;identification&quot;]),
+            (&quot;alternative_plans&quot;, [&quot;альтернатив&quot;, &quot;план&quot;, &quot;alternative&quot;]),
+            (&quot;adaptation_mechanisms&quot;, [&quot;адаптаци&quot;, &quot;механизм&quot;, &quot;adaptation&quot;]),
+            (&quot;robustness&quot;, [&quot;устойчивост&quot;, &quot;непредвиденн&quot;, &quot;robustness&quot;])
+        ]
+
+        for aspect_name, keywords in aspects:
+            score = self._extract_numerical_score(final_thought, keywords)
+            scores[aspect_name] = score
+
+        # Рассчитываем общую оценку
+        overall_score = sum(scores.values()) / len(scores) if scores else 0
+
+        # Извлекаем рекомендации
+        improvement_areas = self._extract_improvement_areas(final_thought)
+
+        return {
+            &quot;strategy_type&quot;: &quot;uncertainty&quot;,
+            &quot;scores&quot;: scores,
+            &quot;overall_score&quot;: overall_score,
+            &quot;improvement_areas&quot;: improvement_areas,
+            &quot;evaluation_text&quot;: final_thought
+        }</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_3: Вынести функцию 'run' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 65 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>DONT_TOUCH_MY_AUDITOR.PY:29-93</li>
+                <li>app\ui\utils\simple_ui_auditor_final.py:40-104</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def run(self):
+        &quot;&quot;&quot;Выполняет аудит UI.&quot;&quot;&quot;
+        try:
+            # Собираем файлы для анализа
+            python_files = []
+            qss_files = []
+            ui_files = []
+
+            total_files = 0
+            processed_files = 0
+
+            # Подсчитываем количество файлов
+            for root, dirs, files in os.walk(self.project_path):
+                for file in files:
+                    if file.endswith((&#x27;.py&#x27;, &#x27;.qss&#x27;, &#x27;.ui&#x27;, &#x27;.css&#x27;)):
+                        total_files += 1
+
+            if total_files == 0:
+                self.signals.message.emit(tr(&quot;simple_ui_auditor.no_files_found&quot;, &quot;Не найдено файлов для анализа.&quot;))
+                self.signals.finished.emit()
+                return
+
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.files_found&quot;, &quot;Найдено {total_files} файлов для анализа.&quot;).format(total_files=total_files))
+
+            # Собираем файлы для анализа
+            for root, dirs, files in os.walk(self.project_path):
+                # Пропускаем директории venv и .git
+                if &#x27;venv&#x27; in root or &#x27;.git&#x27; in root:
+                    continue
+
+                for file in files:
+                    if not self.is_running:
+                        return
+
+                    if file.endswith(&#x27;.py&#x27;):
+                        python_files.append(os.path.join(root, file))
+                    elif file.endswith((&#x27;.qss&#x27;, &#x27;.css&#x27;)):
+                        qss_files.append(os.path.join(root, file))
+                    elif file.endswith(&#x27;.ui&#x27;):
+                        ui_files.append(os.path.join(root, file))
+
+                    processed_files += 1
+                    progress = int(processed_files / total_files * 100)
+                    self.signals.progress.emit(progress)
+
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.files_collected&quot;, &quot;Файлы собраны: {python} Python, {qss} QSS/CSS, {ui} UI&quot;).format(python=len(python_files), qss=len(qss_files), ui=len(ui_files)))
+
+            # Анализ Python файлов
+            self.signals.message.emit(&quot;\n=== Анализ Python файлов ===\n&quot;)
+            self.analyze_python_files(python_files)
+
+            # Анализ QSS файлов
+            self.signals.message.emit(&quot;\n=== Анализ QSS/CSS файлов ===\n&quot;)
+            self.analyze_qss_files(qss_files)
+
+            # Анализ UI файлов
+            self.signals.message.emit(&quot;\n=== Анализ UI файлов ===\n&quot;)
+            self.analyze_ui_files(ui_files)
+
+            self.signals.message.emit(&quot;\nАудит завершен.&quot;)
+            self.signals.finished.emit()
+
+        except Exception as e:
+            self.signals.error.emit(tr(&quot;simple_ui_auditor.audit_error&quot;, f&quot;Ошибка при выполнении аудита: {str(e)}&quot;))
+            self.signals.finished.emit()</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_4: Вынести функцию '_on_language_changed_event' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 59 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\ui\main_window.py:1848-1906</li>
+                <li>app\ui\main_window.py:2838-2896</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def _on_language_changed_event(self, language_code):
+        &quot;&quot;&quot;Обработчик события изменения языка интерфейса.&quot;&quot;&quot;
+        try:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.info(f&quot;Получено событие смены языка на: {language_code}&quot;)
+
+            # Обновляем заголовок окна
+            from app.ui.i18n.translator import tr
+            self.setWindowTitle(tr(&quot;app.title&quot;, &quot;GopiAI&quot;))
+
+            # Обновляем все меню
+            if hasattr(self, &quot;menu_manager&quot;):
+                logger.info(&quot;Обновляем переводы меню&quot;)
+                if hasattr(self.menu_manager, &quot;update_translations&quot;):
+                    self.menu_manager.update_translations()
+                else:
+                    logger.warning(&quot;Метод update_translations не найден в menu_manager&quot;)
+
+            # Обновляем заголовки вкладок
+            self._update_tab_titles()
+
+            # Обновляем все панели и доки
+            for child in self.findChildren(QWidget):
+                # Обновляем заголовки
+                if hasattr(child, &quot;windowTitle&quot;) and hasattr(child, &quot;objectName&quot;):
+                    obj_name = child.objectName()
+                    if obj_name and not obj_name.startswith(&quot;qt_&quot;):
+                        title_key = f&quot;dock.{obj_name}&quot;
+                        translated_title = tr(title_key, child.windowTitle())
+                        if translated_title != child.windowTitle():
+                            child.setWindowTitle(translated_title)
+                            logger.debug(f&quot;Обновлен заголовок {obj_name}: {translated_title}&quot;)
+
+                # Обновляем тексты кнопок
+                if isinstance(child, QPushButton) and hasattr(child, &quot;objectName&quot;):
+                    obj_name = child.objectName()
+                    if obj_name and not obj_name.startswith(&quot;qt_&quot;):
+                        button_key = f&quot;button.{obj_name}&quot;
+                        translated_text = tr(button_key, child.text())
+                        if translated_text != child.text():
+                            child.setText(translated_text)
+                            logger.debug(f&quot;Обновлен текст кнопки {obj_name}: {translated_text}&quot;)
+
+                # Обновляем тексты меток
+                if isinstance(child, QLabel) and hasattr(child, &quot;objectName&quot;):
+                    obj_name = child.objectName()
+                    if obj_name and not obj_name.startswith(&quot;qt_&quot;):
+                        label_key = f&quot;label.{obj_name}&quot;
+                        translated_text = tr(label_key, child.text())
+                        if translated_text != child.text():
+                            child.setText(translated_text)
+                            logger.debug(f&quot;Обновлен текст метки {obj_name}: {translated_text}&quot;)
+
+            logger.info(f&quot;Язык успешно изменен на {language_code}&quot;)
+        except Exception as e:
+            import traceback
+            logger.error(f&quot;Ошибка при обновлении языка UI: {str(e)}&quot;)
+            logger.error(traceback.format_exc())</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_5: Вынести функцию 'analyze_python_files' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 55 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>DONT_TOUCH_MY_AUDITOR.PY:99-153</li>
+                <li>app\ui\utils\simple_ui_auditor_final.py:110-164</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def analyze_python_files(self, files):
+        &quot;&quot;&quot;Анализирует Python файлы на наличие проблем с UI.&quot;&quot;&quot;
+        if not files:
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.python_files_not_found&quot;, &quot;Python файлы не найдены.&quot;))
+            return
+
+        issues_found = 0
+        hardcoded_colors = {}
+
+        for i, file_path in enumerate(files):
+            if not self.is_running:
+                return
+
+            try:
+                with open(file_path, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;) as f:
+                    content = f.read()
+
+                # Поиск хардкодированных цветов
+                hex_colors = re.findall(r&#x27;#[0-9a-fA-F]{6}&#x27;, content)
+                if hex_colors:
+                    for color in hex_colors:
+                        if color not in hardcoded_colors:
+                            hardcoded_colors[color] = []
+                        hardcoded_colors[color].append(file_path)
+                        issues_found += 1
+
+                # Поиск нелокализованных строк
+                ui_strings = re.findall(r&#x27;(?:setText|setTitle|setWindowTitle|setToolTip)\([&quot;\&#x27;]([^&quot;\&#x27;]+)[&quot;\&#x27;]\)&#x27;, content)
+                for string in ui_strings:
+                    if not re.search(r&#x27;self\.tr\([&quot;\&#x27;]&#x27; + re.escape(string) + r&#x27;[&quot;\&#x27;]\)&#x27;, content):
+                        self.signals.message.emit(
+                            tr(&quot;simple_ui_auditor.unlocalized_string&quot;, &quot;  ⚠️ {file_path}: Нелокализованная строка: \&quot;{string}\&quot;&quot;)
+                            .format(file_path=file_path, string=string)
+                        )
+                        issues_found += 1
+
+                # Обновляем прогресс
+                progress = int((i + 1) / len(files) * 100)
+                self.signals.progress.emit(progress)
+
+            except Exception as e:
+                self.signals.message.emit(tr(&quot;simple_ui_auditor.analysis_error&quot;, f&quot;  ⚠️ Ошибка при анализе {file_path}: {str(e)}&quot;))
+
+        # Отчет по хардкодированным цветам
+        if hardcoded_colors:
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.hardcoded_colors_found&quot;, &quot;\n  ⚠️ Найдено {count} различных хардкодированных цветов:&quot;).format(count=len(hardcoded_colors)))
+            most_used_colors = sorted([(color, len(files)) for color, files in hardcoded_colors.items()],
+                                    key=lambda x: x[1], reverse=True)[:10]
+            for color, count in most_used_colors:
+                self.signals.message.emit(tr(&quot;simple_ui_auditor.color_usage&quot;, &quot;    - {color}: {count} использований&quot;).format(color=color, count=count))
+        else:
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.no_hardcoded_colors&quot;, &quot;  ✅ Хардкодированные цвета не найдены&quot;))
+
+        if issues_found == 0:
+            self.signals.message.emit(tr(&quot;simple_ui_auditor.no_issues_found&quot;, &quot;  ✅ В Python файлах проблем не обнаружено&quot;))</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_6: Вынести функцию 'explore_' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 55 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\reasoning.py:380-434</li>
+                <li>app\agent\reasoning.py:436-490</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    async def explore_files(self, query: str, **kwargs) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;
+        Исследует файловую систему по запросу.
+
+        Args:
+            query: Запрос для поиска
+            **kwargs: Дополнительные параметры для стратегии
+
+        Returns:
+            Результаты исследования
+        &quot;&quot;&quot;
+        if not self.file_exploration:
+            return {
+                &quot;success&quot;: False,
+                &quot;error&quot;: &quot;File exploration strategy not initialized&quot;,
+                &quot;query&quot;: query
+            }
+
+        try:
+            # Проверяем разрешение
+            if self.permission_manager:
+                request = self.permission_manager.request_permission(
+                    tool_name=&quot;file_exploration&quot;,
+                    args={&quot;query&quot;: query, **kwargs},
+                    reason=f&quot;File exploration for query: {query}&quot;
+                )
+
+                if not request.approved:
+                    return {
+                        &quot;success&quot;: False,
+                        &quot;error&quot;: &quot;Permission denied for file exploration&quot;,
+                        &quot;query&quot;: query
+                    }
+
+            # Выполняем исследование
+            collection = await self.file_exploration.explore(query, **kwargs)
+
+            # Обрабатываем результаты
+            results = await self.file_exploration.process_results(collection)
+
+            return {
+                &quot;success&quot;: True,
+                &quot;collection&quot;: collection,
+                &quot;results&quot;: results,
+                &quot;items_count&quot;: len(collection.items),
+                &quot;query&quot;: query
+            }
+
+        except Exception as e:
+            logger.error(f&quot;Error during file exploration: {str(e)}&quot;)
+            return {
+                &quot;success&quot;: False,
+                &quot;error&quot;: str(e),
+                &quot;query&quot;: query
+            }</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_7: Вынести функцию 'create_flow_from_tools' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 53 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\pocketflow\adapters.py:232-284</li>
+                <li>app\pocketflow\adapters.py:287-339</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def create_flow_from_agents(
+        agents: List[BaseAgent],
+        flow_name: str = &quot;AgentFlow&quot;,
+        connections: Optional[Dict[str, List[str]]] = None
+    ) -&gt; Flow:
+        &quot;&quot;&quot;
+        Create a PocketFlow Flow from a list of Open Manus agents.
+        
+        Args:
+            agents: List of Open Manus agents to include in the flow
+            flow_name: Name for the created flow
+            connections: Optional dict mapping source nodes to target nodes
+                        If None, agents will be connected sequentially
+        
+        Returns:
+            A PocketFlow Flow object with all agents as nodes
+        &quot;&quot;&quot;
+        if not agents:
+            raise ValueError(&quot;Cannot create a flow with no agents&quot;)
+            
+        # Create nodes for each agent
+        nodes = [PocketFlowNodeAdapter(agent) for agent in agents]
+        
+        # Create flow with the first node as the start node
+        flow = Flow(nodes[0])
+        flow.name = flow_name
+        
+        # Connect nodes based on connections or sequentially
+        if connections:
+            # Custom connections
+            for source_name, target_names in connections.items():
+                # Find the source node
+                source_node = next((n for n in nodes if n.name == source_name), None)
+                if not source_node:
+                    logger.warning(f&quot;Source node &#x27;{source_name}&#x27; not found&quot;)
+                    continue
+                    
+                for target_name in target_names:
+                    # Find the target node
+                    target_node = next((n for n in nodes if n.name == target_name), None)
+                    if not target_node:
+                        logger.warning(f&quot;Target node &#x27;{target_name}&#x27; not found&quot;)
+                        continue
+                        
+                    # Connect the nodes
+                    source_node.add_successor(target_node)
+        else:
+            # Sequential connection
+            for i in range(len(nodes) - 1):
+                nodes[i].add_successor(nodes[i + 1])
+        
+        logger.info(f&quot;Created flow &#x27;{flow_name}&#x27; with {len(nodes)} agents&quot;)
+        return flow</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_8: Вынести функцию '_extract_improvement_areas' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 39 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\planning_strategy.py:773-816</li>
+                <li>app\agent\planning_strategy.py:947-985</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def _extract_improvement_areas(self, text: str) -&gt; List[str]:
+        &quot;&quot;&quot;
+        Извлекает области для улучшения из текста оценки
+
+        Args:
+            text: Текст оценки
+
+        Returns:
+            Список областей для улучшения
+        &quot;&quot;&quot;
+        improvement_areas = []
+        keywords = [&quot;улучшени&quot;, &quot;improvement&quot;, &quot;рекомендац&quot;, &quot;recommendation&quot;]
+        lines = text.split(&quot;\n&quot;)
+        in_section = False
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+
+            for keyword in keywords:
+                if keyword.lower() in line.lower():
+                    in_section = True
+                    break
+
+            if in_section and (line.startswith(&quot;-&quot;) or line.startswith(&quot;•&quot;) or
+                              (line[0].isdigit() and &quot;.&quot; in line[:3])):
+                clean_line = line.lstrip(&quot;-•0123456789. &quot;)
+                if clean_line:
+                    improvement_areas.append(clean_line)
+
+        if not improvement_areas:
+            for keyword in keywords:
+                for line in lines:
+                    if keyword.lower() in line.lower():
+                        improvement_areas.append(line.strip())
+                        break
+
+        return improvement_areas[:5]</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_9: Вынести функцию '_on_home_clicked' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 3 местах, 39 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\ui\browser_tab_widget.py:237-239</li>
+                <li>app\ui\browser_tab_widget.py:401-403</li>
+                <li>app\ui\dock_title_bar.py:93-131</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    def _setup_styles(self):
+        &quot;&quot;&quot;Настраивает стили для компонентов заголовка.&quot;&quot;&quot;
+        # Используем темы из theme_manager
+        self.setStyleSheet(&quot;&quot;&quot;
+            DockTitleBar {
+                background-color: palette(window);
+                border-bottom: 1px solid palette(mid);
+                min-height: 22px;
+                max-height: 22px;
+            }
+
+            DockTitleBar QLabel#dockTitleText {
+                font-weight: bold;
+                color: palette(text);
+            }
+
+            DockTitleBar QPushButton {
+                background-color: transparent;
+                border: none;
+            }
+
+            DockTitleBar QPushButton:hover {
+                background-color: rgba(127, 127, 127, 0.2);
+                border-radius: 2px;
+            }
+
+            DockTitleBar QPushButton:pressed {
+                background-color: rgba(127, 127, 127, 0.4);
+                border-radius: 2px;
+            }
+
+            DockTitleBar QPushButton#dockCloseButton:hover {
+                background-color: rgba(255, 80, 80, 0.3);
+            }
+
+            DockTitleBar QPushButton#dockCloseButton:pressed {
+                background-color: rgba(255, 80, 80, 0.5);
+            }
+        &quot;&quot;&quot;)</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>FUNC_10: Вынести функцию 'update_' в общий модуль utilities.py</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 36 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\browser_agent.py:80-114</li>
+                <li>app\agent\coding_agent.py:74-109</li>
+            </ul>
+            <p><strong>Пример кода:</strong></p>
+            <div class="code">    async def update_editor_state(self):
+        &quot;&quot;&quot;
+        Обновляет сохраненное состояние редактора кода.
+
+        Получает информацию об открытых файлах, текущем файле и позиции курсора.
+        &quot;&quot;&quot;
+        try:
+            # Пытаемся получить информацию об открытых файлах
+            code_control = self.tools.get_tool(&quot;code_control&quot;)
+            if code_control:
+                # Получаем список открытых файлов
+                files_result = await code_control.execute(action=&quot;get_open_files&quot;)
+
+                if not files_result.error:
+                    files_info = files_result.output
+                else:
+                    files_info = &quot;Не удалось получить информацию об открытых файлах&quot;
+
+                # Получаем текущий файл
+                current_file_result = await code_control.execute(action=&quot;get_current_file&quot;)
+                if not current_file_result.error:
+                    current_file = current_file_result.output
+                else:
+                    current_file = &quot;Не удалось получить текущий файл&quot;
+
+                # Сохраняем состояние
+                self._current_editor_state = {
+                    &quot;open_files&quot;: files_info,
+                    &quot;current_file&quot;: current_file
+                }
+
+                return self._current_editor_state
+        except Exception as e:
+            logger.error(f&quot;Ошибка при обновлении состояния редактора: {e}&quot;)
+
+        return None</div>
+            <p><strong>Предлагаемое решение:</strong> Вынести в общий модуль utils/common.py</p>
+        </div>
+        <div class="recommendation high">
+            <h3>CLASS_1: Создать базовый класс 'TreePlanningStrategyBase' в общем модуле</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 167 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\planning_strategy.py:643-816</li>
+                <li>app\agent\planning_strategy.py:819-985</li>
+            </ul>
+        </div>
+        <div class="recommendation high">
+            <h3>CLASS_2: Создать базовый класс 'EnhancedBrowserAgentBase' в общем модуле</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 128 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>app\agent\browser_agent.py:15-147</li>
+                <li>app\agent\coding_agent.py:15-142</li>
+            </ul>
+        </div>
+        <div class="recommendation high">
+            <h3>CLASS_3: Создать базовый класс 'ContentGenerationNodeBase' в общем модуле</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 41 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>examples\pocketflow_marketing\custom_flow.py:101-141</li>
+                <li>examples\pocketflow_marketing\fixed_example.py:89-129</li>
+            </ul>
+        </div>
+        <div class="recommendation high">
+            <h3>CLASS_4: Создать базовый класс 'FixedNodeBase' в общем модуле</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 40 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>examples\pocketflow_marketing\custom_flow.py:23-62</li>
+                <li>examples\pocketflow_marketing\fixed_example.py:11-50</li>
+            </ul>
+        </div>
+        <div class="recommendation high">
+            <h3>CLASS_5: Создать базовый класс 'OptimizationNodeBase' в общем модуле</h3>
+            <p><strong>Приоритет:</strong> high</p>
+            <p><strong>Влияние:</strong> Устранит дублирование в 2 местах, 38 строк кода</p>
+            <p class="locations"><strong>Местоположения:</strong></p>
+            <ul class="locations">
+                <li>examples\pocketflow_marketing\custom_flow.py:144-181</li>
+                <li>examples\pocketflow_marketing\fixed_example.py:132-169</li>
+            </ul>
+        </div>
+    </div>
+    <h2>Обнаруженные шаблоны дублирования</h2>
+    <div class="pattern-category">
+        <h3>Файловые операции (7821 дубликатов)</h3>
+        <ul>
+            <li class="pattern-item">Function, 65 строк, Имена: run, run</li>
+            <li class="pattern-item">Function, 55 строк, Имена: analyze_python_files, analyze_python_files</li>
+            <li class="pattern-item">Function, 55 строк, Имена: explore_web, explore_files</li>
+            <li class="pattern-item">Function, 36 строк, Имена: update_browser_state, update_editor_state</li>
+            <li class="pattern-item">Function, 33 строк, Имена: add_allowed_directory, add_allowed_directory</li>
+        </ul>
+    </div>
+    <div class="pattern-category">
+        <h3>API-вызовы (6389 дубликатов)</h3>
+        <ul>
+            <li class="pattern-item">Function, 88 строк, Имена: init_ui, init_ui</li>
+            <li class="pattern-item">Function, 66 строк, Имена: self_evaluate, self_evaluate</li>
+            <li class="pattern-item">Function, 36 строк, Имена: create_content_planning_workflow, create_content_planning_workflow</li>
+            <li class="pattern-item">Function, 29 строк, Имена: __init__, __init__</li>
+            <li class="pattern-item">Function, 26 строк, Имена: main, main</li>
+        </ul>
+    </div>
+    <div class="pattern-category">
+        <h3>GUI-элементы (957 дубликатов)</h3>
+        <ul>
+            <li class="pattern-item">Function, 59 строк, Имена: _on_language_changed_event, _on_language_changed_event</li>
+            <li class="pattern-item">Function, 39 строк, Имена: _on_home_clicked, go_home, _setup_styles</li>
+            <li class="pattern-item">Function, 17 строк, Имена: __init__, __init__</li>
+            <li class="pattern-item">Fragment, 29 строк</li>
+            <li class="pattern-item">Fragment, 29 строк</li>
+        </ul>
+    </div>
+    <div class="pattern-category">
+        <h3>Обработка данных (1518 дубликатов)</h3>
+        <ul>
+            <li class="pattern-item">Function, 53 строк, Имена: create_flow_from_tools, create_flow_from_agents</li>
+            <li class="pattern-item">Function, 19 строк, Имена: test_map_reduce_sum, test_uneven_chunks, test_custom_chunk_size, test_single_element_chunks</li>
+            <li class="pattern-item">Function, 18 строк, Имена: to_dict, to_dict</li>
+            <li class="pattern-item">Function, 14 строк, Имена: send_message, send_message</li>
+            <li class="pattern-item">Function, 14 строк, Имена: exec, exec, exec</li>
+        </ul>
+    </div>
+    <div class="pattern-category">
+        <h3>Утилитарные функции (721 дубликатов)</h3>
+        <ul>
+            <li class="pattern-item">Function, 18 строк, Имена: _open_coding_agent, _open_browsing_agent</li>
+            <li class="pattern-item">Function, 13 строк, Имена: adapt_plan, adapt_plan</li>
+            <li class="pattern-item">Function, 7 строк, Имена: _toggle_project_explorer, _toggle_chat</li>
+            <li class="pattern-item">Function, 5 строк, Имена: append_stdout, append_stderr, append_debug</li>
+            <li class="pattern-item">Function, 4 строк, Имена: tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown, tearDown</li>
+        </ul>
+    </div>
+    <h2>Рекомендации по организации кода</h2>
+    <ol>
+        <li>Создать модуль <strong>utils/common.py</strong> для общих утилитарных функций</li>
+        <li>Вынести повторяющиеся операции работы с файлами в <strong>utils/file_operations.py</strong></li>
+        <li>Создать базовые классы в соответствующих модулях</li>
+        <li>Использовать абстрактные классы и интерфейсы для стандартизации API</li>
+        <li>Внедрить принцип DRY (Don't Repeat Yourself) в процесс разработки</li>
+    </ol>
+</body>
+</html>

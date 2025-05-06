@@ -1,0 +1,18 @@
+ОТЧЕТ ПО ПОМЕТКЕ 'МЕРТВОГО КОДА'
+Дата: 2025-05-05 09:12:09
+Режим: С внесением изменений
+
+ОБЩАЯ СТАТИСТИКА:
+- Всего неиспользуемых файлов: 7
+- Переименовано файлов: 7
+- Пропущено файлов: 0
+- Модифицировано файлов с неиспользуемым кодом: 0
+
+ПЕРЕИМЕНОВАННЫЕ ФАЙЛЫ:
+- pocketflow_workflow.py -> deprecated_pocketflow_workflow.py
+- tests\test_i18n_mainwindow.py -> tests\deprecated_test_i18n_mainwindow.py
+- tests\test_i18n_settingswidget.py -> tests\deprecated_test_i18n_settingswidget.py
+- tests\test_icon_usage_in_ui.py -> tests\deprecated_test_icon_usage_in_ui.py
+- tests\test_metacognitive_analyzer.py -> tests\deprecated_test_metacognitive_analyzer.py
+- GopiAI_Flow\pocketflow\__init__.py -> GopiAI_Flow\pocketflow\deprecated___init__.py
+- examples\benchmarks\__init__.py -> examples\benchmarks\deprecated___init__.py

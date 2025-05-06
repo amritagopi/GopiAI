@@ -1,0 +1,59 @@
+{
+    "visual_theme": "light",
+    "custom_themes": {
+        "custom_dark": {
+            "background": "#2D2D2D",
+            "foreground": "#55557f",
+            "accent": "#3498DB",
+            "secondary": "#555555",
+            "error": "#E74C3C",
+            "success": "#2ECC71",
+            "warning": "#F39C12",
+            "border": "#444444",
+            "tab_active": "#3498DB",
+            "tab_inactive": "#555555",
+            "button_normal": "#555555",
+            "button_hover": "#3498DB",
+            "button_pressed": "#2980B9",
+            "input_background": "#3D3D3D",
+            "input_text": "#FFFFFF",
+            "input_border": "#555555"
+        },
+        "custom_custom_dark": {
+            "background": "#2D2D2D",
+            "foreground": "#aaaaff",
+            "accent": "#3498DB",
+            "secondary": "#555555",
+            "error": "#E74C3C",
+            "success": "#2ECC71",
+            "warning": "#F39C12",
+            "border": "#444444",
+            "tab_active": "#3498DB",
+            "tab_inactive": "#555555",
+            "button_normal": "#555555",
+            "button_hover": "#3498DB",
+            "button_pressed": "#2980B9",
+            "input_background": "#3D3D3D",
+            "input_text": "#FFFFFF",
+            "input_border": "#555555"
+        },
+        "custom_custom_custom_dark": {
+            "background": "#2D2D2D",
+            "foreground": "#aaaaff",
+            "accent": "#3498DB",
+            "secondary": "#555555",
+            "error": "#E74C3C",
+            "success": "#2ECC71",
+            "warning": "#F39C12",
+            "border": "#444444",
+            "tab_active": "#3498DB",
+            "tab_inactive": "#555555",
+            "button_normal": "#555555",
+            "button_hover": "#3498DB",
+            "button_pressed": "#2980B9",
+            "input_background": "#3D3D3D",
+            "input_text": "#ffff7f",
+            "input_border": "#555555"
+        }
+    }
+}
