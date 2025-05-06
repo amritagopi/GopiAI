@@ -120,7 +120,7 @@ networkx==3.4.2
 nltk==3.9.1
 numpy==1.26.0
 ollama==0.4.8
-openai==1.76.0
+openai==1.77.0
 orjson==3.10.16
 packaging==24.2
 pandas==2.2.3
@@ -144,9 +144,9 @@ pure_eval==0.2.3
 pyarrow==20.0.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
-pydantic==2.10.6
+pydantic==2.11.4
 pydantic-settings==2.9.1
-pydantic_core==2.27.2
+pydantic_core==2.34.1
 pyee==12.1.1
 Pygments==2.19.1
 pylint==3.3.6
