@@ -1,0 +1,50 @@
+ОТЧЕТ О ЗАВИСИМОСТЯХ МОДУЛЕЙ
+Дата: 2025-05-05 09:26:25
+
+ОБЩАЯ СТАТИСТИКА:
+- Всего модулей: 279
+- Всего зависимостей: 33192
+- Изолированных модулей: 14
+- Количество подграфов: 16
+- Циклических зависимостей: 0
+
+КЛЮЧЕВЫЕ МОДУЛИ (наиболее импортируемые):
+- app\pocketflow\core.py: 189 импортов
+- app\ui\i18n\translator.py: 183 импортов
+- app\ui\icon_manager.py: 182 импортов
+- app\ui\i18n\compile_translations.py: 182 импортов
+- app\ui\i18n\__init__.py: 182 импортов
+- app\ui\svg_to_base64.py: 179 импортов
+- app\ui\theme_manager.py: 179 импортов
+- app\utils\theme_manager.py: 179 импортов
+- app\ui\utils\theme_manager.py: 179 импортов
+- app\ui\syntax_highlighter.py: 178 импортов
+
+МОДУЛИ С НАИБОЛЬШИМ ЧИСЛОМ ЗАВИСИМОСТЕЙ:
+- main.py: импортирует 189 модулей
+- app\ui\main_window.py: импортирует 189 модулей
+- app\marketing\fixed_nodes.py: импортирует 188 модулей
+- app\marketing\fixed_orchestrator.py: импортирует 188 модулей
+- app\marketing\flows.py: импортирует 188 модулей
+- app\marketing\nodes.py: импортирует 188 модулей
+- app\marketing\orchestrator.py: импортирует 188 модулей
+- app\mcp\server.py: импортирует 188 модулей
+- app\pocketflow\adapters.py: импортирует 188 модулей
+- app\pocketflow\fixed_adapters.py: импортирует 188 модулей
+
+
+ИЗОЛИРОВАННЫЕ МОДУЛИ (не импортируются и не импортируют):
+- compile_icons.py
+- deprecated_pocketflow_workflow.py
+- init_database.py
+- llm_interaction.py
+- run_with_venv.py
+- setup.py
+- setup_mcp_servers.py
+- visualize_dependencies.py
+- GopiAI_Flow\setup.py
+- scripts\build_resources.py
+- scripts\cleanup_logs.py
+- scripts\generate_icon_set.py
+- GopiAI_Flow/pocketflow/deprecated___init__.py
+- examples/benchmarks/deprecated___init__.py

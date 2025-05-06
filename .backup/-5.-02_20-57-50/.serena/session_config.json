@@ -1,0 +1,6 @@
+{
+  "sessionManagement": {
+    "persistSession": true,
+    "resumeFromLastState": true
+  }
+}

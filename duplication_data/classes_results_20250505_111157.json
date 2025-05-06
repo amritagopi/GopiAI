@@ -1,0 +1,907 @@
+[
+  {
+    "hash": "304972b23fcdacf60651a1796559f5b7",
+    "source": "class UncertaintyPlanningStrategy(PlanningStrategy):\n    \"\"\"\n    \u0421\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u044f \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u0441 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u043e\u0439 \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439\n\n    \u0421\u043e\u0437\u0434\u0430\u0435\u0442 \u043f\u043b\u0430\u043d \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439, \u0432\u043a\u043b\u044e\u0447\u0430\u044f \u0430\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\u043d\u044b\u0435 \u043f\u0443\u0442\u0438,\n    \u0442\u043e\u0447\u043a\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u0439 \u0438 \u043e\u0446\u0435\u043d\u043a\u0443 \u0432\u0435\u0440\u043e\u044f\u0442\u043d\u043e\u0441\u0442\u0435\u0439.\n    \"\"\"\n\n    async def create_plan(self, task: str, sequential_thinking: SequentialThinking) -> Dict[str, Any]:\n        \"\"\"\n        \u0421\u043e\u0437\u0434\u0430\u0435\u0442 \u043f\u043b\u0430\u043d \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439\n\n        Args:\n            task: \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438\n            sequential_thinking: \u041c\u043e\u0434\u0443\u043b\u044c \u043f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u043c\u044b\u0448\u043b\u0435\u043d\u0438\u044f\n\n        Returns:\n            \u041f\u043b\u0430\u043d \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0437\u0430\u0434\u0430\u0447\u0438 \u0441 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u043e\u0439 \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439\n        \"\"\"\n        # \u0417\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0434\u043b\u044f \u0431\u0443\u0434\u0443\u0449\u0435\u0439 \u0440\u0435\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u0438\n        return {\"task\": task, \"type\": \"uncertainty_plan\", \"message\": \"UncertaintyPlanningStrategy not fully implemented yet\"}\n\n    async def adapt_plan(self, original_plan: Dict[str, Any], new_information: Dict[str, Any]) -> Dict[str, Any]:\n        \"\"\"\n        \u0410\u0434\u0430\u043f\u0442\u0438\u0440\u0443\u0435\u0442 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0439 \u043f\u043b\u0430\u043d \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u043d\u043e\u0432\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438\n\n        Args:\n            original_plan: \u0418\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u043f\u043b\u0430\u043d\n            new_information: \u041d\u043e\u0432\u0430\u044f \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u0434\u043b\u044f \u0443\u0447\u0435\u0442\u0430\n\n        Returns:\n            \u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044b\u0439 \u043f\u043b\u0430\u043d\n        \"\"\"\n        # \u0417\u0430\u0433\u043b\u0443\u0448\u043a\u0430 \u0434\u043b\u044f \u0431\u0443\u0434\u0443\u0449\u0435\u0439 \u0440\u0435\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u0438\n        return original_plan\n\n    async def self_evaluate(\n        self,\n        task: str,\n        plan: Dict[str, Any],\n        execution_result: Dict[str, Any],\n        sequential_thinking: SequentialThinking\n    ) -> Dict[str, Any]:\n        \"\"\"\n        \u0412\u044b\u043f\u043e\u043b\u043d\u044f\u0435\u0442 \u0441\u0430\u043c\u043e\u043e\u0446\u0435\u043d\u043a\u0443 \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438 \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439\n\n        Args:\n            task: \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438\n            plan: \u041f\u043b\u0430\u043d \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f\n            execution_result: \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u043f\u043b\u0430\u043d\u0430\n            sequential_thinking: \u041c\u043e\u0434\u0443\u043b\u044c \u043f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u043c\u044b\u0448\u043b\u0435\u043d\u0438\u044f\n\n        Returns:\n            \u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b \u0441\u0430\u043c\u043e\u043e\u0446\u0435\u043d\u043a\u0438 \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438\n        \"\"\"\n        logger.info(f\"Self-evaluating uncertainty strategy for task: {task[:50]}...\")\n\n        evaluation_prompt = (\n            f\"\u041f\u0440\u043e\u0432\u0435\u0434\u0438 \u0441\u0430\u043c\u043e\u043e\u0446\u0435\u043d\u043a\u0443 \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0435\u0439 \u0434\u043b\u044f \u0437\u0430\u0434\u0430\u0447\u0438: '{task}'\\n\\n\"\n            f\"\u041f\u043b\u0430\u043d:\\n{json.dumps(plan.get('plan_text', plan), indent=2)}\\n\\n\"\n            f\"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f:\\n{json.dumps(execution_result, indent=2)}\\n\\n\"\n            f\"\u041e\u0446\u0435\u043d\u0438 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 \u0430\u0441\u043f\u0435\u043a\u0442\u044b \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438:\\n\"\n            f\"1. \u0418\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u044f \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u043e\u0432 \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0438\\n\"\n            f\"2. \u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0430\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\u043d\u044b\u0445 \u043f\u043b\u0430\u043d\u043e\u0432\\n\"\n            f\"3. \u041c\u0435\u0445\u0430\u043d\u0438\u0437\u043c\u044b \u0430\u0434\u0430\u043f\u0442\u0430\u0446\u0438\u0438 \u043f\u0440\u0438 \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u0438\\n\"\n            f\"4. \u0423\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\u044c \u043a \u043d\u0435\u043f\u0440\u0435\u0434\u0432\u0438\u0434\u0435\u043d\u043d\u044b\u043c \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044f\u043c\\n\\n\"\n            f\"\u0414\u043b\u044f \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0430\u0441\u043f\u0435\u043a\u0442\u0430 \u0434\u0430\u0439 \u0447\u0438\u0441\u043b\u043e\u0432\u0443\u044e \u043e\u0446\u0435\u043d\u043a\u0443 (0-10) \u0438 \u043a\u0440\u0430\u0442\u043a\u043e\u0435 \u043e\u0431\u043e\u0441\u043d\u043e\u0432\u0430\u043d\u0438\u0435.\"\n        )\n\n        evaluation_result = await sequential_thinking.run_thinking_chain(\n            initial_thought=evaluation_prompt,\n            max_steps=3\n        )\n\n        final_thought = evaluation_result[-1][\"thought\"] if evaluation_result else \"\"\n\n        # \u0410\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u0443\u0435\u043c \u0442\u0435\u043a\u0441\u0442 \u0434\u043b\u044f \u0438\u0437\u0432\u043b\u0435\u0447\u0435\u043d\u0438\u044f \u043e\u0446\u0435\u043d\u043e\u043a\n        scores = {}\n        aspects = [\n            (\"uncertainty_identification\", [\"\u0438\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0446\u0438\", \"\u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\", \"identification\"]),\n            (\"alternative_plans\", [\"\u0430\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\", \"\u043f\u043b\u0430\u043d\", \"alternative\"]),\n            (\"adaptation_mechanisms\", [\"\u0430\u0434\u0430\u043f\u0442\u0430\u0446\u0438\", \"\u043c\u0435\u0445\u0430\u043d\u0438\u0437\u043c\", \"adaptation\"]),\n            (\"robustness\", [\"\u0443\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\", \"\u043d\u0435\u043f\u0440\u0435\u0434\u0432\u0438\u0434\u0435\u043d\u043d\", \"robustness\"])\n        ]\n\n        for aspect_name, keywords in aspects:\n            score = self._extract_numerical_score(final_thought, keywords)\n            scores[aspect_name] = score\n\n        # \u0420\u0430\u0441\u0441\u0447\u0438\u0442\u044b\u0432\u0430\u0435\u043c \u043e\u0431\u0449\u0443\u044e \u043e\u0446\u0435\u043d\u043a\u0443\n        overall_score = sum(scores.values()) / len(scores) if scores else 0\n\n        # \u0418\u0437\u0432\u043b\u0435\u043a\u0430\u0435\u043c \u0440\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0438\n        improvement_areas = self._extract_improvement_areas(final_thought)\n\n        return {\n            \"strategy_type\": \"uncertainty\",\n            \"scores\": scores,\n            \"overall_score\": overall_score,\n            \"improvement_areas\": improvement_areas,\n            \"evaluation_text\": final_thought\n        }\n\n    def _extract_numerical_score(self, text: str, keywords: List[str]) -> float:\n        \"\"\"\n        \u0418\u0437\u0432\u043b\u0435\u043a\u0430\u0435\u0442 \u0447\u0438\u0441\u043b\u043e\u0432\u0443\u044e \u043e\u0446\u0435\u043d\u043a\u0443 \u0438\u0437 \u0442\u0435\u043a\u0441\u0442\u0430 \u043f\u043e \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u043c \u0441\u043b\u043e\u0432\u0430\u043c\n\n        Args:\n            text: \u0422\u0435\u043a\u0441\u0442 \u0434\u043b\u044f \u0430\u043d\u0430\u043b\u0438\u0437\u0430\n            keywords: \u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u0441\u043b\u043e\u0432\u0430 \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430 \u043e\u0446\u0435\u043d\u043a\u0438\n\n        Returns:\n            \u0427\u0438\u0441\u043b\u043e\u0432\u0430\u044f \u043e\u0446\u0435\u043d\u043a\u0430 (0-10), \u043d\u043e\u0440\u043c\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d\u043d\u0430\u044f \u043a 0-1\n        \"\"\"\n        for keyword in keywords:\n            if keyword in text.lower():\n                parts = text.lower().split(keyword)\n                for part in parts[1:]:\n                    import re\n                    matches = re.findall(r\"\\b(?:10|[0-9])\\b\", part[:30])\n                    if matches:\n                        try:\n                            score = float(matches[0])\n                            return score / 10\n                        except ValueError:\n                            pass\n        return 0.5\n\n    def _extract_improvement_areas(self, text: str) -> List[str]:\n        \"\"\"\n        \u0418\u0437\u0432\u043b\u0435\u043a\u0430\u0435\u0442 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 \u0434\u043b\u044f \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044f \u0438\u0437 \u0442\u0435\u043a\u0441\u0442\u0430 \u043e\u0446\u0435\u043d\u043a\u0438\n\n        Args:\n            text: \u0422\u0435\u043a\u0441\u0442 \u043e\u0446\u0435\u043d\u043a\u0438\n\n        Returns:\n            \u0421\u043f\u0438\u0441\u043e\u043a \u043e\u0431\u043b\u0430\u0441\u0442\u0435\u0439 \u0434\u043b\u044f \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044f\n        \"\"\"\n        improvement_areas = []\n        keywords = [\"\u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\", \"improvement\", \"\u0440\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\", \"recommendation\"]\n        lines = text.split(\"\\n\")\n        in_section = False\n\n        for line in lines:\n            line = line.strip()\n            if not line:\n                continue\n\n            for keyword in keywords:\n                if keyword.lower() in line.lower():\n                    in_section = True\n                    break\n\n            if in_section and (line.startswith(\"-\") or line.startswith(\"\u2022\") or\n                              (line[0].isdigit() and \".\" in line[:3])):\n                clean_line = line.lstrip(\"-\u20220123456789. \")\n                if clean_line:\n                    improvement_areas.append(clean_line)\n\n        if not improvement_areas:\n            for keyword in keywords:\n                for line in lines:\n                    if keyword.lower() in line.lower():\n                        improvement_areas.append(line.strip())\n                        break\n\n        return improvement_areas[:5]",
+    "locations": [
+      [
+        "app\\agent\\planning_strategy.py",
+        643,
+        816,
+        "TreePlanningStrategy"
+      ],
+      [
+        "app\\agent\\planning_strategy.py",
+        819,
+        985,
+        "UncertaintyPlanningStrategy"
+      ]
+    ],
+    "names": [
+      "TreePlanningStrategy",
+      "UncertaintyPlanningStrategy"
+    ],
+    "size": 167
+  },
+  {
+    "hash": "beda86e74f716cb9f7b2a4e4c7848292",
+    "source": "class CodingAgent(ToolCallAgent):\n    \"\"\"\n    \u0410\u0433\u0435\u043d\u0442 \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u043a\u043e\u0434\u043e\u043c \u0438 IDE.\n\n    \u042d\u0442\u043e\u0442 \u0430\u0433\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0442\u044c, \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c, \u0430\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0438 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c \u043a\u043e\u0434,\n    \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u044f \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0439 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440 \u0438 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u043a\u043e\u0434\u043e\u043c.\n    \"\"\"\n\n    name: str = \"coding_agent\"\n    description: str = \"\u0410\u0433\u0435\u043d\u0442 \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u043a\u043e\u0434\u043e\u043c, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u043c\u043e\u0436\u0435\u0442 \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c, \u0430\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0438 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c \u043a\u043e\u0434\"\n\n    # \u041f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0438 \u0434\u043b\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u044b \u0438 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e \u0448\u0430\u0433\u0430\n    system_prompt: str = CODING_AGENT_SYSTEM_PROMPT\n    next_step_prompt: str = CODING_AGENT_NEXT_STEP_PROMPT\n\n    # \u041e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u044f\n    max_observe: int = 15000\n    max_steps: int = 30\n\n    # \u0414\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b (\u0434\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0442\u043e\u043b\u044c\u043a\u043e \u0431\u0430\u0437\u043e\u0432\u044b\u0435 \u0432 \u043a\u043e\u043d\u0441\u0442\u0440\u0443\u043a\u0442\u043e\u0440\u0435)\n    tools: ToolCollection = Field(\n        default_factory=lambda: ToolCollection(Terminate())\n    )\n\n    # \u0412\u044b\u0431\u043e\u0440 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432 (AUTO \u043f\u043e\u0437\u0432\u043e\u043b\u044f\u0435\u0442 \u043a\u0430\u043a \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b, \u0442\u0430\u043a \u0438 \u0434\u0430\u0432\u0430\u0442\u044c \u043e\u0442\u0432\u0435\u0442\u044b)\n    tool_choices: ToolChoice = ToolChoice.AUTO\n\n    # \u0421\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b\n    special_tool_names: list[str] = Field(default_factory=lambda: [Terminate().name])\n\n    # \u0421\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u043d\u043e\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 \u043a\u043e\u0434\u0430\n    _current_editor_state: Optional[Dict] = None\n\n    def __init__(self, **data):\n        super().__init__(**data)\n\n        # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u043a\u043e\u0434\u043e\u043c\n        coding_tools = get_coding_tools()\n        for tool in coding_tools:\n            self.tools.add_tool(tool)\n\n        logger.info(f\"\u0418\u043d\u0438\u0446\u0438\u0430\u043b\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u043d {self.name} \u0441 {len(self.tools.tools)} \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u0430\u043c\u0438\")\n\n    async def _handle_special_tool(self, name: str, result: Any, **kwargs):\n        \"\"\"\u041e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0432\u044b\u0437\u043e\u0432\u0430 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0445 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432.\"\"\"\n        if not self._is_special_tool(name):\n            return\n        else:\n            await super()._handle_special_tool(name, result, **kwargs)\n\n    async def get_editor_state(self) -> Optional[Dict]:\n        \"\"\"\n        \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 \u043a\u043e\u0434\u0430 \u0434\u043b\u044f \u043a\u043e\u043d\u0442\u0435\u043a\u0441\u0442\u0430 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0445 \u0448\u0430\u0433\u043e\u0432.\n\n        Returns:\n            Dict \u0441 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435\u043c \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 \u0438\u043b\u0438 None, \u0435\u0441\u043b\u0438 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430\n        \"\"\"\n        return self._current_editor_state\n\n    async def update_editor_state(self):\n        \"\"\"\n        \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u0442 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u043d\u043e\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 \u043a\u043e\u0434\u0430.\n\n        \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u0442 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e\u0431 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0445 \u0444\u0430\u0439\u043b\u0430\u0445, \u0442\u0435\u043a\u0443\u0449\u0435\u043c \u0444\u0430\u0439\u043b\u0435 \u0438 \u043f\u043e\u0437\u0438\u0446\u0438\u0438 \u043a\u0443\u0440\u0441\u043e\u0440\u0430.\n        \"\"\"\n        try:\n            # \u041f\u044b\u0442\u0430\u0435\u043c\u0441\u044f \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e\u0431 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0445 \u0444\u0430\u0439\u043b\u0430\u0445\n            code_control = self.tools.get_tool(\"code_control\")\n            if code_control:\n                # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432\n                files_result = await code_control.execute(action=\"get_open_files\")\n\n                if not files_result.error:\n                    files_info = files_result.output\n                else:\n                    files_info = \"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e\u0431 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0445 \u0444\u0430\u0439\u043b\u0430\u0445\"\n\n                # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0442\u0435\u043a\u0443\u0449\u0438\u0439 \u0444\u0430\u0439\u043b\n                current_file_result = await code_control.execute(action=\"get_current_file\")\n                if not current_file_result.error:\n                    current_file = current_file_result.output\n                else:\n                    current_file = \"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0442\u0435\u043a\u0443\u0449\u0438\u0439 \u0444\u0430\u0439\u043b\"\n\n                # \u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0435\u043c \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435\n                self._current_editor_state = {\n                    \"open_files\": files_info,\n                    \"current_file\": current_file\n                }\n\n                return self._current_editor_state\n        except Exception as e:\n            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0438 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u044f \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430: {e}\")\n\n        return None\n\n    async def think(self) -> bool:\n        \"\"\"\n        \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0438 \u0440\u0435\u0448\u0430\u0435\u0442, \u043a\u0430\u043a\u0438\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044f \u0432\u044b\u043f\u043e\u043b\u043d\u044f\u0442\u044c \u0434\u0430\u043b\u044c\u0448\u0435,\n        \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u044f \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u0441 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u043e \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0438 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 \u043a\u043e\u0434\u0430.\n\n        Returns:\n            bool: True, \u0435\u0441\u043b\u0438 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u0441\u043f\u0435\u0448\u043d\u0430, False \u0432 \u043f\u0440\u043e\u0442\u0438\u0432\u043d\u043e\u043c \u0441\u043b\u0443\u0447\u0430\u0435\n        \"\"\"\n        # \u0421\u043d\u0430\u0447\u0430\u043b\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u043e \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0435\n        await self.update_editor_state()\n\n        # \u0412\u044b\u0437\u044b\u0432\u0430\u0435\u043c \u0440\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u043c\u0435\u0442\u043e\u0434 \u0434\u043b\u044f \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u0433\u043e \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u044f\n        result = await super().think()\n        return result\n\n    async def format_next_step_prompt(self) -> str:\n        \"\"\"\n        \u0424\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u0443\u0435\u0442 \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0443 \u0434\u043b\u044f \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e \u0448\u0430\u0433\u0430 \u0441 \u0443\u0447\u0435\u0442\u043e\u043c \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u044f \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430.\n\n        Returns:\n            str: \u041e\u0442\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u0430\u044f \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0434\u043b\u044f \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e \u0448\u0430\u0433\u0430\n        \"\"\"\n        editor_state = await self.get_editor_state()\n        editor_state_str = \"\"\n\n        if editor_state:\n            editor_state_str = f\"\u0422\u0435\u043a\u0443\u0449\u0435\u0435 \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430: {json.dumps(editor_state, ensure_ascii=False)}\"\n\n        # \u0417\u0430\u043c\u0435\u043d\u044f\u0435\u043c \u043c\u0435\u0442\u043a\u0443 {editor_state} \u0432 \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0435 \u0434\u043b\u044f \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e \u0448\u0430\u0433\u0430\n        next_prompt = self.next_step_prompt.replace(\"{editor_state}\", editor_state_str)\n\n        return next_prompt",
+    "locations": [
+      [
+        "app\\agent\\browser_agent.py",
+        15,
+        147,
+        "EnhancedBrowserAgent"
+      ],
+      [
+        "app\\agent\\coding_agent.py",
+        15,
+        142,
+        "CodingAgent"
+      ]
+    ],
+    "names": [
+      "EnhancedBrowserAgent",
+      "CodingAgent"
+    ],
+    "size": 128
+  },
+  {
+    "hash": "92b69c53782b9411d0c2337eeaeb8458",
+    "source": "class ContentGenerationNode(FixedNode):\n    \"\"\"Node for content generation.\"\"\"\n    \n    def __init__(self, max_retries=1, wait=0):\n        \"\"\"Initialize the content generation node.\"\"\"\n        super().__init__(name=\"generation\", max_retries=max_retries, wait=wait)\n    \n    def prep(self, shared: Dict[str, Any]) -> Dict[str, Any]:\n        \"\"\"Prepare data for content generation.\"\"\"\n        research_results = shared.get(\"research_results\", {})\n        return {\n            \"topic\": shared.get(\"topic\", \"general topic\"),\n            \"keywords\": research_results.get(\"keywords\", []),\n            \"content_type\": shared.get(\"content_type\", \"blog\")\n        }\n    \n    def exec(self, prep_res: Dict[str, Any]) -> str:\n        \"\"\"Execute content generation.\"\"\"\n        # Simulate content generation\n        time.sleep(1)\n        \n        topic = prep_res.get(\"topic\", \"general topic\")\n        keywords = \", \".join(prep_res.get(\"keywords\", []))\n        \n        # Store results for post-processing\n        self.result = {\n            \"content\": f\"Generated content about {topic} using keywords: {keywords}\",\n            \"content_type\": prep_res.get(\"content_type\", \"blog\")\n        }\n        \n        # Return the key for the next node to execute\n        return \"default\"\n    \n    def post(self, shared: Dict[str, Any], prep_res: Dict[str, Any], exec_res: str) -> Dict[str, Any]:\n        \"\"\"Process generation results and update the shared state.\"\"\"\n        # Update the shared state with generation results\n        shared[\"generated_content\"] = self.result[\"content\"]\n        shared[\"content_type\"] = self.result[\"content_type\"]\n        shared[\"generation_completed\"] = True\n        print(f\"Content generation completed: {self.result['content'][:50]}...\")\n        return shared",
+    "locations": [
+      [
+        "examples\\pocketflow_marketing\\custom_flow.py",
+        101,
+        141,
+        "ContentGenerationNode"
+      ],
+      [
+        "examples\\pocketflow_marketing\\fixed_example.py",
+        89,
+        129,
+        "ContentGenerationNode"
+      ]
+    ],
+    "names": [
+      "ContentGenerationNode",
+      "ContentGenerationNode"
+    ],
+    "size": 41
+  },
+  {
+    "hash": "93ca9c837e529a1428d49eb05315b0ea",
+    "source": "class FixedNode(Node):\n    \"\"\"Fixed node implementation that correctly handles return values.\"\"\"\n    \n    def __init__(self, name=\"node\", max_retries=1, wait=0):\n        \"\"\"Initialize the node.\"\"\"\n        super().__init__(max_retries=max_retries, wait=wait)\n        self.name = name\n        self.successors = {}\n        self.exec_result = None\n    \n    def add_successor(self, node, key=\"default\"):\n        \"\"\"Add a successor node.\"\"\"\n        self.successors[key] = node\n        return self\n    \n    def prep(self, shared: Dict[str, Any]) -> Dict[str, Any]:\n        \"\"\"Prepare data.\"\"\"\n        print(f\"[{self.name}] Preparing...\")\n        return {\"name\": self.name}\n    \n    def exec(self, prep_res: Dict[str, Any]) -> str:\n        \"\"\"Execute node.\"\"\"\n        print(f\"[{self.name}] Executing...\")\n        time.sleep(1)\n        self.exec_result = \"default\"\n        return self.exec_result\n    \n    def post(self, shared: Dict[str, Any], prep_res: Dict[str, Any], exec_res: str) -> Dict[str, Any]:\n        \"\"\"Post-process results.\"\"\"\n        print(f\"[{self.name}] Post-processing...\")\n        shared[f\"{self.name}_completed\"] = True\n        return shared\n    \n    def _run(self, shared):\n        \"\"\"Override _run to return the exec result, not the post result.\"\"\"\n        p = self.prep(shared)\n        e = self._exec(p)\n        # Update shared state but return exec result\n        self.post(shared, p, e)\n        return e",
+    "locations": [
+      [
+        "examples\\pocketflow_marketing\\custom_flow.py",
+        23,
+        62,
+        "FixedNode"
+      ],
+      [
+        "examples\\pocketflow_marketing\\fixed_example.py",
+        11,
+        50,
+        "FixedNode"
+      ]
+    ],
+    "names": [
+      "FixedNode",
+      "FixedNode"
+    ],
+    "size": 40
+  },
+  {
+    "hash": "263af86f149049f37d9f44e72c94c34b",
+    "source": "class OptimizationNode(FixedNode):\n    \"\"\"Node for content optimization.\"\"\"\n    \n    def __init__(self, max_retries=1, wait=0):\n        \"\"\"Initialize the optimization node.\"\"\"\n        super().__init__(name=\"optimization\", max_retries=max_retries, wait=wait)\n    \n    def prep(self, shared: Dict[str, Any]) -> Dict[str, Any]:\n        \"\"\"Prepare data for content optimization.\"\"\"\n        return {\n            \"content\": shared.get(\"generated_content\", \"\"),\n            \"keywords\": shared.get(\"research_results\", {}).get(\"keywords\", [])\n        }\n    \n    def exec(self, prep_res: Dict[str, Any]) -> str:\n        \"\"\"Execute content optimization.\"\"\"\n        # Simulate optimization\n        time.sleep(1)\n        \n        content = prep_res.get(\"content\", \"\")\n        \n        # Store results for post-processing\n        self.result = {\n            \"optimized_content\": f\"Optimized: {content}\",\n            \"recommendations\": [\"Add more keywords\", \"Improve readability\"]\n        }\n        \n        # Return the key for the next node to execute\n        return \"default\"\n    \n    def post(self, shared: Dict[str, Any], prep_res: Dict[str, Any], exec_res: str) -> Dict[str, Any]:\n        \"\"\"Process optimization results and update the shared state.\"\"\"\n        # Update the shared state with optimization results\n        shared[\"optimized_content\"] = self.result[\"optimized_content\"]\n        shared[\"optimization_recommendations\"] = self.result[\"recommendations\"]\n        shared[\"optimization_completed\"] = True\n        print(f\"Content optimization completed: {self.result['optimized_content'][:50]}...\")\n        return shared",
+    "locations": [
+      [
+        "examples\\pocketflow_marketing\\custom_flow.py",
+        144,
+        181,
+        "OptimizationNode"
+      ],
+      [
+        "examples\\pocketflow_marketing\\fixed_example.py",
+        132,
+        169,
+        "OptimizationNode"
+      ]
+    ],
+    "names": [
+      "OptimizationNode",
+      "OptimizationNode"
+    ],
+    "size": 38
+  },
+  {
+    "hash": "0779e694f56df39e157bba3b1eeca519",
+    "source": "class ResearchNode(FixedNode):\n    \"\"\"Node for content research.\"\"\"\n    \n    def __init__(self, max_retries=1, wait=0):\n        \"\"\"Initialize the research node.\"\"\"\n        super().__init__(name=\"research\", max_retries=max_retries, wait=wait)\n    \n    def prep(self, shared: Dict[str, Any]) -> Dict[str, Any]:\n        \"\"\"Prepare data for research.\"\"\"\n        print(f\"Researching topic: {shared.get('topic', 'general topic')}\")\n        return {\"topic\": shared.get(\"topic\", \"general topic\")}\n    \n    def exec(self, prep_res: Dict[str, Any]) -> str:\n        \"\"\"Execute research.\"\"\"\n        # Simulate research work\n        time.sleep(1)\n        \n        # Store results for post-processing\n        self.result = {\n            \"keywords\": [\"ai\", \"automation\", \"marketing\", \"efficiency\"],\n            \"sources\": [\"industry reports\", \"competitor analysis\"],\n            \"trends\": [\"personalization\", \"automation\"]\n        }\n        \n        # Return the key for the next node to execute\n        return \"default\"\n    \n    def post(self, shared: Dict[str, Any], prep_res: Dict[str, Any], exec_res: str) -> Dict[str, Any]:\n        \"\"\"Process research results and update the shared state.\"\"\"\n        # Update the shared state with research results\n        shared[\"research_results\"] = self.result\n        shared[\"research_completed\"] = True\n        print(f\"Research completed. Found keywords: {self.result['keywords']}\")\n        return shared",
+    "locations": [
+      [
+        "examples\\pocketflow_marketing\\custom_flow.py",
+        65,
+        98,
+        "ResearchNode"
+      ],
+      [
+        "examples\\pocketflow_marketing\\fixed_example.py",
+        53,
+        86,
+        "ResearchNode"
+      ]
+    ],
+    "names": [
+      "ResearchNode",
+      "ResearchNode"
+    ],
+    "size": 34
+  },
+  {
+    "hash": "bd110926e1b89af7d9fb584f24cef1f4",
+    "source": "class SimpleReActAgent(ReActAgent):\n    \"\"\"A simple ReAct agent for testing.\"\"\"\n\n    def __init__(self, name: str = \"react_agent\"):\n        \"\"\"Initialize a simple ReAct agent.\"\"\"\n        super().__init__(name=name)\n        self.system_prompt = f\"\"\"\n        You are a helpful assistant named {name}.\n        \"\"\"\n        self.tools = []\n\n    def add_tool(self, tool):\n        \"\"\"Add a tool to the agent.\"\"\"\n        self.tools.append(tool)\n\n    async def think(self):\n        \"\"\"Think about the next step.\"\"\"\n        # Simple implementation for testing\n        return False\n\n    async def act(self):\n        \"\"\"Perform an action.\"\"\"\n        # Simple implementation for testing\n        return \"Action completed successfully.\"",
+    "locations": [
+      [
+        "run_fixed_pocketflow.py",
+        38,
+        61,
+        "SimpleReActAgent"
+      ],
+      [
+        "run_pocketflow.py",
+        36,
+        59,
+        "SimpleReActAgent"
+      ]
+    ],
+    "names": [
+      "SimpleReActAgent",
+      "SimpleReActAgent"
+    ],
+    "size": 24
+  },
+  {
+    "hash": "57a783267224aa9e5b26e47a5fc6fe24",
+    "source": "class AsyncNode(Node):\n    def prep(self,shared): raise RuntimeError(\"Use prep_async.\")\n    def exec(self,prep_res): raise RuntimeError(\"Use exec_async.\")\n    def post(self,shared,prep_res,exec_res): raise RuntimeError(\"Use post_async.\")\n    def exec_fallback(self,prep_res,exc): raise RuntimeError(\"Use exec_fallback_async.\")\n    def _run(self,shared): raise RuntimeError(\"Use run_async.\")\n    async def prep_async(self,shared): pass\n    async def exec_async(self,prep_res): pass\n    async def exec_fallback_async(self,prep_res,exc): raise exc\n    async def post_async(self,shared,prep_res,exec_res): pass\n    async def _exec(self,prep_res): \n        for i in range(self.max_retries):\n            try: return await self.exec_async(prep_res)\n            except Exception as e:\n                if i==self.max_retries-1: return await self.exec_fallback_async(prep_res,e)\n                if self.wait>0: await asyncio.sleep(self.wait)\n    async def run_async(self,shared): \n        if self.successors: warnings.warn(\"Node won't run successors. Use AsyncFlow.\")  \n        return await self._run_async(shared)\n    async def _run_async(self,shared): p=await self.prep_async(shared);e=await self._exec(p);return await self.post_async(shared,p,e)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        57,
+        76,
+        "AsyncNode"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        57,
+        76,
+        "AsyncNode"
+      ]
+    ],
+    "names": [
+      "AsyncNode",
+      "AsyncNode"
+    ],
+    "size": 20
+  },
+  {
+    "hash": "ec9c130a11866cea1528f8aebd361c7c",
+    "source": "class BaseNode:\n    def __init__(self): self.params,self.successors={},{}\n    def set_params(self,params): self.params=params\n    def add_successor(self,node,action=\"default\"):\n        if action in self.successors: warnings.warn(f\"Overwriting successor for action '{action}'\")\n        self.successors[action]=node;return node\n    def prep(self,shared): pass\n    def exec(self,prep_res): pass\n    def post(self,shared,prep_res,exec_res): pass\n    def _exec(self,prep_res): return self.exec(prep_res)\n    def _run(self,shared): p=self.prep(shared);e=self._exec(p);return self.post(shared,p,e)\n    def run(self,shared): \n        if self.successors: warnings.warn(\"Node won't run successors. Use Flow.\")  \n        return self._run(shared)\n    def __rshift__(self,other): return self.add_successor(other)\n    def __sub__(self,action):\n        if isinstance(action,str): return _ConditionalTransition(self,action)\n        raise TypeError(\"Action must be a string\")",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        3,
+        20,
+        "BaseNode"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        3,
+        20,
+        "BaseNode"
+      ]
+    ],
+    "names": [
+      "BaseNode",
+      "BaseNode"
+    ],
+    "size": 18
+  },
+  {
+    "hash": "a90b2d6ed6426caebe879006f7d4c265",
+    "source": "class Flow(BaseNode):\n    def __init__(self,start): super().__init__();self.start=start\n    def get_next_node(self,curr,action):\n        nxt=curr.successors.get(action or \"default\")\n        if not nxt and curr.successors: warnings.warn(f\"Flow ends: '{action}' not found in {list(curr.successors)}\")\n        return nxt\n    def _orch(self,shared,params=None):\n        curr,p=copy.copy(self.start),(params or {**self.params})\n        while curr: curr.set_params(p);c=curr._run(shared);curr=copy.copy(self.get_next_node(curr,c))\n    def _run(self,shared): pr=self.prep(shared);self._orch(shared);return self.post(shared,pr,None)\n    def exec(self,prep_res): raise RuntimeError(\"Flow can't exec.\")",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        39,
+        49,
+        "Flow"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        39,
+        49,
+        "Flow"
+      ]
+    ],
+    "names": [
+      "Flow",
+      "Flow"
+    ],
+    "size": 11
+  },
+  {
+    "hash": "6d2f7e946a140645fc8cba2818f733a6",
+    "source": "class MetricType(Enum):\n    \"\"\"\u0422\u0438\u043f\u044b \u043e\u0442\u0441\u043b\u0435\u0436\u0438\u0432\u0430\u0435\u043c\u044b\u0445 \u043c\u0435\u0442\u0440\u0438\u043a\"\"\"\n    CPU_USAGE = \"cpu_usage\"  # \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 CPU\n    MEMORY_USAGE = \"memory_usage\"  # \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0430\u043c\u044f\u0442\u0438\n    DISK_IO = \"disk_io\"  # \u041e\u043f\u0435\u0440\u0430\u0446\u0438\u0438 \u0432\u0432\u043e\u0434\u0430-\u0432\u044b\u0432\u043e\u0434\u0430 \u0434\u0438\u0441\u043a\u0430\n    NETWORK_IO = \"network_io\"  # \u0421\u0435\u0442\u0435\u0432\u044b\u0435 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438\n    TASK_THROUGHPUT = \"task_throughput\"  # \u041f\u0440\u043e\u043f\u0443\u0441\u043a\u043d\u0430\u044f \u0441\u043f\u043e\u0441\u043e\u0431\u043d\u043e\u0441\u0442\u044c \u0437\u0430\u0434\u0430\u0447\n    RESPONSE_TIME = \"response_time\"  # \u0412\u0440\u0435\u043c\u044f \u043e\u0442\u043a\u043b\u0438\u043a\u0430\n    RESOURCE_UTILIZATION = \"resource_utilization\"  # \u042d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f \u0440\u0435\u0441\u0443\u0440\u0441\u0430\n    ERROR_RATE = \"error_rate\"  # \u0427\u0430\u0441\u0442\u043e\u0442\u0430 \u043e\u0448\u0438\u0431\u043e\u043a",
+    "locations": [
+      [
+        "app\\agent\\error_analysis_system.py",
+        32,
+        41,
+        "ErrorSource"
+      ],
+      [
+        "app\\agent\\performance_monitor.py",
+        26,
+        35,
+        "MetricType"
+      ]
+    ],
+    "names": [
+      "ErrorSource",
+      "MetricType"
+    ],
+    "size": 10
+  },
+  {
+    "hash": "550277ab59cc36fd125d5017cf5e8600",
+    "source": "class StrategyEvaluationMetric(str, Enum):\n    \"\"\"\u041c\u0435\u0442\u0440\u0438\u043a\u0438 \u0434\u043b\u044f \u043e\u0446\u0435\u043d\u043a\u0438 \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0439 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f\"\"\"\n    ACCURACY = \"accuracy\"             # \u0422\u043e\u0447\u043d\u043e\u0441\u0442\u044c (\u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0438\u0435 \u043f\u043b\u0430\u043d\u0430 \u0444\u0430\u043a\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u043c\u0443 \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044e)\n    EFFICIENCY = \"efficiency\"         # \u042d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c (\u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u0435 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0430 \u043a \u0437\u0430\u0442\u0440\u0430\u0447\u0435\u043d\u043d\u044b\u043c \u0440\u0435\u0441\u0443\u0440\u0441\u0430\u043c)\n    ADAPTABILITY = \"adaptability\"     # \u0410\u0434\u0430\u043f\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c (\u0441\u043f\u043e\u0441\u043e\u0431\u043d\u043e\u0441\u0442\u044c \u043f\u043e\u0434\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0442\u044c\u0441\u044f \u043f\u043e\u0434 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f)\n    COMPLETENESS = \"completeness\"     # \u041f\u043e\u043b\u043d\u043e\u0442\u0430 (\u043e\u0445\u0432\u0430\u0442 \u0432\u0441\u0435\u0445 \u0430\u0441\u043f\u0435\u043a\u0442\u043e\u0432 \u0437\u0430\u0434\u0430\u0447\u0438)\n    ROBUSTNESS = \"robustness\"         # \u0423\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\u044c (\u043a \u043d\u0435\u043f\u0440\u0435\u0434\u0432\u0438\u0434\u0435\u043d\u043d\u044b\u043c \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044f\u043c)\n    CLARITY = \"clarity\"               # \u042f\u0441\u043d\u043e\u0441\u0442\u044c (\u043f\u043e\u043d\u044f\u0442\u043d\u043e\u0441\u0442\u044c \u043f\u043b\u0430\u043d\u0430)\n    TIME_EFFICIENCY = \"time_efficiency\"  # \u0412\u0440\u0435\u043c\u0435\u043d\u043d\u0430\u044f \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u044c (\u0441\u043a\u043e\u0440\u043e\u0441\u0442\u044c \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f)",
+    "locations": [
+      [
+        "app\\schema.py",
+        40,
+        48,
+        "AgentState"
+      ],
+      [
+        "app\\agent\\metacognitive_analyzer.py",
+        21,
+        29,
+        "StrategyEvaluationMetric"
+      ]
+    ],
+    "names": [
+      "AgentState",
+      "StrategyEvaluationMetric"
+    ],
+    "size": 9
+  },
+  {
+    "hash": "ebe1e2257a845e70d84f5ba2cd5ef080",
+    "source": "class Node(BaseNode):\n    def __init__(self,max_retries=1,wait=0): super().__init__();self.max_retries,self.wait=max_retries,wait\n    def exec_fallback(self,prep_res,exc): raise exc\n    def _exec(self,prep_res):\n        for self.cur_retry in range(self.max_retries):\n            try: return self.exec(prep_res)\n            except Exception as e:\n                if self.cur_retry==self.max_retries-1: return self.exec_fallback(prep_res,e)\n                if self.wait>0: time.sleep(self.wait)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        26,
+        34,
+        "Node"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        26,
+        34,
+        "Node"
+      ]
+    ],
+    "names": [
+      "Node",
+      "Node"
+    ],
+    "size": 9
+  },
+  {
+    "hash": "34dcf570db7da2932d9658ac6c94c523",
+    "source": "class CustomFlow(Flow):\n    \"\"\"Custom Flow implementation that returns the shared state.\"\"\"\n    \n    def run(self, shared):\n        \"\"\"Override run to return the shared state.\"\"\"\n        # Call the parent's _run method\n        self._run(shared)\n        # Return the shared state\n        return shared",
+    "locations": [
+      [
+        "examples\\pocketflow_marketing\\custom_flow.py",
+        12,
+        20,
+        "CustomFlow"
+      ],
+      [
+        "app\\marketing\\fixed_orchestrator.py",
+        34,
+        42,
+        "CustomFlow"
+      ]
+    ],
+    "names": [
+      "CustomFlow",
+      "CustomFlow"
+    ],
+    "size": 9
+  },
+  {
+    "hash": "fa8df061922cf50ebf2e9d9f709991d6",
+    "source": "class NumberNode(Node):\n    def __init__(self, number):\n        super().__init__()\n        self.number = number\n\n    def prep(self, shared_storage):\n        shared_storage['current'] = self.number",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_flow_basic.py",
+        8,
+        14,
+        "NumberNode"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_flow_composition.py",
+        11,
+        17,
+        "NumberNode"
+      ]
+    ],
+    "names": [
+      "NumberNode",
+      "NumberNode"
+    ],
+    "size": 7
+  },
+  {
+    "hash": "54738e68fd6db043934887777b332c87",
+    "source": "class AddNode(Node):\n    def __init__(self, number):\n        super().__init__()\n        self.number = number\n\n    def prep(self, shared_storage):\n        shared_storage['current'] += self.number",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_flow_basic.py",
+        16,
+        22,
+        "AddNode"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_flow_composition.py",
+        19,
+        25,
+        "AddNode"
+      ]
+    ],
+    "names": [
+      "AddNode",
+      "AddNode"
+    ],
+    "size": 7
+  },
+  {
+    "hash": "e5c6209ed87b59d513a2d180aab95984",
+    "source": "class MultiplyNode(Node):\n    def __init__(self, number):\n        super().__init__()\n        self.number = number\n\n    def prep(self, shared_storage):\n        shared_storage['current'] *= self.number",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_flow_basic.py",
+        24,
+        30,
+        "MultiplyNode"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_flow_composition.py",
+        27,
+        33,
+        "MultiplyNode"
+      ]
+    ],
+    "names": [
+      "MultiplyNode",
+      "MultiplyNode"
+    ],
+    "size": 7
+  },
+  {
+    "hash": "60c502f88af87f1e0e146b8cade01e23",
+    "source": "class FeedbackSource(Enum):\n    \"\"\"\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438 \u043e\u0431\u0440\u0430\u0442\u043d\u043e\u0439 \u0441\u0432\u044f\u0437\u0438\"\"\"\n    USER = \"user\"                 # \u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\n    AUTOMATIC = \"automatic\"       # \u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043e\u0446\u0435\u043d\u043a\u0430\n    SYSTEM = \"system\"             # \u0421\u0438\u0441\u0442\u0435\u043c\u043d\u044b\u0435 \u043c\u0435\u0442\u0440\u0438\u043a\u0438\n    AGENT = \"agent\"               # \u0421\u0430\u043c\u043e\u043e\u0446\u0435\u043d\u043a\u0430 \u0430\u0433\u0435\u043d\u0442\u0430\n    OTHER = \"other\"               # \u0414\u0440\u0443\u0433\u0438\u0435 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438",
+    "locations": [
+      [
+        "app\\agent\\error_analysis_system.py",
+        23,
+        29,
+        "ErrorSeverity"
+      ],
+      [
+        "app\\agent\\feedback_system.py",
+        30,
+        36,
+        "FeedbackSource"
+      ]
+    ],
+    "names": [
+      "ErrorSeverity",
+      "FeedbackSource"
+    ],
+    "size": 7
+  },
+  {
+    "hash": "4175a5007e15b8e4a8113adbf0b1b89a",
+    "source": "class WorkerSignals(QObject):\n    \"\"\"\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u044f\u0435\u0442 \u0441\u0438\u0433\u043d\u0430\u043b\u044b, \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u0438\u0437 \u0440\u0430\u0431\u043e\u0447\u0435\u0433\u043e \u043f\u043e\u0442\u043e\u043a\u0430.\"\"\"\n    progress = Signal(int)\n    message = Signal(str)\n    finished = Signal()\n    error = Signal(str)",
+    "locations": [
+      [
+        "DONT_TOUCH_MY_AUDITOR.PY",
+        10,
+        15,
+        "WorkerSignals"
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        24,
+        29,
+        "WorkerSignals"
+      ]
+    ],
+    "names": [
+      "WorkerSignals",
+      "WorkerSignals"
+    ],
+    "size": 6
+  },
+  {
+    "hash": "9a31c9c899a0c558f875ef288b260a25",
+    "source": "class TaskComplexity(str, Enum):\n    \"\"\"\u0423\u0440\u043e\u0432\u043d\u0438 \u0441\u043b\u043e\u0436\u043d\u043e\u0441\u0442\u0438 \u0437\u0430\u0434\u0430\u0447 \u0434\u043b\u044f \u0430\u0434\u0430\u043f\u0442\u0438\u0432\u043d\u043e\u0433\u043e \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f\"\"\"\n    SIMPLE = \"simple\"  # \u041f\u0440\u043e\u0441\u0442\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430 \u0441 \u043b\u0438\u043d\u0435\u0439\u043d\u044b\u043c \u0440\u0435\u0448\u0435\u043d\u0438\u0435\u043c\n    MEDIUM = \"medium\"  # \u0421\u0440\u0435\u0434\u043d\u044f\u044f \u0437\u0430\u0434\u0430\u0447\u0430 \u0441 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u0438\u043c\u0438 \u043f\u043e\u0434\u0437\u0430\u0434\u0430\u0447\u0430\u043c\u0438\n    COMPLEX = \"complex\"  # \u0421\u043b\u043e\u0436\u043d\u0430\u044f \u0437\u0430\u0434\u0430\u0447\u0430 \u0441 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u043e\u043c \u0432\u0437\u0430\u0438\u043c\u043e\u0441\u0432\u044f\u0437\u0430\u043d\u043d\u044b\u0445 \u0448\u0430\u0433\u043e\u0432\n    UNCERTAIN = \"uncertain\"  # \u0417\u0430\u0434\u0430\u0447\u0430 \u0441 \u0432\u044b\u0441\u043e\u043a\u043e\u0439 \u043d\u0435\u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e",
+    "locations": [
+      [
+        "app\\schema.py",
+        15,
+        21,
+        "Role"
+      ],
+      [
+        "app\\agent\\planning_strategy.py",
+        20,
+        25,
+        "TaskComplexity"
+      ]
+    ],
+    "names": [
+      "Role",
+      "TaskComplexity"
+    ],
+    "size": 6
+  },
+  {
+    "hash": "6ab3202bbaa1f4b57444c47637d43b89",
+    "source": "class BatchFlow(Flow):\n    def _run(self,shared):\n        pr=self.prep(shared) or []\n        for bp in pr: self._orch(shared,{**self.params,**bp})\n        return self.post(shared,pr,None)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        51,
+        55,
+        "BatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        51,
+        55,
+        "BatchFlow"
+      ]
+    ],
+    "names": [
+      "BatchFlow",
+      "BatchFlow"
+    ],
+    "size": 5
+  },
+  {
+    "hash": "a67fb01f7f5d7fce719ebf182c4240c5",
+    "source": "class AsyncFlow(Flow,AsyncNode):\n    async def _orch_async(self,shared,params=None):\n        curr,p=copy.copy(self.start),(params or {**self.params})\n        while curr:curr.set_params(p);c=await curr._run_async(shared) if isinstance(curr,AsyncNode) else curr._run(shared);curr=copy.copy(self.get_next_node(curr,c))\n    async def _run_async(self,shared): p=await self.prep_async(shared);await self._orch_async(shared);return await self.post_async(shared,p,None)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        84,
+        88,
+        "AsyncFlow"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        84,
+        88,
+        "AsyncFlow"
+      ]
+    ],
+    "names": [
+      "AsyncFlow",
+      "AsyncFlow"
+    ],
+    "size": 5
+  },
+  {
+    "hash": "860c554871fbcedf9b5d30cd8ad4c21f",
+    "source": "class AsyncBatchFlow(AsyncFlow,BatchFlow):\n    async def _run_async(self,shared):\n        pr=await self.prep_async(shared) or []\n        for bp in pr: await self._orch_async(shared,{**self.params,**bp})\n        return await self.post_async(shared,pr,None)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        90,
+        94,
+        "AsyncBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        90,
+        94,
+        "AsyncBatchFlow"
+      ]
+    ],
+    "names": [
+      "AsyncBatchFlow",
+      "AsyncBatchFlow"
+    ],
+    "size": 5
+  },
+  {
+    "hash": "314765301b2e60fa2fe351e8be46406e",
+    "source": "class AsyncParallelBatchFlow(AsyncFlow,BatchFlow):\n    async def _run_async(self,shared):\n        pr=await self.prep_async(shared) or []\n        await asyncio.gather(*(self._orch_async(shared,{**self.params,**bp}) for bp in pr))\n        return await self.post_async(shared,pr,None)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        96,
+        100,
+        "AsyncParallelBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        96,
+        100,
+        "AsyncParallelBatchFlow"
+      ]
+    ],
+    "names": [
+      "AsyncParallelBatchFlow",
+      "AsyncParallelBatchFlow"
+    ],
+    "size": 5
+  },
+  {
+    "hash": "2627bb72fca76994c6d5db21647db50c",
+    "source": "        class ErrorProcessor(AsyncParallelNumberProcessor):\n            async def exec_async(self, item):\n                if item == 2:\n                    raise ValueError(f\"Error processing item {item}\")\n                return item",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_async_parallel_batch_flow.py",
+        98,
+        102,
+        "ErrorProcessor"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_parallel_batch_node.py",
+        104,
+        108,
+        "ErrorProcessor"
+      ]
+    ],
+    "names": [
+      "ErrorProcessor",
+      "ErrorProcessor"
+    ],
+    "size": 5
+  },
+  {
+    "hash": "55f2b313462b0a32c32708cac2fa5361",
+    "source": "        class NegativeNode(Node):\n            def exec(self, data):\n                shared_storage[\"path\"] = \"negative\"\n                return None",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_async_flow.py",
+        126,
+        129,
+        "PositiveNode"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_flow.py",
+        131,
+        134,
+        "NegativeNode"
+      ]
+    ],
+    "names": [
+      "PositiveNode",
+      "NegativeNode"
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f764a3e5b9af4c5ebd7e3b754169cc95",
+    "source": "class GoogleSearchEngine(WebSearchEngine):\n    def perform_search(self, query, num_results=10, *args, **kwargs):\n        \"\"\"Google search engine.\"\"\"\n        return search(query, num_results=num_results)",
+    "locations": [
+      [
+        "app\\tool\\search\\baidu_search.py",
+        6,
+        9,
+        "BaiduSearchEngine"
+      ],
+      [
+        "app\\tool\\search\\google_search.py",
+        6,
+        9,
+        "GoogleSearchEngine"
+      ]
+    ],
+    "names": [
+      "BaiduSearchEngine",
+      "GoogleSearchEngine"
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fafdea35437705822ed92898f4e6a7d4",
+    "source": "class _ConditionalTransition:\n    def __init__(self,src,action): self.src,self.action=src,action\n    def __rshift__(self,tgt): return self.src.add_successor(tgt,self.action)",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        22,
+        24,
+        "_ConditionalTransition"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        22,
+        24,
+        "_ConditionalTransition"
+      ]
+    ],
+    "names": [
+      "_ConditionalTransition",
+      "_ConditionalTransition"
+    ],
+    "size": 3
+  },
+  {
+    "hash": "21d45c647ca7e2893a9564a90c100d9d",
+    "source": "        class NestedAsyncBatchFlow(AsyncBatchFlow):\n            async def prep_async(self, shared_storage):\n                return [{'key': k} for k in shared_storage['input_data'].keys()]",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_async_batch_flow.py",
+        37,
+        39,
+        "SimpleTestAsyncBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_batch_flow.py",
+        61,
+        63,
+        "EmptyTestAsyncBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_batch_flow.py",
+        76,
+        78,
+        "ErrorTestAsyncBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_batch_flow.py",
+        113,
+        115,
+        "NestedAsyncBatchFlow"
+      ]
+    ],
+    "names": [
+      "SimpleTestAsyncBatchFlow",
+      "EmptyTestAsyncBatchFlow",
+      "ErrorTestAsyncBatchFlow",
+      "NestedAsyncBatchFlow"
+    ],
+    "size": 3
+  },
+  {
+    "hash": "94a9d17566ff43bf1b547367ad4a70b2",
+    "source": "        class VaryingBatchFlow(AsyncParallelBatchFlow):\n            async def prep_async(self, shared_storage):\n                return [{'batch_id': i} for i in range(len(shared_storage['batches']))]",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_async_parallel_batch_flow.py",
+        57,
+        59,
+        "TestParallelBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_parallel_batch_flow.py",
+        104,
+        106,
+        "ErrorBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_async_parallel_batch_flow.py",
+        125,
+        127,
+        "VaryingBatchFlow"
+      ]
+    ],
+    "names": [
+      "TestParallelBatchFlow",
+      "ErrorBatchFlow",
+      "VaryingBatchFlow"
+    ],
+    "size": 3
+  },
+  {
+    "hash": "f26248e40b727bbe5cfa7524755d7334",
+    "source": "        class NestedBatchFlow(BatchFlow):\n            def prep(self, shared_storage):\n                return [{'key': k} for k in shared_storage['input_data'].keys()]",
+    "locations": [
+      [
+        "GopiAI_Flow\\tests\\test_batch_flow.py",
+        31,
+        33,
+        "SimpleTestBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_batch_flow.py",
+        55,
+        57,
+        "EmptyTestBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_batch_flow.py",
+        70,
+        72,
+        "SingleItemBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_batch_flow.py",
+        90,
+        92,
+        "ErrorTestBatchFlow"
+      ],
+      [
+        "GopiAI_Flow\\tests\\test_batch_flow.py",
+        123,
+        125,
+        "NestedBatchFlow"
+      ]
+    ],
+    "names": [
+      "SimpleTestBatchFlow",
+      "EmptyTestBatchFlow",
+      "SingleItemBatchFlow",
+      "ErrorTestBatchFlow",
+      "NestedBatchFlow"
+    ],
+    "size": 3
+  },
+  {
+    "hash": "636d9993447140625cb2df803d68c66f",
+    "source": "    class BrowserConfig:\n        pass",
+    "locations": [
+      [
+        "app\\config.py",
+        20,
+        21,
+        "ProxyConfig"
+      ],
+      [
+        "app\\config.py",
+        23,
+        24,
+        "BrowserConfig"
+      ]
+    ],
+    "names": [
+      "ProxyConfig",
+      "BrowserConfig"
+    ],
+    "size": 2
+  },
+  {
+    "hash": "a326b5d5b81019baa186ea671e4f1771",
+    "source": "class SandboxResourceError(SandboxError):\n    \"\"\"Exception raised for resource-related errors.\"\"\"",
+    "locations": [
+      [
+        "app\\exceptions.py",
+        8,
+        9,
+        "OpenManusError"
+      ],
+      [
+        "app\\exceptions.py",
+        12,
+        13,
+        "TokenLimitExceeded"
+      ],
+      [
+        "app\\tool\\base.py",
+        73,
+        74,
+        "CLIResult"
+      ],
+      [
+        "app\\tool\\base.py",
+        77,
+        78,
+        "ToolFailure"
+      ],
+      [
+        "app\\sandbox\\core\\exceptions.py",
+        8,
+        9,
+        "SandboxError"
+      ],
+      [
+        "app\\sandbox\\core\\exceptions.py",
+        12,
+        13,
+        "SandboxTimeoutError"
+      ],
+      [
+        "app\\sandbox\\core\\exceptions.py",
+        16,
+        17,
+        "SandboxResourceError"
+      ]
+    ],
+    "names": [
+      "OpenManusError",
+      "TokenLimitExceeded",
+      "CLIResult",
+      "ToolFailure",
+      "SandboxError",
+      "SandboxTimeoutError",
+      "SandboxResourceError"
+    ],
+    "size": 2
+  },
+  {
+    "hash": "5ca59702d8fda026072ee01b3071a25e",
+    "source": "class BatchNode(Node):\n    def _exec(self,items): return [super(BatchNode,self)._exec(i) for i in (items or [])]",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        36,
+        37,
+        "BatchNode"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        36,
+        37,
+        "BatchNode"
+      ]
+    ],
+    "names": [
+      "BatchNode",
+      "BatchNode"
+    ],
+    "size": 2
+  },
+  {
+    "hash": "4e7b4af50967aed574e55b86472ce81d",
+    "source": "class AsyncBatchNode(AsyncNode,BatchNode):\n    async def _exec(self,items): return [await super(AsyncBatchNode,self)._exec(i) for i in items]",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        78,
+        79,
+        "AsyncBatchNode"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        78,
+        79,
+        "AsyncBatchNode"
+      ]
+    ],
+    "names": [
+      "AsyncBatchNode",
+      "AsyncBatchNode"
+    ],
+    "size": 2
+  },
+  {
+    "hash": "65908448bd8cc9862d272d695b8085b7",
+    "source": "class AsyncParallelBatchNode(AsyncNode,BatchNode):\n    async def _exec(self,items): return await asyncio.gather(*(super(AsyncParallelBatchNode,self)._exec(i) for i in items))",
+    "locations": [
+      [
+        "GopiAI_Flow\\pocketflow\\deprecated___init__.py",
+        81,
+        82,
+        "AsyncParallelBatchNode"
+      ],
+      [
+        "GopiAI_Flow\\pocketflow_framework\\__init__.py",
+        81,
+        82,
+        "AsyncParallelBatchNode"
+      ]
+    ],
+    "names": [
+      "AsyncParallelBatchNode",
+      "AsyncParallelBatchNode"
+    ],
+    "size": 2
+  }
+]

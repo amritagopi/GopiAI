@@ -1,0 +1,1051 @@
+
+=== compile_icons.py ===
+compile_icons.py:5: unused import 'Path' (90% confidence)
+
+
+=== compile_resources.py ===
+compile_resources.py:1: unused import 'os' (90% confidence)
+
+
+=== create_basic_icons.py ===
+create_basic_icons.py:8: unused import 'base64' (90% confidence)
+
+
+=== main.py ===
+main.py:16: unused import 'icons_rc' (90% confidence)
+
+
+=== run_fixed_pocketflow.py ===
+run_fixed_pocketflow.py:13: unused import 'Optional' (90% confidence)
+run_fixed_pocketflow.py:28: unused import 'CustomFlow' (90% confidence)
+run_fixed_pocketflow.py:29: unused import 'AgentNode' (90% confidence)
+run_fixed_pocketflow.py:29: unused import 'ToolNode' (90% confidence)
+
+
+=== run_pocketflow.py ===
+run_pocketflow.py:13: unused import 'Optional' (90% confidence)
+run_pocketflow.py:23: unused import 'PythonExecute' (90% confidence)
+run_pocketflow.py:26: unused import 'CustomFlow' (90% confidence)
+run_pocketflow.py:27: unused import 'AgentNode' (90% confidence)
+run_pocketflow.py:27: unused import 'ToolNode' (90% confidence)
+run_pocketflow.py:234: unused variable 'exec_res' (100% confidence)
+
+
+=== vulture_clean_scan.py ===
+vulture_clean_scan.py:15: unused import 'os' (90% confidence)
+
+
+=== app\bedrock.py ===
+app\bedrock.py:30: unused variable 'args' (100% confidence)
+
+
+=== app\config.py ===
+app\config.py:11: unused import 'Any' (90% confidence)
+app\config.py:17: unused import 'BrowserConfig' (90% confidence)
+app\config.py:17: unused import 'ProxyConfig' (90% confidence)
+
+
+=== app\logger.py ===
+app\logger.py:4: unused import 'Path' (90% confidence)
+
+
+=== scripts\build_resources.py ===
+scripts\build_resources.py:15: unused import 'Path' (90% confidence)
+scripts\build_resources.py:16: unused import 'shutil' (90% confidence)
+
+
+=== scripts\cleanup_logs.py ===
+scripts\cleanup_logs.py:12: unused import 'Path' (90% confidence)
+
+
+=== scripts\debug_ui.py ===
+scripts\debug_ui.py:88: unused import 'tr' (90% confidence)
+
+
+=== scripts\experience_archiver.py ===
+scripts\experience_archiver.py:15: unused import 'os' (90% confidence)
+scripts\experience_archiver.py:17: unused import 'json' (90% confidence)
+
+
+=== scripts\generate_icon_set.py ===
+scripts\generate_icon_set.py:15: unused import 'shutil' (90% confidence)
+scripts\generate_icon_set.py:17: unused import 'Path' (90% confidence)
+
+
+=== examples\pocketflow_marketing\complete_example.py ===
+examples\pocketflow_marketing\complete_example.py:10: unused import 'os' (90% confidence)
+examples\pocketflow_marketing\complete_example.py:11: unused import 'Any' (90% confidence)
+examples\pocketflow_marketing\complete_example.py:11: unused import 'Dict' (90% confidence)
+
+
+=== examples\pocketflow_marketing\custom_flow.py ===
+examples\pocketflow_marketing\custom_flow.py:5: unused import 'copy' (90% confidence)
+examples\pocketflow_marketing\custom_flow.py:9: unused import 'BaseNode' (90% confidence)
+examples\pocketflow_marketing\custom_flow.py:50: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\custom_flow.py:92: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\custom_flow.py:134: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\custom_flow.py:174: unused variable 'exec_res' (100% confidence)
+
+
+=== examples\pocketflow_marketing\debug_example.py ===
+examples\pocketflow_marketing\debug_example.py:5: unused import 'copy' (90% confidence)
+examples\pocketflow_marketing\debug_example.py:7: unused import 'inspect' (90% confidence)
+examples\pocketflow_marketing\debug_example.py:10: unused import 'BaseNode' (90% confidence)
+examples\pocketflow_marketing\debug_example.py:48: unused variable 'prep_res' (100% confidence)
+examples\pocketflow_marketing\debug_example.py:63: unused variable 'prep_res' (100% confidence)
+
+
+=== examples\pocketflow_marketing\fixed_example.py ===
+examples\pocketflow_marketing\fixed_example.py:8: unused import 'BaseNode' (90% confidence)
+examples\pocketflow_marketing\fixed_example.py:38: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\fixed_example.py:80: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\fixed_example.py:122: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\fixed_example.py:162: unused variable 'exec_res' (100% confidence)
+
+
+=== examples\pocketflow_marketing\gtm_workflow.py ===
+examples\pocketflow_marketing\gtm_workflow.py:9: unused import 'Any' (90% confidence)
+examples\pocketflow_marketing\gtm_workflow.py:9: unused import 'Dict' (90% confidence)
+examples\pocketflow_marketing\gtm_workflow.py:16: unused import 'ChannelAdapterNode' (90% confidence)
+examples\pocketflow_marketing\gtm_workflow.py:16: unused import 'ContentOptimizationNode' (90% confidence)
+
+
+=== examples\pocketflow_marketing\minimal_example.py ===
+examples\pocketflow_marketing\minimal_example.py:31: unused variable 'prep_res' (100% confidence)
+examples\pocketflow_marketing\minimal_example.py:38: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\minimal_example.py:38: unused variable 'prep_res' (100% confidence)
+
+
+=== examples\pocketflow_marketing\run_custom_workflow.py ===
+examples\pocketflow_marketing\run_custom_workflow.py:9: unused import 'Any' (90% confidence)
+examples\pocketflow_marketing\run_custom_workflow.py:9: unused import 'Dict' (90% confidence)
+
+
+=== examples\pocketflow_marketing\simple_example.py ===
+examples\pocketflow_marketing\simple_example.py:12: unused import 'BaseNode' (90% confidence)
+examples\pocketflow_marketing\simple_example.py:49: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\simple_example.py:107: unused variable 'exec_res' (100% confidence)
+examples\pocketflow_marketing\simple_example.py:163: unused variable 'exec_res' (100% confidence)
+
+
+=== examples\use_case\async_operations_demo.py ===
+examples\use_case\async_operations_demo.py:12: unused import 'time' (90% confidence)
+examples\use_case\async_operations_demo.py:15: unused import 'List' (90% confidence)
+examples\use_case\async_operations_demo.py:15: unused import 'Optional' (90% confidence)
+
+
+=== examples\use_case\experience_adaptation_demo.py ===
+examples\use_case\experience_adaptation_demo.py:9: unused import 'os' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:11: unused import 'json' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:12: unused import 'datetime' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:13: unused import 'time' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:16: unused import 'ContentDomain' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:16: unused import 'PersonalizationManager' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:16: unused import 'UserProfile' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:19: unused import 'ExperienceArchive' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:20: unused import 'AdaptationSuggestion' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:20: unused import 'ExperienceAdapter' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:21: unused import 'ErrorManager' (90% confidence)
+examples\use_case\experience_adaptation_demo.py:22: unused import 'config' (90% confidence)
+
+
+=== examples\use_case\experience_export_demo.py ===
+examples\use_case\experience_export_demo.py:11: unused import 'json' (90% confidence)
+examples\use_case\experience_export_demo.py:12: unused import 'datetime' (90% confidence)
+examples\use_case\experience_export_demo.py:17: unused import 'UserProfile' (90% confidence)
+examples\use_case\experience_export_demo.py:22: unused import 'config' (90% confidence)
+
+
+=== examples\use_case\feedback_system_demo.py ===
+examples\use_case\feedback_system_demo.py:12: unused import 'json' (90% confidence)
+examples\use_case\feedback_system_demo.py:13: unused import 'List' (90% confidence)
+examples\use_case\feedback_system_demo.py:18: unused import 'FeedbackItem' (90% confidence)
+examples\use_case\feedback_system_demo.py:18: unused import 'FeedbackSource' (90% confidence)
+
+
+=== examples\use_case\performance_monitoring_demo.py ===
+examples\use_case\performance_monitoring_demo.py:16: unused import 'timedelta' (90% confidence)
+examples\use_case\performance_monitoring_demo.py:17: unused import 'List' (90% confidence)
+examples\use_case\performance_monitoring_demo.py:17: unused import 'Optional' (90% confidence)
+examples\use_case\performance_monitoring_demo.py:19: unused import 'np' (90% confidence)
+examples\use_case\performance_monitoring_demo.py:26: unused import 'AlertLevel' (90% confidence)
+examples\use_case\performance_monitoring_demo.py:26: unused import 'MetricType' (90% confidence)
+
+
+=== examples\use_case\personalization_demo.py ===
+examples\use_case\personalization_demo.py:11: unused import 'datetime' (90% confidence)
+examples\use_case\personalization_demo.py:14: unused import 'PersonalizationManager' (90% confidence)
+examples\use_case\personalization_demo.py:14: unused import 'UserProfile' (90% confidence)
+examples\use_case\personalization_demo.py:17: unused import 'config' (90% confidence)
+
+
+=== examples\use_case\reflection_agent_demo.py ===
+examples\use_case\reflection_agent_demo.py:9: unused import 'json' (90% confidence)
+examples\use_case\reflection_agent_demo.py:10: unused import 'os' (90% confidence)
+examples\use_case\reflection_agent_demo.py:11: unused import 'Any' (90% confidence)
+examples\use_case\reflection_agent_demo.py:11: unused import 'Dict' (90% confidence)
+examples\use_case\reflection_agent_demo.py:14: unused import 'AnalogicalStrategy' (90% confidence)
+examples\use_case\reflection_agent_demo.py:14: unused import 'DecompositionStrategy' (90% confidence)
+examples\use_case\reflection_agent_demo.py:14: unused import 'SequentialStrategy' (90% confidence)
+
+
+=== examples\use_case\task_prioritization_demo.py ===
+examples\use_case\task_prioritization_demo.py:9: unused import 'os' (90% confidence)
+examples\use_case\task_prioritization_demo.py:11: unused import 'json' (90% confidence)
+examples\use_case\task_prioritization_demo.py:15: unused import 'List' (90% confidence)
+
+
+=== app\agent\agent_manager.py ===
+app\agent\agent_manager.py:9: unused import 'Any' (90% confidence)
+
+
+=== app\agent\browser.py ===
+app\agent\browser.py:1: unused import 'json' (90% confidence)
+app\agent\browser.py:7: unused import 'logger' (90% confidence)
+app\agent\browser.py:9: unused import 'Message' (90% confidence)
+
+
+=== app\agent\browser_access.py ===
+app\agent\browser_access.py:9: unused import 'json' (90% confidence)
+app\agent\browser_access.py:10: unused import 'Union' (90% confidence)
+
+
+=== app\agent\browser_access_agent.py ===
+app\agent\browser_access_agent.py:8: unused import 'asyncio' (90% confidence)
+app\agent\browser_access_agent.py:10: unused import 'Tuple' (90% confidence)
+app\agent\browser_access_agent.py:10: unused import 'Union' (90% confidence)
+app\agent\browser_access_agent.py:12: unused import 'Field' (90% confidence)
+app\agent\browser_access_agent.py:15: unused import 'BrowserAccess' (90% confidence)
+app\agent\browser_access_agent.py:17: unused import 'AgentState' (90% confidence)
+app\agent\browser_access_agent.py:18: unused import 'get_browser_tools' (90% confidence)
+
+
+=== app\agent\browser_agent.py ===
+app\agent\browser_agent.py:2: unused import 'List' (90% confidence)
+app\agent\browser_agent.py:9: unused import 'Message' (90% confidence)
+
+
+=== app\agent\coding_agent.py ===
+app\agent\coding_agent.py:2: unused import 'List' (90% confidence)
+app\agent\coding_agent.py:9: unused import 'Message' (90% confidence)
+
+
+=== app\agent\error_analysis_system.py ===
+app\agent\error_analysis_system.py:9: unused import 'Set' (90% confidence)
+app\agent\error_analysis_system.py:9: unused import 'Tuple' (90% confidence)
+app\agent\error_analysis_system.py:9: unused import 'Union' (90% confidence)
+app\agent\error_analysis_system.py:17: unused import 'traceback' (90% confidence)
+
+
+=== app\agent\error_manager.py ===
+app\agent\error_manager.py:7: unused import 'Set' (90% confidence)
+app\agent\error_manager.py:7: unused import 'Tuple' (90% confidence)
+app\agent\error_manager.py:12: unused import 'datetime' (90% confidence)
+
+
+=== app\agent\experience_adapter.py ===
+app\agent\experience_adapter.py:8: unused import 'os' (90% confidence)
+app\agent\experience_adapter.py:9: unused import 'json' (90% confidence)
+app\agent\experience_adapter.py:10: unused import 'time' (90% confidence)
+app\agent\experience_adapter.py:11: unused import 'Set' (90% confidence)
+app\agent\experience_adapter.py:11: unused import 'Tuple' (90% confidence)
+
+
+=== app\agent\experience_manager.py ===
+app\agent\experience_manager.py:14: unused import 'Path' (90% confidence)
+app\agent\experience_manager.py:15: unused import 'Set' (90% confidence)
+app\agent\experience_manager.py:15: unused import 'Tuple' (90% confidence)
+app\agent\experience_manager.py:17: unused import 'UserProfile' (90% confidence)
+
+
+=== app\agent\exploration_feedback_integration.py ===
+app\agent\exploration_feedback_integration.py:8: unused import 'asyncio' (90% confidence)
+app\agent\exploration_feedback_integration.py:9: unused import 'List' (90% confidence)
+app\agent\exploration_feedback_integration.py:9: unused import 'Set' (90% confidence)
+app\agent\exploration_feedback_integration.py:9: unused import 'Tuple' (90% confidence)
+app\agent\exploration_feedback_integration.py:12: unused import 'ExplorationPhase' (90% confidence)
+app\agent\exploration_feedback_integration.py:12: unused import 'InformationItem' (90% confidence)
+app\agent\exploration_feedback_integration.py:18: unused import 'FeedbackSource' (90% confidence)
+app\agent\exploration_feedback_integration.py:21: unused import 'logger' (90% confidence)
+
+
+=== app\agent\exploration_strategy.py ===
+app\agent\exploration_strategy.py:579: unterminated triple-quoted string literal (detected at line 584) at """""
+
+
+=== app\agent\feedback_system.py ===
+app\agent\feedback_system.py:8: unused import 'Set' (90% confidence)
+app\agent\feedback_system.py:8: unused import 'Tuple' (90% confidence)
+app\agent\feedback_system.py:14: unused import 'ExplorationStrategy' (90% confidence)
+app\agent\feedback_system.py:14: unused import 'InformationItem' (90% confidence)
+
+
+=== app\agent\file_exploration_strategy.py ===
+app\agent\file_exploration_strategy.py:7: unused import 'asyncio' (90% confidence)
+app\agent\file_exploration_strategy.py:11: unused import 'Set' (90% confidence)
+app\agent\file_exploration_strategy.py:11: unused import 'Tuple' (90% confidence)
+app\agent\file_exploration_strategy.py:11: unused import 'Union' (90% confidence)
+
+
+=== app\agent\file_system_access.py ===
+app\agent\file_system_access.py:10: unused import 'shutil' (90% confidence)
+app\agent\file_system_access.py:11: unused import 'json' (90% confidence)
+app\agent\file_system_access.py:13: unused import 'Path' (90% confidence)
+app\agent\file_system_access.py:14: unused import 'BinaryIO' (90% confidence)
+app\agent\file_system_access.py:14: unused import 'Set' (90% confidence)
+
+
+=== app\agent\llm_interaction.py ===
+app\agent\llm_interaction.py:7: unused import 'asyncio' (90% confidence)
+app\agent\llm_interaction.py:9: unused import 'Any' (90% confidence)
+app\agent\llm_interaction.py:9: unused import 'Dict' (90% confidence)
+
+
+=== app\agent\manus.py ===
+app\agent\manus.py:4: unused import 'config' (90% confidence)
+
+
+=== app\agent\mcp.py ===
+app\agent\mcp.py:7: unused import 'asyncio' (90% confidence)
+app\agent\mcp.py:8: unused import 'Dict' (90% confidence)
+app\agent\mcp.py:8: unused import 'Set' (90% confidence)
+app\agent\mcp.py:39: unused variable 'connection_type' (100% confidence)
+app\agent\mcp.py:40: unused variable 'server_url' (100% confidence)
+app\agent\mcp.py:41: unused variable 'command' (100% confidence)
+app\agent\mcp.py:42: unused variable 'args' (100% confidence)
+
+
+=== app\agent\metacognitive_analyzer.py ===
+app\agent\metacognitive_analyzer.py:8: unused import 'asyncio' (90% confidence)
+app\agent\metacognitive_analyzer.py:9: unused import 'time' (90% confidence)
+app\agent\metacognitive_analyzer.py:12: unused import 'Set' (90% confidence)
+
+
+=== app\agent\performance_monitor.py ===
+app\agent\performance_monitor.py:8: unused import 'os' (90% confidence)
+app\agent\performance_monitor.py:9: unused import 'time' (90% confidence)
+app\agent\performance_monitor.py:16: unused import 'Set' (90% confidence)
+app\agent\performance_monitor.py:16: unused import 'Tuple' (90% confidence)
+app\agent\performance_monitor.py:20: unused import 'deque' (90% confidence)
+
+
+=== app\agent\permission_manager.py ===
+app\agent\permission_manager.py:9: unused import 'Tuple' (90% confidence)
+
+
+=== app\agent\personalization_manager.py ===
+app\agent\personalization_manager.py:12: unused import 'Set' (90% confidence)
+
+
+=== app\agent\planning.py ===
+app\agent\planning.py:1: unused import 'List' (90% confidence)
+app\agent\planning.py:8: unused variable 'tavily_api_key' (100% confidence)
+
+
+=== app\agent\planning_mock.py ===
+app\agent\planning_mock.py:7: unused import 'List' (90% confidence)
+app\agent\planning_mock.py:7: unused import 'Optional' (90% confidence)
+
+
+=== app\agent\planning_strategy.py ===
+app\agent\planning_strategy.py:12: unused import 'Optional' (90% confidence)
+app\agent\planning_strategy.py:12: unused import 'Set' (90% confidence)
+
+
+=== app\agent\react.py ===
+app\agent\react.py:2: unused import 'Any' (90% confidence)
+
+
+=== app\agent\reasoning.py ===
+app\agent\reasoning.py:8: unused import 'asyncio' (90% confidence)
+app\agent\reasoning.py:11: unused import 'Set' (90% confidence)
+app\agent\reasoning.py:11: unused import 'Tuple' (90% confidence)
+app\agent\reasoning.py:14: unused import 'Field' (90% confidence)
+app\agent\reasoning.py:22: unused import 'TaskComplexity' (90% confidence)
+app\agent\reasoning.py:25: unused import 'InformationItem' (90% confidence)
+app\agent\reasoning.py:25: unused import 'InformationSource' (90% confidence)
+app\agent\reasoning.py:32: unused import 'ContentDomain' (90% confidence)
+app\agent\reasoning.py:32: unused import 'UserProfile' (90% confidence)
+app\agent\reasoning.py:40: unused import 'AgentState' (90% confidence)
+app\agent\reasoning.py:40: unused import 'Message' (90% confidence)
+app\agent\reasoning.py:41: unused import 'APPROVAL_REQUIRED_MESSAGE' (90% confidence)
+app\agent\reasoning.py:41: unused import 'EXECUTION_BLOCKED_MESSAGE' (90% confidence)
+app\agent\reasoning.py:41: unused import 'PLAN_CREATION_PROMPT' (90% confidence)
+app\agent\reasoning.py:49: unused import 'AlertLevel' (90% confidence)
+app\agent\reasoning.py:49: unused import 'MetricType' (90% confidence)
+app\agent\reasoning.py:49: unused import 'PerformanceMonitor' (90% confidence)
+
+
+=== app\agent\reflection_agent.py ===
+app\agent\reflection_agent.py:294: invalid syntax at "**metadata or {}"
+
+
+=== app\agent\resource_manager.py ===
+app\agent\resource_manager.py:8: unused import 'os' (90% confidence)
+app\agent\resource_manager.py:13: unused import 'Set' (90% confidence)
+app\agent\resource_manager.py:15: unused import 'timedelta' (90% confidence)
+
+
+=== app\agent\terminal_access.py ===
+app\agent\terminal_access.py:12: unused import 'shlex' (90% confidence)
+app\agent\terminal_access.py:14: unused import 'Union' (90% confidence)
+
+
+=== app\agent\text_editor_access.py ===
+app\agent\text_editor_access.py:11: unused import 'Set' (90% confidence)
+app\agent\text_editor_access.py:11: unused import 'Union' (90% confidence)
+
+
+=== app\agent\thought_tree.py ===
+app\agent\thought_tree.py:8: unused import 'Set' (90% confidence)
+app\agent\thought_tree.py:8: unused import 'Tuple' (90% confidence)
+app\agent\thought_tree.py:8: unused import 'Union' (90% confidence)
+
+
+=== app\agent\uncertainty_handling.py ===
+app\agent\uncertainty_handling.py:369: invalid syntax at ""timestamp": import time; time.time()"
+
+
+=== app\agent\web_exploration_strategy.py ===
+app\agent\web_exploration_strategy.py:7: unused import 'asyncio' (90% confidence)
+app\agent\web_exploration_strategy.py:9: unused import 'Union' (90% confidence)
+
+
+=== app\config\reasoning_config.py ===
+app\config\reasoning_config.py:9: unused import 'Optional' (90% confidence)
+
+
+=== app\flow\base.py ===
+app\flow\base.py:62: unused variable 'input_text' (100% confidence)
+
+
+=== app\marketing\agents.py ===
+app\marketing\agents.py:9: unused import 'List' (90% confidence)
+app\marketing\agents.py:9: unused import 'Optional' (90% confidence)
+
+
+=== app\marketing\demo.py ===
+app\marketing\demo.py:8: unused import 'json' (90% confidence)
+app\marketing\demo.py:144: unused variable 'research' (100% confidence)
+app\marketing\demo.py:183: unused variable 'research' (100% confidence)
+
+
+=== app\marketing\fixed_nodes.py ===
+app\marketing\fixed_nodes.py:7: unused import 'List' (90% confidence)
+app\marketing\fixed_nodes.py:7: unused import 'Optional' (90% confidence)
+app\marketing\fixed_nodes.py:61: unused variable 'exec_res' (100% confidence)
+app\marketing\fixed_nodes.py:105: unused variable 'exec_res' (100% confidence)
+app\marketing\fixed_nodes.py:148: unused variable 'exec_res' (100% confidence)
+app\marketing\fixed_nodes.py:201: unused variable 'exec_res' (100% confidence)
+app\marketing\fixed_nodes.py:244: unused variable 'exec_res' (100% confidence)
+
+
+=== app\marketing\fixed_orchestrator.py ===
+app\marketing\fixed_orchestrator.py:8: unused import 'Union' (90% confidence)
+app\marketing\fixed_orchestrator.py:9: unused import 'copy' (90% confidence)
+app\marketing\fixed_orchestrator.py:15: unused import 'BaseNode' (90% confidence)
+
+
+=== app\marketing\flows.py ===
+app\marketing\flows.py:8: unused import 'Any' (90% confidence)
+app\marketing\flows.py:8: unused import 'Dict' (90% confidence)
+app\marketing\flows.py:12: unused import 'BaseFlow' (90% confidence)
+app\marketing\flows.py:15: unused import 'ContentCreationAgent' (90% confidence)
+
+
+=== app\marketing\nodes.py ===
+app\marketing\nodes.py:8: unused import 'List' (90% confidence)
+app\marketing\nodes.py:8: unused import 'Optional' (90% confidence)
+app\marketing\nodes.py:9: unused import 'json' (90% confidence)
+app\marketing\nodes.py:13: unused import 'ContentDistributionTool' (90% confidence)
+app\marketing\nodes.py:53: unused variable 'exec_res' (100% confidence)
+app\marketing\nodes.py:102: unused variable 'exec_res' (100% confidence)
+app\marketing\nodes.py:150: unused variable 'exec_res' (100% confidence)
+app\marketing\nodes.py:199: unused variable 'exec_res' (100% confidence)
+app\marketing\nodes.py:247: unused variable 'exec_res' (100% confidence)
+
+
+=== app\marketing\orchestrator.py ===
+app\marketing\orchestrator.py:8: unused import 'Union' (90% confidence)
+
+
+=== app\marketing\tools.py ===
+app\marketing\tools.py:7: unused import 'json' (90% confidence)
+app\marketing\tools.py:9: unused import 'Optional' (90% confidence)
+
+
+=== app\mcp\client.py ===
+app\mcp\client.py:7: unused import 'Optional' (90% confidence)
+app\mcp\client.py:7: unused import 'Union' (90% confidence)
+app\mcp\client.py:8: unused import 'asyncio' (90% confidence)
+app\mcp\client.py:9: unused import 'json' (90% confidence)
+
+
+=== app\mcp\sequential_thinking.py ===
+app\mcp\sequential_thinking.py:8: unused import 'Tuple' (90% confidence)
+app\mcp\sequential_thinking.py:8: unused import 'Union' (90% confidence)
+
+
+=== app\mcp\serena_integration.py ===
+app\mcp\serena_integration.py:7: unused import 'json' (90% confidence)
+app\mcp\serena_integration.py:8: unused import 'os' (90% confidence)
+
+
+=== app\mcp\serena_tools.py ===
+app\mcp\serena_tools.py:12: unused variable 'random_string' (100% confidence)
+
+
+=== app\mcp\server.py ===
+app\mcp\server.py:14: unused import 'List' (90% confidence)
+
+
+=== app\mcp\sqlite_tools.py ===
+app\mcp\sqlite_tools.py:4: unused import 'Union' (90% confidence)
+
+
+=== app\pocketflow\adapters.py ===
+app\pocketflow\adapters.py:7: unused import 'Callable' (90% confidence)
+app\pocketflow\adapters.py:7: unused import 'Type' (90% confidence)
+app\pocketflow\adapters.py:9: unused import 'asyncio' (90% confidence)
+app\pocketflow\adapters.py:33: unused import 'BatchNode' (90% confidence)
+app\pocketflow\adapters.py:41: unused import 'pocketflow_framework' (90% confidence)
+app\pocketflow\adapters.py:161: unused variable 'exec_res' (100% confidence)
+app\pocketflow\adapters.py:161: unused variable 'prep_res' (100% confidence)
+
+
+=== app\pocketflow\core.py ===
+app\pocketflow\core.py:7: unused import 'Callable' (90% confidence)
+app\pocketflow\core.py:111: unused variable 'data' (100% confidence)
+app\pocketflow\core.py:122: unused variable 'result' (100% confidence)
+
+
+=== app\pocketflow\examples.py ===
+app\pocketflow\examples.py:7: unused import 'asyncio' (90% confidence)
+app\pocketflow\examples.py:17: unused import 'BatchNode' (90% confidence)
+app\pocketflow\examples.py:20: unused import 'BaseAgent' (90% confidence)
+app\pocketflow\examples.py:24: unused import 'BaseFlow' (90% confidence)
+app\pocketflow\examples.py:31: unused import 'OpenManusToolAdapter' (90% confidence)
+app\pocketflow\examples.py:31: unused import 'PocketFlowAdapter' (90% confidence)
+
+
+=== app\pocketflow\fixed_adapters.py ===
+app\pocketflow\fixed_adapters.py:7: unused import 'List' (90% confidence)
+app\pocketflow\fixed_adapters.py:7: unused import 'Optional' (90% confidence)
+app\pocketflow\fixed_adapters.py:11: unused import 'warnings' (90% confidence)
+app\pocketflow\fixed_adapters.py:95: unused variable 'exec_res' (100% confidence)
+app\pocketflow\fixed_adapters.py:202: unused variable 'exec_res' (100% confidence)
+
+
+=== app\pocketflow\fixed_orchestrator.py ===
+app\pocketflow\fixed_orchestrator.py:7: unused import 'Optional' (90% confidence)
+app\pocketflow\fixed_orchestrator.py:8: unused import 'copy' (90% confidence)
+app\pocketflow\fixed_orchestrator.py:11: unused import 'BaseNode' (90% confidence)
+
+
+=== app\pocketflow\orchestrator.py ===
+app\pocketflow\orchestrator.py:7: unused import 'Callable' (90% confidence)
+app\pocketflow\orchestrator.py:7: unused import 'Type' (90% confidence)
+app\pocketflow\orchestrator.py:7: unused import 'Union' (90% confidence)
+app\pocketflow\orchestrator.py:9: unused import 'os' (90% confidence)
+app\pocketflow\orchestrator.py:10: unused import 'uuid' (90% confidence)
+app\pocketflow\orchestrator.py:21: unused import 'BatchNode' (90% confidence)
+app\pocketflow\orchestrator.py:21: unused import 'Node' (90% confidence)
+app\pocketflow\orchestrator.py:22: unused import 'OpenManusFlowAdapter' (90% confidence)
+app\pocketflow\orchestrator.py:22: unused import 'PocketFlowAdapter' (90% confidence)
+
+
+=== app\sandbox\config.py ===
+app\sandbox\config.py:5: unused import 'Dict' (90% confidence)
+app\sandbox\config.py:5: unused import 'Optional' (90% confidence)
+
+
+=== app\tool\bash.py ===
+app\tool\bash.py:135: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\browser_analyzer_tool.py ===
+app\tool\browser_analyzer_tool.py:3: unused import 'Any' (90% confidence)
+app\tool\browser_analyzer_tool.py:3: unused import 'Dict' (90% confidence)
+app\tool\browser_analyzer_tool.py:3: unused import 'List' (90% confidence)
+app\tool\browser_analyzer_tool.py:80: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\browser_control_tool.py ===
+app\tool\browser_control_tool.py:2: unused import 'Any' (90% confidence)
+app\tool\browser_control_tool.py:2: unused import 'Dict' (90% confidence)
+app\tool\browser_control_tool.py:2: unused import 'List' (90% confidence)
+app\tool\browser_control_tool.py:73: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\browser_screenshot_tool.py ===
+app\tool\browser_screenshot_tool.py:4: unused import 'time' (90% confidence)
+app\tool\browser_screenshot_tool.py:6: unused import 'Any' (90% confidence)
+app\tool\browser_screenshot_tool.py:6: unused import 'Dict' (90% confidence)
+app\tool\browser_screenshot_tool.py:6: unused import 'List' (90% confidence)
+app\tool\browser_screenshot_tool.py:61: unused variable 'full_page' (100% confidence)
+app\tool\browser_screenshot_tool.py:63: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\browser_use_tool.py ===
+app\tool\browser_use_tool.py:150: unused variable 'info' (100% confidence)
+app\tool\browser_use_tool.py:216: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\code_analyze_tool.py ===
+app\tool\code_analyze_tool.py:1: unused import 'os' (90% confidence)
+app\tool\code_analyze_tool.py:3: unused import 'Any' (90% confidence)
+app\tool\code_analyze_tool.py:3: unused import 'Dict' (90% confidence)
+app\tool\code_analyze_tool.py:3: unused import 'List' (90% confidence)
+app\tool\code_analyze_tool.py:3: unused import 'Set' (90% confidence)
+app\tool\code_analyze_tool.py:3: unused import 'Tuple' (90% confidence)
+app\tool\code_analyze_tool.py:4: unused import 're' (90% confidence)
+
+
+=== app\tool\code_control_tool.py ===
+app\tool\code_control_tool.py:1: unused import 'asyncio' (90% confidence)
+app\tool\code_control_tool.py:2: unused import 'Any' (90% confidence)
+app\tool\code_control_tool.py:2: unused import 'Dict' (90% confidence)
+app\tool\code_control_tool.py:2: unused import 'List' (90% confidence)
+
+
+=== app\tool\code_edit_tool.py ===
+app\tool\code_edit_tool.py:1: unused import 'asyncio' (90% confidence)
+app\tool\code_edit_tool.py:2: unused import 'Any' (90% confidence)
+app\tool\code_edit_tool.py:2: unused import 'Dict' (90% confidence)
+
+
+=== app\tool\code_run_tool.py ===
+app\tool\code_run_tool.py:1: unused import 'Any' (90% confidence)
+app\tool\code_run_tool.py:1: unused import 'Dict' (90% confidence)
+app\tool\code_run_tool.py:2: unused import 'subprocess' (90% confidence)
+app\tool\code_run_tool.py:3: unused import 'os' (90% confidence)
+app\tool\code_run_tool.py:5: unused import 'asyncio' (90% confidence)
+
+
+=== app\tool\planning.py ===
+app\tool\planning.py:86: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\str_replace_editor.py ===
+app\tool\str_replace_editor.py:124: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\terminal.py ===
+app\tool\terminal.py:4: unused import 'Tuple' (90% confidence)
+app\tool\terminal.py:201: unused variable 'exc_tb' (100% confidence)
+app\tool\terminal.py:201: unused variable 'exc_type' (100% confidence)
+app\tool\terminal.py:201: unused variable 'exc_val' (100% confidence)
+
+
+=== app\tool\web_search.py ===
+app\tool\web_search.py:34: unused variable 'kwargs' (100% confidence)
+
+
+=== app\ui\browser_agent_dialog.py ===
+app\ui\browser_agent_dialog.py:4: unused import 'QApplication' (90% confidence)
+app\ui\browser_agent_dialog.py:4: unused import 'QMenu' (90% confidence)
+app\ui\browser_agent_dialog.py:4: unused import 'QMessageBox' (90% confidence)
+app\ui\browser_agent_dialog.py:4: unused import 'QSizePolicy' (90% confidence)
+app\ui\browser_agent_dialog.py:9: unused import 'QPoint' (90% confidence)
+app\ui\browser_agent_dialog.py:9: unused import 'QSize' (90% confidence)
+app\ui\browser_agent_dialog.py:10: unused import 'QIcon' (90% confidence)
+
+
+=== app\ui\browser_agent_interface.py ===
+app\ui\browser_agent_interface.py:4: unused import 'Tuple' (90% confidence)
+app\ui\browser_agent_interface.py:142: unused variable 'context' (100% confidence)
+
+
+=== app\ui\browser_tab_widget.py ===
+app\ui\browser_tab_widget.py:1: unused import 'os' (90% confidence)
+app\ui\browser_tab_widget.py:2: unused import 'Qt' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QComboBox' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QHBoxLayout' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QLabel' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QMenu' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QSplitter' (90% confidence)
+app\ui\browser_tab_widget.py:3: unused import 'QTabBar' (90% confidence)
+app\ui\browser_tab_widget.py:8: unused import 'QKeySequence' (90% confidence)
+app\ui\browser_tab_widget.py:10: unused import 'initialize_cef' (90% confidence)
+app\ui\browser_tab_widget.py:13: unused import 'ThemeManager' (90% confidence)
+app\ui\browser_tab_widget.py:502: unused variable 'can_back' (100% confidence)
+app\ui\browser_tab_widget.py:502: unused variable 'can_forward' (100% confidence)
+app\ui\browser_tab_widget.py:570: unused variable 'ok' (100% confidence)
+
+
+=== app\ui\browser_widget.py ===
+app\ui\browser_widget.py:5: unused import 'QSize' (90% confidence)
+app\ui\browser_widget.py:6: unused import 'QMessageBox' (90% confidence)
+app\ui\browser_widget.py:7: unused import 'QWindow' (90% confidence)
+app\ui\browser_widget.py:20: unused import 'QWebEnginePage' (90% confidence)
+
+
+=== app\ui\chat_widget.py ===
+app\ui\chat_widget.py:5: unused import 'QLabel' (90% confidence)
+app\ui\chat_widget.py:5: unused import 'QLineEdit' (90% confidence)
+app\ui\chat_widget.py:5: unused import 'QPlainTextEdit' (90% confidence)
+app\ui\chat_widget.py:5: unused import 'QSizePolicy' (90% confidence)
+app\ui\chat_widget.py:5: unused import 'QToolButton' (90% confidence)
+app\ui\chat_widget.py:9: unused import 'QMimeData' (90% confidence)
+app\ui\chat_widget.py:9: unused import 'QTimer' (90% confidence)
+app\ui\chat_widget.py:10: unused import 'QIcon' (90% confidence)
+app\ui\chat_widget.py:374: unused variable 'position' (100% confidence)
+
+
+=== app\ui\close_button_fixer.py ===
+app\ui\close_button_fixer.py:4: unused import 'QMainWindow' (90% confidence)
+app\ui\close_button_fixer.py:5: unused import 'QEvent' (90% confidence)
+app\ui\close_button_fixer.py:5: unused import 'Qt' (90% confidence)
+app\ui\close_button_fixer.py:6: unused import 'os' (90% confidence)
+
+
+=== app\ui\code_editor.py ===
+app\ui\code_editor.py:3: unused import 'QHBoxLayout' (90% confidence)
+app\ui\code_editor.py:3: unused import 'QSizePolicy' (90% confidence)
+app\ui\code_editor.py:3: unused import 'QWidget' (90% confidence)
+app\ui\code_editor.py:5: unused import 'QMimeData' (90% confidence)
+app\ui\code_editor.py:9: unused import 'PythonHighlighter' (90% confidence)
+
+
+=== app\ui\code_editor_widget.py ===
+app\ui\code_editor_widget.py:2: unused import 'Path' (90% confidence)
+app\ui\code_editor_widget.py:4: unused import 'QHBoxLayout' (90% confidence)
+app\ui\code_editor_widget.py:4: unused import 'QLabel' (90% confidence)
+app\ui\code_editor_widget.py:4: unused import 'QPushButton' (90% confidence)
+
+
+=== app\ui\coding_agent_dialog.py ===
+app\ui\coding_agent_dialog.py:4: unused import 'QApplication' (90% confidence)
+app\ui\coding_agent_dialog.py:4: unused import 'QMenu' (90% confidence)
+app\ui\coding_agent_dialog.py:4: unused import 'QMessageBox' (90% confidence)
+app\ui\coding_agent_dialog.py:4: unused import 'QSizePolicy' (90% confidence)
+app\ui\coding_agent_dialog.py:9: unused import 'QPoint' (90% confidence)
+app\ui\coding_agent_dialog.py:9: unused import 'QSize' (90% confidence)
+app\ui\coding_agent_dialog.py:10: unused import 'QIcon' (90% confidence)
+
+
+=== app\ui\coding_agent_interface.py ===
+app\ui\coding_agent_interface.py:2: unused import 'Any' (90% confidence)
+app\ui\coding_agent_interface.py:2: unused import 'Dict' (90% confidence)
+app\ui\coding_agent_interface.py:2: unused import 'List' (90% confidence)
+app\ui\coding_agent_interface.py:2: unused import 'Optional' (90% confidence)
+app\ui\coding_agent_interface.py:7: unused import 'Message' (90% confidence)
+
+
+=== app\ui\debug_ui.py ===
+app\ui\debug_ui.py:4: unused import 'QMetaObject' (90% confidence)
+app\ui\debug_ui.py:4: unused import 'QObject' (90% confidence)
+app\ui\debug_ui.py:4: unused import 'Signal' (90% confidence)
+app\ui\debug_ui.py:5: unused import 'QMessageBox' (90% confidence)
+app\ui\debug_ui.py:6: unused import 'QFont' (90% confidence)
+
+
+=== app\ui\dock_title_bar.py ===
+app\ui\dock_title_bar.py:5: unused import 'os' (90% confidence)
+app\ui\dock_title_bar.py:6: unused import 'QDockWidget' (90% confidence)
+app\ui\dock_title_bar.py:6: unused import 'QToolButton' (90% confidence)
+app\ui\dock_title_bar.py:10: unused import 'QIcon' (90% confidence)
+app\ui\dock_title_bar.py:12: unused import 'get_system_icon' (90% confidence)
+app\ui\dock_title_bar.py:221: unused variable 'is_docked_permanent' (100% confidence)
+app\ui\dock_title_bar.py:241: unused variable 'floating' (100% confidence)
+
+
+=== app\ui\emoji_dialog.py ===
+app\ui\emoji_dialog.py:4: unused import 'QSize' (90% confidence)
+app\ui\emoji_dialog.py:115: unused variable 'checked' (100% confidence)
+app\ui\emoji_dialog.py:149: unused variable 'text' (100% confidence)
+
+
+=== app\ui\flow_visualizer.py ===
+app\ui\flow_visualizer.py:6: unused import 'Signal' (90% confidence)
+app\ui\flow_visualizer.py:149: unused variable 'event' (100% confidence)
+
+
+=== app\ui\icon_manager.py ===
+app\ui\icon_manager.py:3: unused import 're' (90% confidence)
+app\ui\icon_manager.py:4: unused import 'QColor' (90% confidence)
+app\ui\icon_manager.py:5: unused import 'QSize' (90% confidence)
+app\ui\icon_manager.py:12: unused import 'icons_rc' (90% confidence)
+
+
+=== app\ui\main_window.py ===
+app\ui\main_window.py:6: unused import 'tempfile' (90% confidence)
+app\ui\main_window.py:8: unused import 'Path' (90% confidence)
+app\ui\main_window.py:9: unused import 'QFileSystemModel' (90% confidence)
+app\ui\main_window.py:9: unused import 'QHBoxLayout' (90% confidence)
+app\ui\main_window.py:9: unused import 'QLineEdit' (90% confidence)
+app\ui\main_window.py:9: unused import 'QMenuBar' (90% confidence)
+app\ui\main_window.py:9: unused import 'QPlainTextEdit' (90% confidence)
+app\ui\main_window.py:9: unused import 'QSplitter' (90% confidence)
+app\ui\main_window.py:9: unused import 'QStatusBar' (90% confidence)
+app\ui\main_window.py:9: unused import 'QStyle' (90% confidence)
+app\ui\main_window.py:9: unused import 'QStyleFactory' (90% confidence)
+app\ui\main_window.py:9: unused import 'QTextEdit' (90% confidence)
+app\ui\main_window.py:9: unused import 'QToolBar' (90% confidence)
+app\ui\main_window.py:9: unused import 'QToolButton' (90% confidence)
+app\ui\main_window.py:9: unused import 'QTreeView' (90% confidence)
+app\ui\main_window.py:9: unused import 'QVBoxLayout' (90% confidence)
+app\ui\main_window.py:17: unused import 'QDir' (90% confidence)
+app\ui\main_window.py:17: unused import 'QModelIndex' (90% confidence)
+app\ui\main_window.py:17: unused import 'QSize' (90% confidence)
+app\ui\main_window.py:17: unused import 'QThread' (90% confidence)
+app\ui\main_window.py:17: unused import 'QTimer' (90% confidence)
+app\ui\main_window.py:17: unused import 'QUrl' (90% confidence)
+app\ui\main_window.py:21: unused import 'QColor' (90% confidence)
+app\ui\main_window.py:21: unused import 'QCursor' (90% confidence)
+app\ui\main_window.py:21: unused import 'QDesktopServices' (90% confidence)
+app\ui\main_window.py:21: unused import 'QFontMetrics' (90% confidence)
+app\ui\main_window.py:21: unused import 'QIcon' (90% confidence)
+app\ui\main_window.py:21: unused import 'QPainter' (90% confidence)
+app\ui\main_window.py:21: unused import 'QPixmap' (90% confidence)
+app\ui\main_window.py:21: unused import 'QShortcut' (90% confidence)
+app\ui\main_window.py:21: unused import 'QStandardItem' (90% confidence)
+app\ui\main_window.py:21: unused import 'QStandardItemModel' (90% confidence)
+app\ui\main_window.py:21: unused import 'QSyntaxHighlighter' (90% confidence)
+app\ui\main_window.py:21: unused import 'QTextCharFormat' (90% confidence)
+app\ui\main_window.py:21: unused import 'QTextCursor' (90% confidence)
+app\ui\main_window.py:21: unused import 'QTextDocument' (90% confidence)
+app\ui\main_window.py:21: unused import 'QTextOption' (90% confidence)
+app\ui\main_window.py:34: unused import 'OutputWidget' (90% confidence)
+app\ui\main_window.py:36: unused import 'MultiBrowserWidget' (90% confidence)
+app\ui\main_window.py:37: unused import 'shutdown_cef' (90% confidence)
+app\ui\main_window.py:44: unused import 'Manus' (90% confidence)
+app\ui\main_window.py:45: unused import 'ReActAgent' (90% confidence)
+app\ui\main_window.py:46: unused import 'PlanningAgent' (90% confidence)
+app\ui\main_window.py:47: unused import 'BaseAgent' (90% confidence)
+app\ui\main_window.py:48: unused import 'ReactAgent' (90% confidence)
+app\ui\main_window.py:49: unused import 'FlowFactory' (90% confidence)
+app\ui\main_window.py:49: unused import 'FlowType' (90% confidence)
+app\ui\main_window.py:50: unused import 'ToolCollection' (90% confidence)
+app\ui\main_window.py:51: unused import 'PythonExecute' (90% confidence)
+app\ui\main_window.py:52: unused import 'WebSearch' (90% confidence)
+app\ui\main_window.py:53: unused import 'BrowserUseTool' (90% confidence)
+app\ui\main_window.py:54: unused import 'StrReplaceEditor' (90% confidence)
+app\ui\main_window.py:55: unused import 'Bash' (90% confidence)
+app\ui\main_window.py:56: unused import 'FileOperator' (90% confidence)
+app\ui\main_window.py:56: unused import 'LocalFileOperator' (90% confidence)
+app\ui\main_window.py:57: unused import 'Terminal' (90% confidence)
+app\ui\main_window.py:58: unused import 'Terminate' (90% confidence)
+app\ui\main_window.py:59: unused import 'Any' (90% confidence)
+app\ui\main_window.py:60: unused import 'json' (90% confidence)
+app\ui\main_window.py:61: unused import 'BaseFlow' (90% confidence)
+app\ui\main_window.py:67: unused import 'list_icons' (90% confidence)
+app\ui\main_window.py:71: unused import 'icons_rc' (90% confidence)
+app\ui\main_window.py:81: unused import 'QWebEngineView' (90% confidence)
+app\ui\main_window.py:82: unused import 'QWebEnginePage' (90% confidence)
+app\ui\main_window.py:95: unused import 'CloseButtonFixer' (90% confidence)
+app\ui\main_window.py:99: unused import 'SettingsWidget' (90% confidence)
+app\ui\main_window.py:1151: unused variable 'visible' (100% confidence)
+
+
+=== app\ui\menu_manager.py ===
+app\ui\menu_manager.py:8: unused import 'os' (90% confidence)
+app\ui\menu_manager.py:9: unused import 'Any' (90% confidence)
+app\ui\menu_manager.py:9: unused import 'Dict' (90% confidence)
+app\ui\menu_manager.py:9: unused import 'List' (90% confidence)
+app\ui\menu_manager.py:9: unused import 'Optional' (90% confidence)
+app\ui\menu_manager.py:10: unused import 'QMenu' (90% confidence)
+app\ui\menu_manager.py:13: unused import 'QIcon' (90% confidence)
+app\ui\menu_manager.py:301: unused variable 'checked' (100% confidence)
+app\ui\menu_manager.py:356: unused variable 'checked' (100% confidence)
+
+
+=== app\ui\output_widget.py ===
+app\ui\output_widget.py:1: unused import 'QHBoxLayout' (90% confidence)
+app\ui\output_widget.py:1: unused import 'QPushButton' (90% confidence)
+app\ui\output_widget.py:5: unused import 'Qt' (90% confidence)
+app\ui\output_widget.py:5: unused import 'Signal' (90% confidence)
+app\ui\output_widget.py:6: unused import 'QFont' (90% confidence)
+app\ui\output_widget.py:114: unused variable 'index' (100% confidence)
+
+
+=== app\ui\plan_view_widget.py ===
+app\ui\plan_view_widget.py:8: unused import 'Optional' (90% confidence)
+app\ui\plan_view_widget.py:10: unused import 'QSizePolicy' (90% confidence)
+app\ui\plan_view_widget.py:10: unused import 'QSplitter' (90% confidence)
+app\ui\plan_view_widget.py:10: unused import 'QToolTip' (90% confidence)
+app\ui\plan_view_widget.py:15: unused import 'QSize' (90% confidence)
+app\ui\plan_view_widget.py:15: unused import 'Qt' (90% confidence)
+app\ui\plan_view_widget.py:15: unused import 'Slot' (90% confidence)
+app\ui\plan_view_widget.py:16: unused import 'QFont' (90% confidence)
+app\ui\plan_view_widget.py:16: unused import 'QIcon' (90% confidence)
+app\ui\plan_view_widget.py:16: unused import 'QTextCharFormat' (90% confidence)
+app\ui\plan_view_widget.py:16: unused import 'QTextCursor' (90% confidence)
+app\ui\plan_view_widget.py:20: unused import 'logger' (90% confidence)
+app\ui\plan_view_widget.py:47: unused variable 'event' (100% confidence)
+
+
+=== app\ui\preferences_dialog.py ===
+app\ui\preferences_dialog.py:8: unused import 'QCheckBox' (90% confidence)
+app\ui\preferences_dialog.py:8: unused import 'QSpinBox' (90% confidence)
+app\ui\preferences_dialog.py:13: unused import 'Qt' (90% confidence)
+
+
+=== app\ui\project_explorer.py ===
+app\ui\project_explorer.py:3: unused import 'QApplication' (90% confidence)
+app\ui\project_explorer.py:8: unused import 'QMimeData' (90% confidence)
+app\ui\project_explorer.py:8: unused import 'QModelIndex' (90% confidence)
+app\ui\project_explorer.py:8: unused import 'QUrl' (90% confidence)
+app\ui\project_explorer.py:11: unused import 'QAction' (90% confidence)
+app\ui\project_explorer.py:11: unused import 'QDrag' (90% confidence)
+app\ui\project_explorer.py:11: unused import 'QIcon' (90% confidence)
+app\ui\project_explorer.py:13: unused import 'IconManager' (90% confidence)
+
+
+=== app\ui\reasoning_agent_dialog.py ===
+app\ui\reasoning_agent_dialog.py:14: unused import 'time' (90% confidence)
+app\ui\reasoning_agent_dialog.py:15: unused import 'os' (90% confidence)
+app\ui\reasoning_agent_dialog.py:16: unused import 'uuid' (90% confidence)
+app\ui\reasoning_agent_dialog.py:17: unused import 'List' (90% confidence)
+app\ui\reasoning_agent_dialog.py:17: unused import 'Optional' (90% confidence)
+app\ui\reasoning_agent_dialog.py:17: unused import 'Tuple' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QCheckBox' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QFrame' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QProgressBar' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QScrollArea' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QSizePolicy' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QToolButton' (90% confidence)
+app\ui\reasoning_agent_dialog.py:19: unused import 'QToolTip' (90% confidence)
+app\ui\reasoning_agent_dialog.py:26: unused import 'QTimer' (90% confidence)
+app\ui\reasoning_agent_dialog.py:27: unused import 'QFont' (90% confidence)
+app\ui\reasoning_agent_dialog.py:27: unused import 'QIcon' (90% confidence)
+app\ui\reasoning_agent_dialog.py:30: unused import 'ThoughtTree' (90% confidence)
+app\ui\reasoning_agent_dialog.py:36: unused import 'SessionRecord' (90% confidence)
+app\ui\reasoning_agent_dialog.py:666: unused variable 'index' (100% confidence)
+
+
+=== app\ui\reasoning_settings_dialog.py ===
+app\ui\reasoning_settings_dialog.py:12: unused import 'Slot' (90% confidence)
+
+
+=== app\ui\session_history_manager.py ===
+app\ui\session_history_manager.py:14: unused import 'Tuple' (90% confidence)
+app\ui\session_history_manager.py:15: unused import 'Path' (90% confidence)
+
+
+=== app\ui\settings_widget.py ===
+app\ui\settings_widget.py:1: unused import 'QGroupBox' (90% confidence)
+app\ui\settings_widget.py:1: unused import 'QSizePolicy' (90% confidence)
+
+
+=== app\ui\styles.py ===
+app\ui\styles.py:6: unused import 'QApplication' (90% confidence)
+app\ui\styles.py:8: unused import 'QDir' (90% confidence)
+app\ui\styles.py:8: unused import 'QFile' (90% confidence)
+
+
+=== app\ui\terminal_widget.py ===
+app\ui\terminal_widget.py:5: unused import 'QLineEdit' (90% confidence)
+app\ui\terminal_widget.py:9: unused import 'QTimer' (90% confidence)
+
+
+=== app\ui\theme_settings_dialog.py ===
+app\ui\theme_settings_dialog.py:4: unused import 'QSettings' (90% confidence)
+app\ui\theme_settings_dialog.py:98: unused variable 'checked' (100% confidence)
+
+
+=== app\ui\thought_tree_widget.py ===
+app\ui\thought_tree_widget.py:8: unused import 'Any' (90% confidence)
+app\ui\thought_tree_widget.py:8: unused import 'Dict' (90% confidence)
+app\ui\thought_tree_widget.py:8: unused import 'List' (90% confidence)
+app\ui\thought_tree_widget.py:8: unused import 'Set' (90% confidence)
+app\ui\thought_tree_widget.py:8: unused import 'Tuple' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QInputDialog' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QMenu' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QPushButton' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QScrollArea' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QSizePolicy' (90% confidence)
+app\ui\thought_tree_widget.py:10: unused import 'QToolButton' (90% confidence)
+app\ui\thought_tree_widget.py:17: unused import 'Slot' (90% confidence)
+app\ui\thought_tree_widget.py:18: unused import 'QIcon' (90% confidence)
+app\ui\thought_tree_widget.py:23: unused import 'logger' (90% confidence)
+
+
+=== app\ui\tools_widget.py ===
+app\ui\tools_widget.py:1: unused import 'QTextEdit' (90% confidence)
+app\ui\tools_widget.py:1: unused import 'QToolButton' (90% confidence)
+app\ui\tools_widget.py:6: unused import 'QSize' (90% confidence)
+app\ui\tools_widget.py:6: unused import 'Signal' (90% confidence)
+app\ui\tools_widget.py:7: unused import 'QIcon' (90% confidence)
+
+
+=== app\utils\theme_manager.py ===
+app\utils\theme_manager.py:1: unused import 'QApplication' (90% confidence)
+app\utils\theme_manager.py:3: unused import 'QSettings' (90% confidence)
+
+
+=== app\ui\i18n\compile_translations.py ===
+app\ui\i18n\compile_translations.py:4: unused import 'Path' (90% confidence)
+
+
+=== app\ui\i18n\translator.py ===
+app\ui\i18n\translator.py:5: unused import 'QApplication' (90% confidence)
+
+
+=== app\ui\themes\color_system.py ===
+app\ui\themes\color_system.py:12: unused import 'Path' (90% confidence)
+
+
+=== app\ui\utils\simple_ui_auditor_final.py ===
+app\ui\utils\simple_ui_auditor_final.py:7: unused import 'Qt' (90% confidence)
+app\ui\utils\simple_ui_auditor_final.py:7: unused import 'QTimer' (90% confidence)
+
+
+=== app\ui\utils\theme_manager.py ===
+app\ui\utils\theme_manager.py:1: unused import 'QApplication' (90% confidence)
+
+
+=== app\ui\utils\css_tools\cleanup.py ===
+app\ui\utils\css_tools\cleanup.py:14: unused import 'Path' (90% confidence)
+app\ui\utils\css_tools\cleanup.py:15: unused import 're' (90% confidence)
+
+
+=== app\ui\utils\css_tools\theme_compiler.py ===
+app\ui\utils\css_tools\theme_compiler.py:13: unused import 'Path' (90% confidence)
+
+
+=== app\tool\search\baidu_search.py ===
+app\tool\search\baidu_search.py:7: unused variable 'args' (100% confidence)
+app\tool\search\baidu_search.py:7: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\search\base.py ===
+app\tool\search\base.py:3: unused variable 'args' (100% confidence)
+app\tool\search\base.py:3: unused variable 'kwargs' (100% confidence)
+app\tool\search\base.py:3: unused variable 'num_results' (100% confidence)
+app\tool\search\base.py:3: unused variable 'query' (100% confidence)
+
+
+=== app\tool\search\bing_search.py ===
+app\tool\search\bing_search.py:9: unused import 'WebSearchEngine' (90% confidence)
+app\tool\search\bing_search.py:177: unused variable 'args' (100% confidence)
+app\tool\search\bing_search.py:177: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\search\duckduckgo_search.py ===
+app\tool\search\duckduckgo_search.py:7: unused variable 'args' (100% confidence)
+app\tool\search\duckduckgo_search.py:7: unused variable 'kwargs' (100% confidence)
+
+
+=== app\tool\search\google_search.py ===
+app\tool\search\google_search.py:7: unused variable 'args' (100% confidence)
+app\tool\search\google_search.py:7: unused variable 'kwargs' (100% confidence)
+
+
+=== app\sandbox\core\manager.py ===
+app\sandbox\core\manager.py:296: unused variable 'exc_tb' (100% confidence)
+app\sandbox\core\manager.py:296: unused variable 'exc_type' (100% confidence)
+app\sandbox\core\manager.py:296: unused variable 'exc_val' (100% confidence)
+
+
+=== app\sandbox\core\sandbox.py ===
+app\sandbox\core\sandbox.py:460: unused variable 'exc_tb' (100% confidence)
+app\sandbox\core\sandbox.py:460: unused variable 'exc_type' (100% confidence)
+app\sandbox\core\sandbox.py:460: unused variable 'exc_val' (100% confidence)
+
+
+=== app\sandbox\core\terminal.py ===
+app\sandbox\core\terminal.py:344: unused variable 'exc_tb' (100% confidence)
+app\sandbox\core\terminal.py:344: unused variable 'exc_type' (100% confidence)
+app\sandbox\core\terminal.py:344: unused variable 'exc_val' (100% confidence)
+

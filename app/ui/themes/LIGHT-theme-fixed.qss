@@ -1,0 +1,206 @@
+/* Файл исправлен css_fixer.py - устранены дублирующиеся селекторы */
+
+/* Светлая тема для GopiAI */
+
+/* CSS-переменные для светлой темы */
+* {
+    --accent-color: var(--light-7);
+    --accent-color-pressed: var(--light-8);
+    --bg-primary: var(--light-1);
+    --bg-secondary: var(--light-2);
+    --bg-tertiary: var(--light-3);
+    --border-color: var(--light-6);
+    --fg-primary: var(--light-4);
+    --fg-secondary: var(--light-5);
+    --selection-bg: var(--light-10);
+    --terminal-bg: var(--light-9);
+}
+
+/* Основные стили */
+QWidget {
+    background-color: var(--bg-primary);
+    color: var(--fg-primary);
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--fg-primary);
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+QPushButton:pressed {
+    background-color: var(--accent-color-pressed);
+    color: var(--bg-secondary);
+}
+
+/* Поля ввода */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--fg-primary);
+    padding: 4px;
+}
+
+/* Вкладки */
+QTabWidget::pane {
+    border: 1px solid var(--border-color);
+}
+
+QTabBar::tab {
+    background-color: var(--bg-tertiary);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: var(--fg-primary);
+    margin-right: 2px;
+    padding: 6px 12px;
+}
+
+QTabBar::tab:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+/* Полосы прокрутки */
+QScrollBar:vertical {
+    background-color: var(--bg-primary);
+    margin: 0px;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: var(--accent-color);
+}
+
+QScrollBar:horizontal {
+    background-color: var(--bg-primary);
+    height: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: var(--accent-color);
+}
+
+/* Списки и таблицы */
+QListView, QTreeView, QTableView {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+    selection-background-color: var(--accent-color);
+    selection-color: var(--bg-secondary);
+}
+
+QHeaderView::section {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+    padding: 4px;
+}
+
+/* Меню */
+QMenuBar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--fg-primary);
+}
+
+QMenuBar::item:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+QMenu {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+}
+
+QMenu::item:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+/* Док-виджеты */
+QDockWidget {
+    titlebar-close-icon: url(:/icons/close_light.png);
+    titlebar-normal-icon: url(:/icons/undock_light.png);
+}
+
+QDockWidget::title {
+    background-color: var(--bg-tertiary);
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+/* Терминал */
+QPlainTextEdit#terminal {
+    background-color: var(--terminal-bg);
+    color: var(--fg-secondary);
+    font-family: "Consolas", "Courier New", monospace;
+}
+
+/* Редактор кода */
+QPlainTextEdit#codeEditor {
+    background-color: var(--bg-secondary);
+    color: var(--fg-primary);
+    font-family: "Consolas", "Courier New", monospace;
+    selection-background-color: var(--selection-bg);
+    selection-color: var(--fg-secondary);
+}
+
+/* Строка состояния */
+QStatusBar {
+    background-color: var(--bg-tertiary);
+    color: var(--fg-primary);
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+/* Панель инструментов */
+QToolBar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    spacing: 3px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QToolButton:hover {
+    background-color: var(--accent-color);
+    border: 1px solid var(--border-color);
+    color: var(--bg-secondary);
+}
+
+QToolButton:pressed {
+    background-color: var(--accent-color-pressed);
+    color: var(--bg-secondary);
+}
+

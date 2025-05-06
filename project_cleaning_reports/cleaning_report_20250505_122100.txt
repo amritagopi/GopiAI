@@ -1,0 +1,91 @@
+ОТЧЕТ О СКАНИРОВАНИИ ПРОЕКТА GOPIAI НА НАЛИЧИЕ НЕНУЖНЫХ ФАЙЛОВ
+Дата: 2025-05-05 12:21:02
+Корневая директория проекта: C:\Users\amritagopi\GopiAI
+
+СВОДКА:
+- Временных файлов: 495
+- Автогенерированных файлов: 1
+- Больших файлов: 0
+- Пустых директорий: 5
+- Подозрительных директорий: 4
+
+ДЕТАЛИ:
+
+ВРЕМЕННЫЕ ФАЙЛЫ:
+1. venv\Lib\site-packages\3c22db458360489351e4__mypyc.cp312-win_amd64.pyd
+2. venv\Lib\site-packages\aiohttp\_http_parser.cp312-win_amd64.pyd
+3. venv\Lib\site-packages\aiohttp\_http_writer.cp312-win_amd64.pyd
+4. venv\Lib\site-packages\aiohttp\_websocket\mask.cp312-win_amd64.pyd
+5. venv\Lib\site-packages\aiohttp\_websocket\reader_c.cp312-win_amd64.pyd
+6. venv\Lib\site-packages\charset_normalizer\md.cp312-win_amd64.pyd
+7. venv\Lib\site-packages\charset_normalizer\md__mypyc.cp312-win_amd64.pyd
+8. venv\Lib\site-packages\faiss\_swigfaiss.cp312-win_amd64.pyd
+9. venv\Lib\site-packages\faiss\_swigfaiss_avx2.cp312-win_amd64.pyd
+10. venv\Lib\site-packages\frozenlist\_frozenlist.cp312-win_amd64.pyd
+11. venv\Lib\site-packages\functorch\_C.cp312-win_amd64.pyd
+12. venv\Lib\site-packages\google\_upb\_message.pyd
+13. venv\Lib\site-packages\greenlet\_greenlet.cp312-win_amd64.pyd
+14. venv\Lib\site-packages\greenlet\platform\switch_arm64_masm.obj
+15. venv\Lib\site-packages\greenlet\platform\switch_x64_masm.obj
+16. venv\Lib\site-packages\greenlet\tests\_test_extension.cp312-win_amd64.pyd
+17. venv\Lib\site-packages\greenlet\tests\_test_extension_cpp.cp312-win_amd64.pyd
+18. venv\Lib\site-packages\grpc\_cython\cygrpc.cp312-win_amd64.pyd
+19. venv\Lib\site-packages\jiter\jiter.cp312-win_amd64.pyd
+20. venv\Lib\site-packages\lxml\builder.cp312-win_amd64.pyd
+... и еще 475 файлов
+
+АВТОГЕНЕРИРОВАННЫЕ ФАЙЛЫ:
+1. icons.qrc
+
+ПУСТЫЕ ДИРЕКТОРИИ:
+1. data\personalization
+2. picked_icons\file_types
+3. project_cleaning_reports
+4. temp
+5. venv\Lib\site-packages\PySide6\resources\locales
+
+ПОДОЗРИТЕЛЬНЫЕ ДИРЕКТОРИИ:
+
+logs (7 файлов):
+  1. logs\20250505052546.log
+  2. logs\20250505052547.log
+  3. logs\20250505054256.log
+  4. logs\20250505054957.log
+  5. logs\20250505055424.log
+  6. logs\20250505055835.log
+  7. logs\20250505060401.log
+
+workspace (2 файлов):
+  1. workspace\example.txt
+  2. workspace\vegetarianism_post.txt
+
+venv (40308 файлов):
+  1. venv\pyvenv.cfg
+  2. venv\Scripts\activate
+  3. venv\Scripts\activate.bat
+  4. venv\Scripts\Activate.ps1
+  5. venv\Scripts\baidusearch.exe
+  6. venv\Scripts\datasets-cli.exe
+  7. venv\Scripts\ddgs.exe
+  8. venv\Scripts\deactivate.bat
+  9. venv\Scripts\distro.exe
+  10. venv\Scripts\dotenv.exe
+  ... и еще 40298 файлов
+
+__pycache__ (4 файлов):
+  1. __pycache__\duplicate_code_classes.cpython-313.pyc
+  2. __pycache__\duplicate_code_fragments.cpython-313.pyc
+  3. __pycache__\duplicate_code_functions.cpython-313.pyc
+  4. __pycache__\duplicate_code_report.cpython-313.pyc
+
+РЕКОМЕНДАЦИИ:
+1. Временные файлы можно безопасно удалить
+2. Автогенерированные файлы можно удалить, если они не используются напрямую
+3. Пустые директории можно удалить, если они не нужны для организации проекта
+4. Большие файлы следует проверить на необходимость и потенциально переместить в отдельное хранилище
+5. Подозрительные директории требуют ручного анализа перед удалением
+
+СЛЕДУЮЩИЕ ШАГИ:
+1. Просмотрите файл project_safelist.txt и добавьте в него любые файлы или директории, которые не должны быть удалены
+2. Запустите скрипт с параметром --clean для очистки проекта (будет запрошено подтверждение)
+3. Или запустите с параметром --archive для перемещения файлов в архивную директорию вместо удаления

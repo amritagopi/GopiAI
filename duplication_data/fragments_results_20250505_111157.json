@@ -1,0 +1,6405 @@
+[
+  {
+    "hash": "777ca38691bb89f0a860d39e1ba24e30",
+    "content": "\n        self._setup_ui()\n\n    def _setup_ui(self):",
+    "locations": [
+      [
+        "app\\ui\\flow_visualizer.py",
+        44,
+        48
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        84,
+        88
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        228,
+        232
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        303,
+        307
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        129,
+        133
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "be952682e15a7dbd9d8a3ebd01c7a5ed",
+    "content": "\n    def __init__(self, parent=None):\n        super().__init__(parent)\n        self.nodes = []",
+    "locations": [
+      [
+        "app\\ui\\flow_visualizer.py",
+        73,
+        77
+      ],
+      [
+        "app\\ui\\flow_visualizer.py",
+        143,
+        147
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "52e0b0c82a01719cd787c543d5fac1c5",
+    "content": "                project_root = os.path.abspath(os.path.join(current_dir, \"../..\"))\n                file_path = os.path.join(project_root, \"assets\", \"icons\", icon_file)\n\n                if os.path.exists(file_path):",
+    "locations": [
+      [
+        "app\\ui\\icon_manager.py",
+        66,
+        70
+      ],
+      [
+        "app\\ui\\icon_manager.py",
+        182,
+        186
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9365f233f3cc7cec376fc53d93b599e0",
+    "content": "        Args:\n            icon_name (str): \u0418\u043c\u044f \u0438\u043a\u043e\u043d\u043a\u0438 \u0438\u0437 \u043c\u0430\u043d\u0438\u0444\u0435\u0441\u0442\u0430\n\n        Returns:",
+    "locations": [
+      [
+        "app\\ui\\icon_manager.py",
+        84,
+        88
+      ],
+      [
+        "app\\ui\\icon_manager.py",
+        161,
+        165
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5fd8adc4bed4acd3fe360b6cbab6dec3",
+    "content": "\n                        /* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u044b\u0445 \u0432\u043a\u043b\u0430\u0434\u043e\u043a - \u0431\u0430\u0437\u043e\u0432\u044b\u0439 */\n                        QTabWidget::tab-bar {\n                            alignment: left;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        551,
+        555
+      ],
+      [
+        "app\\ui\\main_window.py",
+        672,
+        676
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1ce5523b8b9fa49b7e8cf371c931707b",
+    "content": "                        /* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u044b\u0445 \u0432\u043a\u043b\u0430\u0434\u043e\u043a - \u0431\u0430\u0437\u043e\u0432\u044b\u0439 */\n                        QTabWidget::tab-bar {\n                            alignment: left;\n                        }",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        552,
+        556
+      ],
+      [
+        "app\\ui\\main_window.py",
+        673,
+        677
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2c3db53df1913efa5829ca02449f649a",
+    "content": "                            alignment: left;\n                        }\n\n                        QTabBar::tab {",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        554,
+        558
+      ],
+      [
+        "app\\ui\\main_window.py",
+        675,
+        679
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "73cc3345043fac9ea96ee458243c90e4",
+    "content": "                            border-bottom-color: transparent;\n                            border-top-left-radius: 4px;\n                            border-top-right-radius: 4px;\n                            min-width: 8ex;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        560,
+        564
+      ],
+      [
+        "app\\ui\\main_window.py",
+        681,
+        685
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "84a084d7406657e2856d9abd6fa30033",
+    "content": "                            border-top-left-radius: 4px;\n                            border-top-right-radius: 4px;\n                            min-width: 8ex;\n                            padding: 6px 10px;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        561,
+        565
+      ],
+      [
+        "app\\ui\\main_window.py",
+        682,
+        686
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "25d9a836be75944c5bf7d2f971042d78",
+    "content": "                            border-top-right-radius: 4px;\n                            min-width: 8ex;\n                            padding: 6px 10px;\n                            margin-right: 2px;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        562,
+        566
+      ],
+      [
+        "app\\ui\\main_window.py",
+        683,
+        687
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "15c51f917809fbb218f2c967db4d7666",
+    "content": "                        }\n\n                        /* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0445 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 QDockWidget */\n                        QDockWidget {",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        612,
+        616
+      ],
+      [
+        "app\\ui\\main_window.py",
+        733,
+        737
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4be7481193e928ebd94c73c294b05df0",
+    "content": "\n                        /* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0445 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 QDockWidget */\n                        QDockWidget {\n                            titlebar-close-icon: url(close.png);",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        613,
+        617
+      ],
+      [
+        "app\\ui\\main_window.py",
+        734,
+        738
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1530c767600159cfa01f50c3a8b38079",
+    "content": "                        /* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u043a\u0430\u0441\u0442\u043e\u043c\u043d\u044b\u0445 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 QDockWidget */\n                        QDockWidget {\n                            titlebar-close-icon: url(close.png);\n                            titlebar-normal-icon: url(undock.png);",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        614,
+        618
+      ],
+      [
+        "app\\ui\\main_window.py",
+        735,
+        739
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d7412e6a33668c7acb908f4d549a1806",
+    "content": "                        QDockWidget {\n                            titlebar-close-icon: url(close.png);\n                            titlebar-normal-icon: url(undock.png);\n                        }",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        615,
+        619
+      ],
+      [
+        "app\\ui\\main_window.py",
+        736,
+        740
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "17b76a4327b60eeb3f12bbc5a5495481",
+    "content": "                            titlebar-normal-icon: url(undock.png);\n                        }\n\n                        QDockWidget::title {",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        617,
+        621
+      ],
+      [
+        "app\\ui\\main_window.py",
+        738,
+        742
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c6a53d363d73486b81f5121b95c4d8ad",
+    "content": "                        }\n\n                        QDockWidget::title {\n                            text-align: left;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        618,
+        622
+      ],
+      [
+        "app\\ui\\main_window.py",
+        739,
+        743
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2a8b2c35e06bf79634942ae68dc39bfb",
+    "content": "                        }\n\n                        QDockWidget::close-button, QDockWidget::float-button {\n                            border: none;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        626,
+        630
+      ],
+      [
+        "app\\ui\\main_window.py",
+        746,
+        750
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "364250ca0b1341cdce972256d38879d1",
+    "content": "\n                        QDockWidget::close-button, QDockWidget::float-button {\n                            border: none;\n                            border-radius: 2px;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        627,
+        631
+      ],
+      [
+        "app\\ui\\main_window.py",
+        747,
+        751
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e2c4822e2177d4411d2828babc888407",
+    "content": "                        QDockWidget::close-button, QDockWidget::float-button {\n                            border: none;\n                            border-radius: 2px;\n                            background: transparent;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        628,
+        632
+      ],
+      [
+        "app\\ui\\main_window.py",
+        748,
+        752
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9689c9321387391636975be6bd5aec3e",
+    "content": "                            border: none;\n                            border-radius: 2px;\n                            background: transparent;\n                        }",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        629,
+        633
+      ],
+      [
+        "app\\ui\\main_window.py",
+        749,
+        753
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7e781e7320ecec5f2053708ab3652080",
+    "content": "                            background: transparent;\n                        }\n\n                        QDockWidget::close-button:hover, QDockWidget::float-button:hover {",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        631,
+        635
+      ],
+      [
+        "app\\ui\\main_window.py",
+        751,
+        755
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0a9223ea5c09ad78b6bea9d5e172ea22",
+    "content": "                        }\n\n                        /* \u0421\u0442\u0438\u043b\u0438 \u0434\u043b\u044f \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 \u0434\u043e\u043a\u043e\u0432 */\n                        DockTitleBar {",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        640,
+        644
+      ],
+      [
+        "app\\ui\\main_window.py",
+        760,
+        764
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "941ac04c5ff62da9c9da45cb75a472d8",
+    "content": "                        }\n\n                        DockTitleBar QLabel {\n                            font-weight: bold;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        646,
+        650
+      ],
+      [
+        "app\\ui\\main_window.py",
+        766,
+        770
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "db37d26cf2ada16e1639884840dd617a",
+    "content": "                        }\n\n                        DockTitleBar QPushButton {\n                            background-color: transparent;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        651,
+        655
+      ],
+      [
+        "app\\ui\\main_window.py",
+        771,
+        775
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d2c75287f8212462c627cfe72df039a8",
+    "content": "\n                        DockTitleBar QPushButton {\n                            background-color: transparent;\n                            border: none;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        652,
+        656
+      ],
+      [
+        "app\\ui\\main_window.py",
+        772,
+        776
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "70b12f1304512a3b990087050b8e755b",
+    "content": "                        DockTitleBar QPushButton {\n                            background-color: transparent;\n                            border: none;\n                            border-radius: 2px;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        653,
+        657
+      ],
+      [
+        "app\\ui\\main_window.py",
+        773,
+        777
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e240273c8d13f345252035c9c2c549de",
+    "content": "                            background-color: transparent;\n                            border: none;\n                            border-radius: 2px;\n                            font-size: 10px;",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        654,
+        658
+      ],
+      [
+        "app\\ui\\main_window.py",
+        774,
+        778
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4b687276028c9e730cd4c136a565ace2",
+    "content": "\n        # --- Edit Menu Actions ---\n        # \u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c\n        self.cut_action = QAction(",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        841,
+        845
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        94,
+        98
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a8d40b52963c6f664c414db5acd39bce",
+    "content": "\n        # --- View Menu Actions ---\n        # \u0422\u0435\u0440\u043c\u0438\u043d\u0430\u043b\n        self.toggle_terminal_action = QAction(",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        890,
+        894
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        137,
+        141
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e8cac6317da247696203341c4969140f",
+    "content": "\n        # --- Help Menu Actions ---\n        # \u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435\n        self.about_action = QAction(",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        956,
+        960
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        209,
+        213
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e2db50a9cc28b283185a571a2027c519",
+    "content": "            # \u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0435\u043c \u0435\u0433\u043e \u043a\u0430\u043a \u043d\u0435\u043c\u043e\u0434\u0430\u043b\u044c\u043d\u044b\u0439 \u0434\u0438\u0430\u043b\u043e\u0433\n            dialog.show()\n\n            # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u0432 \u0441\u0442\u0430\u0442\u0443\u0441\u043d\u0443\u044e \u0441\u0442\u0440\u043e\u043a\u0443",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        996,
+        1000
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1015,
+        1019
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7c2be566f4f23e71e10b73c3428cc8d0",
+    "content": "        # \u0417\u0430\u043f\u043e\u043c\u0438\u043d\u0430\u0435\u043c \u0442\u0435\u043a\u0443\u0449\u0438\u0439 \u0438\u043d\u0434\u0435\u043a\u0441\n        current_index = self.central_tabs.currentIndex()\n\n        # \u0410\u043a\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043c \u0432\u043a\u043b\u0430\u0434\u043a\u0443 \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1682,
+        1686
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1696,
+        1700
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2f9fbf42c089bac4c983a2ab576cbbad",
+    "content": "        current_index = self.central_tabs.currentIndex()\n\n        # \u0410\u043a\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043c \u0432\u043a\u043b\u0430\u0434\u043a\u0443 \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f\n        self.central_tabs.setCurrentIndex(index)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1683,
+        1687
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1697,
+        1701
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d64c9ae81cdded07b61fe68f0ac2cbd3",
+    "content": "\n            # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u044f\u0437\u044b\u043a\u0438\n            language_options = [\n                {\"code\": \"en_US\", \"name\": tr(\"language.english\", \"English\")},",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1755,
+        1759
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        334,
+        338
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3c04eb9981ad603f24eb9d1b7da4c676",
+    "content": "            # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0435 \u044f\u0437\u044b\u043a\u0438\n            language_options = [\n                {\"code\": \"en_US\", \"name\": tr(\"language.english\", \"English\")},\n                {\"code\": \"ru_RU\", \"name\": tr(\"language.russian\", \"\u0420\u0443\u0441\u0441\u043a\u0438\u0439\")}",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1756,
+        1760
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        335,
+        339
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7f2e2e8fe50709fbbb9d544d7a67f34e",
+    "content": "            language_options = [\n                {\"code\": \"en_US\", \"name\": tr(\"language.english\", \"English\")},\n                {\"code\": \"ru_RU\", \"name\": tr(\"language.russian\", \"\u0420\u0443\u0441\u0441\u043a\u0438\u0439\")}\n            ]",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1757,
+        1761
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        336,
+        340
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6455e34949ab1886180b2d23d60d6f15",
+    "content": "                {\"code\": \"ru_RU\", \"name\": tr(\"language.russian\", \"\u0420\u0443\u0441\u0441\u043a\u0438\u0439\")}\n            ]\n\n            for lang in language_options:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1759,
+        1763
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        338,
+        342
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f7d5b498f0a0f4e88792fa6cfd6c94bf",
+    "content": "\n    def _on_language_changed_event(self, language_code):\n        \"\"\"\u041e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u044f\u0437\u044b\u043a\u0430 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430.\"\"\"\n        try:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1846,
+        1850
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2836,
+        2840
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6d12c5318bf340c31d6d99e3ad01dd89",
+    "content": "    def _on_language_changed_event(self, language_code):\n        \"\"\"\u041e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u044f\u0437\u044b\u043a\u0430 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430.\"\"\"\n        try:\n            import logging",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1847,
+        1851
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2837,
+        2841
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "37396df3916ebbf8d86cff12012190d1",
+    "content": "        \"\"\"\u041e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u044f\u0437\u044b\u043a\u0430 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430.\"\"\"\n        try:\n            import logging\n            logger = logging.getLogger(__name__)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1848,
+        1852
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2838,
+        2842
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6a70ba5a014a0ad689a8abc606f51790",
+    "content": "        try:\n            import logging\n            logger = logging.getLogger(__name__)\n            logger.info(f\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043e\u0431\u044b\u0442\u0438\u0435 \u0441\u043c\u0435\u043d\u044b \u044f\u0437\u044b\u043a\u0430 \u043d\u0430: {language_code}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1849,
+        1853
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2839,
+        2843
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3af30347730cb4891b546da965a2be40",
+    "content": "            logger = logging.getLogger(__name__)\n            logger.info(f\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043e\u0431\u044b\u0442\u0438\u0435 \u0441\u043c\u0435\u043d\u044b \u044f\u0437\u044b\u043a\u0430 \u043d\u0430: {language_code}\")\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u043e\u043a\u043d\u0430",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1851,
+        1855
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2841,
+        2845
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "323ceb441b232044f24ade4479528d36",
+    "content": "            logger.info(f\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043e\u0431\u044b\u0442\u0438\u0435 \u0441\u043c\u0435\u043d\u044b \u044f\u0437\u044b\u043a\u0430 \u043d\u0430: {language_code}\")\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u043e\u043a\u043d\u0430\n            from app.ui.i18n.translator import tr",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1852,
+        1856
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2842,
+        2846
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f5ec08e91ddb55522c8b6d2ce4377f66",
+    "content": "\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u043e\u043a\u043d\u0430\n            from app.ui.i18n.translator import tr\n            self.setWindowTitle(tr(\"app.title\", \"GopiAI\"))",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1853,
+        1857
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2843,
+        2847
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "91a6c54f7ba80e182c864b6acfbd3a1a",
+    "content": "            from app.ui.i18n.translator import tr\n            self.setWindowTitle(tr(\"app.title\", \"GopiAI\"))\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043c\u0435\u043d\u044e",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1855,
+        1859
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2845,
+        2849
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ef1aaa74bb48b41eb9d8ddd65913f3b7",
+    "content": "            self.setWindowTitle(tr(\"app.title\", \"GopiAI\"))\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043c\u0435\u043d\u044e\n            if hasattr(self, \"menu_manager\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1856,
+        1860
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2846,
+        2850
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c65f3a1309708f0327d2ccbc36e5b598",
+    "content": "\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043c\u0435\u043d\u044e\n            if hasattr(self, \"menu_manager\"):\n                logger.info(\"\u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u044b \u043c\u0435\u043d\u044e\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1857,
+        1861
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2847,
+        2851
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e9718a86b05de2983689f22e5e7b6d94",
+    "content": "            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043c\u0435\u043d\u044e\n            if hasattr(self, \"menu_manager\"):\n                logger.info(\"\u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u044b \u043c\u0435\u043d\u044e\")\n                if hasattr(self.menu_manager, \"update_translations\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1858,
+        1862
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2848,
+        2852
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c096176d8cda69e8146eae59fe1c8cdc",
+    "content": "            if hasattr(self, \"menu_manager\"):\n                logger.info(\"\u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u044b \u043c\u0435\u043d\u044e\")\n                if hasattr(self.menu_manager, \"update_translations\"):\n                    self.menu_manager.update_translations()",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1859,
+        1863
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2849,
+        2853
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f8f671b48fbfca967337aaf8e79438f8",
+    "content": "                logger.info(\"\u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0435\u0440\u0435\u0432\u043e\u0434\u044b \u043c\u0435\u043d\u044e\")\n                if hasattr(self.menu_manager, \"update_translations\"):\n                    self.menu_manager.update_translations()\n                else:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1860,
+        1864
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2850,
+        2854
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "95008fbe57cbd05b170614d748e3398a",
+    "content": "                if hasattr(self.menu_manager, \"update_translations\"):\n                    self.menu_manager.update_translations()\n                else:\n                    logger.warning(\"\u041c\u0435\u0442\u043e\u0434 update_translations \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0432 menu_manager\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1861,
+        1865
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2851,
+        2855
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fe0396cb185721b04ff04cc530dbff03",
+    "content": "                else:\n                    logger.warning(\"\u041c\u0435\u0442\u043e\u0434 update_translations \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0432 menu_manager\")\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0432\u043a\u043b\u0430\u0434\u043e\u043a",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1863,
+        1867
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2853,
+        2857
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c002dacaf533f010c69902f099fd53e2",
+    "content": "                    logger.warning(\"\u041c\u0435\u0442\u043e\u0434 update_translations \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0432 menu_manager\")\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0432\u043a\u043b\u0430\u0434\u043e\u043a\n            self._update_tab_titles()",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1864,
+        1868
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2854,
+        2858
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6a66109a8480f6828aab63e29a7ceb5c",
+    "content": "            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0432\u043a\u043b\u0430\u0434\u043e\u043a\n            self._update_tab_titles()\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043f\u0430\u043d\u0435\u043b\u0438 \u0438 \u0434\u043e\u043a\u0438",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1866,
+        1870
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2856,
+        2860
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fc194a0f8db604a72631678cd458d943",
+    "content": "            self._update_tab_titles()\n\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043f\u0430\u043d\u0435\u043b\u0438 \u0438 \u0434\u043e\u043a\u0438\n            for child in self.findChildren(QWidget):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1867,
+        1871
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2857,
+        2861
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e0a987e897ce8b2fd8eb523066d4aa4e",
+    "content": "\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043f\u0430\u043d\u0435\u043b\u0438 \u0438 \u0434\u043e\u043a\u0438\n            for child in self.findChildren(QWidget):\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1868,
+        1872
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2858,
+        2862
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "59b5a728bb3bb2dc78c699fc39365da3",
+    "content": "            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0432\u0441\u0435 \u043f\u0430\u043d\u0435\u043b\u0438 \u0438 \u0434\u043e\u043a\u0438\n            for child in self.findChildren(QWidget):\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438\n                if hasattr(child, \"windowTitle\") and hasattr(child, \"objectName\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1869,
+        1873
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2859,
+        2863
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "771f6f298b0ca6101ac327855b8daad5",
+    "content": "            for child in self.findChildren(QWidget):\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438\n                if hasattr(child, \"windowTitle\") and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1870,
+        1874
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2860,
+        2864
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "95c0f1743e5841108c23e1723596948f",
+    "content": "                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438\n                if hasattr(child, \"windowTitle\") and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1871,
+        1875
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2861,
+        2865
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c9268baa752608a42cf30eb63e18060c",
+    "content": "                if hasattr(child, \"windowTitle\") and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        title_key = f\"dock.{obj_name}\"",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1872,
+        1876
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2862,
+        2866
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2f6822821302574497f6b29061cfb4c2",
+    "content": "                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        title_key = f\"dock.{obj_name}\"\n                        translated_title = tr(title_key, child.windowTitle())",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1873,
+        1877
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2863,
+        2867
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "cff46d883aaf74e2096c7612f1d17f77",
+    "content": "                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        title_key = f\"dock.{obj_name}\"\n                        translated_title = tr(title_key, child.windowTitle())\n                        if translated_title != child.windowTitle():",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1874,
+        1878
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2864,
+        2868
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fa313f672b41e7cd22246f4a4cfe9de1",
+    "content": "                        title_key = f\"dock.{obj_name}\"\n                        translated_title = tr(title_key, child.windowTitle())\n                        if translated_title != child.windowTitle():\n                            child.setWindowTitle(translated_title)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1875,
+        1879
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2865,
+        2869
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "23b8b4d183d1a803372fc80530e21d61",
+    "content": "                        translated_title = tr(title_key, child.windowTitle())\n                        if translated_title != child.windowTitle():\n                            child.setWindowTitle(translated_title)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a {obj_name}: {translated_title}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1876,
+        1880
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2866,
+        2870
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3638e78fb1a1e0a7beb288e211429920",
+    "content": "                            child.setWindowTitle(translated_title)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a {obj_name}: {translated_title}\")\n\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043a\u043d\u043e\u043f\u043e\u043a",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1878,
+        1882
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2868,
+        2872
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4130b37e5373b8f66056ad963337e3be",
+    "content": "                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a {obj_name}: {translated_title}\")\n\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043a\u043d\u043e\u043f\u043e\u043a\n                if isinstance(child, QPushButton) and hasattr(child, \"objectName\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1879,
+        1883
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2869,
+        2873
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "407b13c0136b2b2f37593fd372d3bd2b",
+    "content": "\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043a\u043d\u043e\u043f\u043e\u043a\n                if isinstance(child, QPushButton) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1880,
+        1884
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2870,
+        2874
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "70a4e9365d106cd238de2b5f0c8b9369",
+    "content": "                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043a\u043d\u043e\u043f\u043e\u043a\n                if isinstance(child, QPushButton) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1881,
+        1885
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2871,
+        2875
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1899f66cb5c593dba4b599aac4531b5d",
+    "content": "                if isinstance(child, QPushButton) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        button_key = f\"button.{obj_name}\"",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1882,
+        1886
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2872,
+        2876
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fd80774e72c35eba779317b5476888c2",
+    "content": "                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        button_key = f\"button.{obj_name}\"\n                        translated_text = tr(button_key, child.text())",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1883,
+        1887
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2873,
+        2877
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9a55cf7097fe4d817abc652f5258ec10",
+    "content": "                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        button_key = f\"button.{obj_name}\"\n                        translated_text = tr(button_key, child.text())\n                        if translated_text != child.text():",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1884,
+        1888
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2874,
+        2878
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "305543b4a4f528432ac7eb0fccbf926f",
+    "content": "                        button_key = f\"button.{obj_name}\"\n                        translated_text = tr(button_key, child.text())\n                        if translated_text != child.text():\n                            child.setText(translated_text)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1885,
+        1889
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2875,
+        2879
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c0fe47ee05eac319b696f7cecaf1ecf7",
+    "content": "                        translated_text = tr(button_key, child.text())\n                        if translated_text != child.text():\n                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043a\u043d\u043e\u043f\u043a\u0438 {obj_name}: {translated_text}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1886,
+        1890
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2876,
+        2880
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "424d572d2113a0e09c5c09bcbc3b1e07",
+    "content": "                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043a\u043d\u043e\u043f\u043a\u0438 {obj_name}: {translated_text}\")\n\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043c\u0435\u0442\u043e\u043a",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1888,
+        1892
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2878,
+        2882
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e3dde8f5abdf5190a8e5c2761c288eee",
+    "content": "                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043a\u043d\u043e\u043f\u043a\u0438 {obj_name}: {translated_text}\")\n\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043c\u0435\u0442\u043e\u043a\n                if isinstance(child, QLabel) and hasattr(child, \"objectName\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1889,
+        1893
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2879,
+        2883
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "35948bab26ece3f082dee629e70afe96",
+    "content": "\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043c\u0435\u0442\u043e\u043a\n                if isinstance(child, QLabel) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1890,
+        1894
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2880,
+        2884
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1ad1ecf80980f0b1fb9982956acd0eec",
+    "content": "                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0442\u0435\u043a\u0441\u0442\u044b \u043c\u0435\u0442\u043e\u043a\n                if isinstance(child, QLabel) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1891,
+        1895
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2881,
+        2885
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "58dd2850ee21fb64cc987532a6fb9001",
+    "content": "                if isinstance(child, QLabel) and hasattr(child, \"objectName\"):\n                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        label_key = f\"label.{obj_name}\"",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1892,
+        1896
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2882,
+        2886
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b68fe88c04f4157cd5f9d7563ca8966e",
+    "content": "                    obj_name = child.objectName()\n                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        label_key = f\"label.{obj_name}\"\n                        translated_text = tr(label_key, child.text())",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1893,
+        1897
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2883,
+        2887
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "aca2dbd180d051f9a57f68843f5ae188",
+    "content": "                    if obj_name and not obj_name.startswith(\"qt_\"):\n                        label_key = f\"label.{obj_name}\"\n                        translated_text = tr(label_key, child.text())\n                        if translated_text != child.text():",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1894,
+        1898
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2884,
+        2888
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4181bb95ef68eac963f32d3b42bd83b4",
+    "content": "                        label_key = f\"label.{obj_name}\"\n                        translated_text = tr(label_key, child.text())\n                        if translated_text != child.text():\n                            child.setText(translated_text)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1895,
+        1899
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2885,
+        2889
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "45ea2a4d8ce7d667e25fd5799d475da0",
+    "content": "                        translated_text = tr(label_key, child.text())\n                        if translated_text != child.text():\n                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043c\u0435\u0442\u043a\u0438 {obj_name}: {translated_text}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1896,
+        1900
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2886,
+        2890
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8fa918b71544543f717501c67d9dd1ae",
+    "content": "                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043c\u0435\u0442\u043a\u0438 {obj_name}: {translated_text}\")\n\n            logger.info(f\"\u042f\u0437\u044b\u043a \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d \u043d\u0430 {language_code}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1898,
+        1902
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2888,
+        2892
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b87e36ac057daad5c2eddba50e41b94d",
+    "content": "                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043c\u0435\u0442\u043a\u0438 {obj_name}: {translated_text}\")\n\n            logger.info(f\"\u042f\u0437\u044b\u043a \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d \u043d\u0430 {language_code}\")\n        except Exception as e:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1899,
+        1903
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2889,
+        2893
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "997136c05d0ea35e0ca9d70b4e8c5f77",
+    "content": "\n            logger.info(f\"\u042f\u0437\u044b\u043a \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d \u043d\u0430 {language_code}\")\n        except Exception as e:\n            import traceback",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1900,
+        1904
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2890,
+        2894
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "552e1c5322d2ef4cbd9828181eedba06",
+    "content": "            logger.info(f\"\u042f\u0437\u044b\u043a \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d \u043d\u0430 {language_code}\")\n        except Exception as e:\n            import traceback\n            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0438 \u044f\u0437\u044b\u043a\u0430 UI: {str(e)}\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1901,
+        1905
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2891,
+        2895
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4e572b4b87da6f91e543eb7b902cd78b",
+    "content": "        except Exception as e:\n            import traceback\n            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0438 \u044f\u0437\u044b\u043a\u0430 UI: {str(e)}\")\n            logger.error(traceback.format_exc())",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1902,
+        1906
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2892,
+        2896
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "95cdc1006fe8ab0f0e0d95448f884ee9",
+    "content": "\n            return True\n\n        except Exception as e:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2332,
+        2336
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2381,
+        2385
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "07908674af490e6941da89147ef9e12c",
+    "content": "        try:\n            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0438\u043d\u0434\u0435\u043a\u0441 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n            current_index = self.central_tabs.currentIndex()\n            if current_index == -1:",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2346,
+        2350
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2395,
+        2399
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6fd2b3ba57b0192280d817f12e75bf69",
+    "content": "            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0438\u043d\u0434\u0435\u043a\u0441 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n            current_index = self.central_tabs.currentIndex()\n            if current_index == -1:\n                return False  # \u041d\u0435\u0442 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2347,
+        2351
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2396,
+        2400
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ef2e4f278c20192b3887c5ccf6d8cdc8",
+    "content": "            if current_index == -1:\n                return False  # \u041d\u0435\u0442 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n\n            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0432\u0438\u0434\u0436\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2349,
+        2353
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2398,
+        2402
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "21cfff526a28b21cdff910ae4df52a6d",
+    "content": "                return False  # \u041d\u0435\u0442 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n\n            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0432\u0438\u0434\u0436\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n            editor = self.central_tabs.widget(current_index)",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2350,
+        2354
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2399,
+        2403
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ffb78d847098f08f2dd461e2599b4b16",
+    "content": "\n            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0432\u0438\u0434\u0436\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n            editor = self.central_tabs.widget(current_index)\n            if not hasattr(editor, 'file_path'):",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2351,
+        2355
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2400,
+        2404
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9c01eecafe215f5f71bfbbb6b484c99c",
+    "content": "            # \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0432\u0438\u0434\u0436\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n            editor = self.central_tabs.widget(current_index)\n            if not hasattr(editor, 'file_path'):\n                return False  # \u041d\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440 \u043a\u043e\u0434\u0430",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2352,
+        2356
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2401,
+        2405
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "61f34fb109848cf5e16c1059f8c37d49",
+    "content": "\n        except Exception as e:\n            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438 \u0444\u0430\u0439\u043b\u0430: {str(e)}\")\n            QMessageBox.warning(",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2383,
+        2387
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2447,
+        2451
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "37bdc28aba4c4f2c116d2aee00a595c8",
+    "content": "        except Exception as e:\n            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438 \u0444\u0430\u0439\u043b\u0430: {str(e)}\")\n            QMessageBox.warning(\n                self,",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2384,
+        2388
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2448,
+        2452
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "24bffbec1a26d291b6df77e877dc4b37",
+    "content": "            logger.error(f\"\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0438 \u0444\u0430\u0439\u043b\u0430: {str(e)}\")\n            QMessageBox.warning(\n                self,\n                tr(\"dialogs.error.title\", \"Error\"),",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2385,
+        2389
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2449,
+        2453
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8f18e529b92351176e72d45819d9a7ef",
+    "content": "            QMessageBox.warning(\n                self,\n                tr(\"dialogs.error.title\", \"Error\"),\n                f\"{tr('dialogs.file.save_error', 'Error saving file')}: {str(e)}\"",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2386,
+        2390
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2450,
+        2454
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4b9891126395891b5b9e1e8b48be5451",
+    "content": "                self,\n                tr(\"dialogs.error.title\", \"Error\"),\n                f\"{tr('dialogs.file.save_error', 'Error saving file')}: {str(e)}\"\n            )",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2387,
+        2391
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2451,
+        2455
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "109571d6f9f316a5e2d03f41baa5d6bb",
+    "content": "                tr(\"dialogs.error.title\", \"Error\"),\n                f\"{tr('dialogs.file.save_error', 'Error saving file')}: {str(e)}\"\n            )\n            return False",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2388,
+        2392
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2452,
+        2456
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5ad21db3f3a4cde977d8901a3d1751ea",
+    "content": "        try:\n            # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c, \u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d \u043b\u0438 \u0430\u0433\u0435\u043d\u0442\n            if not hasattr(self, 'agent') or self.agent is None:\n                QMessageBox.warning(",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2592,
+        2596
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2629,
+        2633
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e817975e949a687055b454ae99ddc290",
+    "content": "            # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c, \u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d \u043b\u0438 \u0430\u0433\u0435\u043d\u0442\n            if not hasattr(self, 'agent') or self.agent is None:\n                QMessageBox.warning(\n                    self,",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2593,
+        2597
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2630,
+        2634
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "04dc2179be0474f23ad304d8a903c5b4",
+    "content": "            if not hasattr(self, 'agent') or self.agent is None:\n                QMessageBox.warning(\n                    self,\n                    tr(\"agent.not_initialized\", \"Agent Not Initialized\"),",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2594,
+        2598
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2631,
+        2635
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f65ca4f824e984072643767434e09d05",
+    "content": "                QMessageBox.warning(\n                    self,\n                    tr(\"agent.not_initialized\", \"Agent Not Initialized\"),\n                    tr(\"agent.not_initialized_message\", \"Please initialize the agent first.\")",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2595,
+        2599
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2632,
+        2636
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "38754459874c83a3a268461b6b0b800a",
+    "content": "                    self,\n                    tr(\"agent.not_initialized\", \"Agent Not Initialized\"),\n                    tr(\"agent.not_initialized_message\", \"Please initialize the agent first.\")\n                )",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2596,
+        2600
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2633,
+        2637
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8bcdc1acb6415f0f459de43ed5ff2952",
+    "content": "                    tr(\"agent.not_initialized\", \"Agent Not Initialized\"),\n                    tr(\"agent.not_initialized_message\", \"Please initialize the agent first.\")\n                )\n                return",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2597,
+        2601
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2634,
+        2638
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1fc9a98672d0fd2b5aa58f77b96be893",
+    "content": "\n        # \u0421\u043e\u0437\u0434\u0430\u0435\u043c layout\n        self.layout = QVBoxLayout(self)\n        self.layout.setContentsMargins(0, 0, 0, 0)",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        16,
+        20
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        80,
+        84
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3f2c7befa71b240e77c1832e2d3f9ff8",
+    "content": "        # \u0421\u043e\u0437\u0434\u0430\u0435\u043c layout\n        self.layout = QVBoxLayout(self)\n        self.layout.setContentsMargins(0, 0, 0, 0)\n        self.layout.setSpacing(0)",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        17,
+        21
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        81,
+        85
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9ecef128588dbd7120e9bd8a5b179365",
+    "content": "\n        if file_path:\n            try:\n                with open(file_path, 'w', encoding='utf-8') as f:",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        100,
+        104
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        371,
+        375
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a59b153eadc7c745e2bb75ee4d4cf9ea",
+    "content": "\n        # \u041b\u0438\u043d\u0438\u044f-\u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u0435\u043b\u044c\n        line = QFrame()\n        line.setFrameShape(QFrame.HLine)",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        118,
+        122
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        177,
+        181
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        239,
+        243
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        140,
+        144
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "301f5575b6194a16e2eafbffaff8d07b",
+    "content": "        # \u041b\u0438\u043d\u0438\u044f-\u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u0435\u043b\u044c\n        line = QFrame()\n        line.setFrameShape(QFrame.HLine)\n        line.setFrameShadow(QFrame.Sunken)",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        119,
+        123
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        178,
+        182
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        240,
+        244
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        141,
+        145
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "bca11edde0150639aa7c05b31c1147c9",
+    "content": "        line = QFrame()\n        line.setFrameShape(QFrame.HLine)\n        line.setFrameShadow(QFrame.Sunken)\n        layout.addWidget(line)",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        120,
+        124
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        179,
+        183
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        241,
+        245
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        142,
+        146
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e9e8ac24a8343473a292c91c66e476da",
+    "content": "        header.setStyleSheet(\"font-size: 14px; font-weight: bold;\")\n        layout.addWidget(header)\n\n        # \u041b\u0438\u043d\u0438\u044f-\u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u0435\u043b\u044c",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        175,
+        179
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        237,
+        241
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "48831ff1197ca5be95da1b1286b03eaa",
+    "content": "        layout.addWidget(header)\n\n        # \u041b\u0438\u043d\u0438\u044f-\u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u0435\u043b\u044c\n        line = QFrame()",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        176,
+        180
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        238,
+        242
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0420fc32d875c9365efb3b07df38975f",
+    "content": "                background-color: rgba(240, 240, 240, 0.5);\n                border: 1px solid rgba(0,0,0,0.1);\n                border-radius: 5px;\n                padding: 5px;",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        209,
+        213
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        275,
+        279
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1b3028c4e3c37984d7cd7b70ee145baf",
+    "content": "                border: 1px solid rgba(0,0,0,0.1);\n                border-radius: 5px;\n                padding: 5px;\n            }",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        210,
+        214
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        276,
+        280
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6e1a9fba1e0520397fb6e9894e206ce5",
+    "content": "                border-radius: 5px;\n                padding: 5px;\n            }\n        \"\"\")",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        211,
+        215
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        277,
+        281
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "08aee1eaa2c23c56d32247f862e831a8",
+    "content": "    \"\"\"\n\n    # \u0421\u0438\u0433\u043d\u0430\u043b\u044b\n    plan_approved = Signal()",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        220,
+        224
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        292,
+        296
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8f8b1b8dcf04fa85d14b017bd4e6f63e",
+    "content": "\n    # \u0421\u0438\u0433\u043d\u0430\u043b\u044b\n    plan_approved = Signal()\n    plan_rejected = Signal()",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        221,
+        225
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        293,
+        297
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f53efc85fa369bc1c27beda4fd456bdd",
+    "content": "        self._setup_ui()\n\n    def _setup_ui(self):\n        \"\"\"\u041d\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441.\"\"\"",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        304,
+        308
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        163,
+        167
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        130,
+        134
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        231,
+        235
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9c845e7f94b836d1ef18551a23d86ed2",
+    "content": "\n    def _setup_ui(self):\n        \"\"\"\u041d\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441.\"\"\"\n        layout = QVBoxLayout(self)",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        305,
+        309
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        164,
+        168
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        131,
+        135
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        232,
+        236
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4f96fda71ba59cd9c552a8f315800f8b",
+    "content": "        super().accept()\n\n    def reject(self):\n        \"\"\"\u041e\u0442\u043c\u0435\u043d\u044f\u0435\u0442 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u0438 \u0437\u0430\u043a\u0440\u044b\u0432\u0430\u0435\u0442 \u0434\u0438\u0430\u043b\u043e\u0433.\"\"\"",
+    "locations": [
+      [
+        "app\\ui\\preferences_dialog.py",
+        159,
+        163
+      ],
+      [
+        "app\\ui\\theme_settings_dialog.py",
+        222,
+        226
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "14d665d7cc14550513ae9129ca451d69",
+    "content": "            except Exception as e:\n                QMessageBox.critical(\n                    self,\n                    tr(\"dialog.error.title\", \"\u041e\u0448\u0438\u0431\u043a\u0430\"),",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        286,
+        290
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        319,
+        323
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        354,
+        358
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        389,
+        393
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d0c1fb0aa10968edcd87c97828bc81a1",
+    "content": "\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0434\u0435\u0440\u0435\u0432\u043e\n                self._refresh_tree()\n            except Exception as e:",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        316,
+        320
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        351,
+        355
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        386,
+        390
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b617337509f9c8e8a0d73667ff2dabdb",
+    "content": "                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0434\u0435\u0440\u0435\u0432\u043e\n                self._refresh_tree()\n            except Exception as e:\n                QMessageBox.critical(",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        317,
+        321
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        352,
+        356
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        387,
+        391
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6dd3345b2408455ec7a9e2423585e7d5",
+    "content": "                self._refresh_tree()\n            except Exception as e:\n                QMessageBox.critical(\n                    self,",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        318,
+        322
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        353,
+        357
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        388,
+        392
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "870f82e4b81c7bfb247217fd2c882718",
+    "content": "            QMessageBox.No\n        )\n\n        if reply == QMessageBox.Yes:",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        374,
+        378
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        234,
+        238
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d2e351997f671921902c3dfddf3127e2",
+    "content": "        \"\"\"\u041d\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441.\"\"\"\n        layout = QVBoxLayout(self)\n\n        # \u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        166,
+        170
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        133,
+        137
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5b40a5f0f8d0c57835eef5c7384ce80c",
+    "content": "        )\n\n        self.approve_button.setEnabled(False)\n        self.reject_button.setEnabled(False)",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        542,
+        546
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        567,
+        571
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ec90bc5f5ed57dc72096428abbd069f2",
+    "content": "\n        # \u0412\u043a\u043b\u044e\u0447\u0430\u0435\u043c \u043a\u043d\u043e\u043f\u043a\u0438\n        self.new_plan_button.setEnabled(True)\n        self.execute_button.setEnabled(True)",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        753,
+        757
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        779,
+        783
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6e93db570f53a2cac2541cb99ca2f211",
+    "content": "        # \u0412\u043a\u043b\u044e\u0447\u0430\u0435\u043c \u043a\u043d\u043e\u043f\u043a\u0438\n        self.new_plan_button.setEnabled(True)\n        self.execute_button.setEnabled(True)\n        self.stop_button.setEnabled(False)",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        754,
+        758
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        780,
+        784
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "34216deffcf9913e6b3f55a7e4c78642",
+    "content": "        self.execute_button.setEnabled(True)\n        self.stop_button.setEnabled(False)\n\n        # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0430\u0433\u0435\u043d\u0442\u0430 \u0432 \u0441\u0435\u0441\u0441\u0438\u044e",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        756,
+        760
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        828,
+        832
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7df0f0d05a21f4d4308c921d91260b23",
+    "content": "        self.stop_button.setEnabled(False)\n\n        # \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0430\u0433\u0435\u043d\u0442\u0430 \u0432 \u0441\u0435\u0441\u0441\u0438\u044e\n        if self.current_session:",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        757,
+        761
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        829,
+        833
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "41d4f79e5ad4002d793ab4818210c6f3",
+    "content": "                    f,\n                    indent=2,\n                    ensure_ascii=False\n                )",
+    "locations": [
+      [
+        "app\\ui\\session_history_manager.py",
+        243,
+        247
+      ],
+      [
+        "app\\ui\\session_history_manager.py",
+        306,
+        310
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c2536719e22d3c702e8b2eae0ff6ad35",
+    "content": "\n        Returns:\n            True \u0432 \u0441\u043b\u0443\u0447\u0430\u0435 \u0443\u0441\u043f\u0435\u0445\u0430, False \u043f\u0440\u0438 \u043e\u0448\u0438\u0431\u043a\u0435\n        \"\"\"",
+    "locations": [
+      [
+        "app\\ui\\session_history_manager.py",
+        295,
+        299
+      ],
+      [
+        "app\\ui\\session_history_manager.py",
+        362,
+        366
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f21d785fa6482a4cc35688b8ad46702a",
+    "content": "    Args:\n        app (QApplication): \u042d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f.\n\n    Returns:",
+    "locations": [
+      [
+        "app\\ui\\styles.py",
+        127,
+        131
+      ],
+      [
+        "app\\ui\\styles.py",
+        161,
+        165
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "186abc9a10d7024b34d66094a4e36cde",
+    "content": "    content = f.read()\n\n# \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c, \u043d\u0435 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d \u043b\u0438 \u0443\u0436\u0435 \u0441\u0442\u0438\u043b\u044c\nif 'QTabBar::close-button' not in content:",
+    "locations": [
+      [
+        "app\\ui\\svg_to_base64.py",
+        35,
+        39
+      ],
+      [
+        "app\\ui\\svg_to_base64.py",
+        46,
+        50
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b1e08df89e06fbf0093ebf7a030253fd",
+    "content": "\n    _instance = None\n\n    @classmethod",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        32,
+        36
+      ],
+      [
+        "app\\utils\\theme_manager.py",
+        55,
+        59
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        12,
+        16
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        28,
+        32
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fb6e521ad53c90128c6a61b0f4a075d2",
+    "content": "    _instance = None\n\n    @classmethod\n    def instance(cls):",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        33,
+        37
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        13,
+        17
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        29,
+        33
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ee40c4bd5132536262061e2a47949336",
+    "content": "\n    @classmethod\n    def instance(cls):\n        \"\"\"\u0412\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 \u043a\u043b\u0430\u0441\u0441\u0430 (singleton).\"\"\"",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        34,
+        38
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        30,
+        34
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fa60a351ba9e520dd4a56add046c8950",
+    "content": "    @classmethod\n    def instance(cls):\n        \"\"\"\u0412\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 \u043a\u043b\u0430\u0441\u0441\u0430 (singleton).\"\"\"\n        if cls._instance is None:",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        35,
+        39
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        31,
+        35
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "50519c8d6b5bb01e85ac321a595f1946",
+    "content": "        return cls._instance\n\n    def __init__(self):\n        super().__init__()",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        40,
+        44
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        20,
+        24
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "eb8a409023b3f7ab2f4fabaddffede92",
+    "content": "\n        Args:\n            name (str): \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme_type (str, optional): \u0422\u0438\u043f \u0442\u0435\u043c\u044b. \u0415\u0441\u043b\u0438 \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f \u0442\u0435\u043c\u0430.",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        528,
+        532
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        547,
+        551
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "401e6ca2b2010097b579ea2595582b4f",
+    "content": "            name (str): \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme_type (str, optional): \u0422\u0438\u043f \u0442\u0435\u043c\u044b. \u0415\u0441\u043b\u0438 \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f \u0442\u0435\u043c\u0430.\n\n        Returns:",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        530,
+        534
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        549,
+        553
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ba77aa3b0bf474ff8a98f0ee3b933516",
+    "content": "        if not self.has_color_system or not self.color_system:\n            return None\n\n        if not theme_type:",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        536,
+        540
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        555,
+        559
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c46fa84fb3c4495d6cff9bb2916a72fb",
+    "content": "            return None\n\n        if not theme_type:\n            theme_type = self.get_theme_type()",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        537,
+        541
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        556,
+        560
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d9259b624e51d51f3712aca8dd581b57",
+    "content": "\n        except Exception as e:\n            QMessageBox.critical(\n                self,",
+    "locations": [
+      [
+        "app\\ui\\thought_tree_widget.py",
+        524,
+        528
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        566,
+        570
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8ccbc25b65a1b104d0257d1447a629f5",
+    "content": "    # \u0422\u0435\u043c\u043d\u0430\u044f \u0442\u0435\u043c\u0430\n    DARK_THEME = {\n        'background': '#2D2D2D',\n        'foreground': '#FFFFFF',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        16,
+        20
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        6,
+        10
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7abe4ec6999d6f51f9df7dc71a24380e",
+    "content": "    DARK_THEME = {\n        'background': '#2D2D2D',\n        'foreground': '#FFFFFF',\n        'accent': '#3498DB',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        17,
+        21
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        7,
+        11
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ad1c391c9e2e4b1701310fe06fb0bc31",
+    "content": "        'background': '#2D2D2D',\n        'foreground': '#FFFFFF',\n        'accent': '#3498DB',\n        'secondary': '#555555',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        18,
+        22
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        8,
+        12
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "93ea472c60e74acba30e5c7d708966a6",
+    "content": "        'foreground': '#FFFFFF',\n        'accent': '#3498DB',\n        'secondary': '#555555',\n        'error': '#E74C3C',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        19,
+        23
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        9,
+        13
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8b1fc75199f3bb222899e4eb50ccfae7",
+    "content": "        'accent': '#3498DB',\n        'secondary': '#555555',\n        'error': '#E74C3C',\n        'success': '#2ECC71',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        20,
+        24
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        10,
+        14
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d187b4ddedacb06c2d14eceb691ea5dc",
+    "content": "        'secondary': '#555555',\n        'error': '#E74C3C',\n        'success': '#2ECC71',\n        'warning': '#F39C12',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        21,
+        25
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        11,
+        15
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "df8c2f15d8b479fab304d75abdaa440f",
+    "content": "        'error': '#E74C3C',\n        'success': '#2ECC71',\n        'warning': '#F39C12',\n        'border': '#444444',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        22,
+        26
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        12,
+        16
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0914d2309d1ce9fc7dba679db42fb5f2",
+    "content": "        'success': '#2ECC71',\n        'warning': '#F39C12',\n        'border': '#444444',\n        'tab_active': '#3498DB',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        23,
+        27
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        13,
+        17
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "086e7ebb2e87700b68261eca535cee60",
+    "content": "        'warning': '#F39C12',\n        'border': '#444444',\n        'tab_active': '#3498DB',\n        'tab_inactive': '#555555',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        24,
+        28
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        14,
+        18
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c48d5c5d6fed763c45b37409078f97ed",
+    "content": "        'border': '#444444',\n        'tab_active': '#3498DB',\n        'tab_inactive': '#555555',\n        'button_normal': '#555555',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        25,
+        29
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        15,
+        19
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c1d2aabcdff96f9e2660d3e1100458d2",
+    "content": "        'tab_active': '#3498DB',\n        'tab_inactive': '#555555',\n        'button_normal': '#555555',\n        'button_hover': '#3498DB',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        26,
+        30
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        16,
+        20
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "58af2651a1fb27b64a6b685da3196792",
+    "content": "        'tab_inactive': '#555555',\n        'button_normal': '#555555',\n        'button_hover': '#3498DB',\n        'button_pressed': '#2980B9',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        27,
+        31
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        17,
+        21
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a44c08280630ec0d5c8b55592213c512",
+    "content": "        'button_normal': '#555555',\n        'button_hover': '#3498DB',\n        'button_pressed': '#2980B9',\n        'input_background': '#3D3D3D',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        28,
+        32
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        18,
+        22
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0b5665c45d81352cee2ecd0111e61d61",
+    "content": "        'button_hover': '#3498DB',\n        'button_pressed': '#2980B9',\n        'input_background': '#3D3D3D',\n        'input_text': '#FFFFFF',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        29,
+        33
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        19,
+        23
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "996e75a692d4f0906aacc9a339fbad1b",
+    "content": "        'button_pressed': '#2980B9',\n        'input_background': '#3D3D3D',\n        'input_text': '#FFFFFF',\n        'input_border': '#555555'",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        30,
+        34
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        20,
+        24
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1eff2f957e30c7bdf9065d03287b30a7",
+    "content": "        'input_background': '#3D3D3D',\n        'input_text': '#FFFFFF',\n        'input_border': '#555555'\n    }",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        31,
+        35
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        21,
+        25
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1562e3c961b35bf7a2c5b7b99d0ae8b5",
+    "content": "    # \u0421\u0432\u0435\u0442\u043b\u0430\u044f \u0442\u0435\u043c\u0430\n    LIGHT_THEME = {\n        'background': '#F5F5F5',\n        'foreground': '#333333',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        36,
+        40
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        26,
+        30
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5bd4c8f4b689f61692e1a79680218dd3",
+    "content": "    LIGHT_THEME = {\n        'background': '#F5F5F5',\n        'foreground': '#333333',\n        'accent': '#2980B9',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        37,
+        41
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        27,
+        31
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7413cee572fd231183f8c6585632eda6",
+    "content": "        'background': '#F5F5F5',\n        'foreground': '#333333',\n        'accent': '#2980B9',\n        'secondary': '#DDDDDD',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        38,
+        42
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        28,
+        32
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9e5af215362a1f14632841acd7876b88",
+    "content": "        'foreground': '#333333',\n        'accent': '#2980B9',\n        'secondary': '#DDDDDD',\n        'error': '#C0392B',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        39,
+        43
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        29,
+        33
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "784ce29f03ab7781f83757cce7de7a46",
+    "content": "        'accent': '#2980B9',\n        'secondary': '#DDDDDD',\n        'error': '#C0392B',\n        'success': '#27AE60',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        40,
+        44
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        30,
+        34
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "dfde250ce29c97fbaef29f066c568b3c",
+    "content": "        'secondary': '#DDDDDD',\n        'error': '#C0392B',\n        'success': '#27AE60',\n        'warning': '#E67E22',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        41,
+        45
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        31,
+        35
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ea9595423fbd0ad1843c918744208fe8",
+    "content": "        'error': '#C0392B',\n        'success': '#27AE60',\n        'warning': '#E67E22',\n        'border': '#CCCCCC',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        42,
+        46
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        32,
+        36
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "107d4452b826f2980b2ad04459fffa4f",
+    "content": "        'success': '#27AE60',\n        'warning': '#E67E22',\n        'border': '#CCCCCC',\n        'tab_active': '#2980B9',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        43,
+        47
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        33,
+        37
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1ae5a4e26bbf52341fde81b6211eaa64",
+    "content": "        'warning': '#E67E22',\n        'border': '#CCCCCC',\n        'tab_active': '#2980B9',\n        'tab_inactive': '#DDDDDD',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        44,
+        48
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        34,
+        38
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "810758c6da43503b3429c0b32986c3e8",
+    "content": "        'border': '#CCCCCC',\n        'tab_active': '#2980B9',\n        'tab_inactive': '#DDDDDD',\n        'button_normal': '#DDDDDD',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        45,
+        49
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        35,
+        39
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "bd3158fc1d030703590054d583dffc45",
+    "content": "        'tab_active': '#2980B9',\n        'tab_inactive': '#DDDDDD',\n        'button_normal': '#DDDDDD',\n        'button_hover': '#2980B9',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        46,
+        50
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        36,
+        40
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a14f9a5aa9367cd2f7bedf784ced74ef",
+    "content": "        'tab_inactive': '#DDDDDD',\n        'button_normal': '#DDDDDD',\n        'button_hover': '#2980B9',\n        'button_pressed': '#3498DB',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        47,
+        51
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        37,
+        41
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6c097201075e4b414673db35a68d74c5",
+    "content": "        'button_normal': '#DDDDDD',\n        'button_hover': '#2980B9',\n        'button_pressed': '#3498DB',\n        'input_background': '#FFFFFF',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        48,
+        52
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        38,
+        42
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "001fa742c9a9aec46bcfceb1dd3c340e",
+    "content": "        'button_hover': '#2980B9',\n        'button_pressed': '#3498DB',\n        'input_background': '#FFFFFF',\n        'input_text': '#333333',",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        49,
+        53
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        39,
+        43
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "4f788663c0026cfefae8ac846017db6a",
+    "content": "        'button_pressed': '#3498DB',\n        'input_background': '#FFFFFF',\n        'input_text': '#333333',\n        'input_border': '#CCCCCC'",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        50,
+        54
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        40,
+        44
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6c3b5c89302eb54d5793e28f78ef6527",
+    "content": "        'input_background': '#FFFFFF',\n        'input_text': '#333333',\n        'input_border': '#CCCCCC'\n    }",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        51,
+        55
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        41,
+        45
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d612ac3599ee595e7834bb2632303efc",
+    "content": "    @classmethod\n    def instance(cls, app=None):\n        \"\"\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0433\u043e \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440\u0430 \u043c\u0435\u043d\u0435\u0434\u0436\u0435\u0440\u0430 \u0442\u0435\u043c (\u043f\u0430\u0442\u0442\u0435\u0440\u043d Singleton).\"\"\"\n        if cls._instance is None:",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        58,
+        62
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        48,
+        52
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "92851f668186970033baa5ce38cb4a17",
+    "content": "    def instance(cls, app=None):\n        \"\"\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0433\u043e \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440\u0430 \u043c\u0435\u043d\u0435\u0434\u0436\u0435\u0440\u0430 \u0442\u0435\u043c (\u043f\u0430\u0442\u0442\u0435\u0440\u043d Singleton).\"\"\"\n        if cls._instance is None:\n            if app is None:",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        59,
+        63
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        49,
+        53
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a9a290f7ee22e26b4b77d04c6ffabc16",
+    "content": "        \"\"\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0435\u0434\u0438\u043d\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0433\u043e \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440\u0430 \u043c\u0435\u043d\u0435\u0434\u0436\u0435\u0440\u0430 \u0442\u0435\u043c (\u043f\u0430\u0442\u0442\u0435\u0440\u043d Singleton).\"\"\"\n        if cls._instance is None:\n            if app is None:\n                raise ValueError(\"\u041f\u0440\u0438 \u043f\u0435\u0440\u0432\u043e\u043c \u0432\u044b\u0437\u043e\u0432\u0435 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 QApplication\")",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        60,
+        64
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        50,
+        54
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8cb0970230d040804cfbe982b8aa5193",
+    "content": "        if cls._instance is None:\n            if app is None:\n                raise ValueError(\"\u041f\u0440\u0438 \u043f\u0435\u0440\u0432\u043e\u043c \u0432\u044b\u0437\u043e\u0432\u0435 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 QApplication\")\n            cls._instance = ThemeManager(app)",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        61,
+        65
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        51,
+        55
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6d308f2e500d94eec6ae7c1281a738cc",
+    "content": "            if app is None:\n                raise ValueError(\"\u041f\u0440\u0438 \u043f\u0435\u0440\u0432\u043e\u043c \u0432\u044b\u0437\u043e\u0432\u0435 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u044d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 QApplication\")\n            cls._instance = ThemeManager(app)\n        return cls._instance",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        62,
+        66
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        52,
+        56
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2826dfd6fde6a02ec636bd1e2ff4da99",
+    "content": "        self.themes = {\n            'dark': self.DARK_THEME,\n            'light': self.LIGHT_THEME\n        }",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        72,
+        76
+      ],
+      [
+        "app\\ui\\utils\\theme_manager.py",
+        60,
+        64
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "33a322db14c67a5a71266fe4c2c773bd",
+    "content": "                        if isinstance(en_result, dict) and en_part in en_result:\n                            en_result = en_result[en_part]\n                        else:\n                            found = False",
+    "locations": [
+      [
+        "app\\ui\\i18n\\translator.py",
+        237,
+        241
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        267,
+        271
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e836e23ac6f85972acd8ab23c818cfed",
+    "content": "                            en_result = en_result[en_part]\n                        else:\n                            found = False\n                            break",
+    "locations": [
+      [
+        "app\\ui\\i18n\\translator.py",
+        238,
+        242
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        268,
+        272
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "53b46ca9d961e9ae3fea015749b09f16",
+    "content": "                            found = False\n                            break\n\n                    if found and isinstance(en_result, str) and \"TODO:\" not in en_result:",
+    "locations": [
+      [
+        "app\\ui\\i18n\\translator.py",
+        240,
+        244
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        270,
+        274
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "874f98c1787235b665cf810c8a2cd198",
+    "content": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n\"\"\"",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\compile_themes.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fonts_fixer.py",
+        0,
+        4
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        0,
+        4
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b15a5750ce97cdad00203f9ce84a799f",
+    "content": "\n                # \u0426\u0432\u0435\u0442\u0430 \u0442\u0435\u043a\u0441\u0442\u0430\n                \"on-primary\": \"#FFFFFF\",      # \u0426\u0432\u0435\u0442 \u0442\u0435\u043a\u0441\u0442\u0430 \u043d\u0430 primary\n                \"on-secondary\": \"#FFFFFF\",    # \u0426\u0432\u0435\u0442 \u0442\u0435\u043a\u0441\u0442\u0430 \u043d\u0430 secondary",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        58,
+        62
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        89,
+        93
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9e38956b4a7f6165779329acfed8b2e2",
+    "content": "\n                # \u0424\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0435 \u0446\u0432\u0435\u0442\u0430\n                \"error\": \"#E74C3C\",           # \u041e\u0448\u0438\u0431\u043a\u0430\n                \"warning\": \"#F39C12\",         # \u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        64,
+        68
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        95,
+        99
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1650ef4007cb53713c3d82e9b9259bde",
+    "content": "                # \u0424\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0435 \u0446\u0432\u0435\u0442\u0430\n                \"error\": \"#E74C3C\",           # \u041e\u0448\u0438\u0431\u043a\u0430\n                \"warning\": \"#F39C12\",         # \u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435\n                \"success\": \"#2ECC71\",         # \u0423\u0441\u043f\u0435\u0445",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        65,
+        69
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        96,
+        100
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e255bff8b10a73e85e51a99a3a64f3d5",
+    "content": "                \"error\": \"#E74C3C\",           # \u041e\u0448\u0438\u0431\u043a\u0430\n                \"warning\": \"#F39C12\",         # \u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435\n                \"success\": \"#2ECC71\",         # \u0423\u0441\u043f\u0435\u0445\n                \"info\": \"#3498DB\",            # \u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        66,
+        70
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        97,
+        101
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d12f10f33bc70a8a7173ffb5caef63dd",
+    "content": "                \"success\": \"#2ECC71\",         # \u0423\u0441\u043f\u0435\u0445\n                \"info\": \"#3498DB\",            # \u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f\n\n                # \u0421\u043b\u0443\u0436\u0435\u0431\u043d\u044b\u0435 \u0446\u0432\u0435\u0442\u0430",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        68,
+        72
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        99,
+        103
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "62bbc1781f8aa0f70dd47ed830f8720f",
+    "content": "                # \u041a\u043d\u043e\u043f\u043a\u0438\n                \"button-background\": \"@background-variant\",\n                \"button-text\": \"@on-background\",\n                \"button-hover\": \"@primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        114,
+        118
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        154,
+        158
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "fde041b7110e35f69a21789abf656525",
+    "content": "                \"button-background\": \"@background-variant\",\n                \"button-text\": \"@on-background\",\n                \"button-hover\": \"@primary\",\n                \"button-hover-text\": \"@on-primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        115,
+        119
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        155,
+        159
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "46832d0d7ee2bf22e67bbedda31ccc27",
+    "content": "                \"button-text\": \"@on-background\",\n                \"button-hover\": \"@primary\",\n                \"button-hover-text\": \"@on-primary\",\n                \"button-pressed\": \"@primary-variant\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        116,
+        120
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        156,
+        160
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e05986a631dfb0fa4361b6af21ec629c",
+    "content": "                \"button-hover\": \"@primary\",\n                \"button-hover-text\": \"@on-primary\",\n                \"button-pressed\": \"@primary-variant\",\n                \"button-disabled\": \"@disabled\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        117,
+        121
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        157,
+        161
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "bfd2d92aac607f24b9001b4f0ed2d755",
+    "content": "                \"button-pressed\": \"@primary-variant\",\n                \"button-disabled\": \"@disabled\",\n\n                # \u041f\u043e\u043b\u044f \u0432\u0432\u043e\u0434\u0430",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        119,
+        123
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        159,
+        163
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "622f042c135c041e3d19c391ae915add",
+    "content": "                \"button-disabled\": \"@disabled\",\n\n                # \u041f\u043e\u043b\u044f \u0432\u0432\u043e\u0434\u0430\n                \"input-background\": \"@surface\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        120,
+        124
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        160,
+        164
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a9cda650b05ad63dd921e4285a9a73a1",
+    "content": "\n                # \u041f\u043e\u043b\u044f \u0432\u0432\u043e\u0434\u0430\n                \"input-background\": \"@surface\",\n                \"input-text\": \"@on-surface\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        121,
+        125
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        161,
+        165
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9968fcaecce4906ee77e053f5ee1783b",
+    "content": "                # \u041f\u043e\u043b\u044f \u0432\u0432\u043e\u0434\u0430\n                \"input-background\": \"@surface\",\n                \"input-text\": \"@on-surface\",\n                \"input-border\": \"@border\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        122,
+        126
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        162,
+        166
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ced72847f3aff4f6df3244cb97b5b4c9",
+    "content": "                \"input-background\": \"@surface\",\n                \"input-text\": \"@on-surface\",\n                \"input-border\": \"@border\",\n                \"input-focus-border\": \"@primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        123,
+        127
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        163,
+        167
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e9f961bf134e8410903e631e250311dc",
+    "content": "                \"input-border\": \"@border\",\n                \"input-focus-border\": \"@primary\",\n\n                # \u0412\u043a\u043b\u0430\u0434\u043a\u0438",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        125,
+        129
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        165,
+        169
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7c6428f2813f36fff78e84bc21650978",
+    "content": "                \"input-focus-border\": \"@primary\",\n\n                # \u0412\u043a\u043b\u0430\u0434\u043a\u0438\n                \"tab-background\": \"@background-variant\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        126,
+        130
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        166,
+        170
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b7e5b944f57f798cca2e51d898c8fbc5",
+    "content": "\n                # \u0412\u043a\u043b\u0430\u0434\u043a\u0438\n                \"tab-background\": \"@background-variant\",\n                \"tab-text\": \"@on-background\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        127,
+        131
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        167,
+        171
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c8875670fe9e609be226a0e23787011d",
+    "content": "                # \u0412\u043a\u043b\u0430\u0434\u043a\u0438\n                \"tab-background\": \"@background-variant\",\n                \"tab-text\": \"@on-background\",\n                \"tab-selected\": \"@primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        128,
+        132
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        168,
+        172
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3cb14fd2ff1ccd1722d9357ea83b2ad4",
+    "content": "                \"tab-background\": \"@background-variant\",\n                \"tab-text\": \"@on-background\",\n                \"tab-selected\": \"@primary\",\n                \"tab-selected-text\": \"@on-primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        129,
+        133
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        169,
+        173
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "a72c57aaf9a68923ba92b84a397fa564",
+    "content": "                \"tab-selected\": \"@primary\",\n                \"tab-selected-text\": \"@on-primary\",\n\n                # \u0414\u043e\u043a-\u0432\u0438\u0434\u0436\u0435\u0442\u044b",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        131,
+        135
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        171,
+        175
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "de7e091af38215d61457e540b783b998",
+    "content": "                \"tab-selected-text\": \"@on-primary\",\n\n                # \u0414\u043e\u043a-\u0432\u0438\u0434\u0436\u0435\u0442\u044b\n                \"dock-title\": \"@background-variant\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        132,
+        136
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        172,
+        176
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "d30644823dd983212fdad8e1295db216",
+    "content": "\n                # \u0414\u043e\u043a-\u0432\u0438\u0434\u0436\u0435\u0442\u044b\n                \"dock-title\": \"@background-variant\",\n                \"dock-border\": \"@border\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        133,
+        137
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        173,
+        177
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7c5fb1f5aad2b67a3c36ab44d142417b",
+    "content": "                \"dock-title\": \"@background-variant\",\n                \"dock-border\": \"@border\",\n\n                # \u041c\u0435\u043d\u044e",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        135,
+        139
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        175,
+        179
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c4a0009803ceb343ef86ea63c68e0142",
+    "content": "                \"dock-border\": \"@border\",\n\n                # \u041c\u0435\u043d\u044e\n                \"menu-background\": \"@background\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        136,
+        140
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        176,
+        180
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5832ea3370f6ea9732c8b66264810b23",
+    "content": "\n                # \u041c\u0435\u043d\u044e\n                \"menu-background\": \"@background\",\n                \"menu-text\": \"@on-background\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        137,
+        141
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        177,
+        181
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "069ea60bf8b2361235582935d4b59299",
+    "content": "                # \u041c\u0435\u043d\u044e\n                \"menu-background\": \"@background\",\n                \"menu-text\": \"@on-background\",\n                \"menu-hover\": \"@primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        138,
+        142
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        178,
+        182
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "122071a054d909ffd35dc301aa8e7541",
+    "content": "                \"menu-background\": \"@background\",\n                \"menu-text\": \"@on-background\",\n                \"menu-hover\": \"@primary\",\n                \"menu-hover-text\": \"@on-primary\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        139,
+        143
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        179,
+        183
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c0ccaefa268432111c446e5eb36fc42b",
+    "content": "                \"menu-hover\": \"@primary\",\n                \"menu-hover-text\": \"@on-primary\",\n\n                # \u0422\u0435\u0440\u043c\u0438\u043d\u0430\u043b",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        141,
+        145
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        181,
+        185
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e0eef3fc137bc44511e7ccc22390a8fd",
+    "content": "\n                # \u041f\u043e\u043b\u043e\u0441\u044b \u043f\u0440\u043e\u043a\u0440\u0443\u0442\u043a\u0438\n                \"scrollbar-background\": \"@background\",\n                \"scrollbar-handle\": \"@background-variant\",",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        147,
+        151
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        187,
+        191
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "16c89ae32669b9038431b63351ee9ea5",
+    "content": "                # \u041f\u043e\u043b\u043e\u0441\u044b \u043f\u0440\u043e\u043a\u0440\u0443\u0442\u043a\u0438\n                \"scrollbar-background\": \"@background\",\n                \"scrollbar-handle\": \"@background-variant\",\n                \"scrollbar-hover\": \"@primary\"",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        148,
+        152
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        188,
+        192
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "83279ca7161971629a39ead45798d295",
+    "content": "\n        Args:\n            name: \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme: \u0422\u0435\u043c\u0430 (\u0435\u0441\u043b\u0438 None, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f)",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        201,
+        205
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        244,
+        248
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3df72515ff258d4afb464cdc036c52eb",
+    "content": "            name: \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme: \u0422\u0435\u043c\u0430 (\u0435\u0441\u043b\u0438 None, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f)\n\n        Returns:",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        203,
+        207
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        246,
+        250
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9dcd32dfd99872f680fbbf865967e847",
+    "content": "\n        Returns:\n            bool: True \u0435\u0441\u043b\u0438 \u0443\u0441\u043f\u0435\u0448\u043d\u043e, False \u0432 \u0441\u043b\u0443\u0447\u0430\u0435 \u043e\u0448\u0438\u0431\u043a\u0438\n        \"\"\"",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        320,
+        324
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        344,
+        348
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        378,
+        382
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "9a568f34eaf9d1c6b30ff529f9e97563",
+    "content": "        Returns:\n            bool: True \u0435\u0441\u043b\u0438 \u0443\u0441\u043f\u0435\u0448\u043d\u043e, False \u0432 \u0441\u043b\u0443\u0447\u0430\u0435 \u043e\u0448\u0438\u0431\u043a\u0438\n        \"\"\"\n        try:",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        321,
+        325
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        345,
+        349
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "38616437304ea365733ac19817cf36e9",
+    "content": "\n        for i, file_path in enumerate(files):\n            if not self.is_running:\n                return",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        117,
+        121
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        172,
+        176
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        250,
+        254
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "524ef63f078011db1b505790dc941e28",
+    "content": "            if not self.is_running:\n                return\n\n            try:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        119,
+        123
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        174,
+        178
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        252,
+        256
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3386a7155a80197d25720d51775a2866",
+    "content": "                return\n\n            try:\n                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        120,
+        124
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        175,
+        179
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        253,
+        257
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7081465ad018da6592ca3ab9d12ffe42",
+    "content": "\n            try:\n                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                    content = f.read()",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        121,
+        125
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        176,
+        180
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        254,
+        258
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "97a3224c08b143984a9d36e87774bbdc",
+    "content": "\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0440\u043e\u0433\u0440\u0435\u0441\u0441\n                progress = int((i + 1) / len(files) * 100)\n                self.signals.progress.emit(progress)",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        144,
+        148
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        232,
+        236
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        263,
+        267
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f3d22f674270f13f01df567f4b1bdf2c",
+    "content": "                progress = int((i + 1) / len(files) * 100)\n                self.signals.progress.emit(progress)\n\n            except Exception as e:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        146,
+        150
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        234,
+        238
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        265,
+        269
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "ae7879fb970910c2c8fb295d12f1d58a",
+    "content": "                self.signals.progress.emit(progress)\n\n            except Exception as e:\n                self.signals.message.emit(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        147,
+        151
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        235,
+        239
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        266,
+        270
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c2b9a4a135d0ef6a215db77bf103a4d4",
+    "content": "\n        issues_found = 0\n\n        for i, file_path in enumerate(files):",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        170,
+        174
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        248,
+        252
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "bb00fee46dae19598ff7f31420199336",
+    "content": "        issues_found = 0\n\n        for i, file_path in enumerate(files):\n            if not self.is_running:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        171,
+        175
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        249,
+        253
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7ce5730d21d2e8c9cf2423ea7fc72237",
+    "content": "                    issues_found += 1\n\n                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0440\u043e\u0433\u0440\u0435\u0441\u0441\n                progress = int((i + 1) / len(files) * 100)",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        231,
+        235
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        262,
+        266
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "45b8e7f4471a64b5dd72ef1cbf7bb23e",
+    "content": "            except Exception as e:\n                self.signals.message.emit(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))\n\n        if issues_found == 0:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        237,
+        241
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        268,
+        272
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8d876acaf09f4f9899ad13d8b1fa83f4",
+    "content": "        for root, dirs, files in os.walk(project_path):\n            # \u041f\u0440\u043e\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438 venv \u0438 .git\n            if 'venv' in root or '.git' in root:\n                continue",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        439,
+        443
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        455,
+        459
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "274f933760cf49311afeeda3d75a2945",
+    "content": "            if 'venv' in root or '.git' in root:\n                continue\n\n            for file in files:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        441,
+        445
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        457,
+        461
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f4e62d7c0ab07ce0725f7d7f2ef16ae0",
+    "content": "\n    for file_path in files:\n        try:\n            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        500,
+        504
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        545,
+        549
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        610,
+        614
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "cb8f49feebbd67269a06a41c1c34e285",
+    "content": "    for file_path in files:\n        try:\n            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                content = f.read()",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        501,
+        505
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        546,
+        550
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        611,
+        615
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "abd65f5708559c7afd39022fdba17a19",
+    "content": "\n    issues_found = 0\n\n    for file_path in files:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        543,
+        547
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        608,
+        612
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "604eae766074dcf528d68a202cb26890",
+    "content": "    issues_found = 0\n\n    for file_path in files:\n        try:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        544,
+        548
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        609,
+        613
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "745348971a3bdb08e1f3e9eb80def643",
+    "content": "                issues_found += 1\n\n        except Exception as e:\n            print(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        595,
+        599
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        619,
+        623
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "af39f9eb1685198edc5993a9afd54668",
+    "content": "        except Exception as e:\n            print(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))\n\n    if issues_found == 0:",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        597,
+        601
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        621,
+        625
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "37bba9906b34f8cbfc9c88540b1ac4d1",
+    "content": "        source_path = os.path.join(root_dir, filename)\n\n        if not os.path.exists(source_path):\n            print(f\"\u0424\u0430\u0439\u043b {filename} \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d.\")",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        58,
+        62
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        96,
+        100
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "cb45459f7307d8290cee6a8cec9b81c3",
+    "content": "\n        if not os.path.exists(source_path):\n            print(f\"\u0424\u0430\u0439\u043b {filename} \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d.\")\n            continue",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        59,
+        63
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        97,
+        101
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1dd5c4b2171f853534a49c76ec57167c",
+    "content": "\n    Args:\n        source_path: \u041f\u0443\u0442\u044c \u043a \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u043c\u0443 \u0444\u0430\u0439\u043b\u0443\n        target_path: \u041f\u0443\u0442\u044c \u043a \u0446\u0435\u043b\u0435\u0432\u043e\u043c\u0443 \u0444\u0430\u0439\u043b\u0443",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        133,
+        137
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        150,
+        154
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8e891e0e8a5d8dca932bfd90e6004b40",
+    "content": "\nimport os\nimport re\nimport sys",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        7,
+        11
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        7,
+        11
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e1c475522fd2277b98396e9f13bf1447",
+    "content": "import os\nimport re\nimport sys\nimport argparse",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        8,
+        12
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        8,
+        12
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6d3c86db2f6d4f2f4f6676662eefb523",
+    "content": "import re\nimport sys\nimport argparse\nfrom collections import defaultdict",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        9,
+        13
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        9,
+        13
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "83afc7f655cd6180ca1feafdb618e781",
+    "content": "import argparse\nfrom collections import defaultdict\n\n# \u041f\u0440\u043e\u0431\u043b\u0435\u043c\u043d\u044b\u0435 \u0441\u0435\u043b\u0435\u043a\u0442\u043e\u0440\u044b, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0447\u0430\u0441\u0442\u043e \u0434\u0443\u0431\u043b\u0438\u0440\u0443\u044e\u0442\u0441\u044f",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        11,
+        15
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        11,
+        15
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "29fcc6b305f9b430135b67335448fbc2",
+    "content": "        if not line:\n            continue\n\n        if ':' in line:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        38,
+        42
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        82,
+        86
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0a6d91d134cb508a07d8658548fbb5a8",
+    "content": "    parser.add_argument(\"file\", help=\"\u041f\u0443\u0442\u044c \u043a CSS/QSS \u0444\u0430\u0439\u043b\u0443 \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438 \u0441 \u0444\u0430\u0439\u043b\u0430\u043c\u0438\")\n    parser.add_argument(\"--output\", \"-o\", help=\"\u041f\u0443\u0442\u044c \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430\")\n\n    args = parser.parse_args()",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        150,
+        154
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        169,
+        173
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f10093a2b0004eec7d59c41311a8062a",
+    "content": "\n    args = parser.parse_args()\n\n    # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        152,
+        156
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        171,
+        175
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "746977f7891f739170cca97550d2d30c",
+    "content": "    args = parser.parse_args()\n\n    # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n    if not os.path.exists(args.file):",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        153,
+        157
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        172,
+        176
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "213711827d0532f87c28a55ef180e1c7",
+    "content": "\n    # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n    if not os.path.exists(args.file):\n        print(f\"\u041e\u0448\u0438\u0431\u043a\u0430: {args.file} \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.\")",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        154,
+        158
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        173,
+        177
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "5892d18c5ea4c2be643e106e6d2bfcf0",
+    "content": "    # \u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0435 \u0444\u0430\u0439\u043b\u0430 \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n    if not os.path.exists(args.file):\n        print(f\"\u041e\u0448\u0438\u0431\u043a\u0430: {args.file} \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.\")\n        return 1",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        155,
+        159
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        174,
+        178
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2577580a9cbb938de8fdbab99c18eec1",
+    "content": "        print(f\"\u041e\u0448\u0438\u0431\u043a\u0430: {args.file} \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.\")\n        return 1\n\n    # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0444\u0430\u0439\u043b \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        157,
+        161
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        176,
+        180
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7f017f0778171eec802b80fdbb3ca3f0",
+    "content": "        return 1\n\n    # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0444\u0430\u0439\u043b \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e\n    if os.path.isdir(args.file):",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        158,
+        162
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        177,
+        181
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "c1daa712e5549a89036192b71625329d",
+    "content": "\n    # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0444\u0430\u0439\u043b \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e\n    if os.path.isdir(args.file):\n        # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0432\u0441\u0435 CSS/QSS \u0444\u0430\u0439\u043b\u044b \u0432 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        159,
+        163
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        178,
+        182
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "eff3d63d0e5e841048f4dad383c4830f",
+    "content": "    # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0444\u0430\u0439\u043b \u0438\u043b\u0438 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e\n    if os.path.isdir(args.file):\n        # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0432\u0441\u0435 CSS/QSS \u0444\u0430\u0439\u043b\u044b \u0432 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n        for root, dirs, files in os.walk(args.file):",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        160,
+        164
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        179,
+        183
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3f6378bb49663ec779747340361d790f",
+    "content": "    if os.path.isdir(args.file):\n        # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0432\u0441\u0435 CSS/QSS \u0444\u0430\u0439\u043b\u044b \u0432 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n        for root, dirs, files in os.walk(args.file):\n            for file in files:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        161,
+        165
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        279,
+        283
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        180,
+        184
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6ec748225fb7976d76f0996064a77202",
+    "content": "        # \u041e\u0431\u0440\u0430\u0431\u0430\u0442\u044b\u0432\u0430\u0435\u043c \u0432\u0441\u0435 CSS/QSS \u0444\u0430\u0439\u043b\u044b \u0432 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438\n        for root, dirs, files in os.walk(args.file):\n            for file in files:\n                if file.endswith(('.css', '.qss')):",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        162,
+        166
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        280,
+        284
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        181,
+        185
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2aa9304fbd837404bd125d456f5181bd",
+    "content": "        for root, dirs, files in os.walk(args.file):\n            for file in files:\n                if file.endswith(('.css', '.qss')):\n                    file_path = os.path.join(root, file)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        163,
+        167
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        281,
+        285
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        182,
+        186
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e94203c4d72aaab295b7851570083336",
+    "content": "\n    return 0\n\nif __name__ == \"__main__\":",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        173,
+        177
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        190,
+        194
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "dd2cd57135f08055dec396601659ee8c",
+    "content": "    return 0\n\nif __name__ == \"__main__\":\n    sys.exit(main())",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        174,
+        178
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        191,
+        195
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "91ddb02cc4402f9faf157e43ac7988b3",
+    "content": "    \"\"\"\n    if not os.path.exists(file_path):\n        print(f\"\u0424\u0430\u0439\u043b \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d: {file_path}\")\n        return",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        158,
+        162
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        194,
+        198
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "0a5c0041b0c27188e394af23aab596c7",
+    "content": "        print(f\"\u0424\u0430\u0439\u043b \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d: {file_path}\")\n        return\n\n    with open(file_path, 'r', encoding='utf-8') as f:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        160,
+        164
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        196,
+        200
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "1322ced4db205201d15caae14fca1713",
+    "content": "        return\n\n    with open(file_path, 'r', encoding='utf-8') as f:\n        css_content = f.read()",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        161,
+        165
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        197,
+        201
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "52c877519e96afe84a6ff38be93f96f6",
+    "content": "\n        # \u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0435\u043c \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS\n        if output_path:\n            with open(output_path, 'w', encoding='utf-8') as f:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        176,
+        180
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        218,
+        222
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6fd3a8da5e90aa8e3097e2a6443edcb8",
+    "content": "        # \u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0435\u043c \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS\n        if output_path:\n            with open(output_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        177,
+        181
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        219,
+        223
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "b8b624d1e5c89e83b2c864c402ad2a8d",
+    "content": "        if output_path:\n            with open(output_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)\n            print(f\"\u0418\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d \u0432 {output_path}\")",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        178,
+        182
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        220,
+        224
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "eabfec897c9f05fe0ad1ec9d33db9401",
+    "content": "            with open(output_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)\n            print(f\"\u0418\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d \u0432 {output_path}\")\n        else:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        179,
+        183
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        221,
+        225
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f0a49c911b9a7d2c2ebbd73b3d4e2175",
+    "content": "                f.write(fixed_css)\n            print(f\"\u0418\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d \u0432 {output_path}\")\n        else:\n            # \u0415\u0441\u043b\u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0439 \u043f\u0443\u0442\u044c \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u0444\u0430\u0439\u043b",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        180,
+        184
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        222,
+        226
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "27c85880b0b5f22cd9cfe3e0a661c69d",
+    "content": "            print(f\"\u0418\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0439 CSS \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d \u0432 {output_path}\")\n        else:\n            # \u0415\u0441\u043b\u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0439 \u043f\u0443\u0442\u044c \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u0444\u0430\u0439\u043b\n            with open(file_path, 'w', encoding='utf-8') as f:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        181,
+        185
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        223,
+        227
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "6e22370fbb4f3ca118d8180a76be6053",
+    "content": "        else:\n            # \u0415\u0441\u043b\u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0439 \u043f\u0443\u0442\u044c \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u0444\u0430\u0439\u043b\n            with open(file_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        182,
+        186
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        224,
+        228
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "cdf0dfb9c834b4c4f51d516e8acb2a96",
+    "content": "            # \u0415\u0441\u043b\u0438 \u0432\u044b\u0445\u043e\u0434\u043d\u043e\u0439 \u043f\u0443\u0442\u044c \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u043c \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u0444\u0430\u0439\u043b\n            with open(file_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)\n            print(f\"\u0424\u0430\u0439\u043b {file_path} \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\")",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        183,
+        187
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        225,
+        229
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "f82b6c7feebf7a3a0af369bc7009dd82",
+    "content": "            with open(file_path, 'w', encoding='utf-8') as f:\n                f.write(fixed_css)\n            print(f\"\u0424\u0430\u0439\u043b {file_path} \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\")\n    else:",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        184,
+        188
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        226,
+        230
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "e4e01c3d127a309eb7c7917d76333eb8",
+    "content": "\n\nif __name__ == \"__main__\":\n    main()",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        302,
+        306
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        291,
+        295
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "eddbf1cff915b2ea14deec508ad97bfb",
+    "content": "\n        # \u041e\u043f\u0440\u0435\u0434\u0435\u043b\u044f\u0435\u043c \u043f\u0443\u0442\u044c \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f\n        if not output_path:\n            output_dir = os.path.dirname(qss_path)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        86,
+        90
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        123,
+        127
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8088099c604f0838bf6cdfeb4ec0f7a8",
+    "content": "        # \u041e\u043f\u0440\u0435\u0434\u0435\u043b\u044f\u0435\u043c \u043f\u0443\u0442\u044c \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f\n        if not output_path:\n            output_dir = os.path.dirname(qss_path)\n            file_name = os.path.basename(qss_path)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        87,
+        91
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        124,
+        128
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "46d85576e89dccdb5dcba1e0d06aa997",
+    "content": "\n    # \u0421\u043e\u0437\u0434\u0430\u0435\u043c \u0432\u044b\u0445\u043e\u0434\u043d\u0443\u044e \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e, \u0435\u0441\u043b\u0438 \u0443\u043a\u0430\u0437\u0430\u043d\u0430\n    if output_dir:\n        os.makedirs(output_dir, exist_ok=True)",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        183,
+        187
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\theme_compiler.py",
+        233,
+        237
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "7d33e02dccdb0d715e4c950836773686",
+    "content": "    } catch (error) {\n        return { success: false, error: error.toString() };\n    }\n}",
+    "locations": [
+      [
+        "app\\tool\\browser_scripts\\elements.py",
+        93,
+        97
+      ],
+      [
+        "app\\tool\\browser_scripts\\forms.py",
+        85,
+        89
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "2b4720b6cfd6c8cc9db1d24c8165265b",
+    "content": "        return self\n\n    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:\n        \"\"\"Async context manager exit.\"\"\"",
+    "locations": [
+      [
+        "app\\sandbox\\core\\manager.py",
+        293,
+        297
+      ],
+      [
+        "app\\sandbox\\core\\terminal.py",
+        341,
+        345
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "82c66bf15caf281979ef99c5eeb1ae22",
+    "content": "\n    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:\n        \"\"\"Async context manager exit.\"\"\"\n        await self.cleanup()",
+    "locations": [
+      [
+        "app\\sandbox\\core\\manager.py",
+        294,
+        298
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        458,
+        462
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "168e2485d7748f2485c3609836bfe361",
+    "content": "        Returns:\n            Command output as string.\n\n        Raises:",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        146,
+        150
+      ],
+      [
+        "app\\sandbox\\core\\terminal.py",
+        322,
+        326
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "afa407db4fdcc9d3d5c6648d049e8063",
+    "content": "        if not self.container:\n            raise RuntimeError(\"Sandbox not initialized\")\n\n        try:",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        178,
+        182
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        207,
+        211
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "eb09097e5014e708e21e430eca494c6a",
+    "content": "\n        Raises:\n            FileNotFoundError: If source file does not exist.\n            RuntimeError: If copy operation fails.",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        260,
+        264
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        320,
+        324
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "8915a5e74732dcccbef733d6272f1418",
+    "content": "        Raises:\n            FileNotFoundError: If source file does not exist.\n            RuntimeError: If copy operation fails.\n        \"\"\"",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        261,
+        265
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        321,
+        325
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "3d94ee01ccf8585e34f4bf893dbf61be",
+    "content": "            FileNotFoundError: If source file does not exist.\n            RuntimeError: If copy operation fails.\n        \"\"\"\n        try:",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        262,
+        266
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        322,
+        326
+      ]
+    ],
+    "size": 4
+  },
+  {
+    "hash": "95b01353f3e6bf333b3971654588a764",
+    "content": "                current_dir = os.path.dirname(os.path.abspath(__file__))\n                project_root = os.path.abspath(os.path.join(current_dir, \"../..\"))\n                file_path = os.path.join(project_root, \"assets\", \"icons\", icon_file)\n",
+    "locations": [
+      [
+        "app\\ui\\icon_manager.py",
+        65,
+        69
+      ],
+      [
+        "app\\ui\\icon_manager.py",
+        181,
+        185
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "b1e80aaecbfd9529b3dcd5db6e53d5e4",
+    "content": "\n        Args:\n            icon_name (str): \u0418\u043c\u044f \u0438\u043a\u043e\u043d\u043a\u0438 \u0438\u0437 \u043c\u0430\u043d\u0438\u0444\u0435\u0441\u0442\u0430\n",
+    "locations": [
+      [
+        "app\\ui\\icon_manager.py",
+        83,
+        87
+      ],
+      [
+        "app\\ui\\icon_manager.py",
+        160,
+        164
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "e7d67c930e78ecafe34277d71b8fafe3",
+    "content": "                        QTabWidget::tab-bar {\n                            alignment: left;\n                        }\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        553,
+        557
+      ],
+      [
+        "app\\ui\\main_window.py",
+        674,
+        678
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "59fa44f3e4b9c87ba78b15e94d6b0e37",
+    "content": "                            font-weight: bold;\n                            color: #ffffff;\n                        }\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        572,
+        576
+      ],
+      [
+        "app\\ui\\main_window.py",
+        649,
+        653
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "dbd3db10f91e547943f5e2d2534062aa",
+    "content": "                            titlebar-close-icon: url(close.png);\n                            titlebar-normal-icon: url(undock.png);\n                        }\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        616,
+        620
+      ],
+      [
+        "app\\ui\\main_window.py",
+        737,
+        741
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "ae51e4a60e7b44a729bca2dd0c152665",
+    "content": "                            border-radius: 2px;\n                            background: transparent;\n                        }\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        630,
+        634
+      ],
+      [
+        "app\\ui\\main_window.py",
+        750,
+        754
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "250a58eb141ee96603d04968178420db",
+    "content": "\n            # \u041e\u0442\u043e\u0431\u0440\u0430\u0436\u0430\u0435\u043c \u0435\u0433\u043e \u043a\u0430\u043a \u043d\u0435\u043c\u043e\u0434\u0430\u043b\u044c\u043d\u044b\u0439 \u0434\u0438\u0430\u043b\u043e\u0433\n            dialog.show()\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        995,
+        999
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1014,
+        1018
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "7ad058a884c2196225423628e9f697e4",
+    "content": "        try:\n            if not hasattr(self, 'project_explorer'):\n                return\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1308,
+        1312
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1401,
+        1405
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "77c20fc4aa76b1662c43d7d6840a764d",
+    "content": "            file_path = self.project_explorer.tree_model.filePath(index)\n            if not file_path:\n                return\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1313,
+        1317
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1411,
+        1415
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "6c5de8de0e09269aed9cbb7dddc1ee9e",
+    "content": "\n            # \u041e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441\u043e\u0431\u044b\u0442\u0438\u0439, \u0447\u0442\u043e\u0431\u044b \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043c\u043e\u0433 \u0440\u0435\u0430\u0433\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432\u043e \u0432\u0440\u0435\u043c\u044f \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f\n            QApplication.processEvents()\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1493,
+        1497
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1513,
+        1517
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1539,
+        1543
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1568,
+        1572
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "3b84b21ed23bbbec802d583430d4121f",
+    "content": "\n        # \u0410\u043a\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043c \u0432\u043a\u043b\u0430\u0434\u043a\u0443 \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f\n        self.central_tabs.setCurrentIndex(index)\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1684,
+        1688
+      ],
+      [
+        "app\\ui\\main_window.py",
+        1698,
+        1702
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "2ba7a93febaaf6480ce919bab9269c99",
+    "content": "                {\"code\": \"en_US\", \"name\": tr(\"language.english\", \"English\")},\n                {\"code\": \"ru_RU\", \"name\": tr(\"language.russian\", \"\u0420\u0443\u0441\u0441\u043a\u0438\u0439\")}\n            ]\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1758,
+        1762
+      ],
+      [
+        "app\\ui\\menu_manager.py",
+        337,
+        341
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "ef18507c4d7835e7b4270ee970a7b0f3",
+    "content": "            import logging\n            logger = logging.getLogger(__name__)\n            logger.info(f\"\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043e\u0431\u044b\u0442\u0438\u0435 \u0441\u043c\u0435\u043d\u044b \u044f\u0437\u044b\u043a\u0430 \u043d\u0430: {language_code}\")\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1850,
+        1854
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2840,
+        2844
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "820b54daf3c04dab1fc9ea8a82d097b7",
+    "content": "            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u043e\u043a\u043d\u0430\n            from app.ui.i18n.translator import tr\n            self.setWindowTitle(tr(\"app.title\", \"GopiAI\"))\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1854,
+        1858
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2844,
+        2848
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "2826dd56d10e52e3aee46cf5abcd9c3b",
+    "content": "                    self.menu_manager.update_translations()\n                else:\n                    logger.warning(\"\u041c\u0435\u0442\u043e\u0434 update_translations \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d \u0432 menu_manager\")\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1862,
+        1866
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2852,
+        2856
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "02d020526fb8f1d9751c163b53b05a41",
+    "content": "\n            # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438 \u0432\u043a\u043b\u0430\u0434\u043e\u043a\n            self._update_tab_titles()\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1865,
+        1869
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2855,
+        2859
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "28571086d11893a44ec8467d58e8a54c",
+    "content": "                        if translated_title != child.windowTitle():\n                            child.setWindowTitle(translated_title)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a {obj_name}: {translated_title}\")\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1877,
+        1881
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2867,
+        2871
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "98e5dedf13e16c902f90d142b29c6d96",
+    "content": "                        if translated_text != child.text():\n                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043a\u043d\u043e\u043f\u043a\u0438 {obj_name}: {translated_text}\")\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1887,
+        1891
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2877,
+        2881
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "ba6795b6616f9828e49210d675ea8b37",
+    "content": "                        if translated_text != child.text():\n                            child.setText(translated_text)\n                            logger.debug(f\"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0442\u0435\u043a\u0441\u0442 \u043c\u0435\u0442\u043a\u0438 {obj_name}: {translated_text}\")\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        1897,
+        1901
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2887,
+        2891
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "82b0bebaa73840e75602cfdfd26af52e",
+    "content": "            current_index = self.central_tabs.currentIndex()\n            if current_index == -1:\n                return False  # \u041d\u0435\u0442 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u0432\u043a\u043b\u0430\u0434\u043a\u0438\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2348,
+        2352
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2397,
+        2401
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "7e04df9a48ea4ea30a0da9c21ec71dcc",
+    "content": "            editor = self.central_tabs.widget(current_index)\n            if not hasattr(editor, 'file_path'):\n                return False  # \u041d\u0435 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440 \u043a\u043e\u0434\u0430\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2353,
+        2357
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2402,
+        2406
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "e95512952a879943eab225d17586be37",
+    "content": "                f\"{tr('dialogs.file.save_error', 'Error saving file')}: {str(e)}\"\n            )\n            return False\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2389,
+        2393
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2453,
+        2457
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "38ed5f586cb769dcedcb1a2575dec1b0",
+    "content": "                    tr(\"agent.not_initialized_message\", \"Please initialize the agent first.\")\n                )\n                return\n",
+    "locations": [
+      [
+        "app\\ui\\main_window.py",
+        2598,
+        2602
+      ],
+      [
+        "app\\ui\\main_window.py",
+        2635,
+        2639
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "922be25868858b4436efe7a0a5ab3ddc",
+    "content": "\nfrom .icon_manager import get_icon\nfrom .i18n.translator import tr\n",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        6,
+        10
+      ],
+      [
+        "app\\ui\\tools_widget.py",
+        7,
+        11
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "164eb45f8b7673bed883c1f8c4865957",
+    "content": "from .icon_manager import get_icon\nfrom .i18n.translator import tr\n\n",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        7,
+        11
+      ],
+      [
+        "app\\ui\\tools_widget.py",
+        8,
+        12
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "25260614e9bbb88b02d9824f52fe0611",
+    "content": "\n    def __init__(self, parent=None):\n        super().__init__(parent)\n",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        13,
+        17
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        225,
+        229
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        298,
+        302
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        75,
+        79
+      ],
+      [
+        "app\\ui\\syntax_highlighter.py",
+        55,
+        59
+      ],
+      [
+        "app\\ui\\tools_widget.py",
+        14,
+        18
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "d891bc06f7fc6d212d00b6dab8a9b896",
+    "content": "        self.layout = QVBoxLayout(self)\n        self.layout.setContentsMargins(0, 0, 0, 0)\n        self.layout.setSpacing(0)\n",
+    "locations": [
+      [
+        "app\\ui\\output_widget.py",
+        18,
+        22
+      ],
+      [
+        "app\\ui\\project_explorer.py",
+        82,
+        86
+      ],
+      [
+        "app\\ui\\tools_widget.py",
+        19,
+        23
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "952fe8810a569af1733848ca71eb8762",
+    "content": "from app.ui.icon_manager import get_icon\nfrom app.ui.i18n.translator import tr\nfrom app.logger import logger\n",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        17,
+        21
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        20,
+        24
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "0972ef22d5f30eba7352e6febb3b5c46",
+    "content": "from app.ui.i18n.translator import tr\nfrom app.logger import logger\n\n",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        18,
+        22
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        21,
+        25
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "cdf15650b87bd24f9ebf3e03f1e80019",
+    "content": "        line.setFrameShape(QFrame.HLine)\n        line.setFrameShadow(QFrame.Sunken)\n        layout.addWidget(line)\n",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        121,
+        125
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        180,
+        184
+      ],
+      [
+        "app\\ui\\plan_view_widget.py",
+        242,
+        246
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        143,
+        147
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "4fec97c70fa38d84ad0d6611ffd1514d",
+    "content": "        super().__init__(parent)\n\n        self._setup_ui()\n",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        227,
+        231
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        128,
+        132
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "2d0d7917095548ca4b3a8b573ddf2f50",
+    "content": "    def _setup_ui(self):\n        \"\"\"\u041d\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441.\"\"\"\n        layout = QVBoxLayout(self)\n",
+    "locations": [
+      [
+        "app\\ui\\plan_view_widget.py",
+        306,
+        310
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        165,
+        169
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        132,
+        136
+      ],
+      [
+        "app\\ui\\thought_tree_widget.py",
+        233,
+        237
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1e2e4e6482c06c302f7c4f52613da1d2",
+    "content": "            QMessageBox.Yes | QMessageBox.No,\n            QMessageBox.No\n        )\n",
+    "locations": [
+      [
+        "app\\ui\\project_explorer.py",
+        373,
+        377
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        233,
+        237
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "fe929676e0e9015273eb0b5e310af4d8",
+    "content": "\n        self.approve_button.setEnabled(False)\n        self.reject_button.setEnabled(False)\n",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        543,
+        547
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        568,
+        572
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "bc2a268eef08bf53324bcace2505885c",
+    "content": "        self.new_plan_button.setEnabled(True)\n        self.execute_button.setEnabled(True)\n        self.stop_button.setEnabled(False)\n",
+    "locations": [
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        755,
+        759
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        781,
+        785
+      ],
+      [
+        "app\\ui\\reasoning_agent_dialog.py",
+        827,
+        831
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "034c05eda0360332db6ef51ef2b9a36c",
+    "content": "                    indent=2,\n                    ensure_ascii=False\n                )\n",
+    "locations": [
+      [
+        "app\\ui\\session_history_manager.py",
+        244,
+        248
+      ],
+      [
+        "app\\ui\\session_history_manager.py",
+        307,
+        311
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1d9a918c31156027726e527f3f2a9ca1",
+    "content": "\n    Args:\n        app (QApplication): \u042d\u043a\u0437\u0435\u043c\u043f\u043b\u044f\u0440 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f.\n",
+    "locations": [
+      [
+        "app\\ui\\styles.py",
+        126,
+        130
+      ],
+      [
+        "app\\ui\\styles.py",
+        160,
+        164
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "406b00dafbfa0b01f3a3629067945439",
+    "content": "    languageChanged = Signal(str)\n\n    _instance = None\n",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        31,
+        35
+      ],
+      [
+        "app\\ui\\i18n\\translator.py",
+        11,
+        15
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "2a7f36751c505a8becdc28c073b143d9",
+    "content": "        Args:\n            name (str): \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme_type (str, optional): \u0422\u0438\u043f \u0442\u0435\u043c\u044b. \u0415\u0441\u043b\u0438 \u043d\u0435 \u0443\u043a\u0430\u0437\u0430\u043d, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f \u0442\u0435\u043c\u0430.\n",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        529,
+        533
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        548,
+        552
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1f4d92fb9255299281736d2384ecf66f",
+    "content": "        \"\"\"\n        if not self.has_color_system or not self.color_system:\n            return None\n",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        535,
+        539
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        554,
+        558
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "905f63ca9d0587b37a5030d2c57a5345",
+    "content": "\n        if not theme_type:\n            theme_type = self.get_theme_type()\n",
+    "locations": [
+      [
+        "app\\ui\\theme_manager.py",
+        538,
+        542
+      ],
+      [
+        "app\\ui\\theme_manager.py",
+        557,
+        561
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "81c243e0733389ec44cdd6d0a4ce2912",
+    "content": "        theme_type = self.current_visual_theme\n        if theme_type not in self.themes:\n            theme_type = 'light'\n",
+    "locations": [
+      [
+        "app\\utils\\theme_manager.py",
+        112,
+        116
+      ],
+      [
+        "app\\utils\\theme_manager.py",
+        182,
+        186
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "8c2b30184b65fe16963f80d530c1ba17",
+    "content": "import os\nimport sys\nfrom pathlib import Path\n",
+    "locations": [
+      [
+        "app\\ui\\i18n\\compile_translations.py",
+        1,
+        5
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\compile_themes.py",
+        7,
+        11
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "c8c3b5b7acaefd6344d2dfd53fd26929",
+    "content": "                \"warning\": \"#F39C12\",         # \u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435\n                \"success\": \"#2ECC71\",         # \u0423\u0441\u043f\u0435\u0445\n                \"info\": \"#3498DB\",            # \u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        67,
+        71
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        98,
+        102
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "0723a2ec1348347dab97a0ba447f5f3f",
+    "content": "                \"button-hover-text\": \"@on-primary\",\n                \"button-pressed\": \"@primary-variant\",\n                \"button-disabled\": \"@disabled\",\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        118,
+        122
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        158,
+        162
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "30aa5fb5fc74a1409c35e2cf155981ff",
+    "content": "                \"input-text\": \"@on-surface\",\n                \"input-border\": \"@border\",\n                \"input-focus-border\": \"@primary\",\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        124,
+        128
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        164,
+        168
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "8f779911025ad1801142b291124800e9",
+    "content": "                \"tab-text\": \"@on-background\",\n                \"tab-selected\": \"@primary\",\n                \"tab-selected-text\": \"@on-primary\",\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        130,
+        134
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        170,
+        174
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "39cb55fd43f585450902c874e8130ed9",
+    "content": "                # \u0414\u043e\u043a-\u0432\u0438\u0434\u0436\u0435\u0442\u044b\n                \"dock-title\": \"@background-variant\",\n                \"dock-border\": \"@border\",\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        134,
+        138
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        174,
+        178
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "9ef5d655f2609a15aa4183504f25c0ea",
+    "content": "                \"menu-text\": \"@on-background\",\n                \"menu-hover\": \"@primary\",\n                \"menu-hover-text\": \"@on-primary\",\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        140,
+        144
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        180,
+        184
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "224dd8d05e1d7c25d9776e67cb747d43",
+    "content": "        Args:\n            name: \u0418\u043c\u044f \u0446\u0432\u0435\u0442\u0430\n            theme: \u0422\u0435\u043c\u0430 (\u0435\u0441\u043b\u0438 None, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0442\u0435\u043a\u0443\u0449\u0430\u044f)\n",
+    "locations": [
+      [
+        "app\\ui\\themes\\color_system.py",
+        202,
+        206
+      ],
+      [
+        "app\\ui\\themes\\color_system.py",
+        245,
+        249
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "78be13265d6e8b349d0939dff9fee272",
+    "content": "        for i, file_path in enumerate(files):\n            if not self.is_running:\n                return\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        118,
+        122
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        173,
+        177
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        251,
+        255
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "56c7bf43bfdfc94f9150b6f6c892669f",
+    "content": "            try:\n                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                    content = f.read()\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        122,
+        126
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        177,
+        181
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        255,
+        259
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1f98ea9326e972e4a0ee614cc6cfd338",
+    "content": "                # \u041e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u043c \u043f\u0440\u043e\u0433\u0440\u0435\u0441\u0441\n                progress = int((i + 1) / len(files) * 100)\n                self.signals.progress.emit(progress)\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        145,
+        149
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        233,
+        237
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        264,
+        268
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "f567fde58ab7727627bf1381e01fec6a",
+    "content": "\n            except Exception as e:\n                self.signals.message.emit(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        148,
+        152
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        236,
+        240
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        267,
+        271
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "0d856dce65e35e654be29423b2a041dd",
+    "content": "            # \u041f\u0440\u043e\u043f\u0443\u0441\u043a\u0430\u0435\u043c \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438 venv \u0438 .git\n            if 'venv' in root or '.git' in root:\n                continue\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        440,
+        444
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        456,
+        460
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "2885146a695a9fc3b01141a66831cb7c",
+    "content": "        try:\n            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:\n                content = f.read()\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        502,
+        506
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        547,
+        551
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        612,
+        616
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "da962171ff27bc23f909a67b0a8678bd",
+    "content": "\n        except Exception as e:\n            print(tr(\"simple_ui_auditor.analysis_error\", f\"  \u26a0\ufe0f \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0435 {file_path}: {str(e)}\"))\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        521,
+        525
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        596,
+        600
+      ],
+      [
+        "app\\ui\\utils\\simple_ui_auditor_final.py",
+        620,
+        624
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "6a32928bb927d66d5e7c15e904caa451",
+    "content": "\n# \u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u043a\u043e\u0440\u043d\u0435\u0432\u0443\u044e \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u044e \u043f\u0440\u043e\u0435\u043a\u0442\u0430 \u0432 \u043f\u0443\u0442\u044c \u043f\u043e\u0438\u0441\u043a\u0430 \u043c\u043e\u0434\u0443\u043b\u0435\u0439\nsys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')))\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        15,
+        19
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\compile_themes.py",
+        10,
+        14
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "7e1958c2036864937b793ec27330ae70",
+    "content": "        if not os.path.exists(source_path):\n            print(f\"\u0424\u0430\u0439\u043b {filename} \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d.\")\n            continue\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        60,
+        64
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\cleanup.py",
+        98,
+        102
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "a92cf4910fd840ee8106a99a8c0a959a",
+    "content": "import sys\nimport argparse\nfrom collections import defaultdict\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        10,
+        14
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        10,
+        14
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "39aea5f66ca47005d872b1a421be2a5f",
+    "content": "        line = line.strip()\n        if not line:\n            continue\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        37,
+        41
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        81,
+        85
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fonts_fixer.py",
+        23,
+        27
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "c82dce48cddc77b1e85409e0126fae7b",
+    "content": "    parser.add_argument(\"--output\", \"-o\", help=\"\u041f\u0443\u0442\u044c \u0434\u043b\u044f \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043d\u043e\u0433\u043e \u0444\u0430\u0439\u043b\u0430\")\n\n    args = parser.parse_args()\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        151,
+        155
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        170,
+        174
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "10e7c73c4c1731d0188ef019f7aa470f",
+    "content": "    if not os.path.exists(args.file):\n        print(f\"\u041e\u0448\u0438\u0431\u043a\u0430: {args.file} \u043d\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.\")\n        return 1\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_fixer.py",
+        156,
+        160
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py",
+        175,
+        179
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1e2183452ff502b341c11f0a6c6d410e",
+    "content": "    \u0412\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u043e\u0435 \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 CSS.\n    \"\"\"\n    result = css_content\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        99,
+        103
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        115,
+        119
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1a480815b1eac2c680528024286eeda2",
+    "content": "    if not os.path.exists(file_path):\n        print(f\"\u0424\u0430\u0439\u043b \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d: {file_path}\")\n        return\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        159,
+        163
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        195,
+        199
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "558daae539261d4deff7ef44aa45e57b",
+    "content": "\n    with open(file_path, 'r', encoding='utf-8') as f:\n        css_content = f.read()\n",
+    "locations": [
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        162,
+        166
+      ],
+      [
+        "app\\ui\\utils\\css_tools\\css_refactor.py",
+        198,
+        202
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "4b14833115b8b499426086d253635dc5",
+    "content": "        return { success: false, error: error.toString() };\n    }\n}\n",
+    "locations": [
+      [
+        "app\\tool\\browser_scripts\\elements.py",
+        94,
+        98
+      ],
+      [
+        "app\\tool\\browser_scripts\\forms.py",
+        86,
+        90
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "1421eff63102b14d61ee6b4de35e6b64",
+    "content": "\nfrom app.tool.search.base import WebSearchEngine\n\n",
+    "locations": [
+      [
+        "app\\tool\\search\\baidu_search.py",
+        1,
+        5
+      ],
+      [
+        "app\\tool\\search\\duckduckgo_search.py",
+        1,
+        5
+      ],
+      [
+        "app\\tool\\search\\google_search.py",
+        1,
+        5
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "27c206ecfcfa39ca282d00bb2db11008",
+    "content": "\n        Args:\n            sandbox_id: Sandbox ID.\n",
+    "locations": [
+      [
+        "app\\sandbox\\core\\manager.py",
+        92,
+        96
+      ],
+      [
+        "app\\sandbox\\core\\manager.py",
+        160,
+        164
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "0aff74fd1eb1e77c15886d2fbb81bfa6",
+    "content": "\n        Returns:\n            Command output as string.\n",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        145,
+        149
+      ],
+      [
+        "app\\sandbox\\core\\terminal.py",
+        321,
+        325
+      ]
+    ],
+    "size": 3
+  },
+  {
+    "hash": "805bee6d88e0c7b2a8a22c0b7b6c4461",
+    "content": "        \"\"\"\n        if not self.container:\n            raise RuntimeError(\"Sandbox not initialized\")\n",
+    "locations": [
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        177,
+        181
+      ],
+      [
+        "app\\sandbox\\core\\sandbox.py",
+        206,
+        210
+      ]
+    ],
+    "size": 3
+  }
+]

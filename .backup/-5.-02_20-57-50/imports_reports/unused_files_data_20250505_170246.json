@@ -1,0 +1,1919 @@
+{
+  "statistics": {
+    "total_files": 292,
+    "used_files": 285,
+    "unused_files": 7,
+    "usage_percentage": 97.6027397260274
+  },
+  "unused_files": [
+    "deprecated_pocketflow_workflow.py",
+    "tests\\deprecated_test_i18n_mainwindow.py",
+    "tests\\deprecated_test_i18n_settingswidget.py",
+    "tests\\deprecated_test_icon_usage_in_ui.py",
+    "tests\\deprecated_test_metacognitive_analyzer.py",
+    "examples\\benchmarks\\deprecated___init__.py",
+    "GopiAI_Flow\\pocketflow\\deprecated___init__.py"
+  ],
+  "imports_map": {
+    "analyze_dependencies.py": [
+      "subprocess",
+      "sys",
+      "pathlib",
+      "os"
+    ],
+    "check_component_connections.py": [
+      "inspect",
+      "argparse",
+      "json",
+      "sys",
+      "ast",
+      "importlib",
+      "matplotlib",
+      "os",
+      "networkx",
+      "pyvis",
+      "logging",
+      "collections",
+      "re",
+      "pathlib"
+    ],
+    "check_python_version.py": [
+      "sys",
+      "platform",
+      "os",
+      "subprocess",
+      "re"
+    ],
+    "clean_project.py": [
+      "shutil",
+      "argparse",
+      "json",
+      "sys",
+      "zipfile",
+      "pathlib",
+      "os",
+      "datetime",
+      "collections",
+      "re",
+      "mimetypes"
+    ],
+    "compile_icons.py": [
+      "sys",
+      "platform",
+      "os",
+      "subprocess",
+      "pathlib"
+    ],
+    "compile_resources.py": [
+      "sys",
+      "os",
+      "subprocess",
+      "re",
+      "pathlib"
+    ],
+    "create_basic_icons.py": [
+      "base64",
+      "shutil",
+      "json",
+      "os"
+    ],
+    "deprecated_pocketflow_workflow.py": [],
+    "duplicate_code_classes.py": [
+      "hashlib",
+      "json",
+      "sys",
+      "ast",
+      "typing"
+    ],
+    "duplicate_code_fragments.py": [
+      "hashlib",
+      "json",
+      "sys",
+      "os",
+      "typing",
+      "collections",
+      "re",
+      "pathlib"
+    ],
+    "duplicate_code_functions.py": [
+      "hashlib",
+      "json",
+      "sys",
+      "ast",
+      "typing",
+      "pathlib"
+    ],
+    "duplicate_code_report.py": [
+      "json",
+      "os",
+      "html",
+      "typing",
+      "difflib",
+      "collections",
+      "datetime",
+      "pathlib"
+    ],
+    "duplicate_code_scanner.py": [
+      "hashlib",
+      "duplicate_code_functions",
+      "argparse",
+      "json",
+      "sys",
+      "duplicate_code_fragments",
+      "duplicate_code_classes",
+      "duplicate_code_report",
+      "os",
+      "datetime",
+      "pathlib"
+    ],
+    "find_duplicate_code.py": [
+      "hashlib",
+      "json",
+      "sys",
+      "ast",
+      "os",
+      "datetime",
+      "html",
+      "typing",
+      "difflib",
+      "collections",
+      "re",
+      "pathlib"
+    ],
+    "find_unused_files.py": [
+      "json",
+      "sys",
+      "ast",
+      "os",
+      "datetime",
+      "networkx",
+      "collections",
+      "re",
+      "pathlib"
+    ],
+    "icons_rc.py": [
+      "PySide6"
+    ],
+    "init_database.py": [
+      "sqlite3",
+      "json",
+      "sys",
+      "os",
+      "typing"
+    ],
+    "language_diagnostics.py": [
+      "json",
+      "sys",
+      "os",
+      "translate_checker",
+      "logging",
+      "pathlib"
+    ],
+    "llm_interaction.py": [],
+    "main.py": [
+      "argparse",
+      "app",
+      "loguru",
+      "sys",
+      "PySide6",
+      "os",
+      "create_basic_icons",
+      "icons_rc"
+    ],
+    "mark_dead_code.py": [
+      "shutil",
+      "json",
+      "sys",
+      "os",
+      "datetime",
+      "re",
+      "pathlib"
+    ],
+    "run_fixed_pocketflow.py": [
+      "argparse",
+      "json",
+      "app",
+      "asyncio",
+      "typing",
+      "logging"
+    ],
+    "run_flow.py": [
+      "app",
+      "time",
+      "asyncio"
+    ],
+    "run_mcp.py": [
+      "app",
+      "argparse",
+      "sys",
+      "asyncio"
+    ],
+    "run_mcp_server.py": [
+      "app"
+    ],
+    "run_pocketflow.py": [
+      "argparse",
+      "json",
+      "app",
+      "asyncio",
+      "typing",
+      "logging"
+    ],
+    "run_ui_diagnostics.py": [
+      "PySide6",
+      "app",
+      "sys",
+      "os"
+    ],
+    "run_web_interface.py": [
+      "app",
+      "uvicorn"
+    ],
+    "run_with_venv.py": [
+      "platform",
+      "subprocess",
+      "sys",
+      "os"
+    ],
+    "setup.py": [
+      "setuptools"
+    ],
+    "setup_mcp_servers.py": [
+      "json",
+      "sys",
+      "os",
+      "typing",
+      "subprocess"
+    ],
+    "translate_checker.py": [
+      "json",
+      "sys",
+      "os"
+    ],
+    "visualize_dependencies.py": [
+      "json",
+      "sys",
+      "matplotlib",
+      "os",
+      "networkx",
+      "pyvis",
+      "collections",
+      "graphviz",
+      "datetime",
+      "pathlib"
+    ],
+    "vulture_clean_scan.py": [
+      "json",
+      "sys",
+      "os",
+      "datetime",
+      "collections",
+      "subprocess",
+      "re",
+      "pathlib"
+    ],
+    "app\\bedrock.py": [
+      "json",
+      "sys",
+      "time",
+      "uuid",
+      "typing",
+      "boto3",
+      "datetime"
+    ],
+    "app\\config.py": [
+      "app",
+      "threading",
+      "os",
+      "typing",
+      "tomllib",
+      "pydantic",
+      "pathlib"
+    ],
+    "app\\exceptions.py": [],
+    "app\\interfaces.py": [
+      "typing",
+      "abc",
+      "enum",
+      "pydantic"
+    ],
+    "app\\llm.py": [
+      "math",
+      "app",
+      "tenacity",
+      "typing",
+      "openai",
+      "tiktoken"
+    ],
+    "app\\logger.py": [
+      "app",
+      "loguru",
+      "sys",
+      "os",
+      "datetime",
+      "pathlib"
+    ],
+    "app\\schema.py": [
+      "enum",
+      "typing",
+      "dataclasses",
+      "pydantic",
+      "datetime"
+    ],
+    "app\\__init__.py": [
+      "sys"
+    ],
+    "GopiAI_Flow\\setup.py": [
+      "setuptools"
+    ],
+    "scripts\\build_resources.py": [
+      "shutil",
+      "argparse",
+      "sys",
+      "os",
+      "glob",
+      "subprocess",
+      "pathlib"
+    ],
+    "scripts\\cleanup_logs.py": [
+      "argparse",
+      "sys",
+      "os",
+      "glob",
+      "datetime",
+      "pathlib"
+    ],
+    "scripts\\debug_ui.py": [
+      "app",
+      "sys",
+      "main",
+      "PySide6",
+      "os",
+      "logging",
+      "pathlib"
+    ],
+    "scripts\\experience_archiver.py": [
+      "argparse",
+      "json",
+      "sys",
+      "app",
+      "os",
+      "pathlib"
+    ],
+    "scripts\\generate_icon_set.py": [
+      "shutil",
+      "argparse",
+      "json",
+      "sys",
+      "os",
+      "subprocess",
+      "pathlib"
+    ],
+    "tests\\deprecated_test_i18n_mainwindow.py": [
+      "PySide6",
+      "app",
+      "pytest",
+      "sys"
+    ],
+    "tests\\deprecated_test_i18n_settingswidget.py": [
+      "PySide6",
+      "app",
+      "pytest",
+      "sys"
+    ],
+    "tests\\deprecated_test_icon_usage_in_ui.py": [
+      "app",
+      "pytest"
+    ],
+    "tests\\deprecated_test_metacognitive_analyzer.py": [
+      "unittest",
+      "app",
+      "json",
+      "os",
+      "pytest"
+    ],
+    "tests\\test_browser_access.py": [
+      "argparse",
+      "app",
+      "sys",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "tests\\test_browser_access_agent.py": [
+      "app",
+      "sys",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "tests\\test_chat_paths.py": [
+      "app",
+      "tempfile",
+      "asyncio",
+      "os",
+      "pathlib"
+    ],
+    "tests\\test_error_analysis.py": [
+      "shutil",
+      "unittest",
+      "json",
+      "app",
+      "tempfile",
+      "time",
+      "os"
+    ],
+    "tests\\test_experience_adapter.py": [
+      "shutil",
+      "unittest",
+      "json",
+      "app",
+      "tempfile",
+      "os",
+      "asyncio",
+      "datetime"
+    ],
+    "tests\\test_experience_manager.py": [
+      "shutil",
+      "unittest",
+      "json",
+      "app",
+      "tempfile",
+      "os",
+      "datetime"
+    ],
+    "tests\\test_exploration_strategies.py": [
+      "app",
+      "unittest",
+      "time",
+      "os",
+      "asyncio"
+    ],
+    "tests\\test_feedback_system.py": [
+      "shutil",
+      "unittest",
+      "app",
+      "tempfile",
+      "os",
+      "asyncio"
+    ],
+    "tests\\test_file_system_access.py": [
+      "argparse",
+      "app",
+      "sys",
+      "tempfile",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "tests\\test_i18n_translations.py": [
+      "app",
+      "pytest",
+      "json",
+      "os"
+    ],
+    "tests\\test_icon_manager.py": [
+      "app",
+      "pytest",
+      "os"
+    ],
+    "tests\\test_performance_monitor.py": [
+      "unittest",
+      "json",
+      "sys",
+      "tempfile",
+      "app",
+      "time",
+      "asyncio",
+      "os",
+      "pytest",
+      "datetime"
+    ],
+    "tests\\test_permissions.py": [
+      "app",
+      "sys",
+      "PySide6",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "tests\\test_personalization_manager.py": [
+      "shutil",
+      "unittest",
+      "json",
+      "app",
+      "tempfile",
+      "os",
+      "datetime"
+    ],
+    "tests\\test_planning_strategies.py": [
+      "app",
+      "json",
+      "sys",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "tests\\test_reasoning_error_integration.py": [
+      "shutil",
+      "unittest",
+      "app",
+      "tempfile",
+      "os",
+      "asyncio"
+    ],
+    "tests\\test_reflection_agent.py": [
+      "app",
+      "unittest",
+      "json",
+      "asyncio",
+      "datetime"
+    ],
+    "tests\\test_resource_manager.py": [
+      "unittest",
+      "json",
+      "app",
+      "asyncio",
+      "os",
+      "datetime"
+    ],
+    "tests\\test_terminal_access.py": [
+      "argparse",
+      "app",
+      "sys",
+      "tempfile",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "tests\\test_text_editor.py": [
+      "app",
+      "tempfile",
+      "asyncio",
+      "os",
+      "pathlib"
+    ],
+    "tests\\test_themed_icons.py": [
+      "app",
+      "json",
+      "sys",
+      "PySide6",
+      "os",
+      "re"
+    ],
+    "tests\\test_thought_tree.py": [
+      "app",
+      "json",
+      "sys",
+      "tempfile",
+      "os",
+      "typing"
+    ],
+    "tests\\test_ui_components.py": [
+      "shutil",
+      "unittest",
+      "json",
+      "sys",
+      "tempfile",
+      "app",
+      "PySide6",
+      "time",
+      "os",
+      "pathlib"
+    ],
+    "app\\agent\\agent_manager.py": [
+      "typing",
+      "app",
+      "threading"
+    ],
+    "app\\agent\\base.py": [
+      "abc",
+      "app",
+      "contextlib",
+      "typing",
+      "pydantic"
+    ],
+    "app\\agent\\browser.py": [
+      "app",
+      "typing",
+      "pydantic",
+      "json"
+    ],
+    "app\\agent\\browser_access.py": [
+      "typing",
+      "app",
+      "json",
+      "asyncio"
+    ],
+    "app\\agent\\browser_access_agent.py": [
+      "app",
+      "json",
+      "time",
+      "asyncio",
+      "typing",
+      "pydantic"
+    ],
+    "app\\agent\\browser_agent.py": [
+      "app",
+      "typing",
+      "pydantic",
+      "json"
+    ],
+    "app\\agent\\coding_agent.py": [
+      "app",
+      "typing",
+      "pydantic",
+      "json"
+    ],
+    "app\\agent\\error_analysis_system.py": [
+      "re",
+      "shutil",
+      "enum",
+      "json",
+      "app",
+      "traceback",
+      "time",
+      "os",
+      "typing",
+      "collections",
+      "datetime"
+    ],
+    "app\\agent\\error_manager.py": [
+      "app",
+      "json",
+      "traceback",
+      "time",
+      "os",
+      "typing",
+      "datetime"
+    ],
+    "app\\agent\\experience_adapter.py": [
+      "math",
+      "app",
+      "json",
+      "time",
+      "os",
+      "typing",
+      "dataclasses",
+      "datetime"
+    ],
+    "app\\agent\\experience_manager.py": [
+      "shutil",
+      "app",
+      "json",
+      "zipfile",
+      "os",
+      "typing",
+      "logging",
+      "datetime",
+      "pathlib"
+    ],
+    "app\\agent\\exploration_feedback_integration.py": [
+      "app",
+      "typing",
+      "time",
+      "asyncio"
+    ],
+    "app\\agent\\exploration_strategy.py": [
+      "abc",
+      "enum",
+      "json",
+      "app",
+      "time",
+      "asyncio",
+      "os",
+      "typing"
+    ],
+    "app\\agent\\feedback_system.py": [
+      "enum",
+      "json",
+      "app",
+      "time",
+      "os",
+      "typing"
+    ],
+    "app\\agent\\file_exploration_strategy.py": [
+      "app",
+      "time",
+      "os",
+      "asyncio",
+      "typing",
+      "re"
+    ],
+    "app\\agent\\file_system_access.py": [
+      "shutil",
+      "app",
+      "json",
+      "asyncio",
+      "os",
+      "typing",
+      "re",
+      "pathlib"
+    ],
+    "app\\agent\\llm_interaction.py": [
+      "logging",
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\agent\\manus.py": [
+      "app",
+      "pydantic"
+    ],
+    "app\\agent\\mcp.py": [
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\agent\\metacognitive_analyzer.py": [
+      "re",
+      "enum",
+      "json",
+      "app",
+      "time",
+      "asyncio",
+      "typing",
+      "collections",
+      "datetime"
+    ],
+    "app\\agent\\performance_monitor.py": [
+      "psutil",
+      "enum",
+      "json",
+      "app",
+      "time",
+      "threading",
+      "asyncio",
+      "os",
+      "typing",
+      "dataclasses",
+      "logging",
+      "collections",
+      "datetime",
+      "statistics"
+    ],
+    "app\\agent\\permission_manager.py": [
+      "enum",
+      "fnmatch",
+      "time",
+      "typing",
+      "logging"
+    ],
+    "app\\agent\\personalization_manager.py": [
+      "enum",
+      "json",
+      "app",
+      "time",
+      "os",
+      "typing",
+      "dataclasses",
+      "collections",
+      "datetime"
+    ],
+    "app\\agent\\planning.py": [
+      "typing"
+    ],
+    "app\\agent\\planning_mock.py": [
+      "typing"
+    ],
+    "app\\agent\\planning_strategy.py": [
+      "abc",
+      "app",
+      "enum",
+      "json",
+      "typing",
+      "re"
+    ],
+    "app\\agent\\react.py": [
+      "typing",
+      "app",
+      "abc",
+      "pydantic"
+    ],
+    "app\\agent\\reasoning.py": [
+      "app",
+      "tempfile",
+      "time",
+      "os",
+      "asyncio",
+      "typing",
+      "pydantic",
+      "datetime"
+    ],
+    "app\\agent\\reflection_agent.py": [
+      "enum",
+      "json",
+      "app",
+      "time",
+      "os",
+      "asyncio",
+      "datetime",
+      "typing",
+      "re"
+    ],
+    "app\\agent\\resource_manager.py": [
+      "enum",
+      "app",
+      "concurrent",
+      "time",
+      "threading",
+      "asyncio",
+      "os",
+      "typing",
+      "dataclasses",
+      "heapq",
+      "logging",
+      "datetime"
+    ],
+    "app\\agent\\swe.py": [
+      "app",
+      "typing",
+      "pydantic"
+    ],
+    "app\\agent\\terminal_access.py": [
+      "app",
+      "sys",
+      "asyncio",
+      "shlex",
+      "os",
+      "typing",
+      "subprocess",
+      "re"
+    ],
+    "app\\agent\\text_editor_access.py": [
+      "app",
+      "time",
+      "os",
+      "typing",
+      "difflib",
+      "re"
+    ],
+    "app\\agent\\thought_tree.py": [
+      "app",
+      "json",
+      "time",
+      "uuid",
+      "typing"
+    ],
+    "app\\agent\\toolcall.py": [
+      "app",
+      "typing",
+      "pydantic",
+      "json"
+    ],
+    "app\\agent\\uncertainty_handling.py": [
+      "app",
+      "typing",
+      "enum",
+      "json"
+    ],
+    "app\\agent\\web_exploration_strategy.py": [
+      "urllib",
+      "app",
+      "time",
+      "asyncio",
+      "typing",
+      "re"
+    ],
+    "app\\agent\\__init__.py": [
+      "app"
+    ],
+    "app\\config\\reasoning_config.py": [
+      "typing",
+      "enum",
+      "dataclasses"
+    ],
+    "app\\config\\__init__.py": [
+      "app",
+      "os",
+      "typing",
+      "toml",
+      "dataclasses",
+      "pathlib"
+    ],
+    "app\\flow\\base.py": [
+      "abc",
+      "app",
+      "enum",
+      "typing",
+      "pydantic"
+    ],
+    "app\\flow\\flow_factory.py": [
+      "typing",
+      "app"
+    ],
+    "app\\flow\\planning.py": [
+      "enum",
+      "json",
+      "app",
+      "time",
+      "typing",
+      "pydantic",
+      "re"
+    ],
+    "app\\flow\\__init__.py": [],
+    "app\\marketing\\agents.py": [
+      "typing",
+      "app"
+    ],
+    "app\\marketing\\demo.py": [
+      "typing",
+      "json",
+      "random"
+    ],
+    "app\\marketing\\fixed_nodes.py": [
+      "typing",
+      "app",
+      "pocketflow_framework"
+    ],
+    "app\\marketing\\fixed_orchestrator.py": [
+      "typing",
+      "app",
+      "copy",
+      "pocketflow_framework"
+    ],
+    "app\\marketing\\flows.py": [
+      "typing",
+      "app",
+      "pocketflow_framework"
+    ],
+    "app\\marketing\\nodes.py": [
+      "typing",
+      "app",
+      "json",
+      "pocketflow_framework"
+    ],
+    "app\\marketing\\orchestrator.py": [
+      "typing",
+      "app",
+      "pocketflow_framework"
+    ],
+    "app\\marketing\\test_fixed_workflow.py": [
+      "app",
+      "json",
+      "sys",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "app\\marketing\\test_workflow.py": [
+      "app",
+      "json",
+      "sys",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "app\\marketing\\tools.py": [
+      "typing",
+      "json",
+      "random"
+    ],
+    "app\\marketing\\__init__.py": [
+      "app"
+    ],
+    "app\\mcp\\client.py": [
+      "typing",
+      "app",
+      "json",
+      "asyncio"
+    ],
+    "app\\mcp\\sequential_thinking.py": [
+      "typing",
+      "app",
+      "json",
+      "re"
+    ],
+    "app\\mcp\\serena_integration.py": [
+      "typing",
+      "app",
+      "json",
+      "os"
+    ],
+    "app\\mcp\\serena_tools.py": [
+      "typing",
+      "app",
+      "json",
+      "os"
+    ],
+    "app\\mcp\\server.py": [
+      "inspect",
+      "argparse",
+      "json",
+      "sys",
+      "app",
+      "importlib",
+      "mcp",
+      "asyncio",
+      "os",
+      "typing",
+      "atexit",
+      "logging"
+    ],
+    "app\\mcp\\sqlite_tools.py": [
+      "app",
+      "sqlite3",
+      "json",
+      "os",
+      "typing"
+    ],
+    "app\\mcp\\__init__.py": [],
+    "app\\pocketflow\\adapters.py": [
+      "inspect",
+      "app",
+      "sys",
+      "os",
+      "asyncio",
+      "typing",
+      "logging",
+      "pocketflow_framework"
+    ],
+    "app\\pocketflow\\core.py": [
+      "sys",
+      "os",
+      "typing",
+      "logging",
+      "pocketflow_framework"
+    ],
+    "app\\pocketflow\\examples.py": [
+      "app",
+      "sys",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "app\\pocketflow\\fixed_adapters.py": [
+      "inspect",
+      "app",
+      "concurrent",
+      "threading",
+      "asyncio",
+      "warnings",
+      "typing",
+      "logging",
+      "pocketflow_framework"
+    ],
+    "app\\pocketflow\\fixed_orchestrator.py": [
+      "app",
+      "typing",
+      "logging",
+      "copy",
+      "pocketflow_framework"
+    ],
+    "app\\pocketflow\\orchestrator.py": [
+      "app",
+      "sys",
+      "uuid",
+      "os",
+      "typing",
+      "logging"
+    ],
+    "app\\pocketflow\\__init__.py": [
+      "app",
+      "sys",
+      "importlib",
+      "os",
+      "pocketflow_framework"
+    ],
+    "app\\prompt\\browser.py": [],
+    "app\\prompt\\browser_agent.py": [],
+    "app\\prompt\\coding.py": [],
+    "app\\prompt\\cot.py": [],
+    "app\\prompt\\manus.py": [],
+    "app\\prompt\\mcp.py": [],
+    "app\\prompt\\planning.py": [],
+    "app\\prompt\\reasoning.py": [],
+    "app\\prompt\\reflection.py": [],
+    "app\\prompt\\swe.py": [],
+    "app\\prompt\\toolcall.py": [],
+    "app\\prompt\\__init__.py": [],
+    "app\\sandbox\\client.py": [
+      "typing",
+      "abc",
+      "app"
+    ],
+    "app\\sandbox\\config.py": [
+      "typing",
+      "dataclasses"
+    ],
+    "app\\sandbox\\__init__.py": [
+      "app"
+    ],
+    "app\\tool\\base.py": [
+      "typing",
+      "app",
+      "abc",
+      "pydantic"
+    ],
+    "app\\tool\\bash.py": [
+      "typing",
+      "app",
+      "os",
+      "asyncio"
+    ],
+    "app\\tool\\browser_analyzer_tool.py": [
+      "app",
+      "json",
+      "asyncio",
+      "typing",
+      "pydantic"
+    ],
+    "app\\tool\\browser_control_tool.py": [
+      "app",
+      "typing",
+      "pydantic",
+      "asyncio"
+    ],
+    "app\\tool\\browser_screenshot_tool.py": [
+      "base64",
+      "app",
+      "time",
+      "os",
+      "asyncio",
+      "typing",
+      "pydantic",
+      "datetime"
+    ],
+    "app\\tool\\browser_tools_integration.py": [
+      "typing",
+      "app"
+    ],
+    "app\\tool\\browser_use_tool.py": [
+      "base64",
+      "app",
+      "json",
+      "browser_use",
+      "markdownify",
+      "asyncio",
+      "pydantic_core",
+      "typing",
+      "pydantic"
+    ],
+    "app\\tool\\code_analyze_tool.py": [
+      "app",
+      "ast",
+      "os",
+      "typing",
+      "re"
+    ],
+    "app\\tool\\code_control_tool.py": [
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\tool\\code_edit_tool.py": [
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\tool\\code_run_tool.py": [
+      "app",
+      "sys",
+      "traceback",
+      "ast",
+      "asyncio",
+      "os",
+      "typing",
+      "subprocess"
+    ],
+    "app\\tool\\code_tools_integration.py": [
+      "typing",
+      "app"
+    ],
+    "app\\tool\\create_chat_completion.py": [
+      "app",
+      "typing",
+      "pydantic"
+    ],
+    "app\\tool\\file_operators.py": [
+      "typing",
+      "app",
+      "pathlib",
+      "asyncio"
+    ],
+    "app\\tool\\file_saver.py": [
+      "aiofiles",
+      "app",
+      "os"
+    ],
+    "app\\tool\\mcp.py": [
+      "mcp",
+      "typing",
+      "app",
+      "contextlib"
+    ],
+    "app\\tool\\planning.py": [
+      "typing",
+      "app"
+    ],
+    "app\\tool\\python_execute.py": [
+      "app",
+      "sys",
+      "io",
+      "typing",
+      "multiprocessing"
+    ],
+    "app\\tool\\str_replace_editor.py": [
+      "collections",
+      "typing",
+      "app",
+      "pathlib"
+    ],
+    "app\\tool\\terminal.py": [
+      "app",
+      "os",
+      "shlex",
+      "asyncio",
+      "typing"
+    ],
+    "app\\tool\\terminate.py": [
+      "app"
+    ],
+    "app\\tool\\tool_collection.py": [
+      "app",
+      "typing",
+      "pydantic"
+    ],
+    "app\\tool\\web_search.py": [
+      "app"
+    ],
+    "app\\tool\\__init__.py": [
+      "app"
+    ],
+    "app\\ui\\agent_ui_integration.py": [],
+    "app\\ui\\browser_agent_dialog.py": [
+      "PySide6",
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\ui\\browser_agent_interface.py": [
+      "app",
+      "json",
+      "PySide6",
+      "asyncio",
+      "typing",
+      "logging"
+    ],
+    "app\\ui\\browser_tab_widget.py": [
+      "app",
+      "icon_manager",
+      "PySide6",
+      "os",
+      "browser_widget"
+    ],
+    "app\\ui\\browser_widget.py": [
+      "sys",
+      "PySide6",
+      "platform",
+      "os",
+      "ctypes",
+      "cefpython3"
+    ],
+    "app\\ui\\chat_widget.py": [
+      "json",
+      "sys",
+      "icon_manager",
+      "PySide6",
+      "theme_manager",
+      "os",
+      "i18n",
+      "datetime"
+    ],
+    "app\\ui\\close_button_fixer.py": [
+      "PySide6",
+      "os"
+    ],
+    "app\\ui\\code_editor.py": [
+      "syntax_highlighter",
+      "sys",
+      "PySide6",
+      "os",
+      "re"
+    ],
+    "app\\ui\\code_editor_widget.py": [
+      "PySide6",
+      "app",
+      "pathlib",
+      "os"
+    ],
+    "app\\ui\\coding_agent_dialog.py": [
+      "PySide6",
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\ui\\coding_agent_interface.py": [
+      "PySide6",
+      "typing",
+      "app",
+      "asyncio"
+    ],
+    "app\\ui\\debug_ui.py": [
+      "app",
+      "sys",
+      "PySide6",
+      "os",
+      "logging"
+    ],
+    "app\\ui\\dock_title_bar.py": [
+      "PySide6",
+      "app",
+      "os"
+    ],
+    "app\\ui\\emoji_dialog.py": [
+      "PySide6",
+      "i18n",
+      "sys",
+      "icon_manager"
+    ],
+    "app\\ui\\fix_tabs.py": [],
+    "app\\ui\\flow_visualizer.py": [
+      "app",
+      "sys",
+      "icon_manager",
+      "PySide6",
+      "i18n"
+    ],
+    "app\\ui\\icon_manager.py": [
+      "app",
+      "json",
+      "PySide6",
+      "os",
+      "re",
+      "icons_rc"
+    ],
+    "app\\ui\\language_selector.py": [
+      "PySide6",
+      "app"
+    ],
+    "app\\ui\\main_window.py": [
+      "base64",
+      "icon_manager",
+      "asyncio",
+      "i18n",
+      "dock_title_bar",
+      "pathlib",
+      "app",
+      "browser_agent_dialog",
+      "traceback",
+      "project_explorer",
+      "code_editor",
+      "close_button_fixer",
+      "threading",
+      "typing",
+      "browser_widget",
+      "subprocess",
+      "menu_manager",
+      "json",
+      "sys",
+      "chat_widget",
+      "os",
+      "reasoning_settings_dialog",
+      "browser_tab_widget",
+      "terminal_widget",
+      "output_widget",
+      "tempfile",
+      "PySide6",
+      "coding_agent_dialog",
+      "logging",
+      "icons_rc"
+    ],
+    "app\\ui\\menu_manager.py": [
+      "app",
+      "traceback",
+      "PySide6",
+      "os",
+      "typing",
+      "logging"
+    ],
+    "app\\ui\\output_widget.py": [
+      "PySide6",
+      "i18n",
+      "icon_manager"
+    ],
+    "app\\ui\\plan_view_widget.py": [
+      "PySide6",
+      "typing",
+      "app"
+    ],
+    "app\\ui\\preferences_dialog.py": [
+      "PySide6",
+      "app"
+    ],
+    "app\\ui\\project_explorer.py": [
+      "shutil",
+      "sys",
+      "icon_manager",
+      "PySide6",
+      "os",
+      "i18n"
+    ],
+    "app\\ui\\reasoning_agent_dialog.py": [
+      "app",
+      "PySide6",
+      "time",
+      "uuid",
+      "threading",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "app\\ui\\reasoning_settings_dialog.py": [
+      "PySide6",
+      "app"
+    ],
+    "app\\ui\\search_similar_icons.py": [
+      "collections",
+      "os"
+    ],
+    "app\\ui\\session_history_manager.py": [
+      "app",
+      "json",
+      "time",
+      "os",
+      "typing",
+      "datetime",
+      "pathlib"
+    ],
+    "app\\ui\\settings_widget.py": [
+      "PySide6",
+      "app",
+      "toml",
+      "os"
+    ],
+    "app\\ui\\styles.py": [
+      "PySide6",
+      "app",
+      "sys",
+      "os"
+    ],
+    "app\\ui\\svg_to_base64.py": [
+      "base64",
+      "os"
+    ],
+    "app\\ui\\syntax_highlighter.py": [
+      "PySide6",
+      "sys"
+    ],
+    "app\\ui\\terminal_widget.py": [
+      "app",
+      "sys",
+      "PySide6",
+      "threading",
+      "os",
+      "subprocess"
+    ],
+    "app\\ui\\theme_manager.py": [
+      "PySide6",
+      "app",
+      "json",
+      "os"
+    ],
+    "app\\ui\\theme_settings_dialog.py": [
+      "PySide6",
+      "logging",
+      "app"
+    ],
+    "app\\ui\\thought_tree_widget.py": [
+      "PySide6",
+      "typing",
+      "app",
+      "json"
+    ],
+    "app\\ui\\tools_widget.py": [
+      "PySide6",
+      "i18n",
+      "icon_manager"
+    ],
+    "app\\utils\\common.py": [
+      "hashlib",
+      "json",
+      "time",
+      "os",
+      "datetime",
+      "typing",
+      "logging",
+      "re"
+    ],
+    "app\\utils\\error_handling.py": [
+      "enum",
+      "functools",
+      "sys",
+      "traceback",
+      "platform",
+      "time",
+      "typing",
+      "logging",
+      "datetime"
+    ],
+    "app\\utils\\file_operations.py": [
+      "csv",
+      "shutil",
+      "json",
+      "pickle",
+      "tempfile",
+      "fnmatch",
+      "os",
+      "typing",
+      "logging"
+    ],
+    "app\\utils\\theme_manager.py": [
+      "PySide6",
+      "app",
+      "json",
+      "os"
+    ],
+    "app\\sandbox\\core\\exceptions.py": [],
+    "app\\sandbox\\core\\manager.py": [
+      "app",
+      "contextlib",
+      "docker",
+      "uuid",
+      "asyncio",
+      "typing"
+    ],
+    "app\\sandbox\\core\\sandbox.py": [
+      "app",
+      "tempfile",
+      "uuid",
+      "docker",
+      "io",
+      "os",
+      "asyncio",
+      "typing",
+      "tarfile"
+    ],
+    "app\\sandbox\\core\\terminal.py": [
+      "docker",
+      "asyncio",
+      "socket",
+      "typing",
+      "re"
+    ],
+    "app\\tool\\browser_scripts\\content.py": [],
+    "app\\tool\\browser_scripts\\elements.py": [],
+    "app\\tool\\browser_scripts\\forms.py": [],
+    "app\\tool\\browser_scripts\\monitoring.py": [],
+    "app\\tool\\browser_scripts\\page_info.py": [],
+    "app\\tool\\browser_scripts\\__init__.py": [
+      "monitoring",
+      "content",
+      "elements",
+      "page_info",
+      "forms"
+    ],
+    "app\\tool\\search\\baidu_search.py": [
+      "app",
+      "baidusearch"
+    ],
+    "app\\tool\\search\\base.py": [],
+    "app\\tool\\search\\bing_search.py": [
+      "app",
+      "typing",
+      "requests",
+      "bs4"
+    ],
+    "app\\tool\\search\\duckduckgo_search.py": [
+      "app",
+      "duckduckgo_search"
+    ],
+    "app\\tool\\search\\google_search.py": [
+      "googlesearch",
+      "app"
+    ],
+    "app\\tool\\search\\test_ddg.py": [
+      "duckduckgo_search"
+    ],
+    "app\\tool\\search\\__init__.py": [
+      "app"
+    ],
+    "app\\ui\\i18n\\compile_translations.py": [
+      "subprocess",
+      "sys",
+      "pathlib",
+      "os"
+    ],
+    "app\\ui\\i18n\\translator.py": [
+      "PySide6",
+      "app",
+      "json",
+      "os"
+    ],
+    "app\\ui\\i18n\\__init__.py": [
+      "translator"
+    ],
+    "app\\ui\\integration\\agent_helpers.py": [],
+    "app\\ui\\integration\\__init__.py": [
+      "app"
+    ],
+    "app\\ui\\themes\\color_system.py": [
+      "PySide6",
+      "json",
+      "pathlib",
+      "os"
+    ],
+    "app\\ui\\utils\\simple_ui_auditor_final.py": [
+      "app",
+      "sys",
+      "PySide6",
+      "os",
+      "datetime",
+      "re"
+    ],
+    "app\\ui\\utils\\theme_manager.py": [
+      "PySide6"
+    ],
+    "app\\ui\\utils\\__init__.py": [
+      "theme_manager"
+    ],
+    "app\\ui\\utils\\css_tools\\cleanup.py": [
+      "shutil",
+      "argparse",
+      "sys",
+      "os",
+      "re",
+      "pathlib"
+    ],
+    "app\\ui\\utils\\css_tools\\compile_themes.py": [
+      "theme_compiler",
+      "app",
+      "sys",
+      "os",
+      "pathlib"
+    ],
+    "app\\ui\\utils\\css_tools\\css_fixer.py": [
+      "argparse",
+      "sys",
+      "os",
+      "collections",
+      "re"
+    ],
+    "app\\ui\\utils\\css_tools\\css_refactor.py": [
+      "argparse",
+      "json",
+      "sys",
+      "os",
+      "collections",
+      "re",
+      "pathlib"
+    ],
+    "app\\ui\\utils\\css_tools\\fix_duplicate_selectors.py": [
+      "argparse",
+      "sys",
+      "os",
+      "collections",
+      "re"
+    ],
+    "app\\ui\\utils\\css_tools\\fonts_fixer.py": [
+      "sys",
+      "re",
+      "os"
+    ],
+    "app\\ui\\utils\\css_tools\\theme_compiler.py": [
+      "argparse",
+      "app",
+      "sys",
+      "os",
+      "re",
+      "pathlib"
+    ],
+    "app\\ui\\utils\\css_tools\\__init__.py": [
+      "css_fixer",
+      "cleanup",
+      "css_refactor"
+    ],
+    "examples\\benchmarks\\deprecated___init__.py": [],
+    "examples\\pocketflow_marketing\\complete_example.py": [
+      "typing",
+      "app",
+      "sys",
+      "os"
+    ],
+    "examples\\pocketflow_marketing\\custom_flow.py": [
+      "typing",
+      "time",
+      "copy",
+      "pocketflow_framework"
+    ],
+    "examples\\pocketflow_marketing\\debug_example.py": [
+      "inspect",
+      "time",
+      "typing",
+      "copy",
+      "pocketflow_framework"
+    ],
+    "examples\\pocketflow_marketing\\doc_example.py": [
+      "typing",
+      "time",
+      "pocketflow_framework"
+    ],
+    "examples\\pocketflow_marketing\\fixed_example.py": [
+      "typing",
+      "time",
+      "pocketflow_framework"
+    ],
+    "examples\\pocketflow_marketing\\gtm_workflow.py": [
+      "typing",
+      "app",
+      "sys",
+      "os"
+    ],
+    "examples\\pocketflow_marketing\\minimal_example.py": [
+      "typing",
+      "time",
+      "pocketflow_framework"
+    ],
+    "examples\\pocketflow_marketing\\run_custom_workflow.py": [
+      "typing",
+      "app",
+      "sys",
+      "os"
+    ],
+    "examples\\pocketflow_marketing\\simple_example.py": [
+      "typing",
+      "time",
+      "pocketflow_framework"
+    ],
+    "examples\\use_case\\async_operations_demo.py": [
+      "app",
+      "sys",
+      "time",
+      "random",
+      "asyncio",
+      "os",
+      "typing",
+      "datetime"
+    ],
+    "examples\\use_case\\experience_adaptation_demo.py": [
+      "app",
+      "json",
+      "time",
+      "asyncio",
+      "os",
+      "datetime"
+    ],
+    "examples\\use_case\\experience_export_demo.py": [
+      "shutil",
+      "app",
+      "json",
+      "tempfile",
+      "asyncio",
+      "os",
+      "datetime"
+    ],
+    "examples\\use_case\\feedback_system_demo.py": [
+      "app",
+      "json",
+      "sys",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "examples\\use_case\\performance_monitoring_demo.py": [
+      "app",
+      "json",
+      "sys",
+      "time",
+      "matplotlib",
+      "random",
+      "asyncio",
+      "os",
+      "typing",
+      "numpy",
+      "datetime"
+    ],
+    "examples\\use_case\\personalization_demo.py": [
+      "app",
+      "json",
+      "asyncio",
+      "os",
+      "datetime"
+    ],
+    "examples\\use_case\\reflection_agent_demo.py": [
+      "app",
+      "json",
+      "os",
+      "asyncio",
+      "typing"
+    ],
+    "examples\\use_case\\task_prioritization_demo.py": [
+      "app",
+      "json",
+      "time",
+      "uuid",
+      "asyncio",
+      "os",
+      "typing",
+      "datetime"
+    ],
+    "GopiAI_Flow\\pocketflow\\deprecated___init__.py": [
+      "warnings",
+      "time",
+      "copy",
+      "asyncio"
+    ],
+    "GopiAI_Flow\\pocketflow_framework\\__init__.py": [
+      "warnings",
+      "time",
+      "copy",
+      "asyncio"
+    ],
+    "GopiAI_Flow\\tests\\test_async_batch_flow.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_async_batch_node.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_async_flow.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_async_parallel_batch_flow.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_async_parallel_batch_node.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_batch_flow.py": [
+      "unittest",
+      "sys",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_batch_node.py": [
+      "unittest",
+      "sys",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_fall_back.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_flow_basic.py": [
+      "unittest",
+      "sys",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "GopiAI_Flow\\tests\\test_flow_composition.py": [
+      "unittest",
+      "sys",
+      "asyncio",
+      "pathlib",
+      "pocketflow_framework"
+    ],
+    "tests\\sandbox\\test_client.py": [
+      "app",
+      "tempfile",
+      "typing",
+      "pytest_asyncio",
+      "pytest",
+      "pathlib"
+    ],
+    "tests\\sandbox\\test_docker_terminal.py": [
+      "pytest_asyncio",
+      "docker",
+      "pytest",
+      "app"
+    ],
+    "tests\\sandbox\\test_sandbox.py": [
+      "pytest_asyncio",
+      "pytest",
+      "docker",
+      "app"
+    ],
+    "tests\\sandbox\\test_sandbox_manager.py": [
+      "app",
+      "tempfile",
+      "os",
+      "asyncio",
+      "typing",
+      "pytest_asyncio",
+      "pytest"
+    ]
+  }
+}

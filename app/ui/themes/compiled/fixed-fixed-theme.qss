@@ -1,0 +1,454 @@
+:root {
+    /* Base Colors */
+    --primary: #3498DB;
+    --primary-variant: #2980B9;
+    --secondary: #1ABC9C;
+    --accent: #E74C3C;
+    --background: #2D2D2D;
+    --surface: #3D3D3D;
+    --background-variant: #252525;
+    --on-primary: #FFFFFF;
+    --on-secondary: #FFFFFF;
+    --on-background: #FFFFFF;
+    --on-surface: #E0E0E0;
+    --error: #E74C3C;
+    --warning: #F39C12;
+    --success: #2ECC71;
+    --info: #3498DB;
+    --border: #444444;
+    --divider: #555555;
+    --disabled: #777777;
+    --hover: #505050;
+    --selected: #264F78;
+
+    /* Component Colors */
+    --button-background: #252525; /* from @background-variant */
+    --button-text: #FFFFFF; /* from @on-background */
+    --button-hover: #3498DB; /* from @primary */
+    --button-hover-text: #FFFFFF; /* from @on-primary */
+    --button-pressed: #2980B9; /* from @primary-variant */
+    --button-disabled: #777777; /* from @disabled */
+    --input-background: #3D3D3D; /* from @surface */
+    --input-text: #E0E0E0; /* from @on-surface */
+    --input-border: #444444; /* from @border */
+    --input-focus-border: #3498DB; /* from @primary */
+    --tab-background: #252525; /* from @background-variant */
+    --tab-text: #FFFFFF; /* from @on-background */
+    --tab-selected: #3498DB; /* from @primary */
+    --tab-selected-text: #FFFFFF; /* from @on-primary */
+    --dock-title: #252525; /* from @background-variant */
+    --dock-border: #444444; /* from @border */
+    --menu-background: #2D2D2D; /* from @background */
+    --menu-text: #FFFFFF; /* from @on-background */
+    --menu-hover: #3498DB; /* from @primary */
+    --menu-hover-text: #FFFFFF; /* from @on-primary */
+    --terminal-background: #1E1E1E;
+    --terminal-text: #E0E0E0;
+    --scrollbar-background: #2D2D2D; /* from @background */
+    --scrollbar-handle: #252525; /* from @background-variant */
+    --scrollbar-hover: #3498DB; /* from @primary */
+}
+
+:root {
+    /* Base Colors */
+    --primary: #3498DB;
+    --primary-variant: #2980B9;
+    --secondary: #1ABC9C;
+    --accent: #E74C3C;
+    --background: #2D2D2D;
+    --surface: #3D3D3D;
+    --background-variant: #252525;
+    --on-primary: #FFFFFF;
+    --on-secondary: #FFFFFF;
+    --on-background: #FFFFFF;
+    --on-surface: #E0E0E0;
+    --error: #E74C3C;
+    --warning: #F39C12;
+    --success: #2ECC71;
+    --info: #3498DB;
+    --border: #444444;
+    --divider: #555555;
+    --disabled: #777777;
+    --hover: #505050;
+    --selected: #264F78;
+
+    /* Component Colors */
+    --button-background: #252525; /* from @background-variant */
+    --button-text: #FFFFFF; /* from @on-background */
+    --button-hover: #3498DB; /* from @primary */
+    --button-hover-text: #FFFFFF; /* from @on-primary */
+    --button-pressed: #2980B9; /* from @primary-variant */
+    --button-disabled: #777777; /* from @disabled */
+    --input-background: #3D3D3D; /* from @surface */
+    --input-text: #E0E0E0; /* from @on-surface */
+    --input-border: #444444; /* from @border */
+    --input-focus-border: #3498DB; /* from @primary */
+    --tab-background: #252525; /* from @background-variant */
+    --tab-text: #FFFFFF; /* from @on-background */
+    --tab-selected: #3498DB; /* from @primary */
+    --tab-selected-text: #FFFFFF; /* from @on-primary */
+    --dock-title: #252525; /* from @background-variant */
+    --dock-border: #444444; /* from @border */
+    --menu-background: #2D2D2D; /* from @background */
+    --menu-text: #FFFFFF; /* from @on-background */
+    --menu-hover: #3498DB; /* from @primary */
+    --menu-hover-text: #FFFFFF; /* from @on-primary */
+    --terminal-background: #1E1E1E;
+    --terminal-text: #E0E0E0;
+    --scrollbar-background: #2D2D2D; /* from @background */
+    --scrollbar-handle: #252525; /* from @background-variant */
+    --scrollbar-hover: #3498DB; /* from @primary */
+}
+
+/* Файл исправлен css_fixer.py - устранены дублирующиеся селекторы */
+
+:root {
+    --accent: #E74C3C;
+    --background: #2D2D2D;
+    --background-variant: #252525;
+    --border: #444444;
+    --disabled: #777777;
+    --divider: #555555;
+    --error: #E74C3C;
+    --hover: #505050;
+    --info: #3498DB;
+    --on-background: #FFFFFF;
+    --on-primary: #FFFFFF;
+    --on-secondary: #FFFFFF;
+    --on-surface: #E0E0E0;
+    --primary-variant: #2980B9;
+    --scrollbar-background: #2D2D2D;
+    --secondary: #1ABC9C;
+    --selected: #264F78;
+    --success: #2ECC71;
+    --surface: #3D3D3D;
+    --terminal-text: #E0E0E0;
+    --warning: #F39C12;
+    /* Base Colors */
+    --primary: #3498DB;
+    /* Component Colors */
+    --button-background: #252525;
+    /* from @background */
+    --menu-text: #FFFFFF;
+    /* from @background */
+    --scrollbar-handle: #252525;
+    /* from @background-variant */
+    --button-text: #FFFFFF;
+    /* from @background-variant */
+    --dock-border: #444444;
+    /* from @background-variant */
+    --scrollbar-hover: #3498DB;
+    /* from @background-variant */
+    --tab-text: #FFFFFF;
+    /* from @border */
+    --input-focus-border: #3498DB;
+    /* from @border */
+    --menu-background: #2D2D2D;
+    /* from @disabled */
+    --input-background: #3D3D3D;
+    /* from @on-background */
+    --button-hover: #3498DB;
+    /* from @on-background */
+    --menu-hover: #3498DB;
+    /* from @on-background */
+    --tab-selected: #3498DB;
+    /* from @on-primary */
+    --button-pressed: #2980B9;
+    /* from @on-primary */
+    --dock-title: #252525;
+    /* from @on-primary */
+    --terminal-background: #1E1E1E;
+    /* from @on-surface */
+    --input-border: #444444;
+    /* from @primary */
+    --button-hover-text: #FFFFFF;
+    /* from @primary */
+    --menu-hover-text: #FFFFFF;
+    /* from @primary */
+    --tab-background: #252525;
+    /* from @primary */
+    --tab-selected-text: #FFFFFF;
+    /* from @primary-variant */
+    --button-disabled: #777777;
+    /* from @surface */
+    --input-text: #E0E0E0;
+}
+
+/* Файл исправлен css_fixer.py - устранены дублирующиеся селекторы */
+
+:root {
+    --accent: #E74C3C;
+    --background: #2D2D2D;
+    --background-variant: #252525;
+    --border: #444444;
+    --disabled: #777777;
+    --divider: #555555;
+    --error: #E74C3C;
+    --hover: #505050;
+    --info: #3498DB;
+    --on-background: #FFFFFF;
+    --on-primary: #FFFFFF;
+    --on-secondary: #FFFFFF;
+    --on-surface: #E0E0E0;
+    --primary-variant: #2980B9;
+    --scrollbar-background: #2D2D2D;
+    --secondary: #1ABC9C;
+    --selected: #264F78;
+    --success: #2ECC71;
+    --surface: #3D3D3D;
+    --terminal-text: #E0E0E0;
+    --warning: #F39C12;
+    /* Base Colors */
+    --primary: #3498DB;
+    /* Component Colors */
+    --button-background: #252525;
+    /* from @background */
+    --menu-text: #FFFFFF;
+    /* from @background */
+    --scrollbar-handle: #252525;
+    /* from @background-variant */
+    --button-text: #FFFFFF;
+    /* from @background-variant */
+    --dock-border: #444444;
+    /* from @background-variant */
+    --scrollbar-hover: #3498DB;
+    /* from @background-variant */
+    --tab-text: #FFFFFF;
+    /* from @border */
+    --input-focus-border: #3498DB;
+    /* from @border */
+    --menu-background: #2D2D2D;
+    /* from @disabled */
+    --input-background: #3D3D3D;
+    /* from @on-background */
+    --button-hover: #3498DB;
+    /* from @on-background */
+    --menu-hover: #3498DB;
+    /* from @on-background */
+    --tab-selected: #3498DB;
+    /* from @on-primary */
+    --button-pressed: #2980B9;
+    /* from @on-primary */
+    --dock-title: #252525;
+    /* from @on-primary */
+    --terminal-background: #1E1E1E;
+    /* from @on-surface */
+    --input-border: #444444;
+    /* from @primary */
+    --button-hover-text: #FFFFFF;
+    /* from @primary */
+    --menu-hover-text: #FFFFFF;
+    /* from @primary */
+    --tab-background: #252525;
+    /* from @primary */
+    --tab-selected-text: #FFFFFF;
+    /* from @primary-variant */
+    --button-disabled: #777777;
+    /* from @surface */
+    --input-text: #E0E0E0;
+}
+
+/* Светлая тема для GopiAI */
+
+/* CSS-переменные для светлой темы */
+* {
+    --accent-color: #2980B9;
+    --accent-color-pressed: #3498DB;
+    --bg-primary: #F5F5F5;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #DDDDDD;
+    --border-color: #CCCCCC;
+    --fg-primary: #333333;
+    --fg-secondary: #000000;
+    --selection-bg: #ADD6FF;
+    --terminal-bg: #F0F0F0;
+}
+
+/* Основные стили */
+QWidget {
+    background-color: var(--bg-primary);
+    color: var(--fg-primary);
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--fg-primary);
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+QPushButton:pressed {
+    background-color: var(--accent-color-pressed);
+    color: var(--bg-secondary);
+}
+
+/* Поля ввода */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--fg-primary);
+    padding: 4px;
+}
+
+/* Вкладки */
+QTabWidget::pane {
+    border: 1px solid var(--border-color);
+}
+
+QTabBar::tab {
+    background-color: var(--bg-tertiary);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: var(--fg-primary);
+    margin-right: 2px;
+    padding: 6px 12px;
+}
+
+QTabBar::tab:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+/* Полосы прокрутки */
+QScrollBar:vertical {
+    background-color: var(--bg-primary);
+    margin: 0px;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: var(--accent-color);
+}
+
+QScrollBar:horizontal {
+    background-color: var(--bg-primary);
+    height: 12px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: var(--accent-color);
+}
+
+/* Списки и таблицы */
+QListView, QTreeView, QTableView {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+    selection-background-color: var(--accent-color);
+    selection-color: var(--bg-secondary);
+}
+
+QHeaderView::section {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+    padding: 4px;
+}
+
+/* Меню */
+QMenuBar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--fg-primary);
+}
+
+QMenuBar::item:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+QMenu {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--fg-primary);
+}
+
+QMenu::item:selected {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary);
+}
+
+/* Док-виджеты */
+QDockWidget {
+    titlebar-close-icon: url(:/icons/close_light.png);
+    titlebar-normal-icon: url(:/icons/undock_light.png);
+}
+
+QDockWidget::title {
+    background-color: var(--bg-tertiary);
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+/* Терминал */
+QPlainTextEdit#terminal {
+    background-color: var(--terminal-bg);
+    color: var(--fg-secondary);
+    font-family: "Consolas", "Courier New", monospace;
+}
+
+/* Редактор кода */
+QPlainTextEdit#codeEditor {
+    background-color: var(--bg-secondary);
+    color: var(--fg-primary);
+    font-family: "Consolas", "Courier New", monospace;
+    selection-background-color: var(--selection-bg);
+    selection-color: var(--fg-secondary);
+}
+
+/* Строка состояния */
+QStatusBar {
+    background-color: var(--bg-tertiary);
+    color: var(--fg-primary);
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+/* Панель инструментов */
+QToolBar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    spacing: 3px;
+}
+
+QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QToolButton:hover {
+    background-color: var(--accent-color);
+    border: 1px solid var(--border-color);
+    color: var(--bg-secondary);
+}
+
+QToolButton:pressed {
+    background-color: var(--accent-color-pressed);
+    color: var(--bg-secondary);
+}
+
