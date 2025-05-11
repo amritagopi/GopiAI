@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "QStyler"
+authors = [{name = "alexpdev", email = "alexpdev@pm.me"}]
+dependencies = ["PySide6", "wheel"]
+description = "QStyleSheet testing application."
+keywords = ["Qt", "GUI", "QStyleSheet", "qss"]
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dynamic = ["version", "readme"]
+
+[project.scripts]
+qstyler = "QStyler.window:execute"
+
+[tool.setuptools.dynamic]
+version = {attr = "QStyler.version.__version__"}
+readme = {file = ["README.md"]}
+
+[tool.bandit]
+skips = ["B101"]
+
+[tool.black]
+line-length = 79
+
+[tool.autopep8]
+max_line_length = 80
+ignore = "E266"
+in-place = true
+recursive = true
+aggressive = 3
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "QStyler",
+]
+console_output_style = "progress"
+addopts = "--maxfail=5"
+
+
+[tool.pylint. 'MESSAGES CONTROL']
+disable = [
+    "no-name-in-module",
+    "R1729",
+    "W0108",
+    "redefined-outer-name",
+    "attribute-defined-outside-init",
+    "invalid-name",
+    "not-callable",
+    "consider-using-with"
+]
+
+[tool.pylint. 'FORMAT']
+max-line-length = 80
+single-line-if-stmt = true
+
+[tool.pylint.'SIMILARITIES']
+ignore-comments = true
+ignore-docstrings=true
+ignore-imports=true
+
+[tool.pylint. 'DESIGN']
+max-args=15
+min-public-methods=0
+max-attributes=100
+max-statements=400
+max-branches=20
+min-similarity-lines=4
+max-locals=25
+
+[tool.coverage.run]
+disable_warnings = ["couldnt-parse"]
+
+[tool.coverage.report]
+omit = [
+    "shibokensupport/*",
+    "pyscript",
+    "signature_bootstrap.py",
+]

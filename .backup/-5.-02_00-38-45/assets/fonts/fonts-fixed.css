@@ -1,0 +1,17 @@
+/* Файл исправлен css_fixer.py - устранены дублирующиеся селекторы */
+
+/* Нормализованные шрифты для GopiAI */
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/Inter/Inter-Black.ttf') format('truetype');
+}

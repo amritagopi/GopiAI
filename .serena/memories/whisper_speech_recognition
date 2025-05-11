@@ -1,0 +1,21 @@
+## Распознавание речи на ноутбуке
+
+### Установленные библиотеки:
+- openai-whisper 20240930 - доступна
+- whisper-ctranslate2 0.5.2 - установлена, но не доступна (возможно, установлена в другом окружении)
+- faster-whisper 1.1.1 - установлена
+
+### Структура файлов:
+1. voice_to_text.py - использует openai-whisper для распознавания речи в реальном времени
+2. transcribe_audio.py - использует whisper-ctranslate2 для транскрибации аудиофайлов (нуждается в исправлении)
+3. speech_recognition.py - главное приложение для запуска обоих режимов
+
+### Путь к моделям:
+C:\Users\amritagopi\models\whisper
+
+### Проблемы:
+1. transcribe_audio.py использует whisper-ctranslate2, который не доступен в текущем окружении
+2. Нужно изменить transcribe_audio.py для использования openai-whisper вместо whisper-ctranslate2
+
+### Задача:
+Обновить transcribe_audio.py для использования openai-whisper, как и в voice_to_text.py

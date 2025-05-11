@@ -1,0 +1,498 @@
+from PySide6.QtWidgets import QApplication
+from PySide6.QtGui import QColor
+from PySide6.QtCore import QObject, Signal, QSettings
+import os
+import json
+import threading # Добавляем этот импорт
+from app.logger import logger
+
+class ThemeManager(QObject):
+    """Централизованный менеджер тем для GopiAI."""
+
+    # Сигнал для изменения только визуальной темы
+    visualThemeChanged = Signal(str)
+
+    # Сигнал при изменении темы
+    themeChanged = Signal(str)
+
+    # Фолбэк для темной темы (если JSON не найден)
+    FALLBACK_DARK_THEME_DATA = {
+        "name": "dark",
+        "type": "dark",
+        "display_name": "Темная тема (Фолбэк)",
+        "description": "Базовая темная тема, если файл dark.json не найден.",
+        "colors": {
+            'background': '#2D2D2D', 'foreground': '#FFFFFF', 'accent': '#3498DB',
+            'secondary_background': '#3C3C3C', 'secondary_foreground': '#B0B0B0', # Добавлены для соответствия
+            'border': '#444444',
+            'button_normal': '#555555', 'button_hover': '#6A6A6A', 'button_pressed': '#3498DB', 'button_text': '#EAEAEA', # Обновлены
+            'input_background': '#3D3D3D', 'input_text': '#EAEAEA', 'input_border': '#555555', 'input_placeholder': '#888888', # Добавлен placeholder
+            'text_color': '#EAEAEA', 'text_secondary': '#B0B0B0', # Добавлены
+            'link_color': '#3498DB', 'link_hover_color': '#5DADE2', # Добавлены
+            'error': '#E74C3C', 'success': '#2ECC71', 'warning': '#F39C12', 'info': '#3498DB', # Добавлен info
+            'icon_color': '#EAEAEA', 'icon_hover_color': '#FFFFFF', 'icon_disabled_color': '#777777', # Добавлены hover и disabled
+            'tab_active_background': '#3498DB', 'tab_active_foreground': '#FFFFFF', # Обновлены ключи
+            'tab_inactive_background': '#3C3C3C', 'tab_inactive_foreground': '#B0B0B0', # Обновлены ключи
+            'tab_hover_background': '#6A6A6A', 'tab_hover_foreground': '#FFFFFF', # Обновлены ключи
+            'tab_selected_background': '#3498DB', 'tab_selected_foreground': '#FFFFFF', # Обновлены ключи
+            'tab_border_color': '#2D2D2D', # Обновлен ключ
+            'dock_title_background': '#3C3C3C', 'dock_title_foreground': '#EAEAEA', # Обновлены ключи
+            'dock_border_color': '#444444', # Обновлен ключ
+            'pane_border_color': '#444444', # Обновлен ключ
+            'menu_background': '#3C3C3C', 'menu_foreground': '#EAEAEA', # Обновлены ключи
+            'menu_selection_background': '#3498DB', 'menu_selection_foreground': '#FFFFFF', # Обновлены ключи
+            'menu_separator': '#555555', # Обновлен ключ
+            'tooltip_background': '#555555', 'tooltip_foreground': '#EAEAEA', # Обновлены ключи
+            'scrollbar_background': '#3C3C3C', 'scrollbar_handle': '#555555', 'scrollbar_handle_hover': '#6A6A6A', # Обновлены ключи
+            'window_background_color': '#2D2D2D', 'window_text_color': '#EAEAEA', # Обновлены ключи
+            'dialog_background_color': '#3C3C3C', 'dialog_text_color': '#EAEAEA', # Обновлены ключи
+            'code_background': '#272822', 'code_text': '#F8F8F2', 'code_comment': '#75715E', # Добавлены code цвета
+            'code_keyword': '#F92672', 'code_string': '#E6DB74', 'code_number': '#AE81FF',
+            'code_operator': '#F92672', 'code_builtin': '#66D9EF',
+            'selection_background': '#3498DB', 'selection_foreground': '#FFFFFF', # Добавлены
+            'disabled_foreground': '#777777', 'disabled_background': '#404040' # Добавлены
+        }
+    }
+
+    # Фолбэк для светлой темы (если JSON не найден)
+    FALLBACK_LIGHT_THEME_DATA = {
+        "name": "light",
+        "type": "light",
+        "display_name": "Светлая тема (Фолбэк)",
+        "description": "Базовая светлая тема, если файл light.json не найден.",
+        "colors": { # Аналогично обновим ключи для светлой темы для консистентности
+            'background': '#F5F5F5', 'foreground': '#333333', 'accent': '#2980B9',
+            'secondary_background': '#E0E0E0', 'secondary_foreground': '#555555',
+            'border': '#CCCCCC',
+            'button_normal': '#DDDDDD', 'button_hover': '#C0C0C0', 'button_pressed': '#2980B9', 'button_text': '#333333',
+            'input_background': '#FFFFFF', 'input_text': '#333333', 'input_border': '#CCCCCC', 'input_placeholder': '#AAAAAA',
+            'text_color': '#333333', 'text_secondary': '#555555',
+            'link_color': '#2980B9', 'link_hover_color': '#3498DB',
+            'error': '#C0392B', 'success': '#27AE60', 'warning': '#E67E22', 'info': '#2980B9',
+            'icon_color': '#333333', 'icon_hover_color': '#000000', 'icon_disabled_color': '#999999',
+            'tab_active_background': '#2980B9', 'tab_active_foreground': '#FFFFFF',
+            'tab_inactive_background': '#E0E0E0', 'tab_inactive_foreground': '#555555',
+            'tab_hover_background': '#C0C0C0', 'tab_hover_foreground': '#333333',
+            'tab_selected_background': '#2980B9', 'tab_selected_foreground': '#FFFFFF',
+            'tab_border_color': '#F5F5F5',
+            'dock_title_background': '#E0E0E0', 'dock_title_foreground': '#333333',
+            'dock_border_color': '#CCCCCC',
+            'pane_border_color': '#CCCCCC',
+            'menu_background': '#E0E0E0', 'menu_foreground': '#333333',
+            'menu_selection_background': '#2980B9', 'menu_selection_foreground': '#FFFFFF',
+            'menu_separator': '#CCCCCC',
+            'tooltip_background': '#DDDDDD', 'tooltip_foreground': '#333333',
+            'scrollbar_background': '#E0E0E0', 'scrollbar_handle': '#CCCCCC', 'scrollbar_handle_hover': '#B0B0B0',
+            'window_background_color': '#F5F5F5', 'window_text_color': '#333333',
+            'dialog_background_color': '#E0E0E0', 'dialog_text_color': '#333333',
+            'code_background': '#FDFDFD', 'code_text': '#333333', 'code_comment': '#999988',
+            'code_keyword': '#A71D5D', 'code_string': '#183691', 'code_number': '#008080',
+            'code_operator': '#A71D5D', 'code_builtin': '#0086B3',
+            'selection_background': '#2980B9', 'selection_foreground': '#FFFFFF',
+            'disabled_foreground': '#999999', 'disabled_background': '#D0D0D0'
+        }
+    }
+
+    _instance = None
+    _lock = threading.Lock() # Добавим блокировку для потокобезопасности
+
+    @classmethod
+    def instance(cls, app=None):
+        """Получение единственного экземпляра менеджера тем (паттерн Singleton)."""
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = cls()  # app больше не нужен
+        return cls._instance
+
+    def __init__(self): # Убираем app из параметров
+        super().__init__()
+        # self.app больше не хранится как атрибут экземпляра постоянно.
+        # Он будет получаться через QApplication.instance() по мере необходимости.
+
+        logger.info("ThemeManager.__init__ called.")
+        # Логирование типа QApplication.instance() можно сделать здесь для информации,
+        # но без сохранения self.app
+        current_qapp_instance = QApplication.instance()
+        if current_qapp_instance:
+            logger.info(f"QApplication.instance() type at ThemeManager init: {type(current_qapp_instance)}")
+        else:
+            logger.warning("QApplication.instance() is None at ThemeManager init.")
+
+        self.themes = {}  # Инициализируем пустым словарем
+        self._load_default_themes() # Загружаем 'light' и 'dark' из JSON или используем фолбэки
+
+        # Устанавливаем current_visual_theme после загрузки стандартных тем,
+        # чтобы убедиться, что тема 'light' (по умолчанию) существует в self.themes.
+        self.current_visual_theme = 'light'
+
+        # Загружаем пользовательские настройки темы, которые могут перезаписать
+        # current_visual_theme или добавить/обновить пользовательские темы.
+        self.load_user_theme_settings()
+
+    def _load_default_themes(self):
+        """Загружает стандартные темы 'light' и 'dark' из JSON-файлов или использует фолбэки."""
+        default_theme_configs = {
+            "light": {"fallback_data": self.FALLBACK_LIGHT_THEME_DATA},
+            "dark": {"fallback_data": self.FALLBACK_DARK_THEME_DATA}
+        }
+        # Путь к директории app/ui/themes/
+        # os.path.dirname(os.path.abspath(__file__)) -> app/utils/
+        # os.path.dirname(...) -> app/
+        # os.path.join(..., "ui", "themes") -> app/ui/themes/
+        theme_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ui", "themes")
+
+        for name, config in default_theme_configs.items():
+            json_path = os.path.join(theme_dir, f"{name}.json")
+            if os.path.exists(json_path):
+                try:
+                    with open(json_path, 'r', encoding='utf-8') as f:
+                        theme_data = json.load(f)
+                        # Проверяем, что загруженные данные содержат ключ 'colors'
+                        if "colors" not in theme_data:
+                            logger.error(f"Ключ 'colors' отсутствует в {json_path}. Используется фолбэк для темы '{name}'.")
+                            self.themes[name] = config["fallback_data"]
+                        else:
+                            self.themes[name] = theme_data
+                            logger.info(f"Загружена тема '{name}' из {json_path}")
+                except Exception as e:
+                    logger.error(f"Ошибка загрузки темы '{name}' из {json_path}: {e}. Используется фолбэк.")
+                    self.themes[name] = config["fallback_data"]
+            else:
+                logger.warning(f"Файл темы {json_path} не найден. Используется фолбэк для темы '{name}'.")
+                self.themes[name] = config["fallback_data"]
+
+    def load_user_theme_settings(self):
+        """Загружает пользовательские настройки темы из файла конфигурации."""
+        try:
+            # Путь к theme_config.json относительно текущего файла (app/utils/theme_config.json)
+            config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'theme_config.json')
+            if os.path.exists(config_path):
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config_data = json.load(f)
+                    if 'visual_theme' in config_data and config_data['visual_theme'] in self.themes:
+                        self.current_visual_theme = config_data['visual_theme']
+                    elif 'visual_theme' in config_data:
+                         logger.warning(f"Сохраненная тема '{config_data['visual_theme']}' не найдена среди доступных. Используется '{self.current_visual_theme}'.")
+
+                    if 'custom_themes' in config_data:
+                        for theme_name, theme_data in config_data['custom_themes'].items():
+                            if "colors" not in theme_data:
+                                logger.warning(f"Пользовательская тема '{theme_name}' не содержит ключ 'colors'. Тема не будет загружена.")
+                                continue
+                            # add_custom_theme позаботится о проверках и сохранении
+                            self.add_custom_theme(theme_name, theme_data, save_settings=False) # Не сохраняем здесь, сохраним один раз в конце
+                logger.info(f"Загружены настройки темы. Текущая тема: {self.current_visual_theme}")
+        except Exception as e:
+            logger.error(f"Ошибка при загрузке настроек темы из {config_path if 'config_path' in locals() else 'theme_config.json'}: {str(e)}")
+
+    def save_user_theme_settings(self):
+        """Сохраняет пользовательские настройки темы в файл конфигурации."""
+        try:
+            # Сохраняем только те темы, которые не являются 'light' или 'dark' по умолчанию
+            # или если они были изменены (хотя текущая логика не позволяет изменять 'light'/'dark' напрямую,
+            # а только через custom_themes с другими именами).
+            # Если 'light' или 'dark' были загружены из JSON, они не считаются "пользовательскими" в этом контексте.
+            custom_themes_to_save = {}
+            for theme_name, theme_data in self.themes.items():
+                # Пользовательскими считаются темы, не являющиеся стандартными 'light' или 'dark'
+                if theme_name not in ['light', 'dark']:
+                    custom_themes_to_save[theme_name] = theme_data
+                # Либо, если это 'light' или 'dark', но они отличаются от фолбэков (т.е. загружены из JSON)
+                # Это условие можно усложнить, если нужно сохранять измененные стандартные темы.
+                # Пока что, если light.json/dark.json изменятся, они просто будут загружены при следующем старте.
+                # theme_config.json хранит только *дополнительные* пользовательские темы и выбранную тему.
+
+            config = {
+                'visual_theme': self.current_visual_theme,
+                'custom_themes': custom_themes_to_save
+            }
+            config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'theme_config.json')
+            with open(config_path, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4, ensure_ascii=False)
+            logger.info(f"Сохранены настройки темы в {config_path}. Текущая тема: {self.current_visual_theme}")
+        except Exception as e:
+            logger.error(f"Ошибка при сохранении настроек темы: {str(e)}")
+
+    def get_color(self, key, default=None):
+        """Получает цвет из текущей темы с улучшенным фолбэком."""
+        active_theme_name = self.current_visual_theme
+
+        # Получаем данные текущей активной темы
+        current_theme_data = self.themes.get(active_theme_name)
+
+        if not current_theme_data or "colors" not in current_theme_data:
+            logger.warning(f"Данные или секция 'colors' для темы '{active_theme_name}' не найдены. Временно используется фолбэк 'light'.")
+            current_theme_data = self.FALLBACK_LIGHT_THEME_DATA # Используем полный объект фолбэка
+            theme_for_logging = f"{active_theme_name} (не найдена, фолбэк на FALLBACK_LIGHT_THEME_DATA)"
+        else:
+            theme_for_logging = active_theme_name
+
+        current_theme_colors = current_theme_data.get("colors", {})
+
+        # Пытаемся получить цвет из текущей темы
+        if key in current_theme_colors:
+            return current_theme_colors[key]
+        elif default is not None:
+            return default
+        else:
+            logger.warning(f"Цвет '{key}' не найден в секции 'colors' темы '{theme_for_logging}'. Попытка использовать базовый фолбэк.")
+
+            # Определяем базовую тему для фолбэка (light или dark)
+            # Используем 'type' из данных темы, если есть, иначе по имени
+            theme_type = current_theme_data.get("type", "light" if "light" in active_theme_name.lower() else "dark")
+
+            if theme_type == "dark":
+                base_fallback_theme_colors = self.FALLBACK_DARK_THEME_DATA.get("colors", {})
+                base_theme_name_for_log = 'FALLBACK_DARK_THEME_DATA'
+            else: # light или неизвестный тип
+                base_fallback_theme_colors = self.FALLBACK_LIGHT_THEME_DATA.get("colors", {})
+                base_theme_name_for_log = 'FALLBACK_LIGHT_THEME_DATA'
+
+            if key in base_fallback_theme_colors:
+                return base_fallback_theme_colors[key]
+            else:
+                logger.error(f"Цвет '{key}' не найден ни в теме '{theme_for_logging}', ни в {base_theme_name_for_log}.")
+                # Последний уровень фолбэка - общие значения по умолчанию
+                general_fallbacks = {
+                    'background': '#2D2D2D',
+                    'foreground': '#EAEAEA',
+                    'accent': '#3498DB',
+                    'border': '#444444',
+                    'window_background_color': '#2D2D2D',
+                    'window_text_color': '#EAEAEA',
+                    'menu_background': '#3C3C3C',
+                    'menu_foreground': '#EAEAEA',
+                    'tab_background_color': '#3C3C3C',
+                    'tab_selected_background_color': '#3498DB',
+                    'tab_text_color': '#B0B0B0',
+                    'tab_selected_text_color': '#FFFFFF',
+                    'button_normal': '#555555',
+                    'button_text': '#EAEAEA',
+                    'tooltip_background': '#555555',
+                    'tooltip_foreground': '#EAEAEA',
+                }
+                return general_fallbacks.get(key, '#FFFFFF')
+
+    def get_qcolor(self, key):
+        """Получает QColor из текущей темы."""
+        return QColor(self.get_color(key))
+
+    def switch_visual_theme(self, visual_theme, force_apply=False):
+        """Переключает только визуальную тему."""
+        if visual_theme not in self.get_available_visual_themes():
+            logger.error(f"Визуальная тема '{visual_theme}' не поддерживается")
+            return False
+
+        if self.current_visual_theme == visual_theme and not force_apply:
+            logger.info(f"Визуальная тема '{visual_theme}' уже установлена")
+            return True
+
+        logger.info(f"Переключение визуальной темы с '{self.current_visual_theme}' на '{visual_theme}'")
+        self.current_visual_theme = visual_theme
+
+        # Применяем стиль
+        self._apply_visual_theme(QApplication.instance())
+
+        self.save_user_theme_settings() # Сохраняем, так как текущая тема могла измениться
+        logger.info(f"Применена визуальная тема: {visual_theme}")
+
+        # Уведомляем подписчиков об изменении темы
+        self.visualThemeChanged.emit(visual_theme)
+
+        return True
+
+    def _apply_visual_theme(self, app_instance: QApplication = None):
+        """Применяет визуальную тему к приложению, загружая QSS и заменяя плейсхолдеры."""
+        app = app_instance if app_instance else QApplication.instance() # Используем переданный экземпляр или получаем новый
+        if app is None:
+            logger.critical("ThemeManager._apply_visual_theme: QApplication instance is None. Cannot apply stylesheet.")
+            return
+
+        theme_qss_path = self.get_theme_qss_path()
+        stylesheet_content = ""
+
+        if os.path.exists(theme_qss_path):
+            try:
+                with open(theme_qss_path, 'r', encoding='utf-8') as f:
+                    stylesheet_content = f.read()
+                logger.info(f"Загружен QSS из файла: {theme_qss_path}")
+            except Exception as e:
+                logger.error(f"Ошибка при чтении файла стиля {theme_qss_path}: {str(e)}")
+                stylesheet_content = self._generate_stylesheet() # Фолбэк на генерацию
+                logger.info("Используется программно сгенерированный стиль (ошибка чтения основного QSS файла).")
+        else:
+            stylesheet_content = self._generate_stylesheet() # Фолбэк на генерацию
+            logger.info(f"Файл QSS {theme_qss_path} не найден. Используется программно сгенерированный стиль.")
+
+        # Добавляем QSS из theme_utils
+        additional_qss = "" # Инициализируем на случай ошибки
+        try:
+            # Импортируем get_additional_qss_template здесь, чтобы избежать циклического импорта
+            from app.utils.theme_utils import get_additional_qss_template
+
+            # Получаем цвета из текущей темы для передачи в get_additional_qss_template
+            current_theme_colors = self.themes.get(self.current_visual_theme, {}).get("colors", {})
+
+            # Если current_theme_colors пуст или не содержит нужных ключей, используем фолбэки
+            # Это важно, так как get_additional_qss_template ожидает определенные ключи
+
+            # Определяем тип текущей темы для выбора правильного фолбэка
+            current_theme_type = self.themes.get(self.current_visual_theme, {}).get("type", "light")
+            fallback_colors = self.FALLBACK_DARK_THEME_DATA["colors"] if current_theme_type == "dark" else self.FALLBACK_LIGHT_THEME_DATA["colors"]
+
+            # Создаем словарь colors для передачи, объединяя текущие и фолбэк значения
+            # Приоритет у текущих цветов темы
+            colors_for_template = fallback_colors.copy() # Начинаем с фолбэка
+            colors_for_template.update(current_theme_colors) # Перезаписываем значениями из текущей темы, если они есть
+
+            # Теперь передаем этот подготовленный словарь
+            additional_qss = get_additional_qss_template()
+
+            print(f"[DEBUG theme_manager] Applying theme: {self.current_visual_theme}")
+            print(f"[DEBUG theme_manager] Base QSS (stylesheet_content before adding additional_qss):\n{stylesheet_content}") # Это base_qss
+            print(f"[DEBUG theme_manager] Additional QSS from get_additional_qss_template():\n{additional_qss}")
+
+            stylesheet_content += "\n" + additional_qss
+            logger.info(f"Добавлен QSS из get_additional_qss_template. Общая длина до замены плейсхолдеров: {len(stylesheet_content)}")
+        except Exception as e:
+            logger.error(f"Ошибка при получении дополнительного QSS из get_additional_qss_template: {e}")
+            print(f"[DEBUG theme_manager] Error getting additional_qss: {e}")
+
+
+        # Замена плейсхолдеров @color_name на значения из текущей темы
+        logger.debug(f"Перед заменой плейсхолдеров в QSS для темы '{self.current_visual_theme}'. Длина QSS: {len(stylesheet_content)} символов.")
+        if len(stylesheet_content) < 500: # Логируем короткие QSS для отладки
+            logger.debug(f"Содержимое QSS (до замены плейсхолдеров):\n{stylesheet_content}")
+
+        final_stylesheet = self._replace_color_placeholders(stylesheet_content)
+        print(f"[DEBUG theme_manager] Final QSS to apply (after placeholder replacement):\n{final_stylesheet}")
+        logger.debug(f"После замены плейсхолдеров. Длина итогового QSS: {len(final_stylesheet)} символов.")
+        if len(final_stylesheet) < 500: # Логируем короткие итоговые QSS
+            logger.debug(f"Итоговое содержимое QSS (после замены плейсхолдеров):\n{final_stylesheet}")
+
+        logger.info(f"Попытка применить стили для темы '{self.current_visual_theme}'...")
+        try:
+            app.setStyleSheet(final_stylesheet)
+            logger.info(f"Стили для темы '{self.current_visual_theme}' успешно применены.")
+        except Exception as e:
+            logger.error(f"КРИТИЧЕСКАЯ ОШИБКА при вызове app.setStyleSheet() для темы '{self.current_visual_theme}': {str(e)}", exc_info=True)
+            logger.error(f"Тип app (QApplication.instance()): {type(app)}")
+            logger.error(f"QApplication.instance() на момент ошибки: {QApplication.instance()}")
+            logger.error(f"Содержимое QSS, вызвавшее ошибку (первые 1000 символов):\n{final_stylesheet[:1000]}")
+
+    def _replace_color_placeholders(self, qss_content):
+        """Заменяет плейсхолдеры вида @color_key на HEX-значения из текущей темы."""
+        import re
+        def replace_match(match):
+            color_key = match.group(1)
+            return self.get_color(color_key)
+        return re.sub(r"@([a-zA-Z0-9_]+)", replace_match, qss_content)
+
+
+    def add_custom_theme(self, theme_name, theme_data, save_settings=True):
+        """Добавляет или обновляет пользовательскую тему.
+        theme_data должен быть словарем, содержащим как минимум ключ 'colors'.
+        """
+        if not isinstance(theme_data, dict) or "colors" not in theme_data:
+            logger.error(f"Некорректные данные для пользовательской темы '{theme_name}'. Отсутствует ключ 'colors' или данные не являются словарем.")
+            return False
+
+        if theme_name in ['light', 'dark']:
+            logger.warning(f"Невозможно перезаписать встроенную тему '{theme_name}' через add_custom_theme. Используйте JSON файлы в 'app/ui/themes/'.")
+            return False
+
+        self.themes[theme_name] = theme_data
+        if save_settings:
+            self.save_user_theme_settings()
+        logger.info(f"Добавлена/обновлена пользовательская тема: {theme_name}")
+        self.visualThemeChanged.emit(self.current_visual_theme)
+        return True
+
+    def delete_custom_theme(self, theme_name_to_delete):
+        """Удаляет пользовательскую тему."""
+        if theme_name_to_delete in ['light', 'dark']:
+            logger.warning(f"Невозможно удалить встроенную тему: {theme_name_to_delete}")
+            return False
+
+        if theme_name_to_delete not in self.themes:
+            logger.warning(f"Пользовательская тема '{theme_name_to_delete}' не найдена.")
+            return False
+
+        try:
+            del self.themes[theme_name_to_delete]
+            logger.info(f"Пользовательская тема '{theme_name_to_delete}' удалена из словаря self.themes.")
+
+            current_theme_was_deleted = False
+            if self.current_visual_theme == theme_name_to_delete:
+                logger.info(f"Удалена текущая активная тема '{theme_name_to_delete}'. Переключение на 'light'.")
+                self.current_visual_theme = 'light'
+                current_theme_was_deleted = True
+
+            self.save_user_theme_settings()
+
+            if current_theme_was_deleted:
+                logger.info(f"Принудительное переключение на тему '{self.current_visual_theme}' после удаления активной темы.")
+                self.switch_visual_theme(self.current_visual_theme)
+            else:
+                logger.info(f"Удалена неактивная тема '{theme_name_to_delete}'. Текущая тема '{self.current_visual_theme}' остается. Отправка сигнала visualThemeChanged для обновления UI.")
+                self.visualThemeChanged.emit(self.current_visual_theme)
+
+            logger.info(f"Пользовательская тема '{theme_name_to_delete}' успешно удалена.")
+            return True
+        except Exception as e:
+            logger.error(f"Ошибка при удалении пользовательской темы '{theme_name_to_delete}': {str(e)}")
+            return False
+
+    def _generate_stylesheet(self):
+        """Генерирует таблицу стилей программно на основе текущей темы (очень упрощенно)."""
+        # Используем self.get_color для доступа к цветам, чтобы учесть все фолбэки
+        bg_color = self.get_color('window_background_color')
+        fg_color = self.get_color('text_color')
+        # Используем новые ключи для кнопок, соответствующие dark.json
+        btn_bg_color = self.get_color('button_normal')
+        btn_text_color = self.get_color('button_text')
+
+        return f"""
+        QMainWindow {{
+            background-color: {bg_color};
+        }}
+        QWidget {{
+            color: {fg_color};
+        }}
+        QPushButton {{
+            background-color: {btn_bg_color};
+            color: {btn_text_color};
+        }}
+        """
+
+    def get_theme_qss_path(self):
+        """Получает путь к файлу QSS для текущей темы."""
+        theme_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ui", "themes")
+        return os.path.join(theme_dir, f"{self.current_visual_theme}.qss")
+
+    def get_available_visual_themes(self):
+        """Получает список доступных визуальных тем."""
+        return list(self.themes.keys())
+
+    def get_current_visual_theme(self):
+        """Возвращает текущую визуальную тему."""
+        return self.current_visual_theme
+
+    def get_theme_display_name(self, theme_name):
+        """Получает отображаемое имя темы, сначала из данных темы, потом из фолбэка."""
+        theme_data = self.themes.get(theme_name)
+
+        if isinstance(theme_data, dict) and "display_name" in theme_data:
+            return theme_data["display_name"]
+
+        if theme_name == "light":
+            return self.FALLBACK_LIGHT_THEME_DATA.get("display_name", "Светлая")
+        if theme_name == "dark":
+            return self.FALLBACK_DARK_THEME_DATA.get("display_name", "Темная")
+
+        if theme_name.startswith("custom_"):
+            friendly_name = theme_name.replace("custom_", "").replace("_", " ").title()
+            return f"{friendly_name} (Пользовательская)"
+
+        return theme_name.replace("_", " ").title()

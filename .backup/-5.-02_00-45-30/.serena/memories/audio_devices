@@ -1,0 +1,21 @@
+## Доступные аудиоустройства
+
+### Устройства ввода (микрофоны):
+- 0: Microsoft Sound Mapper - Input, MME (2 in, 0 out)
+- 1: Microphone (Realtek Audio), MME (2 in, 0 out) - системный микрофон
+- 2: Headset (AB-TWS-J92 Hands-Free), MME (1 in, 0 out) - беспроводные наушники с микрофоном
+- 8: Microphone (Realtek Audio), Windows DirectSound (2 in, 0 out)
+- 9: Headset (AB-TWS-J92 Hands-Free AG Audio), Windows DirectSound (1 in, 0 out)
+- 17: Microphone (Realtek Audio), Windows WASAPI (2 in, 0 out)
+- 18: Headset (AB-TWS-J92 Hands-Free AG Audio), Windows WASAPI (1 in, 0 out)
+- И другие...
+
+### Устройства вывода (динамики/наушники):
+- 3: Microsoft Sound Mapper - Output, MME (0 in, 2 out)
+- 4: Headphones (AB-TWS-J92 Stereo), MME (0 in, 2 out) - беспроводные наушники стерео
+- 5: Headset (AB-TWS-J92 Hands-Free), MME (0 in, 1 out)
+- 6: Speakers / Headphones (Realtek), MME (0 in, 2 out) - системные колонки/наушники
+- И другие...
+
+### Задача:
+Добавить в voice_to_text.py возможность выбора устройства ввода (микрофона) для распознавания речи.

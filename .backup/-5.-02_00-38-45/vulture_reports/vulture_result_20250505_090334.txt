@@ -1,0 +1,29 @@
+
+=== app\ui\syntax_highlighter.py ===
+
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:47: SyntaxWarning: invalid escape sequence '\+'
+  '\+', '-', '\*', '/', '//', '%', '%=',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:47: SyntaxWarning: invalid escape sequence '\*'
+  '\+', '-', '\*', '/', '//', '%', '%=',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:48: SyntaxWarning: invalid escape sequence '\+'
+  '\+=', '-=', '\*=', '/=', '//=',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:48: SyntaxWarning: invalid escape sequence '\*'
+  '\+=', '-=', '\*=', '/=', '//=',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:49: SyntaxWarning: invalid escape sequence '\*'
+  '\*\*', # \u0412\u043e\u0437\u0432\u0435\u0434\u0435\u043d\u0438\u0435 \u0432 \u0441\u0442\u0435\u043f\u0435\u043d\u044c
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:50: SyntaxWarning: invalid escape sequence '\|'
+  '&', '\|', '\^', '~', '<<', '>>',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:50: SyntaxWarning: invalid escape sequence '\^'
+  '&', '\|', '\^', '~', '<<', '>>',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\{'
+  '\{', '\}', '\(', '\)', '\[', '\]',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\}'
+  '\{', '\}', '\(', '\)', '\[', '\]',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\('
+  '\{', '\}', '\(', '\)', '\[', '\]',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\)'
+  '\{', '\}', '\(', '\)', '\[', '\]',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\['
+  '\{', '\}', '\(', '\)', '\[', '\]',
+  C:\Users\amritagopi\GopiAI\app\ui\syntax_highlighter.py:54: SyntaxWarning: invalid escape sequence '\]'
+  '\{', '\}', '\(', '\)', '\[', '\]',

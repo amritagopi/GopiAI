@@ -1,0 +1,6 @@
+{
+  "communication": {
+    "interactionMode": "batch",
+    "batchSize": 5
+  }
+}

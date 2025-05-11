@@ -1,0 +1,5 @@
+[06.05.2025 20:59:33,91] "NORMAL PUSH" to [main]: "update" 
+[07.05.2025  6:11:39,02] "NORMAL PUSH" to [main]: "перед сносом иконок после 6 часов мучений " 
+[11.05.2025 18:34:02,58] "NORMAL PUSH" to [main]: "beforePCswitch" 
+[12.05.2025  0:31:13,31] "FORCE PUSH" to [main]: "без модельки gglm" 
+[12.05.2025  0:36:07,96] "FORCE PUSH" to [main]: "no model 2" 

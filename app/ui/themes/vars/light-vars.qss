@@ -1,0 +1,74 @@
+/* Файл исправлен css_fixer.py - устранены дублирующиеся селекторы */
+
+:root {
+    --accent: #E74C3C;
+    --background: #F5F5F5;
+    --background-variant: #EEEEEE;
+    --border: #CCCCCC;
+    --disabled: #AAAAAA;
+    --divider: #DDDDDD;
+    --error: #E74C3C;
+    --hover: #E0E0E0;
+    --info: #3498DB;
+    --on-background: #333333;
+    --on-primary: #FFFFFF;
+    --on-secondary: #FFFFFF;
+    --on-surface: #333333;
+    --primary-variant: #3498DB;
+    --scrollbar-background: #F5F5F5;
+    --secondary: #16A085;
+    --selected: #C0E0FF;
+    --success: #2ECC71;
+    --surface: #FFFFFF;
+    --terminal-text: #000000;
+    --warning: #F39C12;
+    /* Base Colors */
+    --primary: #2980B9;
+    /* Component Colors */
+    --button-background: #EEEEEE;
+    /* from @background */
+    --menu-text: #333333;
+    /* from @background */
+    --scrollbar-handle: #EEEEEE;
+    /* from @background-variant */
+    --button-text: #333333;
+    /* from @background-variant */
+    --dock-border: #CCCCCC;
+    /* from @background-variant */
+    --scrollbar-hover: #2980B9;
+    /* from @background-variant */
+    --tab-text: #333333;
+    /* from @border */
+    --input-focus-border: #2980B9;
+    /* from @border */
+    --menu-background: #F5F5F5;
+    /* from @disabled */
+    --input-background: #FFFFFF;
+    /* from @on-background */
+    --button-hover: #2980B9;
+    /* from @on-background */
+    --menu-hover: #2980B9;
+    /* from @on-background */
+    --tab-selected: #2980B9;
+    /* from @on-primary */
+    --button-pressed: #3498DB;
+    /* from @on-primary */
+    --dock-title: #EEEEEE;
+    /* from @on-primary */
+    --terminal-background: #F0F0F0;
+    /* from @on-surface */
+    --input-border: #CCCCCC;
+    /* from @primary */
+    --button-hover-text: #FFFFFF;
+    /* from @primary */
+    --menu-hover-text: #FFFFFF;
+    /* from @primary */
+    --tab-background: #EEEEEE;
+    /* from @primary */
+    --tab-selected-text: #FFFFFF;
+    /* from @primary-variant */
+    --button-disabled: #AAAAAA;
+    /* from @surface */
+    --input-text: #333333;
+}
+

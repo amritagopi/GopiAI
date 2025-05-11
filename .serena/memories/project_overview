@@ -1,0 +1,9 @@
+GopiAI is a Python application built with PySide6 that appears to be an AI coding assistant with chat interface, terminal widget, and code execution capabilities. 
+
+Key components:
+- UI components like ChatWidget and TerminalWidget
+- Agent system using MCP (Model Control Protocol)
+- Code execution tools that currently have stub implementations
+- Planning strategies for AI reasoning
+
+The code appears to be mostly complete but there are some stub methods that need real implementation.

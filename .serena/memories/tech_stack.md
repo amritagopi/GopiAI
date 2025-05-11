@@ -1,0 +1,31 @@
+The project uses a variety of libraries and frameworks, including:
+- **pydantic** for data validation and settings management.
+- **openai** for AI model interactions.
+- **tenacity** for retrying operations.
+- **pyyaml** for YAML parsing.
+- **loguru** for logging.
+- **numpy** for numerical operations.
+- **datasets** for handling datasets.
+- **tiktoken** for tokenization.
+- **html2text** for converting HTML to text.
+- **gymnasium** for reinforcement learning environments.
+- **pillow** for image processing.
+- **browsergym** for browser-based environments.
+- **unidiff** for unified diff parsing.
+- **browser-use** for browser automation.
+- **googlesearch-python**, **baidusearch**, **duckduckgo_search** for web searching.
+- **aiofiles** for asynchronous file operations.
+- **pydantic_core** for core functionalities of pydantic.
+- **colorama** for colored terminal text.
+- **playwright** for browser automation.
+- **docker** for container management.
+- **pytest** and **pytest-asyncio** for testing.
+- **mcp** for model context protocol.
+- **httpx** for HTTP requests.
+- **tomli** for TOML parsing.
+- **pocketflow_framework** for the PocketFlow framework.
+- **boto3** for AWS interactions.
+- **uvicorn** and **fastapi** for web server and API development.
+- **PySide6** and **PySide6-Addons** for GUI development.
+- **pathlib** for path handling.
+- **typing-extensions** for type hints.

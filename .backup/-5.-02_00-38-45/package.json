@@ -1,0 +1,23 @@
+{
+    "name": "gopi-ai-mcp",
+    "version": "0.1.0",
+    "description": "GopiAI MCP Integration",
+    "private": true,
+    "scripts": {
+        "setup-mcp": "node scripts/setup-mcp.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/server-everart": "latest",
+        "@modelcontextprotocol/server-github": "latest",
+        "@modelcontextprotocol/server-memory": "latest",
+        "@modelcontextprotocol/server-sequential-thinking": "latest",
+        "@oevortex/ddg_search": "latest",
+        "lucide": "^0.507.0"
+    },
+    "engines": {
+        "node": ">=14.0.0",
+        "npm": ">=6.0.0"
+    },
+    "author": "",
+    "license": "MIT"
+}

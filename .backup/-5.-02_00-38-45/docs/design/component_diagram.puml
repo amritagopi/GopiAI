@@ -1,0 +1,178 @@
+@startuml GopiAI Component Diagram
+
+' Основная палитра цветов
+!define CoreColor #AAFFAA
+!define AgentColor #FFFFAA
+!define ToolColor #AAAAFF
+!define UIColor #FFAAAA
+!define FlowColor #AAFFFF
+!define PromptColor #FFAAFF
+!define UtilColor #DDDDDD
+!define MCPColor #FFCC99
+
+' Стили компонентов
+skinparam component {
+  BackgroundColor<<Core>> CoreColor
+  BackgroundColor<<Agent>> AgentColor
+  BackgroundColor<<Tool>> ToolColor
+  BackgroundColor<<UI>> UIColor
+  BackgroundColor<<Flow>> FlowColor
+  BackgroundColor<<Prompt>> PromptColor
+  BackgroundColor<<Util>> UtilColor
+  BackgroundColor<<MCP>> MCPColor
+  BorderColor black
+  ArrowColor black
+  FontSize 14
+}
+
+' Определение компонентов
+
+' Core Components
+component "Core" as core <<Core>> {
+  component "Configuration" as config
+  component "LLM Interface" as llm
+  component "Logger" as logger
+  component "Schema" as schema
+  component "Exceptions" as exceptions
+  component "Interfaces" as interfaces
+}
+
+' Agent Components
+component "Agents" as agents <<Agent>> {
+  component "Base Agent" as base_agent
+  component "Browser Agent" as browser_agent
+  component "Coding Agent" as coding_agent
+  component "Reasoning" as reasoning
+  component "Planning" as planning
+  component "Experience Manager" as exp_manager
+  component "Toolcall Agent" as toolcall_agent
+  component "MCP Agent" as mcp_agent
+}
+
+' Tool Components
+component "Tools" as tools <<Tool>> {
+  component "Base Tool" as base_tool
+  component "Code Tools" as code_tools
+  component "Browser Tools" as browser_tools
+  component "Terminal Tools" as terminal_tools
+  component "Search Tools" as search_tools
+  component "MCP Tools" as mcp_tools
+}
+
+' UI Components
+component "UI" as ui <<UI>> {
+  component "Main Window" as main_window
+  component "Chat Widget" as chat_widget
+  component "Browser Widget" as browser_widget
+  component "Code Editor" as code_editor
+  component "Terminal Widget" as terminal_widget
+  component "Theme Manager" as theme_manager
+}
+
+' Flow Components
+component "Flows" as flows <<Flow>> {
+  component "Base Flow" as base_flow
+  component "Flow Factory" as flow_factory
+  component "Planning Flow" as planning_flow
+}
+
+' PocketFlow Components
+component "PocketFlow" as pocketflow <<Flow>> {
+  component "Orchestrator" as orchestrator
+  component "Adapters" as adapters
+  component "Core" as pf_core
+}
+
+' Prompt Components
+component "Prompts" as prompts <<Prompt>> {
+  component "Reflection" as reflection_prompt
+  component "Browser" as browser_prompt
+  component "Reasoning" as reasoning_prompt
+  component "Planning" as planning_prompt
+  component "MCP" as mcp_prompt
+}
+
+' MCP Components
+component "MCP" as mcp <<MCP>> {
+  component "Server" as mcp_server
+  component "Client" as mcp_client
+  component "Sequential Thinking" as seq_thinking
+  component "Serena Integration" as serena
+}
+
+' Utils Components
+component "Utils" as utils <<Util>> {
+  component "Common Utils" as common_utils
+  component "File Operations" as file_ops
+  component "Error Handling" as error_handling
+}
+
+' Зависимости между компонентами
+
+' Core dependencies
+core --> utils
+llm --> utils
+interfaces --> core
+
+' Agent dependencies
+agents --> core
+agents --> tools
+agents --> prompts
+agents --> utils
+agents --> llm
+agents --> mcp
+
+' Tool dependencies
+tools --> core
+tools --> utils
+tools --> llm
+
+' UI dependencies
+ui --> agents
+ui --> utils
+ui --> core
+
+' Flow dependencies
+flows --> agents
+flows --> core
+flows --> utils
+
+' PocketFlow dependencies
+pocketflow --> flows
+pocketflow --> agents
+pocketflow --> core
+
+' Prompt dependencies
+prompts --> core
+prompts --> utils
+
+' MCP dependencies
+mcp --> core
+mcp --> utils
+mcp --> llm
+
+' Основные взаимодействия
+ui -down-> agents : "User interactions"
+agents -down-> tools : "Uses tools"
+agents -right-> llm : "Queries LLM"
+flows -down-> agents : "Orchestrates agents"
+agents -left-> prompts : "Uses prompts"
+mcp -up-> agents : "Extends reasoning"
+
+' Легенда
+legend right
+  |= Цвет |= Компонент |
+  |<#AAFFAA>| Core |
+  |<#FFFFAA>| Agents |
+  |<#AAAAFF>| Tools |
+  |<#FFAAAA>| UI |
+  |<#AAFFFF>| Flows |
+  |<#FFAAFF>| Prompts |
+  |<#FFCC99>| MCP |
+  |<#DDDDDD>| Utils |
+endlegend
+
+title "GopiAI Component Architecture"
+footer "Дата создания: 2024-07-03"
+
+@enduml

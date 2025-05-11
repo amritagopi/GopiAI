@@ -1,0 +1,11 @@
+include requirements.txt
+include Makefile
+include tox.ini
+include CHANGELOG.md
+
+recursive-include assets *.png
+recursive-include .github *.yml
+
+recursive-include QStyler/icons *.png
+recursive-include QStyler/themes *.json
+recursive-include QStyler/data  *.json

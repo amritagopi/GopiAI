@@ -1,0 +1,8 @@
+{
+  "description": "Dual validation system inspired by GAN architecture",
+  "weights": {
+    "code_quality": 1.5,
+    "performance": 1.2,
+    "documentation": 1.3
+  }
+}

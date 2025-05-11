@@ -1,0 +1,482 @@
+/* Light Theme QSS for GopiAI */
+
+/* Global settings */
+QMainWindow {
+    background-color: #ffffff;
+    border: none;
+}
+
+QWidget {
+    color: @text_color;
+    background-color: transparent; /* Default to transparent for most widgets */
+    border-color: @border_color; /* Default border color */
+}
+
+/* Стили для кастомного заголовка окна */
+MainWindowTitleBar {
+    background-color: #f0f0f0; /* Делаем фон заголовка такой же, как у меню */
+    min-height: 28px;
+    max-height: 28px;
+}
+
+MainWindowTitleBar QLabel#windowTitleText {
+    font-weight: bold;
+    color: #212121;
+}
+
+MainWindowTitleBar QPushButton {
+    background-color: transparent;
+    border: none;
+}
+
+MainWindowTitleBar QPushButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+MainWindowTitleBar QPushButton:pressed {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+MainWindowTitleBar QPushButton#windowCloseButton:hover {
+    background-color: rgba(232, 17, 35, 0.6);
+}
+
+MainWindowTitleBar QPushButton#windowCloseButton:pressed {
+    background-color: rgba(232, 17, 35, 0.8);
+}
+
+/* QMainWindow с кастомным заголовком */
+QMainWindow QStatusBar {
+    border-top: 1px solid #d0d0d0;
+    background-color: #f0f0f0;
+}
+
+/* Labels */
+QLabel {
+    color: @label_text_color;
+    background-color: transparent;
+}
+
+/* Buttons */
+QPushButton {
+    background-color: @button_background_color;
+    color: @button_text_color;
+    border: 1px solid @border_color;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background-color: @button_hover_background_color;
+}
+
+QPushButton:pressed {
+    background-color: @button_pressed_background_color;
+}
+
+QPushButton:disabled {
+    background-color: @button_disabled_background_color;
+    color: @button_disabled_text_color;
+}
+
+/* Specific buttons for chat as per image */
+ChatWidget QPushButton, /* Assuming ChatWidget is the container */
+#chatSendButton, /* If buttons have specific object names */
+#chatStopButton,
+#chatCorrectButton {
+    background-color: @primary_color; /* Using primary_color for chat buttons */
+    color: @button_text_color; /* White text */
+}
+
+ChatWidget QPushButton:hover,
+#chatSendButton:hover,
+#chatStopButton:hover,
+#chatCorrectButton:hover {
+    background-color: @button_hover_background_color;
+}
+
+
+/* Inputs / Text Editors */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: @input_background_color;
+    color: @input_text_color;
+    border: 1px solid @input_border_color;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
+    border-color: @input_focus_border_color;
+}
+
+/* Main text editor area (if it's a specific class or object name) */
+#mainTextEditor { /* Example, replace with actual object name or class */
+    background-color: @panel_background_color; /* Same as panels */
+}
+
+
+/* Dock Widgets (like Directory) */
+QDockWidget {
+    background-color: @dock_widget_background_color;
+    color: @text_color;
+    titlebar-close-icon: url(:/icons/close.svg); /* Ensure icons are available */
+    titlebar-normal-icon: url(:/icons/float.svg);
+}
+
+QDockWidget::title {
+    background-color: @dock_title_background_color;
+    color: @dock_title_text_color;
+    padding: 4px;
+    border-bottom: 1px solid @border_color;
+}
+
+/* Tree View (for Directory) */
+QTreeView {
+    background-color: @panel_background_color; /* Matches dock background */
+    color: @text_color;
+    border: none; /* No border for the tree view itself if dock has it */
+    alternate-background-color: @list_item_alternate_background_color;
+}
+
+QTreeView::item {
+    padding: 3px;
+}
+
+QTreeView::item:hover {
+    background-color: @list_item_hover_background_color;
+    color: @text_color;
+}
+
+QTreeView::item:selected {
+    background-color: @list_item_selected_background_color;
+    color: @list_item_selected_text_color;
+}
+
+/* Tab Widget and Tab Bar */
+QTabWidget::pane {
+    border: 1px solid @border_color;
+    background-color: @panel_background_color; /* Content area of tabs */
+    border-top: none; /* Border is usually on the TabBar */
+}
+
+QTabBar {
+    background-color: @tab_bar_background_color;
+    border-bottom: 1px solid @tab_bar_border_color;
+}
+
+QTabBar::tab {
+    background-color: @tab_inactive_background_color;
+    color: @tab_inactive_text_color;
+    border: 1px solid @tab_inactive_border_color;
+    border-bottom: none; /* Tab is part of the bar */
+    padding: 6px 12px;
+    margin-right: 1px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: @tab_active_background_color; /* Yellowish from image */
+    color: @tab_active_text_color;
+    border-color: @tab_active_border_color;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: @primary_color; /* Light blue hover for inactive tabs */
+    color: @button_text_color; /* White text on hover */
+}
+
+/* Scroll Bars */
+QScrollBar:vertical {
+    border: 1px solid @scrollbar_background_color;
+    background: @scrollbar_background_color;
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+    background: @scrollbar_handle_background_color;
+    min-height: 20px;
+    border-radius: 6px;
+}
+QScrollBar::handle:vertical:hover {
+    background: @scrollbar_handle_hover_background_color;
+}
+QScrollBar::handle:vertical:pressed {
+    background: @scrollbar_handle_pressed_background_color;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+    width: 0px;
+}
+
+QScrollBar:horizontal {
+    border: 1px solid @scrollbar_background_color;
+    background: @scrollbar_background_color;
+    height: 12px;
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:horizontal {
+    background: @scrollbar_handle_background_color;
+    min-width: 20px;
+    border-radius: 6px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: @scrollbar_handle_hover_background_color;
+}
+QScrollBar::handle:horizontal:pressed {
+    background: @scrollbar_handle_pressed_background_color;
+}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+    height: 0px;
+    width: 0px;
+}
+
+/* Menu Bar and Menus */
+QMenuBar {
+    background-color: @menubar_background_color;
+    color: @menubar_item_text_color;
+    border-bottom: 1px solid @menubar_border_color;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+}
+
+QMenuBar::item:selected { /* Hover */
+    background-color: @menubar_item_hover_background_color;
+    color: @button_text_color; /* Assuming white text on hover */
+}
+
+QMenuBar::item:pressed {
+    background-color: @menubar_item_pressed_background_color;
+}
+
+QMenu {
+    background-color: @menu_background_color;
+    color: @menu_item_text_color;
+    border: 1px solid @menu_border_color;
+    padding: 2px;
+}
+
+QMenu::item {
+    padding: 4px 20px 4px 20px;
+}
+
+QMenu::item:selected { /* Hover */
+    background-color: @menu_item_hover_background_color;
+    color: @button_text_color; /* Assuming white text on hover */
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: @separator_color;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* Status Bar */
+QStatusBar {
+    background-color: @statusbar_background_color;
+    color: @statusbar_text_color;
+    border-top: 1px solid @border_color;
+}
+
+/* ToolBar */
+QToolBar {
+    background-color: @menubar_background_color; /* Same as menubar */
+    border: 1px solid @border_color;
+    padding: 2px;
+}
+QToolBar QToolButton {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    margin: 1px;
+    /* Icons should pick up icon_color */
+}
+QToolBar QToolButton:hover {
+    background-color: @menubar_item_hover_background_color;
+}
+QToolBar QToolButton:pressed {
+    background-color: @menubar_item_pressed_background_color;
+}
+QToolBar QToolButton:checked {
+    background-color: @menubar_item_pressed_background_color; /* Or a distinct checked color */
+}
+
+
+/* Chat specific styles */
+/* Assuming a main ChatWidget container */
+ChatWidget {
+    background-color: @chat_widget_background_color; /* Yellowish background for the whole chat area */
+}
+
+/* Style for message bubbles if they are custom widgets or have object names */
+/* UserMessageBubble, AssistantMessageBubble are hypothetical class names */
+UserMessageBubble {
+    background-color: @chat_user_message_background_color;
+    color: @chat_user_message_text_color;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+AssistantMessageBubble {
+    background-color: @chat_assistant_message_background_color;
+    color: @chat_assistant_message_text_color;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+/* Input field for chat */
+#chatInput { /* Example object name */
+    background-color: @chat_input_background_color;
+    color: @chat_input_text_color;
+    border: 1px solid @chat_input_border_color;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* Splitter */
+QSplitter::handle {
+    background-color: @splitter_handle_color;
+    height: 1px; /* For horizontal splitters */
+    width: 1px; /* For vertical splitters */
+}
+
+QSplitter::handle:horizontal {
+    height: 4px;
+    image: url(:/icons/splitter_horizontal.svg); /* Optional: if you have an icon */
+}
+
+QSplitter::handle:vertical {
+    width: 4px;
+    image: url(:/icons/splitter_vertical.svg); /* Optional: if you have an icon */
+}
+
+QSplitter::handle:hover {
+    background-color: @primary_color;
+}
+
+/* ComboBox */
+QComboBox {
+    background-color: @combobox_background_color;
+    color: @combobox_text_color;
+    border: 1px solid @combobox_border_color;
+    padding: 3px 5px;
+    border-radius: 4px;
+}
+QComboBox:hover {
+    border-color: @primary_color;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: @combobox_border_color;
+    border-left-style: solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: @combobox_background_color;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/arrow_down.svg); /* Needs an icon */
+    width: 10px;
+    height: 10px;
+}
+QComboBox QAbstractItemView { /* Dropdown list */
+    background-color: @combobox_dropdown_background_color;
+    border: 1px solid @combobox_dropdown_border_color;
+    selection-background-color: @combobox_dropdown_hover_background_color;
+    selection-color: @combobox_dropdown_item_text_color;
+    color: @combobox_dropdown_item_text_color;
+    padding: 2px;
+}
+
+/* CheckBox */
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid @checkbox_indicator_border_color;
+    border-radius: 3px;
+    background-color: @input_background_color; /* Or specific checkbox bg */
+}
+QCheckBox::indicator:checked {
+    background-color: @checkbox_indicator_checked_background_color;
+    image: url(:/icons/checkmark.svg); /* Needs an icon */
+    border-color: @checkbox_indicator_checked_background_color;
+}
+QCheckBox::indicator:disabled {
+    background-color: @button_disabled_background_color;
+    border-color: @button_disabled_background_color;
+}
+QCheckBox {
+    color: @checkbox_text_color;
+    spacing: 5px;
+    padding: 2px;
+}
+
+/* GroupBox */
+QGroupBox {
+    border: 1px solid @border_color;
+    border-radius: 4px;
+    margin-top: 10px; /* Space for title */
+    background-color: transparent;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 5px 0 5px;
+    left: 10px;
+    color: @text_color;
+}
+
+/* Tooltip */
+QToolTip {
+    background-color: @tooltip_background_color;
+    color: @tooltip_text_color;
+    border: 1px solid @tooltip_background_color; /* Or a slightly different border */
+    padding: 4px;
+    border-radius: 3px;
+}
+
+/* Стили для кнопок управления окном */
+WindowControlWidget {
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
+WindowControlWidget QPushButton {
+    background-color: transparent;
+    border: none;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 3px;
+}
+
+WindowControlWidget QPushButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+WindowControlWidget QPushButton:pressed {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+WindowControlWidget QPushButton#windowCloseButton:hover {
+    background-color: rgba(232, 17, 35, 0.6);
+}
+
+WindowControlWidget QPushButton#windowCloseButton:pressed {
+    background-color: rgba(232, 17, 35, 0.8);
+}
