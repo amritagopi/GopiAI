@@ -1,0 +1,23 @@
+{
+  "statistics": {
+    "total_files": 607,
+    "files_with_unused_code": 0,
+    "unused_counts": {
+      "functions": 0,
+      "methods": 0,
+      "classes": 0,
+      "variables": 0,
+      "attributes": 0,
+      "imports": 0,
+      "parameters": 0,
+      "other": 0
+    },
+    "important_dirs": {
+      "app": 0,
+      "GopiAI_Flow": 0,
+      "scripts": 0,
+      "config": 0
+    }
+  },
+  "results": {}
+}

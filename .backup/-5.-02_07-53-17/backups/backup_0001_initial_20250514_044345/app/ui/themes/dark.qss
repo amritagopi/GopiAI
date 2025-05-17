@@ -1,0 +1,683 @@
+/* Dark Theme for GopiAI */
+
+/* Общие стили для QWidget и QMainWindow */
+QWidget {
+    background-color: @window_background_color;
+    color: @text_color;
+    font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* Пример шрифтов */
+    font-size: 10pt; /* Базовый размер шрифта */
+}
+
+QMainWindow {
+    background-color: #1e1e1e;
+    border: none;
+}
+
+/* Стили для кастомного заголовка окна */
+MainWindowTitleBar {
+    background-color: #1e1e1e; /* Делаем фон заголовка такой же, как у меню */
+    min-height: 28px;
+    max-height: 28px;
+}
+
+MainWindowTitleBar QLabel#windowTitleText {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+MainWindowTitleBar QPushButton {
+    background-color: transparent;
+    border: none;
+}
+
+MainWindowTitleBar QPushButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+MainWindowTitleBar QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+MainWindowTitleBar QPushButton#windowCloseButton:hover {
+    background-color: rgba(232, 17, 35, 0.7);
+}
+
+MainWindowTitleBar QPushButton#windowCloseButton:pressed {
+    background-color: rgba(232, 17, 35, 0.9);
+}
+
+QMainWindow::separator {
+    background-color: @border;
+    width: 1px; /* Тонкий разделитель для горизонтальных */
+    height: 1px; /* Тонкий разделитель для вертикальных */
+}
+
+/* Стили для меню */
+QMenuBar {
+    background-color: @menu_background;
+    color: @menu_foreground;
+    border-bottom: 1px solid @border;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+    color: @menu_foreground;
+}
+
+QMenuBar::item:selected { /* при наведении или выборе */
+    background-color: @menu_selection_background;
+    color: @menu_selection_foreground;
+}
+
+QMenu {
+    background-color: @menu_background;
+    color: @menu_foreground;
+    border: 1px solid @border;
+    padding: 2px;
+}
+
+QMenu::item {
+    padding: 4px 20px 4px 20px; /* отступы для текста и иконки */
+    min-width: 120px; /* минимальная ширина пункта меню */
+}
+
+QMenu::item:selected {
+    background-color: @menu_selection_background;
+    color: @menu_selection_foreground;
+}
+
+QMenu::item:disabled {
+    color: @disabled_foreground;
+    background-color: transparent;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: @menu_separator;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+/* Стили для панелей инструментов */
+QToolBar {
+    background-color: @secondary_background;
+    border: none;
+    padding: 2px;
+    spacing: 3px; /* Расстояние между кнопками */
+}
+
+QToolBar::handle {
+    /* Можно добавить изображение для ручки, если нужно */
+    /* image: url(:/images/toolbar_handle.png); */
+}
+
+QToolButton {
+    background-color: transparent;
+    color: @icon_color; /* Цвет иконки/текста на кнопке */
+    border: 1px solid transparent;
+    padding: 4px;
+    margin: 1px;
+    border-radius: 3px;
+}
+
+QToolButton:hover {
+    background-color: @button_hover;
+    border: 1px solid @accent;
+    color: @icon_hover_color;
+}
+
+QToolButton:pressed {
+    background-color: @button_pressed;
+    color: @icon_hover_color;
+}
+
+QToolButton:checked { /* Для кнопок с состоянием "включено" */
+    background-color: @accent;
+    color: @icon_hover_color;
+    border: 1px solid @accent;
+}
+
+QToolButton:disabled {
+    color: @icon_disabled_color;
+    background-color: transparent;
+}
+
+
+/* Стили для кнопок */
+QPushButton {
+    background-color: @button_normal;
+    color: @button_text;
+    border: 1px solid @border;
+    padding: 6px 12px;
+    border-radius: 3px;
+    min-width: 60px; /* Минимальная ширина кнопки */
+}
+
+QPushButton:hover {
+    background-color: @button_hover;
+    border: 1px solid @accent;
+}
+
+QPushButton:pressed {
+    background-color: @button_pressed;
+}
+
+QPushButton:disabled {
+    background-color: @disabled_background;
+    color: @disabled_foreground;
+    border: 1px solid @disabled_background;
+}
+
+/* Стили для полей ввода */
+QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    background-color: @input_background;
+    color: @input_text;
+    border: 1px solid @input_border;
+    padding: 4px;
+    border-radius: 3px;
+    selection-background-color: @selection_background;
+    selection-color: @selection_foreground;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
+    border: 1px solid @accent;
+}
+
+QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled, QComboBox:disabled {
+    background-color: @disabled_background;
+    color: @disabled_foreground;
+    border: 1px solid @disabled_background;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: @input_border;
+    border-left-style: solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: @button_normal;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/arrow_down.svg);
+    width: 12px;
+    height: 12px;
+}
+
+QComboBox QAbstractItemView { /* Выпадающий список */
+    background-color: @menu_background;
+    color: @menu_foreground;
+    border: 1px solid @border;
+    selection-background-color: @menu_selection_background;
+    selection-color: @menu_selection_foreground;
+    padding: 2px;
+}
+
+/* Стили для вкладок */
+QTabWidget::pane { /* Область содержимого вкладки */
+    border: 1px solid @border;
+    border-top: none; /* Убираем верхнюю границу, т.к. она будет у вкладок */
+    background-color: @background;
+}
+
+QTabBar::tab {
+    background-color: @tab_inactive_background;
+    color: @tab_inactive_foreground;
+    border: 1px solid @border;
+    border-bottom: none; /* Убираем нижнюю границу, она будет у pane */
+    padding: 6px 12px;
+    margin-right: 1px; /* Небольшой отступ между вкладками */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: @tab_active_background;
+    color: @tab_active_foreground;
+    border-color: @accent;
+    /* Можно сделать активную вкладку чуть выше */
+    /* margin-bottom: -1px; */
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: @button_hover; /* Цвет при наведении на неактивную вкладку */
+    color: @text_color;
+}
+
+QTabBar::tab:disabled {
+    color: @disabled_foreground;
+    background-color: @disabled_background;
+}
+
+/* Стили для док-виджетов */
+QDockWidget {
+    border: 1px solid @border;
+    titlebar-close-icon: url(:/icons/close.svg);
+    titlebar-normal-icon: url(:/icons/float.svg);
+}
+
+QDockWidget::title {
+    background-color: @dock_title_background_color;
+    padding-left: 5px;
+    padding-top: 3px;
+    margin-top: 2px;
+    color: @dock_title_text_color;
+    border-bottom: 1px solid @dock_border_color;
+}
+
+/* Стили для статус-бара */
+QStatusBar {
+    background-color: #2c2c2c;
+    color: @text_secondary;
+    border-top: 1px solid #3c3c3c;
+}
+
+QStatusBar::item {
+    border: none; /* Убираем границы у элементов статус-бара */
+}
+
+/* Стили для ползунков */
+QSlider::groove:horizontal {
+    border: 1px solid @border;
+    height: 8px;
+    background: @input_background;
+    margin: 2px 0;
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+    background: @accent;
+    border: 1px solid @accent;
+    width: 16px;
+    margin: -4px 0; /* (высота_ручки - высота_паза)/2 */
+    border-radius: 8px;
+}
+
+QSlider::groove:vertical {
+    border: 1px solid @border;
+    width: 8px;
+    background: @input_background;
+    margin: 0 2px;
+    border-radius: 4px;
+}
+
+QSlider::handle:vertical {
+    background: @accent;
+    border: 1px solid @accent;
+    height: 16px;
+    margin: 0 -4px;
+    border-radius: 8px;
+}
+
+/* Стили для полос прокрутки */
+QScrollBar:horizontal {
+    border: 1px solid @border;
+    background: @scrollbar_background;
+    height: 12px;
+    margin: 0px 20px 0 20px; /* Отступы для кнопок */
+}
+QScrollBar::handle:horizontal {
+    background: @scrollbar_handle;
+    min-width: 20px;
+    border-radius: 5px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: @scrollbar_handle_hover;
+}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: 1px solid @border;
+    background: @button_normal;
+    width: 18px;
+    subcontrol-origin: margin;
+}
+QScrollBar::add-line:horizontal {
+    subcontrol-position: right;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+QScrollBar::sub-line:horizontal {
+    subcontrol-position: left;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+QScrollBar::left-arrow:horizontal {
+    image: url(:/icons/arrow_left.svg);
+    width: 12px;
+    height: 12px;
+}
+QScrollBar::right-arrow:horizontal {
+    image: url(:/icons/arrow_right.svg);
+    width: 12px;
+    height: 12px;
+}
+
+QScrollBar:vertical {
+    border: 1px solid @border;
+    background: @scrollbar_background;
+    width: 12px;
+    margin: 20px 0 20px 0;
+}
+QScrollBar::handle:vertical {
+    background: @scrollbar_handle;
+    min-height: 20px;
+    border-radius: 5px;
+}
+QScrollBar::handle:vertical:hover {
+    background: @scrollbar_handle_hover;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: 1px solid @border;
+    background: @button_normal;
+    height: 18px;
+    subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical {
+    subcontrol-position: bottom;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+QScrollBar::sub-line:vertical {
+    subcontrol-position: top;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+QScrollBar::up-arrow:vertical {
+    image: url(:/icons/arrow_up.svg);
+    width: 12px;
+    height: 12px;
+}
+QScrollBar::down-arrow:vertical {
+    image: url(:/icons/arrow_down.svg);
+    width: 12px;
+    height: 12px;
+}
+
+/* Стили для представлений (таблицы, списки, деревья) */
+QTableView, QListView, QTreeView {
+    background-color: @input_background;
+    color: @text_color;
+    border: 1px solid @border;
+    gridline-color: @border; /* Цвет линий сетки для QTableView */
+    selection-background-color: @selection_background;
+    selection-color: @selection_foreground;
+}
+
+QHeaderView::section {
+    background-color: @secondary_background;
+    color: @text_color;
+    padding: 4px;
+    border: 1px solid @border;
+    border-bottom-width: 2px; /* Более толстая нижняя граница для заголовков */
+}
+
+/* Tooltip */
+QToolTip {
+    background-color: @tooltip_background;
+    color: @tooltip_foreground;
+    border: 1px solid @border;
+    padding: 4px;
+    border-radius: 3px;
+    opacity: 230; /* Немного прозрачности */
+}
+
+/* Placeholder text color for QLineEdit etc. */
+QLineEdit[placeholderText] {
+    color: @input_placeholder;
+}
+/* Для других виджетов, если они поддерживают плейсхолдер через QSS */
+/* QTextEdit[placeholderText], etc. */
+
+/* Стили для диалоговых окон */
+QDialog {
+    background-color: @dialog_background_color;
+    color: @dialog_text_color;
+    border: 1px solid @border; /* Опционально, если нужен явный бордер */
+}
+
+QDialogButtonBox QPushButton {
+    /* Стили для кнопок в QDialogButtonBox, если нужны специфичные */
+    /* Например, можно убрать min-width, если стандартные кнопки слишком широкие */
+    min-width: 0px;
+}
+
+/* Стили для GroupBox */
+QGroupBox {
+    background-color: @secondary_background; /* Или @background, если нужно */
+    border: 1px solid @border;
+    border-radius: 4px;
+    margin-top: 10px; /* Отступ сверху для заголовка */
+    padding: 10px; /* Внутренние отступы для содержимого */
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left; /* Позиция заголовка */
+    padding: 0 5px 0 5px;
+    left: 10px; /* Смещение от левого края */
+    color: @text_color;
+    background-color: @secondary_background; /* Фон под текстом заголовка */
+    border-radius: 3px;
+}
+
+/* Стили для QLabel */
+QLabel {
+    background-color: transparent; /* Обычно метки не имеют фона */
+    color: @text_color;
+}
+
+QLabel:disabled {
+    color: @disabled_foreground;
+}
+
+/* Стили для CheckBox и RadioButton */
+QCheckBox, QRadioButton {
+    spacing: 5px; /* Расстояние между индикатором и текстом */
+    color: @text_color;
+}
+
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid @input_border;
+    border-radius: 3px; /* Для квадратных чекбоксов */
+    background-color: @input_background;
+}
+
+QRadioButton::indicator {
+    border-radius: 8px; /* Для круглых радиокнопок */
+}
+
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: @accent;
+    border-color: @accent;
+    /* image: url(:/icons/checkmark_dark.svg); */ /* Иконка галочки */
+}
+
+QCheckBox::indicator:unchecked:hover, QRadioButton::indicator:unchecked:hover {
+    border-color: @accent;
+}
+
+QCheckBox::indicator:disabled, QRadioButton::indicator:disabled {
+    background-color: @disabled_background;
+    border-color: @disabled_background;
+}
+
+QCheckBox:disabled, QRadioButton:disabled {
+    color: @disabled_foreground;
+}
+
+/* Стили для Progress Bar */
+QProgressBar {
+    border: 1px solid @border;
+    border-radius: 4px;
+    text-align: center; /* Выравнивание текста (процентов) */
+    color: @text_color; /* Цвет текста на прогресс-баре */
+    background-color: @input_background; /* Фон "пустой" части */
+}
+
+QProgressBar::chunk {
+    background-color: @accent;
+    border-radius: 3px; /* Скругление для "заполненной" части */
+    /* margin: 1px; */ /* Если нужен небольшой отступ у чанка */
+}
+
+/* Стили для кнопок управления окном */
+WindowControlWidget {
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
+WindowControlWidget QPushButton {
+    background-color: transparent;
+    border: none;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 3px;
+}
+
+WindowControlWidget QPushButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+WindowControlWidget QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+WindowControlWidget QPushButton#windowCloseButton:hover {
+    background-color: rgba(232, 17, 35, 0.7);
+}
+
+WindowControlWidget QPushButton#windowCloseButton:pressed {
+    background-color: rgba(232, 17, 35, 0.9);
+}
+
+/* Специфичные стили для конкретных виджетов, если необходимо */
+/* Например, если у вас есть виджет с objectName="myCustomWidget" */
+/* #myCustomWidget { */
+/*     background-color: red; */
+/* } */
+
+/* Chat specific styles */
+/* WhatsApp style chat in dark theme */
+ChatWidget {
+    background-color: #121b22; /* Dark WhatsApp background color */
+}
+
+/* Chat header */
+ChatWidget QWidget#chatHeader {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 0;
+    margin: 0;
+    height: 0px;
+    min-height: 0px;
+    max-height: 0px;
+    visibility: hidden;
+}
+
+ChatWidget QLabel#chatTitle {
+    color: transparent;
+    font-size: 0px;
+    margin: 0;
+    padding: 0;
+    height: 0px;
+    visibility: hidden;
+}
+
+/* Message bubble styles */
+MessageBubble {
+    margin: 2px 8px;
+}
+
+/* Chat input container */
+ChatWidget QWidget#inputContainer {
+    background-color: #1f2c34;
+    border-top: 1px solid #384c56;
+    padding: 4px;
+}
+
+/* Style for expanding text edit in chat */
+ExpandingTextEdit {
+    background-color: #2a3942;
+    border-radius: 15px;
+    border: 1px solid #384c56;
+    padding: 6px 10px;
+    min-height: 32px;
+    max-height: 150px;
+    color: #e9edef;
+    height: 32px;
+}
+
+/* Specific styling for MessageInput in ExpandingTextEdit */
+QTextEdit#messageInput {
+    padding-bottom: 8px;
+    min-height: 32px;
+    font-size: 13px;
+}
+
+/* Buttons row */
+ChatWidget QWidget#buttonsRow {
+    background-color: transparent;
+}
+
+/* Emoji, attach, image buttons */
+ChatWidget QPushButton.toolButton {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 18px;
+    color: #8696a0;
+}
+
+ChatWidget QPushButton.toolButton:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #e9edef;
+}
+
+/* Send/mic button */
+ChatWidget QPushButton#sendMicButton {
+    background-color: #00a884;
+    border-radius: 22px;
+    color: #e9edef;
+    border: none;
+}
+
+ChatWidget QPushButton#sendMicButton:hover {
+    background-color: #008a70;
+}
+
+/* Stop button */
+ChatWidget QPushButton#stopButton {
+    background-color: #f25555;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+ChatWidget QPushButton#stopButton:hover {
+    background-color: #e03535;
+}
+
+/* Chat history area */
+ChatHistoryArea {
+    background-color: #121b22;
+    border: none;
+}
+
+/* Message bubbles styling */
+#userMessageBubble {
+    background-color: #005c4b;
+    color: #e9edef;
+}
+
+#assistantMessageBubble {
+    background-color: #1f2c34;
+    color: #e9edef;
+}

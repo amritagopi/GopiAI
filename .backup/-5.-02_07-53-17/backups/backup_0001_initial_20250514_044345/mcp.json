@@ -1,0 +1,87 @@
+{
+    "version": "0.1.0",
+    "name": "gopi-ai-mcp",
+    "description": "GopiAI MCP Configuration",
+    "tools": [
+        {
+            "name": "sqlite",
+            "description": "SQLite database tools for GopiAI",
+            "path": "app/mcp/sqlite_tools.py",
+            "tools": [
+                "init_database",
+                "execute_query",
+                "select_query",
+                "insert_data",
+                "update_data",
+                "delete_data",
+                "create_table"
+            ]
+        },
+        {
+            "name": "serena",
+            "description": "Serena integration tools for GopiAI",
+            "path": "app/mcp/serena_tools.py"
+        }
+    ],
+    "servers": [
+        {
+            "name": "sequential-thinking",
+            "package": "@modelcontextprotocol/server-sequential-thinking",
+            "description": "Sequential thinking server for step-by-step reasoning"
+        },
+        {
+            "name": "ddg_search",
+            "package": "@oevortex/ddg_search",
+            "description": "DuckDuckGo search integration"
+        },
+        {
+            "name": "memory",
+            "package": "@modelcontextprotocol/server-memory",
+            "description": "Memory server for storing and retrieving information"
+        },
+        {
+            "name": "github",
+            "package": "@modelcontextprotocol/server-github",
+            "description": "GitHub integration server"
+        },
+        {
+            "name": "everart",
+            "package": "@modelcontextprotocol/server-everart",
+            "description": "Everart server for AI art generation"
+        }
+    ],
+    "database": {
+        "path": "data/gopi_ai.db",
+        "init_tables": [
+            {
+                "name": "conversations",
+                "columns": [
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT",
+                    "title TEXT NOT NULL",
+                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+                    "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                ]
+            },
+            {
+                "name": "messages",
+                "columns": [
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT",
+                    "conversation_id INTEGER NOT NULL",
+                    "role TEXT NOT NULL",
+                    "content TEXT NOT NULL",
+                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+                    "FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE"
+                ]
+            },
+            {
+                "name": "settings",
+                "columns": [
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT",
+                    "key TEXT UNIQUE NOT NULL",
+                    "value TEXT NOT NULL",
+                    "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                ]
+            }
+        ]
+    }
+}

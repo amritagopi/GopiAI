@@ -1,1 +1,0 @@
-Пользователь (Анюта) запускает PowerShell скрипт PS-Capture-Local-Screen.ps1 для создания скриншотов рабочего стола каждые 10 секунд. Скриншоты сохраняются в папку C:\Users\amritagopi\Documents\Cline\screenshots_Gemini.

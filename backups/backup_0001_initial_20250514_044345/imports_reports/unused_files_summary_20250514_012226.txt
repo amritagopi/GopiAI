@@ -1,0 +1,11 @@
+Анализ неиспользуемых файлов от 2025-05-14 01:22:26
+Всего проанализировано файлов: 21365
+Найдено неиспользуемых файлов: 6
+
+Список неиспользуемых файлов:
+1. app\agent\exploration_strategy.py
+2. app\agent\reflection_agent.py
+3. app\agent\uncertainty_handling.py
+4. app\ui\main_window.py
+5. venv\Lib\site-packages\baidusearch\baidusearch.py
+6. venv\Lib\site-packages\joblib\test\test_func_inspect_special_encoding.py

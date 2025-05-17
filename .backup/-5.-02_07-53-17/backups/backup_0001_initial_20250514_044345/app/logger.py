@@ -1,0 +1,46 @@
+import sys
+import os
+from datetime import datetime
+from pathlib import Path
+
+from loguru import logger as _logger
+
+from app.config import PROJECT_ROOT
+
+
+def define_log_level(print_level="INFO", logfile_level="DEBUG", name: str = None):
+    """Adjust the log level to above level"""
+    current_date = datetime.now()
+    formatted_date = current_date.strftime("%Y%m%d%H%M%S")
+    log_name = (
+        f"{name}_{formatted_date}" if name else formatted_date
+    )  # name a log with prefix name
+
+    # Создаем директорию логов, если она не существует
+    log_dir = PROJECT_ROOT / "logs"
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    log_file = log_dir / f"{log_name}.log"
+
+    _logger.remove()
+    _logger.add(sys.stderr, level=print_level)
+    _logger.add(log_file, level=logfile_level)
+
+    return _logger
+
+
+logger = define_log_level(print_level="DEBUG") # Теперь DEBUG логи будут выводиться в консоль
+
+
+if __name__ == "__main__":
+    logger.info("Starting application")
+    logger.debug("Debug message")
+    logger.warning("Warning message")
+    logger.error("Error message")
+    logger.critical("Critical message")
+
+    try:
+        raise ValueError("Test error")
+    except Exception as e:
+        logger.exception(f"An error occurred: {e}")
