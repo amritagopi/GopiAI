@@ -1,75 +1,91 @@
 #!/usr/bin/env python3
-"""Скрипт для запуска всех тестов системы переключения провайдеров."""
-import subprocess
-import sys
+"""
+Скрипт для запуска всех тестов системы переключения провайдеров
+"""
+
 import os
+import sys
+import subprocess
+import time
 from pathlib import Path
 
-def run_test_script(script_name, description):
-    """Запуск тестового скрипта."""
-    print(f"\n{'='*60}")
-    print(f"Запуск: {description}")
-    print(f"{'='*60}")
-    
-    current_dir = Path(__file__).parent.absolute()
-    script_path = current_dir / script_name
-    
-    if not script_path.exists():
-        print(f"❌ Скрипт не найден: {script_path}")
-        return False
+# Добавляем путь к проекту
+project_root = Path(__file__).parent
+sys.path.insert(0, str(project_root))
+
+def run_test_script(script_name):
+    """Запускает тестовый скрипт"""
+    print(f"\n🧪 Running {script_name}...")
+    print("-" * 50)
     
     try:
-        # Устанавливаем переменные окружения
-        env = os.environ.copy()
-        env['PYTHONPATH'] = f"{current_dir};{current_dir.parent / 'GopiAI-UI' / 'gopiai'}"
-        
         result = subprocess.run([
             sys.executable, 
-            str(script_path)
-        ], 
-        cwd=current_dir,
-        env=env,
-        capture_output=False,
-        text=True
-        )
+            str(project_root / script_name)
+        ], cwd=str(project_root), timeout=60)
         
-        return result.returncode == 0
-        
+        if result.returncode == 0:
+            print(f"✅ {script_name} completed successfully")
+            return True
+        else:
+            print(f"❌ {script_name} failed with return code {result.returncode}")
+            return False
+            
+    except subprocess.TimeoutExpired:
+        print(f"❌ {script_name} timed out")
+        return False
     except Exception as e:
-        print(f"❌ Ошибка при запуске {script_name}: {e}")
+        print(f"❌ {script_name} failed with error: {e}")
         return False
 
 def main():
-    """Основная функция."""
-    print("🚀 Запуск полного тестирования системы переключения провайдеров")
-    print("=" * 70)
+    """Основная функция запуска тестов"""
+    print("🚀 GopiAI Model Switching System - All Tests")
+    print("=" * 60)
     
-    # Тесты в порядке выполнения
-    tests = [
-        ("test_model_switching.py", "Тесты функциональности переключения провайдеров"),
-        ("test_api_endpoints.py", "Тесты REST API эндпоинтов")
+    # Список тестовых скриптов
+    test_scripts = [
+        "test_model_switching.py",
+        "test_api_endpoints.py",
+        "run_model_tests.py"
     ]
     
-    passed = 0
-    total = len(tests)
+    results = []
     
-    for script_name, description in tests:
-        if run_test_script(script_name, description):
-            passed += 1
-            print(f"✅ {description} - ПРОЙДЕН")
+    # Запускаем каждый тест
+    for script in test_scripts:
+        if (project_root / script).exists():
+            success = run_test_script(script)
+            results.append((script, success))
         else:
-            print(f"❌ {description} - ПРОВАЛЕН")
+            print(f"⚠️  Test script {script} not found, skipping...")
+            results.append((script, False))
     
-    print(f"\n{'='*70}")
-    print(f"📊 ИТОГОВЫЙ РЕЗУЛЬТАТ: {passed}/{total} тестов пройдено")
+    # Выводим сводку
+    print("\n" + "=" * 60)
+    print("📊 Test Results Summary")
+    print("=" * 60)
     
-    if passed == total:
-        print("🎉 Все тесты успешно пройдены! Система готова к работе.")
-        return True
+    passed = 0
+    failed = 0
+    
+    for script, success in results:
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status} {script}")
+        if success:
+            passed += 1
+        else:
+            failed += 1
+    
+    print("-" * 60)
+    print(f"Total: {len(results)} | Passed: {passed} | Failed: {failed}")
+    
+    if failed == 0:
+        print("\n🎉 All tests passed!")
+        return 0
     else:
-        print("❌ Некоторые тесты провалены. Требуется дополнительная проверка.")
-        return False
+        print(f"\n⚠️  {failed} test(s) failed")
+        return 1
 
 if __name__ == "__main__":
-    success = main()
-    sys.exit(0 if success else 1)
+    sys.exit(main())

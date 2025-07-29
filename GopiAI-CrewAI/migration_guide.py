@@ -1,157 +1,247 @@
 #!/usr/bin/env python3
 """
-Руководство по миграции на улучшенную систему переключения провайдеров LLM.
+Гид по миграции на новую систему переключения провайдеров
 """
+
 import os
 import sys
+import json
+import shutil
 from pathlib import Path
+from datetime import datetime
 
-def print_migration_guide():
-    """Вывод руководства по миграции."""
-    print("🔄 Руководство по миграции на улучшенную систему переключения провайдеров LLM")
-    print("=" * 80)
-    print()
-    
-    print("🚀 НОВЫЕ ВОЗМОЖНОСТИ:")
-    print("   ✅ Стабильная синхронизация состояния между UI и Backend")
-    print("   ✅ Мягкий черный список для моделей с превышением лимитов")
-    print("   ✅ Надежный цикл API ключей без дубликатов")
-    print("   ✅ Автоматические тесты для предотвращения регрессий")
-    print()
-    
-    print("📋 ШАГИ ДЛЯ МИГРАЦИИ:")
-    print()
-    print("1. ЗАМЕНА ИМПОРТОВ:")
-    print("   Было:")
-    print("   >>> from llm_rotation_config import ...")
-    print()
-    print("   Стало:")
-    print("   >>> from llm_rotation_config_fixed import ...")
-    print()
-    
-    print("2. НАСТРОЙКА API КЛЮЧЕЙ:")
-    print("   Добавьте в ваш .env файл:")
-    print("   >>> GEMINI_API_KEY=ваш_ключ_gemini")
-    print("   >>> OPENROUTER_API_KEY=ваш_ключ_openrouter")
-    print()
-    
-    print("3. ЗАПУСК СИСТЕМЫ:")
-    print("   Windows:")
-    print("   >>> start_model_switching_system.bat")
-    print()
-    print("   Linux/Mac:")
-    print("   >>> python start_model_switching_system.py")
-    print()
-    
-    print("4. ПРОВЕРКА РАБОТЫ:")
-    print("   >>> python run_all_tests.py")
-    print()
-    
-    print("📚 ДОКУМЕНТАЦИЯ:")
-    print("   - MODEL_SWITCHING_README.md - подробное описание системы")
-    print("   - MODEL_SWITCHING_FINAL_REPORT.md - финальный отчет")
-    print()
-    
-    print("🔧 ТЕСТИРОВАНИЕ:")
-    print("   Запустите тесты для проверки корректности миграции:")
-    print("   >>> cd GopiAI-CrewAI")
-    print("   >>> python test_model_switching.py")
-    print("   >>> python test_api_endpoints.py")
-    print()
+# Добавляем путь к проекту
+project_root = Path(__file__).parent
+sys.path.insert(0, str(project_root))
 
-def check_current_setup():
-    """Проверка текущей конфигурации."""
-    print("🔍 Проверка текущей конфигурации...")
-    print()
+def backup_file(file_path):
+    """Создает резервную копию файла"""
+    if file_path.exists():
+        backup_path = file_path.with_suffix(file_path.suffix + f".backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+        shutil.copy2(file_path, backup_path)
+        print(f"✅ Backup created: {backup_path}")
+        return backup_path
+    return None
+
+def migrate_env_file():
+    """Мигрирует .env файл"""
+    env_path = project_root / ".env"
+    if not env_path.exists():
+        print("⚠️  .env file not found, creating new one...")
+        env_content = """# GopiAI Model Switching System - API Keys
+# Generated on {}
+
+# Google Gemini API
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# OpenRouter API  
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+OPENROUTER_API_BASE=https://openrouter.ai/api/v1
+
+# Other API keys (optional)
+# BRAVE_API_KEY=your_brave_api_key_here
+""".format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        
+        env_path.write_text(env_content)
+        print("✅ New .env file created")
+        return True
     
-    # Проверяем наличие необходимых файлов
-    required_files = [
-        "llm_rotation_config_fixed.py",
-        "crewai_api_server.py", 
-        "state_manager.py",
-        "model_selector_widget.py"
+    # Проверяем существующие ключи
+    content = env_path.read_text()
+    lines = content.splitlines()
+    
+    required_keys = {
+        'GEMINI_API_KEY': 'Google Gemini API key',
+        'OPENROUTER_API_KEY': 'OpenRouter API key',
+        'OPENROUTER_API_BASE': 'https://openrouter.ai/api/v1'
+    }
+    
+    missing_keys = []
+    for key, description in required_keys.items():
+        if not any(line.startswith(f"{key}=") for line in lines):
+            missing_keys.append((key, description))
+    
+    if missing_keys:
+        print("⚠️  Missing required API keys in .env:")
+        for key, description in missing_keys:
+            print(f"   - {key}: {description}")
+        return False
+    
+    print("✅ .env file is properly configured")
+    return True
+
+def migrate_state_file():
+    """Мигрирует файл состояния"""
+    state_path = Path.home() / ".gopiai_state.json"
+    
+    if state_path.exists():
+        try:
+            with open(state_path, 'r', encoding='utf-8') as f:
+                state = json.load(f)
+            
+            # Проверяем структуру
+            required_fields = ['provider', 'model_id']
+            missing_fields = [field for field in required_fields if field not in state]
+            
+            if missing_fields:
+                print(f"⚠️  State file missing fields: {missing_fields}")
+                # Обновляем структуру
+                state.setdefault('provider', 'gemini')
+                state.setdefault('model_id', 'gemini/gemini-1.5-flash')
+                
+                backup_file(state_path)
+                with open(state_path, 'w', encoding='utf-8') as f:
+                    json.dump(state, f, indent=2, ensure_ascii=False)
+                print("✅ State file structure updated")
+            else:
+                print("✅ State file is properly configured")
+                
+        except Exception as e:
+            print(f"❌ Error reading state file: {e}")
+            return False
+    else:
+        # Создаем новый файл состояния
+        default_state = {
+            "provider": "gemini",
+            "model_id": "gemini/gemini-1.5-flash"
+        }
+        
+        with open(state_path, 'w', encoding='utf-8') as f:
+            json.dump(default_state, f, indent=2, ensure_ascii=False)
+        print("✅ New state file created")
+    
+    return True
+
+def check_old_files():
+    """Проверяет наличие старых файлов, которые нужно удалить"""
+    old_files = [
+        "old_llm_config.py",
+        "legacy_model_selector.py",
+        "deprecated_api_keys.txt"
     ]
     
-    crewai_dir = Path(__file__).parent
-    missing_files = []
-    
-    for file_name in required_files:
-        file_path = crewai_dir / file_name
+    found_old_files = []
+    for file_name in old_files:
+        file_path = project_root / file_name
         if file_path.exists():
-            print(f"✅ {file_name} - найден")
-        else:
-            print(f"❌ {file_name} - НЕ НАЙДЕН")
-            missing_files.append(file_name)
+            found_old_files.append(file_path)
     
-    print()
-    if missing_files:
-        print("❌ Обнаружены отсутствующие файлы. Установите полную версию системы.")
+    if found_old_files:
+        print("⚠️  Found old files that should be removed:")
+        for file_path in found_old_files:
+            print(f"   - {file_path}")
         return False
-    else:
-        print("✅ Все необходимые файлы найдены.")
-        return True
+    
+    print("✅ No old deprecated files found")
+    return True
 
-def check_api_keys():
-    """Проверка наличия API ключей."""
-    print("🔑 Проверка API ключей...")
-    print()
-    
-    env_file = Path(__file__).parent.parent / ".env"
-    if not env_file.exists():
-        print("⚠️  Файл .env не найден. Создайте его в корневой директории проекта.")
-        return False
-    
+def update_imports_in_code():
+    """Обновляет импорты в коде (если нужно)"""
+    # В новой системе импорты остаются теми же:
+    # from gopiai_integration.llm_rotation_config import ...
+    print("ℹ️  Import paths remain unchanged:")
+    print("   from gopiai_integration.llm_rotation_config import select_llm_model_safe")
+    print("   from gopiai_integration.llm_rotation_config import get_available_models")
+    print("   from gopiai_integration.llm_rotation_config import register_use")
+    return True
+
+def run_compatibility_tests():
+    """Запускает тесты совместимости"""
     try:
-        with open(env_file, 'r', encoding='utf-8') as f:
-            content = f.read()
+        # Импортируем основные модули
+        from llm_rotation_config import select_llm_model_safe, get_available_models, register_use
+        from state_manager import load_state, save_state
         
-        keys_found = []
-        if "GEMINI_API_KEY" in content:
-            keys_found.append("GEMINI_API_KEY")
-        if "OPENROUTER_API_KEY" in content:
-            keys_found.append("OPENROUTER_API_KEY")
+        # Тестируем базовую функциональность
+        models = get_available_models("dialog")
+        print(f"✅ Available models: {len(models)}")
         
-        if keys_found:
-            print(f"✅ Найдены API ключи: {', '.join(keys_found)}")
-            return True
-        else:
-            print("⚠️  API ключи не найдены в .env файле.")
-            print("   Добавьте строки:")
-            print("   GEMINI_API_KEY=ваш_ключ_gemini")
-            print("   OPENROUTER_API_KEY=ваш_ключ_openrouter")
-            return False
-            
+        if models:
+            first_model = models[0]
+            print(f"✅ First model: {first_model['display_name']} ({first_model['id']})")
+        
+        # Тестируем выбор модели
+        selected_model = select_llm_model_safe("dialog")
+        print(f"✅ Model selection: {selected_model}")
+        
+        # Тестируем состояние
+        state = load_state()
+        print(f"✅ Current state: provider={state.get('provider')}, model={state.get('model_id')}")
+        
+        return True
+        
     except Exception as e:
-        print(f"❌ Ошибка чтения .env файла: {e}")
+        print(f"❌ Compatibility test failed: {e}")
         return False
 
 def main():
-    """Основная функция."""
-    print("🌟 Миграция на улучшенную систему переключения провайдеров LLM")
-    print("=" * 70)
+    """Основная функция миграции"""
+    print("🔄 GopiAI Model Switching System - Migration Guide")
+    print("=" * 60)
+    print("This guide will help you migrate to the new provider switching system.")
     print()
     
-    # Проверяем текущую конфигурацию
-    if not check_current_setup():
-        print("\n❌ Миграция не может быть выполнена из-за отсутствующих файлов.")
-        return 1
+    steps = [
+        ("Environment Configuration", migrate_env_file),
+        ("State File Migration", migrate_state_file),
+        ("Old Files Check", check_old_files),
+        ("Import Paths", update_imports_in_code),
+        ("Compatibility Tests", run_compatibility_tests)
+    ]
     
-    print()
+    results = []
     
-    # Проверяем API ключи
-    check_api_keys()
+    for step_name, step_func in steps:
+        print(f"\n📋 {step_name}")
+        print("-" * 40)
+        
+        try:
+            success = step_func()
+            results.append((step_name, success))
+            
+            if success:
+                print(f"✅ {step_name} completed")
+            else:
+                print(f"⚠️  {step_name} requires attention")
+                
+        except Exception as e:
+            print(f"❌ {step_name} failed: {e}")
+            results.append((step_name, False))
     
-    print()
-    print("-" * 70)
+    # Выводим сводку
+    print("\n" + "=" * 60)
+    print("📊 Migration Summary")
+    print("=" * 60)
     
-    # Выводим руководство по миграции
-    print_migration_guide()
+    completed = 0
+    needs_attention = 0
+    failed = 0
     
-    print("🎉 Миграция завершена! Система готова к использованию.")
-    print("   Для запуска используйте start_model_switching_system.bat (Windows)")
-    print("   или start_model_switching_system.py (Linux/Mac)")
+    for step_name, success in results:
+        if success:
+            status = "✅"
+            completed += 1
+        else:
+            status = "⚠️"
+            needs_attention += 1
+        print(f"{status} {step_name}")
     
-    return 0
+    print("-" * 60)
+    print(f"Steps: {len(results)} | Completed: {completed} | Attention: {needs_attention}")
+    
+    if needs_attention == 0:
+        print("\n🎉 Migration completed successfully!")
+        print("You can now use the new model switching system.")
+    else:
+        print(f"\n⚠️  {needs_attention} step(s) require your attention.")
+        print("Please review the warnings above and take necessary actions.")
+    
+    print("\n💡 Quick Start:")
+    print("   1. Run 'python start_model_switching_system.py'")
+    print("   2. Use the UI widget to switch providers")
+    print("   3. Or use the REST API endpoints directly")
+    
+    return 0 if needs_attention == 0 else 1
 
 if __name__ == "__main__":
     sys.exit(main())

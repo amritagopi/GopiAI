@@ -1,25 +1,44 @@
 @echo off
-REM Скрипт запуска руководства по миграции для Windows
+title GopiAI Model Switching System - Migration
 
-echo 🌟 Руководство по миграции на улучшенную систему переключения провайдеров LLM
-echo ==============================================================================
+echo ==================================================
+echo GopiAI Model Switching System - Migration Guide
+echo ==================================================
+echo.
 
-REM Проверяем наличие Python
+cd /d "%~dp0"
+
+echo Checking Python installation...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Python не найден. Установите Python 3.8 или выше.
+    echo ❌ Python not found. Please install Python 3.8 or higher.
     pause
     exit /b 1
 )
 
-REM Переходим в директорию скрипта
-cd /d "%~dp0"
-
-echo 🚀 Запуск руководства по миграции...
+echo ✅ Python found
 echo.
 
+echo Running migration guide...
 python migration_guide.py
 
-echo.
-echo Нажмите любую клавишу для выхода...
-pause >nul
+if %errorlevel% equ 0 (
+    echo.
+    echo 🎉 Migration completed successfully!
+    echo.
+    echo You can now start the model switching system:
+    echo   python start_model_switching_system.py
+    echo   or
+    echo   start_model_switching_system.bat
+    echo.
+    echo Press any key to close this window...
+    pause >nul
+) else (
+    echo.
+    echo ⚠️  Migration requires attention.
+    echo Please review the output above and take necessary actions.
+    echo.
+    echo Press any key to close this window...
+    pause >nul
+    exit /b 1
+)

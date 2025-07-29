@@ -3891,7 +3891,7 @@
   },
   "current": {
     "provider": "openrouter",
-    "model_id": "tencent/hunyuan-a13b-instruct:free"
+    "model_id": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free"
   },
   "version": "1.0",
   "last_updated": "1753566756.6909013"

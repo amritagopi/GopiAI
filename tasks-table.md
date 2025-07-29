@@ -3,21 +3,29 @@ Refactor backend and frontend to support stable provider switching between Gemin
 
 > ## 📈 Project Summary
 > 
-> **✅ Done**: 4 | **🔄 In Progress**: 0 | **⬜ Todo**: 5 | **❌ Blocked**: 0
+> **✅ Done**: 9 | **🔄 In Progress**: 1 | **⬜ Todo**: 7 | **❌ Blocked**: 0
 > 
-> **Progress**: 44% `█████████░░░░░░░░░░░` 4/9 tasks
+> **Progress**: 53% `███████████░░░░░░░░░` 9/17 tasks
 > 
-> **Priorities**: 🚨 **Critical**: 0 | 🔴 **High**: 4 | 🟡 **Medium**: 5 | 🟢 **Low**: 0
+> **Priorities**: 🚨 **Critical**: 3 | 🔴 **High**: 7 | 🟡 **Medium**: 7 | 🟢 **Low**: 0
 
 ## Tasks
 
 | ID | Status | Priority | Title | Description |
 |:--:|:------:|:--------:|:------|:------------|
 | #1 | ⬜ todo | 700 | **Project Setup: ModelSwitchRefactor** | Refactor backend and frontend... |
-| #2 | ✅ done | 701 | **Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates** | Add OpenRouter provider suppo... |
-| #3 | ✅ done | 699 | **Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals** | Frontend widget should:
+| #2 | 🔄 inprogress | 701 | **Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates** | Add OpenRouter provider suppo... |
+| #3 | ⬜ todo | 699 | **Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals** | Frontend widget should:
 - Pre... |
-| #4 | ✅ done | 702 | **Implement provider/model state file synchronization** | Create ~/.gopiai_state.json s... |
+| #4 | ⬜ todo | 702 | **Implement provider/model state file synchronization** | Create ~/.gopiai_state.json s... |
+| #5 | ✅ done | 698 | **Создание ветки для исправлений** | Создать git ветку fix/llm-pro... |
+| #6 | ✅ done | 900 | **Чистка конфигураций - удаление дубликатов** | Удалить .env.override, перене... |
+| #7 | ✅ done | 901 | **Выравнивание интерфейса адаптеров LLM** | Ввести абстракцию BaseAdapter... |
+| #8 | ✅ done | 899 | **Реализация реинициализации клиента LLM** | Добавить метод swap_provider(... |
+| #9 | ✅ done | 703 | **Реализация тайм-аутов и обработка ошибок** | Ввести DEFAULT_TIMEOUT, оберн... |
+| #10 | ✅ done | 697 | **Исправление инструментов (filesystem/terminal)** | Перевести callback-менеджер н... |
+| #11 | ✅ done | 500 | **Создание тест-матрицы для проверки переключения** | Создать тесты в tests/llm/tes... |
+| #12 | ✅ done | 501 | **Обновление документации по переключению LLM** | Обновить 02_DOCUMENTATION/USA... |
 
 
 ### Task #2: Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates - Subtasks
@@ -25,12 +33,13 @@ Refactor backend and frontend to support stable provider switching between Gemin
 | ID | Status | Title |
 |:--:|:------:|:------|
 | #2.1 | ✅ done | Introduce PROVIDERS dict with Gemini and OpenRouter models |
-| #2.2 | ✅ done | Create UsageTracker class and replace scattered usage dicts |
+| #2.2 | ⬜ todo | Create UsageTracker class and replace scattered usage dicts |
 
 ### Task #3: Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals - Subtasks
 
 | ID | Status | Title |
 |:--:|:------:|:------|
-| #3.1 | ✅ done | Replace two provider buttons with QComboBox |
-| #3.2 | ✅ done | Refactor model loading to use get_available_models |
-| #3.3 | ✅ done | Unify API key handling and save to .env |
+| #3.1 | ⬜ todo | Replace two provider buttons with QComboBox |
+| #3.2 | ⬜ todo | Refactor model loading to use get_available_models |
+| #3.3 | ⬜ todo | Unify API key handling and save to .env |
+

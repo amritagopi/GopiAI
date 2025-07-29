@@ -1,7 +1,0 @@
-# Cursor AI Workflow Rules for Agentic Control Framework
-
-# (Define rules here to tell Cursor how to use acf commands)
-
-# Example:
-# To list tasks, use the command: acf list
-# To get the next task: acf next

@@ -1,141 +1,147 @@
 #!/usr/bin/env python3
 """
-Скрипт для запуска всей системы переключения провайдеров LLM.
-Запускает REST API сервер и открывает UI для взаимодействия.
+Скрипт для запуска системы переключения провайдеров
 """
-import subprocess
-import sys
+
 import os
+import sys
+import subprocess
 import time
-import threading
+import requests
 from pathlib import Path
 
-def start_api_server():
-    """Запуск REST API сервера."""
-    print("🚀 Запуск REST API сервера...")
-    try:
-        # Переходим в директорию с сервером
-        server_dir = Path(__file__).parent
-        os.chdir(server_dir)
-        
-        # Запускаем сервер
-        result = subprocess.run([
-            sys.executable, 
-            "crewai_api_server.py"
-        ])
-        
-        if result.returncode == 0:
-            print("✅ REST API сервер успешно запущен")
-        else:
-            print("❌ Ошибка запуска REST API сервера")
-            return False
-            
-    except Exception as e:
-        print(f"❌ Ошибка при запуске сервера: {e}")
+# Добавляем путь к проекту
+project_root = Path(__file__).parent
+sys.path.insert(0, str(project_root))
+
+def check_api_key(env_var, service_name):
+    """Проверяет наличие API ключа"""
+    key = os.getenv(env_var)
+    if not key:
+        print(f"❌ {service_name} API key not found in environment variables")
         return False
-    
+    print(f"✅ {service_name} API key found")
     return True
 
-def start_ui():
-    """Запуск UI приложения."""
-    print("🎨 Запуск UI приложения...")
-    try:
-        # Переходим в директорию UI
-        ui_dir = Path(__file__).parent.parent / "GopiAI-UI"
-        os.chdir(ui_dir)
-        
-        # Здесь должен быть код для запуска UI приложения
-        # Пока просто выводим информацию
-        print("ℹ️  UI приложение готово к запуску")
-        print("   Для запуска UI используйте соответствующий скрипт из GopiAI-UI")
-        
-    except Exception as e:
-        print(f"❌ Ошибка при подготовке UI: {e}")
+def start_crewai_server():
+    """Запускает CrewAI сервер"""
+    print("🚀 Starting CrewAI API server...")
+    
+    # Проверяем API ключи
+    gemini_ok = check_api_key('GEMINI_API_KEY', 'Gemini')
+    openrouter_ok = check_api_key('OPENROUTER_API_KEY', 'OpenRouter')
+    
+    if not gemini_ok and not openrouter_ok:
+        print("❌ No API keys found. Please set GEMINI_API_KEY and/or OPENROUTER_API_KEY in .env file")
         return False
     
-    return True
-
-def run_tests():
-    """Запуск тестов системы."""
-    print("🧪 Запуск тестов...")
+    # Запускаем сервер в отдельном процессе
     try:
-        # Переходим в директорию с тестами
-        test_dir = Path(__file__).parent
-        os.chdir(test_dir)
-        
-        # Запускаем тесты
-        result = subprocess.run([
+        server_process = subprocess.Popen([
             sys.executable, 
-            "run_all_tests.py"
-        ])
+            str(project_root / "crewai_api_server.py")
+        ], cwd=str(project_root))
         
-        if result.returncode == 0:
-            print("✅ Все тесты успешно пройдены")
+        print(f"✅ CrewAI server started with PID {server_process.pid}")
+        
+        # Ждем запуска сервера
+        print("⏳ Waiting for server to start...")
+        for i in range(30):  # Ждем до 30 секунд
+            try:
+                response = requests.get("http://localhost:5051/api/health", timeout=1)
+                if response.status_code == 200:
+                    print("✅ Server is ready!")
+                    return True
+            except requests.exceptions.RequestException:
+                pass
+            time.sleep(1)
+            print(f"⏳ Still waiting... ({i+1}/30)")
+        
+        print("❌ Server failed to start within 30 seconds")
+        return False
+        
+    except Exception as e:
+        print(f"❌ Failed to start server: {e}")
+        return False
+
+def test_model_switching():
+    """Тестирует переключение провайдеров"""
+    print("\n🧪 Testing model switching...")
+    
+    try:
+        # Проверяем текущее состояние
+        response = requests.get("http://localhost:5051/internal/state")
+        if response.status_code == 200:
+            state = response.json()
+            print(f"📊 Current state: {state}")
+        
+        # Тестируем переключение на OpenRouter
+        print("\n🔄 Testing switch to OpenRouter...")
+        response = requests.post("http://localhost:5051/internal/state", json={
+            "provider": "openrouter",
+            "model_id": "openrouter/google-gemma-2b-it"
+        })
+        if response.status_code == 200:
+            print("✅ Switched to OpenRouter")
         else:
-            print("❌ Некоторые тесты провалены")
-            return False
+            print(f"❌ Failed to switch to OpenRouter: {response.text}")
+        
+        # Проверяем состояние после переключения
+        response = requests.get("http://localhost:5051/internal/state")
+        if response.status_code == 200:
+            state = response.json()
+            print(f"📊 New state: {state}")
+        
+        # Тестируем получение моделей для провайдера
+        print("\n📋 Testing model listing...")
+        response = requests.get("http://localhost:5051/internal/models?provider=openrouter")
+        if response.status_code == 200:
+            models = response.json()
+            print(f"✅ OpenRouter models: {len(models)} available")
+            for model in models[:3]:  # Показываем первые 3 модели
+                print(f"  - {model['display_name']} ({model['id']})")
+        
+        # Тестируем переключение обратно на Gemini
+        print("\n🔄 Testing switch back to Gemini...")
+        response = requests.post("http://localhost:5051/internal/state", json={
+            "provider": "gemini",
+            "model_id": "gemini/gemini-1.5-flash"
+        })
+        if response.status_code == 200:
+            print("✅ Switched back to Gemini")
+        else:
+            print(f"❌ Failed to switch back to Gemini: {response.text}")
             
     except Exception as e:
-        print(f"❌ Ошибка при запуске тестов: {e}")
-        return False
-    
-    return True
+        print(f"❌ Error during testing: {e}")
 
 def main():
-    """Основная функция."""
-    print("🌟 Система переключения провайдеров LLM для GopiAI")
-    print("=" * 60)
+    """Основная функция"""
+    print("🚀 GopiAI Model Switching System Startup")
+    print("=" * 50)
     
-    # Проверяем текущую директорию
-    current_dir = Path(__file__).parent.absolute()
-    print(f"📂 Рабочая директория: {current_dir}")
+    # Загружаем переменные окружения
+    from dotenv import load_dotenv
+    load_dotenv()
+    load_dotenv(dotenv_path=project_root / ".env")
     
-    # Создаем директорию для состояния если её нет
-    state_dir = Path.home() / ".gopiai"
-    state_dir.mkdir(exist_ok=True)
-    print(f"📁 Директория состояния: {state_dir}")
-    
-    # Запускаем тесты
-    print("\n📋 Этап 1: Проверка системы...")
-    if not run_tests():
-        print("❌ Система не прошла проверку. Запуск отменен.")
-        return 1
-    
-    print("\n🚀 Этап 2: Запуск компонентов...")
-    
-    # Запускаем API сервер в отдельном потоке
-    print("📡 Запуск REST API сервера в фоновом режиме...")
-    server_process = subprocess.Popen([
-        sys.executable, 
-        str(current_dir / "crewai_api_server.py")
-    ])
-    
-    # Ждем немного для запуска сервера
-    time.sleep(3)
-    
-    # Проверяем, запущен ли сервер
-    if server_process.poll() is None:
-        print("✅ REST API сервер запущен успешно (порт 5051)")
+    # Запускаем сервер
+    if start_crewai_server():
+        print("\n✅ System started successfully!")
+        
+        # Ждем немного и тестируем
+        time.sleep(2)
+        test_model_switching()
+        
+        print("\n🎯 System is ready for use!")
+        print("💡 You can now use the UI to switch between providers")
+        print("💡 Or use the API endpoints:")
+        print("   GET  http://localhost:5051/internal/state")
+        print("   POST http://localhost:5051/internal/state")
+        print("   GET  http://localhost:5051/internal/models?provider={provider}")
     else:
-        print("❌ Ошибка запуска REST API сервера")
-        return 1
-    
-    print("\n🎨 Этап 3: Готовность к работе")
-    print("✅ Система переключения провайдеров готова к использованию!")
-    print("   - REST API сервер: http://localhost:5051")
-    print("   - Для запуска UI используйте соответствующий скрипт")
-    print("   - Для остановки сервера нажмите Ctrl+C")
-    
-    try:
-        # Держим сервер запущенным
-        server_process.wait()
-    except KeyboardInterrupt:
-        print("\n🛑 Остановка сервера...")
-        server_process.terminate()
-        server_process.wait()
-        print("✅ Сервер остановлен")
-    
-    return 0
+        print("\n❌ Failed to start system")
+        sys.exit(1)
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

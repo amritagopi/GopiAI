@@ -235,6 +235,12 @@ class UsageTracker:
         """Проверяет, находится ли модель в черном списке."""
         return self._check_blacklist(model_id)
 
+    def mark_model_unavailable(self, model_id: str, duration: int = 3600) -> None:
+        """Помечает модель как недоступную на указанное время (в секундах)."""
+        usage = self._usage[model_id]
+        usage.blacklisted_until = time.time() + duration
+        print(f"[BLACKLIST] Model {model_id} marked as unavailable for {duration} seconds")
+
     # Legacy compatibility helpers expected by older ai_router code
     def get_blacklist_status(self) -> dict:
         """Return model_id -> seconds until unblocked."""
@@ -370,14 +376,33 @@ def get_models_by_intelligence(min_score: float = 0.0):
 # Legacy functions expected elsewhere
 get_active_models = lambda: [m for m in MODELS if get_api_key_for_provider(m["provider"])]
 
-def select_llm_model_safe(task_type: str = "dialog", tokens: int = 0):
+def select_llm_model_safe(task_type: str = "dialog", tokens: int = 0, intelligence_priority: bool = False, exclude_models: list = None):
     """Legacy helper: return first available model and register its usage.
     Keeps API surface for old ai_router_llm import.
     """
-    model = get_next_available_model(task_type, tokens)
+    # Фильтруем модели, исключая указанные в exclude_models
+    if exclude_models is None:
+        exclude_models = []
+    
+    available_models = get_available_models(task_type)
+    if exclude_models:
+        available_models = [m for m in available_models if m["id"] not in exclude_models]
+    
+    # Сортируем по приоритету и базовому счету
+    available_models.sort(key=lambda m: (m["priority"], -m.get("base_score", 0)))
+    
+    # Если запрошена высокая интеллектуальная приоритетность, выбираем модели с высоким приоритетом
+    if intelligence_priority:
+        # Фильтруем модели с высоким приоритетом (меньше число = выше приоритет)
+        high_priority_models = [m for m in available_models if m["priority"] <= 2]
+        if high_priority_models:
+            available_models = high_priority_models
+    
+    # Возвращаем первую доступную модель
+    model = available_models[0] if available_models else None
     if model:
         register_use(model["id"], tokens)
-    return model
+    return model["id"] if model else None
 
 get_active_models = lambda: [m for m in MODELS if get_api_key_for_provider(m["provider"])]
 

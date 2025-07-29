@@ -1,7 +1,7 @@
 {
   "projectName": "ModelSwitchRefactor",
   "projectDescription": "Refactor backend and frontend to support stable provider switching between Gemini and OpenRouter",
-  "lastTaskId": 4,
+  "lastTaskId": 12,
   "tasks": [
     {
       "id": 1,
@@ -167,6 +167,219 @@
           "timestamp": "2025-07-28T20:22:41.855Z",
           "type": "log",
           "message": "Task created with title: \"Implement provider/model state file synchronization\""
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Создание ветки для исправлений",
+      "description": "Создать git ветку fix/llm-provider-switch для изоляции изменений",
+      "status": "done",
+      "priority": 698,
+      "priorityDisplay": "high",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:55:51.618Z",
+      "updatedAt": "2025-07-29T01:58:59.877Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:55:51.621Z",
+          "type": "log",
+          "message": "Task created with title: \"Создание ветки для исправлений\""
+        },
+        {
+          "timestamp": "2025-07-29T01:58:59.876Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Создана ветка fix/llm-provider-switch для изоляции изменений"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Чистка конфигураций - удаление дубликатов",
+      "description": "Удалить .env.override, перенести все переменные в .env, упростить settings.yaml",
+      "status": "done",
+      "priority": 900,
+      "priorityDisplay": "critical",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:56:04.138Z",
+      "updatedAt": "2025-07-29T02:26:10.458Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:56:04.138Z",
+          "type": "log",
+          "message": "Task created with title: \"Чистка конфигураций - удаление дубликатов\""
+        },
+        {
+          "timestamp": "2025-07-29T02:21:08.391Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"inprogress\". Message: Начата чистка конфигураций и удаление дубликатов"
+        },
+        {
+          "timestamp": "2025-07-29T02:26:10.458Z",
+          "type": "log",
+          "message": "Status changed from \"inprogress\" to \"done\". Message: Завершена чистка конфигураций и удаление дубликатов. Созданы адаптеры для провайдеров."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Выравнивание интерфейса адаптеров LLM",
+      "description": "Ввести абстракцию BaseAdapter, привести GeminiAdapter и OpenRouterAdapter к идентичной сигнатуре (async + stream support)",
+      "status": "done",
+      "priority": 901,
+      "priorityDisplay": "critical",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:56:25.461Z",
+      "updatedAt": "2025-07-29T02:26:49.562Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:56:25.461Z",
+          "type": "log",
+          "message": "Task created with title: \"Выравнивание интерфейса адаптеров LLM\""
+        },
+        {
+          "timestamp": "2025-07-29T02:26:49.562Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Создана абстракция BaseAdapter, приведены GeminiAdapter и OpenRouterAdapter к идентичной сигнатуре"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Реализация реинициализации клиента LLM",
+      "description": "Добавить метод swap_provider() в LlmClient для правильной смены провайдера без перезапуска",
+      "status": "done",
+      "priority": 899,
+      "priorityDisplay": "critical",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:56:41.121Z",
+      "updatedAt": "2025-07-29T02:27:12.685Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:56:41.121Z",
+          "type": "log",
+          "message": "Task created with title: \"Реализация реинициализации клиента LLM\""
+        },
+        {
+          "timestamp": "2025-07-29T02:27:12.685Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Добавлен метод swap_provider() в LlmClient для правильной смены провайдера без перезапуска"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Реализация тайм-аутов и обработка ошибок",
+      "description": "Ввести DEFAULT_TIMEOUT, обернуть вызовы в asyncio.wait_for() для предотвращения зависаний",
+      "status": "done",
+      "priority": 703,
+      "priorityDisplay": "high",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:56:53.572Z",
+      "updatedAt": "2025-07-29T02:37:36.965Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:56:53.572Z",
+          "type": "log",
+          "message": "Task created with title: \"Реализация тайм-аутов и обработка ошибок\""
+        },
+        {
+          "timestamp": "2025-07-29T02:37:36.965Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Реализованы таймауты и улучшена обработка ошибок"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Исправление инструментов (filesystem/terminal)",
+      "description": "Перевести callback-менеджер на EventBus, чтобы инструменты не зависели от конкретного клиента",
+      "status": "done",
+      "priority": 697,
+      "priorityDisplay": "high",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:57:13.131Z",
+      "updatedAt": "2025-07-29T02:38:13.133Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:57:13.131Z",
+          "type": "log",
+          "message": "Task created with title: \"Исправление инструментов (filesystem/terminal)\""
+        },
+        {
+          "timestamp": "2025-07-29T02:38:13.133Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Инструменты переведены на EventBus, исправлена зависимость от конкретного клиента"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Создание тест-матрицы для проверки переключения",
+      "description": "Создать тесты в tests/llm/test_switch.py: test_provider_toggle(), test_timeout_handling()",
+      "status": "done",
+      "priority": 500,
+      "priorityDisplay": "medium",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:57:25.156Z",
+      "updatedAt": "2025-07-29T02:38:46.097Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:57:25.156Z",
+          "type": "log",
+          "message": "Task created with title: \"Создание тест-матрицы для проверки переключения\""
+        },
+        {
+          "timestamp": "2025-07-29T02:38:46.097Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Создана тест-матрица для проверки переключения провайдеров"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Обновление документации по переключению LLM",
+      "description": "Обновить 02_DOCUMENTATION/USAGE/llm_switch.md с примерами CLI команд",
+      "status": "done",
+      "priority": 501,
+      "priorityDisplay": "medium",
+      "dependsOn": [],
+      "createdAt": "2025-07-29T01:57:53.877Z",
+      "updatedAt": "2025-07-29T02:27:40.950Z",
+      "subtasks": [],
+      "lastSubtaskIndex": 0,
+      "relatedFiles": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-29T01:57:53.877Z",
+          "type": "log",
+          "message": "Task created with title: \"Обновление документации по переключению LLM\""
+        },
+        {
+          "timestamp": "2025-07-29T02:27:40.950Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Обновлена документация по переключению LLM с примерами CLI команд"
         }
       ]
     }
