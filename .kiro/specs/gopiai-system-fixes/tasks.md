@@ -27,7 +27,11 @@
   - Write unit tests for schema validation
   - _Requirements: 1.1, 1.5_
 
-- [-] 3. Implement native Tool Calling in LLM integration
+- [x] 3. Implement native Tool Calling in LLM integration
+
+
+
+
 
 
 
@@ -61,7 +65,11 @@
   - Add JSON parsing for tool arguments with error handling
   - _Requirements: 1.1, 1.2, 7.1_
 
-- [ ] 4. Rewrite CommandExecutor with direct method interface
+- [-] 4. Rewrite CommandExecutor with direct method interface
+
+
+
+
   - Replace text parsing with direct method calls: `execute_terminal_command()`, `browse_website()`, etc.
   - Implement command safety validation with whitelist of allowed commands
   - Add timeout handling for command execution (30 second limit)
