@@ -1,0 +1,53 @@
+{
+  "workspace_path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k",
+  "project_info": {
+    "project_type": "node",
+    "primary_language": "javascript",
+    "technologies": [],
+    "frameworks": [],
+    "build_tools": [],
+    "package_managers": [],
+    "config_files": [],
+    "entry_points": [
+      "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k\\index.js"
+    ],
+    "test_directories": [],
+    "documentation_files": [
+      "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k\\README.md"
+    ]
+  },
+  "file_tree": {
+    "name": "tmpx0udwr0k",
+    "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k",
+    "is_directory": true,
+    "size": null,
+    "modified": 1753930814.504496,
+    "children": [
+      {
+        "name": "README.md",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k\\README.md",
+        "is_directory": false,
+        "size": 0,
+        "modified": 1753930814.504496
+      },
+      {
+        "name": "index.js",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k\\index.js",
+        "is_directory": false,
+        "size": 0,
+        "modified": 1753930814.5034952
+      },
+      {
+        "name": "package.json",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpx0udwr0k\\package.json",
+        "is_directory": false,
+        "size": 82,
+        "modified": 1753930814.5034952
+      }
+    ]
+  },
+  "total_files": 3,
+  "total_size": 82,
+  "indexed_at": "2025-07-31T08:30:14.522492",
+  "cache_key": "workspace_da838bb20890d7af8e4af5480ff241c1_1753930814"
+}

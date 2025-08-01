@@ -1,0 +1,55 @@
+{
+  "workspace_path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy",
+  "project_info": {
+    "project_type": "node",
+    "primary_language": "javascript",
+    "technologies": [],
+    "frameworks": [
+      "React"
+    ],
+    "build_tools": [],
+    "package_managers": [],
+    "config_files": [],
+    "entry_points": [
+      "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy\\index.js"
+    ],
+    "test_directories": [],
+    "documentation_files": [
+      "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy\\README.md"
+    ]
+  },
+  "file_tree": {
+    "name": "tmpxkp945wy",
+    "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy",
+    "is_directory": true,
+    "size": null,
+    "modified": 1753936401.5243537,
+    "children": [
+      {
+        "name": "README.md",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy\\README.md",
+        "is_directory": false,
+        "size": 0,
+        "modified": 1753936401.5243537
+      },
+      {
+        "name": "index.js",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy\\index.js",
+        "is_directory": false,
+        "size": 0,
+        "modified": 1753936401.5243537
+      },
+      {
+        "name": "package.json",
+        "path": "C:\\Users\\crazy\\AppData\\Local\\Temp\\tmpxkp945wy\\package.json",
+        "is_directory": false,
+        "size": 82,
+        "modified": 1753936401.523356
+      }
+    ]
+  },
+  "total_files": 3,
+  "total_size": 82,
+  "indexed_at": "2025-07-31T10:03:21.547356",
+  "cache_key": "workspace_b1c7feb4a52a329a3321fbe45d1c2b60_1753936401"
+}

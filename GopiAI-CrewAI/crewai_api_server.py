@@ -1,5 +1,8 @@
 # --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 
+# КРИТИЧЕСКИ ВАЖНО: Применяем патч для mem0/faiss ДО импорта любых других библиотек
+import mem0_patch
+
 import logging
 import os
 
@@ -134,6 +137,15 @@ except ImportError:
     from .llm_rotation_config import get_available_models, update_state, PROVIDER_KEY_ENV
     from .state_manager import load_state, save_state
 
+# Импортируем наш новый StateManager
+try:
+    from GopiAI_Core.gopiai.core.state_manager import get_state_manager, load_provider_model_state
+    STATE_MANAGER_AVAILABLE = True
+    logger.info("[STARTUP] StateManager импортирован успешно")
+except ImportError as e:
+    logger.warning(f"[STARTUP] Не удалось импортировать StateManager: {e}")
+    STATE_MANAGER_AVAILABLE = False
+
 # --- Настройки сервера ---
 HOST = "0.0.0.0"  # Слушаем на всех интерфейсах
 PORT = 5051  # Стандартный порт для CrewAI API сервера
@@ -217,6 +229,22 @@ try:
     print("[ДИАГНОСТИКА] Создание SmartDelegator")
     smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
     print(f"[ДИАГНОСТИКА] SmartDelegator создан: {smart_delegator_instance is not None}")
+    
+    # 3. Загружаем состояние провайдера/модели при запуске
+    if STATE_MANAGER_AVAILABLE:
+        try:
+            print("[ДИАГНОСТИКА] Загрузка состояния провайдера/модели")
+            state_manager = get_state_manager()
+            current_state = state_manager.load_state()
+            
+            # Обновляем внутреннее состояние системы
+            update_state(current_state.provider, current_state.model_id)
+            
+            logger.info(f"✅ Состояние загружено: провайдер={current_state.provider}, модель={current_state.model_id}")
+            print(f"[ДИАГНОСТИКА] Состояние загружено: {current_state.provider}/{current_state.model_id}")
+        except Exception as e:
+            logger.warning(f"[STARTUP] Ошибка загрузки состояния: {e}")
+            print(f"[ДИАГНОСТИКА] Ошибка загрузки состояния: {e}")
     
     logger.info("✅ Smart Delegator и RAG System успешно инициализированы.")
     SERVER_IS_READY = True
@@ -342,7 +370,53 @@ def debug_status():
 
 # --- Новые эндпоинты для синхронизации состояния провайдеров и моделей ---
 
-@app.route('/internal/models', methods=['GET'])
+@app.route('/api/config/models', methods=['GET'])
+def get_model_config():
+    """
+    Возвращает список активных моделей и провайдеров для UI.
+    Этот эндпоинт заменяет прямой импорт llm_rotation_config в UI.
+    """
+    try:
+        from llm_rotation_config import LLM_MODELS_CONFIG, rate_limit_monitor
+        
+        # Получаем активные модели с учетом blacklist
+        active_models = []
+        providers = set()
+        
+        for model in LLM_MODELS_CONFIG:
+            if not model.get('deprecated', False):
+                # Проверяем, не заблокирована ли модель
+                if not rate_limit_monitor.is_model_blocked_safe(model['id']):
+                    active_models.append({
+                        'id': model['id'],
+                        'name': model['name'],
+                        'provider': model['provider'],
+                        'type': model['type'],
+                        'multimodal': model.get('multimodal', False),
+                        'priority': model.get('priority', 1),
+                        'base_score': model.get('base_score', 0.5)
+                    })
+                    providers.add(model['provider'])
+        
+        # Получаем статус blacklist для отладки
+        blacklist_status = rate_limit_monitor.get_blacklist_status()
+        
+        config_data = {
+            "providers": list(providers),
+            "active_models": active_models,
+            "blacklist_status": blacklist_status,
+            "total_models": len(LLM_MODELS_CONFIG),
+            "active_count": len(active_models)
+        }
+        
+        logger.info(f"[CONFIG] Возвращаем конфигурацию: {len(active_models)} активных моделей из {len(LLM_MODELS_CONFIG)}")
+        return jsonify(config_data)
+        
+    except Exception as e:
+        logger.error(f"[CONFIG] Ошибка получения конфигурации моделей: {e}")
+        return jsonify({"error": "Failed to load model configuration", "details": str(e)}), 500
+
+@app.route('/api/models/<provider>', methods=['GET'])
 def get_models_by_provider():
     """Возвращает список доступных моделей для указанного провайдера"""
     provider = request.args.get('provider')
@@ -371,14 +445,27 @@ def update_provider_model_state():
         if not provider or not model_id:
             return jsonify({"error": "Both 'provider' and 'model_id' are required"}), 400
         
-        # Обновляем состояние
+        # Обновляем внутреннее состояние системы
         update_state(provider, model_id)
+        
+        # Сохраняем в файл состояния через StateManager
+        if STATE_MANAGER_AVAILABLE:
+            try:
+                state_manager = get_state_manager()
+                success = state_manager.save_state(provider, model_id)
+                if success:
+                    logger.info(f"[STATE] Состояние сохранено в файл: {provider}/{model_id}")
+                else:
+                    logger.warning(f"[STATE] Не удалось сохранить состояние в файл")
+            except Exception as e:
+                logger.error(f"[STATE] Ошибка сохранения состояния в файл: {e}")
         
         return jsonify({
             "status": "success",
             "message": f"State updated: provider={provider}, model_id={model_id}",
             "provider": provider,
-            "model_id": model_id
+            "model_id": model_id,
+            "saved_to_file": STATE_MANAGER_AVAILABLE
         })
         
     except Exception as e:
@@ -389,8 +476,27 @@ def update_provider_model_state():
 def get_current_state():
     """Возвращает текущее состояние провайдера и модели"""
     try:
+        # Пытаемся загрузить из файла через StateManager
+        if STATE_MANAGER_AVAILABLE:
+            try:
+                state_manager = get_state_manager()
+                current_state = state_manager.get_current_state()
+                
+                if current_state:
+                    return jsonify({
+                        "provider": current_state.provider,
+                        "model_id": current_state.model_id,
+                        "last_updated": current_state.last_updated,
+                        "source": "state_file"
+                    })
+            except Exception as e:
+                logger.warning(f"[STATE] Ошибка чтения из файла состояния: {e}")
+        
+        # Fallback к старому методу
         state = load_state()
+        state["source"] = "legacy_method"
         return jsonify(state)
+        
     except Exception as e:
         logger.error(f"Error loading state: {str(e)}", exc_info=True)
         return jsonify({"error": f"Failed to load state: {str(e)}"}), 500

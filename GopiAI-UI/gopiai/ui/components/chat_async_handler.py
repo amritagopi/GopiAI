@@ -182,7 +182,12 @@ class ChatAsyncHandler(QObject):
             else:
                 print("[DEBUG-ASYNC-BG] Получен синхронный ответ, отправка в UI")
                 logger.info("[ASYNC] Получен синхронный ответ, отправка в UI")
-                self.response_ready.emit(response)
+                # Если сервер вернул структуру ошибки
+                if isinstance(response, dict) and response.get("status") == "failed":
+                    err = response.get("error", "Неизвестная ошибка")
+                    self.message_error.emit(err)
+                else:
+                    self.response_ready.emit(response)
 
         except Exception as e:
             print(f"[DEBUG-ASYNC-BG-ERROR] Ошибка в фоновой обработке: {e}")
@@ -235,8 +240,11 @@ class ChatAsyncHandler(QObject):
                 self._current_task_id = None
                 self._current_polling_attempt = 0
                 
-                # Отправляем результат в UI
-                self.response_ready.emit(result)
+                # Проверяем на ошибку
+                if isinstance(result, dict) and result.get("status") == "failed":
+                    self.message_error.emit(result.get("error", "Неизвестная ошибка"))
+                else:
+                    self.response_ready.emit(result)
                 logger.info(f"[POLLING-COMPLETE] Результат задачи {task_id} отправлен в UI")
             else:
                 # Обновляем статус в UI

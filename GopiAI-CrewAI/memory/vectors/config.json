@@ -3,6 +3,7 @@
   "content": true,
   "dimensions": 768,
   "backend": "faiss",
+  "gpu": false,
   "offset": 286,
   "build": {
     "create": "2025-07-18T18:17:33Z",

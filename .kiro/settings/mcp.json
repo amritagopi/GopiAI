@@ -1,4 +1,17 @@
 {
   "mcpServers": {
+      "acf-tool": {
+          "command": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+              "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework\\bin\\agentic-control-framework-mcp",
+              "--workspaceRoot",
+              "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework"
+          ],
+          "type": "stdio",
+          "env": {
+              "WORKSPACE_ROOT": "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework",
+              "ALLOWED_DIRS": "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework"
+          }
+      }
   }
 }

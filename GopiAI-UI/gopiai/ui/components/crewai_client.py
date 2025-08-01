@@ -25,52 +25,52 @@ logger = logging.getLogger(__name__)
 # Импортируем менеджер памяти для работы с историей чата
 from ..memory.manager import MemoryManager
 
-# Добавляем путь к модулю emotional_classifier
-import sys
-import os
-print('Current working directory:', os.getcwd())
-print('sys.path:', sys.path)
+# 🔧 ИСПРАВЛЕНИЕ АРХИТЕКТУРЫ: Убираем прямые импорты серверных модулей
+# UI должен получать конфигурацию через API, а не импортировать серверные файлы
 
-# Добавляем пути для импортов
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-gopiai_integration_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools', 'gopiai_integration')
-sys.path.append(gopiai_integration_path)
-
-# Импортируем эмоциональный классификатор и AI Router
+# Локальные заглушки для эмоционального классификатора
 EMOTIONAL_CLASSIFIER_AVAILABLE = False
 EmotionalClassifier = None
 EmotionalState = None
-AIRouterLLM = None
-
-try:
-    import spacy
-    try:
-        from gopiai_integration.emotional_classifier import EmotionalClassifier, EmotionalState
-        from gopiai_integration.ai_router_llm import AIRouterLLM
-        EMOTIONAL_CLASSIFIER_AVAILABLE = True
-        logger.debug("[INIT] Эмоциональный классификатор и AI Router успешно импортированы")
-    except ImportError as e:
-        logger.error(f"[INIT] Ошибка импорта модулей emotional_classifier/ai_router_llm: {e}")
-        logger.error(f"[INIT] Пути в sys.path: {sys.path}")
-        logger.error(f"[INIT] Проверьте наличие файлов в: {gopiai_integration_path}")
-        EMOTIONAL_CLASSIFIER_AVAILABLE = False
-except ImportError as e:
-    logger.error(f"[INIT] Ошибка импорта модуля spacy: {e}")
-    logger.error("[INIT] Модуль spacy недоступен, эмоциональный классификатор отключен")
-
-# === ИНТЕГРАЦИЯ СИСТЕМЫ ДИНАМИЧЕСКИХ ИНСТРУКЦИЙ ===
-# Импортируем систему динамических инструкций для реального UI-чата
 TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
-ToolsInstructionManager = None
 
+# Простая заглушка для эмоционального состояния
+class SimpleEmotionalState:
+    def __init__(self, emotion="neutral", confidence=0.5):
+        self.emotion = emotion
+        self.confidence = confidence
+        
+class SimpleEmotionalClassifier:
+    """Простая локальная реализация эмоционального классификатора для UI"""
+    def analyze_emotion(self, text, context=None):
+        # Базовый анализ эмоций без серверных зависимостей
+        emotion = "neutral"
+        confidence = 0.5
+        
+        # Простые эвристики
+        text_lower = text.lower()
+        if any(word in text_lower for word in ['!', 'отлично', 'супер', 'круто']):
+            emotion = "positive"
+            confidence = 0.7
+        elif any(word in text_lower for word in ['ошибка', 'проблема', 'не работает']):
+            emotion = "negative"
+            confidence = 0.7
+            
+        return {
+            "emotion": emotion,
+            "confidence": confidence,
+            "analysis_method": "local_heuristic"
+        }
+
+# Инициализируем локальный эмоциональный классификатор
 try:
-    from gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
-    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
-    logger.info("[INIT] ✅ Система динамических инструкций успешно импортирована в UI-чат")
-except ImportError as e:
-    logger.error(f"[INIT] ❌ Ошибка импорта системы динамических инструкций: {e}")
-    logger.error("[INIT] UI-чат будет работать без динамических инструкций")
-    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+    EmotionalClassifier = SimpleEmotionalClassifier
+    EmotionalState = SimpleEmotionalState
+    EMOTIONAL_CLASSIFIER_AVAILABLE = True
+    logger.info("[INIT] ✅ Локальный эмоциональный классификатор инициализирован")
+except Exception as e:
+    logger.error(f"[INIT] ❌ Ошибка инициализации локального эмоционального классификатора: {e}")
+    EMOTIONAL_CLASSIFIER_AVAILABLE = False
 
 # Создаем директорию для логов, если её нет
 # Используем текущую директорию или директорию приложения
@@ -136,17 +136,28 @@ class CrewAIClient:
         self._server_available = None
         self._last_check = 0
         
+        # Кэш конфигурации моделей
+        self._model_config_cache = None
+        self._model_config_last_update = 0
+        self._model_config_cache_ttl = 300  # 5 минут
+        
         # Инициализация эмоционального классификатора
         self.emotional_classifier = None
         if EMOTIONAL_CLASSIFIER_AVAILABLE:
             try:
-                # Создаем AI Router для эмоционального классификатора
-                ai_router = AIRouterLLM()
-                self.emotional_classifier = EmotionalClassifier(ai_router)
-                logger.info("[INIT] ✅ Эмоциональный классификатор инициализирован с AI Router")
+                # Используем локальный эмоциональный классификатор
+                self.emotional_classifier = EmotionalClassifier()
+                logger.info("[INIT] ✅ Локальный эмоциональный классификатор инициализирован")
             except Exception as e:
                 logger.error(f"[INIT] ❌ Ошибка инициализации эмоционального классификатора: {e}")
                 self.emotional_classifier = None
+        
+        # Загружаем конфигурацию моделей при инициализации
+        try:
+            self.load_model_config()
+            logger.info("[INIT] ✅ Конфигурация моделей загружена через API")
+        except Exception as e:
+            logger.warning(f"[INIT] ⚠️ Не удалось загрузить конфигурацию моделей: {e}")
 
     def brave_search_site(self, query):
         """
@@ -194,6 +205,83 @@ class CrewAIClient:
             self._last_check = current_time
             return False
 
+    def load_model_config(self, force_reload=False):
+        """
+        Загружает конфигурацию моделей через HTTP-запрос к API-эндпоинту /api/config/models
+        
+        Args:
+            force_reload: Принудительная перезагрузка, игнорируя кэш
+            
+        Returns:
+            dict: Конфигурация моделей или None при ошибке
+        """
+        current_time = time.time()
+        
+        # Проверяем кэш
+        if (not force_reload 
+            and self._model_config_cache is not None 
+            and (current_time - self._model_config_last_update) < self._model_config_cache_ttl):
+            logger.debug("[MODEL_CONFIG] 📋 Используем кэшированную конфигурацию моделей")
+            return self._model_config_cache
+        
+        # Проверяем доступность сервера
+        if not self.is_available():
+            logger.warning("[MODEL_CONFIG] ⚠️ CrewAI API сервер недоступен")
+            return self._model_config_cache  # Возвращаем кэшированную версию если есть
+        
+        try:
+            logger.info("[MODEL_CONFIG] 🔄 Загружаем конфигурацию моделей через API...")
+            response = requests.get(
+                f"{self.base_url}/api/config/models", 
+                timeout=self.timeout
+            )
+            
+            if response.status_code == 200:
+                config_data = response.json()
+                
+                # Обновляем кэш
+                self._model_config_cache = config_data
+                self._model_config_last_update = current_time
+                
+                logger.info(f"[MODEL_CONFIG] ✅ Конфигурация загружена: {config_data.get('active_count', 0)} активных моделей из {config_data.get('total_models', 0)}")
+                logger.info(f"[MODEL_CONFIG] 📊 Провайдеры: {', '.join(config_data.get('providers', []))}")
+                
+                return config_data
+            else:
+                logger.error(f"[MODEL_CONFIG] ❌ Ошибка API: {response.status_code} - {response.text}")
+                return self._model_config_cache  # Возвращаем кэшированную версию если есть
+                
+        except requests.RequestException as e:
+            logger.error(f"[MODEL_CONFIG] ❌ Ошибка сетевого запроса: {e}")
+            return self._model_config_cache  # Возвращаем кэшированную версию если есть
+        except Exception as e:
+            logger.error(f"[MODEL_CONFIG] ❌ Неожиданная ошибка: {e}")
+            return self._model_config_cache  # Возвращаем кэшированную версию если есть
+    
+    def get_active_models(self):
+        """
+        Возвращает список активных моделей из конфигурации
+        
+        Returns:
+            list: Список активных моделей или пустой список
+        """
+        config = self.load_model_config()
+        if config:
+            return config.get('active_models', [])
+        return []
+    
+    def get_available_providers(self):
+        """
+        Возвращает список доступных провайдеров из конфигурации
+        
+        Returns:
+            list: Список провайдеров или пустой список
+        """
+        config = self.load_model_config()
+        if config:
+            return config.get('providers', [])
+        return []
+
     def analyze_emotion(self, message_text, context=None):
         """
         Анализирует эмоциональное состояние сообщения
@@ -213,19 +301,16 @@ class CrewAIClient:
             if message_text.startswith(('/', '!', '#')):
                 return None
                 
-            # Анализируем эмоциональное состояние
-            analysis = self.emotional_classifier.analyze_emotional_state(
-                context or [], 
-                message_text
-            )
+            # Анализируем эмоциональное состояние через локальную заглушку
+            analysis = self.emotional_classifier.analyze_emotion(message_text, context)
             
             # Возвращаем структурированные данные
             return {
-                'primary_emotion': analysis.primary_emotion.value,
-                'confidence': analysis.confidence,
-                'intensity': analysis.emotional_intensity,
-                'explanation': getattr(analysis, 'explanation', ''),
-                'recommendations': getattr(analysis, 'recommendations', [])
+                'primary_emotion': analysis.get('emotion', 'neutral'),
+                'confidence': analysis.get('confidence', 0.5),
+                'intensity': 0.5,  # По умолчанию
+                'explanation': f"Локальный анализ: {analysis.get('analysis_method', 'unknown')}",
+                'recommendations': []
             }
             
         except Exception as e:

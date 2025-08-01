@@ -38,6 +38,14 @@ from GopiAI_CrewAI.llm_rotation_config import (
     get_available_models,
 )
 
+# StateManager для синхронизации состояния
+try:
+    from GopiAI_Core.gopiai.core.state_manager import get_state_manager, save_provider_model_state
+    STATE_MANAGER_AVAILABLE = True
+except ImportError:
+    STATE_MANAGER_AVAILABLE = False
+    print("[WARNING] StateManager не доступен - синхронизация состояния отключена")
+
 # Path to user .env
 ENV_PATH = Path(os.getenv("GOPIAI_ENV_FILE", Path(__file__).resolve().parents[4] / ".env"))
 
@@ -101,31 +109,52 @@ class ModelSelectorWidget(QWidget):
     # state handling
     # ------------------------------------------------------------------
     def _load_initial_state(self):
-        """Load initial state from backend API."""
+        """Load initial state from backend API or local StateManager."""
+        provider = "gemini"
+        model_id = ""
+        
+        # Сначала пытаемся загрузить из локального StateManager
+        if STATE_MANAGER_AVAILABLE:
+            try:
+                state_manager = get_state_manager()
+                current_state = state_manager.load_state()
+                provider = current_state.provider
+                model_id = current_state.model_id
+                print(f"[STATE] Состояние загружено из файла: {provider}/{model_id}")
+            except Exception as e:
+                print(f"[WARNING] Ошибка загрузки из локального файла состояния: {e}")
+        
+        # Если локальная загрузка не удалась, пытаемся загрузить с backend
+        if not model_id:
+            try:
+                response = requests.get(f"{BACKEND_BASE_URL}/internal/state", timeout=5)
+                if response.status_code == 200:
+                    state = response.json()
+                    provider = state.get("provider", "gemini")
+                    model_id = state.get("model_id", "")
+                    print(f"[STATE] Состояние загружено с backend: {provider}/{model_id}")
+            except Exception as e:
+                print(f"[WARNING] Could not load initial state from backend: {e}")
+        
+        # Применяем загруженное состояние
         try:
-            response = requests.get(f"{BACKEND_BASE_URL}/internal/state", timeout=5)
-            if response.status_code == 200:
-                state = response.json()
-                provider = state.get("provider", "gemini")
-                model_id = state.get("model_id", "")
-                
-                # Set provider in combo box
-                index = self.provider_combo.findText(provider)
-                if index >= 0:
-                    self.provider_combo.setCurrentIndex(index)
-                
-                # Load models for this provider
-                self._reload_models()
-                
-                # Set model in combo box if available
-                if model_id:
-                    for i in range(self.model_combo.count()):
-                        if self.model_combo.itemData(i) == model_id:
-                            self.model_combo.setCurrentIndex(i)
-                            break
-                            
+            # Set provider in combo box
+            index = self.provider_combo.findText(provider)
+            if index >= 0:
+                self.provider_combo.setCurrentIndex(index)
+            
+            # Load models for this provider
+            self._reload_models()
+            
+            # Set model in combo box if available
+            if model_id:
+                for i in range(self.model_combo.count()):
+                    if self.model_combo.itemData(i) == model_id:
+                        self.model_combo.setCurrentIndex(i)
+                        break
+                        
         except Exception as e:
-            print(f"[WARNING] Could not load initial state from backend: {e}")
+            print(f"[WARNING] Ошибка применения загруженного состояния: {e}")
             # Fall back to default behavior
             self._on_provider_changed(self.provider_combo.currentText())
 
@@ -150,9 +179,19 @@ class ModelSelectorWidget(QWidget):
         try:
             current_model_id = self.model_combo.currentData()
             if current_model_id:
+                # Уведомляем backend через REST API
                 requests.post(f"{BACKEND_BASE_URL}/internal/state", 
                             json={"provider": provider, "model_id": current_model_id},
                             timeout=5)
+                
+                # Также сохраняем локально через StateManager
+                if STATE_MANAGER_AVAILABLE:
+                    try:
+                        save_provider_model_state(provider, current_model_id)
+                        print(f"[STATE] Состояние сохранено локально: {provider}/{current_model_id}")
+                    except Exception as e:
+                        print(f"[WARNING] Ошибка локального сохранения состояния: {e}")
+                        
         except Exception as e:
             print(f"[WARNING] Could not notify backend about provider change: {e}")
 
@@ -190,9 +229,19 @@ class ModelSelectorWidget(QWidget):
             # Notify backend about model change
             provider = self.provider_combo.currentText()
             try:
+                # Уведомляем backend через REST API
                 requests.post(f"{BACKEND_BASE_URL}/internal/state", 
                             json={"provider": provider, "model_id": model_id},
                             timeout=5)
+                
+                # Также сохраняем локально через StateManager
+                if STATE_MANAGER_AVAILABLE:
+                    try:
+                        save_provider_model_state(provider, model_id)
+                        print(f"[STATE] Состояние сохранено локально: {provider}/{model_id}")
+                    except Exception as e:
+                        print(f"[WARNING] Ошибка локального сохранения состояния: {e}")
+                        
             except Exception as e:
                 print(f"[WARNING] Could not notify backend about model change: {e}")
 

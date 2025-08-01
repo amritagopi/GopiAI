@@ -7,11 +7,226 @@ import traceback
 import sys
 import os
 from typing import Dict, List, Any, Optional
-import re # Added for command extraction
+# Removed regex import - no longer needed for command parsing
+from dataclasses import dataclass
+from enum import Enum
 
-# Импортируем модуль ротации моделей
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from llm_rotation_config import select_llm_model_safe, rate_limit_monitor
+# Инициализируем логгер в начале файла
+logger = logging.getLogger(__name__)
+
+# Импорты для LLM
+import litellm
+from litellm import (
+    RateLimitError, AuthenticationError, InvalidRequestError, 
+    APIError, Timeout, APIConnectionError, BadRequestError
+)
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
+
+# Импорты для CrewAI инструментов (опциональные)
+try:
+    from crewai_toolkit.tools import (
+        FileReadTool, DirectoryReadTool, FileWriteTool, DirectorySearchTool,
+        WebsiteSearchTool, SerperDevTool, YoutubeChannelSearchTool, YoutubeVideoSearchTool,
+        GithubSearchTool, CodeDocsSearchTool, CodeInterpreterTool, TXTSearchTool,
+        CSVSearchTool, JSONSearchTool, XMLSearchTool, MDXSearchTool, DocxSearchTool,
+        PDFSearchTool, PGSearchTool, MySQLSearchTool, SeleniumScrapingTool,
+        FirecrawlCrawlWebsiteTool, FirecrawlScrapeWebsiteTool, FirecrawlSearchTool
+    )
+    CREWAI_TOOLKIT_AVAILABLE = True
+except ImportError:
+    # logger ещё не инициализирован на этом этапе, используем print
+    print("WARNING: crewai_toolkit не установлен, используем только базовые инструменты")
+    CREWAI_TOOLKIT_AVAILABLE = False
+
+# 🔧 ИСПРАВЛЕНИЕ АРХИТЕКТУРЫ: Убираем прямые импорты серверных модулей
+# Заменяем на локальные заглушки для избежания ImportError
+
+# Локальные заглушки для функций из llm_rotation_config
+class LocalRateLimitMonitor:
+    """Локальная заглушка для rate_limit_monitor"""
+    def is_model_blocked_safe(self, model_id):
+        return False  # По умолчанию модели не заблокированы
+    
+    def get_blacklist_status(self):
+        return {}
+
+def select_llm_model_safe(*args, **kwargs):
+    """Локальная заглушка для select_llm_model_safe"""
+    return "gemini/gemini-1.5-flash"  # Fallback модель
+
+def get_available_tools() -> List[Dict[str, Any]]:
+    """Возвращает список доступных инструментов в формате OpenAI tool_calls"""
+    tools = []
+    
+    if CREWAI_TOOLKIT_AVAILABLE:
+        # Основные файловые инструменты
+        file_read_tool = FileReadTool()
+        tools.append({
+            "type": "function",
+            "function": {
+                "name": "read_file",
+                "description": "Читает содержимое файла",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Путь к файлу для чтения"
+                        }
+                    },
+                    "required": ["file_path"]
+                }
+            }
+        })
+        
+        # Инструмент для чтения директории
+        dir_read_tool = DirectoryReadTool()
+        tools.append({
+            "type": "function",
+            "function": {
+                "name": "read_directory",
+                "description": "Читает содержимое директории",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "directory_path": {
+                            "type": "string",
+                            "description": "Путь к директории для чтения"
+                        }
+                    },
+                    "required": ["directory_path"]
+                }
+            }
+        })
+        
+        # Инструмент для записи файла
+        file_write_tool = FileWriteTool()
+        tools.append({
+            "type": "function",
+            "function": {
+                "name": "write_file",
+                "description": "Записывает содержимое в файл",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Путь к файлу для записи"
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "Содержимое для записи в файл"
+                        }
+                    },
+                    "required": ["file_path", "content"]
+                }
+            }
+        })
+        
+        # Инструмент для поиска в директории
+        dir_search_tool = DirectorySearchTool()
+        tools.append({
+            "type": "function",
+            "function": {
+                "name": "search_directory",
+                "description": "Ищет файлы в директории по паттерну",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "directory_path": {
+                            "type": "string",
+                            "description": "Путь к директории для поиска"
+                        },
+                        "pattern": {
+                            "type": "string",
+                            "description": "Паттерн для поиска файлов"
+                        }
+                    },
+                    "required": ["directory_path", "pattern"]
+                }
+            }
+        })
+    else:
+        # Если crewai_toolkit недоступен, возвращаем пустой список
+        logger.info("CrewAI toolkit недоступен, используем только основные инструменты из tool_definitions")
+    
+    return tools
+
+def process_tool_calls(tool_calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Обрабатывает вызовы инструментов и возвращает результаты"""
+    results = []
+    
+    if not CREWAI_TOOLKIT_AVAILABLE:
+        logger.warning("CrewAI toolkit недоступен, пропускаем обработку tool_calls")
+        return results
+    
+    # Создаем экземпляры инструментов
+    tool_instances = {
+        "read_file": FileReadTool(),
+        "read_directory": DirectoryReadTool(),
+        "write_file": FileWriteTool(),
+        "search_directory": DirectorySearchTool()
+    }
+    
+    for tool_call in tool_calls:
+        try:
+            function_name = tool_call.get("function", {}).get("name")
+            arguments = json.loads(tool_call.get("function", {}).get("arguments", "{}"))
+            call_id = tool_call.get("id", "unknown")
+            
+            logger.info(f"[TOOL-CALL] Вызов инструмента: {function_name} с аргументами: {arguments}")
+            
+            if function_name in tool_instances:
+                tool_instance = tool_instances[function_name]
+                
+                # Вызываем инструмент с соответствующими аргументами
+                if function_name == "read_file":
+                    result = tool_instance._run(file_path=arguments.get("file_path"))
+                elif function_name == "read_directory":
+                    result = tool_instance._run(directory_path=arguments.get("directory_path"))
+                elif function_name == "write_file":
+                    result = tool_instance._run(
+                        file_path=arguments.get("file_path"),
+                        content=arguments.get("content")
+                    )
+                elif function_name == "search_directory":
+                    result = tool_instance._run(
+                        directory_path=arguments.get("directory_path"),
+                        pattern=arguments.get("pattern")
+                    )
+                else:
+                    result = f"Неизвестный инструмент: {function_name}"
+                
+                logger.info(f"[TOOL-RESULT] Результат {function_name}: {str(result)[:200]}...")
+                
+                results.append({
+                    "tool_call_id": call_id,
+                    "role": "tool",
+                    "name": function_name,
+                    "content": str(result)
+                })
+            else:
+                logger.error(f"[TOOL-ERROR] Неизвестный инструмент: {function_name}")
+                results.append({
+                    "tool_call_id": call_id,
+                    "role": "tool",
+                    "name": function_name,
+                    "content": f"Ошибка: неизвестный инструмент {function_name}"
+                })
+                
+        except Exception as e:
+            logger.error(f"[TOOL-ERROR] Ошибка при выполнении инструмента: {str(e)}")
+            results.append({
+                "tool_call_id": tool_call.get("id", "unknown"),
+                "role": "tool",
+                "name": tool_call.get("function", {}).get("name", "unknown"),
+                "content": f"Ошибка выполнения: {str(e)}"
+            })
+    
+    return results
+
+# Создаём локальные экземпляры
+rate_limit_monitor = LocalRateLimitMonitor()
 
 # Импортируем RAGSystem
 try:
@@ -38,9 +253,6 @@ from .response_formatter import ResponseFormatter
 from .openrouter_client import get_openrouter_client
 from .model_config_manager import get_model_config_manager, ModelProvider
 
-# Инициализируем логгер перед использованием
-logger = logging.getLogger(__name__)
-
 class SmartDelegator:
     
     def __init__(self, rag_system: Optional[RAGSystem] = None, **kwargs):
@@ -65,14 +277,7 @@ class SmartDelegator:
         self.mcp_available = False
         logger.info("[INFO] Внешняя MCP интеграция отключена, используем локальные инструменты")
         
-        # Инициализируем исполнитель команд для обработки ответов Gemini
-        try:
-            self.command_executor = CommandExecutor()
-            logger.info("[OK] CommandExecutor инициализирован для обработки команд Gemini")
-        except Exception as e:
-            self.command_executor = None
-            logger.warning(f"[WARNING] Не удалось инициализировать CommandExecutor: {str(e)}")
-        
+
         # Инициализируем форматировщик ответов для чистого отображения
         try:
             self.response_formatter = ResponseFormatter()
@@ -186,26 +391,18 @@ class SmartDelegator:
             
             # 4. Вызов LLM
             response_text = self._call_llm(messages)
+
+            # --- NEW: формируем ошибку, если ответ пустой или содержит заглушку ---
+            if not response_text or response_text.strip().lower().startswith("пустой ответ"):
+                error_msg = response_text.strip() if response_text else "LLM вернул пустой ответ"
+                return {
+                    "status": "failed",
+                    "error": error_msg,
+                    "analysis": analysis,
+                    "model_info": {},
+                }
         
-        # 5. Обработка команд из ответа Gemini (НОВАЯ ФУНКЦИОНАЛЬНОСТЬ)
-        if self.command_executor and response_text:
-            try:
-                logger.info("[COMMAND-PROCESSOR] Проверяем ответ Gemini на наличие команд...")
-                updated_response, command_results = self.command_executor.process_gemini_response(response_text)
-                
-                if command_results:
-                    logger.info(f"[COMMAND-PROCESSOR] Выполнено команд: {len(command_results)}")
-                    response_text = updated_response
-                    # Добавляем информацию о выполненных командах в анализ
-                    analysis['executed_commands'] = len(command_results)
-                    analysis['command_results'] = command_results
-                else:
-                    logger.info("[COMMAND-PROCESSOR] Команды в ответе не найдены")
-                    
-            except Exception as e:
-                logger.error(f"[COMMAND-PROCESSOR] Ошибка при обработке команд: {str(e)}")
-                logger.error(f"[COMMAND-PROCESSOR] Traceback: {traceback.format_exc()}")
-                # Не прерываем выполнение, просто логируем ошибку
+
         
         elapsed = time.time() - start_time
         logger.info(f"[TIMING] Request processed in {elapsed:.2f} sec")
@@ -379,15 +576,17 @@ class SmartDelegator:
             }
         
         # Проверяем запросы на терминальные команды
-        if any(keyword in message_lower for keyword in ['terminal', 'command', 'execute shell', 'run in terminal']):
-            cmd_match = re.search(r'(?:terminal|command|execute shell|run in terminal):?\s*(.+)', message, re.IGNORECASE)
-            if cmd_match:
-                command = cmd_match.group(1).strip()
-                return {
-                    'tool_name': 'terminal',
-                    'server_name': 'local',
-                    'params': {'command': command}
-                }
+        for keyword in ['terminal:', 'command:', 'execute shell:', 'run in terminal:']:
+            if keyword in message_lower:
+                # Извлекаем команду после ключевого слова
+                start_idx = message_lower.find(keyword) + len(keyword)
+                command = message[start_idx:].strip()
+                if command:
+                    return {
+                        'tool_name': 'terminal',
+                        'server_name': 'local',
+                        'params': {'command': command}
+                    }
         
         return None
         
@@ -474,12 +673,177 @@ class SmartDelegator:
 
     def _call_llm(self, messages: List[Dict]) -> str:
         """
-        Вызывает языковую модель, используя litellm и систему ротации моделей.
+        Вызывает языковую модель с нативной поддержкой Tool Calling.
+        Реализует двухфазную обработку: tool execution → final response generation.
         """
-        logger.info("[CRITICAL-DEBUG] НАЧАЛО _call_llm")
-        logger.info(f"[CRITICAL-DEBUG] messages_count: {len(messages)}")
-        logger.info(f"[CRITICAL-DEBUG] model_config_manager: {self.model_config_manager is not None}")
+        logger.info("[TOOL-CALLING] Начало _call_llm с нативной поддержкой инструментов")
+        logger.info(f"[TOOL-CALLING] messages_count: {len(messages)}")
         
+        # Получаем схемы инструментов из tool_definitions
+        from .tool_definitions import get_tool_schema
+        available_tools = get_tool_schema()
+        logger.info(f"[TOOL-CALLING] Доступно инструментов: {len(available_tools)}")
+        
+        # Вызываем новый метод с поддержкой инструментов
+        return self._call_llm_with_tools(messages, available_tools)
+    
+    def _retry_with_backoff(self, func, max_retries: int = 3, base_delay: float = 1.0):
+        """
+        Выполняет функцию с экспоненциальным backoff при ошибках rate limit
+        
+        Args:
+            func: Функция для выполнения
+            max_retries: Максимальное количество попыток
+            base_delay: Базовая задержка в секундах
+            
+        Returns:
+            Результат выполнения функции
+        """
+        import time
+        import random
+        
+        for attempt in range(max_retries + 1):
+            try:
+                return func()
+            except RateLimitError as e:
+                if attempt == max_retries:
+                    logger.error(f"[RETRY] Исчерпаны все попытки retry после {max_retries} попыток")
+                    raise e
+                
+                # Экспоненциальный backoff с jitter
+                delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                logger.warning(f"[RETRY] Rate limit hit, попытка {attempt + 1}/{max_retries + 1}, ждём {delay:.2f} сек")
+                time.sleep(delay)
+            except (AuthenticationError, InvalidRequestError, APIConnectionError) as e:
+                # Эти ошибки не требуют retry
+                logger.error(f"[RETRY] Критическая ошибка, retry не поможет: {type(e).__name__}")
+                raise e
+            except Exception as e:
+                if attempt == max_retries:
+                    logger.error(f"[RETRY] Исчерпаны все попытки retry после {max_retries} попыток")
+                    raise e
+                
+                # Для других ошибок тоже пробуем retry
+                delay = base_delay * (2 ** attempt)
+                logger.warning(f"[RETRY] Неожиданная ошибка, попытка {attempt + 1}/{max_retries + 1}, ждём {delay:.2f} сек: {e}")
+                time.sleep(delay)
+    
+    def _call_llm_with_tools(self, messages: List[Dict], tools: List[Dict], max_iterations: int = 5) -> str:
+        """
+        Вызывает LLM с нативной поддержкой OpenAI Tool Calling.
+        
+        Args:
+            messages: Список сообщений для LLM
+            tools: Схемы доступных инструментов в формате OpenAI
+            max_iterations: Максимальное количество итераций tool calling
+            
+        Returns:
+            str: Финальный ответ от LLM
+        """
+        logger.info(f"[TOOL-CALLING] Начало _call_llm_with_tools, max_iterations={max_iterations}")
+        
+        current_messages = messages.copy()
+        iteration = 0
+        
+        try:
+            # Определяем модель для использования
+            model_id = self._get_model_for_request(current_messages)
+            logger.info(f"[TOOL-CALLING] Используем модель: {model_id}")
+            
+            while iteration < max_iterations:
+                iteration += 1
+                logger.info(f"[TOOL-CALLING] Итерация {iteration}/{max_iterations}")
+                
+                # Фаза 1: Вызов LLM с инструментами (с retry логикой)
+                response = self._retry_with_backoff(
+                    lambda: self._make_llm_request(model_id, current_messages, tools),
+                    max_retries=3,
+                    base_delay=1.0
+                )
+                
+                if not response or not response.choices:
+                    logger.error("[TOOL-CALLING] Пустой ответ от LLM")
+                    return "Ошибка: пустой ответ от языковой модели"
+                
+                message = response.choices[0].message
+                response_text = message.content or ""
+                tool_calls = getattr(message, 'tool_calls', None)
+                
+                logger.info(f"[TOOL-CALLING] Получен ответ: text_length={len(response_text)}, tool_calls={len(tool_calls) if tool_calls else 0}")
+                
+                # Если нет вызовов инструментов, возвращаем финальный ответ
+                if not tool_calls:
+                    logger.info("[TOOL-CALLING] Нет вызовов инструментов, возвращаем финальный ответ")
+                    return response_text or "Пустой ответ от модели"
+                
+                # Фаза 2: Выполнение инструментов
+                logger.info(f"[TOOL-CALLING] Выполняем {len(tool_calls)} вызовов инструментов")
+                
+                # Добавляем сообщение ассистента с tool_calls
+                current_messages.append({
+                    "role": "assistant",
+                    "content": response_text,
+                    "tool_calls": [
+                        {
+                            "id": tc.id,
+                            "type": "function",
+                            "function": {
+                                "name": tc.function.name,
+                                "arguments": tc.function.arguments
+                            }
+                        } for tc in tool_calls
+                    ]
+                })
+                
+                # Выполняем каждый вызов инструмента
+                tool_results = []
+                for tool_call in tool_calls:
+                    try:
+                        result = self._execute_tool_call(tool_call)
+                        tool_results.append({
+                            "tool_call_id": tool_call.id,
+                            "role": "tool",
+                            "name": tool_call.function.name,
+                            "content": str(result)
+                        })
+                        logger.info(f"[TOOL-CALLING] Инструмент {tool_call.function.name} выполнен успешно")
+                    except Exception as e:
+                        logger.error(f"[TOOL-CALLING] Ошибка выполнения инструмента {tool_call.function.name}: {e}")
+                        tool_results.append({
+                            "tool_call_id": tool_call.id,
+                            "role": "tool",
+                            "name": tool_call.function.name,
+                            "content": f"Ошибка выполнения: {str(e)}"
+                        })
+                
+                # Добавляем результаты инструментов к сообщениям
+                current_messages.extend(tool_results)
+                
+                # Продолжаем цикл для следующей итерации
+                logger.info(f"[TOOL-CALLING] Итерация {iteration} завершена, продолжаем...")
+            
+            # Если достигли максимального количества итераций
+            logger.warning(f"[TOOL-CALLING] Достигнуто максимальное количество итераций ({max_iterations})")
+            
+            # Делаем финальный вызов без инструментов для получения ответа (с retry логикой)
+            final_response = self._retry_with_backoff(
+                lambda: self._make_llm_request(model_id, current_messages, tools=None),
+                max_retries=3,
+                base_delay=1.0
+            )
+            if final_response and final_response.choices:
+                final_text = final_response.choices[0].message.content
+                return final_text or "Достигнуто максимальное количество итераций инструментов"
+            else:
+                return "Достигнуто максимальное количество итераций инструментов"
+                
+        except Exception as e:
+            logger.error(f"[TOOL-CALLING] Критическая ошибка в _call_llm_with_tools: {e}")
+            logger.error(f"[TOOL-CALLING] Traceback: {traceback.format_exc()}")
+            return f"Ошибка при обработке запроса с инструментами: {str(e)}"
+    
+    def _get_model_for_request(self, messages: List[Dict]) -> str:
+        """Определяет модель для использования в запросе"""
         try:
             # Выводим длину системного промпта для диагностики
             system_prompt_len = len(messages[0]['content']) if messages and messages[0]['role'] == 'system' else 0
@@ -501,6 +865,21 @@ class SmartDelegator:
             if current_config and current_config.is_available():
                 # Используем выбранную пользователем модель
                 model_id = current_config.model_id
+                
+                # 🔥 КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Проверяем, не искажен ли model_id
+                # Если это OpenRouter модель, убеждаемся что ID не был изменен (например, точки заменены на подчеркивания)
+                if current_config.provider == ModelProvider.OPENROUTER:
+                    # Логируем оригинальный ID для диагностики
+                    logger.info(f"[MODEL-ID-DEBUG] Оригинальный model_id из конфига: '{model_id}'")
+                    
+                    # Если model_id содержит подчеркивания вместо точек или изменен регистр - это баг
+                    # Пытаемся восстановить оригинальное имя из метаданных запроса
+                    if hasattr(self, '_last_request_metadata') and self._last_request_metadata:
+                        preferred_model = self._last_request_metadata.get('preferred_model')
+                        if preferred_model and preferred_model != model_id:
+                            logger.warning(f"[MODEL-ID-FIX] Обнаружено искажение model_id: '{model_id}' → '{preferred_model}'")
+                            model_id = preferred_model
+                
                 logger.info(f"[LLM] Используем выбранную пользователем модель: {model_id} ({current_config.display_name})")
                 logger.info(f"[LLM] Провайдер: {current_config.provider.value}")
             else:
@@ -531,176 +910,560 @@ class SmartDelegator:
             logger.info(f"[LLM-DEBUG] Финальная модель: {model_id}")
             logger.info(f"[LLM-DEBUG] Проверка 'gemini' in model_id.lower(): {'gemini' in model_id.lower()}")
             
-            # Регистрируем использование модели
-            if model_id in rate_limit_monitor.models:
+            # Регистрируем использование модели (с защитой от AttributeError)
+            # Проверяем, что у rate_limit_monitor есть атрибут .models (для совместимости с LocalRateLimitMonitor)
+            if hasattr(rate_limit_monitor, 'models') and model_id in rate_limit_monitor.models:
                 rate_limit_monitor.register_use(model_id, estimated_tokens)
+                logger.debug(f"[LLM] Зарегистрировано использование модели: {model_id}")
+            elif hasattr(rate_limit_monitor, 'register_use'):
+                # Для LocalRateLimitMonitor или других мониторов без .models
+                rate_limit_monitor.register_use(model_id, estimated_tokens)
+                logger.debug(f"[LLM] Зарегистрировано использование модели (без .models): {model_id}")
             
-            # 🔥 СПЕЦИАЛЬНАЯ ОБРАБОТКА ДЛЯ РАЗНЫХ ПРОВАЙДЕРОВ
+            return model_id
             
-            # OpenRouter модели - проверяем и по current_config, и по имени модели
+        except Exception as e:
+            logger.error(f"[MODEL-SELECTION] Ошибка при выборе модели: {e}")
+            return "gemini/gemini-1.5-flash"  # Fallback модель
+    
+    def _make_llm_request(self, model_id: str, messages: List[Dict], tools: Optional[List[Dict]] = None):
+        """
+        Выполняет запрос к LLM с поддержкой инструментов
+        
+        Args:
+            model_id: ID модели для использования
+            messages: Сообщения для отправки
+            tools: Схемы инструментов (опционально)
+            
+        Returns:
+            Ответ от LLM
+        """
+        logger.info(f"[LLM-REQUEST] Отправляем запрос к {model_id}, tools={len(tools) if tools else 0}")
+        
+        try:
+            
+            # Определяем провайдера модели
+            current_config = None
+            if self.model_config_manager:
+                current_config = self.model_config_manager.get_current_configuration()
+            
+            # OpenRouter модели
             is_openrouter = (current_config and current_config.provider.value == 'openrouter') or \
                 model_id.startswith('openrouter/')
             
             if is_openrouter:
-                try:
-                    logger.info(f"🌐 Используем OpenRouter модель: {model_id}")
-                    
-                    # Получаем API ключ для OpenRouter
-                    api_key = os.getenv('OPENROUTER_API_KEY')
-                    
-                    logger.debug(f"[DEBUG] OPENROUTER_API_KEY найден: {'Да' if api_key else 'Нет'}")
-                    if api_key:
-                        logger.debug(f"[DEBUG] API ключ начинается с: {api_key[:10]}...")
-                    
-                    if not api_key:
-                        raise ValueError("Не найден API ключ для OpenRouter (OPENROUTER_API_KEY)")
-                    
-                    # Используем litellm с OpenRouter
-                    # Формируем правильное имя модели
-                    if model_id.startswith('openrouter/'):
-                        final_model = model_id
-                    else:
-                        final_model = f"openrouter/{model_id}"
-                    
-                    logger.info(f"[LLM-DEBUG] Отправляем запрос в OpenRouter: final_model={final_model}, messages_count={len(messages)}")
-                    
-                    response = litellm.completion(
-                        model=final_model,
-                        messages=messages,
-                        temperature=0.2,
-                        max_tokens=2000,
-                        api_key=api_key,
-                        api_base="https://openrouter.ai/api/v1"
-                    )
-                    
-                    logger.info(f"[LLM-DEBUG] Получен ответ от OpenRouter: {type(response)}")
-                    logger.info(f"[LLM-DEBUG] response.choices: {response.choices if hasattr(response, 'choices') else 'NO CHOICES'}")
-                    
-                    if response and response.choices and len(response.choices) > 0:
-                        response_text = response.choices[0].message.content
-                        logger.info(f"[LLM-DEBUG] Извлеченный текст: '{response_text[:100]}...' (длина: {len(response_text) if response_text else 0})")
-                        
-                        if response_text and response_text.strip():
-                            logger.info(f"✅ OpenRouter вернул непустой ответ: {len(response_text)} символов")
-                            return response_text
-                        else:
-                            logger.error(f"[LLM-DEBUG] OpenRouter вернул пустой текст: '{response_text}'")
-                            return "Пустой ответ от OpenRouter модели"
-                    else:
-                        logger.error(f"[LLM-DEBUG] Нет choices в ответе OpenRouter: response={response}")
-                        return "Пустой ответ от OpenRouter модели"
-                        
-                except Exception as e:
-                    logger.error(f"❌ Ошибка OpenRouter: {str(e)}")
-                    # Продолжаем со стандартным litellm
+                return self._make_openrouter_request(model_id, messages, tools)
             
-            # 🔥 КАСТОМНЫЙ ОБХОД ОГРАНИЧЕНИЙ GEMINI API!
-            # Используем наш GeminiDirectClient вместо стандартного Google API
+            # Gemini модели
             elif 'gemini' in model_id.lower():
-                try:
-                    # Импортируем наш кастомный клиент
-                    from .gemini_direct_client import GeminiDirectClient
-                    
-                    # Создаем кастомный клиент БЕЗ safetySettings
-                    api_key = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
-                    if not api_key:
-                        raise ValueError("Не найден API ключ для Google/Gemini")
-                    
-                    client = GeminiDirectClient(
-                        api_key=api_key,
-                        model=model_id.split('/')[-1]  # Извлекаем имя модели
-                    )
-                    
-                    logger.info(f"🔥 Используем GeminiDirectClient для обхода ограничений безопасности: {model_id}")
-                    
-                    # Преобразуем сообщения в формат, понятный нашему клиенту
-                    logger.info(f"[LLM-DEBUG] Отправляем запрос в GeminiDirectClient: model={model_id}, messages_count={len(messages)}")
-                    
-                    response = client.generate_text(messages)
-                    
-                    logger.info(f"[LLM-DEBUG] Получен ответ от GeminiDirectClient: '{response[:100] if response else 'None'}...' (длина: {len(response) if response else 0})")
-                    
-                    if response and response.strip():
-                        logger.info(f"✅ Gemini вернул непустой ответ: {len(response)} символов")
-                        return response
-                    else:
-                        logger.error(f"[LLM-DEBUG] Gemini вернул пустой ответ: '{response}'")
-                        return "Пустой ответ от Gemini"
-                    
-                except Exception as e:
-                    logger.error(f"❌ Ошибка кастомного GeminiDirectClient: {str(e)}")
-                    # Продолжаем со стандартным litellm
+                return self._make_gemini_request(model_id, messages, tools)
+            
+            # Другие модели через litellm
             else:
-                logger.info(f"[CRITICAL-DEBUG] ОБЩАЯ ВЕТКА litellm: model_id={model_id}")
+                return self._make_generic_request(model_id, messages, tools)
                 
-                # Получаем API ключ для Gemini если это Gemini модель
-                api_key = None
-                if 'gemini' in model_id.lower():
-                    api_key = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
-                    logger.info(f"[CRITICAL-DEBUG] Gemini API key: {'НАЙДЕН' if api_key else 'ОТСУТСТВУЕТ'}")
+        except Exception as e:
+            logger.error(f"[LLM-REQUEST] Ошибка запроса к LLM: {e}")
+            raise
+    
+    def _make_openrouter_request(self, model_id: str, messages: List[Dict], tools: Optional[List[Dict]] = None):
+        """Выполняет запрос к OpenRouter модели с обработкой ошибок"""
+        try:
+            logger.info(f"🌐 Используем OpenRouter модель: {model_id}")
+            
+            # Получаем API ключ для OpenRouter
+            api_key = os.getenv('OPENROUTER_API_KEY')
+            if not api_key:
+                raise ValueError("Не найден API ключ для OpenRouter (OPENROUTER_API_KEY)")
+            
+            # Формируем правильное имя модели
+            if model_id.startswith('openrouter/'):
+                final_model = model_id
+            else:
+                final_model = f"openrouter/{model_id}"
+            
+            # Подготавливаем аргументы для запроса
+            completion_args = {
+                "model": final_model,
+                "messages": messages,
+                "temperature": 0.2,
+                "max_tokens": 2000,
+                "api_key": api_key,
+                "api_base": "https://openrouter.ai/api/v1"
+            }
+            
+            # Добавляем инструменты если они есть
+            if tools:
+                completion_args["tools"] = tools
+                completion_args["tool_choice"] = "auto"
+                logger.info(f"[OPENROUTER] Добавлены инструменты: {len(tools)}")
+            
+            response = litellm.completion(**completion_args)
+            
+            if response and response.choices and len(response.choices) > 0:
+                logger.info("✅ OpenRouter вернул успешный ответ")
+                return response
+            else:
+                logger.error("❌ OpenRouter вернул пустой ответ")
+                return None
                 
-                # Добавляем safety settings для ослабления фильтров
-                safety_settings = [
+        except RateLimitError as e:
+            logger.error(f"❌ Превышен лимит запросов OpenRouter: {e}")
+            raise e  # 🔧 ИСПРАВЛЕНО: передаем оригинальную ошибку вместо создания новой
+        except AuthenticationError as e:
+            logger.error(f"❌ Ошибка аутентификации OpenRouter: {e}")
+            raise AuthenticationError("Неверный API ключ OpenRouter")
+        except InvalidRequestError as e:
+            logger.error(f"❌ Неверный запрос к OpenRouter: {e}")
+            raise InvalidRequestError(f"Неверный запрос к модели {model_id}: {str(e)}")
+        except Timeout as e:
+            logger.error(f"❌ Таймаут запроса к OpenRouter: {e}")
+            raise Timeout("Превышено время ожидания ответа от OpenRouter")
+        except APIConnectionError as e:
+            logger.error(f"❌ Ошибка соединения с OpenRouter: {e}")
+            raise APIConnectionError("Не удалось подключиться к OpenRouter API")
+        except Exception as e:
+            logger.error(f"❌ Неожиданная ошибка OpenRouter запроса: {e}")
+            raise
+    
+    def _make_gemini_request(self, model_id: str, messages: List[Dict], tools: Optional[List[Dict]] = None):
+        """Выполняет запрос к Gemini модели с обработкой ошибок"""
+        try:
+            logger.info(f"🔥 Используем Gemini модель: {model_id}")
+            
+            # Получаем API ключ для Gemini
+            api_key = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
+            if not api_key:
+                raise ValueError("Не найден API ключ для Google/Gemini")
+            
+            # Подготавливаем аргументы для запроса
+            completion_args = {
+                "model": model_id,
+                "messages": messages,
+                "temperature": 0.2,
+                "max_tokens": 2000,
+                "api_key": api_key,
+                "safety_settings": [
                     {
                         "category": HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
                         "threshold": HarmBlockThreshold.BLOCK_ONLY_HIGH
                     }
                 ]
+            }
+            
+            # Добавляем инструменты если они есть
+            if tools:
+                completion_args["tools"] = tools
+                completion_args["tool_choice"] = "auto"
+                logger.info(f"[GEMINI] Добавлены инструменты: {len(tools)}")
+            
+            response = litellm.completion(**completion_args)
+            
+            if response and response.choices and len(response.choices) > 0:
+                logger.info("✅ Gemini вернул успешный ответ")
+                return response
+            else:
+                logger.error("❌ Gemini вернул пустой ответ")
+                return None
                 
-                logger.info(f"[CRITICAL-DEBUG] Вызываем litellm.completion с model={model_id}, api_key={'ЕСТЬ' if api_key else 'НЕТ'}")
+        except RateLimitError as e:
+            logger.error(f"❌ Превышен лимит запросов Gemini: {e}")
+            raise e  # 🔧 ИСПРАВЛЕНО: передаем оригинальную ошибку вместо создания новой
+        except AuthenticationError as e:
+            logger.error(f"❌ Ошибка аутентификации Gemini: {e}")
+            raise AuthenticationError("Неверный API ключ Google/Gemini")
+        except InvalidRequestError as e:
+            logger.error(f"❌ Неверный запрос к Gemini: {e}")
+            raise InvalidRequestError(f"Неверный запрос к модели {model_id}: {str(e)}")
+        except Timeout as e:
+            logger.error(f"❌ Таймаут запроса к Gemini: {e}")
+            raise Timeout("Превышено время ожидания ответа от Gemini")
+        except APIConnectionError as e:
+            logger.error(f"❌ Ошибка соединения с Gemini: {e}")
+            raise APIConnectionError("Не удалось подключиться к Google/Gemini API")
+        except Exception as e:
+            logger.error(f"❌ Неожиданная ошибка Gemini запроса: {e}")
+            raise
+    
+    def _make_generic_request(self, model_id: str, messages: List[Dict], tools: Optional[List[Dict]] = None):
+        """Выполняет запрос к общей модели через litellm с обработкой ошибок"""
+        try:
+            logger.info(f"🔧 Используем общую модель: {model_id}")
+            
+            # Подготавливаем аргументы для запроса
+            completion_args = {
+                "model": model_id,
+                "messages": messages,
+                "temperature": 0.2,
+                "max_tokens": 2000
+            }
+            
+            # Добавляем инструменты если они есть
+            if tools:
+                completion_args["tools"] = tools
+                completion_args["tool_choice"] = "auto"
+                logger.info(f"[GENERIC] Добавлены инструменты: {len(tools)}")
+            
+            response = litellm.completion(**completion_args)
+            
+            if response and response.choices and len(response.choices) > 0:
+                logger.info("✅ Общая модель вернула успешный ответ")
+                return response
+            else:
+                logger.error("❌ Общая модель вернула пустой ответ")
+                return None
                 
-                completion_args = {
-                    "model": model_id,
-                    "messages": messages,
-                    "temperature": 0.2,
-                    "max_tokens": 2000,
-                    "safety_settings": safety_settings
-                }
-                
-                if api_key:
-                    completion_args["api_key"] = api_key
-                
-                response = litellm.completion(**completion_args)
-                
-                logger.info(f"[LLM] Получен ответ от LLM: {str(response)[:200]}...")
-                
-                # Извлекаем текст ответа
-                if response and response.choices and len(response.choices) > 0:
-                    response_text = response.choices[0].message.content
-                    logger.info(f"[LLM] Извлеченный текст: {response_text[:100]}...")
-                    return response_text if response_text else "Пустой ответ от модели"
+        except RateLimitError as e:
+            logger.error(f"❌ Превышен лимит запросов для модели {model_id}: {e}")
+            raise e  # 🔧 ИСПРАВЛЕНО: передаем оригинальную ошибку вместо создания новой
+        except AuthenticationError as e:
+            logger.error(f"❌ Ошибка аутентификации для модели {model_id}: {e}")
+            raise AuthenticationError(f"Неверный API ключ для модели {model_id}")
+        except InvalidRequestError as e:
+            logger.error(f"❌ Неверный запрос к модели {model_id}: {e}")
+            raise InvalidRequestError(f"Неверный запрос к модели {model_id}: {str(e)}")
+        except Timeout as e:
+            logger.error(f"❌ Таймаут запроса к модели {model_id}: {e}")
+            raise Timeout(f"Превышено время ожидания ответа от модели {model_id}")
+        except APIConnectionError as e:
+            logger.error(f"❌ Ошибка соединения с моделью {model_id}: {e}")
+            raise APIConnectionError(f"Не удалось подключиться к API модели {model_id}")
+        except Exception as e:
+            logger.error(f"❌ Неожиданная ошибка запроса к модели {model_id}: {e}")
+            raise
+    
+    def _execute_tool_call(self, tool_call):
+        """
+        Выполняет вызов инструмента с парсингом JSON аргументов и обработкой ошибок
+        
+        Args:
+            tool_call: Объект вызова инструмента от LLM
+            
+        Returns:
+            Результат выполнения инструмента
+        """
+        try:
+            function_name = tool_call.function.name
+            arguments_str = tool_call.function.arguments
+            
+            logger.info(f"[TOOL-EXEC] Выполняем инструмент: {function_name}")
+            logger.debug(f"[TOOL-EXEC] Аргументы (raw): {arguments_str}")
+            
+            # Парсим JSON аргументы с обработкой ошибок
+            try:
+                if isinstance(arguments_str, str):
+                    arguments = json.loads(arguments_str)
                 else:
-                    logger.error("[LLM] Пустой ответ от модели")
-                    return "Пустой ответ от модели"
+                    arguments = arguments_str
+            except json.JSONDecodeError as e:
+                logger.error(f"[TOOL-EXEC] Ошибка парсинга JSON аргументов: {e}")
+                return f"Ошибка парсинга аргументов инструмента: {str(e)}"
+            
+            logger.debug(f"[TOOL-EXEC] Аргументы (parsed): {arguments}")
+            
+            # Валидируем аргументы против схемы
+            from .tool_definitions import validate_tool_call
+            validation = validate_tool_call(function_name, arguments)
+            
+            if not validation['valid']:
+                logger.error(f"[TOOL-EXEC] Валидация не прошла: {validation['errors']}")
+                return f"Ошибка валидации аргументов: {'; '.join(validation['errors'])}"
+            
+            # Используем нормализованные аргументы
+            normalized_args = validation['normalized_args']
+            logger.debug(f"[TOOL-EXEC] Нормализованные аргументы: {normalized_args}")
+            
+            # 🚀 МОДЕРНИЗИРОВАНО: Используем современные CrewAI и локальные MCP инструменты
+            result = self._execute_modern_tool(function_name, normalized_args)
+            
+            logger.info(f"[TOOL-EXEC] Инструмент {function_name} выполнен успешно")
+            logger.debug(f"[TOOL-EXEC] Результат: {str(result)[:200]}...")
+            
+            return result
             
         except Exception as e:
-            error_msg = f"Ошибка при вызове LLM: {str(e)}"
-            logger.error(f"[CRITICAL-DEBUG] ОШИБКА в _call_llm: {error_msg}")
-            logger.error(f"[LLM] Traceback: {traceback.format_exc()}")
+            logger.error(f"[TOOL-EXEC] Критическая ошибка выполнения инструмента {function_name}: {e}")
+            logger.error(f"[TOOL-EXEC] Traceback: {traceback.format_exc()}")
+            return f"Критическая ошибка выполнения инструмента: {str(e)}"
+    
+    def _execute_modern_tool(self, function_name: str, arguments: Dict[str, Any]) -> Any:
+        """
+        🚀 СОВРЕМЕННОЕ ВЫПОЛНЕНИЕ ИНСТРУМЕНТОВ
+        Использует CrewAI инструменты и локальные MCP инструменты вместо устаревшего CommandExecutor
+        
+        Args:
+            function_name: Имя инструмента для выполнения
+            arguments: Аргументы для инструмента
             
-            # Если ошибка связана с моделью, помечаем её как недоступную
-            if model_id and "rate limit" in str(e).lower() or "quota exceeded" in str(e).lower():
-                logger.warning(f"[LLM] Модель {model_id} превысила лимиты, блокируем на 10 минут")
-                rate_limit_monitor.mark_model_unavailable(model_id, duration=600)  # 10 минут
+        Returns:
+            Результат выполнения инструмента
+        """
+        logger.info(f"[MODERN-TOOL] Выполняем современный инструмент: {function_name}")
+        logger.debug(f"[MODERN-TOOL] Аргументы: {arguments}")
+        
+        try:
+            # 1. Сначала пробуем CrewAI инструменты
+            if CREWAI_TOOLKIT_AVAILABLE:
+                result = self._try_crewai_tool(function_name, arguments)
+                if result is not None:
+                    logger.info(f"[MODERN-TOOL] Успешно выполнен через CrewAI: {function_name}")
+                    return result
+            
+            # 2. Затем пробуем локальные MCP инструменты
+            if self.local_tools_available:
+                result = self._try_local_mcp_tool(function_name, arguments)
+                if result is not None:
+                    logger.info(f"[MODERN-TOOL] Успешно выполнен через локальные MCP: {function_name}")
+                    return result
+            
+            # 3. Fallback на специальные инструменты
+            result = self._try_special_tool(function_name, arguments)
+            if result is not None:
+                logger.info(f"[MODERN-TOOL] Успешно выполнен через специальные инструменты: {function_name}")
+                return result
+            
+            # 4. Если ничего не сработало
+            logger.error(f"[MODERN-TOOL] Инструмент {function_name} не найден ни в одной системе")
+            return f"Инструмент {function_name} не поддерживается"
+            
+        except Exception as e:
+            logger.error(f"[MODERN-TOOL] Ошибка выполнения {function_name}: {e}")
+            return f"Ошибка выполнения инструмента {function_name}: {str(e)}"
+    
+    def _try_crewai_tool(self, function_name: str, arguments: Dict[str, Any]) -> Any:
+        """Пытается выполнить инструмент через CrewAI Toolkit"""
+        try:
+            # Маппинг функций на CrewAI инструменты
+            crewai_tool_map = {
+                'execute_terminal_command': self._execute_terminal_via_crewai,
+                'browse_website': self._browse_website_via_crewai,
+                'web_search': self._web_search_via_crewai,
+                'file_operations': self._file_operations_via_crewai
+            }
+            
+            if function_name in crewai_tool_map:
+                return crewai_tool_map[function_name](arguments)
+            
+            return None
+            
+        except Exception as e:
+            logger.debug(f"[CREWAI-TOOL] Не удалось выполнить {function_name} через CrewAI: {e}")
+            return None
+    
+    def _try_local_mcp_tool(self, function_name: str, arguments: Dict[str, Any]) -> Any:
+        """Пытается выполнить инструмент через локальные MCP инструменты"""
+        try:
+            # Маппинг функций на локальные MCP инструменты
+            local_tool_map = {
+                'execute_terminal_command': 'terminal',
+                'browse_website': 'browser',
+                'web_search': 'web_search',
+                'file_operations': 'file_ops'
+            }
+            
+            if function_name in local_tool_map:
+                local_tool_name = local_tool_map[function_name]
+                return self.local_tools.call_tool(local_tool_name, arguments)
+            
+            return None
+            
+        except Exception as e:
+            logger.debug(f"[LOCAL-MCP] Не удалось выполнить {function_name} через локальные MCP: {e}")
+            return None
+    
+    def _try_special_tool(self, function_name: str, arguments: Dict[str, Any]) -> Any:
+        """Пытается выполнить специальные инструменты"""
+        try:
+            if function_name == 'execute_terminal_command':
+                # Специальная обработка терминальных команд
+                command = arguments.get('command', '')
+                working_dir = arguments.get('working_directory', '.')
+                timeout = arguments.get('timeout', 30)
                 
-                # Пробуем другую модель
-                fallback_model = select_llm_model_safe("dialog", tokens=estimated_tokens, exclude_models=[model_id])
-                if fallback_model:
-                    logger.info(f"[LLM] Пробуем запасную модель: {fallback_model}")
-                    try:
-                        response = litellm.completion(
-                            model=fallback_model,
-                            messages=messages,
-                            temperature=0.2,
-                            max_tokens=2000
-                        )
-                        if response and response.choices and len(response.choices) > 0:
-                            return response.choices[0].message.content
-                    except Exception as fallback_error:
-                        logger.error(f"[LLM] Ошибка при использовании запасной модели: {fallback_error}")
+                return self._execute_terminal_command_safe(command, working_dir, timeout)
             
-            logger.error(f"[CRITICAL-DEBUG] ВОЗВРАЩАЕМ ОШИБКУ: {error_msg}")
-            return f"Произошла ошибка при обработке запроса: {str(e)}"
+            return None
+            
+        except Exception as e:
+            logger.debug(f"[SPECIAL-TOOL] Не удалось выполнить {function_name} через специальные инструменты: {e}")
+            return None
+    
+    # 🚀 CrewAI инструменты - современная реализация
+    
+    def _execute_terminal_via_crewai(self, arguments: Dict[str, Any]) -> Any:
+        """Выполняет терминальные команды через CrewAI CodeInterpreterTool"""
+        try:
+            from crewai_toolkit.tools import CodeInterpreterTool
+            tool = CodeInterpreterTool()
+            
+            command = arguments.get('command', '')
+            logger.info(f"[CREWAI-TERMINAL] Выполняем команду: {command}")
+            
+            result = tool._run(command)
+            return {
+                'success': True,
+                'output': str(result),
+                'command': command
+            }
+            
+        except Exception as e:
+            logger.error(f"[CREWAI-TERMINAL] Ошибка: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'command': arguments.get('command', '')
+            }
+    
+    def _browse_website_via_crewai(self, arguments: Dict[str, Any]) -> Any:
+        """Просматривает веб-сайты через CrewAI SeleniumScrapingTool"""
+        try:
+            from crewai_toolkit.tools import SeleniumScrapingTool
+            tool = SeleniumScrapingTool()
+            
+            url = arguments.get('url', '')
+            css_selector = arguments.get('css_selector', 'body')
+            
+            logger.info(f"[CREWAI-BROWSER] Просматриваем: {url}")
+            
+            result = tool._run(website_url=url, css_element=css_selector)
+            return {
+                'success': True,
+                'content': str(result),
+                'url': url
+            }
+            
+        except Exception as e:
+            logger.error(f"[CREWAI-BROWSER] Ошибка: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'url': arguments.get('url', '')
+            }
+    
+    def _web_search_via_crewai(self, arguments: Dict[str, Any]) -> Any:
+        """Выполняет веб-поиск через CrewAI SerperDevTool"""
+        try:
+            from crewai_toolkit.tools import SerperDevTool
+            tool = SerperDevTool()
+            
+            query = arguments.get('query', '')
+            logger.info(f"[CREWAI-SEARCH] Поиск: {query}")
+            
+            result = tool._run(search_query=query)
+            return {
+                'success': True,
+                'results': str(result),
+                'query': query
+            }
+            
+        except Exception as e:
+            logger.error(f"[CREWAI-SEARCH] Ошибка: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'query': arguments.get('query', '')
+            }
+    
+    def _file_operations_via_crewai(self, arguments: Dict[str, Any]) -> Any:
+        """Выполняет файловые операции через CrewAI инструменты"""
+        try:
+            operation = arguments.get('operation', 'read')
+            file_path = arguments.get('file_path', '')
+            
+            if operation == 'read':
+                from crewai_toolkit.tools import FileReadTool
+                tool = FileReadTool()
+                result = tool._run(file_path=file_path)
+            elif operation == 'write':
+                from crewai_toolkit.tools import FileWriteTool
+                tool = FileWriteTool()
+                content = arguments.get('content', '')
+                result = tool._run(filename=file_path, content=content)
+            elif operation == 'search':
+                from crewai_toolkit.tools import DirectorySearchTool
+                tool = DirectorySearchTool()
+                search_term = arguments.get('search_term', '')
+                result = tool._run(search_term=search_term, directory=file_path)
+            else:
+                return {
+                    'success': False,
+                    'error': f'Неподдерживаемая операция: {operation}'
+                }
+            
+            logger.info(f"[CREWAI-FILE] Операция {operation} с {file_path}")
+            
+            return {
+                'success': True,
+                'result': str(result),
+                'operation': operation,
+                'file_path': file_path
+            }
+            
+        except Exception as e:
+            logger.error(f"[CREWAI-FILE] Ошибка: {e}")
+            return {
+                'success': False,
+                'error': str(e),
+                'operation': arguments.get('operation', 'unknown')
+            }
+    
+    def _execute_terminal_command_safe(self, command: str, working_dir: str = '.', timeout: int = 30) -> Dict[str, Any]:
+        """Безопасное выполнение терминальных команд"""
+        import subprocess
+        import os
+        
+        # Белый список разрешенных команд
+        allowed_commands = {
+            'ls', 'dir', 'pwd', 'cd', 'echo', 'cat', 'type', 'tree', 'find', 'grep',
+            'mkdir', 'touch', 'cp', 'copy', 'mv', 'move', 'whoami', 'date', 'time'
+        }
+        
+        try:
+            # Проверяем безопасность команды
+            cmd_parts = command.strip().split()
+            if not cmd_parts:
+                return {'success': False, 'error': 'Пустая команда'}
+            
+            base_cmd = cmd_parts[0].lower()
+            if base_cmd not in allowed_commands:
+                return {
+                    'success': False, 
+                    'error': f'Команда "{base_cmd}" не разрешена для выполнения'
+                }
+            
+            # Выполняем команду
+            logger.info(f"[SAFE-TERMINAL] Выполняем: {command} в {working_dir}")
+            
+            result = subprocess.run(
+                command,
+                shell=True,
+                cwd=working_dir,
+                capture_output=True,
+                text=True,
+                timeout=timeout
+            )
+            
+            return {
+                'success': result.returncode == 0,
+                'output': result.stdout,
+                'error': result.stderr if result.returncode != 0 else None,
+                'command': command,
+                'working_directory': working_dir,
+                'return_code': result.returncode
+            }
+            
+        except subprocess.TimeoutExpired:
+            return {
+                'success': False,
+                'error': f'Команда превысила таймаут {timeout} секунд',
+                'command': command
+            }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': f'Ошибка выполнения: {str(e)}',
+                'command': command
+            }
     
     def _load_openrouter_models_async(self):
         """Загружает модели OpenRouter в фоновом режиме"""

@@ -3,21 +3,21 @@ Refactor backend and frontend to support stable provider switching between Gemin
 
 > ## 📈 Project Summary
 > 
-> **✅ Done**: 9 | **🔄 In Progress**: 1 | **⬜ Todo**: 7 | **❌ Blocked**: 0
+> **✅ Done**: 15 | **🔄 In Progress**: 1 | **⬜ Todo**: 5 | **❌ Blocked**: 0
 > 
-> **Progress**: 53% `███████████░░░░░░░░░` 9/17 tasks
+> **Progress**: 71% `██████████████░░░░░░` 15/21 tasks
 > 
-> **Priorities**: 🚨 **Critical**: 3 | 🔴 **High**: 7 | 🟡 **Medium**: 7 | 🟢 **Low**: 0
+> **Priorities**: 🚨 **Critical**: 3 | 🔴 **High**: 7 | 🟡 **Medium**: 11 | 🟢 **Low**: 0
 
 ## Tasks
 
 | ID | Status | Priority | Title | Description |
 |:--:|:------:|:--------:|:------|:------------|
-| #1 | ⬜ todo | 700 | **Project Setup: ModelSwitchRefactor** | Refactor backend and frontend... |
+| #1 | ✅ done | 700 | **Project Setup: ModelSwitchRefactor** | Refactor backend and frontend... |
 | #2 | 🔄 inprogress | 701 | **Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates** | Add OpenRouter provider suppo... |
 | #3 | ⬜ todo | 699 | **Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals** | Frontend widget should:
 - Pre... |
-| #4 | ⬜ todo | 702 | **Implement provider/model state file synchronization** | Create ~/.gopiai_state.json s... |
+| #4 | ✅ done | 702 | **Implement provider/model state file synchronization** | Create ~/.gopiai_state.json s... |
 | #5 | ✅ done | 698 | **Создание ветки для исправлений** | Создать git ветку fix/llm-pro... |
 | #6 | ✅ done | 900 | **Чистка конфигураций - удаление дубликатов** | Удалить .env.override, перене... |
 | #7 | ✅ done | 901 | **Выравнивание интерфейса адаптеров LLM** | Ввести абстракцию BaseAdapter... |
@@ -42,4 +42,13 @@ Refactor backend and frontend to support stable provider switching between Gemin
 | #3.1 | ⬜ todo | Replace two provider buttons with QComboBox |
 | #3.2 | ⬜ todo | Refactor model loading to use get_available_models |
 | #3.3 | ⬜ todo | Unify API key handling and save to .env |
+
+### Task #4: Implement provider/model state file synchronization - Subtasks
+
+| ID | Status | Title |
+|:--:|:------:|:------|
+| #4.1 | ✅ done | Создать модуль управления файлом состояния |
+| #4.2 | ✅ done | Интегрировать чтение состояния в backend при запуске |
+| #4.3 | ✅ done | Обновить UI виджет для записи в файл состояния |
+| #4.4 | ✅ done | Создать тесты для синхронизации состояния |
 

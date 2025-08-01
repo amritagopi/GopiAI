@@ -25,6 +25,7 @@ load_dotenv(env_path, override=True)
 
 # Импорт CrewAI
 from crewai import Agent, Task, Crew, LLM
+from mem0_config import MEM0_CONFIG
 from tools.gopiai_integration.ai_router_llm import AIRouterLLM
 from crewai.tasks.task_output import TaskOutput
 
@@ -385,11 +386,15 @@ def run_simple_demo():
             agent=demo_agent
         )
         
-        # Создаем crew
+        # Создаем crew с отключенным GPU для mem0
         demo_crew = Crew(**{
             "agents": [demo_agent],
             "tasks": [demo_task],
-            "verbose": True
+            "verbose": True,
+            "memory_config": {
+                "provider": "mem0",
+                "local_mem0_config": MEM0_CONFIG
+            }
         })
         
         # Запускаем
@@ -425,11 +430,15 @@ def run_advanced_demo():
         )
         tasks = [init_task, research_task, writing_task, coding_task]
         tasks = [t for t in tasks if t is not None]
-        # Создаем crew с динамическими инструкциями
+        # Создаем crew с динамическими инструкциями и отключенным GPU для mem0
         advanced_crew = Crew(**{
             "agents": agents,
             "tasks": tasks,
-            "verbose": True
+            "verbose": True,
+            "memory_config": {
+                "provider": "mem0",
+                "local_mem0_config": MEM0_CONFIG
+            }
         })
         
         # Применяем динамические инструкции к команде

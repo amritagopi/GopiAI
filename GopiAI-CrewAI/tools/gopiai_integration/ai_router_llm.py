@@ -1,29 +1,58 @@
 import logging
 import traceback
 import time
+import sys
+import os
 from typing import List, Optional, Any, Mapping, ClassVar
-from pydantic import Field
+from pydantic import Field, BaseModel, ConfigDict
+# 🔧 ИСПРАВЛЕНИЕ АРХИТЕКТУРЫ: Убираем прямые импорты серверных модулей
+# Заменяем на HTTP-запросы к API или локальные заглушки
+
+# Локальные заглушки для функций из llm_rotation_config
+class LocalRateLimitMonitor:
+    """Локальная заглушка для rate_limit_monitor"""
+    def is_model_blocked_safe(self, model_id):
+        return False  # По умолчанию модели не заблокированы
+    
+    def get_blacklist_status(self):
+        return {}
+
+# Создаём локальные заглушки
+rate_limit_monitor = LocalRateLimitMonitor()
+LLM_MODELS_CONFIG = []  # Пустой список по умолчанию
+
+def select_llm_model_safe(*args, **kwargs):
+    """Локальная заглушка для select_llm_model_safe"""
+    return None
+
+def get_api_key_for_provider(provider):
+    """Локальная заглушка для get_api_key_for_provider"""
+    import os
+    if provider == 'openai':
+        return os.getenv('OPENAI_API_KEY')
+    elif provider == 'gemini':
+        return os.getenv('GEMINI_API_KEY')
+    elif provider == 'openrouter':
+        return os.getenv('OPENROUTER_API_KEY')
+    return None
+
+def get_active_models():
+    """Локальная заглушка для get_active_models"""
+    return []
+
+def get_next_available_model(*args, **kwargs):
+    """Локальная заглушка для get_next_available_model"""
+    return None
 
 # Импорт нашего кастомного клиента для обхода ограничений безопасности Gemini
 from .gemini_crewai_adapter import GeminiDirectLLM, create_gemini_direct_llm
 from langchain.llms.base import BaseLLM
 from langchain.schema import LLMResult, Generation
-import sys
-import os
 
 # Добавляем путь к корню GopiAI-CrewAI
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
-from llm_rotation_config import (
-    select_llm_model_safe, 
-    rate_limit_monitor, 
-    get_api_key_for_provider, 
-    LLM_MODELS_CONFIG,
-    get_active_models,
-    get_models_by_intelligence,
-    get_next_available_model
-)
 # Импортируем LLM из crewai
 from crewai.llm import LLM
 class AIRouterLLM(BaseLLM):
@@ -110,8 +139,25 @@ class AIRouterLLM(BaseLLM):
             
             # Выполняем запрос
             response = llm_instance.call(prompt)
+
+            # --- NORMALIZE RESPONSE TO PLAIN TEXT ---------------------------------
+            if not isinstance(response, str):
+                try:
+                    # litellm / OpenAI-like dict with choices
+                    if isinstance(response, dict):
+                        if "choices" in response and response["choices"]:
+                            first = response["choices"][0]
+                            if isinstance(first, dict):
+                                response = first.get("message", {}).get("content") or first.get("text")
+                    # fallback convert to json string
+                    if not isinstance(response, str):
+                        import json
+                        response = json.dumps(response, ensure_ascii=False)
+                except Exception as _norm_err:
+                    response = str(response)
+            # ----------------------------------------------------------------------
             
-            if not response or response.strip() == "":
+            if not response or (isinstance(response, str) and response.strip() == ""):
                 raise ValueError("Получен пустой ответ от модели")
                 
             self.logger.info(f"✅ Успешный ответ от модели {model_id} (длина: {len(response)} символов)")

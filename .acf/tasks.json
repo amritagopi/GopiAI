@@ -7,15 +7,26 @@
       "id": 1,
       "title": "Project Setup: ModelSwitchRefactor",
       "description": "Refactor backend and frontend to support stable provider switching between Gemini and OpenRouter",
-      "status": "todo",
+      "status": "done",
       "priority": 700,
       "priorityDisplay": "high",
       "dependsOn": [],
       "createdAt": "2025-07-28T18:30:08.813Z",
-      "updatedAt": "2025-07-28T18:30:08.813Z",
+      "updatedAt": "2025-07-31T00:08:45.865Z",
       "subtasks": [],
       "relatedFiles": [],
-      "activityLog": [],
+      "activityLog": [
+        {
+          "timestamp": "2025-07-31T00:02:55.351Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"inprogress\". Message: Starting removal of broken text parsing system"
+        },
+        {
+          "timestamp": "2025-07-31T00:08:45.865Z",
+          "type": "log",
+          "message": "Status changed from \"inprogress\" to \"done\". Message: Task completed: Removed broken text parsing system"
+        }
+      ],
       "lastSubtaskIndex": 0
     },
     {
@@ -27,7 +38,7 @@
       "priorityDisplay": "high",
       "dependsOn": [],
       "createdAt": "2025-07-28T18:30:33.136Z",
-      "updatedAt": "2025-07-28T18:32:13.486Z",
+      "updatedAt": "2025-07-31T00:27:53.005Z",
       "subtasks": [
         {
           "id": "2.1",
@@ -77,6 +88,11 @@
           "timestamp": "2025-07-28T18:32:13.486Z",
           "type": "log",
           "message": "Status changed from \"todo\" to \"inprogress\". Message: Backend refactor main part committed"
+        },
+        {
+          "timestamp": "2025-07-31T00:27:53.005Z",
+          "type": "log",
+          "message": "Status changed from \"inprogress\" to \"inprogress\". Message: Начинаю реализацию OpenAI-совместимой схемы инструментов"
         }
       ]
     },
@@ -150,14 +166,111 @@
       "id": 4,
       "title": "Implement provider/model state file synchronization",
       "description": "Create ~/.gopiai_state.json storing current provider and model.\nBackend reads on startup; UI writes whenever user changes selection.",
-      "status": "todo",
+      "status": "done",
       "priority": 702,
       "priorityDisplay": "high",
       "dependsOn": [],
       "createdAt": "2025-07-28T20:22:41.855Z",
-      "updatedAt": "2025-07-28T20:22:41.855Z",
-      "subtasks": [],
-      "lastSubtaskIndex": 0,
+      "updatedAt": "2025-07-31T00:26:50.567Z",
+      "subtasks": [
+        {
+          "id": "4.1",
+          "title": "Создать модуль управления файлом состояния",
+          "status": "done",
+          "createdAt": "2025-07-31T00:19:47.308Z",
+          "updatedAt": "2025-07-31T00:21:22.535Z",
+          "activityLog": [
+            {
+              "timestamp": "2025-07-31T00:19:47.308Z",
+              "type": "log",
+              "message": "Subtask created with title: \"Создать модуль управления файлом состояния\""
+            },
+            {
+              "timestamp": "2025-07-31T00:20:33.969Z",
+              "type": "log",
+              "message": "Status changed from \"todo\" to \"inprogress\". Message: Начинаем реализацию синхронизации состояния провайдера/модели"
+            },
+            {
+              "timestamp": "2025-07-31T00:21:22.535Z",
+              "type": "log",
+              "message": "Status changed from \"inprogress\" to \"done\". Message: Создан модуль StateManager для управления файлом состояния ~/.gopiai_state.json"
+            }
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Интегрировать чтение состояния в backend при запуске",
+          "status": "done",
+          "createdAt": "2025-07-31T00:20:08.148Z",
+          "updatedAt": "2025-07-31T00:23:28.405Z",
+          "activityLog": [
+            {
+              "timestamp": "2025-07-31T00:20:08.148Z",
+              "type": "log",
+              "message": "Subtask created with title: \"Интегрировать чтение состояния в backend при запуске\""
+            },
+            {
+              "timestamp": "2025-07-31T00:21:30.905Z",
+              "type": "log",
+              "message": "Status changed from \"todo\" to \"inprogress\". Message: Интегрируем загрузку состояния в backend при запуске"
+            },
+            {
+              "timestamp": "2025-07-31T00:23:28.405Z",
+              "type": "log",
+              "message": "Status changed from \"inprogress\" to \"done\". Message: Интегрирована загрузка и сохранение состояния в backend через StateManager"
+            }
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Обновить UI виджет для записи в файл состояния",
+          "status": "done",
+          "createdAt": "2025-07-31T00:20:17.337Z",
+          "updatedAt": "2025-07-31T00:24:32.709Z",
+          "activityLog": [
+            {
+              "timestamp": "2025-07-31T00:20:17.337Z",
+              "type": "log",
+              "message": "Subtask created with title: \"Обновить UI виджет для записи в файл состояния\""
+            },
+            {
+              "timestamp": "2025-07-31T00:23:36.724Z",
+              "type": "log",
+              "message": "Status changed from \"todo\" to \"inprogress\". Message: Обновляем UI виджет для записи в файл состояния"
+            },
+            {
+              "timestamp": "2025-07-31T00:24:32.709Z",
+              "type": "log",
+              "message": "Status changed from \"inprogress\" to \"done\". Message: UI виджет обновлён для использования StateManager и синхронизации состояния"
+            }
+          ]
+        },
+        {
+          "id": "4.4",
+          "title": "Создать тесты для синхронизации состояния",
+          "status": "done",
+          "createdAt": "2025-07-31T00:20:25.379Z",
+          "updatedAt": "2025-07-31T00:26:41.624Z",
+          "activityLog": [
+            {
+              "timestamp": "2025-07-31T00:20:25.379Z",
+              "type": "log",
+              "message": "Subtask created with title: \"Создать тесты для синхронизации состояния\""
+            },
+            {
+              "timestamp": "2025-07-31T00:24:39.888Z",
+              "type": "log",
+              "message": "Status changed from \"todo\" to \"inprogress\". Message: Создаём тесты для синхронизации состояния"
+            },
+            {
+              "timestamp": "2025-07-31T00:26:41.624Z",
+              "type": "log",
+              "message": "Status changed from \"inprogress\" to \"done\". Message: Созданы комплексные тесты для синхронизации состояния"
+            }
+          ]
+        }
+      ],
+      "lastSubtaskIndex": 4,
       "relatedFiles": [
         "GopiAI-CrewAI backend",
         "GopiAI-UI widget"
@@ -167,6 +280,11 @@
           "timestamp": "2025-07-28T20:22:41.855Z",
           "type": "log",
           "message": "Task created with title: \"Implement provider/model state file synchronization\""
+        },
+        {
+          "timestamp": "2025-07-31T00:26:50.567Z",
+          "type": "log",
+          "message": "Status changed from \"todo\" to \"done\". Message: Реализована полная синхронизация состояния провайдера/модели через файл ~/.gopiai_state.json"
         }
       ]
     },

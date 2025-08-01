@@ -3887,12 +3887,48 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_z-ai/glm-4.5-air:free": {
+      "provider": "openrouter",
+      "model_id": "z-ai/glm-4.5-air:free",
+      "display_name": "Z.AI: GLM 4.5 Air (free) (z-ai/glm-4.5-air:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_openrouter/horizon-alpha": {
+      "provider": "openrouter",
+      "model_id": "openrouter/horizon-alpha",
+      "display_name": "Horizon Alpha (openrouter/horizon-alpha)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_qwen/qwen3-30b-a3b-instruct-2507": {
+      "provider": "openrouter",
+      "model_id": "qwen/qwen3-30b-a3b-instruct-2507",
+      "display_name": "Qwen: Qwen3 30B A3B Instruct 2507 (qwen/qwen3-30b-a3b-instruct-2507)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {
     "provider": "openrouter",
-    "model_id": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free"
+    "model_id": "google/gemini-2.0-flash-exp:free"
   },
   "version": "1.0",
-  "last_updated": "1753566756.6909013"
+  "last_updated": "1753762898.876158"
 }
