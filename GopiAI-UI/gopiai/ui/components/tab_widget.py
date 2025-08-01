@@ -25,6 +25,18 @@ from PySide6.QtWebEngineCore import QWebEnginePage
 
 import chardet
 import traceback
+import weakref
+from typing import Optional, Dict, Any
+
+# Импорт системы отображения ошибок
+try:
+    from .error_display import ErrorDisplayWidget, show_critical_error
+
+    ERROR_DISPLAY_AVAILABLE = True
+except ImportError:
+    ErrorDisplayWidget = None
+    show_critical_error = None
+    ERROR_DISPLAY_AVAILABLE = False
 
 # Импортируем продвинутый текстовый редактор
 import sys
@@ -252,6 +264,13 @@ class TabDocumentWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("tabDocument")
+
+        # Словарь для хранения ссылок на виджеты (предотвращение garbage collection)
+        self._widget_references: Dict[int, Any] = {}
+
+        # Система отображения ошибок
+        self._error_display: Optional[ErrorDisplayWidget] = None
+
         self._setup_ui()
 
     def _setup_ui(self):
@@ -272,7 +291,7 @@ class TabDocumentWidget(QWidget):
             "GopiAI-Assets",
             "gopiai",
             "assets",
-            "wallpaper.svg",
+            "wallpaper.png",
         )
         image_path = os.path.abspath(image_path)
 
@@ -304,6 +323,14 @@ class TabDocumentWidget(QWidget):
 
         layout.addWidget(self.stacked_widget)
 
+        # Создаем систему отображения ошибок
+        if ERROR_DISPLAY_AVAILABLE:
+            self._error_display = ErrorDisplayWidget(self)
+            self._error_display.setVisible(False)
+            self._error_display.retryRequested.connect(self._handle_error_retry)
+            self._error_display.dismissRequested.connect(self._handle_error_dismiss)
+            layout.addWidget(self._error_display)
+
     def _update_display(self):
         """Обновление отображения в зависимости от количества вкладок"""
         if self.tab_widget.count() > 0:
@@ -333,11 +360,19 @@ class TabDocumentWidget(QWidget):
 
     def add_notebook_tab(self, title="Новый блокнот", content="", menu_bar=None):
         """Добавление новой вкладки-блокнота с форматированием (чистый rich text notebook)"""
+        notebook = None
+        fallback_used = False
+
         try:
             if NOTEBOOK_EDITOR_AVAILABLE and NotebookEditorWidget:
                 notebook = NotebookEditorWidget()
                 if content:
                     notebook.setPlainText(content)
+
+                # Сохраняем ссылку на виджет для предотвращения garbage collection
+                widget_id = id(notebook)
+                self._widget_references[widget_id] = notebook
+
                 index = self.tab_widget.addTab(notebook, title)
                 self.tab_widget.setCurrentIndex(index)
                 self._update_display()  # Обновляем отображение
@@ -364,17 +399,51 @@ class TabDocumentWidget(QWidget):
 
         except Exception as e:
             logger.error(f"Ошибка создания блокнота: {e}", exc_info=True)
+            fallback_used = True
+
+            # Показываем ошибку пользователю
+            if self._error_display:
+                self._error_display.show_component_error(
+                    "Блокнот", str(e), fallback_available=True
+                )
+
             # Fallback к обычному текстовому редактору
-            fallback_editor = QTextEdit()
-            fallback_editor.setPlainText(content if content else "")
-            fallback_editor.setAcceptRichText(True)  # Включаем поддержку форматирования
-            index = self.tab_widget.addTab(
-                fallback_editor, f"{title} (простой редактор)"
-            )
-            self.tab_widget.setCurrentIndex(index)
-            self._update_display()
-            logger.info(f"Создана fallback вкладка-блокнот: {title}")
-            return fallback_editor
+            try:
+                fallback_editor = QTextEdit()
+                fallback_editor.setPlainText(content if content else "")
+                fallback_editor.setAcceptRichText(
+                    True
+                )  # Включаем поддержку форматирования
+
+                # Сохраняем ссылку на fallback виджет
+                widget_id = id(fallback_editor)
+                self._widget_references[widget_id] = fallback_editor
+
+                index = self.tab_widget.addTab(
+                    fallback_editor, f"{title} (простой редактор)"
+                )
+                self.tab_widget.setCurrentIndex(index)
+                self._update_display()
+                logger.info(f"Создана fallback вкладка-блокнот: {title}")
+                return fallback_editor
+
+            except Exception as fallback_error:
+                logger.critical(
+                    f"Критическая ошибка создания fallback редактора: {fallback_error}"
+                )
+                if self._error_display:
+                    self._error_display.show_generic_error(
+                        "Критическая ошибка",
+                        "Не удалось создать ни основной, ни резервный редактор",
+                        str(fallback_error),
+                    )
+                elif show_critical_error:
+                    show_critical_error(
+                        "Не удалось создать редактор",
+                        f"Основная ошибка: {str(e)}\nОшибка fallback: {str(fallback_error)}",
+                        self,
+                    )
+                return None
 
     def open_file_in_tab(self, file_path):
         """Открытие файла в новой вкладке"""
@@ -431,7 +500,17 @@ class TabDocumentWidget(QWidget):
 
     def _close_tab(self, index):
         """Закрытие вкладки по индексу"""
-        if self.tab_widget.count() > 0:
+        if self.tab_widget.count() > 0 and 0 <= index < self.tab_widget.count():
+            # Получаем виджет перед закрытием
+            widget = self.tab_widget.widget(index)
+
+            # Удаляем ссылку из словаря для освобождения памяти
+            if widget:
+                widget_id = id(widget)
+                if widget_id in self._widget_references:
+                    del self._widget_references[widget_id]
+
+            # Закрываем вкладку
             self.tab_widget.removeTab(index)
             self._update_display()  # Обновляем отображение после закрытия
 
@@ -683,3 +762,331 @@ class TabDocumentWidget(QWidget):
         editor = self.get_current_editor()
         if editor:
             editor.setPlainText(text)
+
+    def _handle_error_retry(self, error_type: str):
+        """Обработка запроса повтора операции после ошибки"""
+        logger.info(f"Повторная попытка операции после ошибки: {error_type}")
+        
+        # Скрываем сообщение об ошибке
+        if self._error_display:
+            self._error_display.setVisible(False)
+        
+        # В зависимости от типа ошибки, пытаемся повторить операцию
+        if error_type == "notebook_creation":
+            self.add_notebook_tab("Новый блокнот (повтор)")
+        elif error_type == "tab_creation":
+            self.add_new_tab("Новый документ (повтор)")
+        elif error_type == "file_open":
+            logger.info("Для повтора открытия файла требуется указать путь")
+
+    def _handle_error_dismiss(self):
+        """Обработка закрытия сообщения об ошибке"""
+        if self._error_display:
+            self._error_display.setVisible(False)
+
+    def _safe_tab_creation(self, creation_func, fallback_func, error_context: str):
+        """
+        Безопасное создание вкладки с обработкой ошибок и fallback
+        
+        Args:
+            creation_func: Основная функция создания вкладки
+            fallback_func: Резервная функция при ошибке
+            error_context: Контекст ошибки для логирования
+        """
+        try:
+            return creation_func()
+        except Exception as e:
+            logger.error(f"Ошибка {error_context}: {e}", exc_info=True)
+            
+            # Показываем ошибку пользователю
+            if self._error_display:
+                self._error_display.show_component_error(
+                    error_context, str(e), fallback_available=True
+                )
+            
+            # Пытаемся использовать fallback
+            try:
+                return fallback_func()
+            except Exception as fallback_error:
+                logger.critical(f"Критическая ошибка fallback для {error_context}: {fallback_error}")
+                if self._error_display:
+                    self._error_display.show_generic_error(
+                        "Критическая ошибка",
+                        f"Не удалось создать {error_context}",
+                        str(fallback_error)
+                    )
+                elif show_critical_error:
+                    show_critical_error(
+                        f"Критическая ошибка {error_context}",
+                        f"Основная ошибка: {str(e)}\nОшибка fallback: {str(fallback_error)}",
+                        self
+                    )
+                return None
+
+    def add_notebook_tab_safe(self, title="Новый блокнот", content="", menu_bar=None):
+        """Безопасное добавление вкладки-блокнота с обработкой ошибок"""
+        
+        def create_notebook():
+            if not NOTEBOOK_EDITOR_AVAILABLE or not NotebookEditorWidget:
+                raise ImportError("NotebookEditorWidget недоступен")
+            
+            notebook = NotebookEditorWidget()
+            if content:
+                notebook.setPlainText(content)
+
+            # Сохраняем ссылку на виджет для предотвращения garbage collection
+            widget_id = id(notebook)
+            self._widget_references[widget_id] = notebook
+
+            index = self.tab_widget.addTab(notebook, title)
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+
+            # Подключаем сигналы меню к QTextEdit, если menu_bar передан
+            if menu_bar is not None:
+                try:
+                    menu_bar.undoRequested.connect(notebook.editor.undo)
+                    menu_bar.redoRequested.connect(notebook.editor.redo)
+                    menu_bar.cutRequested.connect(notebook.editor.cut)
+                    menu_bar.copyRequested.connect(notebook.editor.copy)
+                    menu_bar.pasteRequested.connect(notebook.editor.paste)
+                    menu_bar.deleteRequested.connect(notebook.editor.clear)
+                    menu_bar.selectAllRequested.connect(notebook.editor.selectAll)
+                except Exception as e:
+                    logger.warning(f"Не удалось подключить сигналы меню: {e}")
+
+            logger.info(f"Создана вкладка-блокнот: {title}")
+            return notebook
+        
+        def create_fallback():
+            fallback_editor = QTextEdit()
+            fallback_editor.setPlainText(content if content else "")
+            fallback_editor.setAcceptRichText(True)
+
+            # Сохраняем ссылку на fallback виджет
+            widget_id = id(fallback_editor)
+            self._widget_references[widget_id] = fallback_editor
+
+            index = self.tab_widget.addTab(fallback_editor, f"{title} (простой редактор)")
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            
+            logger.info(f"Создана fallback вкладка-блокнот: {title}")
+            return fallback_editor
+        
+        return self._safe_tab_creation(create_notebook, create_fallback, "создания блокнота")
+
+    def add_new_tab_safe(self, title="Новый документ", content=""):
+        """Безопасное добавление новой вкладки с обработкой ошибок"""
+        
+        def create_text_editor():
+            if not TEXT_EDITOR_AVAILABLE or not TextEditorWidget:
+                raise ImportError("TextEditorWidget недоступен")
+            
+            editor = TextEditorWidget()
+            editor.text_editor.setPlainText(content)
+            
+            # Сохраняем ссылку на виджет
+            widget_id = id(editor)
+            self._widget_references[widget_id] = editor
+            
+            index = self.tab_widget.addTab(editor, title)
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            
+            logger.info(f"Создана вкладка с TextEditorWidget: {title}")
+            return editor
+        
+        def create_fallback():
+            editor = QTextEdit()
+            editor.setPlainText(content)
+            
+            # Сохраняем ссылку на fallback виджет
+            widget_id = id(editor)
+            self._widget_references[widget_id] = editor
+            
+            index = self.tab_widget.addTab(editor, title)
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            
+            logger.info(f"Создана вкладка с QTextEdit (fallback): {title}")
+            return editor
+        
+        return self._safe_tab_creation(create_text_editor, create_fallback, "создания текстового редактора")
+
+    def open_file_in_tab_safe(self, file_path):
+        """Безопасное открытие файла в новой вкладке с обработкой ошибок"""
+        
+        def create_file_editor():
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"Файл не найден: {file_path}")
+            
+            if TEXT_EDITOR_AVAILABLE and TextEditorWidget:
+                editor = TextEditorWidget()
+                editor.current_file = file_path
+                
+                with open(file_path, "rb") as f:
+                    raw = f.read()
+                encoding = chardet.detect(raw)["encoding"] or "utf-8"
+                text = raw.decode(encoding, errors="replace")
+                editor.current_encoding = encoding
+                editor.text_editor.setPlainText(text)
+                
+                tab_title = os.path.basename(file_path)
+                editor.file_name_changed.connect(
+                    lambda name: self._update_tab_title(editor, name)
+                )
+                
+                # Сохраняем ссылку на виджет
+                widget_id = id(editor)
+                self._widget_references[widget_id] = editor
+                
+                index = self.tab_widget.addTab(editor, tab_title)
+                self.tab_widget.setCurrentIndex(index)
+                self._update_display()
+                
+                logger.info(f"Файл открыт в TextEditorWidget: {file_path}")
+                return editor
+            else:
+                raise ImportError("TextEditorWidget недоступен")
+        
+        def create_fallback():
+            with open(file_path, "rb") as f:
+                raw = f.read()
+            encoding = chardet.detect(raw)["encoding"] or "utf-8"
+            content = raw.decode(encoding, errors="replace")
+            
+            editor = QTextEdit()
+            editor.setPlainText(content)
+            tab_title = os.path.basename(file_path)
+            
+            # Сохраняем ссылку на fallback виджет
+            widget_id = id(editor)
+            self._widget_references[widget_id] = editor
+            
+            index = self.tab_widget.addTab(editor, tab_title)
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            
+            logger.info(f"Файл открыт в QTextEdit (fallback): {file_path}")
+            return editor
+        
+        return self._safe_tab_creation(create_file_editor, create_fallback, f"открытия файла {file_path}")
+
+    def _cleanup_tab_widget(self, widget):
+        """Очистка ресурсов виджета вкладки"""
+        if not widget:
+            return
+        
+        try:
+            # Удаляем ссылку из словаря для освобождения памяти
+            widget_id = id(widget)
+            if widget_id in self._widget_references:
+                del self._widget_references[widget_id]
+                logger.debug(f"Удалена ссылка на виджет {widget_id}")
+            
+            # Специальная очистка для браузера
+            if hasattr(widget, 'property'):
+                web_view = widget.property("_web_view")
+                profile = widget.property("_profile")
+                
+                if web_view:
+                    try:
+                        web_view.stop()
+                        web_view.setPage(None)
+                        logger.debug("Очищен веб-браузер")
+                    except Exception as e:
+                        logger.warning(f"Ошибка очистки веб-браузера: {e}")
+                
+                if profile:
+                    try:
+                        # Профиль будет автоматически очищен при удалении виджета
+                        logger.debug("Профиль браузера будет очищен")
+                    except Exception as e:
+                        logger.warning(f"Ошибка очистки профиля браузера: {e}")
+            
+            # Очистка текстовых редакторов
+            if hasattr(widget, 'text_editor'):
+                try:
+                    widget.text_editor.clear()
+                    logger.debug("Очищен текстовый редактор")
+                except Exception as e:
+                    logger.warning(f"Ошибка очистки текстового редактора: {e}")
+            
+            # Общая очистка QWidget
+            try:
+                widget.deleteLater()
+                logger.debug("Виджет помечен для удаления")
+            except Exception as e:
+                logger.warning(f"Ошибка при deleteLater: {e}")
+                
+        except Exception as e:
+            logger.error(f"Ошибка очистки виджета вкладки: {e}", exc_info=True)
+        logger.info(f"Запрос повтора операции для типа ошибки: {error_type}")
+
+        if error_type == "component":
+            # Попытка пересоздания компонента
+            try:
+                # Здесь можно добавить логику повтора создания компонента
+                if self._error_display:
+                    self._error_display.setVisible(False)
+            except Exception as e:
+                logger.error(f"Ошибка при повторе операции: {e}")
+
+    def _handle_error_dismiss(self):
+        """Обработка закрытия ошибки"""
+        logger.debug("Ошибка закрыта пользователем")
+
+    def add_terminal_tab(self, title="Терминал"):
+        """Добавление новой вкладки с терминалом"""
+        try:
+            # Импортируем TerminalWidget локально для избежания циклических импортов
+            from .terminal_widget import InteractiveTerminal
+
+            terminal = InteractiveTerminal()
+
+            # Сохраняем ссылку на виджет
+            widget_id = id(terminal)
+            self._widget_references[widget_id] = terminal
+
+            index = self.tab_widget.addTab(terminal, title)
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+
+            logger.info(f"Создана вкладка терминала: {title}")
+            return terminal
+
+        except Exception as e:
+            logger.error(f"Ошибка создания вкладки терминала: {e}", exc_info=True)
+
+            if self._error_display:
+                self._error_display.show_component_error(
+                    "Терминал", str(e), fallback_available=False
+                )
+            elif show_critical_error:
+                show_critical_error(
+                    "Ошибка создания терминала",
+                    f"Не удалось создать вкладку терминала: {str(e)}",
+                    self,
+                )
+            return None
+
+    def _handle_tab_creation_error(
+        self, error: Exception, component_name: str, fallback_available: bool = False
+    ):
+        """Централизованная обработка ошибок создания вкладок"""
+        logger.error(
+            f"Ошибка создания вкладки {component_name}: {error}", exc_info=True
+        )
+
+        if self._error_display:
+            self._error_display.show_component_error(
+                component_name, str(error), fallback_available=fallback_available
+            )
+        elif show_critical_error:
+            show_critical_error(f"Ошибка создания {component_name}", str(error), self)
+
+    def cleanup_widget_references(self):
+        """Очистка ссылок на виджеты при закрытии"""
+        self._widget_references.clear()
+        logger.debug("Очищены ссылки на виджеты")

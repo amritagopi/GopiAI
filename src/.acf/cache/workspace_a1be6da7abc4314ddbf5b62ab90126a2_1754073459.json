@@ -1,0 +1,104 @@
+{
+  "workspace_path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src",
+  "project_info": {
+    "project_type": "node",
+    "primary_language": "javascript",
+    "technologies": [],
+    "frameworks": [],
+    "build_tools": [],
+    "package_managers": [
+      "npm"
+    ],
+    "config_files": [],
+    "entry_points": [],
+    "test_directories": [],
+    "documentation_files": []
+  },
+  "file_tree": {
+    "name": "src",
+    "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src",
+    "is_directory": true,
+    "size": null,
+    "modified": 1754073459.2196338,
+    "children": [
+      {
+        "name": ".acf",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\.acf",
+        "is_directory": true,
+        "size": null,
+        "modified": 1754073459.2206283,
+        "children": [
+          {
+            "name": "cache",
+            "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\.acf\\cache",
+            "is_directory": true,
+            "size": null,
+            "modified": 1754073459.2206283
+          }
+        ]
+      },
+      {
+        "name": "mcp_server.js",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\mcp_server.js",
+        "is_directory": false,
+        "size": 28987,
+        "modified": 1754073358.6209965
+      },
+      {
+        "name": "package-lock.json",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\package-lock.json",
+        "is_directory": false,
+        "size": 5564,
+        "modified": 1754073448.8164582
+      },
+      {
+        "name": "package.json",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\package.json",
+        "is_directory": false,
+        "size": 490,
+        "modified": 1754073368.1766653
+      },
+      {
+        "name": "temp_index_workspace.py",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\temp_index_workspace.py",
+        "is_directory": false,
+        "size": 612,
+        "modified": 1754073458.511723
+      },
+      {
+        "name": "test_mcp_server.js",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\test_mcp_server.js",
+        "is_directory": false,
+        "size": 2788,
+        "modified": 1754073384.7386894
+      },
+      {
+        "name": "tools",
+        "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\tools",
+        "is_directory": true,
+        "size": null,
+        "modified": 1753938032.2645264,
+        "children": [
+          {
+            "name": "unified_filesystem_tools.js",
+            "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\tools\\unified_filesystem_tools.js",
+            "is_directory": false,
+            "size": 31844,
+            "modified": 1753940421.4582121
+          },
+          {
+            "name": "unified_task_tool.js",
+            "path": "C:\\Users\\crazy\\GOPI_AI_MODULES\\src\\tools\\unified_task_tool.js",
+            "is_directory": false,
+            "size": 25235,
+            "modified": 1753936667.049674
+          }
+        ]
+      }
+    ]
+  },
+  "total_files": 7,
+  "total_size": 95520,
+  "indexed_at": "2025-08-02T00:07:39.240791",
+  "cache_key": "workspace_a1be6da7abc4314ddbf5b62ab90126a2_1754073459"
+}

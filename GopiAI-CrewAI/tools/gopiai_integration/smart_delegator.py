@@ -22,6 +22,40 @@ from litellm import (
 )
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
+# Импорт новой системы обработки ошибок LLM
+try:
+    from .llm_error_handler import llm_error_handler, with_llm_error_handling, LLMErrorType
+    LLM_ERROR_HANDLER_AVAILABLE = True
+    logger.info("[OK] LLM Error Handler импортирован успешно")
+except ImportError as e:
+    LLM_ERROR_HANDLER_AVAILABLE = False
+    logger.warning(f"[WARNING] Не удалось импортировать LLM Error Handler: {e}")
+    # Создаём заглушки
+    def with_llm_error_handling(func):
+        return func
+    llm_error_handler = None
+
+# Импорт новой системы стандартизации API ответов
+try:
+    from .api_error_integration import (
+        api_error_integration, handle_llm_error_to_api, handle_tool_error_to_api,
+        create_successful_api_response
+    )
+    from .api_response_builder import APIResponseBuilder, ModelInfo
+    API_RESPONSE_BUILDER_AVAILABLE = True
+    logger.info("[OK] API Response Builder импортирован успешно")
+except ImportError as e:
+    API_RESPONSE_BUILDER_AVAILABLE = False
+    logger.warning(f"[WARNING] Не удалось импортировать API Response Builder: {e}")
+    # Создаём заглушки
+    api_error_integration = None
+    def handle_llm_error_to_api(error, model_id="unknown", context=None):
+        return {"status": "error", "error": str(error)}
+    def handle_tool_error_to_api(error, tool_name, context=None):
+        return {"status": "error", "error": str(error)}
+    def create_successful_api_response(data, **kwargs):
+        return {"status": "success", "data": data}
+
 # Импорты для CrewAI инструментов (опциональные)
 try:
     from crewai_toolkit.tools import (
@@ -169,58 +203,127 @@ def process_tool_calls(tool_calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]
     }
     
     for tool_call in tool_calls:
+        function_name = tool_call.get("function", {}).get("name", "unknown")
+        call_id = tool_call.get("id", "unknown")
+        
         try:
-            function_name = tool_call.get("function", {}).get("name")
             arguments = json.loads(tool_call.get("function", {}).get("arguments", "{}"))
-            call_id = tool_call.get("id", "unknown")
             
             logger.info(f"[TOOL-CALL] Вызов инструмента: {function_name} с аргументами: {arguments}")
             
             if function_name in tool_instances:
                 tool_instance = tool_instances[function_name]
                 
-                # Вызываем инструмент с соответствующими аргументами
-                if function_name == "read_file":
-                    result = tool_instance._run(file_path=arguments.get("file_path"))
-                elif function_name == "read_directory":
-                    result = tool_instance._run(directory_path=arguments.get("directory_path"))
-                elif function_name == "write_file":
-                    result = tool_instance._run(
-                        file_path=arguments.get("file_path"),
-                        content=arguments.get("content")
+                try:
+                    # Вызываем инструмент с соответствующими аргументами
+                    if function_name == "read_file":
+                        result = tool_instance._run(file_path=arguments.get("file_path"))
+                    elif function_name == "read_directory":
+                        result = tool_instance._run(directory_path=arguments.get("directory_path"))
+                    elif function_name == "write_file":
+                        result = tool_instance._run(
+                            file_path=arguments.get("file_path"),
+                            content=arguments.get("content")
+                        )
+                    elif function_name == "search_directory":
+                        result = tool_instance._run(
+                            directory_path=arguments.get("directory_path"),
+                            pattern=arguments.get("pattern")
+                        )
+                    else:
+                        result = f"Неизвестный инструмент: {function_name}"
+                    
+                    logger.info(f"[TOOL-RESULT] Результат {function_name}: {str(result)[:200]}...")
+                    
+                    results.append({
+                        "tool_call_id": call_id,
+                        "role": "tool",
+                        "name": function_name,
+                        "content": str(result)
+                    })
+                    
+                except FileNotFoundError as e:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_file_operation_error(
+                        e, 
+                        function_name, 
+                        arguments.get("file_path", arguments.get("directory_path", "unknown"))
                     )
-                elif function_name == "search_directory":
-                    result = tool_instance._run(
-                        directory_path=arguments.get("directory_path"),
-                        pattern=arguments.get("pattern")
+                    results.append({
+                        "tool_call_id": call_id,
+                        "role": "tool",
+                        "name": function_name,
+                        "content": error_msg
+                    })
+                    
+                except PermissionError as e:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_file_operation_error(
+                        e, 
+                        function_name, 
+                        arguments.get("file_path", arguments.get("directory_path", "unknown"))
                     )
-                else:
-                    result = f"Неизвестный инструмент: {function_name}"
-                
-                logger.info(f"[TOOL-RESULT] Результат {function_name}: {str(result)[:200]}...")
-                
-                results.append({
-                    "tool_call_id": call_id,
-                    "role": "tool",
-                    "name": function_name,
-                    "content": str(result)
-                })
+                    results.append({
+                        "tool_call_id": call_id,
+                        "role": "tool",
+                        "name": function_name,
+                        "content": error_msg
+                    })
+                    
+                except Exception as e:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_tool_error(
+                        e,
+                        function_name,
+                        {"arguments": arguments, "call_id": call_id}
+                    )
+                    results.append({
+                        "tool_call_id": call_id,
+                        "role": "tool",
+                        "name": function_name,
+                        "content": error_msg
+                    })
+                    
             else:
-                logger.error(f"[TOOL-ERROR] Неизвестный инструмент: {function_name}")
+                from error_handler import error_handler
+                error_msg = error_handler.handle_tool_error(
+                    Exception(f"Неизвестный инструмент: {function_name}"),
+                    function_name,
+                    {"arguments": arguments, "call_id": call_id}
+                )
                 results.append({
                     "tool_call_id": call_id,
                     "role": "tool",
                     "name": function_name,
-                    "content": f"Ошибка: неизвестный инструмент {function_name}"
+                    "content": error_msg
                 })
                 
-        except Exception as e:
-            logger.error(f"[TOOL-ERROR] Ошибка при выполнении инструмента: {str(e)}")
+        except json.JSONDecodeError as e:
+            from error_handler import error_handler
+            error_msg = error_handler.handle_tool_error(
+                e,
+                function_name,
+                {"raw_arguments": tool_call.get("function", {}).get("arguments", ""), "call_id": call_id}
+            )
             results.append({
-                "tool_call_id": tool_call.get("id", "unknown"),
+                "tool_call_id": call_id,
                 "role": "tool",
-                "name": tool_call.get("function", {}).get("name", "unknown"),
-                "content": f"Ошибка выполнения: {str(e)}"
+                "name": function_name,
+                "content": f"Ошибка парсинга аргументов: {error_msg}"
+            })
+            
+        except Exception as e:
+            from error_handler import error_handler
+            error_msg = error_handler.handle_tool_error(
+                e,
+                function_name,
+                {"call_id": call_id}
+            )
+            results.append({
+                "tool_call_id": call_id,
+                "role": "tool",
+                "name": function_name,
+                "content": f"Критическая ошибка: {error_msg}"
             })
     
     return results
@@ -349,142 +452,266 @@ class SmartDelegator:
     def process_request(self, message: str, metadata: Dict) -> Dict:
         """
         Главный метод обработки. Анализирует, получает контекст и вызывает LLM.
+        Использует новую систему стандартизации API ответов.
         """
+        # Инициализируем API Response Builder для отслеживания времени выполнения
+        if API_RESPONSE_BUILDER_AVAILABLE:
+            api_error_integration.response_builder.start_request()
+        
         start_time = time.time()
         
-        # 0. Обрабатываем информацию о выбранной модели из UI
-        preferred_provider = metadata.get('preferred_provider')
-        preferred_model = metadata.get('preferred_model')
-        model_info = metadata.get('model_info')
-        
-        if preferred_provider and preferred_model:
-            logger.info(f"[MODEL-SELECTION] UI запросил использование {preferred_provider} модели: {preferred_model}")
+        try:
+            # 0. Обрабатываем информацию о выбранной модели из UI
+            preferred_provider = metadata.get('preferred_provider')
+            preferred_model = metadata.get('preferred_model')
+            model_info = metadata.get('model_info')
             
-            # Устанавливаем выбранную модель
-            if preferred_provider == 'openrouter' and self.model_config_manager:
-                try:
-                    success = self.set_model('openrouter', preferred_model)
-                    if success:
-                        logger.info(f"[MODEL-SELECTION] ✅ Успешно переключились на OpenRouter модель: {preferred_model}")
-                    else:
-                        logger.warning(f"[MODEL-SELECTION] ⚠️ Не удалось переключиться на OpenRouter модель: {preferred_model}")
-                except Exception as e:
-                    logger.error(f"[MODEL-SELECTION] ❌ Ошибка переключения на OpenRouter: {e}")
-            elif preferred_provider == 'gemini':
-                try:
-                    success = self.set_provider('gemini')
-                    if success:
-                        logger.info(f"[MODEL-SELECTION] ✅ Успешно переключились на Gemini")
-                    else:
-                        logger.warning(f"[MODEL-SELECTION] ⚠️ Не удалось переключиться на Gemini")
-                except Exception as e:
-                    logger.error(f"[MODEL-SELECTION] ❌ Ошибка переключения на Gemini: {e}")
-        else:
-            logger.info("[MODEL-SELECTION] UI не указал предпочтительную модель, используем настройки по умолчанию")
-        
-        # 1. Анализ (пока заглушка, можно вернуть старую логику позже)
-        analysis = {"type": "general", "complexity": 1, "requires_crewai": False}
-        
-        # 2. Получение RAG-контекста
-        rag_context = self.rag_system.get_context_for_prompt(message) if self.rag_available else None
-        
-        # 3. Проверяем наличие запроса на вызов MCP инструмента
-        tool_request = self._check_for_tool_request(message, metadata)
-        
-        if tool_request and self.local_tools_available:
-            logger.info(f"Обнаружен запрос на использование инструмента: {tool_request['tool_name']} (сервер: {tool_request['server_name']})")
+            if preferred_provider and preferred_model:
+                logger.info(f"[MODEL-SELECTION] UI запросил использование {preferred_provider} модели: {preferred_model}")
+                
+                # Устанавливаем выбранную модель
+                if preferred_provider == 'openrouter' and self.model_config_manager:
+                    try:
+                        success = self.set_model('openrouter', preferred_model)
+                        if success:
+                            logger.info(f"[MODEL-SELECTION] ✅ Успешно переключились на OpenRouter модель: {preferred_model}")
+                        else:
+                            logger.warning(f"[MODEL-SELECTION] ⚠️ Не удалось переключиться на OpenRouter модель: {preferred_model}")
+                    except Exception as e:
+                        logger.error(f"[MODEL-SELECTION] ❌ Ошибка переключения на OpenRouter: {e}")
+                elif preferred_provider == 'gemini':
+                    try:
+                        success = self.set_provider('gemini')
+                        if success:
+                            logger.info(f"[MODEL-SELECTION] ✅ Успешно переключились на Gemini")
+                        else:
+                            logger.warning(f"[MODEL-SELECTION] ⚠️ Не удалось переключиться на Gemini")
+                    except Exception as e:
+                        logger.error(f"[MODEL-SELECTION] ❌ Ошибка переключения на Gemini: {e}")
+            else:
+                logger.info("[MODEL-SELECTION] UI не указал предпочтительную модель, используем настройки по умолчанию")
             
-            # Вызываем MCP инструмент
-            try:
+            # 1. Анализ (пока заглушка, можно вернуть старую логику позже)
+            analysis = {"type": "general", "complexity": 1, "requires_crewai": False}
+            
+            # 2. Получение RAG-контекста
+            rag_context = self.rag_system.get_context_for_prompt(message) if self.rag_available else None
+            
+            # 3. Проверяем наличие запроса на вызов MCP инструмента
+            tool_request = self._check_for_tool_request(message, metadata)
+            
+            if tool_request and self.local_tools_available:
+                logger.info(f"Обнаружен запрос на использование инструмента: {tool_request['tool_name']} (сервер: {tool_request['server_name']})")
+                
+                # Вызываем MCP инструмент с обработкой ошибок
                 tool_response = self._call_tool(
                     tool_request['tool_name'], 
                     tool_request['server_name'],
                     tool_request['params']
                 )
                 
-                # Формируем ответ с результатами инструмента
-                messages = self._format_prompt_with_tool_result(
-                    message, 
-                    rag_context, 
-                    metadata.get("chat_history", []),
-                    tool_request,
-                    tool_response,
-                    metadata
-                )
+                # Проверяем успешность выполнения инструмента
+                if tool_response.get("success", False):
+                    # Инструмент выполнен успешно
+                    logger.info(f"Инструмент {tool_request['tool_name']} выполнен успешно")
+                    
+                    # Формируем ответ с результатами инструмента
+                    messages = self._format_prompt_with_tool_result(
+                        message, 
+                        rag_context, 
+                        metadata.get("chat_history", []),
+                        tool_request,
+                        tool_response,
+                        metadata
+                    )
+                    
+                    # Вызываем LLM для формирования итогового ответа
+                    response_text = self._call_llm(messages)
+                else:
+                    # Инструмент завершился с ошибкой - используем новую систему API ответов
+                    error_msg = tool_response.get("error", "Неизвестная ошибка инструмента")
+                    logger.error(f"Ошибка выполнения инструмента {tool_request['tool_name']}: {error_msg}")
+                    
+                    # Создаём стандартизированный ответ об ошибке инструмента
+                    if API_RESPONSE_BUILDER_AVAILABLE:
+                        tool_error = Exception(error_msg)
+                        return handle_tool_error_to_api(
+                            error=tool_error,
+                            tool_name=tool_request['tool_name'],
+                            context={
+                                "params": tool_request.get('params', {}),
+                                "server_name": tool_request.get('server_name'),
+                                "analysis": analysis
+                            }
+                        )
+                    else:
+                        # Fallback на старый формат
+                        return {
+                            "status": "error",
+                            "error": f"Ошибка выполнения инструмента '{tool_request['tool_name']}': {error_msg}",
+                            "error_code": "TOOL_EXECUTION_ERROR",
+                            "tool_name": tool_request['tool_name'],
+                            "analysis": analysis,
+                            "model_info": {},
+                            "retryable": True
+                        }
+            else:
+                # 3. Обычное формирование промпта без инструментов
+                messages = self._format_prompt(message, rag_context, metadata.get("chat_history", []), metadata)
                 
-                # Вызываем LLM для формирования итогового ответа
+                # 4. Вызов LLM
                 response_text = self._call_llm(messages)
-                
-            except Exception as e:
-                logger.error(f"Ошибка при вызове MCP инструмента: {str(e)}")
-                traceback.print_exc()
-                response_text = f"Извините, произошла ошибка при использовании инструмента {tool_request['tool_name']}: {str(e)}"
-        else:
-            # 3. Обычное формирование промпта без инструментов
-            messages = self._format_prompt(message, rag_context, metadata.get("chat_history", []), metadata)
+
+                # Валидация ответа LLM с использованием новой системы обработки ошибок
+                if LLM_ERROR_HANDLER_AVAILABLE:
+                    model_id = self._get_model_for_request(messages) if 'messages' in locals() else "unknown"
+                    validation_result = llm_error_handler.validate_llm_response(response_text, model_id)
+                    
+                    if not validation_result.get("valid", False):
+                        logger.error(f"[VALIDATION] Ответ LLM не прошёл валидацию: {validation_result}")
+                        
+                        # Используем новую систему API ответов для ошибки валидации
+                        if API_RESPONSE_BUILDER_AVAILABLE:
+                            validation_error = Exception(validation_result.get("message", "LLM вернул некорректный ответ"))
+                            return handle_llm_error_to_api(
+                                error=validation_error,
+                                model_id=model_id,
+                                context={
+                                    "validation_result": validation_result,
+                                    "analysis": analysis
+                                }
+                            )
+                        else:
+                            # Fallback на старый формат
+                            return {
+                                "status": "error",
+                                "error": validation_result.get("message", "LLM вернул некорректный ответ"),
+                                "error_code": validation_result.get("error_code", "INVALID_RESPONSE"),
+                                "analysis": analysis,
+                                "model_info": model_info,
+                                "retryable": validation_result.get("retryable", True)
+                            }
+                else:
+                    # Fallback на старую проверку
+                    if not response_text or response_text.strip().lower().startswith("пустой ответ"):
+                        error_msg = response_text.strip() if response_text else "LLM вернул пустой ответ"
+                        
+                        # Используем новую систему API ответов для пустого ответа
+                        if API_RESPONSE_BUILDER_AVAILABLE:
+                            empty_response_error = Exception(error_msg)
+                            return handle_llm_error_to_api(
+                                error=empty_response_error,
+                                model_id="unknown",
+                                context={"analysis": analysis}
+                            )
+                        else:
+                            # Fallback на старый формат
+                            return {
+                                "status": "failed",
+                                "error": error_msg,
+                                "analysis": analysis,
+                                "model_info": {},
+                            }
             
-            # 4. Вызов LLM
-            response_text = self._call_llm(messages)
-
-            # --- NEW: формируем ошибку, если ответ пустой или содержит заглушку ---
-            if not response_text or response_text.strip().lower().startswith("пустой ответ"):
-                error_msg = response_text.strip() if response_text else "LLM вернул пустой ответ"
-                return {
-                    "status": "failed",
-                    "error": error_msg,
+            elapsed = time.time() - start_time
+            logger.info(f"[TIMING] Request processed in {elapsed:.2f} sec")
+            
+            # 6. Форматирование ответа для чистого отображения
+            analysis['analysis_time'] = elapsed
+            
+            # Добавляем информацию о используемой модели
+            current_model_info = {}
+            if self.model_config_manager:
+                current_config = self.model_config_manager.get_current_configuration()
+                if current_config:
+                    current_model_info = {
+                        "provider": current_config.provider.value,
+                        "model_id": current_config.model_id,
+                        "display_name": current_config.display_name
+                    }
+                    logger.info(f"[RESPONSE-MODEL] Ответ сгенерирован моделью: {current_config.display_name} ({current_config.provider.value}/{current_config.model_id})")
+            
+            # Применяем форматирование для удаления JSON и очистки контента
+            formatted_response_text = response_text
+            has_commands = False
+            
+            if self.response_formatter:
+                try:
+                    logger.info("[RESPONSE-FORMATTER] Применяем форматирование ответа...")
+                    raw_response = {
+                        "response": response_text,
+                        "processed_with_crewai": False,
+                        "analysis": analysis,
+                        "model_info": current_model_info
+                    }
+                    formatted_response = self.response_formatter.format_for_chat(raw_response)
+                    
+                    # Обновляем основной ответ очищенным контентом
+                    formatted_response_text = formatted_response.get('user_content', response_text)
+                    has_commands = formatted_response.get('has_commands', False)
+                    
+                    logger.info(f"[RESPONSE-FORMATTER] Ответ отформатирован. Команды: {has_commands}")
+                    
+                except Exception as e:
+                    logger.error(f"[RESPONSE-FORMATTER] Ошибка форматирования: {str(e)}")
+                    logger.error(f"[RESPONSE-FORMATTER] Traceback: {traceback.format_exc()}")
+                    # Не прерываем выполнение, просто логируем ошибку
+            
+            # 7. Создаём стандартизированный успешный ответ
+            if API_RESPONSE_BUILDER_AVAILABLE:
+                response_data = {
+                    "response": formatted_response_text,
+                    "processed_with_crewai": False,
                     "analysis": analysis,
-                    "model_info": {},
+                    "formatted": True,
+                    "has_commands": has_commands
                 }
-        
-
-        
-        elapsed = time.time() - start_time
-        logger.info(f"[TIMING] Request processed in {elapsed:.2f} sec")
-        
-        # 6. Форматирование ответа для чистого отображения (НОВАЯ ФУНКЦИОНАЛЬНОСТЬ)
-        analysis['analysis_time'] = elapsed
-        
-        # Добавляем информацию о используемой модели
-        model_info = {}
-        if self.model_config_manager:
-            current_config = self.model_config_manager.get_current_configuration()
-            if current_config:
-                model_info = {
-                    "provider": current_config.provider.value,
-                    "model_id": current_config.model_id,
-                    "display_name": current_config.display_name
+                
+                return create_successful_api_response(
+                    data=response_data,
+                    message="Request processed successfully",
+                    model_info=current_model_info,
+                    execution_time=elapsed,
+                    metadata={
+                        "rag_context_used": rag_context is not None,
+                        "tool_used": tool_request is not None,
+                        "formatted": True
+                    }
+                )
+            else:
+                # Fallback на старый формат
+                return {
+                    "response": formatted_response_text,
+                    "processed_with_crewai": False,
+                    "analysis": analysis,
+                    "model_info": current_model_info,
+                    "formatted": True,
+                    "has_commands": has_commands
                 }
-                logger.info(f"[RESPONSE-MODEL] Ответ сгенерирован моделью: {current_config.display_name} ({current_config.provider.value}/{current_config.model_id})")
-        
-        raw_response = {
-            "response": response_text,
-            "processed_with_crewai": False,
-            "analysis": analysis,
-            "model_info": model_info
-        }
-        
-        # Применяем форматирование для удаления JSON и очистки контента
-        if self.response_formatter:
-            try:
-                logger.info("[RESPONSE-FORMATTER] Применяем форматирование ответа...")
-                formatted_response = self.response_formatter.format_for_chat(raw_response)
                 
-                # Обновляем основной ответ очищенным контентом
-                raw_response["response"] = formatted_response.get('user_content', response_text)
-                
-                # Добавляем информацию о форматировании
-                raw_response["formatted"] = True
-                raw_response["has_commands"] = formatted_response.get('has_commands', False)
-                
-                logger.info(f"[RESPONSE-FORMATTER] Ответ отформатирован. Команды: {formatted_response.get('has_commands', False)}")
-                
-            except Exception as e:
-                logger.error(f"[RESPONSE-FORMATTER] Ошибка форматирования: {str(e)}")
-                logger.error(f"[RESPONSE-FORMATTER] Traceback: {traceback.format_exc()}")
-                # Не прерываем выполнение, просто логируем ошибку
-        
-        # 7. Возвращаем отформатированный результат
-        return raw_response
+        except Exception as e:
+            # Обрабатываем неожиданные ошибки с помощью новой системы API ответов
+            logger.error(f"[PROCESS-REQUEST] Неожиданная ошибка: {str(e)}")
+            logger.error(f"[PROCESS-REQUEST] Traceback: {traceback.format_exc()}")
+            
+            if API_RESPONSE_BUILDER_AVAILABLE:
+                return handle_llm_error_to_api(
+                    error=e,
+                    model_id="unknown",
+                    context={
+                        "message": message,
+                        "metadata": metadata,
+                        "stage": "process_request"
+                    }
+                )
+            else:
+                # Fallback на старый формат
+                return {
+                    "status": "error",
+                    "error": f"Внутренняя ошибка сервера: {str(e)}",
+                    "error_code": "INTERNAL_SERVER_ERROR",
+                    "retryable": True
+                }
 
     def _format_prompt(self, user_message: str, rag_context: Optional[str], chat_history: List[Dict], metadata: Dict) -> List[Dict]:
         """Формирует итоговый список сообщений для LLM."""
@@ -628,39 +855,100 @@ class SmartDelegator:
         """Вызывает MCP инструмент через MCPToolsManager или локальные инструменты."""
         logger.info(f"Вызов MCP инструмента {tool_name} на сервере {server_name} с параметрами: {params}")
         
-        # Если это локальный инструмент
-        if server_name == 'local':
-            if not self.local_tools_available or not self.local_tools:
-                raise Exception("Локальные MCP инструменты не инициализированы или недоступны")
-            
-            # Добавляем special handling for terminal
-            if tool_name == 'terminal':
+        try:
+            # Если это локальный инструмент
+            if server_name == 'local':
+                if not self.local_tools_available or not self.local_tools:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_tool_error(
+                        Exception("Локальные MCP инструменты не инициализированы или недоступны"),
+                        tool_name,
+                        {"server_name": server_name, "params": params}
+                    )
+                    return {"error": error_msg, "success": False}
+                
+                # Добавляем special handling for terminal
+                if tool_name == 'terminal':
+                    try:
+                        from terminal_tool import TerminalTool
+                        terminal_tool = TerminalTool()
+                        result = terminal_tool._run(params.get('command', ''))
+                        logger.info(f"Получен результат от terminal tool: {str(result)[:200]}...")
+                        return {"result": result, "success": True}
+                    except ImportError as e:
+                        from error_handler import error_handler
+                        error_msg = error_handler.handle_tool_error(
+                            e,
+                            tool_name,
+                            {"server_name": server_name, "params": params, "error_type": "missing_dependency"}
+                        )
+                        return {"error": error_msg, "success": False}
+                    except Exception as e:
+                        from error_handler import error_handler
+                        error_msg = error_handler.handle_tool_error(
+                            e,
+                            tool_name,
+                            {"server_name": server_name, "params": params}
+                        )
+                        return {"error": error_msg, "success": False}
+                
+                # Вызываем локальный инструмент
                 try:
-                    from terminal_tool import TerminalTool
-                    terminal_tool = TerminalTool()
-                    return terminal_tool._run(params.get('command', ''))
-                except ImportError:
-                    return f"Terminal tool не доступен: {params.get('command', '')}"
+                    result = self.local_tools.call_tool(tool_name, params)
+                    logger.info(f"Получен результат от локального инструмента: {str(result)[:200]}...")
+                    return {"result": result, "success": True}
+                except Exception as e:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_tool_error(
+                        e,
+                        tool_name,
+                        {"server_name": server_name, "params": params}
+                    )
+                    return {"error": error_msg, "success": False}
             
-            # Вызываем локальный инструмент
-            result = self.local_tools.call_tool(tool_name, params)
-            logger.info(f"Получен результат от локального инструмента: {str(result)[:200]}...")
-            return result
-        
-        # Если это внешний инструмент
-        else:
-            if not self.mcp_available or not self.mcp_manager:
-                raise Exception("Внешний MCP менеджер не инициализирован или недоступен")
-            
-            # Находим инструмент по имени
-            tool = self.mcp_manager.get_tool_by_name(tool_name)
-            if not tool:
-                raise Exception(f"Внешний инструмент {tool_name} не найден")
-            
-            # Вызываем инструмент через MCPToolsManager
-            result = self.mcp_manager.execute_tool(tool, **params)
-            logger.info(f"Получен результат от внешнего MCP инструмента: {str(result)[:200]}...")
-            return result
+            # Если это внешний инструмент
+            else:
+                if not self.mcp_available or not self.mcp_manager:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_tool_error(
+                        Exception("Внешний MCP менеджер не инициализирован или недоступен"),
+                        tool_name,
+                        {"server_name": server_name, "params": params}
+                    )
+                    return {"error": error_msg, "success": False}
+                
+                try:
+                    # Находим инструмент по имени
+                    tool = self.mcp_manager.get_tool_by_name(tool_name)
+                    if not tool:
+                        from error_handler import error_handler
+                        error_msg = error_handler.handle_tool_error(
+                            Exception(f"Внешний инструмент {tool_name} не найден"),
+                            tool_name,
+                            {"server_name": server_name, "params": params}
+                        )
+                        return {"error": error_msg, "success": False}
+                    
+                    # Вызываем инструмент через MCPToolsManager
+                    result = self.mcp_manager.execute_tool(tool, **params)
+                    logger.info(f"Получен результат от внешнего MCP инструмента: {str(result)[:200]}...")
+                    return {"result": result, "success": True}
+                except Exception as e:
+                    from error_handler import error_handler
+                    error_msg = error_handler.handle_tool_error(
+                        e,
+                        tool_name,
+                        {"server_name": server_name, "params": params}
+                    )
+                    return {"error": error_msg, "success": False}
+                    
+        except Exception as e:
+            # Критическая ошибка в самом обработчике
+            logger.critical(f"[TOOL-CALL] Критическая ошибка при вызове инструмента {tool_name}: {e}")
+            return {
+                "error": f"Критическая ошибка при вызове инструмента {tool_name}: {str(e)}",
+                "success": False
+            }
     
     def _format_prompt_with_tool_result(self, user_message: str, rag_context: Optional[str], 
                                       chat_history: List[Dict], tool_request: Dict, 
@@ -671,11 +959,22 @@ class SmartDelegator:
         # Получаем базовый промпт
         messages = self._format_prompt(user_message, rag_context, chat_history, metadata)
         
-        # Добавляем результаты инструмента к запросу пользователя
-        tool_result_message = {
-            "role": "assistant",
-            "content": f"Я использовал инструмент '{tool_request['tool_name']}' и получил следующий результат:\n```json\n{json.dumps(tool_response, ensure_ascii=False, indent=2)}\n```\n\nТеперь я проанализирую этот результат и отвечу на ваш запрос."
-        }
+        # Извлекаем результат из структурированного ответа
+        if tool_response.get("success", False):
+            actual_result = tool_response.get("result", "Результат недоступен")
+            
+            # Добавляем результаты инструмента к запросу пользователя
+            tool_result_message = {
+                "role": "assistant",
+                "content": f"Я использовал инструмент '{tool_request['tool_name']}' и получил следующий результат:\n\n{actual_result}\n\nТеперь я проанализирую этот результат и отвечу на ваш запрос."
+            }
+        else:
+            # Если инструмент завершился с ошибкой (не должно происходить в этом методе)
+            error_msg = tool_response.get("error", "Неизвестная ошибка")
+            tool_result_message = {
+                "role": "assistant", 
+                "content": f"При выполнении инструмента '{tool_request['tool_name']}' произошла ошибка: {error_msg}"
+            }
         
         messages.append(tool_result_message)
         
@@ -757,7 +1056,7 @@ class SmartDelegator:
     
     def _call_llm_without_tools(self, messages: List[Dict]) -> str:
         """
-        Fallback метод для вызова LLM без инструментов
+        Fallback метод для вызова LLM без инструментов с новой системой обработки ошибок
         
         Args:
             messages: Список сообщений для отправки
@@ -772,24 +1071,48 @@ class SmartDelegator:
             model_id = self._get_model_for_request(messages)
             logger.info(f"[LLM-FALLBACK] Используем модель: {model_id}")
             
-            # Делаем запрос без инструментов
-            response = self._retry_with_backoff(
-                lambda: self._make_llm_request(model_id, messages, tools=None),
-                max_retries=3,
-                base_delay=1.0
-            )
-            
-            if response and response.choices:
-                result = response.choices[0].message.content
-                logger.info("[LLM-FALLBACK] ✅ Получен ответ без инструментов")
-                return result or "Пустой ответ от модели"
+            # Используем новую систему обработки ошибок LLM
+            if LLM_ERROR_HANDLER_AVAILABLE:
+                # Обёртываем функцию запроса в обработчик ошибок
+                @with_llm_error_handling
+                def make_request():
+                    response = self._make_llm_request(model_id, messages, tools=None)
+                    if response and response.choices:
+                        content = response.choices[0].message.content
+                        if not content or not content.strip():
+                            raise ValueError("LLM вернул пустой ответ")
+                        return content
+                    else:
+                        raise ValueError("LLM вернул пустой response объект")
+                
+                try:
+                    result = make_request()
+                    logger.info("[LLM-FALLBACK] ✅ Получен ответ без инструментов")
+                    return result
+                except Exception as e:
+                    # Обрабатываем ошибку через новую систему
+                    error_response = llm_error_handler.handle_llm_error(e, model_id)
+                    logger.error(f"[LLM-FALLBACK] ❌ Ошибка обработана системой: {error_response}")
+                    return error_response.get("message", f"Ошибка при вызове модели: {str(e)}")
             else:
-                logger.error("[LLM-FALLBACK] ❌ Пустой ответ от модели")
-                return "Ошибка: пустой ответ от языковой модели"
+                # Fallback на старую систему retry
+                response = self._retry_with_backoff(
+                    lambda: self._make_llm_request(model_id, messages, tools=None),
+                    max_retries=3,
+                    base_delay=1.0
+                )
+                
+                if response and response.choices:
+                    result = response.choices[0].message.content
+                    logger.info("[LLM-FALLBACK] ✅ Получен ответ без инструментов (старая система)")
+                    return result or "Пустой ответ от модели"
+                else:
+                    logger.error("[LLM-FALLBACK] ❌ Пустой ответ от модели")
+                    return "Ошибка: пустой ответ от языковой модели"
                 
         except Exception as e:
-            logger.error(f"[LLM-FALLBACK] ❌ Ошибка fallback вызова: {e}")
-            return f"Ошибка при вызове модели: {str(e)}"
+            logger.error(f"[LLM-FALLBACK] ❌ Критическая ошибка fallback вызова: {e}")
+            return f"Критическая ошибка при вызове модели: {str(e)}"
     
     def _retry_with_backoff(self, func, max_retries: int = 3, base_delay: float = 1.0):
         """
@@ -862,13 +1185,32 @@ class SmartDelegator:
                 iteration += 1
                 logger.info(f"[TOOL-CALLING] === Итерация {iteration}/{max_iterations} ===")
                 
-                # Фаза 1: Вызов LLM с инструментами (с retry логикой)
+                # Фаза 1: Вызов LLM с инструментами (с новой системой обработки ошибок)
                 logger.info("[TOOL-CALLING] Фаза 1: Запрос к LLM с инструментами")
-                response = self._retry_with_backoff(
-                    lambda: self._make_llm_request(model_id, current_messages, tools),
-                    max_retries=3,
-                    base_delay=1.0
-                )
+                
+                if LLM_ERROR_HANDLER_AVAILABLE:
+                    # Используем новую систему обработки ошибок
+                    @with_llm_error_handling
+                    def make_tools_request():
+                        response = self._make_llm_request(model_id, current_messages, tools)
+                        if not response or not response.choices:
+                            raise ValueError("LLM вернул пустой response объект")
+                        return response
+                    
+                    try:
+                        response = make_tools_request()
+                    except Exception as e:
+                        # Обрабатываем ошибку через новую систему
+                        error_response = llm_error_handler.handle_llm_error(e, model_id)
+                        logger.error(f"[TOOL-CALLING] ❌ Ошибка обработана системой: {error_response}")
+                        return error_response.get("message", f"Ошибка при вызове модели с инструментами: {str(e)}")
+                else:
+                    # Fallback на старую систему retry
+                    response = self._retry_with_backoff(
+                        lambda: self._make_llm_request(model_id, current_messages, tools),
+                        max_retries=3,
+                        base_delay=1.0
+                    )
                 
                 # Проверяем валидность ответа
                 if not response or not response.choices:
@@ -972,11 +1314,29 @@ class SmartDelegator:
             })
             
             # Делаем финальный вызов без инструментов для получения ответа
-            final_response = self._retry_with_backoff(
-                lambda: self._make_llm_request(model_id, current_messages, tools=None),
-                max_retries=3,
-                base_delay=1.0
-            )
+            if LLM_ERROR_HANDLER_AVAILABLE:
+                # Используем новую систему обработки ошибок
+                @with_llm_error_handling
+                def make_final_request():
+                    response = self._make_llm_request(model_id, current_messages, tools=None)
+                    if not response or not response.choices:
+                        raise ValueError("LLM вернул пустой response объект для финального ответа")
+                    return response
+                
+                try:
+                    final_response = make_final_request()
+                except Exception as e:
+                    # Обрабатываем ошибку через новую систему
+                    error_response = llm_error_handler.handle_llm_error(e, model_id)
+                    logger.error(f"[TOOL-CALLING] ❌ Ошибка финального запроса: {error_response}")
+                    return error_response.get("message", f"Ошибка при получении финального ответа: {str(e)}")
+            else:
+                # Fallback на старую систему retry
+                final_response = self._retry_with_backoff(
+                    lambda: self._make_llm_request(model_id, current_messages, tools=None),
+                    max_retries=3,
+                    base_delay=1.0
+                )
             
             if final_response and final_response.choices:
                 final_text = final_response.choices[0].message.content
@@ -986,22 +1346,16 @@ class SmartDelegator:
                 logger.error("[TOOL-CALLING] ❌ Не удалось получить финальный ответ")
                 return "Инструменты выполнены, но не удалось сгенерировать финальный ответ"
                 
-        except RateLimitError as e:
-            logger.error(f"[TOOL-CALLING] ❌ Превышен лимит запросов: {e}")
-            return f"Превышен лимит запросов к модели. Попробуйте позже или выберите другую модель."
-        except AuthenticationError as e:
-            logger.error(f"[TOOL-CALLING] ❌ Ошибка аутентификации: {e}")
-            return f"Ошибка аутентификации с моделью. Проверьте API ключи."
-        except InvalidRequestError as e:
-            logger.error(f"[TOOL-CALLING] ❌ Неверный запрос: {e}")
-            return f"Неверный запрос к модели: {str(e)}"
-        except Timeout as e:
-            logger.error(f"[TOOL-CALLING] ❌ Таймаут запроса: {e}")
-            return f"Превышено время ожидания ответа от модели."
         except Exception as e:
             logger.error(f"[TOOL-CALLING] ❌ Критическая ошибка в _call_llm_with_tools: {e}")
             logger.error(f"[TOOL-CALLING] Traceback: {traceback.format_exc()}")
-            return f"Критическая ошибка при обработке запроса с инструментами: {str(e)}"
+            
+            # Используем новую систему обработки ошибок для критических ошибок
+            if LLM_ERROR_HANDLER_AVAILABLE:
+                error_response = llm_error_handler.handle_llm_error(e, model_id)
+                return error_response.get("message", f"Критическая ошибка при обработке запроса с инструментами: {str(e)}")
+            else:
+                return f"Критическая ошибка при обработке запроса с инструментами: {str(e)}"
     
     def _get_model_for_request(self, messages: List[Dict]) -> str:
         """Определяет модель для использования в запросе"""

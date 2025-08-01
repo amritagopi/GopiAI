@@ -19,6 +19,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional
 
+logger = logging.getLogger(__name__)
+
 import chardet
 
 # Исправляем конфликт OpenMP библиотек
@@ -302,9 +304,7 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
         self._apply_vscode_like_layout()
         self._setup_panel_shortcuts()
 
-        self.terminal_widget = TerminalWidget()
-        set_terminal_widget(self.terminal_widget)
-        TerminalWidget.instance = self.terminal_widget  # Singleton-like access
+        # Терминал будет создан в _setup_ui
 
         print("[OK] FramelessGopiAIStandaloneWindow готов к работе!")
 
@@ -353,12 +353,15 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
         center_vertical_splitter.addWidget(self.tab_document)
 
         # Нижняя панель — терминал под TabDocumentWidget
-        self.terminal_widget = TerminalWidget()
+        self.terminal_widget = TerminalWidget(self)
         self.terminal_widget.setMinimumHeight(150)
         self.terminal_widget.setMaximumHeight(400)
         terminal_size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.terminal_widget.setSizePolicy(terminal_size_policy)
         center_vertical_splitter.addWidget(self.terminal_widget)
+        
+        # Устанавливаем глобальную ссылку на терминал
+        set_terminal_widget(self.terminal_widget)
 
         # Правая панель - чат
         self.chat_widget = ChatWidget()
@@ -938,8 +941,29 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
         self.chat_widget.setVisible(not self.chat_widget.isVisible())
 
     def _toggle_terminal(self):
-        """Переключение видимости терминала"""
-        self.terminal_widget.setVisible(not self.terminal_widget.isVisible())
+        """Создание терминала в новой вкладке или переключение видимости панели терминала"""
+        try:
+            # Если терминал скрыт, показываем его
+            if not self.terminal_widget.isVisible():
+                self.terminal_widget.setVisible(True)
+                logger.info("Панель терминала показана")
+            else:
+                # Если терминал уже видим, создаем новую вкладку в tab_document
+                if hasattr(self, 'tab_document') and hasattr(self.tab_document, 'add_terminal_tab'):
+                    terminal_tab = self.tab_document.add_terminal_tab()
+                    if terminal_tab:
+                        logger.info("Создана новая вкладка терминала в центральной области")
+                    else:
+                        logger.warning("Не удалось создать вкладку терминала")
+                else:
+                    # Fallback: просто переключаем видимость
+                    self.terminal_widget.setVisible(not self.terminal_widget.isVisible())
+                    logger.info("Переключена видимость панели терминала (fallback)")
+                    
+        except Exception as e:
+            logger.error(f"Ошибка при работе с терминалом: {e}")
+            # Fallback: просто переключаем видимость
+            self.terminal_widget.setVisible(not self.terminal_widget.isVisible())
 
     def on_change_theme(self, theme_name):
         """Обработчик смены темы"""
