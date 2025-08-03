@@ -345,7 +345,7 @@ class APIErrorIntegration:
         else:
             return APIErrorCode.NETWORK_CONNECTION_ERROR
     
-    def _get_file_error_suggestions(self, error: Exception, operation: str, path: str) -> List[str]:
+    def _get_file_error_suggestions(self, error: Exception, operation: str, path: str) -> list[str]:
         """Возвращает предложения по исправлению файловых ошибок."""
         suggestions = []
         
@@ -374,7 +374,7 @@ class APIErrorIntegration:
         
         return suggestions
     
-    def _get_network_error_suggestions(self, error: Exception, url: str) -> List[str]:
+    def _get_network_error_suggestions(self, error: Exception, url: str) -> list[str]:
         """Возвращает предложения по исправлению сетевых ошибок."""
         suggestions = []
         

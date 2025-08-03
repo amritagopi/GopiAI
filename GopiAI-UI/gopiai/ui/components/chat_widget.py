@@ -40,6 +40,7 @@ from .chat_async_handler import ChatAsyncHandler
 # from .optimized_chat_widget import OptimizedChatWidget  # Модуль не найден, закомментировано
 from .icon_file_system_model import UniversalIconManager
 from .terminal_widget import TerminalWidget
+from .error_display import ErrorDisplayWidget
 
 class ChatWidget(QWidget):
     
@@ -66,6 +67,12 @@ class ChatWidget(QWidget):
         
         logger.info("[CHAT] Инициализация менеджера памяти")
         self.memory_manager = get_memory_manager()
+        
+        # Инициализация виджета отображения ошибок
+        self.error_display = ErrorDisplayWidget(self)
+        self.error_display.setVisible(False)  # Скрыт по умолчанию
+        self.error_display.retryRequested.connect(self._handle_error_retry)
+        self.error_display.dismissRequested.connect(self._handle_error_dismiss)
         
         self._setup_ui()
         
@@ -99,8 +106,36 @@ class ChatWidget(QWidget):
             cursor.movePosition(QTextCursor.MoveOperation.EndOfBlock, QTextCursor.MoveMode.KeepAnchor)
             cursor.removeSelectedText()
         
-        # Отображаем ошибку
-        self._append_message_with_style("error", f"Ошибка: {error_message}")
+        # Включаем кнопку отправки обратно
+        self.send_btn.setEnabled(True)
+        
+        # Определяем тип ошибки и отображаем соответствующее сообщение
+        if isinstance(error_message, dict):
+            error_code = error_message.get('error_code', 'UNKNOWN_ERROR')
+            message = error_message.get('message', str(error_message))
+            
+            if error_code == 'CONNECTION_ERROR':
+                self.show_connection_error()
+            elif error_code == 'API_ERROR':
+                self.show_api_error(message, error_code)
+            elif error_code == 'TIMEOUT_ERROR':
+                self.show_api_error(message, error_code)
+            else:
+                self.error_display.show_generic_error("Ошибка системы", message)
+        else:
+            # Анализируем текст ошибки для определения типа
+            error_text = str(error_message).lower()
+            
+            if 'connection' in error_text or 'подключ' in error_text:
+                self.show_connection_error()
+            elif 'timeout' in error_text or 'таймаут' in error_text:
+                self.show_api_error(str(error_message), 'TIMEOUT_ERROR')
+            elif 'api' in error_text or 'сервер' in error_text:
+                self.show_api_error(str(error_message), 'API_ERROR')
+            else:
+                self.error_display.show_generic_error("Ошибка", str(error_message))
+        
+        logger.error(f"[CHAT_ERROR] {error_message}")
 
     def _setup_animation_timer(self):
         """Настраивает таймер для анимации точек загрузки"""
@@ -192,6 +227,9 @@ class ChatWidget(QWidget):
             logger.warning("⚠️ PersonalityTab недоступен")
 
         self.main_layout.addWidget(self.tab_widget, 1)
+        
+        # Добавляем виджет отображения ошибок
+        self.main_layout.addWidget(self.error_display)
 
         self._setup_bottom_panel()
 
@@ -681,6 +719,14 @@ class ChatWidget(QWidget):
             cursor.movePosition(QTextCursor.MoveOperation.EndOfBlock, QTextCursor.MoveMode.KeepAnchor)
             cursor.removeSelectedText()
         
+        # Включаем кнопку отправки обратно
+        self.send_btn.setEnabled(True)
+        
+        # Проверяем, является ли ответ ошибкой
+        if isinstance(response, dict) and response.get('status') == 'error':
+            self._handle_error(response)
+            return
+        
         # Обрабатываем успешный ответ
         if isinstance(response, dict):
             if 'terminal_output' in response:
@@ -697,8 +743,6 @@ class ChatWidget(QWidget):
         self._append_message_with_style("assistant", full_message)
         if self.session_id:
             self.memory_manager.add_message(self.session_id, "assistant", full_message)
-        
-        self.send_btn.setEnabled(True)
 
     @Slot(str)
     def _handle_partial_response(self, partial_text: str):
@@ -968,3 +1012,161 @@ class ChatWidget(QWidget):
                     print("Переключились на вкладку выбора моделей")
                     return True
         return False
+    
+    def _handle_error_retry(self, error_type: str):
+        """Обрабатывает запрос повтора операции после ошибки"""
+        logger.info(f"[ERROR_RETRY] Повтор операции для типа ошибки: {error_type}")
+        
+        if error_type == "connection":
+            # Повторная проверка соединения с сервером
+            self._retry_connection()
+        elif error_type == "api":
+            # Повтор последнего API запроса
+            self._retry_last_message()
+        elif error_type == "component":
+            # Попытка перезагрузки компонента
+            self._retry_component_initialization()
+        elif error_type == "tool":
+            # Повтор выполнения инструмента
+            self._retry_tool_execution()
+        else:
+            logger.warning(f"[ERROR_RETRY] Неизвестный тип ошибки для повтора: {error_type}")
+    
+    def _handle_error_dismiss(self):
+        """Обрабатывает закрытие сообщения об ошибке"""
+        logger.debug("[ERROR_DISMISS] Ошибка закрыта пользователем")
+        # Дополнительная логика при необходимости
+    
+    def _retry_connection(self):
+        """Повторная попытка подключения к серверу"""
+        try:
+            from .api.client import get_default_client
+            client = get_default_client()
+            
+            if client.health_check():
+                self.error_display.setVisible(False)
+                self._append_message_with_style("system", "✅ Соединение с сервером восстановлено")
+                logger.info("[RETRY] Соединение с сервером восстановлено")
+            else:
+                self.error_display.show_connection_error("Backend Server")
+                logger.warning("[RETRY] Сервер по-прежнему недоступен")
+        except Exception as e:
+            logger.error(f"[RETRY] Ошибка при проверке соединения: {e}")
+            self.error_display.show_generic_error(
+                "Ошибка повтора",
+                f"Не удалось проверить соединение: {str(e)}"
+            )
+    
+    def _retry_last_message(self):
+        """Повторная отправка последнего сообщения"""
+        try:
+            # Получаем последнее сообщение пользователя из истории
+            last_user_message = self._get_last_user_message()
+            if last_user_message:
+                logger.info(f"[RETRY] Повторная отправка сообщения: {last_user_message[:50]}...")
+                self.error_display.setVisible(False)
+                
+                # Отправляем сообщение заново
+                self._show_loading_indicator()
+                message_data = {
+                    "message": last_user_message,
+                    "metadata": {
+                        "session_id": self.session_id,
+                        "current_tool": self.current_tool,
+                        "model_provider": self.current_provider,
+                        "model_id": self.current_model_id,
+                        "model_data": self.current_model_data,
+                        "retry": True
+                    }
+                }
+                
+                self.async_handler.send_message(last_user_message, message_data.get("metadata", {}))
+            else:
+                logger.warning("[RETRY] Не найдено последнее сообщение для повтора")
+                self.error_display.show_generic_error(
+                    "Ошибка повтора",
+                    "Не найдено сообщение для повторной отправки"
+                )
+        except Exception as e:
+            logger.error(f"[RETRY] Ошибка при повторной отправке сообщения: {e}")
+            self.error_display.show_generic_error(
+                "Ошибка повтора",
+                f"Не удалось повторить отправку: {str(e)}"
+            )
+    
+    def _retry_component_initialization(self):
+        """Повторная инициализация компонента"""
+        try:
+            logger.info("[RETRY] Попытка перезагрузки компонентов")
+            self.error_display.setVisible(False)
+            
+            # Попытка переинициализации критических компонентов
+            if not hasattr(self, 'crew_ai_client') or self.crew_ai_client is None:
+                self.crew_ai_client = CrewAIClient()
+                logger.info("[RETRY] CrewAI клиент переинициализирован")
+            
+            if not hasattr(self, 'async_handler') or self.async_handler is None:
+                self.async_handler = ChatAsyncHandler(self.crew_ai_client, self)
+                self.async_handler.response_ready.connect(self._handle_response)
+                self.async_handler.status_update.connect(self._update_status_message)
+                self.async_handler.partial_response.connect(self._handle_partial_response)
+                self.async_handler.message_error.connect(self._handle_error)
+                logger.info("[RETRY] Асинхронный обработчик переинициализирован")
+            
+            self._append_message_with_style("system", "✅ Компоненты успешно перезагружены")
+            
+        except Exception as e:
+            logger.error(f"[RETRY] Ошибка при перезагрузке компонентов: {e}")
+            self.error_display.show_component_error(
+                "Система",
+                f"Не удалось перезагрузить компоненты: {str(e)}",
+                fallback_available=False
+            )
+    
+    def _retry_tool_execution(self):
+        """Повторное выполнение инструмента"""
+        try:
+            logger.info("[RETRY] Повтор выполнения инструмента")
+            self.error_display.setVisible(False)
+            
+            # Логика повтора зависит от конкретного инструмента
+            # Пока просто скрываем ошибку и уведомляем пользователя
+            self._append_message_with_style("system", "🔄 Попробуйте выполнить команду еще раз")
+            
+        except Exception as e:
+            logger.error(f"[RETRY] Ошибка при повторе выполнения инструмента: {e}")
+            self.error_display.show_tool_error(
+                "Неизвестный инструмент",
+                f"Не удалось повторить выполнение: {str(e)}"
+            )
+    
+    def _get_last_user_message(self) -> Optional[str]:
+        """Извлекает последнее сообщение пользователя из истории чата"""
+        try:
+            if self.session_id and self.memory_manager:
+                messages = self.memory_manager.get_messages(self.session_id)
+                # Ищем последнее сообщение пользователя
+                for message in reversed(messages):
+                    if message.get('role') == 'user':
+                        return message.get('content', '')
+            return None
+        except Exception as e:
+            logger.error(f"[RETRY] Ошибка при получении последнего сообщения: {e}")
+            return None
+    
+    def show_api_error(self, error_message: str, error_code: str = None, retry_available: bool = True):
+        """Публичный метод для отображения API ошибок"""
+        retry_action = "api" if retry_available else None
+        self.error_display.show_api_error(error_message, error_code, retry_action)
+    
+    def show_connection_error(self, service_name: str = "Backend Server"):
+        """Публичный метод для отображения ошибок соединения"""
+        self.error_display.show_connection_error(service_name)
+    
+    def show_component_error(self, component_name: str, error_details: str, fallback_available: bool = False):
+        """Публичный метод для отображения ошибок компонентов"""
+        self.error_display.show_component_error(component_name, error_details, fallback_available)
+    
+    def show_tool_error(self, tool_name: str, error_message: str, command: str = None):
+        """Публичный метод для отображения ошибок инструментов"""
+        self.error_display.show_tool_error(tool_name, error_message, command)

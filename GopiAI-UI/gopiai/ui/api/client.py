@@ -28,7 +28,7 @@ class GopiAIAPIClient:
     - Таймауты запросов и пулинг соединений
     """
     
-    def __init__(self, base_url: str = "http://localhost:5051", timeout: int = 30):
+    def __init__(self, base_url: str = "disabled", timeout: int = 30):  # Connection disabled
         """
         Инициализация API клиента.
         

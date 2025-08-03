@@ -86,7 +86,7 @@ class CommandExecutor:
         try:
             # Валидация входных данных
             if not command or not command.strip():
-                from error_handler import error_handler
+                from .error_handler import error_handler
                 return error_handler.handle_tool_error(
                     ValueError("Пустая команда"),
                     "execute_terminal_command",
@@ -102,7 +102,7 @@ class CommandExecutor:
             # Проверка безопасности команды
             safety_result = self._validate_command_safety(command)
             if not safety_result["safe"]:
-                from error_handler import error_handler
+                from .error_handler import error_handler
                 return error_handler.handle_command_safety_error(
                     command, 
                     safety_result['reason'],
@@ -312,20 +312,33 @@ class CommandExecutor:
         path: str, 
         content: str = "", 
         destination: str = "",
-        encoding: str = "utf-8"
+        encoding: str = "utf-8",
+        max_file_size: int = None
     ) -> str:
         """
-        Выполняет операции с файловой системой.
+        Выполняет безопасные операции с файловой системой.
+        
+        Поддерживаемые операции:
+        - read: Чтение файла
+        - write: Запись в файл
+        - list_dir: Список содержимого директории
+        - exists: Проверка существования файла/директории
+        - info: Получение информации о файле/директории
+        - copy: Копирование файла/директории
+        - move: Перемещение файла/директории
+        - delete: Удаление файла/директории
+        - mkdir: Создание директории
         
         Args:
-            operation: Тип операции (read, write, list, exists, info, copy, move, delete)
+            operation: Тип операции
             path: Путь к файлу/директории
-            content: Содержимое для записи
-            destination: Путь назначения для копирования/перемещения
-            encoding: Кодировка файла
+            content: Содержимое для записи (для операции write)
+            destination: Путь назначения (для операций copy/move)
+            encoding: Кодировка файла (по умолчанию utf-8)
+            max_file_size: Максимальный размер файла в байтах (None = использовать по умолчанию)
             
         Returns:
-            str: Результат операции или сообщение об ошибке
+            str: Структурированный результат операции в JSON-подобном формате
         """
         start_time = time.time()
         
@@ -348,7 +361,20 @@ class CommandExecutor:
                 )
                 
             operation = operation.strip().lower()
-            path = path.strip()
+            path = os.path.normpath(path.strip())
+            
+            # Нормализация имени операции для совместимости
+            operation_mapping = {
+                "list": "list_dir",
+                "ls": "list_dir", 
+                "dir": "list_dir",
+                "create_dir": "mkdir",
+                "create_directory": "mkdir",
+                "remove": "delete",
+                "rm": "delete",
+                "del": "delete"
+            }
+            operation = operation_mapping.get(operation, operation)
             
             self.logger.info(f"[FILE-OPS] Операция: '{operation}', путь: '{path}'")
             
@@ -357,20 +383,35 @@ class CommandExecutor:
                 from error_handler import error_handler
                 return error_handler.handle_command_safety_error(
                     f"file_operations {operation} {path}",
-                    f"Небезопасный путь '{path}'",
+                    f"Небезопасный путь '{path}' - доступ запрещён по соображениям безопасности",
                     {"operation": operation, "path": path, "destination": destination}
                 )
             
+            # Проверка безопасности пути назначения для операций копирования/перемещения
+            if destination and not self._validate_path_safety(destination):
+                from error_handler import error_handler
+                return error_handler.handle_command_safety_error(
+                    f"file_operations {operation} {path} -> {destination}",
+                    f"Небезопасный путь назначения '{destination}' - доступ запрещён",
+                    {"operation": operation, "path": path, "destination": destination}
+                )
+            
+            # Установка лимитов размера файла
+            if max_file_size is None:
+                max_file_size = self.max_file_size
+            
             # Выполнение операции
-            result = self._execute_file_operation(operation, path, content, destination, encoding)
+            result = self._execute_file_operation(
+                operation, path, content, destination, encoding, max_file_size
+            )
             
             execution_time = time.time() - start_time
-            self.logger.info(f"[FILE-OPS] Операция выполнена за {execution_time:.2f}с")
+            self.logger.info(f"[FILE-OPS] Операция '{operation}' выполнена за {execution_time:.2f}с")
             
             return result
             
         except FileNotFoundError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -378,7 +419,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding}
             )
         except PermissionError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -386,7 +427,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding, "error_type": "permission"}
             )
         except IsADirectoryError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -394,7 +435,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding, "error_type": "is_directory"}
             )
         except NotADirectoryError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -402,7 +443,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding, "error_type": "not_directory"}
             )
         except UnicodeDecodeError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -410,7 +451,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding, "error_type": "encoding"}
             )
         except OSError as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_file_operation_error(
                 e,
                 operation,
@@ -418,7 +459,7 @@ class CommandExecutor:
                 {"destination": destination, "encoding": encoding, "error_type": "os_error"}
             )
         except Exception as e:
-            from error_handler import error_handler
+            from .error_handler import error_handler
             return error_handler.handle_tool_error(
                 e,
                 "file_operations",
@@ -806,7 +847,7 @@ class CommandExecutor:
 
     def _validate_path_safety(self, path: str) -> bool:
         """
-        Проверяет безопасность файлового пути.
+        Проверяет безопасность файлового пути с улучшенными правилами.
         
         Args:
             path: Путь для проверки
@@ -816,26 +857,61 @@ class CommandExecutor:
         """
         try:
             # Нормализация пути
-            normalized_path = os.path.normpath(path)
+            normalized_path = os.path.normpath(os.path.abspath(path))
             
-            # Запрещённые паттерны (исключаем временные директории)
-            dangerous_patterns = [
-                "..", "/etc/", "/root/", "/home/", "/usr/bin/", "/bin/", "/sbin/",
-                "/var/", "/dev/", "/proc/", "/sys/",
-                "C:\\Windows\\", "C:\\Program Files\\",
-                # Исключаем C:\\Users\\ для временных директорий, но проверяем конкретные системные папки
-                "C:\\Users\\Public\\", "C:\\Users\\Default\\", "C:\\Users\\All Users\\",
+            # Получаем текущую рабочую директорию
+            current_dir = os.getcwd()
+            
+            # Разрешённые базовые директории
+            allowed_base_dirs = [
+                current_dir,  # Текущая рабочая директория
+                os.path.expanduser("~/Documents"),  # Документы пользователя
+                os.path.expanduser("~/Desktop"),    # Рабочий стол
+                os.path.expanduser("~/Downloads"),  # Загрузки
+                os.path.join(os.path.expanduser("~"), "AppData", "Local", "Temp"),  # Временные файлы
+                os.environ.get("TEMP", ""),  # Системная временная директория
+                os.environ.get("TMP", ""),   # Альтернативная временная директория
             ]
             
-            # Дополнительная проверка для системных директорий в C:\Users\
-            if "C:\\Users\\" in normalized_path:
-                # Разрешаем только временные директории и AppData
-                if not any(allowed in normalized_path for allowed in ["\\AppData\\", "\\Temp\\", "temp"]):
-                    # Проверяем, что это не системная папка пользователя
-                    system_user_dirs = ["\\Desktop\\", "\\Documents\\", "\\Downloads\\", "\\Pictures\\", "\\Music\\", "\\Videos\\"]
-                    if any(sys_dir in normalized_path for sys_dir in system_user_dirs):
-                        self.logger.warning(f"[PATH-SAFETY] Доступ к системной папке пользователя запрещён: {normalized_path}")
-                        return False
+            # Добавляем пути из переменных окружения
+            if "USERPROFILE" in os.environ:
+                user_profile = os.environ["USERPROFILE"]
+                allowed_base_dirs.extend([
+                    os.path.join(user_profile, "AppData", "Local"),
+                    os.path.join(user_profile, "AppData", "Roaming"),
+                ])
+            
+            # Фильтруем пустые пути
+            allowed_base_dirs = [d for d in allowed_base_dirs if d and os.path.exists(d)]
+            
+            # Проверяем, находится ли путь в разрешённых директориях
+            path_is_allowed = False
+            for allowed_dir in allowed_base_dirs:
+                try:
+                    # Проверяем, является ли путь поддиректорией разрешённой директории
+                    if normalized_path.startswith(os.path.normpath(os.path.abspath(allowed_dir))):
+                        path_is_allowed = True
+                        break
+                except:
+                    continue
+            
+            if not path_is_allowed:
+                self.logger.warning(f"[PATH-SAFETY] Путь не находится в разрешённых директориях: {normalized_path}")
+                return False
+            
+            # Запрещённые паттерны в пути
+            dangerous_patterns = [
+                "..",  # Попытка выхода из директории
+                "\\\\",  # UNC пути
+                "//",    # Двойные слеши
+                ":",     # Альтернативные потоки данных (Windows)
+                "<",     # Недопустимые символы
+                ">",
+                "|",
+                "?",
+                "*",
+                "\"",
+            ]
             
             # Проверка на опасные паттерны
             for pattern in dangerous_patterns:
@@ -843,14 +919,46 @@ class CommandExecutor:
                     self.logger.warning(f"[PATH-SAFETY] Обнаружен опасный паттерн '{pattern}' в пути: {normalized_path}")
                     return False
             
-            # Проверка на абсолютные пути к системным директориям
-            if os.path.isabs(normalized_path):
-                system_dirs = ['/etc', '/root', '/usr', '/bin', '/sbin', '/var', '/tmp', '/dev', '/proc', '/sys']
-                for sys_dir in system_dirs:
-                    if normalized_path.startswith(sys_dir):
-                        self.logger.warning(f"[PATH-SAFETY] Доступ к системной директории запрещён: {normalized_path}")
-                        return False
+            # Запрещённые системные директории (абсолютные пути)
+            forbidden_dirs = [
+                "C:\\Windows",
+                "C:\\Program Files",
+                "C:\\Program Files (x86)",
+                "C:\\System Volume Information",
+                "/etc",
+                "/root",
+                "/usr/bin",
+                "/bin",
+                "/sbin",
+                "/var/log",
+                "/dev",
+                "/proc",
+                "/sys"
+            ]
             
+            for forbidden_dir in forbidden_dirs:
+                if normalized_path.startswith(forbidden_dir):
+                    self.logger.warning(f"[PATH-SAFETY] Доступ к системной директории запрещён: {normalized_path}")
+                    return False
+            
+            # Запрещённые имена файлов (Windows)
+            forbidden_names = [
+                "CON", "PRN", "AUX", "NUL",
+                "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
+                "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
+            ]
+            
+            filename = os.path.basename(normalized_path).upper()
+            if filename in forbidden_names or filename.split('.')[0] in forbidden_names:
+                self.logger.warning(f"[PATH-SAFETY] Запрещённое имя файла: {filename}")
+                return False
+            
+            # Проверка длины пути
+            if len(normalized_path) > 260:  # Ограничение Windows
+                self.logger.warning(f"[PATH-SAFETY] Путь слишком длинный ({len(normalized_path)} символов): {normalized_path}")
+                return False
+            
+            self.logger.debug(f"[PATH-SAFETY] Путь прошёл проверку безопасности: {normalized_path}")
             return True
             
         except Exception as e:
@@ -863,10 +971,11 @@ class CommandExecutor:
         path: str, 
         content: str, 
         destination: str, 
-        encoding: str
+        encoding: str,
+        max_file_size: int
     ) -> str:
         """
-        Выполняет конкретную файловую операцию.
+        Выполняет конкретную файловую операцию с улучшенной обработкой ошибок.
         
         Args:
             operation: Тип операции
@@ -874,16 +983,17 @@ class CommandExecutor:
             content: Содержимое для записи
             destination: Путь назначения
             encoding: Кодировка файла
+            max_file_size: Максимальный размер файла
             
         Returns:
-            str: Результат операции
+            str: Структурированный результат операции
         """
         try:
             if operation == "read":
-                return self._read_file(path, encoding)
+                return self._read_file(path, encoding, max_file_size)
             elif operation == "write":
                 return self._write_file(path, content, encoding)
-            elif operation == "list":
+            elif operation == "list_dir":
                 return self._list_directory(path)
             elif operation == "exists":
                 return self._check_exists(path)
@@ -898,197 +1008,804 @@ class CommandExecutor:
             elif operation == "mkdir":
                 return self._create_directory(path)
             else:
-                return f"Операция '{operation}' не поддерживается. Доступные операции: read, write, list, exists, info, copy, move, delete, mkdir"
+                available_ops = ["read", "write", "list_dir", "exists", "info", "copy", "move", "delete", "mkdir"]
+                return self._format_error_response(
+                    "INVALID_OPERATION",
+                    f"Операция '{operation}' не поддерживается",
+                    {
+                        "operation": operation,
+                        "available_operations": available_ops,
+                        "path": path
+                    }
+                )
                 
         except Exception as e:
-            return f"Ошибка выполнения операции '{operation}': {str(e)}"
+            return self._format_error_response(
+                "OPERATION_FAILED",
+                f"Ошибка выполнения операции '{operation}': {str(e)}",
+                {
+                    "operation": operation,
+                    "path": path,
+                    "error_type": e.__class__.__name__
+                }
+            )
 
-    def _read_file(self, path: str, encoding: str) -> str:
-        """Читает содержимое файла."""
+    def _read_file(self, path: str, encoding: str, max_file_size: int) -> str:
+        """
+        Читает содержимое файла с проверками безопасности и ограничениями размера.
+        
+        Args:
+            path: Путь к файлу
+            encoding: Кодировка файла
+            max_file_size: Максимальный размер для чтения
+            
+        Returns:
+            str: Структурированный ответ с содержимым файла
+        """
         if not os.path.exists(path):
-            return f"Ошибка: файл '{path}' не существует"
+            return self._format_error_response(
+                "FILE_NOT_FOUND",
+                f"Файл '{path}' не существует",
+                {"path": path, "operation": "read"}
+            )
         
         if not os.path.isfile(path):
-            return f"Ошибка: '{path}' не является файлом"
+            return self._format_error_response(
+                "NOT_A_FILE",
+                f"'{path}' не является файлом",
+                {"path": path, "operation": "read", "is_directory": os.path.isdir(path)}
+            )
         
         try:
+            # Проверка размера файла перед чтением
+            file_size = os.path.getsize(path)
+            if file_size > max_file_size * 2:  # Двойной лимит для предупреждения
+                return self._format_error_response(
+                    "FILE_TOO_LARGE",
+                    f"Файл '{path}' слишком большой ({file_size} байт). Максимальный размер: {max_file_size * 2} байт",
+                    {"path": path, "file_size": file_size, "max_size": max_file_size * 2}
+                )
+            
             with open(path, 'r', encoding=encoding) as f:
                 file_content = f.read()
             
-            # Ограничение размера
-            if len(file_content) > self.max_file_size:
-                file_content = file_content[:self.max_file_size] + f"\n... [файл обрезан, показано {self.max_file_size} символов]"
+            # Ограничение размера содержимого
+            was_truncated = False
+            if len(file_content) > max_file_size:
+                file_content = file_content[:max_file_size]
+                was_truncated = True
             
             self.logger.info(f"[FILE-READ] Прочитан файл: {len(file_content)} символов")
-            return f"Содержимое файла '{path}':\n\n{file_content}"
             
-        except UnicodeDecodeError:
-            return f"Ошибка: не удалось прочитать файл '{path}' с кодировкой {encoding} (возможно, это бинарный файл)"
+            return self._format_success_response(
+                "FILE_READ_SUCCESS",
+                f"Файл '{path}' успешно прочитан",
+                {
+                    "path": path,
+                    "content": file_content,
+                    "file_size": file_size,
+                    "content_length": len(file_content),
+                    "encoding": encoding,
+                    "was_truncated": was_truncated,
+                    "truncated_at": max_file_size if was_truncated else None
+                }
+            )
+            
+        except UnicodeDecodeError as e:
+            return self._format_error_response(
+                "ENCODING_ERROR",
+                f"Не удалось прочитать файл '{path}' с кодировкой {encoding}",
+                {
+                    "path": path,
+                    "encoding": encoding,
+                    "error_details": str(e),
+                    "suggestion": "Попробуйте другую кодировку (cp1251, latin-1) или это может быть бинарный файл"
+                }
+            )
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для чтения файла '{path}'",
+                {"path": path, "operation": "read"}
+            )
         except Exception as e:
-            return f"Ошибка чтения файла '{path}': {str(e)}"
+            return self._format_error_response(
+                "READ_ERROR",
+                f"Ошибка чтения файла '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
 
     def _write_file(self, path: str, content: str, encoding: str) -> str:
-        """Записывает содержимое в файл."""
-        if not content:
-            return "Ошибка: не указано содержимое для записи"
+        """
+        Записывает содержимое в файл с проверками безопасности.
+        
+        Args:
+            path: Путь к файлу
+            content: Содержимое для записи
+            encoding: Кодировка файла
+            
+        Returns:
+            str: Структурированный ответ о результате записи
+        """
+        if content is None:
+            content = ""  # Разрешаем создание пустых файлов
         
         try:
-            # Создание директории если нужно
-            os.makedirs(os.path.dirname(path), exist_ok=True)
+            # Проверка размера содержимого
+            content_size = len(content.encode(encoding))
+            max_write_size = self.max_file_size * 3  # Больший лимит для записи
             
+            if content_size > max_write_size:
+                return self._format_error_response(
+                    "CONTENT_TOO_LARGE",
+                    f"Содержимое слишком большое ({content_size} байт). Максимальный размер: {max_write_size} байт",
+                    {"path": path, "content_size": content_size, "max_size": max_write_size}
+                )
+            
+            # Создание директории если нужно
+            dir_path = os.path.dirname(path)
+            if dir_path and not os.path.exists(dir_path):
+                try:
+                    os.makedirs(dir_path, exist_ok=True)
+                    self.logger.info(f"[FILE-WRITE] Создана директория: {dir_path}")
+                except Exception as e:
+                    return self._format_error_response(
+                        "DIRECTORY_CREATION_FAILED",
+                        f"Не удалось создать директорию '{dir_path}': {str(e)}",
+                        {"path": path, "directory": dir_path}
+                    )
+            
+            # Проверка существования файла для информации
+            file_existed = os.path.exists(path)
+            old_size = os.path.getsize(path) if file_existed else 0
+            
+            # Запись файла
             with open(path, 'w', encoding=encoding) as f:
                 f.write(content)
             
-            self.logger.info(f"[FILE-WRITE] Записан файл: {len(content)} символов")
-            return f"Файл '{path}' успешно записан ({len(content)} символов)"
+            # Проверка успешности записи
+            new_size = os.path.getsize(path)
             
+            self.logger.info(f"[FILE-WRITE] Записан файл: {len(content)} символов, {new_size} байт")
+            
+            return self._format_success_response(
+                "FILE_WRITE_SUCCESS",
+                f"Файл '{path}' успешно {'перезаписан' if file_existed else 'создан'}",
+                {
+                    "path": path,
+                    "content_length": len(content),
+                    "file_size_bytes": new_size,
+                    "encoding": encoding,
+                    "file_existed": file_existed,
+                    "old_size": old_size if file_existed else None,
+                    "operation": "overwrite" if file_existed else "create"
+                }
+            )
+            
+        except UnicodeEncodeError as e:
+            return self._format_error_response(
+                "ENCODING_ERROR",
+                f"Не удалось закодировать содержимое в {encoding}",
+                {
+                    "path": path,
+                    "encoding": encoding,
+                    "error_details": str(e),
+                    "suggestion": "Попробуйте другую кодировку или проверьте содержимое на специальные символы"
+                }
+            )
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для записи в файл '{path}'",
+                {"path": path, "operation": "write"}
+            )
+        except OSError as e:
+            return self._format_error_response(
+                "WRITE_ERROR",
+                f"Системная ошибка при записи файла '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
         except Exception as e:
-            return f"Ошибка записи файла '{path}': {str(e)}"
+            return self._format_error_response(
+                "WRITE_ERROR",
+                f"Ошибка записи файла '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
 
     def _list_directory(self, path: str) -> str:
-        """Выводит содержимое директории."""
+        """
+        Выводит структурированное содержимое директории.
+        
+        Args:
+            path: Путь к директории
+            
+        Returns:
+            str: Структурированный список содержимого директории
+        """
         if not os.path.exists(path):
-            return f"Ошибка: директория '{path}' не существует"
+            return self._format_error_response(
+                "DIRECTORY_NOT_FOUND",
+                f"Директория '{path}' не существует",
+                {"path": path, "operation": "list_dir"}
+            )
         
         if not os.path.isdir(path):
-            return f"Ошибка: '{path}' не является директорией"
+            return self._format_error_response(
+                "NOT_A_DIRECTORY",
+                f"'{path}' не является директорией",
+                {"path": path, "operation": "list_dir", "is_file": os.path.isfile(path)}
+            )
         
         try:
             items = []
-            for item in os.listdir(path):
-                item_path = os.path.join(path, item)
-                if os.path.isdir(item_path):
-                    items.append(f"📁 {item}/")
-                else:
-                    try:
-                        size = os.path.getsize(item_path)
-                        items.append(f"📄 {item} ({size} байт)")
-                    except:
-                        items.append(f"📄 {item}")
+            directories = []
+            files = []
+            total_size = 0
             
-            if items:
-                items_text = "\n".join(items[:50])  # Максимум 50 элементов
-                if len(os.listdir(path)) > 50:
-                    items_text += f"\n... и ещё {len(os.listdir(path)) - 50} элементов"
+            # Получение списка элементов
+            dir_items = os.listdir(path)
+            
+            for item in dir_items:
+                item_path = os.path.join(path, item)
+                try:
+                    stat_info = os.stat(item_path)
+                    item_info = {
+                        "name": item,
+                        "path": item_path,
+                        "size": stat_info.st_size,
+                        "modified": datetime.fromtimestamp(stat_info.st_mtime).isoformat(),
+                        "is_directory": os.path.isdir(item_path),
+                        "is_file": os.path.isfile(item_path)
+                    }
+                    
+                    if item_info["is_directory"]:
+                        directories.append(item_info)
+                    else:
+                        files.append(item_info)
+                        total_size += item_info["size"]
+                    
+                    items.append(item_info)
+                    
+                except (OSError, PermissionError) as e:
+                    # Элемент недоступен, но продолжаем
+                    items.append({
+                        "name": item,
+                        "path": item_path,
+                        "error": f"Недоступен: {str(e)}",
+                        "is_directory": None,
+                        "is_file": None
+                    })
+            
+            # Сортировка: сначала директории, потом файлы
+            directories.sort(key=lambda x: x["name"].lower())
+            files.sort(key=lambda x: x["name"].lower())
+            
+            # Ограничение количества элементов для отображения
+            max_items = 100
+            display_items = directories + files
+            was_truncated = len(display_items) > max_items
+            if was_truncated:
+                display_items = display_items[:max_items]
+            
+            self.logger.info(f"[DIR-LIST] Список директории: {len(items)} элементов")
+            
+            return self._format_success_response(
+                "DIRECTORY_LIST_SUCCESS",
+                f"Содержимое директории '{path}' ({len(directories)} папок, {len(files)} файлов)",
+                {
+                    "path": path,
+                    "total_items": len(items),
+                    "directories_count": len(directories),
+                    "files_count": len(files),
+                    "total_size_bytes": total_size,
+                    "items": display_items,
+                    "was_truncated": was_truncated,
+                    "truncated_at": max_items if was_truncated else None
+                }
+            )
                 
-                self.logger.info(f"[DIR-LIST] Список директории: {len(items)} элементов")
-                return f"Содержимое директории '{path}':\n\n{items_text}"
-            else:
-                return f"Директория '{path}' пуста"
-                
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для чтения директории '{path}'",
+                {"path": path, "operation": "list_dir"}
+            )
         except Exception as e:
-            return f"Ошибка чтения директории '{path}': {str(e)}"
+            return self._format_error_response(
+                "LIST_ERROR",
+                f"Ошибка чтения директории '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
 
     def _check_exists(self, path: str) -> str:
         """Проверяет существование файла/директории."""
         exists = os.path.exists(path)
         self.logger.info(f"[EXISTS] Проверка существования: {path} = {exists}")
-        return f"Путь '{path}' {'существует' if exists else 'не существует'}"
+        
+        if exists:
+            return self._format_success_response(
+                "PATH_EXISTS",
+                f"Путь '{path}' существует",
+                {
+                    "path": path,
+                    "exists": True,
+                    "is_file": os.path.isfile(path),
+                    "is_directory": os.path.isdir(path),
+                    "operation": "exists"
+                }
+            )
+        else:
+            return self._format_success_response(
+                "PATH_NOT_EXISTS",
+                f"Путь '{path}' не существует",
+                {
+                    "path": path,
+                    "exists": False,
+                    "operation": "exists"
+                }
+            )
 
     def _get_file_info(self, path: str) -> str:
-        """Получает информацию о файле/директории."""
+        """Получает подробную информацию о файле/директории."""
         if not os.path.exists(path):
-            return f"Ошибка: путь '{path}' не существует"
+            return self._format_error_response(
+                "PATH_NOT_FOUND",
+                f"Путь '{path}' не существует",
+                {"path": path, "operation": "info"}
+            )
         
         try:
             stat = os.stat(path)
             is_file = os.path.isfile(path)
             is_dir = os.path.isdir(path)
             
-            info_lines = [
-                f"Путь: {path}",
-                f"Тип: {'файл' if is_file else 'директория' if is_dir else 'другое'}",
-                f"Размер: {stat.st_size} байт",
-                f"Последнее изменение: {time.ctime(stat.st_mtime)}",
-            ]
+            info_data = {
+                "path": path,
+                "absolute_path": os.path.abspath(path),
+                "name": os.path.basename(path),
+                "parent_directory": os.path.dirname(path),
+                "type": "file" if is_file else "directory" if is_dir else "other",
+                "is_file": is_file,
+                "is_directory": is_dir,
+                "size_bytes": stat.st_size,
+                "size_human": self._format_file_size(stat.st_size),
+                "created": datetime.fromtimestamp(stat.st_ctime).isoformat(),
+                "modified": datetime.fromtimestamp(stat.st_mtime).isoformat(),
+                "accessed": datetime.fromtimestamp(stat.st_atime).isoformat(),
+                "permissions": oct(stat.st_mode)[-3:],
+                "operation": "info"
+            }
             
+            # Дополнительная информация для директорий
             if is_dir:
                 try:
-                    items_count = len(os.listdir(path))
-                    info_lines.append(f"Элементов в директории: {items_count}")
+                    items = os.listdir(path)
+                    info_data.update({
+                        "items_count": len(items),
+                        "subdirectories": len([item for item in items if os.path.isdir(os.path.join(path, item))]),
+                        "files": len([item for item in items if os.path.isfile(os.path.join(path, item))])
+                    })
+                except PermissionError:
+                    info_data["items_count"] = "Недоступно (нет прав)"
+            
+            # Дополнительная информация для файлов
+            if is_file:
+                try:
+                    # Попытка определить тип файла по расширению
+                    _, ext = os.path.splitext(path)
+                    info_data["extension"] = ext.lower() if ext else None
+                    
+                    # Попытка определить кодировку для текстовых файлов
+                    if ext.lower() in ['.txt', '.py', '.js', '.html', '.css', '.md', '.json', '.xml']:
+                        try:
+                            with open(path, 'rb') as f:
+                                sample = f.read(1024)
+                            try:
+                                sample.decode('utf-8')
+                                info_data["likely_encoding"] = "utf-8"
+                            except UnicodeDecodeError:
+                                try:
+                                    sample.decode('cp1251')
+                                    info_data["likely_encoding"] = "cp1251"
+                                except UnicodeDecodeError:
+                                    info_data["likely_encoding"] = "unknown"
+                        except:
+                            pass
                 except:
                     pass
             
             self.logger.info(f"[FILE-INFO] Получена информация о: {path}")
-            return "\n".join(info_lines)
             
+            return self._format_success_response(
+                "FILE_INFO_SUCCESS",
+                f"Информация о {'файле' if is_file else 'директории'} '{path}'",
+                info_data
+            )
+            
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для получения информации о '{path}'",
+                {"path": path, "operation": "info"}
+            )
         except Exception as e:
-            return f"Ошибка получения информации о '{path}': {str(e)}"
+            return self._format_error_response(
+                "INFO_ERROR",
+                f"Ошибка получения информации о '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
+
+    def _format_file_size(self, size_bytes: int) -> str:
+        """Форматирует размер файла в человекочитаемом виде."""
+        if size_bytes == 0:
+            return "0 байт"
+        
+        units = ['байт', 'КБ', 'МБ', 'ГБ', 'ТБ']
+        unit_index = 0
+        size = float(size_bytes)
+        
+        while size >= 1024 and unit_index < len(units) - 1:
+            size /= 1024
+            unit_index += 1
+        
+        if unit_index == 0:
+            return f"{int(size)} {units[unit_index]}"
+        else:
+            return f"{size:.1f} {units[unit_index]}"
 
     def _copy_file(self, source: str, destination: str) -> str:
         """Копирует файл или директорию."""
         if not destination:
-            return "Ошибка: не указан путь назначения для копирования"
-        
-        if not self._validate_path_safety(destination):
-            return f"Ошибка: небезопасный путь назначения '{destination}'"
+            return self._format_error_response(
+                "MISSING_DESTINATION",
+                "Не указан путь назначения для копирования",
+                {"source": source, "operation": "copy"}
+            )
         
         if not os.path.exists(source):
-            return f"Ошибка: источник '{source}' не существует"
+            return self._format_error_response(
+                "SOURCE_NOT_FOUND",
+                f"Источник '{source}' не существует",
+                {"source": source, "destination": destination, "operation": "copy"}
+            )
         
         try:
-            if os.path.isfile(source):
-                shutil.copy2(source, destination)
-                self.logger.info(f"[COPY] Скопирован файл: {source} -> {destination}")
-                return f"Файл '{source}' успешно скопирован в '{destination}'"
-            elif os.path.isdir(source):
-                shutil.copytree(source, destination)
-                self.logger.info(f"[COPY] Скопирована директория: {source} -> {destination}")
-                return f"Директория '{source}' успешно скопирована в '{destination}'"
-            else:
-                return f"Ошибка: '{source}' не является файлом или директорией"
+            source_is_file = os.path.isfile(source)
+            source_is_dir = os.path.isdir(source)
+            
+            if not source_is_file and not source_is_dir:
+                return self._format_error_response(
+                    "INVALID_SOURCE_TYPE",
+                    f"'{source}' не является файлом или директорией",
+                    {"source": source, "destination": destination, "operation": "copy"}
+                )
+            
+            # Проверка, не существует ли уже файл назначения
+            dest_exists = os.path.exists(destination)
+            
+            if source_is_file:
+                # Если назначение - директория, копируем файл в неё
+                if os.path.isdir(destination):
+                    destination = os.path.join(destination, os.path.basename(source))
                 
+                shutil.copy2(source, destination)
+                operation_type = "file_copy"
+                self.logger.info(f"[COPY] Скопирован файл: {source} -> {destination}")
+                
+            elif source_is_dir:
+                if dest_exists:
+                    return self._format_error_response(
+                        "DESTINATION_EXISTS",
+                        f"Директория назначения '{destination}' уже существует",
+                        {"source": source, "destination": destination, "operation": "copy"}
+                    )
+                
+                shutil.copytree(source, destination)
+                operation_type = "directory_copy"
+                self.logger.info(f"[COPY] Скопирована директория: {source} -> {destination}")
+            
+            # Получаем информацию о результате
+            dest_size = os.path.getsize(destination) if os.path.isfile(destination) else self._get_directory_size(destination)
+            
+            return self._format_success_response(
+                "COPY_SUCCESS",
+                f"{'Файл' if source_is_file else 'Директория'} '{source}' успешно скопирован{'а' if source_is_dir else ''} в '{destination}'",
+                {
+                    "source": source,
+                    "destination": destination,
+                    "operation": "copy",
+                    "operation_type": operation_type,
+                    "source_was_file": source_is_file,
+                    "source_was_directory": source_is_dir,
+                    "destination_existed": dest_exists,
+                    "destination_size": dest_size
+                }
+            )
+                
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для копирования '{source}' в '{destination}'",
+                {"source": source, "destination": destination, "operation": "copy"}
+            )
+        except shutil.SameFileError as e:
+            return self._format_error_response(
+                "SAME_FILE_ERROR",
+                f"Источник и назначение указывают на один и тот же файл",
+                {"source": source, "destination": destination, "operation": "copy"}
+            )
         except Exception as e:
-            return f"Ошибка копирования '{source}' в '{destination}': {str(e)}"
+            return self._format_error_response(
+                "COPY_ERROR",
+                f"Ошибка копирования '{source}' в '{destination}': {str(e)}",
+                {"source": source, "destination": destination, "error_type": e.__class__.__name__}
+            )
 
     def _move_file(self, source: str, destination: str) -> str:
         """Перемещает файл или директорию."""
         if not destination:
-            return "Ошибка: не указан путь назначения для перемещения"
-        
-        if not self._validate_path_safety(destination):
-            return f"Ошибка: небезопасный путь назначения '{destination}'"
+            return self._format_error_response(
+                "MISSING_DESTINATION",
+                "Не указан путь назначения для перемещения",
+                {"source": source, "operation": "move"}
+            )
         
         if not os.path.exists(source):
-            return f"Ошибка: источник '{source}' не существует"
+            return self._format_error_response(
+                "SOURCE_NOT_FOUND",
+                f"Источник '{source}' не существует",
+                {"source": source, "destination": destination, "operation": "move"}
+            )
         
         try:
+            source_is_file = os.path.isfile(source)
+            source_is_dir = os.path.isdir(source)
+            source_size = os.path.getsize(source) if source_is_file else self._get_directory_size(source)
+            
+            # Если назначение - существующая директория, перемещаем в неё
+            if os.path.isdir(destination):
+                destination = os.path.join(destination, os.path.basename(source))
+            
             shutil.move(source, destination)
             self.logger.info(f"[MOVE] Перемещён: {source} -> {destination}")
-            return f"'{source}' успешно перемещён в '{destination}'"
             
+            return self._format_success_response(
+                "MOVE_SUCCESS",
+                f"{'Файл' if source_is_file else 'Директория'} '{source}' успешно перемещён{'а' if source_is_dir else ''} в '{destination}'",
+                {
+                    "source": source,
+                    "destination": destination,
+                    "operation": "move",
+                    "source_was_file": source_is_file,
+                    "source_was_directory": source_is_dir,
+                    "size": source_size
+                }
+            )
+            
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для перемещения '{source}' в '{destination}'",
+                {"source": source, "destination": destination, "operation": "move"}
+            )
+        except shutil.Error as e:
+            return self._format_error_response(
+                "MOVE_ERROR",
+                f"Ошибка перемещения '{source}' в '{destination}': {str(e)}",
+                {"source": source, "destination": destination, "error_type": e.__class__.__name__}
+            )
         except Exception as e:
-            return f"Ошибка перемещения '{source}' в '{destination}': {str(e)}"
+            return self._format_error_response(
+                "MOVE_ERROR",
+                f"Ошибка перемещения '{source}' в '{destination}': {str(e)}",
+                {"source": source, "destination": destination, "error_type": e.__class__.__name__}
+            )
 
     def _delete_file(self, path: str) -> str:
-        """Удаляет файл или директорию."""
+        """Удаляет файл или директорию с дополнительными проверками безопасности."""
         if not os.path.exists(path):
-            return f"Ошибка: путь '{path}' не существует"
+            return self._format_error_response(
+                "PATH_NOT_FOUND",
+                f"Путь '{path}' не существует",
+                {"path": path, "operation": "delete"}
+            )
         
         try:
-            if os.path.isfile(path):
+            is_file = os.path.isfile(path)
+            is_dir = os.path.isdir(path)
+            
+            if not is_file and not is_dir:
+                return self._format_error_response(
+                    "INVALID_PATH_TYPE",
+                    f"'{path}' не является файлом или директорией",
+                    {"path": path, "operation": "delete"}
+                )
+            
+            # Получаем информацию перед удалением
+            size_before = os.path.getsize(path) if is_file else self._get_directory_size(path)
+            items_count = None
+            
+            if is_dir:
+                try:
+                    items_count = len(os.listdir(path))
+                    # Дополнительная проверка для непустых директорий
+                    if items_count > 0:
+                        self.logger.warning(f"[DELETE] Удаление непустой директории: {path} ({items_count} элементов)")
+                except:
+                    items_count = "unknown"
+            
+            # Выполнение удаления
+            if is_file:
                 os.remove(path)
+                operation_type = "file_delete"
                 self.logger.info(f"[DELETE] Удалён файл: {path}")
-                return f"Файл '{path}' успешно удалён"
-            elif os.path.isdir(path):
-                shutil.rmtree(path)
-                self.logger.info(f"[DELETE] Удалена директория: {path}")
-                return f"Директория '{path}' успешно удалена"
             else:
-                return f"Ошибка: '{path}' не является файлом или директорией"
+                shutil.rmtree(path)
+                operation_type = "directory_delete"
+                self.logger.info(f"[DELETE] Удалена директория: {path}")
+            
+            return self._format_success_response(
+                "DELETE_SUCCESS",
+                f"{'Файл' if is_file else 'Директория'} '{path}' успешно удален{'а' if is_dir else ''}",
+                {
+                    "path": path,
+                    "operation": "delete",
+                    "operation_type": operation_type,
+                    "was_file": is_file,
+                    "was_directory": is_dir,
+                    "size_bytes": size_before,
+                    "items_count": items_count
+                }
+            )
                 
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для удаления '{path}'",
+                {"path": path, "operation": "delete"}
+            )
+        except OSError as e:
+            return self._format_error_response(
+                "DELETE_ERROR",
+                f"Системная ошибка при удалении '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
         except Exception as e:
-            return f"Ошибка удаления '{path}': {str(e)}"
+            return self._format_error_response(
+                "DELETE_ERROR",
+                f"Ошибка удаления '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
+
+    def _get_directory_size(self, path: str) -> int:
+        """Вычисляет общий размер директории."""
+        total_size = 0
+        try:
+            for dirpath, dirnames, filenames in os.walk(path):
+                for filename in filenames:
+                    filepath = os.path.join(dirpath, filename)
+                    try:
+                        total_size += os.path.getsize(filepath)
+                    except (OSError, FileNotFoundError):
+                        # Файл может быть удалён или недоступен
+                        continue
+        except (OSError, PermissionError):
+            # Если не можем получить размер, возвращаем 0
+            pass
+        return total_size
 
     def _create_directory(self, path: str) -> str:
         """Создаёт директорию."""
         try:
+            existed = os.path.exists(path)
             os.makedirs(path, exist_ok=True)
             self.logger.info(f"[MKDIR] Создана директория: {path}")
-            return f"Директория '{path}' успешно создана"
             
+            return self._format_success_response(
+                "DIRECTORY_CREATE_SUCCESS",
+                f"Директория '{path}' {'уже существовала' if existed else 'успешно создана'}",
+                {
+                    "path": path,
+                    "operation": "mkdir",
+                    "already_existed": existed
+                }
+            )
+            
+        except PermissionError as e:
+            return self._format_error_response(
+                "PERMISSION_DENIED",
+                f"Недостаточно прав для создания директории '{path}'",
+                {"path": path, "operation": "mkdir"}
+            )
         except Exception as e:
-            return f"Ошибка создания директории '{path}': {str(e)}"
+            return self._format_error_response(
+                "MKDIR_ERROR",
+                f"Ошибка создания директории '{path}': {str(e)}",
+                {"path": path, "error_type": e.__class__.__name__}
+            )
+
+    def _format_success_response(self, status_code: str, message: str, data: Dict[str, Any]) -> str:
+        """
+        Форматирует успешный ответ в структурированном виде.
+        
+        Args:
+            status_code: Код статуса операции
+            message: Сообщение о результате
+            data: Данные результата
+            
+        Returns:
+            str: Форматированный ответ
+        """
+        response = {
+            "status": "success",
+            "status_code": status_code,
+            "message": message,
+            "data": data,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        # Для удобочитаемости возвращаем и JSON и текстовое представление
+        json_response = json.dumps(response, ensure_ascii=False, indent=2)
+        
+        # Создаём читаемое представление
+        readable_parts = [f"✅ {message}"]
+        
+        if "content" in data:
+            readable_parts.append(f"\nСодержимое:\n{data['content']}")
+        elif "items" in data:
+            readable_parts.append(f"\nЭлементы:")
+            for item in data["items"][:10]:  # Показываем первые 10 элементов
+                if item.get("is_directory"):
+                    readable_parts.append(f"  📁 {item['name']}/")
+                elif item.get("is_file"):
+                    size_str = f" ({item['size']} байт)" if "size" in item else ""
+                    readable_parts.append(f"  📄 {item['name']}{size_str}")
+                else:
+                    readable_parts.append(f"  ❓ {item['name']}")
+            
+            if len(data["items"]) > 10:
+                readable_parts.append(f"  ... и ещё {len(data['items']) - 10} элементов")
+        
+        readable_response = "\n".join(readable_parts)
+        
+        return f"{readable_response}\n\n[Структурированные данные]\n{json_response}"
+
+    def _format_error_response(self, error_code: str, message: str, context: Dict[str, Any]) -> str:
+        """
+        Форматирует ответ об ошибке в структурированном виде.
+        
+        Args:
+            error_code: Код ошибки
+            message: Сообщение об ошибке
+            context: Контекст ошибки
+            
+        Returns:
+            str: Форматированный ответ об ошибке
+        """
+        response = {
+            "status": "error",
+            "error_code": error_code,
+            "message": message,
+            "context": context,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        json_response = json.dumps(response, ensure_ascii=False, indent=2)
+        
+        # Создаём читаемое представление ошибки
+        readable_response = f"❌ {message}"
+        
+        # Добавляем полезные подсказки
+        if error_code == "FILE_NOT_FOUND":
+            readable_response += "\n💡 Проверьте правильность пути к файлу"
+        elif error_code == "PERMISSION_DENIED":
+            readable_response += "\n💡 Проверьте права доступа к файлу или директории"
+        elif error_code == "ENCODING_ERROR":
+            readable_response += "\n💡 Попробуйте другую кодировку (utf-8, cp1251, latin-1)"
+        elif error_code == "FILE_TOO_LARGE":
+            readable_response += "\n💡 Попробуйте обработать файл частями или увеличить лимит"
+        
+        return f"{readable_response}\n\n[Детали ошибки]\n{json_response}"
 
 
 # Пример использования и тестирования

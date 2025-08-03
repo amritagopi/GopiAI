@@ -401,7 +401,7 @@ class SmartDelegator:
         try:
             self.local_tools = get_local_mcp_tools()
             self.local_tools_available = True
-            local_tools_count = len(self.local_tools.get_available_tools())
+            local_tools_count = len(self.local_tools.get_available_tools()) if self.local_tools else 0
             logger.info(f"[OK] Локальные MCP инструменты инициализированы. Доступно: {local_tools_count}")
         except Exception as e:
             self.local_tools = None

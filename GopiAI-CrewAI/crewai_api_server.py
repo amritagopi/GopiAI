@@ -87,7 +87,7 @@ except (OSError, PermissionError) as e:
 
 # Базовая настройка логирования
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     handlers=handlers
 )
 
@@ -138,13 +138,8 @@ except ImportError:
     from .state_manager import load_state, save_state
 
 # Импортируем наш новый StateManager
-try:
-    from GopiAI_Core.gopiai.core.state_manager import get_state_manager, load_provider_model_state
-    STATE_MANAGER_AVAILABLE = True
-    logger.info("[STARTUP] StateManager импортирован успешно")
-except ImportError as e:
-    logger.warning(f"[STARTUP] Не удалось импортировать StateManager: {e}")
-    STATE_MANAGER_AVAILABLE = False
+# Комментарий: Убрали импорт GopiAI_Core, чтобы избежать ошибок - STATE_MANAGER_AVAILABLE = False
+STATE_MANAGER_AVAILABLE = False
 
 # --- Настройки сервера ---
 HOST = "0.0.0.0"  # Слушаем на всех интерфейсах

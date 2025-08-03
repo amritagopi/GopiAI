@@ -28,6 +28,17 @@ import traceback
 import weakref
 from typing import Optional, Dict, Any
 
+# Импорт улучшений стабильности
+try:
+    from .ui_stability_enhancements import (
+        stability_manager, stable_widget_creation, safe_widget_operation,
+        error_recovery, stability_monitor
+    )
+    STABILITY_ENHANCEMENTS_AVAILABLE = True
+except ImportError:
+    STABILITY_ENHANCEMENTS_AVAILABLE = False
+    logger.warning("Улучшения стабильности UI недоступны")
+
 # Импорт системы отображения ошибок
 try:
     from .error_display import ErrorDisplayWidget, show_critical_error
@@ -122,140 +133,338 @@ class BackgroundImageWidget(QLabel):
 
 
 class CustomTabWidget(QTabWidget):
-    """Кастомный виджет вкладок с контекстным меню"""
+    """Кастомный виджет вкладок с контекстным меню и улучшенной обработкой ошибок"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.parent_widget = parent
+        self._tab_close_in_progress = False  # Флаг для предотвращения рекурсивных закрытий
 
+    @safe_widget_operation("context_menu_creation")
     def contextMenuEvent(self, event):
-        """Обработка правого клика для показа контекстного меню"""
-        # Определяем, на какой вкладке был клик
-        tab_index = self.tabBar().tabAt(event.pos())
-        if tab_index == -1:
-            return
+        """Обработка правого клика для показа контекстного меню с улучшенной обработкой ошибок"""
+        try:
+            # Определяем, на какой вкладке был клик
+            tab_index = self.tabBar().tabAt(event.pos())
+            if tab_index == -1:
+                logger.debug("Клик вне области вкладок, контекстное меню не показывается")
+                return
 
-        # Создаем контекстное меню
-        menu = QMenu(self)
+            # Проверяем, что индекс валиден
+            if not (0 <= tab_index < self.count()):
+                logger.warning(f"Невалидный индекс вкладки для контекстного меню: {tab_index}")
+                return
 
-        # Опции закрытия
-        close_current_action = menu.addAction("🗙 Закрыть вкладку")
-        close_current_action.triggered.connect(
-            lambda: self._close_tab_at_index(tab_index)
-        )
+            # Создаем контекстное меню с обработкой ошибок
+            menu = QMenu(self)
+            if not menu:
+                logger.error("Не удалось создать контекстное меню")
+                return
 
-        close_others_action = menu.addAction("🗙 Закрыть остальные")
-        close_others_action.triggered.connect(lambda: self._close_other_tabs(tab_index))
-
-        close_all_action = menu.addAction("🗙 Закрыть все")
-        close_all_action.triggered.connect(self._close_all_tabs)
-
-        menu.addSeparator()
-
-        # Дополнительные опции
-        close_left_action = menu.addAction("← Закрыть слева")
-        close_left_action.triggered.connect(lambda: self._close_tabs_to_left(tab_index))
-
-        close_right_action = menu.addAction("→ Закрыть справа")
-        close_right_action.triggered.connect(
-            lambda: self._close_tabs_to_right(tab_index)
-        )
-
-        # Отключаем опции, если они неприменимы
-        if self.count() <= 1:
-            close_others_action.setEnabled(False)
-            close_all_action.setEnabled(False)
-
-        if tab_index == 0:
-            close_left_action.setEnabled(False)
-
-        if tab_index == self.count() - 1:
-            close_right_action.setEnabled(False)
-
-        # Показываем меню
-        menu.exec(event.globalPos())
-
-    def _close_tab_at_index(self, index):
-        """Закрытие вкладки по индексу"""
-        if 0 <= index < self.count():
-            self.removeTab(index)
-            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
-                self.parent_widget._update_display()
-
-    def _close_other_tabs(self, keep_index):
-        """Закрытие всех вкладок кроме указанной"""
-        if keep_index < 0 or keep_index >= self.count():
-            return
-
-        # Безопасное закрытие с защитой от бесконечного цикла
-        max_iterations = 100
-        iteration = 0
-
-        # Закрываем справа от keep_index
-        while self.count() > keep_index + 1 and iteration < max_iterations:
-            self.removeTab(keep_index + 1)
-            iteration += 1
-
-        # Закрываем слева от keep_index
-        iteration = 0
-        while keep_index > 0 and iteration < max_iterations:
-            self.removeTab(0)
-            keep_index -= 1
-            iteration += 1
-
-        if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
-            self.parent_widget._update_display()
-
-    def _close_all_tabs(self):
-        """Закрытие всех вкладок"""
-        # Безопасное закрытие всех вкладок с защитой от бесконечного цикла
-        max_iterations = 100  # Защита от бесконечного цикла
-        iteration = 0
-
-        while self.count() > 0 and iteration < max_iterations:
-            self.removeTab(0)
-            iteration += 1
-
-        if iteration >= max_iterations:
-            logger.warning(
-                "Достигнуто максимальное количество итераций при закрытии всех вкладок"
+            # Опции закрытия с проверкой состояния
+            close_current_action = menu.addAction("🗙 Закрыть вкладку")
+            close_current_action.triggered.connect(
+                lambda: self._safe_close_tab_at_index(tab_index)
             )
 
-        if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
-            self.parent_widget._update_display()
+            close_others_action = menu.addAction("🗙 Закрыть остальные")
+            close_others_action.triggered.connect(
+                lambda: self._safe_close_other_tabs(tab_index)
+            )
 
-    def _close_tabs_to_left(self, index):
-        """Закрытие всех вкладок слева от указанной"""
-        if index <= 0:
+            close_all_action = menu.addAction("🗙 Закрыть все")
+            close_all_action.triggered.connect(self._safe_close_all_tabs)
+
+            menu.addSeparator()
+
+            # Дополнительные опции
+            close_left_action = menu.addAction("← Закрыть слева")
+            close_left_action.triggered.connect(
+                lambda: self._safe_close_tabs_to_left(tab_index)
+            )
+
+            close_right_action = menu.addAction("→ Закрыть справа")
+            close_right_action.triggered.connect(
+                lambda: self._safe_close_tabs_to_right(tab_index)
+            )
+
+            # Отключаем опции, если они неприменимы
+            current_count = self.count()
+            if current_count <= 1:
+                close_others_action.setEnabled(False)
+                close_all_action.setEnabled(False)
+
+            if tab_index == 0:
+                close_left_action.setEnabled(False)
+
+            if tab_index == current_count - 1:
+                close_right_action.setEnabled(False)
+
+            # Показываем меню с проверкой
+            if event.globalPos().isNull():
+                logger.warning("Невалидная позиция для контекстного меню")
+                return
+                
+            menu.exec(event.globalPos())
+            logger.debug(f"Показано контекстное меню для вкладки {tab_index}")
+
+        except Exception as e:
+            logger.error(f"Ошибка создания контекстного меню: {e}", exc_info=True)
+            # Показываем упрощенное меню в случае ошибки
+            self._show_fallback_context_menu(event, tab_index)
+
+    def _show_fallback_context_menu(self, event, tab_index):
+        """Показ упрощенного контекстного меню в случае ошибки"""
+        try:
+            menu = QMenu(self)
+            close_action = menu.addAction("Закрыть вкладку")
+            close_action.triggered.connect(lambda: self._safe_close_tab_at_index(tab_index))
+            menu.exec(event.globalPos())
+            logger.info("Показано упрощенное контекстное меню")
+        except Exception as e:
+            logger.error(f"Ошибка показа упрощенного контекстного меню: {e}")
+
+    @safe_widget_operation("tab_closing")
+    def _safe_close_tab_at_index(self, index):
+        """Безопасное закрытие вкладки по индексу с обработкой ошибок"""
+        if self._tab_close_in_progress:
+            logger.debug("Закрытие вкладки уже в процессе, пропускаем")
             return
 
-        # Безопасное закрытие с защитой от бесконечного цикла
-        max_iterations = 100
-        iteration = 0
+        try:
+            self._tab_close_in_progress = True
+            
+            if not (0 <= index < self.count()):
+                logger.warning(f"Попытка закрыть вкладку с невалидным индексом: {index}")
+                return
 
-        while index > 0 and iteration < max_iterations:
-            self.removeTab(0)
-            index -= 1
-            iteration += 1
+            # Получаем виджет перед закрытием для правильной очистки
+            widget = self.widget(index)
+            tab_title = self.tabText(index)
+            
+            logger.debug(f"Закрываем вкладку '{tab_title}' с индексом {index}")
 
-        if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
-            self.parent_widget._update_display()
+            # Выполняем очистку виджета
+            if widget and self.parent_widget:
+                self.parent_widget._cleanup_tab_widget(widget)
 
-    def _close_tabs_to_right(self, index):
-        """Закрытие всех вкладок справа от указанной"""
-        if index < 0 or index >= self.count() - 1:
+            # Закрываем вкладку
+            self.removeTab(index)
+            
+            # Обновляем отображение
+            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
+                self.parent_widget._update_display()
+                
+            logger.info(f"Вкладка '{tab_title}' успешно закрыта")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия вкладки {index}: {e}", exc_info=True)
+            # Попытка принудительного закрытия
+            try:
+                if 0 <= index < self.count():
+                    self.removeTab(index)
+                    logger.warning(f"Принудительно закрыта вкладка {index}")
+            except Exception as force_error:
+                logger.error(f"Ошибка принудительного закрытия вкладки {index}: {force_error}")
+        finally:
+            self._tab_close_in_progress = False
+
+    @safe_widget_operation("multiple_tab_closing")
+    def _safe_close_other_tabs(self, keep_index):
+        """Безопасное закрытие всех вкладок кроме указанной"""
+        if self._tab_close_in_progress:
+            logger.debug("Закрытие вкладок уже в процессе, пропускаем")
             return
 
-        # Безопасное закрытие с защитой от бесконечного цикла
-        max_iterations = 100
-        iteration = 0
+        try:
+            self._tab_close_in_progress = True
+            
+            if not (0 <= keep_index < self.count()):
+                logger.warning(f"Невалидный индекс для сохранения: {keep_index}")
+                return
 
-        while self.count() > index + 1 and iteration < max_iterations:
-            self.removeTab(index + 1)
-            iteration += 1
+            initial_count = self.count()
+            logger.debug(f"Закрываем все вкладки кроме {keep_index}, всего вкладок: {initial_count}")
 
-        if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
-            self.parent_widget._update_display()
+            # Безопасное закрытие с защитой от бесконечного цикла
+            max_iterations = 100
+            iteration = 0
+
+            # Закрываем справа от keep_index
+            while self.count() > keep_index + 1 and iteration < max_iterations:
+                try:
+                    widget = self.widget(keep_index + 1)
+                    if widget and self.parent_widget:
+                        self.parent_widget._cleanup_tab_widget(widget)
+                    self.removeTab(keep_index + 1)
+                    iteration += 1
+                except Exception as e:
+                    logger.error(f"Ошибка закрытия вкладки справа: {e}")
+                    break
+
+            # Закрываем слева от keep_index
+            iteration = 0
+            while keep_index > 0 and iteration < max_iterations:
+                try:
+                    widget = self.widget(0)
+                    if widget and self.parent_widget:
+                        self.parent_widget._cleanup_tab_widget(widget)
+                    self.removeTab(0)
+                    keep_index -= 1
+                    iteration += 1
+                except Exception as e:
+                    logger.error(f"Ошибка закрытия вкладки слева: {e}")
+                    break
+
+            # Обновляем отображение
+            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
+                self.parent_widget._update_display()
+                
+            logger.info(f"Закрыто {initial_count - self.count()} вкладок, осталось {self.count()}")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия других вкладок: {e}", exc_info=True)
+        finally:
+            self._tab_close_in_progress = False
+
+    @safe_widget_operation("all_tabs_closing")
+    def _safe_close_all_tabs(self):
+        """Безопасное закрытие всех вкладок"""
+        if self._tab_close_in_progress:
+            logger.debug("Закрытие вкладок уже в процессе, пропускаем")
+            return
+
+        try:
+            self._tab_close_in_progress = True
+            
+            initial_count = self.count()
+            logger.debug(f"Закрываем все {initial_count} вкладок")
+
+            # Безопасное закрытие всех вкладок с защитой от бесконечного цикла
+            max_iterations = 100
+            iteration = 0
+
+            while self.count() > 0 and iteration < max_iterations:
+                try:
+                    widget = self.widget(0)
+                    if widget and self.parent_widget:
+                        self.parent_widget._cleanup_tab_widget(widget)
+                    self.removeTab(0)
+                    iteration += 1
+                except Exception as e:
+                    logger.error(f"Ошибка закрытия вкладки при закрытии всех: {e}")
+                    # Принудительное удаление в случае ошибки
+                    try:
+                        self.removeTab(0)
+                    except:
+                        break
+
+            if iteration >= max_iterations:
+                logger.warning(
+                    f"Достигнуто максимальное количество итераций при закрытии всех вкладок. "
+                    f"Осталось {self.count()} вкладок"
+                )
+
+            # Обновляем отображение
+            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
+                self.parent_widget._update_display()
+                
+            logger.info(f"Закрыто {initial_count - self.count()} из {initial_count} вкладок")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия всех вкладок: {e}", exc_info=True)
+        finally:
+            self._tab_close_in_progress = False
+
+    @safe_widget_operation("left_tabs_closing")
+    def _safe_close_tabs_to_left(self, index):
+        """Безопасное закрытие всех вкладок слева от указанной"""
+        if self._tab_close_in_progress:
+            logger.debug("Закрытие вкладок уже в процессе, пропускаем")
+            return
+
+        try:
+            self._tab_close_in_progress = True
+            
+            if index <= 0:
+                logger.debug("Нет вкладок слева для закрытия")
+                return
+
+            logger.debug(f"Закрываем {index} вкладок слева от индекса {index}")
+
+            # Безопасное закрытие с защитой от бесконечного цикла
+            max_iterations = 100
+            iteration = 0
+            closed_count = 0
+
+            while index > 0 and iteration < max_iterations:
+                try:
+                    widget = self.widget(0)
+                    if widget and self.parent_widget:
+                        self.parent_widget._cleanup_tab_widget(widget)
+                    self.removeTab(0)
+                    index -= 1
+                    closed_count += 1
+                    iteration += 1
+                except Exception as e:
+                    logger.error(f"Ошибка закрытия вкладки слева: {e}")
+                    break
+
+            # Обновляем отображение
+            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
+                self.parent_widget._update_display()
+                
+            logger.info(f"Закрыто {closed_count} вкладок слева")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия вкладок слева: {e}", exc_info=True)
+        finally:
+            self._tab_close_in_progress = False
+
+    @safe_widget_operation("right_tabs_closing")
+    def _safe_close_tabs_to_right(self, index):
+        """Безопасное закрытие всех вкладок справа от указанной"""
+        if self._tab_close_in_progress:
+            logger.debug("Закрытие вкладок уже в процессе, пропускаем")
+            return
+
+        try:
+            self._tab_close_in_progress = True
+            
+            if index < 0 or index >= self.count() - 1:
+                logger.debug("Нет вкладок справа для закрытия")
+                return
+
+            tabs_to_close = self.count() - index - 1
+            logger.debug(f"Закрываем {tabs_to_close} вкладок справа от индекса {index}")
+
+            # Безопасное закрытие с защитой от бесконечного цикла
+            max_iterations = 100
+            iteration = 0
+            closed_count = 0
+
+            while self.count() > index + 1 and iteration < max_iterations:
+                try:
+                    widget = self.widget(index + 1)
+                    if widget and self.parent_widget:
+                        self.parent_widget._cleanup_tab_widget(widget)
+                    self.removeTab(index + 1)
+                    closed_count += 1
+                    iteration += 1
+                except Exception as e:
+                    logger.error(f"Ошибка закрытия вкладки справа: {e}")
+                    break
+
+            # Обновляем отображение
+            if self.parent_widget and hasattr(self.parent_widget, "_update_display"):
+                self.parent_widget._update_display()
+                
+            logger.info(f"Закрыто {closed_count} вкладок справа")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия вкладок справа: {e}", exc_info=True)
+        finally:
+            self._tab_close_in_progress = False
 
 
 class TabDocumentWidget(QWidget):
@@ -271,7 +480,43 @@ class TabDocumentWidget(QWidget):
         # Система отображения ошибок
         self._error_display: Optional[ErrorDisplayWidget] = None
 
+        # Инициализация мониторинга стабильности
+        if STABILITY_ENHANCEMENTS_AVAILABLE:
+            self._init_stability_monitoring()
+
         self._setup_ui()
+        
+    def _init_stability_monitoring(self):
+        """Инициализация мониторинга стабильности"""
+        try:
+            # Подключаем обработчик проблем стабильности
+            stability_monitor.stability_issue_detected.connect(self._handle_stability_issue)
+            
+            # Запускаем мониторинг, если он еще не запущен
+            if not stability_monitor.timer.isActive():
+                stability_monitor.start_monitoring()
+                
+            logger.debug("Мониторинг стабильности инициализирован для TabDocumentWidget")
+        except Exception as e:
+            logger.error(f"Ошибка инициализации мониторинга стабильности: {e}")
+            
+    def _handle_stability_issue(self, issue_type: str, data: dict):
+        """Обработка проблем стабильности"""
+        try:
+            if issue_type == "memory_leaks" and self._error_display:
+                self._error_display.show_generic_error(
+                    "Обнаружены утечки памяти",
+                    f"Система обнаружила {data.get('memory_leaks_detected', 0)} утечек памяти в UI компонентах.",
+                    "Рекомендуется перезапустить приложение для оптимальной производительности."
+                )
+            elif issue_type == "high_creation_errors" and self._error_display:
+                self._error_display.show_generic_error(
+                    "Множественные ошибки создания виджетов",
+                    f"Обнаружено {data.get('widget_creation_errors', 0)} ошибок создания виджетов.",
+                    "Возможны проблемы со стабильностью системы."
+                )
+        except Exception as e:
+            logger.error(f"Ошибка обработки проблемы стабильности {issue_type}: {e}")
 
     def _setup_ui(self):
         """Настройка интерфейса вкладок"""
@@ -291,7 +536,7 @@ class TabDocumentWidget(QWidget):
             "GopiAI-Assets",
             "gopiai",
             "assets",
-            "wallpaper.png",
+            "lotus_animation.svg",
         )
         image_path = os.path.abspath(image_path)
 
@@ -330,34 +575,149 @@ class TabDocumentWidget(QWidget):
             self._error_display.retryRequested.connect(self._handle_error_retry)
             self._error_display.dismissRequested.connect(self._handle_error_dismiss)
             layout.addWidget(self._error_display)
+        else:
+            self._error_display = None
+            logger.warning("Система отображения ошибок недоступна")
 
     def _update_display(self):
-        """Обновление отображения в зависимости от количества вкладок"""
-        if self.tab_widget.count() > 0:
-            # Есть вкладки - показываем виджет вкладок
-            self.stacked_widget.setCurrentWidget(self.tab_widget)
-        else:
-            # Нет вкладок - показываем фоновое изображение
-            self.stacked_widget.setCurrentWidget(self.background_widget)
+        """Улучшенное обновление отображения в зависимости от количества вкладок"""
+        try:
+            current_tab_count = self.tab_widget.count()
+            logger.debug(f"Обновляем отображение, количество вкладок: {current_tab_count}")
+            
+            if current_tab_count > 0:
+                # Есть вкладки - показываем виджет вкладок
+                if self.stacked_widget.currentWidget() != self.tab_widget:
+                    self.stacked_widget.setCurrentWidget(self.tab_widget)
+                    logger.debug("Переключились на отображение вкладок")
+            else:
+                # Нет вкладок - показываем фоновое изображение
+                if self.stacked_widget.currentWidget() != self.background_widget:
+                    self.stacked_widget.setCurrentWidget(self.background_widget)
+                    logger.debug("Переключились на фоновое изображение")
+                    
+                # Убеждаемся, что фоновое изображение корректно отображается
+                self._ensure_background_display()
+                
+        except Exception as e:
+            logger.error(f"Ошибка обновления отображения: {e}", exc_info=True)
+            
+            # Обработка ошибки через систему стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.handle_error("display_update", e, {
+                    'tab_count': getattr(self.tab_widget, 'count', lambda: -1)(),
+                    'current_widget': str(self.stacked_widget.currentWidget())
+                })
+            
+            # Fallback - пытаемся показать фон
+            try:
+                self.stacked_widget.setCurrentWidget(self.background_widget)
+                logger.warning("Использован fallback для отображения фона")
+            except Exception as fallback_error:
+                logger.error(f"Ошибка fallback отображения: {fallback_error}")
 
+    def _ensure_background_display(self):
+        """Обеспечение корректного отображения фонового изображения"""
+        try:
+            if not self.background_widget:
+                logger.warning("Фоновый виджет не инициализирован")
+                return
+                
+            # Проверяем, что изображение загружено
+            if not self.background_widget.original_pixmap:
+                logger.warning("Фоновое изображение не загружено, перезагружаем")
+                self.background_widget.load_image()
+                
+            # Принудительно обновляем масштабирование
+            self.background_widget.scale_image()
+            
+            # Убеждаемся, что виджет видим
+            if not self.background_widget.isVisible():
+                self.background_widget.setVisible(True)
+                
+            logger.debug("Фоновое изображение корректно отображается")
+            
+        except Exception as e:
+            logger.error(f"Ошибка обеспечения отображения фона: {e}", exc_info=True)
+
+    @stable_widget_creation(fallback_factory=lambda self, title="Новый документ", content="": self._create_fallback_text_editor(title, content))
+    @safe_widget_operation("text_tab_creation")
     def add_new_tab(self, title="Новый документ", content=""):
-        """Добавление новой вкладки с текстовым редактором"""
-        if TEXT_EDITOR_AVAILABLE:
-            # Используем продвинутый текстовый редактор с нумерацией строк
-            editor = TextEditorWidget()
-            editor.text_editor.setPlainText(content)  # type: ignore
-            logger.info(f"Создана вкладка с TextEditorWidget: {title}")
-        else:
+        """Улучшенное добавление новой вкладки с текстовым редактором"""
+        editor = None
+        
+        try:
+            if TEXT_EDITOR_AVAILABLE:
+                # Используем продвинутый текстовый редактор с нумерацией строк
+                editor = TextEditorWidget()
+                if hasattr(editor, 'text_editor') and editor.text_editor:
+                    editor.text_editor.setPlainText(content)
+                else:
+                    # Fallback если text_editor недоступен
+                    editor.setPlainText(content)
+                    
+                # Сохраняем ссылку на виджет
+                widget_id = id(editor)
+                self._widget_references[widget_id] = editor
+                
+                # Регистрируем в менеджере стабильности
+                if STABILITY_ENHANCEMENTS_AVAILABLE:
+                    stability_manager.register_widget(f"text_editor_{widget_id}", editor)
+
+                index = self.tab_widget.addTab(editor, title)
+                self.tab_widget.setCurrentIndex(index)
+                self._update_display()
+                
+                logger.info(f"Создана вкладка с TextEditorWidget: {title}")
+                return editor
+            else:
+                raise ImportError("TextEditorWidget недоступен")
+
+        except Exception as e:
+            logger.error(f"Ошибка создания текстовой вкладки: {e}", exc_info=True)
+            
+            # Показываем ошибку пользователю
+            if self._error_display:
+                self._error_display.show_component_error(
+                    "Текстовый редактор", str(e), fallback_available=True
+                )
+
             # Fallback к обычному QTextEdit
+            return self._create_fallback_text_editor(title, content)
+
+    def _create_fallback_text_editor(self, title: str, content: str = "") -> Optional[QTextEdit]:
+        """Создание fallback текстового редактора"""
+        try:
             editor = QTextEdit()
             editor.setPlainText(content)
-            logger.info(f"Создана вкладка с QTextEdit (fallback): {title}")
+            
+            # Сохраняем ссылку на fallback виджет
+            widget_id = id(editor)
+            self._widget_references[widget_id] = editor
+            
+            # Регистрируем в менеджере стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.register_widget(f"fallback_text_{widget_id}", editor)
 
-        index = self.tab_widget.addTab(editor, title)
-        self.tab_widget.setCurrentIndex(index)
-        self._update_display()  # Обновляем отображение
-        return editor
+            index = self.tab_widget.addTab(editor, f"{title} (простой редактор)")
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            
+            logger.info(f"Создана fallback текстовая вкладка: {title}")
+            return editor
 
+        except Exception as fallback_error:
+            logger.critical(f"Критическая ошибка создания fallback текстового редактора: {fallback_error}")
+            if self._error_display:
+                self._error_display.show_generic_error(
+                    "Критическая ошибка",
+                    "Не удалось создать ни основной, ни резервный текстовый редактор",
+                    str(fallback_error)
+                )
+            return None
+
+    @stable_widget_creation(fallback_factory=lambda self, title="Новый блокнот", content="", menu_bar=None: self._create_fallback_notebook(title, content))
+    @safe_widget_operation("notebook_tab_creation")
     def add_notebook_tab(self, title="Новый блокнот", content="", menu_bar=None):
         """Добавление новой вкладки-блокнота с форматированием (чистый rich text notebook)"""
         notebook = None
@@ -372,6 +732,10 @@ class TabDocumentWidget(QWidget):
                 # Сохраняем ссылку на виджет для предотвращения garbage collection
                 widget_id = id(notebook)
                 self._widget_references[widget_id] = notebook
+                
+                # Регистрируем в менеджере стабильности
+                if STABILITY_ENHANCEMENTS_AVAILABLE:
+                    stability_manager.register_widget(f"notebook_{widget_id}", notebook)
 
                 index = self.tab_widget.addTab(notebook, title)
                 self.tab_widget.setCurrentIndex(index)
@@ -399,6 +763,19 @@ class TabDocumentWidget(QWidget):
 
         except Exception as e:
             logger.error(f"Ошибка создания блокнота: {e}", exc_info=True)
+            
+            # Попытка восстановления через систему восстановления
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                recovery_success = error_recovery.attempt_recovery(
+                    'widget_creation', e, {
+                        'widget_type': 'notebook',
+                        'title': title,
+                        'fallback_factory': lambda: self._create_fallback_notebook(title, content)
+                    }
+                )
+                if recovery_success:
+                    return self._create_fallback_notebook(title, content)
+            
             fallback_used = True
 
             # Показываем ошибку пользователю
@@ -408,111 +785,345 @@ class TabDocumentWidget(QWidget):
                 )
 
             # Fallback к обычному текстовому редактору
-            try:
-                fallback_editor = QTextEdit()
-                fallback_editor.setPlainText(content if content else "")
-                fallback_editor.setAcceptRichText(
-                    True
-                )  # Включаем поддержку форматирования
-
-                # Сохраняем ссылку на fallback виджет
-                widget_id = id(fallback_editor)
-                self._widget_references[widget_id] = fallback_editor
-
-                index = self.tab_widget.addTab(
-                    fallback_editor, f"{title} (простой редактор)"
-                )
-                self.tab_widget.setCurrentIndex(index)
-                self._update_display()
-                logger.info(f"Создана fallback вкладка-блокнот: {title}")
-                return fallback_editor
-
-            except Exception as fallback_error:
-                logger.critical(
-                    f"Критическая ошибка создания fallback редактора: {fallback_error}"
-                )
-                if self._error_display:
-                    self._error_display.show_generic_error(
-                        "Критическая ошибка",
-                        "Не удалось создать ни основной, ни резервный редактор",
-                        str(fallback_error),
-                    )
-                elif show_critical_error:
-                    show_critical_error(
-                        "Не удалось создать редактор",
-                        f"Основная ошибка: {str(e)}\nОшибка fallback: {str(fallback_error)}",
-                        self,
-                    )
-                return None
-
-    def open_file_in_tab(self, file_path):
-        """Открытие файла в новой вкладке"""
+            return self._create_fallback_notebook(title, content)
+            
+    def _create_fallback_notebook(self, title: str, content: str = "") -> Optional[QTextEdit]:
+        """Создание fallback блокнота"""
         try:
-            if TEXT_EDITOR_AVAILABLE:
-                # Создаем текстовый редактор
-                editor = TextEditorWidget()
-                editor.current_file = file_path
-                with open(file_path, "rb") as f:
-                    raw = f.read()
-                encoding = chardet.detect(raw)["encoding"] or "utf-8"
-                text = raw.decode(encoding, errors="replace")
-                editor.current_encoding = encoding
-                editor.text_editor.setPlainText(text)
-                tab_title = os.path.basename(file_path)
-                editor.file_name_changed.connect(
-                    lambda name: self._update_tab_title(editor, name)
+            fallback_editor = QTextEdit()
+            fallback_editor.setPlainText(content if content else "")
+            fallback_editor.setAcceptRichText(True)  # Включаем поддержку форматирования
+
+            # Сохраняем ссылку на fallback виджет
+            widget_id = id(fallback_editor)
+            self._widget_references[widget_id] = fallback_editor
+            
+            # Регистрируем в менеджере стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.register_widget(f"fallback_notebook_{widget_id}", fallback_editor)
+
+            index = self.tab_widget.addTab(
+                fallback_editor, f"{title} (простой редактор)"
+            )
+            self.tab_widget.setCurrentIndex(index)
+            self._update_display()
+            logger.info(f"Создана fallback вкладка-блокнот: {title}")
+            return fallback_editor
+
+        except Exception as fallback_error:
+            logger.critical(
+                f"Критическая ошибка создания fallback редактора: {fallback_error}"
+            )
+            if self._error_display:
+                self._error_display.show_generic_error(
+                    "Критическая ошибка",
+                    "Не удалось создать ни основной, ни резервный редактор",
+                    str(fallback_error),
                 )
+            elif show_critical_error:
+                show_critical_error(
+                    "Не удалось создать редактор",
+                    f"Ошибка fallback: {str(fallback_error)}",
+                    self,
+                )
+            return None
+
+    @stable_widget_creation(fallback_factory=lambda self, file_path: self._create_error_tab(f"Ошибка открытия файла: {file_path}"))
+    @safe_widget_operation("file_opening")
+    def open_file_in_tab(self, file_path):
+        """Улучшенное открытие файла в новой вкладке с обработкой ошибок"""
+        editor = None
+        
+        try:
+            # Проверяем существование файла
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"Файл не найден: {file_path}")
+                
+            # Проверяем права на чтение
+            if not os.access(file_path, os.R_OK):
+                raise PermissionError(f"Нет прав на чтение файла: {file_path}")
+
+            # Читаем файл с определением кодировки
+            with open(file_path, "rb") as f:
+                raw = f.read()
+                
+            # Определяем кодировку
+            encoding_info = chardet.detect(raw)
+            encoding = encoding_info.get("encoding", "utf-8") or "utf-8"
+            confidence = encoding_info.get("confidence", 0)
+            
+            if confidence < 0.7:
+                logger.warning(f"Низкая уверенность в кодировке {encoding} ({confidence:.2f}) для файла {file_path}")
+                
+            text = raw.decode(encoding, errors="replace")
+            tab_title = os.path.basename(file_path)
+
+            if TEXT_EDITOR_AVAILABLE:
+                # Создаем продвинутый текстовый редактор
+                editor = TextEditorWidget()
+                
+                # Устанавливаем свойства файла
+                if hasattr(editor, 'current_file'):
+                    editor.current_file = file_path
+                if hasattr(editor, 'current_encoding'):
+                    editor.current_encoding = encoding
+                    
+                # Устанавливаем текст
+                if hasattr(editor, 'text_editor') and editor.text_editor:
+                    editor.text_editor.setPlainText(text)
+                else:
+                    editor.setPlainText(text)
+                
+                # Подключаем сигнал изменения имени файла
+                if hasattr(editor, 'file_name_changed'):
+                    editor.file_name_changed.connect(
+                        lambda name: self._update_tab_title(editor, name)
+                    )
+                    
                 logger.info(f"Файл открыт в TextEditorWidget: {file_path}")
             else:
                 # Fallback к обычному редактору
                 editor = QTextEdit()
-                with open(file_path, "rb") as f:
-                    raw = f.read()
-                encoding = chardet.detect(raw)["encoding"] or "utf-8"
-                content = raw.decode(encoding, errors="replace")
-                editor.setPlainText(content)
-                tab_title = os.path.basename(file_path)  # type: ignore
+                editor.setPlainText(text)
                 logger.info(f"Файл открыт в QTextEdit (fallback): {file_path}")
+
+            # Сохраняем ссылку на виджет
+            widget_id = id(editor)
+            self._widget_references[widget_id] = editor
+            
+            # Регистрируем в менеджере стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.register_widget(f"file_editor_{widget_id}", editor)
 
             # Добавляем вкладку
             index = self.tab_widget.addTab(editor, tab_title)
             self.tab_widget.setCurrentIndex(index)
-            self._update_display()  # Обновляем отображение
+            self._update_display()
+            
+            logger.info(f"Файл '{file_path}' успешно открыт в вкладке")
             return editor
 
-        except Exception as e:  # type: ignore
+        except Exception as e:
             logger.error(f"Ошибка открытия файла {file_path}: {e}", exc_info=True)
+            
+            # Показываем ошибку пользователю
+            if self._error_display:
+                self._error_display.show_generic_error(
+                    "Ошибка открытия файла",
+                    f"Не удалось открыть файл: {os.path.basename(file_path)}",
+                    str(e)
+                )
+            
             # Создаем вкладку с сообщением об ошибке
+            return self._create_error_tab(f"Ошибка открытия файла: {file_path}", str(e))
+
+    def _create_error_tab(self, title: str, error_message: str = "") -> QTextEdit:
+        """Создание вкладки с сообщением об ошибке"""
+        try:
             error_tab = QTextEdit()
-            error_tab.setPlainText(f"Ошибка открытия файла:\n{file_path}\n\n{str(e)}")
+            error_content = f"❌ {title}\n\n"
+            if error_message:
+                error_content += f"Детали ошибки:\n{error_message}\n\n"
+            error_content += "Попробуйте:\n• Проверить путь к файлу\n• Убедиться в наличии прав на чтение\n• Выбрать другой файл"
+            
+            error_tab.setPlainText(error_content)
             error_tab.setReadOnly(True)
-            index = self.tab_widget.addTab(error_tab, "Ошибка")
+            
+            # Сохраняем ссылку на виджет
+            widget_id = id(error_tab)
+            self._widget_references[widget_id] = error_tab
+            
+            # Регистрируем в менеджере стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.register_widget(f"error_tab_{widget_id}", error_tab)
+
+            index = self.tab_widget.addTab(error_tab, "❌ Ошибка")
             self.tab_widget.setCurrentIndex(index)
-            self._update_display()  # Обновляем отображение
+            self._update_display()
+            
+            logger.info(f"Создана вкладка с ошибкой: {title}")
             return error_tab
+            
+        except Exception as tab_error:
+            logger.critical(f"Критическая ошибка создания вкладки с ошибкой: {tab_error}")
+            # Возвращаем минимальный виджет
+            minimal_tab = QTextEdit()
+            minimal_tab.setPlainText("Критическая ошибка создания вкладки")
+            minimal_tab.setReadOnly(True)
+            return minimal_tab
 
     def _update_tab_title(self, editor_widget, new_title):
         """Обновление заголовка вкладки"""
-        for i in range(self.tab_widget.count()):
-            if self.tab_widget.widget(i) == editor_widget:
-                self.tab_widget.setTabText(i, new_title)
-                break
+        try:
+            for i in range(self.tab_widget.count()):
+                if self.tab_widget.widget(i) == editor_widget:
+                    self.tab_widget.setTabText(i, new_title)
+                    logger.debug(f"Обновлен заголовок вкладки {i}: {new_title}")
+                    break
+        except Exception as e:
+            logger.error(f"Ошибка обновления заголовка вкладки: {e}")
 
-    def _close_tab(self, index):
-        """Закрытие вкладки по индексу"""
-        if self.tab_widget.count() > 0 and 0 <= index < self.tab_widget.count():
-            # Получаем виджет перед закрытием
-            widget = self.tab_widget.widget(index)
+    def _handle_error_retry(self):
+        """Обработка запроса повтора после ошибки"""
+        try:
+            logger.info("Пользователь запросил повтор после ошибки")
+            
+            # Скрываем сообщение об ошибке
+            if self._error_display:
+                self._error_display.setVisible(False)
+                
+            # Можно добавить логику повтора последней операции
+            # Пока просто логируем событие
+            
+        except Exception as e:
+            logger.error(f"Ошибка обработки повтора: {e}")
 
+    def _handle_error_dismiss(self):
+        """Обработка отклонения сообщения об ошибке"""
+        try:
+            logger.debug("Пользователь отклонил сообщение об ошибке")
+            
+            # Скрываем сообщение об ошибке
+            if self._error_display:
+                self._error_display.setVisible(False)
+                
+        except Exception as e:
+            logger.error(f"Ошибка отклонения сообщения об ошибке: {e}")
+
+    def get_stability_metrics(self) -> Dict[str, Any]:
+        """Получение метрик стабильности для вкладок"""
+        try:
+            metrics = {
+                'total_tabs': self.tab_widget.count(),
+                'registered_widgets': len(self._widget_references),
+                'background_displayed': self.stacked_widget.currentWidget() == self.background_widget,
+                'error_display_available': ERROR_DISPLAY_AVAILABLE,
+                'stability_enhancements_available': STABILITY_ENHANCEMENTS_AVAILABLE
+            }
+            
+            # Добавляем метрики стабильности, если доступны
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_metrics = stability_manager.get_stability_metrics()
+                metrics.update(stability_metrics)
+                
+            return metrics
+            
+        except Exception as e:
+            logger.error(f"Ошибка получения метрик стабильности: {e}")
+            return {'error': str(e)}
+
+    def force_cleanup(self):
+        """Принудительная очистка всех ресурсов"""
+        try:
+            logger.info("Выполняем принудительную очистку TabDocumentWidget")
+            
+            # Закрываем все вкладки
+            while self.tab_widget.count() > 0:
+                widget = self.tab_widget.widget(0)
+                self._cleanup_tab_widget(widget)
+                self.tab_widget.removeTab(0)
+                
+            # Очищаем словарь ссылок
+            self._widget_references.clear()
+            
+            # Принудительная сборка мусора
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                collected = stability_manager.force_garbage_collection()
+                logger.info(f"Собрано {collected} объектов при принудительной очистке")
+                
+            # Обновляем отображение
+            self._update_display()
+            
+            logger.info("Принудительная очистка завершена")
+            
+        except Exception as e:
+            logger.error(f"Ошибка принудительной очистки: {e}", exc_info=True)
+
+    def _cleanup_tab_widget(self, widget):
+        """Правильная очистка виджета при закрытии вкладки"""
+        try:
+            if not widget:
+                return
+
+            widget_id = id(widget)
+            
             # Удаляем ссылку из словаря для освобождения памяти
-            if widget:
-                widget_id = id(widget)
-                if widget_id in self._widget_references:
-                    del self._widget_references[widget_id]
+            if widget_id in self._widget_references:
+                del self._widget_references[widget_id]
+                logger.debug(f"Удалена ссылка на виджет {widget_id}")
+                
+            # Отменяем регистрацию в менеджере стабильности
+            if STABILITY_ENHANCEMENTS_AVAILABLE:
+                stability_manager.unregister_widget(f"widget_{widget_id}")
+                stability_manager.unregister_widget(f"notebook_{widget_id}")
+                stability_manager.unregister_widget(f"fallback_notebook_{widget_id}")
+                stability_manager.unregister_widget(f"terminal_{widget_id}")
+                logger.debug(f"Отменена регистрация виджета {widget_id} в менеджере стабильности")
+
+            # Дополнительная очистка для специфических типов виджетов
+            try:
+                # Для текстовых редакторов
+                if hasattr(widget, 'clear'):
+                    widget.clear()
+                    
+                # Для веб-виджетов
+                if hasattr(widget, 'page') and hasattr(widget.page(), 'deleteLater'):
+                    widget.page().deleteLater()
+                    
+                # Для виджетов с таймерами
+                if hasattr(widget, 'timer') and hasattr(widget.timer, 'stop'):
+                    widget.timer.stop()
+                    
+            except Exception as cleanup_error:
+                logger.warning(f"Ошибка дополнительной очистки виджета: {cleanup_error}")
+
+        except Exception as e:
+            logger.error(f"Ошибка очистки виджета: {e}", exc_info=True)
+
+    @safe_widget_operation("tab_closing")
+    def _close_tab(self, index):
+        """Улучшенное закрытие вкладки по индексу с обработкой ошибок"""
+        try:
+            if not (self.tab_widget.count() > 0 and 0 <= index < self.tab_widget.count()):
+                logger.warning(f"Попытка закрыть вкладку с невалидным индексом: {index}")
+                return
+
+            # Получаем виджет и заголовок перед закрытием
+            widget = self.tab_widget.widget(index)
+            tab_title = self.tab_widget.tabText(index)
+            
+            logger.debug(f"Закрываем вкладку '{tab_title}' с индексом {index}")
+
+            # Выполняем правильную очистку виджета
+            self._cleanup_tab_widget(widget)
 
             # Закрываем вкладку
             self.tab_widget.removeTab(index)
-            self._update_display()  # Обновляем отображение после закрытия
+            
+            # Обновляем отображение после закрытия
+            self._update_display()
+            
+            logger.info(f"Вкладка '{tab_title}' успешно закрыта")
+
+        except Exception as e:
+            logger.error(f"Ошибка закрытия вкладки {index}: {e}", exc_info=True)
+            
+            # Показываем ошибку пользователю
+            if self._error_display:
+                self._error_display.show_generic_error(
+                    "Ошибка закрытия вкладки",
+                    f"Не удалось корректно закрыть вкладку {index}",
+                    str(e)
+                )
+            
+            # Попытка принудительного закрытия
+            try:
+                if 0 <= index < self.tab_widget.count():
+                    self.tab_widget.removeTab(index)
+                    self._update_display()
+                    logger.warning(f"Принудительно закрыта вкладка {index}")
+            except Exception as force_error:
+                logger.error(f"Ошибка принудительного закрытия вкладки {index}: {force_error}")
 
     def add_browser_tab(self, url="about:blank", title="Браузер"):
         """Добавление новой вкладки с браузером"""  # type: ignore
@@ -763,21 +1374,20 @@ class TabDocumentWidget(QWidget):
         if editor:
             editor.setPlainText(text)
 
-    def _handle_error_retry(self, error_type: str):
-        """Обработка запроса повтора операции после ошибки"""
-        logger.info(f"Повторная попытка операции после ошибки: {error_type}")
-        
-        # Скрываем сообщение об ошибке
-        if self._error_display:
-            self._error_display.setVisible(False)
-        
-        # В зависимости от типа ошибки, пытаемся повторить операцию
-        if error_type == "notebook_creation":
-            self.add_notebook_tab("Новый блокнот (повтор)")
-        elif error_type == "tab_creation":
-            self.add_new_tab("Новый документ (повтор)")
-        elif error_type == "file_open":
-            logger.info("Для повтора открытия файла требуется указать путь")
+    def _handle_error_retry(self):
+        """Обработка запроса повтора после ошибки"""
+        try:
+            logger.info("Пользователь запросил повтор после ошибки")
+            
+            # Скрываем сообщение об ошибке
+            if self._error_display:
+                self._error_display.setVisible(False)
+                
+            # Можно добавить логику повтора последней операции
+            # Пока просто логируем событие
+            
+        except Exception as e:
+            logger.error(f"Ошибка обработки повтора: {e}")
 
     def _handle_error_dismiss(self):
         """Обработка закрытия сообщения об ошибке"""
@@ -1021,17 +1631,7 @@ class TabDocumentWidget(QWidget):
                 logger.warning(f"Ошибка при deleteLater: {e}")
                 
         except Exception as e:
-            logger.error(f"Ошибка очистки виджета вкладки: {e}", exc_info=True)
-        logger.info(f"Запрос повтора операции для типа ошибки: {error_type}")
-
-        if error_type == "component":
-            # Попытка пересоздания компонента
-            try:
-                # Здесь можно добавить логику повтора создания компонента
-                if self._error_display:
-                    self._error_display.setVisible(False)
-            except Exception as e:
-                logger.error(f"Ошибка при повторе операции: {e}")
+            logger.error(f"Ошибка очистки виджета: {e}", exc_info=True)
 
     def _handle_error_dismiss(self):
         """Обработка закрытия ошибки"""

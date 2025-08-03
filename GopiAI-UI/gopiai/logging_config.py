@@ -4,7 +4,7 @@ import os
 
 def setup_logging(
     log_file_path: str = 'application.log',
-    level: int = logging.INFO,
+    level: int = logging.DEBUG,
     console_output: bool = True,
     single_file_mode: bool = True
 ):

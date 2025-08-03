@@ -1,0 +1,803 @@
+{
+  "timestamp": "2025-08-02T15:10:23.281Z",
+  "summary": {
+    "duration": -1754147386747,
+    "totalTests": 84,
+    "totalPassed": 76,
+    "totalFailed": 8,
+    "successRate": 90
+  },
+  "categories": {
+    "task_manage": {
+      "passed": 8,
+      "failed": 0,
+      "total": 8,
+      "successRate": 100
+    },
+    "file_system": {
+      "passed": 11,
+      "failed": 0,
+      "total": 11,
+      "successRate": 100
+    },
+    "browser_control": {
+      "passed": 33,
+      "failed": 0,
+      "total": 33,
+      "successRate": 100
+    },
+    "compatibility": {
+      "passed": 9,
+      "failed": 3,
+      "total": 12,
+      "successRate": 75,
+      "categoryStats": {
+        "Task Management": {
+          "passed": 0,
+          "total": 3
+        },
+        "File System": {
+          "passed": 3,
+          "total": 3
+        },
+        "Browser Automation": {
+          "passed": 6,
+          "total": 6
+        }
+      }
+    },
+    "mcp_handlers": {
+      "passed": 11,
+      "failed": 0,
+      "total": 11,
+      "successRate": 100
+    },
+    "integration": {
+      "passed": 4,
+      "failed": 5,
+      "total": 9,
+      "successRate": 44,
+      "scenarios": [
+        {
+          "name": "Full task workflow compatibility",
+          "category": "Task Management",
+          "success": false,
+          "passed": 0,
+          "failed": 3,
+          "rate": 0,
+          "steps": [
+            {
+              "step": 1,
+              "method": "addTask",
+              "success": false,
+              "duration": 4,
+              "result": {
+                "success": false,
+                "error": "tasks.map is not a function",
+                "action": "add"
+              }
+            },
+            {
+              "step": 2,
+              "method": "listTasks",
+              "success": false,
+              "duration": 2,
+              "result": {
+                "success": true,
+                "tasks": {
+                  "projectName": "ModelSwitchRefactor",
+                  "projectDescription": "Refactor backend and frontend to support stable provider switching between Gemini and OpenRouter",
+                  "lastTaskId": 12,
+                  "tasks": [
+                    {
+                      "id": 1,
+                      "title": "Project Setup: ModelSwitchRefactor",
+                      "description": "Refactor backend and frontend to support stable provider switching between Gemini and OpenRouter",
+                      "status": "done",
+                      "priority": 700,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-28T18:30:08.813Z",
+                      "updatedAt": "2025-07-31T00:08:45.865Z",
+                      "subtasks": [],
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-31T00:02:55.351Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"inprogress\". Message: Starting removal of broken text parsing system"
+                        },
+                        {
+                          "timestamp": "2025-07-31T00:08:45.865Z",
+                          "type": "log",
+                          "message": "Status changed from \"inprogress\" to \"done\". Message: Task completed: Removed broken text parsing system"
+                        }
+                      ],
+                      "lastSubtaskIndex": 0
+                    },
+                    {
+                      "id": 2,
+                      "title": "Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates",
+                      "description": "Add OpenRouter provider support with models list, unify key_map, remove duplicated helper functions, consolidate usage/blacklist structures. Ensure get_api_key_for_provider works.",
+                      "status": "inprogress",
+                      "priority": 701,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-28T18:30:33.136Z",
+                      "updatedAt": "2025-07-31T00:27:53.005Z",
+                      "subtasks": [
+                        {
+                          "id": "2.1",
+                          "title": "Introduce PROVIDERS dict with Gemini and OpenRouter models",
+                          "status": "done",
+                          "createdAt": "2025-07-28T18:30:46.771Z",
+                          "updatedAt": "2025-07-28T18:32:07.791Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-28T18:30:46.771Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Introduce PROVIDERS dict with Gemini and OpenRouter models\""
+                            },
+                            {
+                              "timestamp": "2025-07-28T18:32:07.791Z",
+                              "type": "log",
+                              "message": "Status changed from \"todo\" to \"done\". Message: Implemented PROVIDERS dict and models list with OpenRouter support"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "2.2",
+                          "title": "Create UsageTracker class and replace scattered usage dicts",
+                          "status": "todo",
+                          "createdAt": "2025-07-28T18:30:56.048Z",
+                          "updatedAt": "2025-07-28T18:30:56.048Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-28T18:30:56.048Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Create UsageTracker class and replace scattered usage dicts\""
+                            }
+                          ]
+                        }
+                      ],
+                      "lastSubtaskIndex": 2,
+                      "relatedFiles": [
+                        "GopiAI-CrewAI/llm_rotation_config.py"
+                      ],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-28T18:30:33.136Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Refactor backend llm_rotation_config.py to support OpenRouter and remove duplicates\""
+                        },
+                        {
+                          "timestamp": "2025-07-28T18:32:13.486Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"inprogress\". Message: Backend refactor main part committed"
+                        },
+                        {
+                          "timestamp": "2025-07-31T00:27:53.005Z",
+                          "type": "log",
+                          "message": "Status changed from \"inprogress\" to \"inprogress\". Message: Начинаю реализацию OpenAI-совместимой схемы инструментов"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3,
+                      "title": "Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals",
+                      "description": "Frontend widget should:\n- Present providers in QComboBox based on PROVIDER_KEY_ENV\n- Load models dynamically via llm_rotation_config.get_available_models\n- Single set of widgets, no duplicated signals.\n- Correctly save API keys to .env using unified map.\n- Remove duplicate button connections causing double calls.",
+                      "status": "todo",
+                      "priority": 699,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-28T18:40:36.541Z",
+                      "updatedAt": "2025-07-28T18:40:36.542Z",
+                      "subtasks": [
+                        {
+                          "id": "3.1",
+                          "title": "Replace two provider buttons with QComboBox",
+                          "status": "todo",
+                          "createdAt": "2025-07-28T18:40:46.690Z",
+                          "updatedAt": "2025-07-28T18:40:46.690Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-28T18:40:46.690Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Replace two provider buttons with QComboBox\""
+                            }
+                          ]
+                        },
+                        {
+                          "id": "3.2",
+                          "title": "Refactor model loading to use get_available_models",
+                          "status": "todo",
+                          "createdAt": "2025-07-28T18:40:52.115Z",
+                          "updatedAt": "2025-07-28T18:40:52.115Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-28T18:40:52.115Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Refactor model loading to use get_available_models\""
+                            }
+                          ]
+                        },
+                        {
+                          "id": "3.3",
+                          "title": "Unify API key handling and save to .env",
+                          "status": "todo",
+                          "createdAt": "2025-07-28T18:41:00.204Z",
+                          "updatedAt": "2025-07-28T18:41:00.204Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-28T18:41:00.204Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Unify API key handling and save to .env\""
+                            }
+                          ]
+                        }
+                      ],
+                      "lastSubtaskIndex": 3,
+                      "relatedFiles": [
+                        "GopiAI-UI/gopiai/ui/components/model_selector_widget.py"
+                      ],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-28T18:40:36.542Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Refactor model_selector_widget.py to single-provider dropdown and remove duplicate signals\""
+                        }
+                      ]
+                    },
+                    {
+                      "id": 4,
+                      "title": "Implement provider/model state file synchronization",
+                      "description": "Create ~/.gopiai_state.json storing current provider and model.\nBackend reads on startup; UI writes whenever user changes selection.",
+                      "status": "done",
+                      "priority": 702,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-28T20:22:41.855Z",
+                      "updatedAt": "2025-07-31T00:26:50.567Z",
+                      "subtasks": [
+                        {
+                          "id": "4.1",
+                          "title": "Создать модуль управления файлом состояния",
+                          "status": "done",
+                          "createdAt": "2025-07-31T00:19:47.308Z",
+                          "updatedAt": "2025-07-31T00:21:22.535Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-31T00:19:47.308Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Создать модуль управления файлом состояния\""
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:20:33.969Z",
+                              "type": "log",
+                              "message": "Status changed from \"todo\" to \"inprogress\". Message: Начинаем реализацию синхронизации состояния провайдера/модели"
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:21:22.535Z",
+                              "type": "log",
+                              "message": "Status changed from \"inprogress\" to \"done\". Message: Создан модуль StateManager для управления файлом состояния ~/.gopiai_state.json"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "4.2",
+                          "title": "Интегрировать чтение состояния в backend при запуске",
+                          "status": "done",
+                          "createdAt": "2025-07-31T00:20:08.148Z",
+                          "updatedAt": "2025-07-31T00:23:28.405Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-31T00:20:08.148Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Интегрировать чтение состояния в backend при запуске\""
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:21:30.905Z",
+                              "type": "log",
+                              "message": "Status changed from \"todo\" to \"inprogress\". Message: Интегрируем загрузку состояния в backend при запуске"
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:23:28.405Z",
+                              "type": "log",
+                              "message": "Status changed from \"inprogress\" to \"done\". Message: Интегрирована загрузка и сохранение состояния в backend через StateManager"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "4.3",
+                          "title": "Обновить UI виджет для записи в файл состояния",
+                          "status": "done",
+                          "createdAt": "2025-07-31T00:20:17.337Z",
+                          "updatedAt": "2025-07-31T00:24:32.709Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-31T00:20:17.337Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Обновить UI виджет для записи в файл состояния\""
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:23:36.724Z",
+                              "type": "log",
+                              "message": "Status changed from \"todo\" to \"inprogress\". Message: Обновляем UI виджет для записи в файл состояния"
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:24:32.709Z",
+                              "type": "log",
+                              "message": "Status changed from \"inprogress\" to \"done\". Message: UI виджет обновлён для использования StateManager и синхронизации состояния"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "4.4",
+                          "title": "Создать тесты для синхронизации состояния",
+                          "status": "done",
+                          "createdAt": "2025-07-31T00:20:25.379Z",
+                          "updatedAt": "2025-07-31T00:26:41.624Z",
+                          "activityLog": [
+                            {
+                              "timestamp": "2025-07-31T00:20:25.379Z",
+                              "type": "log",
+                              "message": "Subtask created with title: \"Создать тесты для синхронизации состояния\""
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:24:39.888Z",
+                              "type": "log",
+                              "message": "Status changed from \"todo\" to \"inprogress\". Message: Создаём тесты для синхронизации состояния"
+                            },
+                            {
+                              "timestamp": "2025-07-31T00:26:41.624Z",
+                              "type": "log",
+                              "message": "Status changed from \"inprogress\" to \"done\". Message: Созданы комплексные тесты для синхронизации состояния"
+                            }
+                          ]
+                        }
+                      ],
+                      "lastSubtaskIndex": 4,
+                      "relatedFiles": [
+                        "GopiAI-CrewAI backend",
+                        "GopiAI-UI widget"
+                      ],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-28T20:22:41.855Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Implement provider/model state file synchronization\""
+                        },
+                        {
+                          "timestamp": "2025-07-31T00:26:50.567Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Реализована полная синхронизация состояния провайдера/модели через файл ~/.gopiai_state.json"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 5,
+                      "title": "Создание ветки для исправлений",
+                      "description": "Создать git ветку fix/llm-provider-switch для изоляции изменений",
+                      "status": "done",
+                      "priority": 698,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:55:51.618Z",
+                      "updatedAt": "2025-07-29T01:58:59.877Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:55:51.621Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Создание ветки для исправлений\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T01:58:59.876Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Создана ветка fix/llm-provider-switch для изоляции изменений"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 6,
+                      "title": "Чистка конфигураций - удаление дубликатов",
+                      "description": "Удалить .env.override, перенести все переменные в .env, упростить settings.yaml",
+                      "status": "done",
+                      "priority": 900,
+                      "priorityDisplay": "critical",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:56:04.138Z",
+                      "updatedAt": "2025-07-29T02:26:10.458Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:56:04.138Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Чистка конфигураций - удаление дубликатов\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:21:08.391Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"inprogress\". Message: Начата чистка конфигураций и удаление дубликатов"
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:26:10.458Z",
+                          "type": "log",
+                          "message": "Status changed from \"inprogress\" to \"done\". Message: Завершена чистка конфигураций и удаление дубликатов. Созданы адаптеры для провайдеров."
+                        }
+                      ]
+                    },
+                    {
+                      "id": 7,
+                      "title": "Выравнивание интерфейса адаптеров LLM",
+                      "description": "Ввести абстракцию BaseAdapter, привести GeminiAdapter и OpenRouterAdapter к идентичной сигнатуре (async + stream support)",
+                      "status": "done",
+                      "priority": 901,
+                      "priorityDisplay": "critical",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:56:25.461Z",
+                      "updatedAt": "2025-07-29T02:26:49.562Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:56:25.461Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Выравнивание интерфейса адаптеров LLM\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:26:49.562Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Создана абстракция BaseAdapter, приведены GeminiAdapter и OpenRouterAdapter к идентичной сигнатуре"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 8,
+                      "title": "Реализация реинициализации клиента LLM",
+                      "description": "Добавить метод swap_provider() в LlmClient для правильной смены провайдера без перезапуска",
+                      "status": "done",
+                      "priority": 899,
+                      "priorityDisplay": "critical",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:56:41.121Z",
+                      "updatedAt": "2025-07-29T02:27:12.685Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:56:41.121Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Реализация реинициализации клиента LLM\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:27:12.685Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Добавлен метод swap_provider() в LlmClient для правильной смены провайдера без перезапуска"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 9,
+                      "title": "Реализация тайм-аутов и обработка ошибок",
+                      "description": "Ввести DEFAULT_TIMEOUT, обернуть вызовы в asyncio.wait_for() для предотвращения зависаний",
+                      "status": "done",
+                      "priority": 703,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:56:53.572Z",
+                      "updatedAt": "2025-07-29T02:37:36.965Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:56:53.572Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Реализация тайм-аутов и обработка ошибок\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:37:36.965Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Реализованы таймауты и улучшена обработка ошибок"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 10,
+                      "title": "Исправление инструментов (filesystem/terminal)",
+                      "description": "Перевести callback-менеджер на EventBus, чтобы инструменты не зависели от конкретного клиента",
+                      "status": "done",
+                      "priority": 697,
+                      "priorityDisplay": "high",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:57:13.131Z",
+                      "updatedAt": "2025-07-29T02:38:13.133Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:57:13.131Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Исправление инструментов (filesystem/terminal)\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:38:13.133Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Инструменты переведены на EventBus, исправлена зависимость от конкретного клиента"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 11,
+                      "title": "Создание тест-матрицы для проверки переключения",
+                      "description": "Создать тесты в tests/llm/test_switch.py: test_provider_toggle(), test_timeout_handling()",
+                      "status": "done",
+                      "priority": 500,
+                      "priorityDisplay": "medium",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:57:25.156Z",
+                      "updatedAt": "2025-07-29T02:38:46.097Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:57:25.156Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Создание тест-матрицы для проверки переключения\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:38:46.097Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Создана тест-матрица для проверки переключения провайдеров"
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "title": "Обновление документации по переключению LLM",
+                      "description": "Обновить 02_DOCUMENTATION/USAGE/llm_switch.md с примерами CLI команд",
+                      "status": "done",
+                      "priority": 501,
+                      "priorityDisplay": "medium",
+                      "dependsOn": [],
+                      "createdAt": "2025-07-29T01:57:53.877Z",
+                      "updatedAt": "2025-07-29T02:27:40.950Z",
+                      "subtasks": [],
+                      "lastSubtaskIndex": 0,
+                      "relatedFiles": [],
+                      "activityLog": [
+                        {
+                          "timestamp": "2025-07-29T01:57:53.877Z",
+                          "type": "log",
+                          "message": "Task created with title: \"Обновление документации по переключению LLM\""
+                        },
+                        {
+                          "timestamp": "2025-07-29T02:27:40.950Z",
+                          "type": "log",
+                          "message": "Status changed from \"todo\" to \"done\". Message: Обновлена документация по переключению LLM с примерами CLI команд"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "step": 3,
+              "method": "updateStatus",
+              "success": false,
+              "duration": 1,
+              "result": {
+                "success": false,
+                "error": "tasks.find is not a function",
+                "action": "update_status"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Full file operations compatibility",
+          "category": "File System",
+          "success": false,
+          "passed": 1,
+          "failed": 2,
+          "rate": 33,
+          "steps": [
+            {
+              "step": 1,
+              "method": "writeFile",
+              "success": true,
+              "duration": 2,
+              "result": {
+                "success": true,
+                "action": "write",
+                "path": "test_files/compat_test.txt",
+                "size": 26,
+                "message": "Файл \"test_files/compat_test.txt\" успешно записан (26 байт)"
+              }
+            },
+            {
+              "step": 2,
+              "method": "readFile",
+              "duration": 1,
+              "result": {
+                "success": true,
+                "action": "read",
+                "files": [
+                  {
+                    "path": "test_files/compat_test.txt",
+                    "success": true,
+                    "content": "Compatibility test content",
+                    "size": 26
+                  }
+                ],
+                "totalFiles": 1,
+                "successfulReads": 1
+              }
+            },
+            {
+              "step": 3,
+              "method": "listDirectory",
+              "success": false,
+              "duration": 1,
+              "result": {
+                "success": true,
+                "action": "list",
+                "directory": "test_files",
+                "items": [
+                  {
+                    "name": "compat_test.txt",
+                    "path": "test_files\\compat_test.txt",
+                    "type": "file",
+                    "size": 26,
+                    "modified": "2025-08-02T15:09:51.691Z",
+                    "permissions": "100666"
+                  },
+                  {
+                    "name": "test.txt",
+                    "path": "test_files\\test.txt",
+                    "type": "file",
+                    "size": 35,
+                    "modified": "2025-08-02T15:09:51.671Z",
+                    "permissions": "100666"
+                  }
+                ],
+                "totalItems": 2,
+                "directories": 0,
+                "files": 2
+              }
+            }
+          ]
+        },
+        {
+          "name": "Full browser workflow compatibility",
+          "category": "Browser Automation",
+          "success": true,
+          "passed": 3,
+          "failed": 0,
+          "rate": 100,
+          "steps": [
+            {
+              "step": 1,
+              "method": "browserNavigate",
+              "success": true,
+              "duration": 2,
+              "result": {
+                "success": true,
+                "action": "navigate",
+                "url": "https://example.com",
+                "title": "Navigated to https://example.com",
+                "timestamp": "2025-08-02T15:09:46.783Z",
+                "options": {}
+              }
+            },
+            {
+              "step": 2,
+              "method": "browserTakeScreenshot",
+              "success": true,
+              "duration": 0,
+              "result": {
+                "success": true,
+                "action": "screenshot",
+                "filename": "compat_test_screenshot.png",
+                "raw": false,
+                "message": "Screenshot saved as compat_test_screenshot.png",
+                "timestamp": "2025-08-02T15:09:51.721Z",
+                "options": {}
+              }
+            },
+            {
+              "step": 3,
+              "method": "browserTabList",
+              "success": true,
+              "duration": 1,
+              "result": {
+                "success": true,
+                "action": "tab_list",
+                "tabs": [
+                  {
+                    "index": 0,
+                    "title": "Tab 1",
+                    "url": "https://example.com",
+                    "active": true
+                  },
+                  {
+                    "index": 1,
+                    "title": "Tab 2",
+                    "url": "https://google.com",
+                    "active": false
+                  }
+                ],
+                "timestamp": "2025-08-02T15:09:51.722Z",
+                "options": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "performance": {
+    "task_manage": {
+      "iterations": 100,
+      "avgTime": 2.459841,
+      "minTime": 0.0504,
+      "maxTime": 6.8918,
+      "p95Time": 4.5344,
+      "opsPerSec": 407
+    },
+    "file_system": {
+      "iterations": 100,
+      "avgTime": 6.464726000000001,
+      "minTime": 4.8333,
+      "maxTime": 23.9764,
+      "p95Time": 9.6062,
+      "opsPerSec": 155
+    },
+    "browser_control": {
+      "iterations": 100,
+      "avgTime": 4.204390000000001,
+      "minTime": 1.5051,
+      "maxTime": 31.5246,
+      "p95Time": 11.2776,
+      "opsPerSec": 238
+    },
+    "loadTests": {
+      "Mixed Operations Load Test": {
+        "duration": 30006,
+        "totalOperations": 80727,
+        "successfulOperations": 80727,
+        "failedOperations": 0,
+        "opsPerSec": 2690,
+        "successRate": 100,
+        "avgResponseTime": 3.7150907602164427
+      }
+    }
+  },
+  "quality": {
+    "codeComplexity": "low",
+    "testCoverage": 85,
+    "maintainability": "high",
+    "performance": "excellent",
+    "reliability": "high",
+    "security": "good"
+  },
+  "config": {
+    "enablePerformanceTests": true,
+    "enableLoadTests": true,
+    "enableIntegrationTests": true,
+    "performanceIterations": 100,
+    "loadTestDuration": 30000,
+    "maxAcceptableLatency": 100,
+    "minSuccessRate": 95
+  }
+}

@@ -14,6 +14,7 @@ const { CallToolRequestSchema, ListToolsRequestSchema } = require('@modelcontext
 // Импортируем унифицированные инструменты
 const { UnifiedTaskTool } = require('./tools/unified_task_tool.js');
 const { UnifiedFileSystemTool } = require('./tools/unified_filesystem_tools.js');
+const { UnifiedBrowserTool } = require('./tools/unified_browser_tools.js');
 
 // Импортируем workspace indexer (через Python bridge)
 const { execSync, spawn } = require('child_process');
@@ -36,6 +37,11 @@ class GopiAIMCPServer {
         // Инициализируем инструменты
         this.taskTool = new UnifiedTaskTool();
         this.fileSystemTool = new UnifiedFileSystemTool();
+        this.browserTool = new UnifiedBrowserTool();
+        
+        // Инициализируем слой обратной совместимости
+        const { CompatibilityLayer } = require('./compatibility_layer.js');
+        this.compatibilityLayer = new CompatibilityLayer();
         
         // Текущее рабочее пространство
         this.currentWorkspace = null;
@@ -207,6 +213,113 @@ class GopiAIMCPServer {
                             },
                             required: []
                         }
+                    },
+
+                    // Унифицированный инструмент браузерной автоматизации
+                    {
+                        name: 'browser_control',
+                        description: 'Унифицированный инструмент браузерной автоматизации с action-based архитектурой. Объединяет 22 браузерных инструмента в 6 групп действий.',
+                        inputSchema: {
+                            type: 'object',
+                            properties: {
+                                action: {
+                                    type: 'string',
+                                    description: 'Тип действия для выполнения',
+                                    enum: ['navigate', 'interact', 'capture', 'upload', 'wait', 'manage']
+                                },
+                                operation: {
+                                    type: 'string',
+                                    description: 'Конкретная операция в рамках действия'
+                                },
+                                url: {
+                                    type: 'string',
+                                    description: 'URL для навигации'
+                                },
+                                element: {
+                                    type: 'string',
+                                    description: 'Человекочитаемое описание элемента'
+                                },
+                                ref: {
+                                    type: 'string',
+                                    description: 'Точная ссылка на элемент со страницы'
+                                },
+                                text: {
+                                    type: 'string',
+                                    description: 'Текст для ввода'
+                                },
+                                values: {
+                                    type: 'array',
+                                    items: { type: 'string' },
+                                    description: 'Значения для выбора'
+                                },
+                                key: {
+                                    type: 'string',
+                                    description: 'Клавиша для нажатия'
+                                },
+                                startElement: {
+                                    type: 'string',
+                                    description: 'Начальный элемент для перетаскивания'
+                                },
+                                endElement: {
+                                    type: 'string',
+                                    description: 'Конечный элемент для перетаскивания'
+                                },
+                                filename: {
+                                    type: 'string',
+                                    description: 'Имя файла для сохранения'
+                                },
+                                raw: {
+                                    type: 'boolean',
+                                    description: 'Формат PNG (true) или JPEG (false)',
+                                    default: false
+                                },
+                                paths: {
+                                    type: 'array',
+                                    items: { type: 'string' },
+                                    description: 'Пути к файлам для загрузки'
+                                },
+                                time: {
+                                    type: 'number',
+                                    description: 'Время ожидания в секундах (максимум 10)',
+                                    maximum: 10
+                                },
+                                textGone: {
+                                    type: 'string',
+                                    description: 'Текст, исчезновения которого нужно ждать'
+                                },
+                                width: {
+                                    type: 'number',
+                                    description: 'Ширина окна браузера'
+                                },
+                                height: {
+                                    type: 'number',
+                                    description: 'Высота окна браузера'
+                                },
+                                accept: {
+                                    type: 'boolean',
+                                    description: 'Принять диалог (true) или отклонить (false)'
+                                },
+                                promptText: {
+                                    type: 'string',
+                                    description: 'Текст для prompt диалогов'
+                                },
+                                index: {
+                                    type: 'number',
+                                    description: 'Индекс вкладки'
+                                },
+                                options: {
+                                    type: 'object',
+                                    description: 'Дополнительные опции для действия',
+                                    properties: {
+                                        timeout: { type: 'number', description: 'Таймаут операции в миллисекундах' },
+                                        selector: { type: 'string', description: 'CSS селектор для поиска элементов' },
+                                        slowly: { type: 'boolean', description: 'Медленный ввод текста' },
+                                        submit: { type: 'boolean', description: 'Отправить форму после ввода' }
+                                    }
+                                }
+                            },
+                            required: ['action']
+                        }
                     }
                 ]
             };
@@ -238,6 +351,9 @@ class GopiAIMCPServer {
 
                     case 'workspace_refresh':
                         return await this.handleWorkspaceRefresh(args);
+
+                    case 'browser_control':
+                        return await this.handleBrowserControl(args);
 
                     default:
                         throw new Error(`Неизвестный инструмент: ${name}`);
@@ -746,6 +862,37 @@ except Exception as e:
         const transport = new StdioServerTransport();
         await this.server.connect(transport);
         console.error('GopiAI MCP Server запущен');
+    }
+
+    // Обработчик унифицированного браузерного инструмента
+    async handleBrowserControl(args) {
+        try {
+            const result = await this.browserTool.execute(args);
+            
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify(result, null, 2)
+                    }
+                ]
+            };
+        } catch (error) {
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: JSON.stringify({
+                            success: false,
+                            error: error.message,
+                            action: args.action || 'unknown',
+                            timestamp: new Date().toISOString()
+                        }, null, 2)
+                    }
+                ],
+                isError: true
+            };
+        }
     }
 }
 

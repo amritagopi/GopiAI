@@ -50,7 +50,7 @@ except ImportError:
 ENV_PATH = Path(os.getenv("GOPIAI_ENV_FILE", Path(__file__).resolve().parents[4] / ".env"))
 
 # Backend API base URL
-BACKEND_BASE_URL = "http://localhost:5051"
+BACKEND_BASE_URL = "disabled" # Connection disabled
 
 
 class ModelSelectorWidget(QWidget):

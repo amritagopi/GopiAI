@@ -139,60 +139,135 @@ class ChatAsyncHandler(QObject):
             else:
                 msg_log = f"{message_data[:50]}..." if len(str(message_data)) > 50 else message_data
             
-            print(f"[DEBUG-ASYNC-BG] Отправка сообщения в CrewAI: {msg_log}")
-            logger.debug(f"[ASYNC] Отправка сообщения в CrewAI: {msg_log}")
+            print(f"[DEBUG-ASYNC-BG] Отправка сообщения через API клиент: {msg_log}")
+            logger.debug(f"[ASYNC] Отправка сообщения через API клиент: {msg_log}")
             
-            print("[DEBUG-ASYNC-BG] Проверяем доступность CrewAI API...")
+            # Используем API клиент вместо прямого обращения к crew_ai_client
+            try:
+                from ..api.client import get_default_client
+                api_client = get_default_client()
+                
+                # Проверяем доступность сервера
+                print("[DEBUG-ASYNC-BG] Проверяем доступность API сервера...")
+                if not api_client.health_check():
+                    print("[DEBUG-ASYNC-BG-ERROR] API сервер недоступен!")
+                    logger.error("[ASYNC-ERROR] API сервер недоступен!")
+                    error_response = {
+                        "status": "error",
+                        "error_code": "CONNECTION_ERROR",
+                        "message": "Сервер недоступен. Проверьте, что бэкенд сервер запущен.",
+                        "response": "**Ошибка подключения к серверу**\n\n"
+                                   "Сервер GopiAI в настоящее время недоступен. Пожалуйста, убедитесь, что:\n\n"
+                                   "1. Сервер запущен и работает\n"
+                                   "2. Сервер доступен по адресу http://localhost:5051\n"
+                                   "3. Нет проблем с сетевыми настройками\n\n"
+                                   "Вы можете перезапустить сервер с помощью соответствующего скрипта."
+                    }
+                    self.message_error.emit(error_response)
+                    return
+                
+                # Извлекаем данные для API запроса
+                message_text = message_data.get('message', '')
+                metadata = message_data.get('metadata', {})
+                model_id = metadata.get('model_id')
+                session_id = metadata.get('session_id')
+                
+                print(f"[DEBUG-ASYNC-BG] Отправляем запрос к API: message='{msg_log}', model_id='{model_id}'")
+                logger.debug(f"[ASYNC] Отправляем запрос к API: model_id='{model_id}', session_id='{session_id}'")
+                
+                # Отправляем сообщение через API клиент
+                response = api_client.send_message(
+                    message=message_text,
+                    model_id=model_id,
+                    session_id=session_id
+                )
+                
+                print(f"[DEBUG-ASYNC-BG] Получен ответ от API: {response}")
+                logger.debug(f"[ASYNC] Получен ответ от API: {response}")
+                
+                if not response:
+                    print("[DEBUG-ASYNC-BG-ERROR] Получен пустой ответ от API")
+                    logger.error("[ASYNC-ERROR] Получен пустой ответ от API")
+                    error_response = {
+                        "status": "error",
+                        "error_code": "EMPTY_RESPONSE",
+                        "message": "Получен пустой ответ от сервера",
+                        "response": "Сервер вернул пустой ответ. Попробуйте еще раз."
+                    }
+                    self.message_error.emit(error_response)
+                    return
+                
+                # Проверяем статус ответа
+                if isinstance(response, dict) and response.get('status') == 'error':
+                    print(f"[DEBUG-ASYNC-BG-ERROR] API вернул ошибку: {response.get('message', 'Неизвестная ошибка')}")
+                    logger.error(f"[ASYNC-ERROR] API вернул ошибку: {response}")
+                    self.message_error.emit(response)
+                    return
+                
+                # Проверяем на асинхронную обработку (task_id)
+                if isinstance(response, dict) and "task_id" in response:
+                    print(f"[DEBUG-ASYNC-BG] Получен task_id: {response['task_id']}, запуск опроса статуса")
+                    logger.info(f"[ASYNC] Получен task_id: {response['task_id']}, запуск опроса статуса")
+                    self.start_polling_signal.emit(response["task_id"])
+                else:
+                    print("[DEBUG-ASYNC-BG] Получен синхронный ответ, отправка в UI")
+                    logger.info("[ASYNC] Получен синхронный ответ, отправка в UI")
+                    self.response_ready.emit(response)
+                    
+            except ImportError as e:
+                print(f"[DEBUG-ASYNC-BG-ERROR] Не удалось импортировать API клиент: {e}")
+                logger.error(f"[ASYNC-ERROR] Не удалось импортировать API клиент: {e}")
+                # Fallback к старому методу
+                self._fallback_to_crew_ai_client(message_data)
+                
+        except Exception as e:
+            print(f"[DEBUG-ASYNC-BG-ERROR] Ошибка в фоновой обработке: {e}")
+            logger.error(f"[ASYNC-ERROR] Ошибка в фоновой обработке: {e}", exc_info=True)
+            error_response = {
+                "status": "error",
+                "error_code": "PROCESSING_ERROR",
+                "message": f"Ошибка обработки сообщения: {str(e)}",
+                "response": f"Произошла ошибка при обработке вашего сообщения: {str(e)}"
+            }
+            self.message_error.emit(error_response)
+    
+    def _fallback_to_crew_ai_client(self, message_data: dict):
+        """Fallback метод для использования старого crew_ai_client"""
+        try:
+            print("[DEBUG-ASYNC-BG] Fallback: используем crew_ai_client")
+            logger.debug("[ASYNC] Fallback: используем crew_ai_client")
+            
             is_available = self.crew_ai_client.is_available(force_check=True)
-            print(f"[DEBUG-ASYNC-BG] CrewAI API доступен: {is_available}")
-            logger.debug(f"[ASYNC] CrewAI API доступен: {is_available}")
-            
             if not is_available:
-                print("[DEBUG-ASYNC-BG-ERROR] CrewAI API недоступен!")
-                logger.error("[ASYNC-ERROR] CrewAI API недоступен!")
-                error_message = {
-                    "response": "**Ошибка подключения к серверу**\n\n"
-                               "Сервер CrewAI в настоящее время недоступен. Пожалуйста, убедитесь, что:\n\n"
-                               "1. Сервер CrewAI запущен и работает\n"
-                               "2. Сервер доступен по адресу http://127.0.0.1:5051\n"
-                               "3. Нет проблем с сетевыми настройками\n\n"
-                               "Вы можете перезапустить сервер с помощью скрипта `start_auto_development.bat`."
+                error_response = {
+                    "status": "error",
+                    "error_code": "CONNECTION_ERROR",
+                    "message": "CrewAI сервер недоступен",
+                    "response": "Сервер CrewAI недоступен. Проверьте подключение."
                 }
-                self.message_error.emit(error_message.get("response", "Ошибка сервера"))
+                self.message_error.emit(error_response)
                 return
-            
-            print("[DEBUG-ASYNC-BG] Вызываем crew_ai_client.process_request...")
-            logger.debug("[ASYNC] Вызываем crew_ai_client.process_request...")
             
             response = self.crew_ai_client.process_request(message_data)
             
-            print(f"[DEBUG-ASYNC-BG] Получен ответ от CrewAI: {response}")
-            logger.debug(f"[ASYNC] Получен ответ от CrewAI: {response}")
-            
-            if not response:
-                print("[DEBUG-ASYNC-BG-ERROR] Получен пустой ответ от сервера")
-                logger.error("[ASYNC-ERROR] Получен пустой ответ от сервера")
-                raise ValueError("Received an empty response from the server.")
-            
             if isinstance(response, dict) and "task_id" in response:
-                # ### ИЗМЕНЕНО: Не запускаем таймер напрямую, а испускаем сигнал ###
-                print(f"[DEBUG-ASYNC-BG] Получен task_id: {response['task_id']}, запуск опроса статуса")
-                logger.info(f"[ASYNC] Получен task_id: {response['task_id']}, запуск опроса статуса")
                 self.start_polling_signal.emit(response["task_id"])
             else:
-                print("[DEBUG-ASYNC-BG] Получен синхронный ответ, отправка в UI")
-                logger.info("[ASYNC] Получен синхронный ответ, отправка в UI")
-                # Если сервер вернул структуру ошибки
                 if isinstance(response, dict) and response.get("status") == "failed":
                     err = response.get("error", "Неизвестная ошибка")
                     self.message_error.emit(err)
                 else:
                     self.response_ready.emit(response)
-
+                    
         except Exception as e:
-            print(f"[DEBUG-ASYNC-BG-ERROR] Ошибка в фоновой обработке: {e}")
-            logger.error(f"[ASYNC-ERROR] Ошибка в фоновой обработке: {e}", exc_info=True)
-            self.message_error.emit(str(e))
+            logger.error(f"[ASYNC-ERROR] Ошибка в fallback методе: {e}")
+            error_response = {
+                "status": "error",
+                "error_code": "FALLBACK_ERROR",
+                "message": f"Ошибка fallback обработки: {str(e)}",
+                "response": f"Не удалось обработать сообщение: {str(e)}"
+            }
+            self.message_error.emit(error_response)
             
     # ### ИЗМЕНЕНО: Создаем новый слот, который будет выполняться в основном потоке ###
     @Slot(str)

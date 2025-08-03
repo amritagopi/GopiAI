@@ -98,7 +98,7 @@ def setup_environment_for_debug():
         'PYTHONUNBUFFERED': '1',           # Disable output buffering
         'PYTHONASYNCIODEBUG': '1',         # AsyncIO debug
         'PYTHONVERBOSE': '1',              # Verbose Python output
-        'PYTHONDEBUG': '1',                # Python debug mode
+        'PYTHONDEBUG': '1',                # Python 
         'QT_LOGGING_RULES': '*=true',      # Enable all Qt logging
         'QT_DEBUG_PLUGINS': '1',           # Qt plugin debug
         'GOPIAI_DEBUG': 'true',            # GopiAI debug flag
