@@ -109,9 +109,12 @@ except ImportError as e:
 project_root = r"c:\Users\crazy\GOPI_AI_MODULES"  # Прямое указание пути
 # Путь к tools (а не к GopiAI-CrewAI!) для импорта gopiai_integration
 tools_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools')
-if os.path.exists(tools_path) and tools_path not in sys.path:
-    sys.path.insert(0, tools_path)
-    print(f"✅ Добавлен путь к tools: {tools_path}")
+if os.path.exists(tools_path):
+    if tools_path not in sys.path:
+        sys.path.insert(0, tools_path)
+        print(f"✅ Добавлен путь к tools: {tools_path}")
+    else:
+        print(f"ℹ️ Путь к tools уже в sys.path: {tools_path}")
 else:
     print(f"⚠️ Путь к tools не найден: {tools_path}")
 

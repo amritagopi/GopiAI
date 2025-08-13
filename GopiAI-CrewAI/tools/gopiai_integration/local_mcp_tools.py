@@ -252,9 +252,13 @@ class LocalMCPTools:
             }
         }
     
-    def get_available_tools(self) -> List[Dict]:
-        """Получение списка доступных инструментов"""
-        return list(self.tools_registry.values())
+    def get_available_tools(self) -> List[str]:
+        """Получение списка доступных инструментов (имена).
+
+        Совместимо с `ToolDispatcher._is_tool_available`, где ожидается список строк
+        с каноническими именами инструментов.
+        """
+        return list(self.tools_registry.keys())
     
     def call_tool(self, tool_name: str, parameters: Dict) -> Dict:
         """Вызов инструмента"""

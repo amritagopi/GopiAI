@@ -91,10 +91,23 @@ try:
             print(f"[WARNING] Не удалось создать родительский каталог для лога: {os.path.dirname(log_file)}: {_e}")
     
     from logging.handlers import RotatingFileHandler
+    # Основной хендлер в домашней директории
     file_handler = RotatingFileHandler(log_file, mode='a', encoding='utf-8', maxBytes=10 * 1024 * 1024, backupCount=5)
     file_handler.setFormatter(UltraCleanFormatter())
     handlers.append(file_handler)
     print(f"[OK] Логирование настроено с записью в файл: {log_file}")
+
+    # Дополнительный локальный хендлер в папке проекта (перезаписывается при каждом запуске, с BOM для Windows)
+    try:
+        _LOCAL_LOG_PATH = _Path(__file__).parent / "crewai_api_server_debug_local.log"
+        # Перезаписываем файл на каждый старт сервера
+        from logging import FileHandler as _FileHandler
+        local_file_handler = _FileHandler(str(_LOCAL_LOG_PATH), mode='w', encoding='utf-8-sig')
+        local_file_handler.setFormatter(UltraCleanFormatter())
+        handlers.append(local_file_handler)
+        print(f"[OK] Доп. логирование включено (перезапись на старте): {_LOCAL_LOG_PATH}")
+    except Exception as _le:
+        print(f"[WARNING] Не удалось создать локальный лог в папке проекта: {_le}")
     
 except (OSError, PermissionError) as e:
     print(f"[WARNING] Не удалось создать файл лога {log_file}: {e}")
@@ -174,6 +187,38 @@ HOST = "0.0.0.0"  # Слушаем на всех интерфейсах
 PORT = 5051  # Стандартный порт для CrewAI API сервера
 DEBUG = False
 TASK_CLEANUP_INTERVAL = 300
+
+# --- Динамический выбор свободного порта с учетом ENV ---
+def _find_available_port(start_port: int, max_tries: int = 20) -> int:
+    """Возвращает первый свободный порт, начиная с start_port.
+    Если за max_tries не найден, возвращает исходный start_port.
+    """
+    import socket
+    port = int(start_port)
+    for _ in range(max_tries):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            s.bind(("127.0.0.1", port))
+            s.close()
+            return port
+        except OSError:
+            try:
+                s.close()
+            except Exception:
+                pass
+            port += 1
+    return int(start_port)
+
+def _write_selected_port(port_value: int) -> None:
+    """Сохраняет выбранный порт в файл ~/.gopiai/crewai_server_port.txt"""
+    try:
+        target_dir = _Path.home() / ".gopiai"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        port_file = target_dir / "crewai_server_port.txt"
+        with open(port_file, "w", encoding="utf-8") as f:
+            f.write(str(int(port_value)))
+    except Exception as _e:
+        logger.warning(f"Не удалось сохранить выбранный порт: {port_value}: {_e}")
 
 # --- Глобальное хранилище задач ---
 TASKS = {}
@@ -923,6 +968,20 @@ if __name__ == '__main__':
     
     print(f"[DIAGNOSTIC] __main__ block, SERVER_IS_READY = {SERVER_IS_READY}")
     if SERVER_IS_READY:
+        # Разрешаем порт из ENV и выбираем свободный при конфликте
+        try:
+            env_port = os.getenv("GOPIAI_CREWAI_PORT") or os.getenv("CREWAI_PORT")
+            base_port = int(env_port) if env_port else int(PORT)
+        except Exception:
+            base_port = int(PORT)
+        selected_port = _find_available_port(base_port, max_tries=20)
+        if selected_port != base_port:
+            logger.warning(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
+            print(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
+        # Обновляем глобальный PORT для единообразия
+        PORT = selected_port  # type: ignore
+        # Сохраняем выбранный порт в файл, чтобы UI/скрипты могли прочитать
+        _write_selected_port(PORT)
         print(f"[DIAGNOSTIC] Starting server on http://{HOST}:{PORT}")
         logger.info(f"[STARTUP] Server starting on http://{HOST}:{PORT}")
         try:

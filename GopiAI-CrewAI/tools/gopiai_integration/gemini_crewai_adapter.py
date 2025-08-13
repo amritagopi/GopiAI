@@ -21,17 +21,21 @@ class GeminiDirectLLM(BaseLLM):
     
     # Поля для совместимости с CrewAI
     model: str = Field(default="gemini-1.5-flash-latest")
-    api_key: Optional[str] = Field(default=None)
     temperature: float = Field(default=0.7)
     max_tokens: int = Field(default=8192)
     
-    def __init__(self, **kwargs):
-        """Инициализация адаптера."""
+    def __init__(self, api_key: Optional[str] = None, **kwargs):
+        """Инициализация адаптера.
+
+        ВАЖНО: не передаем api_key в BaseLLM.__init__, чтобы избежать ошибки
+        """
+        # Сохраняем ключ локально и убираем его из kwargs перед вызовом super
+        self._api_key: Optional[str] = api_key
         super().__init__(**kwargs)
-        
+
         # Создаем экземпляр нашего кастомного клиента
         self.client = GeminiDirectClient(
-            api_key=self.api_key,
+            api_key=self._api_key,
             model=self.model
         )
         

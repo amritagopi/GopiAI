@@ -39,17 +39,19 @@ class PersonalityTab(QWidget):
         """Находит файл system_prompts.py"""
         try:
             # Пробуем найти файл system_prompts.py
-            possible_paths = [
-                # Относительно текущего файла
-                os.path.join(
-                    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
-                    "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"
-                ),
-                # Абсолютный путь
-                r"c:\Users\crazy\GOPI_AI_MODULES\GopiAI-CrewAI\tools\gopiai_integration\system_prompts.py"
-            ]
-            
-            for path in possible_paths:
+            # 1) Относительно текущего файла (предпочтительно)
+            rel_path = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
+                "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"
+            )
+            candidates = [rel_path]
+
+            # 2) Через GOPI_AI_ROOT, если задан
+            root = os.environ.get("GOPI_AI_ROOT")
+            if root:
+                candidates.append(os.path.join(root, "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"))
+
+            for path in candidates:
                 if os.path.exists(path):
                     self.system_prompts_file = path
                     logger.info(f"Найден файл system_prompts.py: {path}")
@@ -136,7 +138,8 @@ class PersonalityTab(QWidget):
 
             # 2) Находим функцию get_base_assistant_prompt и первую тройную кавычку внутри неё
             import re
-            func_pattern = r"def\s+get_base_assistant_prompt\s*\([^)]*\)\s*:\s*\n"
+            # Разрешаем опциональную return-аннотацию: def ...(...) -> ...:
+            func_pattern = r"def\s+get_base_assistant_prompt\s*\([^)]*\)\s*(->[^:]+)?:\s*\n"
             func_match = re.search(func_pattern, file_text)
             if not func_match:
                 # Фоллбэк: работаем по старой логике построчного среза
@@ -153,13 +156,18 @@ class PersonalityTab(QWidget):
 
             # 3) Ищем первую тройную кавычку после определения функции
             start_idx = func_match.end()
+            # Поддерживаем и """ и '''
             triple_start = file_text.find('"""', start_idx)
+            q = '"""'
+            if triple_start == -1:
+                triple_start = file_text.find("'''", start_idx)
+                q = "'''"
             if triple_start == -1:
                 self.status_label.setText("Ошибка: не найдена начальная тройная кавычка в промпте")
                 return
 
             # 4) Ищем соответствующую закрывающую тройную кавычку
-            triple_end = file_text.find('"""', triple_start + 3)
+            triple_end = file_text.find(q, triple_start + 3)
             if triple_end == -1:
                 self.status_label.setText("Ошибка: не найдена закрывающая тройная кавычка в промпте")
                 return
@@ -216,18 +224,23 @@ class PersonalityTab(QWidget):
 
             # Находим функцию и границы тела тройной кавычечной строки
             import re
-            func_pattern = r"def\s+get_base_assistant_prompt\s*\([^)]*\)\s*:\s*\n"
+            func_pattern = r"def\s+get_base_assistant_prompt\s*\([^)]*\)\s*(->[^:]+)?:\s*\n"
             func_match = re.search(func_pattern, file_text)
             if not func_match:
                 self.status_label.setText("Ошибка: не найдена функция get_base_assistant_prompt()")
                 return
 
             start_idx = func_match.end()
+            # Поддерживаем и """ и '''
             triple_start = file_text.find('"""', start_idx)
+            q = '"""'
+            if triple_start == -1:
+                triple_start = file_text.find("'''", start_idx)
+                q = "'''"
             if triple_start == -1:
                 self.status_label.setText("Ошибка: не найдена начальная тройная кавычка")
                 return
-            triple_end = file_text.find('"""', triple_start + 3)
+            triple_end = file_text.find(q, triple_start + 3)
             if triple_end == -1:
                 self.status_label.setText("Ошибка: не найдена закрывающая тройная кавычка")
                 return

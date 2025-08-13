@@ -220,3 +220,51 @@ class CrewAIToolsIntegrator:
     def get_all_tools(self) -> Dict[str, Dict[str, Any]]:
         """Получает все доступные инструменты"""
         return self.available_tools
+
+    def get_available_tools(self) -> List[str]:
+        """
+        Возвращает список канонических названий доступных инструментов.
+
+        Совместимо с вызовами в `SmartDelegator` и `ToolDispatcher`, где ожидается
+        список строк с именами инструментов.
+        """
+        return list(self.available_tools.keys())
+
+    def get_tools_summary(self) -> Dict[str, List[Dict[str, Any]]]:
+        """
+        Краткая сводка инструментов по категориям для API/UI.
+
+        Возвращает словарь вида:
+        {
+          "category": [
+             {"name": str, "description": str, "available": bool}, ...
+          ],
+          ...
+        }
+        """
+        summary: Dict[str, List[Dict[str, Any]]] = {}
+        for name, info in self.available_tools.items():
+            category = info.get('category', 'misc')
+            summary.setdefault(category, []).append({
+                'name': name,
+                'description': info.get('description', ''),
+                'available': True  # на этом уровне считаем доступным, т.к. прошёл discover
+            })
+
+        # Сортируем инструменты внутри категорий по имени для стабильности отображения
+        for cat in summary:
+            summary[cat] = sorted(summary[cat], key=lambda x: x['name'])
+        return summary
+
+# --- Factory function and explicit exports ---
+def get_crewai_tools_integrator() -> "CrewAIToolsIntegrator":
+    """Фабрика для совместимости с сервером CrewAI.
+
+    Возвращает экземпляр интегратора инструментов CrewAI Toolkit.
+    """
+    return CrewAIToolsIntegrator()
+
+__all__ = [
+    "CrewAIToolsIntegrator",
+    "get_crewai_tools_integrator",
+]

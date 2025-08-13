@@ -32,21 +32,49 @@ from PySide6.QtWidgets import (
 )
 from gopiai.ui.utils.icon_helpers import create_icon_button
 
-# Backend helpers
-# Resolve import robustly relative to repo root so Pyright can find it
-# Repo root: .../GOPI_AI_MODULES/
-# We need to import from "GopiAI-CrewAI/llm_rotation_config.py"
-_repo_root = Path(__file__).resolve().parents[2]  # points to .../GopiAI-UI
-_repo_root = _repo_root.parent  # now .../GOPI_AI_MODULES
-crewai_dir = _repo_root / "GopiAI-CrewAI"
-if str(crewai_dir) not in sys.path:
-    sys.path.append(str(crewai_dir))
+"""
+Backend helpers
+Robustly resolve import of llm_rotation_config located in GopiAI-CrewAI.
+Handles various run contexts by falling back to direct file import.
+"""
+_repo_root = Path(__file__).resolve().parents[2]  # .../GopiAI-UI
+_modules_root = _repo_root.parent                 # .../GOPI_AI_MODULES
+crewai_dir = _modules_root / "GopiAI-CrewAI"
 
-from llm_rotation_config import (  # type: ignore
-    PROVIDER_KEY_ENV,
-    get_api_key_for_provider,
-    get_available_models,
-)
+# Try regular import first
+try:
+    from llm_rotation_config import (  # type: ignore
+        PROVIDER_KEY_ENV,
+        get_api_key_for_provider,
+        get_available_models,
+    )
+except Exception:
+    # Ensure CrewAI dir is on sys.path and try again
+    try:
+        if str(crewai_dir) not in sys.path:
+            sys.path.append(str(crewai_dir))
+        from llm_rotation_config import (  # type: ignore
+            PROVIDER_KEY_ENV,
+            get_api_key_for_provider,
+            get_available_models,
+        )
+    except Exception:
+        # Final fallback: import module directly from file path
+        llm_cfg_path = crewai_dir / "llm_rotation_config.py"
+        if llm_cfg_path.exists():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("llm_rotation_config", str(llm_cfg_path))
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["llm_rotation_config"] = mod
+                spec.loader.exec_module(mod)
+                PROVIDER_KEY_ENV = getattr(mod, "PROVIDER_KEY_ENV")
+                get_api_key_for_provider = getattr(mod, "get_api_key_for_provider")
+                get_available_models = getattr(mod, "get_available_models")
+            else:
+                raise ImportError(f"Cannot load llm_rotation_config from {llm_cfg_path}")
+        else:
+            raise ImportError("llm_rotation_config.py not found under GopiAI-CrewAI")
 
 # Path to user .env
 ENV_PATH = Path(os.getenv("GOPIAI_ENV_FILE", Path(__file__).resolve().parents[4] / ".env"))
