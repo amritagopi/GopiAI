@@ -1507,7 +1507,7 @@ class SmartDelegator:
                     "model": str(model_id),
                     "messages": messages,
                     "temperature": 0.2,
-                    "max_tokens": 2000
+                    "max_output_tokens": 2000
                 }
                 if safety_settings is not None:
                     completion_args["safety_settings"] = safety_settings
@@ -1554,12 +1554,16 @@ class SmartDelegator:
                         fb_id = fb_cfg
                     if fb_id and fb_id != model_id and litellm is not None:
                         logger.info(f"[LLM] Пробуем запасную модель: {fb_id}")
-                        resp = litellm.completion(
-                            model=str(fb_id),
-                            messages=messages,
-                            temperature=0.2,
-                            max_tokens=2000
-                        )
+                        fb_args = {
+                            "model": str(fb_id),
+                            "messages": messages,
+                            "temperature": 0.2,
+                        }
+                        if isinstance(fb_id, str) and "gemini" in fb_id.lower():
+                            fb_args["max_output_tokens"] = 2000
+                        else:
+                            fb_args["max_tokens"] = 2000
+                        resp = litellm.completion(**fb_args)
                         # попытка извлечь текст
                         fb_text = self._extract_text(resp)
                         if isinstance(fb_text, str) and fb_text.strip():

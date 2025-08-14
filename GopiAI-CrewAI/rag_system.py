@@ -78,12 +78,12 @@ class _WorkerProc:
                 logger.error(f"rag_worker.py not found: {self.worker_script}")
                 return False
             self.proc = subprocess.Popen(
-                [str(self.python_path), str(self.worker_script)],
+                [str(self.python_path), "-u", str(self.worker_script)],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 text=True, encoding="utf-8", bufsize=1, cwd=str(self.worker_script.parent)
             )
             # ждём первую готовность
-            line = self._readline(timeout=10.0)
+            line = self._readline(timeout=20.0)
             if not line:
                 logger.error("RAG worker didn't send ready line")
                 # Попробуем неблокирующе прочитать stderr для диагностики (с таймаутом)

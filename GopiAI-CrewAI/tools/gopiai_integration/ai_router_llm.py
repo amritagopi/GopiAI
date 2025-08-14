@@ -154,8 +154,7 @@ class AIRouterLLM(BaseLLM):
                 llm_instance = create_gemini_direct_llm(
                     model=model_id,
                     api_key=api_key,
-                    temperature=0.7,
-                    max_tokens=8192  # Увеличиваем лимит токенов
+                    temperature=0.7
                 )
                 
                 self.logger.info(f"✅ GeminiDirectLLM создан для модели {model_id} (БЕЗ safetySettings!)")
@@ -169,6 +168,13 @@ class AIRouterLLM(BaseLLM):
                         'max_tokens': 2000,
                     }
                 }
+                # Санитарная правка: если по каким-либо причинам сюда попала gemini-модель,
+                # убираем max_tokens из конфига, чтобы не провоцировать BaseLLM.__init__ ошибку
+                try:
+                    if isinstance(model_id, str) and 'gemini' in model_id.lower():
+                        llm_params['config'].pop('max_tokens', None)
+                except Exception:
+                    pass
                 llm_instance = LLM(**llm_params)
                 self.logger.info(f"📋 Стандартный LLM создан для модели {model_id}")
             
@@ -181,7 +187,11 @@ class AIRouterLLM(BaseLLM):
             self.logger.info(f"🔄 Попытка {attempt_number}: Отправляем запрос к модели {model_id}")
             
             # Выполняем запрос
-            response = llm_instance.call(prompt)
+            # Для Gemini используем maxOutputTokens вместо max_tokens
+            if provider_name.lower() in ('google', 'gemini'):
+                response = llm_instance.call(prompt, maxOutputTokens=8192)
+            else:
+                response = llm_instance.call(prompt)
             
             if not response or response.strip() == "":
                 raise ValueError("Получен пустой ответ от модели")
@@ -442,8 +452,7 @@ class AIRouterLLM(BaseLLM):
                 llm_instance = create_gemini_direct_llm(
                     model=model_id,
                     api_key=api_key,
-                    temperature=0.7,
-                    max_tokens=8192
+                    temperature=0.7
                 )
                 self.logger.info(f"🎯 CrewAI использует GeminiDirectLLM: {model_id} (env={api_key_env})")
                 return llm_instance  # совместим с crewai.llm.LLM интерфейсом-адаптером
