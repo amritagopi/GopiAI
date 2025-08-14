@@ -361,17 +361,14 @@ try:
     print("[ДИАГНОСТИКА] Начало инициализации систем")
     logger.info("--- ИНИЦИАЛИЗАЦИЯ СИСТЕМ ---")
     
-    # 1. Получаем единственный экземпляр RAGSystem
-    print("[ДИАГНОСТИКА] Вызов get_rag_system()")
+    # 1. Инициализируем RAG систему
+    print("[ДИАГНОСТИКА] Инициализация RAG системы")
     rag_system_instance = get_rag_system()
     print(f"[ДИАГНОСТИКА] RAGSystem получен: {rag_system_instance is not None}")
     
-    # 2. Создаем SmartDelegator, передавая ему наш единственный экземпляр RAG
-    # Примечание по типам: SmartDelegator ожидает свой тип RAGSystem из другого модуля,
-    # а локальный RAGSystem из GopiAI-CrewAI.rag_system имеет другое происхождение типов для Pyright.
-    # В рантайме они совместимы, поэтому выполняем cast к Any, чтобы устранить конфликт типов.
-    print("[ДИАГНОСТИКА] Создание SmartDelegator")
-    smart_delegator_instance = SmartDelegator(rag_system=cast(Any, rag_system_instance))
+    # 2. Создаем SmartDelegator С RAG
+    print("[ДИАГНОСТИКА] Создание SmartDelegator с RAG")
+    smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
     print(f"[ДИАГНОСТИКА] SmartDelegator создан: {smart_delegator_instance is not None}")
     
     # 3. Инициализируем интегратор инструментов
@@ -380,7 +377,7 @@ try:
     tools_integrator_instance = get_crewai_tools_integrator()
     print(f"[ДИАГНОСТИКА] Tools Integrator создан: {tools_integrator_instance is not None}")
     
-    logger.info("✅ Smart Delegator, RAG System и Tools Integrator успешно инициализированы.")
+    logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
     SERVER_IS_READY = True
     print("[ДИАГНОСТИКА] SERVER_IS_READY = True")
 except Exception as e:
@@ -967,21 +964,21 @@ if __name__ == '__main__':
     atexit.register(cleanup_on_exit)
     
     print(f"[DIAGNOSTIC] __main__ block, SERVER_IS_READY = {SERVER_IS_READY}")
+    # Всегда определяем и сохраняем выбранный порт ЗАРАНЕЕ, даже если SERVER_IS_READY = False
+    try:
+        env_port = os.getenv("GOPIAI_CREWAI_PORT") or os.getenv("CREWAI_PORT")
+        base_port = int(env_port) if env_port else int(PORT)
+    except Exception:
+        base_port = int(PORT)
+    selected_port = _find_available_port(base_port, max_tries=20)
+    if selected_port != base_port:
+        logger.warning(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
+        print(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
+    # Обновляем глобальный PORT и сохраняем для UI/скриптов
+    PORT = selected_port  # type: ignore
+    _write_selected_port(PORT)
+
     if SERVER_IS_READY:
-        # Разрешаем порт из ENV и выбираем свободный при конфликте
-        try:
-            env_port = os.getenv("GOPIAI_CREWAI_PORT") or os.getenv("CREWAI_PORT")
-            base_port = int(env_port) if env_port else int(PORT)
-        except Exception:
-            base_port = int(PORT)
-        selected_port = _find_available_port(base_port, max_tries=20)
-        if selected_port != base_port:
-            logger.warning(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
-            print(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
-        # Обновляем глобальный PORT для единообразия
-        PORT = selected_port  # type: ignore
-        # Сохраняем выбранный порт в файл, чтобы UI/скрипты могли прочитать
-        _write_selected_port(PORT)
         print(f"[DIAGNOSTIC] Starting server on http://{HOST}:{PORT}")
         logger.info(f"[STARTUP] Server starting on http://{HOST}:{PORT}")
         try:

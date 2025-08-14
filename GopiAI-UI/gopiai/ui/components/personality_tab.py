@@ -38,18 +38,28 @@ class PersonalityTab(QWidget):
     def _find_system_prompts_file(self):
         """Находит файл system_prompts.py"""
         try:
-            # Пробуем найти файл system_prompts.py
-            # 1) Относительно текущего файла (предпочтительно)
-            rel_path = os.path.join(
-                os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
-                "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"
-            )
-            candidates = [rel_path]
-
-            # 2) Через GOPI_AI_ROOT, если задан
-            root = os.environ.get("GOPI_AI_ROOT")
-            if root:
-                candidates.append(os.path.join(root, "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"))
+            # Список возможных путей к файлу system_prompts.py
+            candidates = []
+            
+            # 1) Проверяем GOPI_AI_MODULES окружение
+            gopi_ai_modules = os.environ.get("GOPI_AI_MODULES")
+            if gopi_ai_modules:
+                candidates.append(os.path.join(gopi_ai_modules, "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"))
+            
+            # 2) Проверяем GOPI_AI_ROOT окружение
+            gopi_ai_root = os.environ.get("GOPI_AI_ROOT")
+            if gopi_ai_root:
+                candidates.append(os.path.join(gopi_ai_root, "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"))
+            
+            # 3) Проверяем относительный путь от UI директории
+            ui_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+            candidates.extend([
+                os.path.join(ui_dir, "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"),
+                os.path.join(ui_dir, "..", "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py")
+            ])
+            
+            # 4) Проверяем абсолютный путь
+            candidates.append("c:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-CrewAI\\tools\\gopiai_integration\\system_prompts.py")
 
             for path in candidates:
                 if os.path.exists(path):

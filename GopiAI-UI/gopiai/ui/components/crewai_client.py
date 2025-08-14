@@ -200,6 +200,63 @@ except Exception as e:
     nlp_ru = None
     nlp_en = None
 
+# === РЕЗОЛЮЦИЯ ДИНАМИЧЕСКОГО ПОРТА ДЛЯ CrewAI API ===
+def _read_crewai_port_from_file() -> Optional[int]:
+    """Читает порт CrewAI сервера из файла ~/.gopiai/crewai_server_port.txt, если он существует.
+
+    Возвращает целочисленный порт или None, если файл отсутствует/некорректен.
+    """
+    try:
+        port_file = Path.home() / ".gopiai" / "crewai_server_port.txt"
+        if port_file.exists():
+            content = port_file.read_text(encoding="utf-8").strip()
+            if content:
+                port = int(content)
+                if 0 < port < 65536:
+                    return port
+    except Exception as e:
+        logger.warning(f"[INIT] Не удалось прочитать порт из файла: {e}")
+    return None
+
+def _get_crewai_port_from_env() -> Optional[int]:
+    """Возвращает порт из переменных окружения GOPIAI_CREWAI_PORT/CREWAI_PORT, если задан."""
+    env_port = os.getenv("GOPIAI_CREWAI_PORT") or os.getenv("CREWAI_PORT")
+    if env_port:
+        try:
+            port = int(env_port)
+            if 0 < port < 65536:
+                return port
+        except ValueError:
+            logger.warning(f"[INIT] Некорректное значение порта в окружении: {env_port}")
+    return None
+
+def _resolve_crewai_base_url(default_base_url: str) -> str:
+    """Строит корректный base_url, учитывая динамический порт CrewAI сервера.
+
+    Логика:
+    1) Если пользователь явно передал свой base_url (не стандартный 127.0.0.1:5051/localhost:5051), используем его как есть.
+    2) Иначе пробуем порт из окружения, затем из файла ~/.gopiai/crewai_server_port.txt.
+    3) Фоллбэк: оставляем стандартный порт 5051.
+    """
+    try:
+        # Распознаём, используется ли стандарт по умолчанию
+        std_hosts = {"http://127.0.0.1:5051", "http://localhost:5051"}
+        if default_base_url not in std_hosts:
+            return default_base_url
+
+        # Порт из окружения имеет приоритет
+        port = _get_crewai_port_from_env()
+        if port is None:
+            port = _read_crewai_port_from_file()
+
+        if port is not None and port != 5051:
+            resolved = f"http://127.0.0.1:{port}"
+            logger.info(f"[INIT] Используем динамический порт CrewAI API: {resolved}")
+            return resolved
+    except Exception as e:
+        logger.warning(f"[INIT] Ошибка резолюции base_url: {e}")
+    return default_base_url
+
 class CrewAIClient:
     """
     Клиент для взаимодействия с CrewAI API сервером
@@ -209,7 +266,9 @@ class CrewAIClient:
     """
 
     def __init__(self, base_url="http://127.0.0.1:5051"):  # Стандартный порт CrewAI API сервера
-        self.base_url = base_url
+        # Разрешаем динамический порт, если используется значение по умолчанию
+        resolved_url = _resolve_crewai_base_url(base_url)
+        self.base_url = resolved_url
         self.timeout = 30  # Таймаут для API запросов (в секундах)
         self._server_available = None
         self._last_check = 0

@@ -4103,6 +4103,18 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_mistralai/mistral-medium-3.1": {
+      "provider": "openrouter",
+      "model_id": "mistralai/mistral-medium-3.1",
+      "display_name": "Mistral: Mistral Medium 3.1 (mistralai/mistral-medium-3.1)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {

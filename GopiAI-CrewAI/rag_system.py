@@ -86,14 +86,18 @@ class _WorkerProc:
             line = self._readline(timeout=10.0)
             if not line:
                 logger.error("RAG worker didn't send ready line")
-                # Попробуем прочитать stderr для диагностики
-                if self.proc.stderr:
-                    try:
-                        stderr_output = self.proc.stderr.read()
-                        if stderr_output:
-                            logger.error(f"RAG worker stderr: {stderr_output}")
-                    except Exception:
-                        pass
+                # Попробуем неблокирующе прочитать stderr для диагностики (с таймаутом)
+                try:
+                    err_sample = self._readerr(timeout=1.0) if self.proc and self.proc.stderr else None
+                    if err_sample:
+                        logger.error(f"RAG worker stderr (sample): {err_sample.strip()}")
+                except Exception:
+                    pass
+                # Останавливаем воркер на случай залипания (fail-open)
+                try:
+                    self.stop()
+                except Exception:
+                    pass
                 return False
             logger.info(f"RAG worker started: {line.strip()}")
             return True
@@ -109,6 +113,20 @@ class _WorkerProc:
         def _reader():
             try:
                 result["line"] = self.proc.stdout.readline()
+            except Exception:
+                result["line"] = None
+        th = threading.Thread(target=_reader, daemon=True)
+        th.start()
+        th.join(timeout)
+        return result["line"]
+
+    def _readerr(self, timeout: float = 1.0) -> Optional[str]:
+        if not self.proc or not self.proc.stderr:
+            return None
+        result: Dict[str, Optional[str]] = {"line": None}
+        def _reader():
+            try:
+                result["line"] = self.proc.stderr.readline()
             except Exception:
                 result["line"] = None
         th = threading.Thread(target=_reader, daemon=True)

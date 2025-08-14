@@ -73,7 +73,16 @@ class ToolDispatcher:
             'tool_usage': {}
         }
         
-        self.logger.info("✅ ToolDispatcher инициализирован")
+        # ЗАЩИТА ОТ ЗАЦИКЛИВАНИЯ
+        self.call_limits = {
+            'max_calls_per_request': 50,  # Максимум вызовов за один запрос
+            'max_same_tool_calls': 10,    # Максимум одинаковых вызовов подряд
+            'request_call_count': 0,      # Счетчик вызовов в текущем запросе
+            'last_tool_calls': [],        # История последних вызовов
+            'current_request_id': None    # ID текущего запроса
+        }
+        
+        self.logger.info("✅ ToolDispatcher инициализирован с защитой от зацикливания")
     
     def dispatch_tool_call(self, 
                           tool_name: str, 
@@ -98,8 +107,56 @@ class ToolDispatcher:
         params = params or {}
         context = context or {}
         
+        # ЗАЩИТА ОТ ЗАЦИКЛИВАНИЯ: Проверяем лимиты вызовов
+        request_id = context.get('request_id', 'unknown')
+        if self.call_limits['current_request_id'] != request_id:
+            # Новый запрос - сбрасываем счетчики
+            self.call_limits['current_request_id'] = request_id
+            self.call_limits['request_call_count'] = 0
+            self.call_limits['last_tool_calls'] = []
+        
+        # Увеличиваем счетчик вызовов
+        self.call_limits['request_call_count'] += 1
+        
+        # Проверяем превышение общего лимита вызовов
+        if self.call_limits['request_call_count'] > self.call_limits['max_calls_per_request']:
+            error_msg = f"🚫 ЗАЩИТА ОТ ЗАЦИКЛИВАНИЯ: Превышен лимит вызовов ({self.call_limits['max_calls_per_request']}) за запрос"
+            self.logger.error(error_msg)
+            return DispatchResponse(
+                result=DispatchResult.EXECUTION_ERROR,
+                tool_call=ToolCall(tool_name=tool_name, original_name=tool_name, mode=mode, 
+                                 params=params, context=context, timestamp=start_time, user_text=user_text),
+                response_data=None,
+                error_message=error_msg,
+                execution_time=time.time() - start_time,
+                suggestions=[]
+            )
+        
         # Нормализуем название инструмента
         canonical_name = self.alias_manager.normalize_tool_name(tool_name)
+        
+        # Проверяем повторяющиеся вызовы одного инструмента
+        tool_signature = f"{canonical_name or tool_name}:{str(sorted(params.items()))}"
+        self.call_limits['last_tool_calls'].append(tool_signature)
+        
+        # Оставляем только последние N вызовов для анализа
+        if len(self.call_limits['last_tool_calls']) > self.call_limits['max_same_tool_calls']:
+            self.call_limits['last_tool_calls'] = self.call_limits['last_tool_calls'][-self.call_limits['max_same_tool_calls']:]
+        
+        # Проверяем, не повторяется ли один и тот же вызов слишком часто
+        same_calls_count = self.call_limits['last_tool_calls'].count(tool_signature)
+        if same_calls_count >= self.call_limits['max_same_tool_calls']:
+            error_msg = f"🚫 ЗАЩИТА ОТ ЗАЦИКЛИВАНИЯ: Обнаружено {same_calls_count} одинаковых вызовов {canonical_name or tool_name}"
+            self.logger.error(error_msg)
+            return DispatchResponse(
+                result=DispatchResult.EXECUTION_ERROR,
+                tool_call=ToolCall(tool_name=canonical_name or tool_name, original_name=tool_name, mode=mode, 
+                                 params=params, context=context, timestamp=start_time, user_text=user_text),
+                response_data=None,
+                error_message=error_msg,
+                execution_time=time.time() - start_time,
+                suggestions=[]
+            )
         
         # Создаем объект вызова
         tool_call = ToolCall(
