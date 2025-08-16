@@ -4103,6 +4103,42 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_baidu/ernie-4.5-21b-a3b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-21b-a3b",
+      "display_name": "Baidu: ERNIE 4.5 21B A3B (baidu/ernie-4.5-21b-a3b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_baidu/ernie-4.5-vl-28b-a3b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-vl-28b-a3b",
+      "display_name": "Baidu: ERNIE 4.5 VL 28B A3B (baidu/ernie-4.5-vl-28b-a3b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_mistralai/mistral-medium-3.1": {
+      "provider": "openrouter",
+      "model_id": "mistralai/mistral-medium-3.1",
+      "display_name": "Mistral: Mistral Medium 3.1 (mistralai/mistral-medium-3.1)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {
@@ -4110,5 +4146,5 @@
     "model_id": "google/gemini-2.0-flash-exp:free"
   },
   "version": "1.0",
-  "last_updated": "1754901075.5737875"
+  "last_updated": "1755225858.7112973"
 }

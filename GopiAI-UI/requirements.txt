@@ -1,0 +1,8 @@
+# Frontend Dependencies
+flask>=2.0.1
+flask-cors>=3.0.10
+PyQt5>=5.15.4
+PyQtWebEngine>=5.15.5
+requests>=2.26.0
+python-dotenv>=0.19.0
+
