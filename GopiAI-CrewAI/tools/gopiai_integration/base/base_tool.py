@@ -14,9 +14,17 @@ import json
 import tempfile
 import subprocess
 
-# Импортируем BaseTool из crewai
-from crewai.tools.base_tool import BaseTool
-CREWAI_AVAILABLE = True
+# Импортируем BaseTool из crewai c безопасным фоллбеком
+try:
+    from crewai.tools.base_tool import BaseTool  # type: ignore
+    CREWAI_AVAILABLE = True
+except Exception:  # pragma: no cover
+    CREWAI_AVAILABLE = False
+    class BaseTool(BaseModel):  # type: ignore
+        """Заглушка BaseTool, если пакет crewai недоступен"""
+        name: str = Field(default="base_tool_stub")
+        description: str = Field(default="Stub for crewai BaseTool")
+        verbose: bool = Field(default=False)
 
 class GopiAIBaseTool(BaseTool):
     """

@@ -39,6 +39,18 @@ class ToolsInstructionManager:
             "project_helper": self._get_project_helper_instructions()
         }
 
+    def get_tools_summary(self) -> Dict[str, str]:
+        """
+        Возвращает сводку по доступным инструментам в формате {tool_name: description}.
+        Совместимо с ожиданиями вызывающего кода в `system_prompts.py`.
+        """
+        try:
+            # Текущая структура уже хранит строки-описания
+            return dict(self.instructions)
+        except Exception as e:
+            self.logger.error(f"Ошибка в get_tools_summary: {e}", exc_info=True)
+            return {}
+
     def _get_execute_shell_instructions(self) -> str:
         """Детальные инструкции для execute_shell"""
         return "Используйте execute_shell для выполнения команд оболочки. Пример: execute_shell('ls -l')"
@@ -86,3 +98,17 @@ class ToolsInstructionManager:
     def get_all_instructions(self) -> Dict[str, str]:
         """Получает все инструкции"""
         return self.instructions
+
+# Глобальный синглтон менеджера
+_TOOLS_MANAGER_SINGLETON: Optional[ToolsInstructionManager] = None
+
+def get_tools_instruction_manager() -> ToolsInstructionManager:
+    """
+    Фабрика (синглтон) для получения экземпляра ToolsInstructionManager.
+    Соответствует импорту в `system_prompts.py`:
+    `from tools.gopiai_integration.tools_instruction_manager import get_tools_instruction_manager`
+    """
+    global _TOOLS_MANAGER_SINGLETON
+    if _TOOLS_MANAGER_SINGLETON is None:
+        _TOOLS_MANAGER_SINGLETON = ToolsInstructionManager()
+    return _TOOLS_MANAGER_SINGLETON

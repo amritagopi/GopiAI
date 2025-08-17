@@ -276,7 +276,7 @@ class UnifiedModelsTab(QWidget):
         Требования сервера: оба поля обязательны.
         """
         try:
-            base_url = os.environ.get("CREWAI_API_BASE_URL", "http://127.0.0.1:5051")
+            base_url = os.environ.get("CREWAI_API_BASE_URL", "http://127.0.0.1:5052")
             url = f"{base_url}/internal/state"
             
             # Проверяем, что оба параметра имеют значения

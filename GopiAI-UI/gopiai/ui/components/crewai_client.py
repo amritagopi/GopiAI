@@ -208,7 +208,7 @@ class CrewAIClient:
     запущенного в отдельном окружении через REST API.
     """
 
-    def __init__(self, base_url="http://127.0.0.1:5051"):  # Стандартный порт CrewAI API сервера
+    def __init__(self, base_url="http://127.0.0.1:5052"):  # Стандартный порт CrewAI API сервера
         self.base_url = base_url
         self.timeout = 30  # Таймаут для API запросов (в секундах)
         self._server_available = None

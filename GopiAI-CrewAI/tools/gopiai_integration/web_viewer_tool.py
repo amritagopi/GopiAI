@@ -7,13 +7,35 @@ import requests
 import logging
 from typing import Type, Any, Optional, Dict
 from pydantic import BaseModel, Field
-from bs4 import BeautifulSoup
+
+# Безопасный импорт BeautifulSoup (bs4 может быть не установлен)
+try:
+    from bs4 import BeautifulSoup  # type: ignore
+except Exception:
+    BeautifulSoup = None  # type: ignore
+
 import time
 from urllib.parse import urljoin, urlparse
 import re
 
-# Импортируем BaseTool из crewai
-from crewai.tools.base_tool import BaseTool
+# Импортируем BaseTool с фоллбеком, если crewai не установлен
+try:
+    from crewai.tools.base_tool import BaseTool  # type: ignore
+except Exception:
+    class BaseTool:  # минимальная заглушка
+        name: str = "BaseTool"
+        description: str = "Stub BaseTool when crewai is unavailable"
+        def tool_schema(self):
+            return {
+                "type": "function",
+                "function": {
+                    "name": getattr(self, "name", "tool"),
+                    "description": getattr(self, "description", ""),
+                    "parameters": {"type": "object", "properties": {}},
+                },
+            }
+        def _run(self, *args, **kwargs):
+            return {"error": "crewai BaseTool is unavailable"}
 
 class WebViewerInput(BaseModel):
     """Схема входных данных для инструмента просмотра веб-страниц"""
@@ -114,6 +136,8 @@ class GopiAIWebViewerTool(BaseTool):
                 response.raise_for_status()
                 
                 # Парсим HTML
+                if BeautifulSoup is None:
+                    return "❌ BeautifulSoup (bs4) не установлен — парсинг HTML недоступен"
                 soup = BeautifulSoup(response.text, 'html.parser')
                 self._page_cache[url] = soup
             
@@ -162,6 +186,8 @@ class GopiAIWebViewerTool(BaseTool):
             if url not in self._page_cache:
                 response = self.session.get(url, timeout=self.timeout)
                 response.raise_for_status()
+                if BeautifulSoup is None:
+                    return "❌ BeautifulSoup (bs4) не установлен — парсинг HTML недоступен"
                 soup = BeautifulSoup(response.text, 'html.parser')
                 self._page_cache[url] = soup
             else:

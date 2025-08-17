@@ -1,5 +1,15 @@
-# Импортируем BaseTool из crewai
-from crewai.tools.base_tool import BaseTool
+# Импортируем BaseTool из crewai (с безопасным фоллбеком при отсутствии пакета)
+try:
+    from crewai.tools.base_tool import BaseTool  # type: ignore
+except Exception:  # пакет crewai отсутствует — определяем простой фоллбек
+    class BaseTool:  # минимальная заглушка, совместимая по интерфейсу
+        def __init__(self, *args, **kwargs):
+            pass
+
+        # В crewai BaseTool обычно вызывает _run через run()
+        def run(self, *args, **kwargs):
+            return self._run(*args, **kwargs)
+
 from pydantic import Field
 import os
 import shutil

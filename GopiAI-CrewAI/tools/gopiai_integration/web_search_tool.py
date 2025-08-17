@@ -8,13 +8,36 @@ import logging
 import os
 from typing import Type, Any, Optional, Dict, List
 from pydantic import BaseModel, Field
-from bs4 import BeautifulSoup
+
+# Безопасный импорт BeautifulSoup
+try:
+    from bs4 import BeautifulSoup  # type: ignore
+except Exception:
+    BeautifulSoup = None  # type: ignore
+
 import json
 import time
 from urllib.parse import quote_plus
 
-# Импортируем BaseTool из crewai
-from crewai.tools.base_tool import BaseTool
+# Импортируем BaseTool из crewai с фоллбеком
+try:
+    from crewai.tools.base_tool import BaseTool  # type: ignore
+except Exception:
+    class BaseTool:  # минимальная заглушка
+        name: str = "BaseTool"
+        description: str = "Stub BaseTool when crewai is unavailable"
+
+        def tool_schema(self):
+            return {
+                "type": "function",
+                "function": {
+                    "name": getattr(self, "name", "tool"),
+                    "description": getattr(self, "description", ""),
+                    "parameters": {"type": "object", "properties": {}},
+                },
+            }
+        def _run(self, *args, **kwargs):
+            return {"error": "crewai BaseTool is unavailable"}
 
 class WebSearchInput(BaseModel):
     """Схема входных данных для инструмента поиска в интернете"""
@@ -132,6 +155,8 @@ class GopiAIWebSearchTool(BaseTool):
             response.raise_for_status()
             
             # Парсим результаты
+            if BeautifulSoup is None:
+                return "❌ BeautifulSoup (bs4) не установлен — парсинг результатов недоступен"
             soup = BeautifulSoup(response.text, 'html.parser')
             results = []
             

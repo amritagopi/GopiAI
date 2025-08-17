@@ -13,8 +13,18 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Union
 import requests
-from bs4 import BeautifulSoup, Tag
-from bs4.element import NavigableString, ResultSet
+# Безопасные импорты bs4: модуль может отсутствовать в окружении
+try:
+    from bs4 import BeautifulSoup, Tag  # type: ignore
+    from bs4.element import NavigableString, ResultSet  # type: ignore
+except Exception:  # pragma: no cover
+    BeautifulSoup = None  # type: ignore
+    class Tag:  # type: ignore
+        pass
+    class NavigableString(str):  # type: ignore
+        pass
+    class ResultSet(list):  # type: ignore
+        pass
 import urllib.parse
 import re
 from urllib.robotparser import RobotFileParser
@@ -486,6 +496,9 @@ class LocalMCPTools:
             # Получаем страницу
             response = requests.get(url, headers=headers, timeout=30)
             response.raise_for_status()
+            
+            if BeautifulSoup is None:
+                return {"error": "BeautifulSoup (bs4) не установлен — парсинг HTML недоступен"}
             
             soup = BeautifulSoup(response.content, 'html.parser')
             

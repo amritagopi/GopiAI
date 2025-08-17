@@ -220,3 +220,46 @@ class CrewAIToolsIntegrator:
     def get_all_tools(self) -> Dict[str, Dict[str, Any]]:
         """Получает все доступные инструменты"""
         return self.available_tools
+
+    def get_tools_summary(self) -> Dict[str, List[Dict[str, Any]]]:
+        """
+        Возвращает сводку инструментов по категориям в формате, ожидаемом сервером:
+        {
+          "category": [
+             {"name": str, "description": str, "available": bool}
+          ]
+        }
+        """
+        summary: Dict[str, List[Dict[str, Any]]] = {}
+        for name, info in self.available_tools.items():
+            category = info.get("category", "uncategorized")
+            description = info.get("description", "")
+            # available=true если инструмент включён и его модуль можно импортировать
+            enabled = info.get("enabled", True)
+            available = enabled
+            if enabled:
+                try:
+                    importlib.import_module(info["module"])  # быстрая проверка доступности
+                except Exception:
+                    available = False
+            item = {
+                "name": name,
+                "description": description,
+                "available": bool(available),
+            }
+            summary.setdefault(category, []).append(item)
+        return summary
+
+
+# --- Factory (singleton) ---
+_tools_integrator_singleton: Optional[CrewAIToolsIntegrator] = None
+
+def get_crewai_tools_integrator() -> CrewAIToolsIntegrator:
+    """
+    Фабричная функция (singleton) для интегратора инструментов.
+    Используется сервером `crewai_api_server.py`.
+    """
+    global _tools_integrator_singleton
+    if _tools_integrator_singleton is None:
+        _tools_integrator_singleton = CrewAIToolsIntegrator()
+    return _tools_integrator_singleton

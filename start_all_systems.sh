@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 SERVER_IP="127.0.0.1"  # Change this to your server IP
 CREWAI_PORT=5051
 
-# Paths
+# Paths🤯🤯😄
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$BASE_DIR/GopiAI-CrewAI"
 FRONTEND_DIR="$BASE_DIR/GopiAI-UI"
@@ -89,9 +89,9 @@ start_backend() {
     export FLASK_ENV="development"
     export PYTHONPATH="$BACKEND_DIR:$PYTHONPATH"
     
-    # Start the backend server in background
+    # Start the backend server in background (use explicit venv python)
     echo -e "  - Starting CrewAI API Server on $SERVER_IP:$CREWAI_PORT"
-    nohup python -m flask run --host=$SERVER_IP --port=$CREWAI_PORT > "$BACKEND_DIR/logs/backend.log" 2>&1 &
+    nohup "$BACKEND_VENV/bin/python" -m flask run --host=$SERVER_IP --port=$CREWAI_PORT > "$BACKEND_DIR/logs/backend.log" 2>&1 &
     BACKEND_PID=$!
     echo $BACKEND_PID > /tmp/gopiai_backend.pid
     
@@ -102,8 +102,8 @@ start_backend() {
     echo -e "  - Waiting for server to initialize..."
     sleep 5
     
-    # Check if server is running
-    if ! curl -s "http://$SERVER_IP:$CREWAI_PORT/health" > /dev/null; then
+    # Check if server is running (correct endpoint)
+    if ! curl -s "http://$SERVER_IP:$CREWAI_PORT/api/health" > /dev/null; then
         echo -e "${RED}[ERROR]${NC} Failed to start backend server"
         echo -e "  - Check logs at: $BACKEND_DIR/logs/backend.log"
         exit 1

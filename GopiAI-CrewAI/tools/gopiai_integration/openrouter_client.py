@@ -13,7 +13,11 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-import aiohttp
+# aiohttp может быть не установлен — делаем безопасный импорт
+try:
+    import aiohttp  # type: ignore
+except Exception:  # pragma: no cover
+    aiohttp = None  # type: ignore
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -229,11 +233,17 @@ class OpenRouterClient:
             logger.debug("📋 Возвращаем модели из кэша (async)")
             return self._models_cache
         
+        # Если aiohttp недоступен — работаем в деградированном режиме
+        if aiohttp is None:
+            logger.warning("aiohttp не установлен — get_models_async использует синхронный режим")
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(None, self.get_models_sync, force_refresh)
+
         try:
             logger.info("🔄 Получаем список моделей OpenRouter (async)...")
             
-            timeout = aiohttp.ClientTimeout(total=30)
-            async with aiohttp.ClientSession(timeout=timeout) as session:
+            timeout = aiohttp.ClientTimeout(total=30)  # type: ignore
+            async with aiohttp.ClientSession(timeout=timeout) as session:  # type: ignore
                 url = f"{self.BASE_URL}{self.MODELS_ENDPOINT}"
                 
                 async with session.get(url, headers=self._get_headers()) as response:
@@ -270,13 +280,14 @@ class OpenRouterClient:
             
             return models
             
-        except aiohttp.ClientError as e:
-            logger.error(f"❌ Ошибка сети при получении моделей (async): {e}")
-            return self._models_cache
         except Exception as e:
+            # Если это ошибка aiohttp клиента и он есть — логируем соответствующе
+            if aiohttp is not None and isinstance(e, aiohttp.ClientError):  # type: ignore
+                logger.error(f"❌ Ошибка сети при получении моделей (async): {e}")
+                return self._models_cache
             logger.error(f"❌ Неожиданная ошибка при получении моделей (async): {e}")
             return self._models_cache
-    
+
     def search_models(self, search_term: str, models: Optional[List[OpenRouterModel]] = None) -> List[OpenRouterModel]:
         """
         Поиск моделей по названию

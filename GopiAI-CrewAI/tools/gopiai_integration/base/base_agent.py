@@ -7,13 +7,18 @@
 import logging
 from typing import Any, Dict, List, Optional
 
-# Импортируем реальные классы из crewai
-from crewai import Agent, Task, Crew
+# Пытаемся импортировать реальные классы из crewai; если недоступно — используем заглушки
+try:
+    from crewai import Agent as _CrewAI_Agent, Task as _CrewAI_Task, Crew as _CrewAI_Crew  # type: ignore
+    CREWAI_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _CrewAI_Agent = None  # type: ignore
+    _CrewAI_Task = None  # type: ignore
+    _CrewAI_Crew = None  # type: ignore
+    CREWAI_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
-# Теперь этот модуль просто ре-экспортирует классы из crewai
-# Все заглушки удалены и заменены на реальные классы
 class Agent:
     """
     Заглушка для Agent из crewai
@@ -31,7 +36,8 @@ class Agent:
         self.name = name
         self.role = role
         self.kwargs = kwargs
-        logger.warning("WARNING: Using Agent stub instead of crewai.Agent")
+        if not CREWAI_AVAILABLE:
+            logger.warning("WARNING: Using Agent stub instead of crewai.Agent")
     
     def __str__(self) -> str:
         return f"Agent(name={self.name}, role={self.role})"
@@ -57,7 +63,8 @@ class Task:
         self.description = description
         self.agent = agent
         self.kwargs = kwargs
-        logger.warning("WARNING: Using Task stub instead of crewai.Task")
+        if not CREWAI_AVAILABLE:
+            logger.warning("WARNING: Using Task stub instead of crewai.Task")
     
     def __str__(self) -> str:
         return f"Task(description={self.description})"
@@ -83,7 +90,8 @@ class Crew:
         self.agents = agents
         self.tasks = tasks
         self.kwargs = kwargs
-        logger.warning("WARNING: Using Crew stub instead of crewai.Crew")
+        if not CREWAI_AVAILABLE:
+            logger.warning("WARNING: Using Crew stub instead of crewai.Crew")
     
     def kickoff(self) -> str:
         """
@@ -92,7 +100,8 @@ class Crew:
         Returns:
             str: Заглушка результата
         """
-        logger.warning("WARNING: Using Crew stub - no actual work will be performed")
+        if not CREWAI_AVAILABLE:
+            logger.warning("WARNING: Using Crew stub - no actual work will be performed")
         return "[CREW STUB] This is a stub response. The crewai module is not available."
     
     def __str__(self) -> str:

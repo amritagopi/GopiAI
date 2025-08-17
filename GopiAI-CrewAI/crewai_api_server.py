@@ -171,8 +171,28 @@ except ImportError:
 
 # --- Настройки сервера ---
 HOST = "0.0.0.0"  # Слушаем на всех интерфейсах
-PORT = 5051  # Стандартный порт для CrewAI API сервера
+DEFAULT_PORT = 5051  # Стандартный порт для CrewAI API сервера
+PORT = DEFAULT_PORT
 DEBUG = False
+
+# Handle command line arguments (дружелюбно к дополнительным флагам)
+import argparse
+parser = argparse.ArgumentParser(description='Запуск сервера CrewAI API', add_help=True)
+parser.add_argument('command', nargs='?', default='run', help="Необязательная команда (по умолчанию: 'run')")
+parser.add_argument('--host', type=str, default=HOST, help=f'Хост для запуска сервера (по умолчанию: {HOST})')
+parser.add_argument('--port', type=int, default=DEFAULT_PORT, help=f'Порт для запуска сервера (по умолчанию: {DEFAULT_PORT})')
+
+# Используем parse_known_args, чтобы не падать на неизвестных аргументах (например, '--host=127.0.0.1')
+args, unknown_args = parser.parse_known_args()
+if unknown_args:
+    try:
+        logging.getLogger(__name__).warning(f"Неизвестные аргументы CLI будут проигнорированы: {unknown_args}")
+    except Exception:
+        pass
+
+# Применяем значения
+HOST = args.host or HOST
+PORT = int(args.port) if args.port else DEFAULT_PORT
 TASK_CLEANUP_INTERVAL = 300
 
 # --- Глобальное хранилище задач ---
@@ -329,13 +349,19 @@ try:
     smart_delegator_instance = SmartDelegator(rag_system=cast(Any, rag_system_instance))
     print(f"[ДИАГНОСТИКА] SmartDelegator создан: {smart_delegator_instance is not None}")
     
-    # 3. Инициализируем интегратор инструментов
+    # 3. Инициализируем интегратор инструментов (необязательный)
     print("[ДИАГНОСТИКА] Инициализация CrewAI Tools Integrator")
-    from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
-    tools_integrator_instance = get_crewai_tools_integrator()
-    print(f"[ДИАГНОСТИКА] Tools Integrator создан: {tools_integrator_instance is not None}")
-    
-    logger.info("✅ Smart Delegator, RAG System и Tools Integrator успешно инициализированы.")
+    tools_integrator_instance = None
+    try:
+        from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
+        tools_integrator_instance = get_crewai_tools_integrator()
+        print(f"[ДИАГНОСТИКА] Tools Integrator создан: {tools_integrator_instance is not None}")
+        logger.info("✅ Tools Integrator успешно инициализирован")
+    except Exception as _e_tools:
+        print(f"[DIAGNOSTIC] WARNING: Tools Integrator init failed: {_e_tools}")
+        logger.warning(f"Tools Integrator недоступен: {_e_tools}")
+
+    logger.info("✅ Smart Delegator и RAG System успешно инициализированы. Продолжаем запуск сервера.")
     SERVER_IS_READY = True
     print("[ДИАГНОСТИКА] SERVER_IS_READY = True")
 except Exception as e:

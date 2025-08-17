@@ -54,13 +54,15 @@ class _WorkerProc:
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 text=True, encoding="utf-8", bufsize=1, cwd=str(self.worker_script.parent)
             )
-            # ждём первую готовность
-            line = self._readline(timeout=10.0)
+            # ждём первую готовность (импорт txtai/torch может занимать значительное время)
+            line = self._readline(timeout=60.0)
             if not line:
                 logger.error("RAG worker didn't send ready line")
                 # Попробуем прочитать stderr для диагностики
                 if self.proc.stderr:
                     try:
+                        # Чтение stderr может блокировать, поэтому читаем осторожно
+                        # Здесь ограничимся попыткой чтения небольшого объёма, если доступно
                         stderr_output = self.proc.stderr.read()
                         if stderr_output:
                             logger.error(f"RAG worker stderr: {stderr_output}")

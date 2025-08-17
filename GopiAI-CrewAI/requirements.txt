@@ -17,3 +17,7 @@ tqdm>=4.62.0
 python-multipart>=0.0.5
 pytest>=6.2.5
 pytest-cov>=2.12.1
+
+# LLM and RAG
+litellm>=1.40.0
+txtai[faiss]>=7.1.0

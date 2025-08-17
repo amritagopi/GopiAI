@@ -16,15 +16,80 @@ Set of specialized tools for integrating CrewAI with GopiAI
 - GopiAIBrowserTool: браузерная автоматизация (отключена)
 """
 
-# ОСНОВНЫЕ ИНСТРУМЕНТЫ
-from .filesystem_tools import GopiAIFileSystemTool
-from .terminal_tool import TerminalTool
-from .web_search_tool import GopiAIWebSearchTool
-from .web_viewer_tool import GopiAIWebViewerTool
+# Безопасный BaseTool (fallback, если crewai недоступен)
+try:
+    from crewai.tools.base_tool import BaseTool  # type: ignore
+except Exception:  # pragma: no cover
+    class BaseTool:  # минимальная заглушка
+        name: str = "BaseTool"
+        description: str = "Stub BaseTool when crewai is unavailable"
+        def tool_schema(self):
+            return {
+                "type": "function",
+                "function": {
+                    "name": getattr(self, "name", "tool"),
+                    "description": getattr(self, "description", ""),
+                    "parameters": {"type": "object", "properties": {}},
+                },
+            }
+        def _run(self, *args, **kwargs):
+            return {"error": "crewai BaseTool is unavailable"}
 
-# ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ
-from .memory_tools import GopiAIMemoryTool
-from .communication_tools import GopiAICommunicationTool
+# ОСНОВНЫЕ ИНСТРУМЕНТЫ (с импортом через try/except)
+try:
+    from .filesystem_tools import GopiAIFileSystemTool
+except Exception:  # pragma: no cover
+    class GopiAIFileSystemTool(BaseTool):
+        name = "gopiai_filesystem"
+        description = "Filesystem tool unavailable (dependency missing)"
+        def _run(self, *args, **kwargs):
+            return {"error": "Filesystem tool unavailable"}
+
+try:
+    from .terminal_tool import TerminalTool
+except Exception:  # pragma: no cover
+    class TerminalTool(BaseTool):
+        name = "terminal"
+        description = "Terminal tool unavailable (dependency missing)"
+        def _run(self, *args, **kwargs):
+            return {"terminal_output": {"error": "Terminal tool unavailable", "success": False}}
+
+try:
+    from .web_search_tool import GopiAIWebSearchTool
+except Exception:  # pragma: no cover
+    class GopiAIWebSearchTool(BaseTool):
+        name = "gopiai_web_search"
+        description = "Web search unavailable (bs4/requests missing)"
+        def _run(self, *args, **kwargs):
+            return "❌ Web search tool unavailable"
+
+try:
+    from .web_viewer_tool import GopiAIWebViewerTool
+except Exception:  # pragma: no cover
+    class GopiAIWebViewerTool(BaseTool):
+        name = "gopiai_web_viewer"
+        description = "Web viewer unavailable (dependency missing)"
+        def _run(self, *args, **kwargs):
+            return "❌ Web viewer tool unavailable"
+
+# ДОПОЛНИТЕЛЬНЫЕ ИНСТРУМЕНТЫ (с импортом через try/except)
+try:
+    from .memory_tools import GopiAIMemoryTool
+except Exception:  # pragma: no cover
+    class GopiAIMemoryTool(BaseTool):
+        name = "gopiai_memory"
+        description = "Memory tool unavailable"
+        def _run(self, *args, **kwargs):
+            return {"error": "Memory tool unavailable"}
+
+try:
+    from .communication_tools import GopiAICommunicationTool
+except Exception:  # pragma: no cover
+    class GopiAICommunicationTool(BaseTool):
+        name = "gopiai_communication"
+        description = "Communication tool unavailable"
+        def _run(self, *args, **kwargs):
+            return {"error": "Communication tool unavailable"}
 
 # ОТКЛЮЧЕННЫЕ ИНСТРУМЕНТЫ (оставлены для совместимости)
 # browser_tools удалены из проекта
@@ -138,5 +203,3 @@ def get_tool_by_name(tool_name: str):
 def get_active_tools_info():
     """Возвращает информацию только об активных инструментах"""
     return {k: v for k, v in TOOLS_INFO.items() if v['status'] == 'active'}
-
-print("GopiAI Integration Tools loaded successfully!")

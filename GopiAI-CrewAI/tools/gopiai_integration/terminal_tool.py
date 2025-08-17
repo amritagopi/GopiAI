@@ -6,8 +6,27 @@ Terminal Tool для GopiAI-CrewAI
 Безопасная интеграция между LLM и терминальным виджетом.
 """
 
-# Используем BaseTool из crewai_tools вместо langchain
-from crewai.tools import BaseTool
+# Используем BaseTool из crewai при наличии; добавляем безопасный фоллбек при отсутствии пакета
+try:
+    from crewai.tools import BaseTool  # type: ignore
+except Exception:  # fallback when crewai is not installed
+    class BaseTool:  # minimal stub to avoid import errors
+        name: str = "BaseTool"
+        description: str = "Stub BaseTool when crewai is unavailable"
+
+        def tool_schema(self):
+            return {
+                "type": "function",
+                "function": {
+                    "name": getattr(self, "name", "tool"),
+                    "description": getattr(self, "description", ""),
+                    "parameters": {"type": "object", "properties": {}},
+                },
+            }
+
+        def _run(self, *args, **kwargs):  # pragma: no cover - stub behavior
+            return {"error": "crewai BaseTool is unavailable"}
+
 from typing import Dict, Any, Optional
 import subprocess
 import logging
