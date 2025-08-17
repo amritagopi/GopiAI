@@ -221,6 +221,13 @@ class CrewAIToolsIntegrator:
         """Получает все доступные инструменты"""
         return self.available_tools
 
+    def get_available_tools(self) -> List[str]:
+        """
+        Возвращает список доступных инструментов по именам (канонические названия).
+        Совместимо с ожиданиями `SmartDelegator` и `ToolDispatcher`.
+        """
+        return list(self.available_tools.keys())
+
     def get_tools_summary(self) -> Dict[str, List[Dict[str, Any]]]:
         """
         Возвращает сводку инструментов по категориям в формате, ожидаемом сервером:

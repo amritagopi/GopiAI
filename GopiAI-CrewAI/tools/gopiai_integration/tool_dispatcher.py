@@ -448,8 +448,20 @@ class ToolDispatcher:
         if (self.smart_delegator.local_tools_available and 
             self.smart_delegator.local_tools):
             available_local = self.smart_delegator.local_tools.get_available_tools()
-            if tool_name in available_local:
-                return True
+            # Поддержка форматов: List[str] и List[Dict[str, Any]] с ключом 'name'
+            try:
+                if isinstance(available_local, list):
+                    for item in available_local:
+                        if isinstance(item, str) and item == tool_name:
+                            return True
+                        if isinstance(item, dict) and item.get('name') == tool_name:
+                            return True
+                # Fallback на прямую проверку
+                if tool_name in available_local:
+                    return True
+            except Exception:
+                # Не прерываем проверку другими источниками
+                pass
         
         # Проверяем в внешних MCP инструментах
         if (self.smart_delegator.mcp_available and 

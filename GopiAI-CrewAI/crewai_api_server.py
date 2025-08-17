@@ -260,6 +260,7 @@ cleanup_thread = threading.Thread(target=cleanup_old_tasks, daemon=True)
 cleanup_thread.start()
 
 app = Flask(__name__)
+
  
 # --- Settings manager for UI toggle ---
 try:
@@ -935,52 +936,25 @@ def cleanup_on_exit():
     logger.info("Cleaning up resources...")
 
 if __name__ == '__main__':
-    # [AUDIT] Разовая диагностика загруженных модулей с префиксом "gopiai."
-    try:
-        loaded = sorted([m for m in sys.modules.keys() if m.startswith("gopiai.")])
-        print(f"[AUDIT][CREWAI] Loaded gopiai.* modules (pre-run): {loaded}")
-        logging.getLogger(__name__).info("[AUDIT][CREWAI] Loaded gopiai.* modules (pre-run): %s", loaded)
-    except Exception as _e:
-        print(f"[AUDIT][CREWAI] Error while auditing modules: {_e}")
     # Регистрируем обработчики сигналов
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
     atexit.register(cleanup_on_exit)
-    
-    print(f"[DIAGNOSTIC] __main__ block, SERVER_IS_READY = {SERVER_IS_READY}")
+
     if SERVER_IS_READY:
-        print(f"[DIAGNOSTIC] Starting server on http://{HOST}:{PORT}")
-        logger.info(f"[STARTUP] Server starting on http://{HOST}:{PORT}")
         try:
-            print("[DIAGNOSTIC] Calling app.run()")
-
-            # Дополнительно планируем аудит уже после старта (через отдельный поток-таймер)
-            try:
-                def _late_audit():
-                    import time as _t
-                    _t.sleep(3)
-                    try:
-                        late_loaded = sorted([m for m in sys.modules.keys() if m.startswith("gopiai.")])
-                        print(f"[AUDIT][CREWAI] Loaded gopiai.* modules (post-run): {late_loaded}")
-                        logging.getLogger(__name__).info("[AUDIT][CREWAI] Loaded gopiai.* modules (post-run): %s", late_loaded)
-                    except Exception as __e:
-                        print(f"[AUDIT][CREWAI] Error while late auditing modules: {__e}")
-                threading.Thread(target=_late_audit, daemon=True).start()
-            except Exception as __e:
-                print(f"[AUDIT][CREWAI] Unable to schedule late audit: {__e}")
-
-            app.run(host=HOST, port=PORT, debug=DEBUG, threaded=True, use_reloader=False)
-            print("[DIAGNOSTIC] After app.run() - this message should not appear")
-        except KeyboardInterrupt:
-            print("\n[SHUTDOWN] Received KeyboardInterrupt. Shutting down gracefully...")
-            logger.info("Received KeyboardInterrupt. Shutting down gracefully...")
+            from waitress import serve
+            logger.info(f"[STARTUP] Starting production server with waitress on http://{HOST}:{PORT}")
+            serve(app, host=HOST, port=PORT, threads=8)
+        except ImportError:
+            logger.error("Waitress not installed. Falling back to Flask development server.")
+            logger.info(f"[STARTUP] Starting Flask development server on http://{HOST}:{PORT}")
+            app.run(host=HOST, port=PORT, debug=DEBUG, use_reloader=False)
         except Exception as e:
-            print(f"[DIAGNOSTIC] Error starting server: {e}")
-            logger.error(f"Error starting server: {e}")
+            logger.error(f"CRITICAL: Failed to start server: {e}", exc_info=True)
+            sys.exit(1)
     else:
-        print("[DIAGNOSTIC] Server not started due to initialization errors")
         logger.error("Server not started due to initialization errors.")
-        print("CRITICAL ERROR: Server cannot be started due to initialization errors.")
         sys.exit(1)
 
 # --- END OF FILE crewai_api_server.py ---
