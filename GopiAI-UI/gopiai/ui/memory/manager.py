@@ -123,9 +123,18 @@ class MemoryManager:
             return session_messages
         return []
     
-    def get_session_messages(self, session_id: str) -> List[Dict]:
-        """Alias for get_chat_history for backward compatibility."""
-        return self.get_chat_history(session_id)
+    def get_session_messages(self, session_id: str, limit: Optional[int] = None) -> List[Dict]:
+        """
+        Alias for get_chat_history for backward compatibility.
+        
+        Args:
+            session_id: ID сессии
+            limit: Максимальное количество сообщений (если None, возвращает все)
+        """
+        messages = self.get_chat_history(session_id)
+        if limit is not None and limit > 0:
+            return messages[-limit:]  # Возвращаем последние N сообщений
+        return messages
 
     # Дополнительные методы для работы с общей памятью
     def list_sessions(self) -> List[Dict]:

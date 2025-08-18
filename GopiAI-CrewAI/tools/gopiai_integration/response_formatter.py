@@ -20,6 +20,8 @@ class ResponseFormatter:
         self.code_block_pattern = re.compile(r'```[a-zA-Z]*\s*(.*?)\s*```', re.DOTALL)
         self.html_pattern = re.compile(r'<[^<>]*>')
         self.command_pattern = re.compile(r'\{[\'"]tool[\']:\s*[\'"]terminal[\'].*?\}', re.DOTALL)
+        # Паттерн для поиска tool_code блоков
+        self.tool_code_pattern = re.compile(r'tool_code\s+([^\n]+)', re.IGNORECASE)
         
         # Инициализируем HTML санитизатор
         self.html_sanitizer = HTMLSanitizer()
@@ -122,8 +124,20 @@ class ResponseFormatter:
         if not isinstance(response_data, dict):
             return False
             
+        # Проверяем analysis.executed_commands
         analysis = response_data.get('analysis', {})
-        return isinstance(analysis, dict) and analysis.get('executed_commands', 0) > 0
+        if isinstance(analysis, dict) and analysis.get('executed_commands', 0) > 0:
+            return True
+            
+        # Проверяем наличие tool_code блоков в ответе
+        response_text = response_data.get('response', '')
+        if isinstance(response_text, str):
+            tool_code_matches = self.tool_code_pattern.findall(response_text)
+            if tool_code_matches:
+                logger.debug(f"[ResponseFormatter] Найдено {len(tool_code_matches)} tool_code блоков")
+                return True
+                
+        return False
         
     def remove_command_json_blocks(self, content: str) -> str:
         """Удаление JSON блоков с командами терминала"""

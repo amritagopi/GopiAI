@@ -448,8 +448,9 @@ class SmartDelegator:
                 # Проверяем, не является ли ответ ошибкой
                 if isinstance(tool_response, dict) and tool_response.get('error'):
                     # Возвращаем честную ошибку пользователю
+                    error_message = tool_response.get('message') or tool_response.get('error') or 'Неизвестная ошибка'
                     return {
-                        'response': tool_response['message'],
+                        'response': error_message,
                         'tool_used': tool_request['tool_name'],
                         'tool_error': True
                     }
