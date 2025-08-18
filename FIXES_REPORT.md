@@ -9,7 +9,7 @@
 
 ## ✅ Выполненные исправления
 
-### 1. Исправление ToolsInstructionManager
+### 1. Исправление ToolsInstructionManager ✅
 
 **Файл**: `GopiAI-CrewAI/tools/gopiai_integration/tools_instruction_manager.py`
 
@@ -29,7 +29,7 @@ def get_tool_detailed_instructions(self, tool_name: str) -> Optional[str]:
 - Добавлены инструкции для новых инструментов: `filesystem_tools`, `local_mcp_tools`, `browser_tools`, `page_analyzer`
 - Добавлены соответствующие методы для генерации инструкций
 
-### 2. Исправление MemoryManager
+### 2. Исправление MemoryManager ✅
 
 **Файл**: `GopiAI-UI/gopiai/ui/memory/manager.py`
 
@@ -51,19 +51,89 @@ def get_session_messages(self, session_id: str, limit: Optional[int] = None) -> 
     return messages
 ```
 
+### 3. Исправление file_operations (KeyError: 'message') ✅
+
+**Файл**: `GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py`
+
+**Проблема**: При ошибке file_operations код пытался получить `tool_response['message']`, но инструмент возвращал `{"error": "..."}` вместо `{"message": "..."}`
+
+**Исправление**:
+```python
+# Проверяем, не является ли ответ ошибкой
+if isinstance(tool_response, dict) and tool_response.get('error'):
+    # Возвращаем честную ошибку пользователю
+    error_message = tool_response.get('message') or tool_response.get('error') or 'Неизвестная ошибка'
+    return {
+        'response': error_message,
+        'tool_used': tool_request['tool_name'],
+        'tool_error': True
+    }
+```
+
+### 4. Исправление определения команд (has_commands=False) ✅
+
+**Файл**: `GopiAI-CrewAI/tools/gopiai_integration/response_formatter.py`
+
+**Проблема**: Система не распознавала `tool_code` блоки как команды, поэтому `has_commands` всегда было `False`
+
+**Исправления**:
+1. Добавлен паттерн для поиска tool_code блоков:
+```python
+self.tool_code_pattern = re.compile(r'tool_code\s+([^\n]+)', re.IGNORECASE)
+```
+
+2. Обновлен метод `has_executed_commands`:
+```python
+def has_executed_commands(self, response_data: Dict[str, Any]) -> bool:
+    """Проверяет, были ли выполнены команды"""
+    if not isinstance(response_data, dict):
+        return False
+        
+    # Проверяем analysis.executed_commands
+    analysis = response_data.get('analysis', {})
+    if isinstance(analysis, dict) and analysis.get('executed_commands', 0) > 0:
+        return True
+        
+    # Проверяем наличие tool_code блоков в ответе
+    response_text = response_data.get('response', '')
+    if isinstance(response_text, str):
+        tool_code_matches = self.tool_code_pattern.findall(response_text)
+        if tool_code_matches:
+            logger.debug(f"[ResponseFormatter] Найдено {len(tool_code_matches)} tool_code блоков")
+            return True
+            
+    return False
+```
+
 ## 🧪 Результаты тестирования
 
-### ToolsInstructionManager
+### ✅ Все тесты пройдены успешно (5/5)
+
+#### 1. ToolsInstructionManager
 - ✅ Инициализация: успешно
 - ✅ Количество инструкций: 14
 - ✅ Метод `get_tool_detailed_instructions`: работает корректно
-- ✅ Возврат инструкций для `filesystem_tools`: успешно
+- ✅ Возврат инструкций для `filesystem_tools`: 195 символов
 
-### MemoryManager
+#### 2. MemoryManager
 - ✅ Инициализация: успешно
 - ✅ Метод `get_session_messages` с `limit=3`: возвращает 3 сообщения
 - ✅ Метод `get_session_messages` без `limit`: возвращает все сообщения
 - ✅ Обратная совместимость: сохранена
+
+#### 3. file_operations
+- ✅ LocalMCPTools инициализирован
+- ✅ Корректная обработка ошибок без KeyError
+- ✅ Возврат понятных сообщений об ошибках
+
+#### 4. ResponseFormatter
+- ✅ Инициализация: успешно
+- ✅ Корректное определение tool_code блоков
+- ✅ Корректное определение отсутствия команд
+
+#### 5. SmartDelegator
+- ✅ Корректная обработка ошибок инструментов
+- ✅ Отсутствие KeyError при обработке ошибок
 
 ## 🎯 Ожидаемые результаты
 
@@ -85,14 +155,23 @@ def get_session_messages(self, session_id: str, limit: Optional[int] = None) -> 
 
 ## 📁 Измененные файлы
 
-1. `GopiAI-CrewAI/tools/gopiai_integration/tools_instruction_manager.py`
-   - Добавлен метод `get_tool_detailed_instructions`
-   - Расширен список поддерживаемых инструментов
-   - Добавлены методы для генерации инструкций
+1. **`GopiAI-CrewAI/tools/gopiai_integration/tools_instruction_manager.py`**
+   - ✅ Добавлен метод `get_tool_detailed_instructions`
+   - ✅ Расширен список поддерживаемых инструментов
+   - ✅ Добавлены методы для генерации инструкций
 
-2. `GopiAI-UI/gopiai/ui/memory/manager.py`
-   - Обновлен метод `get_session_messages` с поддержкой параметра `limit`
-   - Сохранена обратная совместимость
+2. **`GopiAI-UI/gopiai/ui/memory/manager.py`**
+   - ✅ Обновлен метод `get_session_messages` с поддержкой параметра `limit`
+   - ✅ Сохранена обратная совместимость
+
+3. **`GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py`**
+   - ✅ Исправлена обработка ошибок инструментов
+   - ✅ Устранен KeyError: 'message' при ошибках file_operations
+
+4. **`GopiAI-CrewAI/tools/gopiai_integration/response_formatter.py`**
+   - ✅ Добавлен паттерн для поиска tool_code блоков
+   - ✅ Обновлен метод `has_executed_commands` для корректного определения команд
+   - ✅ Улучшено определение has_commands=True
 
 ## 🚀 Рекомендации по развертыванию
 
