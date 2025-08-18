@@ -4139,6 +4139,18 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_baidu/ernie-4.5-vl-424b-a47b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-vl-424b-a47b",
+      "display_name": "Baidu: ERNIE 4.5 VL 424B A47B  (baidu/ernie-4.5-vl-424b-a47b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {

@@ -9,7 +9,7 @@ The enhanced logging system provides comprehensive logging capabilities includin
 - Detailed log messages with timestamps and source locations
 - Log rotation (10MB per file, 5 backups)
 - Separate log levels for different components
-- Signal logging for PyQt signals
+- Signal logging for PySide6 signals
 - Function call logging
 - Exception handling and stack traces
 - Import tracing
@@ -60,15 +60,15 @@ except Exception as e:
     logger.exception("An error occurred")
 ```
 
-### Logging PyQt Signals
+### Logging PySide6 Signals
 
 ```python
 from gopiai.enhanced_logging import SignalLogger
 
 # Connect a signal and log its emissions
-button.clicked.connect(
-    SignalLogger.connect_signal(button.clicked, your_slot_function)
-)
+connection = SignalLogger.connect_signal(button.clicked, your_slot_function)
+# Store the connection if you need to disconnect later
+self._connections.append(connection)
 ```
 
 ### Logging Function Calls

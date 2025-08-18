@@ -57,7 +57,7 @@ def setup_logging(log_level: int = logging.DEBUG, log_to_file: bool = True) -> N
         logger.addHandler(file_handler)
     
     # Configure third-party loggers
-    for lib in ['PyQt5', 'urllib3', 'asyncio']:
+    for lib in ['PySide6', 'urllib3', 'asyncio']:
         logging.getLogger(lib).setLevel(logging.WARNING)
     
     # Enable debug logging for specific modules
@@ -95,9 +95,9 @@ def setup_logging(log_level: int = logging.DEBUG, log_to_file: bool = True) -> N
     
     logger.info("Logging system initialized")
 
-# Signal logger for PyQt signals
+# Signal logger for PySide6 signals
 class SignalLogger:
-    """Utility class to log PyQt signal emissions"""
+    """Utility class to log PySide6 signal emissions"""
     
     @classmethod
     def log_signal(cls, signal, *args):
@@ -112,10 +112,22 @@ class SignalLogger:
     
     @classmethod
     def connect_signal(cls, signal, slot):
-        """Connect a signal and log its emissions"""
+        """Connect a signal and log its emissions
+        
+        Args:
+            signal: PySide6 signal to connect
+            slot: Slot function to connect to the signal
+            
+        Returns:
+            The connection object that can be used to disconnect the slot
+        """
         def wrapped_slot(*args):
             cls.log_signal(signal, *args)
-            return slot(*args)
+            # PySide6 doesn't require returning the result of the slot
+            result = slot(*args)
+            return result
+            
+        # In PySide6, connect returns a connection object
         return signal.connect(wrapped_slot)
 
 # Function to log function calls

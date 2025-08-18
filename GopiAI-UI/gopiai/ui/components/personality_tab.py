@@ -43,10 +43,10 @@ class PersonalityTab(QWidget):
                 # Относительно текущего файла
                 os.path.join(
                     os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
-                    "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"
+                    "..", "GopiAI-CrewAI", "tools", "gopiai_integration", "system_prompts.py"
                 ),
                 # Абсолютный путь
-                r"c:\Users\crazy\GOPI_AI_MODULES\GopiAI-CrewAI\tools\gopiai_integration\system_prompts.py"
+                "/home/amritagopi/GopiAI/GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py"
             ]
             
             for path in possible_paths:

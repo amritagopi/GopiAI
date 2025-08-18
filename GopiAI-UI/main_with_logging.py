@@ -30,7 +30,7 @@ logger.info(f"Working directory: {os.getcwd()}")
 logger.info(f"Python path: {sys.path}")
 
 # Now import the rest of the application
-from PyQt5.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from gopiai.ui.main_window import MainWindow
 
 def main():
