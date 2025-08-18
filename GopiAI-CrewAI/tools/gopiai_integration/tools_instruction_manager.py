@@ -33,10 +33,14 @@ class ToolsInstructionManager:
             "api_client": self._get_api_client_instructions(),
             "url_analyzer": self._get_url_analyzer_instructions(),
             "file_operations": self._get_file_operations_instructions(),
+            "filesystem_tools": self._get_filesystem_tools_instructions(),
             "system_info": self._get_system_info_instructions(),
             "process_manager": self._get_process_manager_instructions(),
             "time_helper": self._get_time_helper_instructions(),
-            "project_helper": self._get_project_helper_instructions()
+            "project_helper": self._get_project_helper_instructions(),
+            "local_mcp_tools": self._get_local_mcp_tools_instructions(),
+            "browser_tools": self._get_browser_tools_instructions(),
+            "page_analyzer": self._get_page_analyzer_instructions()
         }
 
     def get_tools_summary(self) -> Dict[str, str]:
@@ -90,6 +94,22 @@ class ToolsInstructionManager:
     def _get_project_helper_instructions(self) -> str:
         """Детальные инструкции для project_helper"""
         return "Используйте project_helper для помощи в управлении проектами. Пример: project_helper('create', 'project_name')"
+    
+    def _get_filesystem_tools_instructions(self) -> str:
+        """Детальные инструкции для filesystem_tools"""
+        return "Используйте filesystem_tools для работы с файловой системой. Поддерживает: read, write, list_directory, create_directory, delete, copy, move. Пример: filesystem_tools('read', '/path/to/file.txt')"
+    
+    def _get_local_mcp_tools_instructions(self) -> str:
+        """Детальные инструкции для local_mcp_tools"""
+        return "Используйте local_mcp_tools для работы с локальными MCP инструментами. Поддерживает API запросы, веб-скрапинг. Пример: local_mcp_tools('get', 'https://api.example.com')"
+    
+    def _get_browser_tools_instructions(self) -> str:
+        """Детальные инструкции для browser_tools"""
+        return "Используйте browser_tools для автоматизации браузера. Поддерживает: открытие сайтов, клики, скриншоты, навигацию. Пример: browser_tools('open', 'https://example.com')"
+    
+    def _get_page_analyzer_instructions(self) -> str:
+        """Детальные инструкции для page_analyzer"""
+        return "Используйте page_analyzer для анализа веб-страниц. Поддерживает: SEO анализ, проверка скорости, анализ контента. Пример: page_analyzer('analyze', 'https://example.com')"
 
     def get_instruction(self, tool_name: str) -> Optional[str]:
         """Получает инструкцию по использованию инструмента"""
@@ -98,6 +118,13 @@ class ToolsInstructionManager:
     def get_all_instructions(self) -> Dict[str, str]:
         """Получает все инструкции"""
         return self.instructions
+    
+    def get_tool_detailed_instructions(self, tool_name: str) -> Optional[str]:
+        """
+        Получает детальные инструкции для конкретного инструмента.
+        Этот метод ожидается в crewai_client.py
+        """
+        return self.get_instruction(tool_name)
 
 # Глобальный синглтон менеджера
 _TOOLS_MANAGER_SINGLETON: Optional[ToolsInstructionManager] = None
