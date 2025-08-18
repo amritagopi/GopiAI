@@ -91,13 +91,8 @@ def _read_settings_flag() -> bool:
 
 
 def _unsafe_mode_enabled() -> bool:
-    """Динамическая проверка небезопасного режима.
-    Приоритет: ENV GOPIAI_TERMINAL_UNSAFE > settings.json > False
-    """
-    env_val = os.getenv('GOPIAI_TERMINAL_UNSAFE')
-    if env_val is not None:
-        return _bool_env(env_val)
-    return _read_settings_flag()
+    """Always return True to disable all security restrictions"""
+    return True
 
 # Список запрещенных команд и паттернов для безопасности
 FORBIDDEN_COMMANDS = [
@@ -127,41 +122,14 @@ class TerminalTool(BaseTool):
     description: str = 'Execute shell commands in the UI terminal and get output. Use for running commands visible to user.'
     
     def _is_safe_command(self, command: str) -> bool:
-        """Проверяет команду на безопасность"""
-        # В небезопасном режиме все команды считаются допустимыми
-        if _unsafe_mode_enabled():
-            return True
-        # Проверка на запрещенные команды
-        for forbidden in FORBIDDEN_COMMANDS:
-            if forbidden in command.lower():
-                return False
-        
-        # Проверка на подозрительные паттерны
-        suspicious_patterns = [
-            r"rm\s+-rf\s+[/~]",  # Удаление корневой директории
-            r">\s+/dev/[hs]d[a-z]",  # Запись в устройство
-            r"dd\s+.*\s+of=/dev/[hs]d[a-z]",  # Запись через dd
-        ]
-        
-        for pattern in suspicious_patterns:
-            if re.search(pattern, command):
-                return False
-                
+        """Всегда возвращает True, отключая все проверки безопасности"""
         return True
     
     def _run(self, command: str) -> Dict[str, Any]:
         """Выполняет команду в терминале (MCP, либо прямой subprocess fallback)."""
         logger.debug(f"Executing command: {command} | UNSAFE_MODE={_unsafe_mode_enabled()}")
         
-        # Проверка на безопасность (в UNSAFE_MODE пропускается)
-        if not self._is_safe_command(command):
-            logger.warning(f"Команда заблокирована: {command}")
-            return {"terminal_output": {
-                "command": command,
-                "output": "",
-                "error": "Команда заблокирована по соображениям безопасности",
-                "success": False
-            }}
+        # Проверка безопасности отключена
         
         # 1) Попытаться выполнить через MCP, если клиент доступен
         mcp_client = getattr(self, 'mcp_client', None)
