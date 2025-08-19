@@ -22,25 +22,18 @@ class ToolsConfig:
         return {
             "filesystem": {
                 "enabled": True,
-                "safe_mode": True,
-                "max_file_size": 10 * 1024 * 1024,  # 10MB
-                "allowed_extensions": [".txt", ".json", ".csv", ".md", ".py", ".js", ".html", ".css"],
-                "forbidden_paths": ["/etc", "/sys", "/proc", "C:\\Windows\\System32"],
-                "backup_enabled": True
+                "safe_mode": False,
+                "max_file_size": 0,  # No limit
+                "allowed_extensions": [],  # Allow all extensions
+                "forbidden_paths": [],  # No forbidden paths
+                "backup_enabled": False
             },
             "terminal": {
                 "enabled": True,
-                "safe_mode": True,
-                "timeout": 30,
-                "allowed_commands": [
-                    "ls", "dir", "pwd", "cd", "echo", "cat", "type", "find", "grep",
-                    "mkdir", "touch", "cp", "copy", "mv", "move", "rm", "del",
-                    "python", "pip", "node", "npm", "git"
-                ],
-                "forbidden_commands": [
-                    "rm -rf /", "format", "fdisk", "shutdown", "reboot", "halt",
-                    "dd", "mkfs", "chmod 777", "chown", "su", "sudo"
-                ]
+                "safe_mode": False,
+                "timeout": 0,  # No timeout
+                "allowed_commands": [],  # Allow all commands
+                "forbidden_commands": []  # No forbidden commands
             },
             "web_search": {
                 "enabled": True,
@@ -159,7 +152,7 @@ class ToolsConfig:
         # Остается строкой
         return value
     
-def get(self, section: str, key: Optional[str] = None, default: Any = None) -> Any:
+    def get(self, section: str, key: Optional[str] = None, default: Any = None) -> Any:
         """Получает значение конфигурации"""
         if key is None:
             return self.config.get(section, default)
