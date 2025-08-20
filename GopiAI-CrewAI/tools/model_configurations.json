@@ -4115,6 +4115,54 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_baidu/ernie-4.5-21b-a3b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-21b-a3b",
+      "display_name": "Baidu: ERNIE 4.5 21B A3B (baidu/ernie-4.5-21b-a3b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_baidu/ernie-4.5-vl-28b-a3b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-vl-28b-a3b",
+      "display_name": "Baidu: ERNIE 4.5 VL 28B A3B (baidu/ernie-4.5-vl-28b-a3b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_baidu/ernie-4.5-vl-424b-a47b": {
+      "provider": "openrouter",
+      "model_id": "baidu/ernie-4.5-vl-424b-a47b",
+      "display_name": "Baidu: ERNIE 4.5 VL 424B A47B  (baidu/ernie-4.5-vl-424b-a47b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_openai/gpt-4o-audio-preview": {
+      "provider": "openrouter",
+      "model_id": "openai/gpt-4o-audio-preview",
+      "display_name": "OpenAI: GPT-4o Audio (openai/gpt-4o-audio-preview)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {
@@ -4122,5 +4170,5 @@
     "model_id": "google/gemini-2.0-flash-exp:free"
   },
   "version": "1.0",
-  "last_updated": "1754901075.5737875"
+  "last_updated": "1755692252.4066398"
 }

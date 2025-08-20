@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Virtual environments
+crewai_env/
+gopiai_env/
+txtai_env/
+.env
+*.env
+
 # Exclude local utilities folder from VCS except specific tools
 /03_UTILITIES/*
 !/03_UTILITIES/fix_unused_imports.py
