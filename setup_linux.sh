@@ -31,6 +31,11 @@ for env_name in "crewai_env" "gopiai_env" "txtai_env"; do
     else
         echo "Устанавливаем зависимости для GopiAI-UI..."
         pip install -r "GopiAI-UI/requirements.txt"
+        
+        # Устанавливаем языковые модели для spacy
+        echo "Устанавливаем языковые модели для spacy..."
+        python -m spacy download ru_core_news_sm
+        python -m spacy download en_core_web_sm
     fi
     
     deactivate

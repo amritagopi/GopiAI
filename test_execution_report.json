@@ -1,56 +1,32 @@
 {
   "summary": {
-    "total_executions": 3,
-    "total_duration": 6.601003408432007,
+    "total_executions": 5,
+    "total_duration": 0.0019497871398925781,
     "by_result": {
-      "failed": 3
+      "error": 5
     },
     "by_module": {
-      "GopiAI-Core": 1,
-      "GopiAI-Assets": 1,
+      "GopiAI-Assets": 4,
       "GopiAI-CrewAI": 1
     },
     "by_category": {
-      "unit": 3
+      "unit": 5
     },
     "by_environment": {
-      "gopiai_env": 2,
+      "gopiai_env": 4,
       "crewai_env": 1
     }
   },
   "executions": [
     {
-      "module": "GopiAI-Core",
-      "category": "unit",
-      "environment": "gopiai_env",
-      "command": "gopiai_env\\Scripts\\python.exe -m pytest -v --tb=short --color=yes --junitxml=test_results_GopiAI-Core_unit.xml GopiAI-Core\\tests\\test_exceptions.py GopiAI-Core\\tests\\test_interfaces.py GopiAI-Core\\tests\\test_schema.py GopiAI-Core\\tests\\test_utils.py",
-      "result": "failed",
-      "duration": 3.058786153793335,
-      "output": "\u001b[1m============================= test session starts =============================\u001b[0m\nplatform win32 -- Python 3.12.0, pytest-8.4.1, pluggy-1.6.0 -- C:\\Users\\crazy\\GOPI_AI_MODULES\\gopiai_env\\Scripts\\python.exe\ncachedir: .pytest_cache\nrootdir: C:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-Core\nconfigfile: pytest.ini\nplugins: anyio-4.9.0, langsmith-0.3.45\n\u001b[1mcollecting ... \u001b[0mcollected 0 items\n\n- generated xml file: C:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-Core\\test_results_GopiAI-Core_unit.xml -\n\u001b[33m============================ \u001b[33mno tests ran\u001b[0m\u001b[33m in 0.01s\u001b[0m\u001b[33m ============================\u001b[0m\n",
-      "error_output": "ERROR: file or directory not found: GopiAI-Core\\tests\\test_exceptions.py\n\n",
-      "exit_code": 4
-    },
-    {
       "module": "GopiAI-Assets",
       "category": "unit",
       "environment": "gopiai_env",
-      "command": "gopiai_env\\Scripts\\python.exe -m pytest -v --tb=short --color=yes --junitxml=test_results_GopiAI-Assets_unit.xml GopiAI-Assets\\tests\\unit\\test_assets.py",
-      "result": "failed",
-      "duration": 3.4190831184387207,
-      "output": "\u001b[1m============================= test session starts =============================\u001b[0m\nplatform win32 -- Python 3.12.0, pytest-8.4.1, pluggy-1.6.0 -- C:\\Users\\crazy\\GOPI_AI_MODULES\\gopiai_env\\Scripts\\python.exe\ncachedir: .pytest_cache\nrootdir: C:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-Assets\nconfigfile: pytest.ini\nplugins: anyio-4.9.0, langsmith-0.3.45\n\u001b[1mcollecting ... \u001b[0mcollected 0 items\n\n- generated xml file: C:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-Assets\\test_results_GopiAI-Assets_unit.xml -\n\u001b[33m============================ \u001b[33mno tests ran\u001b[0m\u001b[33m in 0.01s\u001b[0m\u001b[33m ============================\u001b[0m\n",
-      "error_output": "ERROR: file or directory not found: GopiAI-Assets\\tests\\unit\\test_assets.py\n\n",
-      "exit_code": 4
-    },
-    {
-      "module": "GopiAI-CrewAI",
-      "category": "unit",
-      "environment": "crewai_env",
-      "command": "GopiAI-CrewAI\\crewai_env\\Scripts\\python.exe -m pytest -v --tb=short --color=yes --junitxml=test_results_GopiAI-CrewAI_unit.xml GopiAI-CrewAI\\tests\\test_command_processor_improved.py GopiAI-CrewAI\\tests\\test_command_processor_strict_json.py GopiAI-CrewAI\\tests\\unit\\test_command_processing.py GopiAI-CrewAI\\tests\\unit\\test_model_switching.py GopiAI-CrewAI\\tests\\unit\\test_runner.py GopiAI-CrewAI\\tests\\unit\\test_state_manager.py",
-      "result": "failed",
-      "duration": 0.12313413619995117,
+      "command": "gopiai_env/Scripts/python.exe -m pytest -v --tb=short --color=yes --junitxml=test_results_GopiAI-Assets_unit_retry0.xml GopiAI-Assets/tests/unit",
+      "result": "error",
+      "duration": 0.0003352165222167969,
       "output": "",
-      "error_output": "C:\\Users\\crazy\\GOPI_AI_MODULES\\GopiAI-CrewAI\\crewai_env\\Scripts\\python.exe: No module named pytest\n",
-      "exit_code": 1
-    }
-  ]
-}
+      "error_output": "[Errno 2] No such file or directory: 'gopiai_env/Scripts/python.exe'",
+      "exit_code": -1,
+      "retry_count": 0,
+      "priority": 

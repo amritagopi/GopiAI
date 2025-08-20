@@ -1,121 +1,137 @@
 # GopiAI
 
-A comprehensive collection of artificial intelligence modules for the GopiAI project, featuring multi-agent coordination, intelligent UI components, and advanced LLM provider management.
+Комплексная платформа искусственного интеллекта с модульной архитектурой, включающая координацию агентов, современный пользовательский интерфейс и расширенные возможности работы с языковыми моделями.
 
-> 🚀 **Quick Start**: New to GopiAI? Check out our [Quick Start Guide](QUICK_START.md) to get up and running quickly!
+> 🚀 **Быстрый старт**: Хотите быстро начать работу? Ознакомьтесь с нашим [Руководством по быстрому старту](QUICK_START.md)!
+> 💻 **Для разработчиков**: [Документация по доступу к файловой системе](FILESYSTEM_ACCESS_GUIDE.md)
 
-## Table of Contents
+## Содержание
 
-- [Project Structure](#project-structure)
-- [Core Modules](#core-modules)
-- [Features](#features)
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-- [Documentation](#documentation)
-- [Task Status](#task-status)
-- [License](#license)
+- [Структура проекта](#структура-проекта)
+- [Основные модули](#основные-модули)
+- [Возможности](#возможности)
+- [Установка](#установка)
+- [Запуск](#запуск)
+- [Документация](#документация)
+- [Статус задач](#статус-задач)
+- [Лицензия](#лицензия)
 
-## Project Structure
+## Структура проекта
 
-```text
+```
 GopiAI/
-├── GopiAI-CrewAI/          # Main CrewAI integration module
-├── GopiAI-UI/              # User interface components
-├── GopiAI-Assets/          # Project assets and resources
-├── 02_DOCUMENTATION/       # Project documentation
-├── 03_UTILITIES/           # Utility scripts and tools
-├── rag_memory_system/      # RAG memory system implementation
-├── test_infrastructure/    # Testing framework and utilities
-├── tests/                  # Test suites
-└── requirements.txt        # Project dependencies
+├── GopiAI-CrewAI/          # Интеграция с CrewAI и API сервер
+├── GopiAI-UI/              # Пользовательский интерфейс на PySide6
+├── GopiAI-Assets/          # Ресурсы проекта (изображения, иконки и т.д.)
+├── 02_DOCUMENTATION/       # Документация по проекту
+├── 03_UTILITIES/           # Вспомогательные скрипты и утилиты
+├── rag_memory_system/      # Система памяти RAG
+├── test_infrastructure/    # Инфраструктура тестирования
+├── tests/                  # Наборы тестов
+├── crewai_env/             # Виртуальное окружение для CrewAI
+├── gopiai_env/             # Виртуальное окружение для UI
+├── txtai_env/              # Виртуальное окружение для txtai
+├── setup_linux.sh          # Скрипт настройки окружения (Linux)
+├── start_linux.sh          # Скрипт запуска приложения (Linux)
+└── requirements.txt        # Основные зависимости проекта
 ```
 
-## Features
+## Возможности
 
-- 🤖 **Multi-Agent Coordination**: Seamless integration with CrewAI for intelligent agent orchestration
-- 🔄 **Smart LLM Switching**: Automatic provider rotation with rate limit handling
-- 🎨 **Modern UI**: Qt-based interface with responsive design
-- 🧠 **RAG Memory**: Advanced retrieval-augmented generation for context awareness
-- 🧪 **Comprehensive Testing**: Automated test suites with continuous validation
-- 📊 **Real-time Monitoring**: Live status tracking and performance metrics
+- 🤖 **Координация агентов**: Интеграция с CrewAI для оркестрации ИИ-агентов
+- 🔄 **Умное переключение LLM**: Автоматическая смена провайдеров с учетом лимитов запросов
+- 🎨 **Современный интерфейс**: Qt-приложение с адаптивным дизайном
+- 🧠 **Продвинутая память RAG**: Контекстно-зависимые ответы с расширенной генерацией
+- 🧪 **Полноценное тестирование**: Автоматизированные тесты и валидация
+- 📊 **Мониторинг в реальном времени**: Отслеживание состояния и метрик производительности
 
-## Core Modules
+## Основные модули
 
 ### 1. GopiAI-CrewAI
-CrewAI integration module for coordinating agents and tasks.
+Модуль интеграции с CrewAI для координации агентов и задач.
 
-**Key Files:**
-- [`llm_rotation_config.py`](GopiAI-CrewAI/llm_rotation_config.py) - Enhanced LLM provider switching system
-- [`crewai_api_server.py`](GopiAI-CrewAI/crewai_api_server.py) - REST API server for state synchronization
-- [`state_manager.py`](GopiAI-CrewAI/state_manager.py) - Application state management
-- [`model_selector_widget.py`](GopiAI-UI/gopiai/ui/components/model_selector_widget.py) - Model selection UI widget
-
-**Latest Updates:** Successfully implemented enhanced LLM provider switching system! 
-- ✅ Stable state synchronization between UI and Backend
-- ✅ Soft blacklist for models exceeding rate limits
-- ✅ Reliable API key rotation without duplicates
-- ✅ Automated tests to prevent regressions
+**Ключевые файлы:**
+- [`llm_rotation_config.py`](GopiAI-CrewAI/llm_rotation_config.py) - Система переключения между провайдерами LLM
+- [`crewai_api_server.py`](GopiAI-CrewAI/crewai_api_server.py) - REST API сервер для синхронизации состояния
+- [`state_manager.py`](GopiAI-CrewAI/state_manager.py) - Управление состоянием приложения
 
 ### 2. GopiAI-UI
-Qt-based user interface for system interaction and visualization.
+Современный пользовательский интерфейс на базе PySide6 (Qt для Python).
+
+**Особенности:**
+- Адаптивный дизайн
+- Встроенный терминал
+- Поддержка тем оформления
+- Интеграция с файловой системой
 
 ### 3. RAG Memory System
-Advanced retrieval-augmented generation system for intelligent memory management.
+Продвинутая система памяти с использованием RAG (Retrieval-Augmented Generation).
 
-### 4. Testing Infrastructure
-Comprehensive testing framework with automated validation and reporting.
+### 4. Инфраструктура тестирования
+Комплексная система тестирования с автоматической валидацией и отчетами.
 
-## Installation
+## Установка
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/yourusername/GopiAI.git
+   cd GopiAI
+   ```
 
-# For REST API server functionality
-pip install fastapi uvicorn requests
-```
+2. Настройте окружение (требуются права администратора):
+   ```bash
+   chmod +x setup_linux.sh
+   sudo ./setup_linux.sh
+   ```
+   
+   Этот скрипт:
+   - Установит необходимые системные зависимости
+   - Создаст виртуальные окружения
+   - Установит все необходимые Python-пакеты
+   - Настроит окружение для работы
+   
+3. Настройте переменные окружения (если нужно):
+   ```bash
+   cp .env.example .env
+   # Отредактируйте .env при необходимости
+   ```
 
-## Getting Started
+## Запуск
 
-### Starting the REST API Server
-```bash
-cd GopiAI-CrewAI
-python crewai_api_server.py
-```
+1. Запустите приложение одним скриптом:
+   ```bash
+   chmod +x start_linux.sh
+   ./start_linux.sh
+   ```
+   
+   Скрипт автоматически запустит:
+   - Сервер CrewAI API на порту 5051
+   - Службу TXTAI
+   - Пользовательский интерфейс GopiAI
 
-### Running Tests
-```bash
-cd GopiAI-CrewAI
-python run_all_tests.py
-```
+2. После запуска откроется графическое приложение GopiAI.
 
-### Basic Usage Example
-```python
-# Example: Using the CrewAI integration
-from GopiAI-CrewAI.crewai_api_server import CrewAIServer
-from GopiAI-CrewAI.state_manager import StateManager
+3. Для доступа к API используйте `http://localhost:5051`
 
-# Initialize the system
-server = CrewAIServer()
-state_manager = StateManager()
+## Документация
 
-# Start coordinating AI agents
-server.start()
-```
+Подробная документация доступна в директории `02_DOCUMENTATION/`:
 
-## Documentation
+- [Руководство по быстрому старту](QUICK_START.md)
+- [Документация по API](02_DOCUMENTATION/API_REFERENCE.md)
+- [Руководство разработчика](02_DOCUMENTATION/DEVELOPMENT.md)
+- [Руководство по тестированию](02_DOCUMENTATION/TESTING.md)
+- [Доступ к файловой системе](FILESYSTEM_ACCESS_GUIDE.md)
 
-Comprehensive documentation is available in the [`02_DOCUMENTATION/`](02_DOCUMENTATION/) directory:
-- [`MODEL_SWITCHING_README.md`](GopiAI-CrewAI/MODEL_SWITCHING_README.md) - Provider switching system documentation
-- [`MODEL_SWITCHING_FINAL_REPORT.md`](GopiAI-CrewAI/MODEL_SWITCHING_FINAL_REPORT.md) - Implementation final report
-- [`CREWAI_INTEGRATION_PLAN.md`](02_DOCUMENTATION/CREWAI_INTEGRATION_PLAN.md) - CrewAI integration plan
+## Статус задач
 
-## Task Status
+| Модуль | Статус | Примечания |
+|--------|--------|------------|
+| Ядро | ✅ Стабильно | Готово к продакшену |
+| Интерфейс | 🚧 В разработке | Активная разработка |
+| Тестирование | ✅ Стабильно | Покрытие >90% |
+| Документация | 📝 Требуется обновление | В процессе |
 
-The project uses the Agentic Control Framework (ACF) for task management. Current task status can be viewed in the ACF tools.
+## Лицензия
 
-**Latest Implementation:** Enhanced LLM provider switching system (Task #74 - COMPLETED)
-
-## License
-
-MIT License - see the LICENSE file for details.
+Этот проект лицензирован в соответствии с условиями MIT License - подробности в файле [LICENSE](LICENSE).
