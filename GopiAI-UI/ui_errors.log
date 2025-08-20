@@ -1,0 +1,14 @@
+[INIT] Ошибка импорта модулей emotional_classifier/ai_router_llm: No module named 'langchain' | fallback: No module named 'langchain'
+[INIT] Пути в sys.path: ['/home/amritagopi/GopiAI/GopiAI-UI', '/usr/lib/python312.zip', '/usr/lib/python3.12', '/usr/lib/python3.12/lib-dynload', '/home/amritagopi/GopiAI/gopiai_env/lib/python3.12/site-packages', '/home/amritagopi/GopiAI/GopiAI-CrewAI/tools', '/home/amritagopi/GopiAI/GopiAI-CrewAI/tools/gopiai_integration', '/home/amritagopi/GopiAI/GopiAI-UI/GopiAI-CrewAI', '/home/amritagopi/GopiAI/GopiAI-UI']
+[INIT] Проверьте наличие файлов в: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/gopiai_integration
+QTextCursor::setPosition: Position '1' out of range
+QTextCursor::setPosition: Position '1' out of range
+QTextCursor::setPosition: Position '2' out of range
+QTextCursor::setPosition: Position '3' out of range
+QTextCursor::setPosition: Position '4' out of range
+QTextCursor::setPosition: Position '5' out of range
+QTextCursor::setPosition: Position '6' out of range
+QTextCursor::setPosition: Position '1' out of range
+QTextCursor::setPosition: Position '1' out of range
+QTextCursor::setPosition: Position '1' out of range
+QTextCursor::setPosition: Position '1' out of range

@@ -4,51 +4,28 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Пути к виртуальным окружениям
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CREWAI_ENV="$BASE_DIR/crewai_env"
-UI_ENV="$BASE_DIR/gopiai_env"
-TXTAI_ENV="$BASE_DIR/txtai_env"
-
-# Функция для запуска сервиса в новом терминале
-start_service() {
-    local name=$1
-    local env_path=$2
-    local command=$3
-    
-    echo "Запуск $name..."
-    gnome-terminal --tab --title="$name" -- bash -c "
-        cd '$BASE_DIR' && \
-        source '$env_path/bin/activate' && \
-        echo '=== $name ===' && \
-        echo 'Окружение: $env_path' && \
-        echo 'Директория: ' && pwd && \
-        echo 'Команда: $command' && \
-        echo '========================' && \
-        $command
-    "
+# Функция для проверки доступности порта
+check_port() {
+    if command -v lsof >/dev/null 2>&1; then
+        if lsof -i ":$1" >/dev/null 2>&1; then
+            echo "Порт $1 уже занят. Освободите порт и попробуйте снова."
+            exit 1
+        fi
+    fi
 }
 
-# Создаем необходимые директории
-echo "Создаем необходимые директории..."
-mkdir -p "$BASE_DIR/GopiAI-CrewAI/memory/vectors"
-touch "$BASE_DIR/GopiAI-CrewAI/memory/chats.json"
+# Проверяем порты
+check_port 5051  # Порт для CrewAI API
+check_port 8000  # Порт для GopiAI-UI
 
-# Функция для запуска в новом терминале
-run_in_terminal() {
-    local title="$1"
-    local cmd="$2"
-    gnome-terminal --title="$title" -- bash -c "$cmd; exec bash"
-}
+# Проверяем наличие виртуального окружения
+if [ ! -d "gopiai_env" ]; then
+    echo "Ошибка: Виртуальное окружение не найдено. Сначала выполните setup_linux.sh"
+    exit 1
+fi
 
-# Запускаем сервисы в отдельных терминалах
-run_in_terminal "CrewAI API Server" "
-    echo 'Активация окружения CrewAI...'
-    source $CREWAI_ENV/bin/activate
-    cd GopiAI-CrewAI
-    echo 'Запуск CrewAI API Server...'
-    python crewai_api_server.py --port 5051 --debug
-"
+# Активируем виртуальное окружение
+source gopiai_env/bin/activate
 
 echo "Ожидаем запуск CrewAI сервера..."
 sleep 5

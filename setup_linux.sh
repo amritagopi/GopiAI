@@ -12,6 +12,9 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
+# Создаем необходимые директории
+mkdir -p scripts docs config tests/unit tests/integration tests/e2e
+
 # Создаем виртуальные окружения
 for env_name in "crewai_env" "gopiai_env" "txtai_env"; do
     echo "Создаем виртуальное окружение: $env_name"
@@ -36,10 +39,17 @@ for env_name in "crewai_env" "gopiai_env" "txtai_env"; do
         echo "Устанавливаем языковые модели для spacy..."
         python -m spacy download ru_core_news_sm
         python -m spacy download en_core_web_sm
+        
+        # Устанавливаем зависимости для разработки
+        echo "Устанавливаем зависимости для разработки..."
+        pip install -r "requirements.txt"
     fi
     
     deactivate
 done
+
+# Устанавливаем права на выполнение скриптов
+chmod +x scripts/*.py
 
 echo -e "\n=== Настройка завершена успешно! ===\n"
 echo "Для запуска приложения выполните команду:"
