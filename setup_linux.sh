@@ -13,44 +13,31 @@ if ! command -v python3 &> /dev/null; then
 fi
 
 # Создаем необходимые директории
+echo "Создаем необходимые директории..."
 mkdir -p scripts docs config tests/unit tests/integration tests/e2e
 
-# Создаем виртуальные окружения
-for env_name in "crewai_env" "gopiai_env" "txtai_env"; do
-    echo "Создаем виртуальное окружение: $env_name"
-    python3 -m venv "$env_name"
-    
-    # Активируем окружение и обновляем pip
-    source "$env_name/bin/activate"
-    pip install --upgrade pip
-    
-    # Устанавливаем зависимости в зависимости от типа окружения
-    if [ "$env_name" = "crewai_env" ]; then
-        echo "Устанавливаем зависимости для CrewAI..."
-        pip install -r "GopiAI-CrewAI/requirements.txt"
-    elif [ "$env_name" = "txtai_env" ]; then
-        echo "Устанавливаем зависимости для txtai..."
-        pip install txtai
-    else
-        echo "Устанавливаем зависимости для GopiAI-UI..."
-        pip install -r "GopiAI-UI/requirements.txt"
-        
-        # Устанавливаем языковые модели для spacy
-        echo "Устанавливаем языковые модели для spacy..."
-        python -m spacy download ru_core_news_sm
-        python -m spacy download en_core_web_sm
-        
-        # Устанавливаем зависимости для разработки
-        echo "Устанавливаем зависимости для разработки..."
-        pip install -r "requirements.txt"
-    fi
-    
-    deactivate
-done
+# Создаем единое виртуальное окружение
+VENV_NAME=".venv"
+echo "Создаем виртуальное окружение: $VENV_NAME"
+python3 -m venv "$VENV_NAME"
+
+# Активируем окружение и обновляем pip
+source "$VENV_NAME/bin/activate"
+echo "Обновляем pip..."
+pip install --upgrade pip
+
+# Устанавливаем все зависимости из корневого requirements.txt
+echo "Устанавливаем зависимости из requirements.txt..."
+pip install -r "requirements.txt"
 
 # Устанавливаем права на выполнение скриптов
+echo "Устанавливаем права на выполнение скриптов..."
 chmod +x scripts/*.py
 
+deactivate
+
 echo -e "\n=== Настройка завершена успешно! ===\n"
+echo "Для активации окружения выполните команду:"
+echo "source $VENV_NAME/bin/activate"
 echo "Для запуска приложения выполните команду:"
 echo "source start_linux.sh"
