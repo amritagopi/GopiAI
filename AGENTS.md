@@ -1,97 +1,142 @@
-# AGENTS.md
+AGENTS.md
+Overview
+Jules, этот файл содержит инструкции для настройки окружений, установки зависимостей, запуска тестов и валидации приложения GopiAI в твоей изолированной VM. Проект требует три окружения (crewai_env, gopiai_env, txtai_env), чтобы избежать конфликтов зависимостей. Из-за ограничений sandbox на команду python -m venv, используй встроенный механизм изоляции зависимостей с pip --user. Следуй шагам ниже последовательно.
+Environment Setup
+Из-за блокировки python -m venv в run_in_bash_session, устанавливай зависимости в изолированные пользовательские контексты. Используй Python 3.8+ (доступен в твоей VM). Не объединяй файлы зависимостей — они должны оставаться раздельными.
 
-## Environment Setup
-Jules, для работы с проектом GopiAI требуется три виртуальных окружения, чтобы избежать конфликтов зависимостей: crewai_env, gopiai_env и txtai_env. Эти окружения создаются и настраиваются на основе скрипта setup_linux.sh. Ты должен воспроизвести этот процесс в своей VM шаг за шагом. Используй Python 3.8+ (доступен в твоей среде). Не объединяй зависимости — оставь их раздельными.
+Подготовка:
 
-Вот инструкции для автоматизации setup (ты можешь выполнить это как bash-скрипт или последовательно в терминале VM):
+Создай необходимые директории: mkdir -p scripts docs config tests/unit tests/integration tests/e2e.
+Убедись, что файлы зависимостей существуют:
+GopiAI-CrewAI/requirements.txt (для CrewAI).
+GopiAI-UI/requirements.txt (для UI и gopiai_env).
+requirements.txt (для dev-зависимостей).
 
-1. **Подготовка**:
-   - Убедись, что в корне проекта есть необходимые директории: mkdir -p scripts docs config tests/unit tests/integration tests/e2e.
-   - Убедись, что есть файлы зависимостей: GopiAI-CrewAI/requirements.txt, GopiAI-UI/requirements.txt и requirements.txt (для dev).
 
-2. **Создание и настройка окружений**:
-   - Для каждого окружения: создай venv, активируй, обнови pip, установи зависимости, деактивируй.
-   - Команды (выполни последовательно):
+Установи права на скрипты: chmod +x scripts/*.py.
 
-     ```
-     # Создание crewai_env
-     python -m venv crewai_env
-     source crewai_env/bin/activate
-     pip install --upgrade pip
-     pip install -r GopiAI-CrewAI/requirements.txt
-     deactivate
 
-     # Создание gopiai_env
-     python -m venv gopiai_env
-     source gopiai_env/bin/activate
-     pip install --upgrade pip
-     pip install -r GopiAI-UI/requirements.txt  # Это для UI, но в скрипте оно используется для gopiai_env
-     python -m spacy download ru_core_news_sm
-     python -m spacy download en_core_web_sm
-     pip install -r requirements.txt  # Dev зависимости
-     deactivate
+Установка зависимостей:
 
-     # Создание txtai_env
-     python -m venv txtai_env
-     source txtai_env/bin/activate
-     pip install --upgrade pip
-     pip install txtai
-     deactivate
-     ```
+Для crewai_env:pip install --user -r GopiAI-CrewAI/requirements.txt
 
-   - После создания: Установи права на скрипты: chmod +x scripts/*.py (если нужно для тестов).
 
-3. **Проверка**: После setup выполни `ls` в корне и убедись, что окружения созданы (директории crewai_env, gopiai_env, txtai_env существуют).
+Для gopiai_env:pip install --user -r GopiAI-UI/requirements.txt
+pip install --user -r requirements.txt
+python -m spacy download ru_core_news_sm
+python -m spacy download en_core_web_sm
 
-## Dependencies
-- Не модифицируй файлы зависимостей: GopiAI-CrewAI/requirements.txt (для CrewAI), GopiAI-UI/requirements.txt (для UI и gopiai), requirements.txt (для dev).
-- Для txtai_env: Только txtai, как указано.
-- Если конфликты при установке: Запиши ошибки в отчёт и продолжи — мы разберёмся позже.
-- Дополнительно: spacy модели (ru_core_news_sm, en_core_web_sm) устанавливаются только в gopiai_env.
 
-## Running Tests
-На основе README.md и скриптов, тесты запускаются через scripts/run_tests.py. Сначала настрой окружения (см. выше), затем:
+Для txtai_env:pip install --user txtai
 
-1. **Активация нужного env**: Для большинства тестов используй gopiai_env (оно включает dev зависимости).
-   - source gopiai_env/bin/activate
 
-2. **Запуск тестов**:
-   - Все тесты: ./scripts/run_tests.py
-   - По категории: ./scripts/run_tests.py --category unit (или integration, e2e).
-   - Проверь пути: Убедись, что скрипт ищет тесты в tests/unit, tests/integration, tests/e2e. Если сломано после рефакторинга — поправь импорты или пути.
+Используй флаг --user для установки в изолированный контекст.
+Если возникают ошибки (например, конфликты зависимостей), добавь флаг --no-cache-dir и запиши ошибки в отчёт.
+Проверь установленные пакеты: pip list --user.
 
-3. **Проверка перед запуском**:
-   - Убедись, что нет занятых портов (хотя в VM это редко): Используй lsof -i :порт для проверки (например, 5051, 8000).
-   - Если тесты требуют запущенных сервисов: Сначала симулируй запуск (см. ниже), но для базовых тестов это может не нужно.
 
-## Running the Application (for Validation)
-Если нужно проверить изменения путём запуска приложения (на основе start_linux.sh):
+Проверка:
 
-1. **Подготовка**:
-   - Экспорт кодировки: export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
-   - Проверка портов: Используй функцию вроде:
-     ```
-     check_port() {
-         if lsof -i ":$1" >/dev/null 2>&1; then
-             echo "Порт $1 занят." && exit 1
-         fi
-     }
-     check_port 5051
-     check_port 8000
-     ```
-   - Убедись, что gopiai_env существует.
+Убедись, что зависимости установлены для каждого окружения (проверь pip list --user).
+Подтверди наличие директорий и файлов: ls scripts docs config tests.
 
-2. **Запуск сервисов** (симулируй в фоне или последовательно в VM):
-   - Активируй gopiai_env: source gopiai_env/bin/activate
-   - Запусти TXTAI (в txtai_env): source txtai_env/bin/activate && echo "TXTAI ready" (добавь реальный запуск, если есть команда).
-   - Установка UI deps (если не сделано): source gopiai_env/bin/activate && cd GopiAI-UI && pip install -r requirements.txt
-   - Запуск UI: source gopiai_env/bin/activate && cd GopiAI-UI && python -m gopiai.ui.main 2> ui_errors.log
-   - Для CrewAI: Активируй crewai_env и запусти сервер (предполагаю, что есть команда вроде crewai serve --port 5051; уточни по коду).
 
-   Поскольку VM не имеет GUI, фокусируйся на CLI-тестах и логах. Если UI не запускается — проверь логи и отчётуй.
 
-## Other Instructions
-- **Всегда проверяй изменения**: После перемещений/изменений — git diff и проверь импорты/пути.
-- **Ошибки**: Если venv не создаётся — проверь права VM (ты имеешь доступ). Если pip fails — попробуй --no-cache-dir.
-- **Автоматизация**: Если возможно, создай временный bash-скрипт в VM для полного setup: echo "команды" > temp_setup.sh && bash temp_setup.sh.
-- **Финальная проверка**: После setup запусти тесты и подтверди, что ничего не сломано. Коммить только working changes.
+Running Tests
+Для запуска тестов используй контекст gopiai_env (зависимости из GopiAI-UI/requirements.txt и requirements.txt). Тесты запускаются через scripts/run_tests.py.
+
+Подготовка:
+
+Убедись, что pytest установлен: pip install --user pytest.
+Проверь порты (5051 для CrewAI API, 8000 для UI): check_port() {
+    if lsof -i ":$1" >/dev/null 2>&1; then
+        echo "Порт $1 занят." && exit 1
+    fi
+}
+check_port 5051
+check_port 8000
+
+
+
+
+Запуск тестов:
+
+Все тесты: ./scripts/run_tests.py
+По категориям: ./scripts/run_tests.py --category unit (или integration, e2e).
+Проверь пути в тестах (tests/unit, tests/integration, tests/e2e). Если импорты или пути сломаны после рефакторинга, исправь их и запиши изменения в отчёт.
+
+
+Обработка ошибок:
+
+Если тесты не запускаются, проверь логи и укажи ошибки (например, stderr от pytest).
+Сохраняй логи в файл (например, pytest tests/ > test_output.log 2>&1).
+
+
+
+Running the Application (for Validation)
+Для проверки изменений запусти приложение в CLI-режиме (без GUI, так как VM не поддерживает графический интерфейс). Следуй этим шагам:
+
+Подготовка:
+
+Экспорт кодировки: export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8.
+Убедись, что зависимости для gopiai_env установлены (см. Environment Setup).
+
+
+Запуск сервисов:
+
+TXTAI (txtai_env контекст):pip install --user txtai
+echo "TXTAI service is ready"
+
+(Если есть конкретная команда для запуска txtai, уточни её в коде и добавь.)
+UI (gopiai_env контекст):pip install --user -r GopiAI-UI/requirements.txt
+cd GopiAI-UI
+python -m gopiai.ui.main 2> ui_errors.log
+
+
+CrewAI API (crewai_env контекст):pip install --user -r GopiAI-CrewAI/requirements.txt
+cd GopiAI-CrewAI
+# Уточни команду запуска CrewAI API, например: crewai serve --port 5051
+
+
+Если запуск UI или CrewAI не требуется для тестов, пропусти этот шаг и фокусируйся на тестах.
+
+
+Логирование:
+
+Сохраняй ошибки в ui_errors.log или аналогичный файл.
+Если сервис не запускается, включи логи в отчёт.
+
+
+
+Alternative Environment Setup (Docker)
+Если pip --user не работает из-за ограничений sandbox, используй Docker. В репозитории есть три Dockerfile для каждого окружения. Построй и используй их:
+
+Создание образов:
+
+Для crewai_env: docker build -f Dockerfile.crewai -t crewai_env .
+Для gopiai_env: docker build -f Dockerfile.gopiai -t gopiai_env .
+Для txtai_env: docker build -f Dockerfile.txtai -t txtai_env .
+
+
+Запуск тестов:
+
+docker run --rm gopiai_env ./scripts/run_tests.py
+Для конкретных тестов: docker run --rm gopiai_env ./scripts/run_tests.py --category unit
+
+
+Запуск приложения:
+
+UI: docker run --rm gopiai_env bash -c "cd GopiAI-UI && python -m gopiai.ui.main 2> ui_errors.log"
+
+
+
+Other Instructions
+
+Проверка изменений: Перед коммитом проверяй изменения: git diff. Убедись, что пути и импорты в тестах/скриптах валидны после рефакторинга.
+Ошибки: Если pip или тесты не работают, попробуй pip install --no-cache-dir --user. Включи полные логи (stdout/stderr) в отчёт.
+Автоматизация: Если хочешь, создай временный скрипт в VM:echo "pip install --user -r GopiAI-CrewAI/requirements.txt" > temp_setup.sh
+bash temp_setup.sh
+
+
+Финальная проверка: После настройки и запуска тестов подтверди, что ничего не сломано. Коммить только рабочие изменения.
+Запрет на внешние сервисы: Не используй PythonAnywhere или другие облачные платформы — всё должно работать в твоей VM.
