@@ -1,142 +1,79 @@
 AGENTS.md
 Overview
-Jules, этот файл содержит инструкции для настройки окружений, установки зависимостей, запуска тестов и валидации приложения GopiAI в твоей изолированной VM. Проект требует три окружения (crewai_env, gopiai_env, txtai_env), чтобы избежать конфликтов зависимостей. Из-за ограничений sandbox на команду python -m venv, используй встроенный механизм изоляции зависимостей с pip --user. Следуй шагам ниже последовательно.
-Environment Setup
-Из-за блокировки python -m venv в run_in_bash_session, устанавливай зависимости в изолированные пользовательские контексты. Используй Python 3.8+ (доступен в твоей VM). Не объединяй файлы зависимостей — они должны оставаться раздельными.
+Jules, из-за проблем с disk space в твоей VM, не устанавливай ничего локально. Вместо этого перенеси проект в Coiled (облачная платформа Python), используя предоставленный API-токен. Твоя задача: залогиниться в Coiled, клонировать репозиторий, настроить три виртуальных окружения (crewai_env, gopiai_env, txtai_env) по аналогии с setup_linux.sh, и выполнить рефакторинг проекта, будь предельно внимателен и осторожен (тесты или ручную валидацию). Следуй шагам последовательно, отчитывайся о каждом шаге с логами (df -h, stdout/stderr).
+Step 1: Read Coiled Documentation
 
-Подготовка:
+Ознакомься с документацией Coiled: https://docs.coiled.io/en/latest/
+Ключевые разделы: "Getting Started", "Environments", "Python Packages". Это нужно для понимания coiled login и управления окружениями.
+Подтверди: echo "Read Coiled docs at https://docs.coiled.io/en/latest/" > coiled_read.log
 
-Создай необходимые директории: mkdir -p scripts docs config tests/unit tests/integration tests/e2e.
-Убедись, что файлы зависимостей существуют:
-GopiAI-CrewAI/requirements.txt (для CrewAI).
-GopiAI-UI/requirements.txt (для UI и gopiai_env).
-requirements.txt (для dev-зависимостей).
+Step 2: Login to Coiled
 
-
-Установи права на скрипты: chmod +x scripts/*.py.
+Установи Coiled CLI (минимально, только для login, не жди disk errors):pip install --user --no-cache-dir coiled
 
 
-Установка зависимостей:
-
-Для crewai_env:pip install --user -r GopiAI-CrewAI/requirements.txt
+Залогинись с токеном:coiled login --token 2744f6a48bcb4c2db97dcbb8ecc0f648-4be3a948bd7a97bc1685b9deb02dd6ea79ad089b
 
 
-Для gopiai_env:pip install --user -r GopiAI-UI/requirements.txt
-pip install --user -r requirements.txt
-python -m spacy download ru_core_news_sm
-python -m spacy download en_core_web_sm
+Проверь логин: coiled whoami > coiled_login.log
+Если ошибка (например, disk space), отчётуй: echo "Coiled login failed" && cat coiled_login.log
+
+Step 3: Clone Repository in Coiled
+
+Создай новую Coiled среду (compute environment):coiled create environment --name gopiai-project --python 3.8
 
 
-Для txtai_env:pip install --user txtai
+Клонируй репо в Coiled:coiled run --environment gopiai-project -- git clone https://github.com/amritagopi/GopiAI /app
 
 
-Используй флаг --user для установки в изолированный контекст.
-Если возникают ошибки (например, конфликты зависимостей), добавь флаг --no-cache-dir и запиши ошибки в отчёт.
-Проверь установленные пакеты: pip list --user.
+Перейди в директорию: coiled run --environment gopiai-project -- bash -c "cd /app && pwd > clone_log.txt"
+Проверь: coiled run --environment gopiai-project -- bash -c "ls -l /app > repo_files.txt"
+Отчётуй: Сохрани clone_log.txt, repo_files.txt.
+
+Step 4: Setup Environments in Coiled
+
+Настрой три виртуальных окружения (crewai_env, gopiai_env, txtai_env) по аналогии с setup_linux.sh. Выполняй команды в Coiled:coiled run --environment gopiai-project -- bash -c "cd /app && mkdir -p scripts docs config tests/unit tests/integration tests/e2e"
 
 
-Проверка:
-
-Убедись, что зависимости установлены для каждого окружения (проверь pip list --user).
-Подтверди наличие директорий и файлов: ls scripts docs config tests.
+Для каждого окружения:
+crewai_env:coiled run --environment gopiai-project -- bash -c "cd /app && python3 -m venv crewai_env && source crewai_env/bin/activate && pip install --upgrade pip && pip install -r GopiAI-CrewAI/requirements.txt && deactivate"
 
 
+gopiai_env:coiled run --environment gopiai-project -- bash -c "cd /app && python3 -m venv gopiai_env && source gopiai_env/bin/activate && pip install --upgrade pip && pip install -r GopiAI-UI/requirements.txt && pip install -r requirements.txt && python -m spacy download ru_core_news_sm && python -m spacy download en_core_web_sm && deactivate"
 
-Running Tests
-Для запуска тестов используй контекст gopiai_env (зависимости из GopiAI-UI/requirements.txt и requirements.txt). Тесты запускаются через scripts/run_tests.py.
 
-Подготовка:
-
-Убедись, что pytest установлен: pip install --user pytest.
-Проверь порты (5051 для CrewAI API, 8000 для UI): check_port() {
-    if lsof -i ":$1" >/dev/null 2>&1; then
-        echo "Порт $1 занят." && exit 1
-    fi
-}
-check_port 5051
-check_port 8000
+txtai_env:coiled run --environment gopiai-project -- bash -c "cd /app && python3 -m venv txtai_env && source txtai_env/bin/activate && pip install --upgrade pip && pip install txtai && deactivate"
 
 
 
 
-Запуск тестов:
+Установи права: coiled run --environment gopiai-project -- bash -c "cd /app && chmod +x scripts/*.py"
+Проверь диск: coiled run --environment gopiai-project -- bash -c "df -h > disk_usage.txt"
+Если ошибка (например, pip fails), добавь --no-cache-dir и сохрани логи: pip ... 2> pip_error.log
 
-Все тесты: ./scripts/run_tests.py
-По категориям: ./scripts/run_tests.py --category unit (или integration, e2e).
-Проверь пути в тестах (tests/unit, tests/integration, tests/e2e). Если импорты или пути сломаны после рефакторинга, исправь их и запиши изменения в отчёт.
+Step 5: Run Tests
 
-
-Обработка ошибок:
-
-Если тесты не запускаются, проверь логи и укажи ошибки (например, stderr от pytest).
-Сохраняй логи в файл (например, pytest tests/ > test_output.log 2>&1).
+Используй gopiai_env для тестов (оно включает dev deps):coiled run --environment gopiai-project -- bash -c "cd /app && source gopiai_env/bin/activate && ./scripts/run_tests.py --category unit > test_log.txt 2>&1"
 
 
-
-Running the Application (for Validation)
-Для проверки изменений запусти приложение в CLI-режиме (без GUI, так как VM не поддерживает графический интерфейс). Следуй этим шагам:
-
-Подготовка:
-
-Экспорт кодировки: export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8.
-Убедись, что зависимости для gopiai_env установлены (см. Environment Setup).
-
-
-Запуск сервисов:
-
-TXTAI (txtai_env контекст):pip install --user txtai
-echo "TXTAI service is ready"
-
-(Если есть конкретная команда для запуска txtai, уточни её в коде и добавь.)
-UI (gopiai_env контекст):pip install --user -r GopiAI-UI/requirements.txt
-cd GopiAI-UI
-python -m gopiai.ui.main 2> ui_errors.log
-
-
-CrewAI API (crewai_env контекст):pip install --user -r GopiAI-CrewAI/requirements.txt
-cd GopiAI-CrewAI
-# Уточни команду запуска CrewAI API, например: crewai serve --port 5051
-
-
-Если запуск UI или CrewAI не требуется для тестов, пропусти этот шаг и фокусируйся на тестах.
-
-
-Логирование:
-
-Сохраняй ошибки в ui_errors.log или аналогичный файл.
-Если сервис не запускается, включи логи в отчёт.
+Если disk error или тесты не нужны, пропусти и перейди к ручной проверке:coiled run --environment gopiai-project -- bash -c "cd /app && git diff > diff.txt && ls -l tests/ > test_files.txt"
 
 
 
-Alternative Environment Setup (Docker)
-Если pip --user не работает из-за ограничений sandbox, используй Docker. В репозитории есть три Dockerfile для каждого окружения. Построй и используй их:
+Step 6: Validate Application (Optional)
 
-Создание образов:
-
-Для crewai_env: docker build -f Dockerfile.crewai -t crewai_env .
-Для gopiai_env: docker build -f Dockerfile.gopiai -t gopiai_env .
-Для txtai_env: docker build -f Dockerfile.txtai -t txtai_env .
+Если тесты не нужны, симулируй запуск (по start_linux.sh, без UI, так как Coiled — CLI-only):
+TXTAI: coiled run --environment gopiai-project -- bash -c "cd /app && source txtai_env/bin/activate && echo 'TXTAI ready' > txtai_log.txt"
+UI (dry-run): coiled run --environment gopiai-project -- bash -c "cd /app && source gopiai_env/bin/activate && cd GopiAI-UI && python -m gopiai.ui.main --dry-run 2> ui_errors.log"
+CrewAI (если есть команда): уточни запуск сервера (например, crewai serve --port 5051) и выполни в crewai_env.
 
 
-Запуск тестов:
-
-docker run --rm gopiai_env ./scripts/run_tests.py
-Для конкретных тестов: docker run --rm gopiai_env ./scripts/run_tests.py --category unit
-
-
-Запуск приложения:
-
-UI: docker run --rm gopiai_env bash -c "cd GopiAI-UI && python -m gopiai.ui.main 2> ui_errors.log"
-
-
+Сохрани логи: txtai_log.txt, ui_errors.log.
 
 Other Instructions
 
-Проверка изменений: Перед коммитом проверяй изменения: git diff. Убедись, что пути и импорты в тестах/скриптах валидны после рефакторинга.
-Ошибки: Если pip или тесты не работают, попробуй pip install --no-cache-dir --user. Включи полные логи (stdout/stderr) в отчёт.
-Автоматизация: Если хочешь, создай временный скрипт в VM:echo "pip install --user -r GopiAI-CrewAI/requirements.txt" > temp_setup.sh
-bash temp_setup.sh
-
-
-Финальная проверка: После настройки и запуска тестов подтверди, что ничего не сломано. Коммить только рабочие изменения.
-Запрет на внешние сервисы: Не используй PythonAnywhere или другие облачные платформы — всё должно работать в твоей VM.
+Логирование: Сохраняй все логи (coiled_login.log, clone_log.txt, repo_files.txt, disk_usage.txt, pip_error.log, test_log.txt, diff.txt, test_files.txt, ui_errors.log) и включай в отчёт.
+Ошибки: Если disk space error в Coiled, выполни coiled run --environment gopiai-project -- bash -c "pip cache purge && rm -rf ~/.cache/pip && df -h > disk_error.txt".
+Проверка: Перед коммитом: coiled run --environment gopiai-project -- bash -c "cd /app && git diff > final_diff.txt".
+Запрет: Не устанавливай ничего в своей VM — только Coiled.
+Отчёт: После каждого шага пиши: успех/ошибка, приложи логи, укажи свободное место (df -h).
