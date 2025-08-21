@@ -1,0 +1,7 @@
+name: gopiai-project
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - git
