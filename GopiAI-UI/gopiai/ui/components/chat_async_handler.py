@@ -25,26 +25,23 @@ except Exception:
 # Настраиваем файловый обработчик для логов
 async_log_file = os.path.join(logs_dir, 'chat_async_handler.log')
 try:
-    file_handler = logging.handlers.RotatingFileHandler(
-        async_log_file, 
-        maxBytes=5 * 1024 * 1024,  # 5 МБ
-        backupCount=3,
-        encoding='utf-8'
-    )
+    # Используем FileHandler с mode='w' для перезаписи файла при каждом запуске
+    file_handler = logging.FileHandler(async_log_file, mode='w', encoding='utf-8')
     formatter = logging.Formatter(
         '%(asctime)s - %(levelname)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
     file_handler.setFormatter(formatter)
     file_handler.setLevel(logging.DEBUG)
-    # Prevent adding duplicate handlers if module reloaded
-    if not any(isinstance(h, logging.handlers.RotatingFileHandler) and getattr(h, 'baseFilename', None) == file_handler.baseFilename for h in logger.handlers):
-        logger.addHandler(file_handler)
+    # Очищаем все существующие обработчики перед добавлением нового
+    logger.handlers = []
+    logger.addHandler(file_handler)
     logger.setLevel(logging.DEBUG)
+    logger.info("Логирование инициализировано (режим перезаписи)")
 except Exception as _log_exc:
     # Fall back to basicConfig
     logging.basicConfig(level=logging.DEBUG)
-    logger.warning("Failed to attach RotatingFileHandler: %s", _log_exc)
+    logger.warning("Failed to attach FileHandler: %s", _log_exc)
 
 class ChatAsyncHandler(QObject):
     """Объединенный асинхронный обработчик чата с оптимизированным polling"""

@@ -1,0 +1,53 @@
+2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
+2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 00:41:52 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-08-23 00:41:52 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x3aaaa9e0) at 0x7ad584690b40>
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - WARNING - OPENROUTER_API_KEY не найден в переменных окружения
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🔌 OpenRouterClient инициализирован
+2025-08-23 00:41:52 - tools.gopiai_integration.model_config_manager - INFO - 📋 Загружено 349 конфигураций
+2025-08-23 00:41:52 - tools.gopiai_integration.model_config_manager - INFO - 🔧 ModelConfigurationManager инициализирован (конфиг: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/model_configurations.json)
+2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
+2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
+2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🔄 Получаем список моделей OpenRouter...
+2025-08-23 00:41:52 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
+2025-08-23 00:41:52 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
+2025-08-23 00:41:52 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-08-23 00:41:52 - gopiai.ui.components.tools_tab - ERROR - Ошибка загрузки: 404
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-08-23 00:41:52 - gopiai.ui.components.agents_tab - ERROR - Ошибка загрузки: 404
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1755889912
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] Используем динамический порт CrewAI API: http://127.0.0.1:5053
+2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-23 00:41:52 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с переданным ModelConfigurationManager
+2025-08-23 00:41:52 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с улучшенной системой ротации
+2025-08-23 00:41:52 - gopiai_integration.emotional_classifier - INFO - ✅ EmotionalClassifier: model_config_manager найден в ai_router
+2025-08-23 00:41:52 - gopiai_integration.emotional_classifier - INFO - EmotionalClassifier инициализирован
+2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-08-23 00:41:52 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x3de530e0) at 0x7ad5845e35c0>
+2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - ✅ Получено 316 моделей OpenRouter (все показаны)
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🆓 Бесплатных моделей: 55
+2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 💰 Платных моделей: 261
+2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-23 00:41:53 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-23 00:41:55 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-08-23 00:41:58 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 6 сообщений из истории
+2025-08-23 00:42:04 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-23 00:42:04 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...

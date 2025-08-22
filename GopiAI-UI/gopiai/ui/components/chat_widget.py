@@ -42,7 +42,6 @@ from .chat_async_handler import ChatAsyncHandler
 from .terminal_widget import TerminalWidget
 from gopiai.ui.utils.icon_helpers import create_icon_button
 from .enhanced_browser_widget import EnhancedBrowserWidget
-from gopiai.ui.utils.theme_manager import ThemeManager
 
 class ChatWidget(QWidget):
     
@@ -57,7 +56,6 @@ class ChatWidget(QWidget):
 
         self.session_id = None
         self._waiting_message_id = None
-        self.theme_manager = ThemeManager()
         self.current_tool = None
         self._animation_timer = None
         self._pending_updates = []
@@ -90,7 +88,7 @@ class ChatWidget(QWidget):
         logger.info("[CHAT] Инициализация CrewAI клиента")
         self.crew_ai_client = CrewAIClient()
         
-        logger.info("[CHAT] Инициализация объединенного обработчика сообщений")
+        logger.info("[CHART] Инициализация объединенного обработчика сообщений")
         self.async_handler = ChatAsyncHandler(self.crew_ai_client, self)
         
         logger.info("[CHAT] Подключение сигналов объединенного обработчика")
@@ -134,20 +132,6 @@ class ChatWidget(QWidget):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(8, 8, 8, 8)
         self.main_layout.setSpacing(6)
-
-        # Theme selection UI
-        theme_layout = QHBoxLayout()
-        theme_layout.addWidget(QLabel("Тема:"))
-        self.theme_combo = QComboBox()
-        if self.theme_manager:
-            themes = self.theme_manager.get_theme_display_names()
-            for theme_name in themes:
-                self.theme_combo.addItem(themes[theme_name], theme_name)
-        theme_layout.addWidget(self.theme_combo)
-        self.apply_theme_btn = QPushButton("Применить")
-        self.apply_theme_btn.clicked.connect(self.apply_theme)
-        theme_layout.addWidget(self.apply_theme_btn)
-        self.main_layout.addLayout(theme_layout)
 
         self.tab_widget = QTabWidget()
         self.tab_widget.setTabPosition(QTabWidget.TabPosition.North)
@@ -1010,34 +994,29 @@ class ChatWidget(QWidget):
     def show_context_stats(self):
         """Показывает статистику контекста"""
         QMessageBox.information(self, "Статистика", "Логика статистики будет добавлена позже.")
-        
-    def set_theme_manager(self, theme_manager):
-        """Устанавливает менеджер тем"""
-        self.theme_manager = theme_manager
-        self.apply_theme()
 
-    def apply_theme(self):
-        """Применяет текущую тему"""
-        if self.theme_manager:
-            theme_name = self.theme_combo.currentData()
-            if theme_name:
-                logger.info(f"Применение темы: {theme_name}")
-                success = self.theme_manager.apply_theme(theme_name)
+#    def apply_theme(self):
+#        """Применяет текущую тему"""
+#        if self.theme_manager:
+#            theme_name = self.theme_combo.currentData()
+#            if theme_name:
+#                logger.info(f"Применение темы: {theme_name}")
+#                success = self.theme_manager.apply_theme(theme_name)
 
-                # Показываем результат
-                msg_box = QMessageBox()
-                msg_box.setWindowTitle("Применение темы")
-                if success:
-                    msg_box.setText(f"Тема '{theme_name}' успешно применена.")
-                    msg_box.setIcon(QMessageBox.Information)
-                else:
-                    msg_box.setText(f"Не удалось применить тему '{theme_name}'.")
-                    msg_box.setIcon(QMessageBox.Warning)
-                msg_box.exec()
-            else:
-                logger.warning("Тема не выбрана в комбо-боксе.")
-        else:
-            logger.error("ThemeManager не инициализирован.")
+#                # Показываем результат
+#                msg_box = QMessageBox()
+#                msg_box.setWindowTitle("Применение темы")
+#                if success:
+#                    msg_box.setText(f"Тема '{theme_name}' успешно применена.")
+#                    msg_box.setIcon(QMessageBox.Information)
+#                else:
+#                    msg_box.setText(f"Не удалось применить тему '{theme_name}'.")
+#                    msg_box.setIcon(QMessageBox.Warning)
+#                msg_box.exec()
+#            else:
+#                logger.warning("Тема не выбрана в комбо-боксе.")
+#        else:
+#            logger.error("ThemeManager не инициализирован.")
         
     def _initialize_session_and_history(self):
         self.session_id = f"session_{int(time.time())}"
