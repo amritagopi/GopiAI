@@ -40,6 +40,9 @@ install_batch "AI & ML (Heavy)" "torch>=2.2.1 transformers>=4.38.2"
 install_batch "Memory & Search" "txtai>=8.2.0 faiss-cpu>=1.8.0 qdrant-client>=1.7.6"
 install_batch "Remaining Tools & Utilities" "pytest>=8.0.2 pytest-qt>=4.2.0 jupyter>=1.0.0 jupyterlab>=4.1.5 soundfile>=0.12.1 sounddevice>=0.4.6 pydub>=0.25.1 noisereduce>=2.5.0 openai-whisper>=20231117 python-docx>=1.1.0 pypdf>=4.1.0 reportlab>=4.1.0 beautifulsoup4>=4.12.3 lxml>=5.1.0 selenium>=4.17.2 playwright>=1.41.2 webdriver-manager>=4.0.1 tqdm>=4.66.2 psutil>=5.9.8 python-dateutil>=2.9.0.post0 packaging>=23.2 chardet>=5.2.0"
 
+# Batch 7: Local Editable Installs
+install_batch "Local Packages" "-e ./GopiAI-UI"
+
 echo ""
 echo "--- All batches installed successfully! ---"
 

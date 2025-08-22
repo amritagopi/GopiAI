@@ -19,6 +19,9 @@ fi
 echo "Активация окружения: $VENV_DIR"
 source "$VENV_DIR/bin/activate"
 
+# Добавляем GopiAI-CrewAI в PYTHONPATH для корректного импорта
+export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI"
+
 # Запускаем основной UI приложения
 echo "Запуск GopiAI UI..."
 python -m gopiai.ui.main 2> ui_errors.log || {
