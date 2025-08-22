@@ -1,0 +1,14 @@
+name: Auto Docs
+
+on:
+  push:
+    paths:
+      - "**/*.md"
+
+jobs:
+  diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Diagrams
+        uses: timvink/mkdocs-generate-diagrams@v1
