@@ -10,13 +10,12 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 from enum import Enum
+import logging
 
 
 class TestEnvironment(Enum):
     """Available test environments."""
-    GOPIAI_ENV = "gopiai_env"
-    CREWAI_ENV = "crewai_env"
-    TXTAI_ENV = "txtai_env"  # Legacy support
+    VENV = ".venv"
 
 
 class TestCategory(Enum):
@@ -77,7 +76,7 @@ class TestConfigManager:
             modules["gopiai-ui"] = ModuleTestConfig(
                 name="gopiai-ui",
                 path=ui_path,
-                environment=TestEnvironment.GOPIAI_ENV,
+                environment=TestEnvironment.VENV,
                 test_categories=[
                     TestCategory.UNIT,
                     TestCategory.INTEGRATION,
@@ -96,7 +95,7 @@ class TestConfigManager:
             modules["gopiai-crewai"] = ModuleTestConfig(
                 name="gopiai-crewai",
                 path=crewai_path,
-                environment=TestEnvironment.CREWAI_ENV,
+                environment=TestEnvironment.VENV,
                 test_categories=[
                     TestCategory.UNIT,
                     TestCategory.INTEGRATION,
@@ -114,7 +113,7 @@ class TestConfigManager:
             modules["gopiai-assets"] = ModuleTestConfig(
                 name="gopiai-assets",
                 path=assets_path,
-                environment=TestEnvironment.GOPIAI_ENV,
+                environment=TestEnvironment.VENV,
                 test_categories=[TestCategory.UNIT],
                 pytest_ini_path=assets_path / "pytest.ini",
                 coverage_threshold=80.0,
@@ -169,12 +168,12 @@ class TestConfigManager:
         # Windows
         python_exe = env_path / "Scripts" / "python.exe"
         if python_exe.exists():
-            return python_exe
+            return python_exe.absolute()
         
         # Unix
         python_exe = env_path / "bin" / "python"
         if python_exe.exists():
-            return python_exe
+            return python_exe.absolute()
         
         return None
     
@@ -243,8 +242,7 @@ class TestConfigManager:
 # Global configuration instance
 config_manager = TestConfigManager()
 
-#
- Enhanced problem discovery integration
+# Enhanced problem discovery integration
 class ProblemAwareTestConfig:
     """Test configuration that integrates with problem discovery."""
     

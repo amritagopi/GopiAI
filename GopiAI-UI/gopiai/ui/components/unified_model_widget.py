@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QListWidget, QListWidgetItem,
     QLineEdit, QPushButton, QLabel, QFrame, QSplitter, QTextEdit,
     QProgressBar, QComboBox, QCheckBox, QGroupBox, QScrollArea,
-    QButtonGroup, QRadioButton
+    QButtonGroup, QRadioButton, QMessageBox
 )
 from PySide6.QtCore import Qt, Signal, QTimer, QThread
 from PySide6.QtGui import QFont, QPixmap, QIcon
@@ -429,13 +429,73 @@ class UnifiedModelWidget(QWidget):
     
     def _test_connection(self):
         """Тестирует соединение с выбранным провайдером"""
-        # TODO: Реализовать тест соединения
         logger.info(f"Тест соединения с {self.current_provider}")
+
+        success = False
+        message = ""
+
+        try:
+            if self.current_provider == "openrouter":
+                if self.openrouter_client:
+                    # Пробуем получить модели как тест
+                    getattr(self.openrouter_client, "get_models_sync")()
+                    success = True
+                    message = "Соединение с OpenRouter успешно установлено!"
+                else:
+                    message = "Клиент OpenRouter не инициализирован."
+            else:  # gemini
+                if self.model_config_manager:
+                    # Пробуем получить конфигурации как тест
+                    provider_enum = ModelProvider.GEMINI
+                    getattr(self.model_config_manager, "get_configurations_by_provider")(provider_enum)
+                    success = True
+                    message = "Соединение с Gemini (через конфигурацию) успешно!"
+                else:
+                    message = "Менеджер конфигураций не инициализирован."
+
+        except Exception as e:
+            logger.error(f"Ошибка теста соединения: {e}")
+            message = f"Ошибка: {e}"
+
+        # Показываем результат
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle("Результат теста")
+        msg_box.setText(message)
+        if success:
+            msg_box.setIcon(QMessageBox.Information)
+        else:
+            msg_box.setIcon(QMessageBox.Warning)
+        msg_box.exec()
     
     def _reset_configuration(self):
         """Сбрасывает конфигурацию к настройкам по умолчанию"""
-        # TODO: Реализовать сброс конфигурации
         logger.info("Сброс конфигурации к настройкам по умолчанию")
+
+        success = False
+        message = ""
+
+        try:
+            if self.model_config_manager:
+                if getattr(self.model_config_manager, "set_default_configuration")():
+                    success = True
+                    message = "Конфигурация успешно сброшена к настройкам по умолчанию."
+                    # Перезагружаем UI, чтобы отразить изменения
+                    self._load_current_configuration()
+                else:
+                    message = "Не удалось сбросить конфигурацию."
+            else:
+                message = "Менеджер конфигураций не инициализирован."
+
+        except Exception as e:
+            logger.error(f"Ошибка сброса конфигурации: {e}")
+            message = f"Ошибка: {e}"
+
+        # Показываем результат
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle("Результат сброса")
+        msg_box.setText(message)
+        msg_box.setIcon(QMessageBox.Information if success else QMessageBox.Warning)
+        msg_box.exec()
     
     def get_current_model(self):
         """Возвращает текущую выбранную модель"""
