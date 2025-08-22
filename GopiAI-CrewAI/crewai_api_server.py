@@ -432,7 +432,7 @@ def process_task(task_id: str):
 
     try:
         task.start_processing()
-        logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'message': task.message})
+        logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'user_message': task.message})
         
         response_data = smart_delegator_instance.process_request(
             message=task.message,
