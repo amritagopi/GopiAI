@@ -1,0 +1,974 @@
+{
+  "timestamp": "2025-08-21 16:25:24",
+  "summary": {
+    "total_test_runs": 7,
+    "successful_runs": 0,
+    "failed_runs": 7,
+    "total_tests": 0,
+    "passed_tests": 0,
+    "failed_tests": 0,
+    "skipped_tests": 0,
+    "total_duration_seconds": 0.024758100509643555,
+    "average_coverage_percentage": 0
+  },
+  "results_by_module": {
+    "gopiai-ui": [
+      {
+        "module": "gopiai-ui",
+        "category": "unit",
+        "success": false,
+        "duration": 0.004204750061035156,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      },
+      {
+        "module": "gopiai-ui",
+        "category": "integration",
+        "success": false,
+        "duration": 0.0043468475341796875,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      },
+      {
+        "module": "gopiai-ui",
+        "category": "ui",
+        "success": false,
+        "duration": 0.004106998443603516,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      }
+    ],
+    "gopiai-crewai": [
+      {
+        "module": "gopiai-crewai",
+        "category": "integration",
+        "success": false,
+        "duration": 0.002811908721923828,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      },
+      {
+        "module": "gopiai-crewai",
+        "category": "unit",
+        "success": false,
+        "duration": 0.0051000118255615234,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      },
+      {
+        "module": "gopiai-crewai",
+        "category": "api",
+        "success": false,
+        "duration": 0.002966165542602539,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      }
+    ],
+    "gopiai-assets": [
+      {
+        "module": "gopiai-assets",
+        "category": "unit",
+        "success": false,
+        "duration": 0.0012214183807373047,
+        "exit_code": -1,
+        "stdout": "",
+        "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+        "coverage_percentage": null,
+        "test_count": 0,
+        "passed_count": 0,
+        "failed_count": 0,
+        "skipped_count": 0
+      }
+    ]
+  },
+  "problem_discovery": {
+    "summary": {
+      "total_problems": 73,
+      "by_severity": {
+        "critical": 1,
+        "high": 53,
+        "low": 1,
+        "medium": 18
+      },
+      "by_category": {
+        "syntax_error": 1,
+        "security_issue": 53,
+        "todo_fixme": 1,
+        "exception_handling": 17,
+        "deprecated_api": 1
+      },
+      "by_module": {
+        "GopiAI-CrewAI": 32,
+        "GopiAI-UI": 41
+      }
+    },
+    "problems": [
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/tools_config.py",
+        "line_number": 169,
+        "category": "syntax_error",
+        "severity": "critical",
+        "description": "Syntax error: unindent does not match any outer indentation level",
+        "code_snippet": "    def set(self, section: str, key: str, value: Any):",
+        "suggested_fix": null,
+        "test_marker": "xfail_known_issue"
+      },
+      {
+        "file_path": "GopiAI-CrewAI/main.py",
+        "line_number": 530,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "user_input = input(\"\\n\u0412\u044b: \").strip()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/test_direct_github.py",
+        "line_number": 135,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "input(\"\\n\u041d\u0430\u0436\u043c\u0438 Enter \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430...\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/test_github_alternative.py",
+        "line_number": 240,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "input(\"\\n\u041d\u0430\u0436\u043c\u0438 Enter \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430...\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/test_github_tool.py",
+        "line_number": 163,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "input(\"\\n\u041d\u0430\u0436\u043c\u0438 Enter \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430...\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/test_openrouter_github.py",
+        "line_number": 256,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "input(\"\\n\u041d\u0430\u0436\u043c\u0438 Enter \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430...\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/test_working_github.py",
+        "line_number": 173,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "input(\"\\n\u041d\u0430\u0436\u043c\u0438 Enter \u0434\u043b\u044f \u0432\u044b\u0445\u043e\u0434\u0430...\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 125,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def exec(code: str, locals: Dict[str, Any]) -> None:",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 132,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potentially dangerous function: exec",
+        "code_snippet": "        exec(code, {\"__builtins__\": SandboxPython.safe_builtins()}, locals)",
+        "suggested_fix": "Avoid using eval/exec or validate input thoroughly",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 132,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "exec(code, {\"__builtins__\": SandboxPython.safe_builtins()}, locals)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 350,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "SandboxPython.exec(code=code, locals=exec_locals)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 373,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "os.system(f\"pip install {library}\")",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 378,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potentially dangerous function: exec",
+        "code_snippet": "            exec(code, {}, exec_locals)",
+        "suggested_fix": "Avoid using eval/exec or validate input thoroughly",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py",
+        "line_number": 378,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "exec(code, {}, exec_locals)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/databricks_query_tool/databricks_query_tool.py",
+        "line_number": 30,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def validate_input(self) -> 'DatabricksQueryToolSchema':",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/command_executor.py",
+        "line_number": 62,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potentially dangerous function: eval",
+        "code_snippet": "                            command_data = eval(json_str)",
+        "suggested_fix": "Avoid using eval/exec or validate input thoroughly",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/command_executor.py",
+        "line_number": 62,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "command_data = eval(json_str)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/example_usage.py",
+        "line_number": 86,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "choice = input(\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043d\u043e\u043c\u0435\u0440 (1-2): \").strip()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/chat_widget.py",
+        "line_number": 281,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "menu.exec(self.sessions_list.viewport().mapToGlobal(pos))",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/chat_widget.py",
+        "line_number": 295,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = msg_box.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/chat_widget.py",
+        "line_number": 1036,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "msg_box.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/menu_bar.py",
+        "line_number": 223,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "box.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/minimal_gemini_widget.py",
+        "line_number": 159,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/model_selector_widget.py",
+        "line_number": 282,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/openrouter_model_widget.py",
+        "line_number": 509,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/personality_tab.py",
+        "line_number": 327,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/tab_widget.py",
+        "line_number": 281,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "menu.exec(event.globalPos())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/tab_widget.py",
+        "line_number": 295,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "menu.exec(event.globalPos())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/unified_model_widget.py",
+        "line_number": 468,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "msg_box.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/unified_model_widget.py",
+        "line_number": 498,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "msg_box.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/unified_model_widget.py",
+        "line_number": 534,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/unified_models_tab.py",
+        "line_number": 361,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "sys.exit(app.exec())",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/main.py",
+        "line_number": 818,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = self._settings_dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/main.py",
+        "line_number": 896,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = settings_dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/main.py",
+        "line_number": 1153,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "# \u041f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430 \u0434\u043b\u044f Pyright: QApplication.exec() \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442 int",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/main.py",
+        "line_number": 1186,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "# \u0412\u044b\u0437\u044b\u0432\u0430\u0435\u043c \u0437\u0430\u0440\u0430\u043d\u0435\u0435 \u0438\u0437\u0432\u043b\u0435\u0447\u0451\u043d\u043d\u044b\u0439 \u043c\u0435\u0442\u043e\u0434 exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/utils/simple_theme_manager.py",
+        "line_number": 951,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "if dialog.exec() == QDialog.DialogCode.Accepted:",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/security/test_ui_security.py",
+        "line_number": 66,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "# Test extremely long input (potential DoS)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_model_switching_ui.py",
+        "line_number": 57,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_model_data_retrieval(self, qtbot, mock_model_selector):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_settings_ui.py",
+        "line_number": 33,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "assert dialog.exec() == 1  # QDialog.Accepted",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_settings_ui.py",
+        "line_number": 65,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_settings_ui.py",
+        "line_number": 70,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_settings_ui.py",
+        "line_number": 73,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_settings_retrieval(self, qtbot, mock_settings_dialog, ui_test_data):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/ui/test_settings_ui.py",
+        "line_number": 264,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_api_key_input(self, qtbot, mock_settings_dialog):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_main_window.py",
+        "line_number": 104,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = settings_dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_settings_dialog.py",
+        "line_number": 45,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_settings_dialog_exec(self, qtbot, mock_settings_dialog):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_settings_dialog.py",
+        "line_number": 50,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_settings_dialog.py",
+        "line_number": 307,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "mock_dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_settings_dialog.py",
+        "line_number": 338,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "result = dialog.exec()",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_user_input_handling.py",
+        "line_number": 39,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_message_sending_input(self, qtbot, mock_chat_widget):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_user_input_handling.py",
+        "line_number": 79,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "def test_special_characters_input(self, qtbot, mock_chat_widget):",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_user_input_handling.py",
+        "line_number": 150,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "is_valid = widget.validate_input(valid_message)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_user_input_handling.py",
+        "line_number": 165,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "clean_message = widget.sanitize_input(dirty_message)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/test_user_input_handling.py",
+        "line_number": 442,
+        "category": "security_issue",
+        "severity": "high",
+        "description": "Potential security issue detected",
+        "code_snippet": "is_valid = widget.validate_input(test_message)",
+        "suggested_fix": "Review for security implications",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/crewai_toolkit/tools/llamaindex_tool/llamaindex_tool.py",
+        "line_number": 79,
+        "category": "todo_fixme",
+        "severity": "low",
+        "description": "TODO/FIXME comment: we are replacing the schema with our custom schema",
+        "code_snippet": "# HACK: we are replacing the schema with our custom schema",
+        "suggested_fix": null,
+        "test_marker": "xfail_known_issue"
+      },
+      {
+        "file_path": "GopiAI-CrewAI/restart_server.py",
+        "line_number": 31,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "            except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/restart_server.py",
+        "line_number": 38,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "    except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/restart_server.py",
+        "line_number": 60,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "        except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/base/base_tool.py",
+        "line_number": 275,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/communication_tools.py",
+        "line_number": 184,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "            except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/communication_tools.py",
+        "line_number": 276,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "            except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/local_mcp_tools.py",
+        "line_number": 435,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/local_mcp_tools.py",
+        "line_number": 466,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/local_mcp_tools.py",
+        "line_number": 728,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "            except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/local_mcp_tools.py",
+        "line_number": 833,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                    except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/memory_tools.py",
+        "line_number": 147,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "            except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/memory_tools.py",
+        "line_number": 255,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-CrewAI/tools/gopiai_integration/memory_tools.py",
+        "line_number": 329,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/components/tab_widget.py",
+        "line_number": 432,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "                    except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/dialogs/settings_dialog.py",
+        "line_number": 281,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "        except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/dialogs/settings_dialog.py",
+        "line_number": 299,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "        except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/gopiai/ui/main.py",
+        "line_number": 1158,
+        "category": "deprecated_api",
+        "severity": "medium",
+        "description": "Deprecated API usage detected",
+        "code_snippet": "warnings.filterwarnings(\"ignore\", category=DeprecationWarning)",
+        "suggested_fix": null,
+        "test_marker": null
+      },
+      {
+        "file_path": "GopiAI-UI/tests/unit/conftest.py",
+        "line_number": 55,
+        "category": "exception_handling",
+        "severity": "medium",
+        "description": "Bare except clause - catches all exceptions",
+        "code_snippet": "    except:",
+        "suggested_fix": "Specify specific exception types to catch",
+        "test_marker": null
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "module": "gopiai-ui",
+      "category": "unit",
+      "success": false,
+      "duration": 0.004204750061035156,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-ui",
+      "category": "integration",
+      "success": false,
+      "duration": 0.0043468475341796875,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-ui",
+      "category": "ui",
+      "success": false,
+      "duration": 0.004106998443603516,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-crewai",
+      "category": "integration",
+      "success": false,
+      "duration": 0.002811908721923828,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-crewai",
+      "category": "unit",
+      "success": false,
+      "duration": 0.0051000118255615234,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-crewai",
+      "category": "api",
+      "success": false,
+      "duration": 0.002966165542602539,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    },
+    {
+      "module": "gopiai-assets",
+      "category": "unit",
+      "success": false,
+      "duration": 0.0012214183807373047,
+      "exit_code": -1,
+      "stdout": "",
+      "stderr": "[Errno 2] No such file or directory: '.venv/bin/python'",
+      "coverage_percentage": null,
+      "test_count": 0,
+      "passed_count": 0,
+      "failed_count": 0,
+      "skipped_count": 0
+    }
+  ]
+}

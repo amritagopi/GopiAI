@@ -358,36 +358,29 @@ def _after_request_logging(response):
 
 # --- Инициализация всех систем при старте ---
 try:
-    print("[ДИАГНОСТИКА] Начало инициализации систем")
     logger.info("--- ИНИЦИАЛИЗАЦИЯ СИСТЕМ ---")
     
     # 1. Инициализируем RAG систему
-    print("[ДИАГНОСТИКА] Инициализация RAG системы")
     rag_system_instance = get_rag_system()
-    print(f"[ДИАГНОСТИКА] RAGSystem получен: {rag_system_instance is not None}")
     
     # 2. Создаем SmartDelegator С RAG
-    print("[ДИАГНОСТИКА] Создание SmartDelegator с RAG")
     smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
-    print(f"[ДИАГНОСТИКА] SmartDelegator создан: {smart_delegator_instance is not None}")
     
     # 3. Инициализируем интегратор инструментов
-    print("[ДИАГНОСТИКА] Инициализация CrewAI Tools Integrator")
     from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
     tools_integrator_instance = get_crewai_tools_integrator()
-    print(f"[ДИАГНОСТИКА] Tools Integrator создан: {tools_integrator_instance is not None}")
     
     logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
     SERVER_IS_READY = True
-    print("[ДИАГНОСТИКА] SERVER_IS_READY = True")
+
 except Exception as e:
-    print(f"[DIAGNOSTIC] CRITICAL ERROR: {e}")
     logger.error(f"CRITICAL ERROR DURING SERVER STARTUP: {e}", exc_info=True)
     rag_system_instance = None
     smart_delegator_instance = None
     tools_integrator_instance = None
     SERVER_IS_READY = False
-    print("[DIAGNOSTIC] SERVER_IS_READY = False, server will not be started")
+    print("CRITICAL ERROR: Server will start in limited mode due to an initialization failure.", file=sys.stderr)
+    traceback.print_exc()
 
 # --- Flask routes ---
 
@@ -428,38 +421,33 @@ def process_task(task_id: str):
     """Processes a task in a separate thread."""
     task = TASKS.get(task_id)
     if not task:
-        logger.error(f"[TASK-ERROR] Task {task_id} not found in TASKS")
+        logger.error(f"Task {task_id} not found in TASKS dictionary.", extra={'task_id': task_id})
         return
-        
+
     if not smart_delegator_instance:
-        error_msg = "Smart Delegator not initialized."
-        logger.error(f"[TASK-ERROR] {error_msg}")
-        task.fail(error_msg)
+        err_msg = "Smart Delegator not initialized. Cannot process task."
+        logger.error(err_msg, extra={'task_id': task_id})
+        task.fail(err_msg)
         return
 
     try:
         task.start_processing()
-        logger.info(f"[TASK-START] Starting task {task_id} for message: '{task.message}'")
+        logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'message': task.message})
         
-        # Добавляем дополнительную проверку
-        if not hasattr(smart_delegator_instance, 'process_request'):
-            error_msg = "Smart Delegator missing process_request method"
-            logger.error(f"[TASK-ERROR] {error_msg}")
-            task.fail(error_msg)
-            return
-            
         response_data = smart_delegator_instance.process_request(
             message=task.message,
             metadata=task.metadata
         )
         
-        logger.info(f"[TASK-SUCCESS] Task {task_id} processed successfully.")
+        logger.info(f"Task {task_id} processed successfully.", extra={'task_id': task_id})
         task.complete(response_data)
         
     except Exception as e:
-        error_msg = f"Error processing task {task_id}: {str(e)}"
-        logger.error(f"[TASK-ERROR] {error_msg}", exc_info=True)
-        task.fail(error_msg)
+        error_msg = f"An unexpected error occurred while processing task {task_id}."
+        logger.error(error_msg, exc_info=True, extra={'task_id': task_id})
+        # Capture full traceback for the task's error field
+        tb = traceback.format_exc()
+        task.fail(f"{error_msg} Details: {e}\n{tb}")
 
 @app.route('/api/process', methods=['POST'])
 def process_request():
@@ -492,30 +480,25 @@ def process_request():
     if not SERVER_IS_READY:
         return jsonify({"error": "Server started in limited mode due to initialization error."}), 503
 
-    # Добавляем отладочную информацию
-    logger.info(f"[API-REQUEST] Получен POST запрос на /api/process")
-    logger.info(f"[API-REQUEST] Content-Type: {request.content_type}")
-    logger.info(f"[API-REQUEST] Raw data: {request.get_data()}")
-    
     try:
-        # Пробуем получить JSON данные
-        data = request.get_json(force=True)
-        logger.info(f"[API-REQUEST] Parsed JSON: {data}")
-        jlog(level="DEBUG", event="api_payload", request_id=rid, payload_keys=list((data or {}).keys()))
-        
-        if not data or 'message' not in data:
-            logger.error(f"[API-REQUEST] Ошибка: нет поля 'message' в данных: {data}")
-            return jsonify({"error": "Missing 'message' field"}), 400
+        data = request.get_json()
+        if data is None:
+            logger.warning("Request received with non-JSON or empty body.", extra={'request_id': rid})
+            return jsonify({"error": "Invalid request: body must be a valid JSON."}), 400
+
+        jlog(level="DEBUG", event="api_payload", request_id=rid, payload_keys=list(data.keys()))
 
         message = data.get('message')
+        if not message:
+            logger.warning("Request is missing 'message' field.", extra={'request_id': rid})
+            return jsonify({"error": "Missing required 'message' field in JSON payload."}), 400
+
         metadata = data.get('metadata', {})
-        
-        logger.info(f"[API-REQUEST] Message: {message}")
-        logger.info(f"[API-REQUEST] Metadata: {metadata}")
+        logger.info(f"Received task with message: '{message}'", extra={'request_id': rid})
         
     except Exception as e:
-        logger.error(f"[API-REQUEST] Ошибка парсинга JSON: {str(e)}")
-        return jsonify({"error": f"Invalid JSON: {str(e)}"}), 400
+        logger.error(f"Failed to parse JSON payload: {e}", exc_info=True, extra={'request_id': rid})
+        return jsonify({"error": f"Invalid JSON format: {e}"}), 400
 
     task_id = str(uuid.uuid4())
     task = Task(task_id, message, metadata)

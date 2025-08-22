@@ -19,7 +19,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
 
 # Add test infrastructure to path
-sys.path.insert(0, str(Path(__file__).parent / "test_infrastructure"))
+# The script is in 'scripts/', and 'test_infrastructure' is in the root.
+# We need to go up one level from the script's directory.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "test_infrastructure"))
 
 from test_config import TestConfigManager, TestCategory, TestEnvironment
 from problem_discovery import ProblemDiscovery
@@ -132,17 +134,14 @@ class ComprehensiveTestRunner:
         start_time = time.time()
         
         try:
-            # Change to module directory
-            original_cwd = os.getcwd()
-            os.chdir(module_config.path)
-            
+            # The cwd is set in subprocess.run, so os.chdir is not needed and can cause issues in multithreading.
             # Run the test command
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
                 timeout=test_timeout,
-                cwd=module_config.path
+                cwd=str(module_config.path) # Ensure path is a string
             )
             
             duration = time.time() - start_time
@@ -200,9 +199,6 @@ class ComprehensiveTestRunner:
                 stdout="",
                 stderr=str(e)
             )
-        
-        finally:
-            os.chdir(original_cwd)
     
     def _parse_pytest_output(self, output: str) -> Tuple[int, int, int, int]:
         """Parse pytest output to extract test counts."""
