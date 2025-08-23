@@ -1,7 +1,43 @@
-2025-08-23 00:41:51 - INFO - ✅ spaCy и языковые модели успешно загружены
-2025-08-23 00:41:51 - INFO - [INIT] Используем динамический порт CrewAI API: http://127.0.0.1:5053
-2025-08-23 00:41:51 - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-23 00:41:51 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
-2025-08-23 00:41:52 - INFO - [INIT] Используем динамический порт CrewAI API: http://127.0.0.1:5053
-2025-08-23 00:41:52 - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-23 00:41:52 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-23 22:41:29 - INFO - ✅ spaCy и языковые модели успешно загружены
+2025-08-23 22:41:29 - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-23 22:41:29 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-23 22:41:30 - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-23 22:41:30 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-23 22:41:56 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-08-23 22:41:56 - DEBUG - [REQUEST] Сообщение: привет
+2025-08-23 22:41:56 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-08-23 22:41:56 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-08-23 22:41:56 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-08-23 22:41:56 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-08-23 22:41:56 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
+2025-08-23 22:41:56 - INFO - [REQUEST] Получено 16 сообщений из истории для сессии session_1755863547
+2025-08-23 22:41:56 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-08-23 22:41:56 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-08-23 22:41:56 - DEBUG - привет
+2025-08-23 22:41:56 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Результат анализа эмоций: neutral
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-08-23 22:42:11 - INFO - [MODEL] Запрос с провайдером: openrouter
+2025-08-23 22:42:11 - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-08-23 22:42:11 - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-23T22:42:11.547626', 'message': 'Task queued for processing', 'request_id': '3c77d8fb-e6e5-4061-99e5-e7f8ff486518', 'status': 'pending', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-23T22:42:11.547626', 'message': 'Task queued for processing', 'request_id': '3c77d8fb-e6e5-4061-99e5-e7f8ff486518', 'status': 'pending', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - DEBUG - [TASK-START] Начальный статус задачи: pending
+2025-08-23 22:42:11 - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': None, 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'processing', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: processing
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': None, 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'processing', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:12 - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: processing
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': '2025-08-23T22:42:12.251352', 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.7015435695648193, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'completed', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:12 - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: completed

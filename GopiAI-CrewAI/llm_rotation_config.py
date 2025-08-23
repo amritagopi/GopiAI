@@ -79,8 +79,8 @@ MODELS: list[dict] = [
     },
     # ---------------------- OpenRouter block ----------------------
     {
-        "display_name": "Gemma 2B-it (OpenRouter)",
-        "id": "openrouter/google-gemma-2b-it",
+        "display_name": "Qwen 3 Coder (OpenRouter)",
+        "id": "qwen/qwen3-coder:free",
         "provider": "openrouter",
         "rpm": 20,
         "tpm": 2_000_000,
@@ -90,8 +90,8 @@ MODELS: list[dict] = [
         "base_score": 0.4,
     },
     {
-        "display_name": "Mistral-7B-instruct (OpenRouter)",
-        "id": "openrouter/mistralai-mistral-7b-instruct",
+        "display_name": "Gemini 2.0 Flash-Exp (OpenRouter)",
+        "id": "google/gemini-2.0-flash-exp:free",
         "provider": "openrouter",
         "rpm": 10,
         "tpm": 4_000_000,

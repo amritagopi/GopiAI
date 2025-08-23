@@ -36,8 +36,8 @@ def load_env_file():
             Path(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))) / '.env'  # Абсолютный путь к корню проекта
         ]
         
-        # Добавляем путь к корню проекта GOPI_AI_MODULES
-        root_path = Path('C:/Users/crazy/GOPI_AI_MODULES/.env')
+        # Добавляем путь к корню проекта GOPI_AI
+        root_path = Path('/home/amritagopi/GopiAI/GopiAI-CrewAI/.env')
         if root_path not in possible_paths:
             possible_paths.append(root_path)
         
@@ -106,7 +106,7 @@ except ImportError as e:
 
 # Добавляем правильные пути к tools для импорта gopiai_integration
 # Правильное формирование project_root
-project_root = r"c:\Users\crazy\GOPI_AI_MODULES"  # Прямое указание пути
+project_root = r"/home/amritagopi/GopiAI"  # Прямое указание пути
 # Путь к tools (а не к GopiAI-CrewAI!) для импорта gopiai_integration
 tools_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools')
 if os.path.exists(tools_path):

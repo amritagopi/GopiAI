@@ -140,24 +140,7 @@ class TestSystemValidation(unittest.TestCase):
         # Verify result
         self.assertTrue(result)
     
-    @patch('subprocess.run')
-    def test_validate_environments(self, mock_run):
-        """Test environment validation."""
-        # Create mock environment directories
-        for env in ['gopiai_env', 'crewai_env', 'txtai_env']:
-            env_dir = Path(self.temp_dir) / env / "Scripts"
-            env_dir.mkdir(parents=True, exist_ok=True)
-            (env_dir / "python.exe").touch()
-        
-        # Mock subprocess result
-        mock_run.return_value.returncode = 0
-        mock_run.return_value.stdout = "Python 3.9.0"
-        
-        # Run validation
-        result = self.validator._validate_environments()
-        
-        # Verify result
-        self.assertTrue(result)
+    
     
     @patch('psutil.cpu_count')
     @patch('psutil.virtual_memory')
@@ -185,9 +168,9 @@ class TestSystemValidation(unittest.TestCase):
         # Mock test discovery
         with patch.object(self.validator, 'test_discovery') as mock_discovery:
             mock_modules = [
-                Mock(category=Mock(value="unit"), environment=Mock(value="gopiai_env")),
-                Mock(category=Mock(value="integration"), environment=Mock(value="crewai_env")),
-                Mock(category=Mock(value="ui"), environment=Mock(value="gopiai_env"))
+                Mock(category=Mock(value="unit")),
+                Mock(category=Mock(value="integration")),
+                Mock(category=Mock(value="ui"))
             ]
             mock_discovery.discover_all_tests.return_value = mock_modules
             
@@ -196,7 +179,7 @@ class TestSystemValidation(unittest.TestCase):
             
             # Verify result
             self.assertIsInstance(strategy, str)
-            self.assertIn(strategy, ["environment_based", "category_based", "round_robin"])
+            self.assertIn(strategy, ["category_based", "round_robin"])
     
     def test_create_parallel_groups(self):
         """Test parallel group creation."""
@@ -420,8 +403,7 @@ class TestSystemValidationIntegration(unittest.TestCase):
         # Mock test discovery
         mock_discovery.return_value.discover_all_tests.return_value = [
             Mock(path=Path(self.temp_dir) / "test_module", 
-                 category=Mock(value="unit"),
-                 environment=Mock(value="gopiai_env"))
+                 category=Mock(value="unit"))
         ]
         
         # Mock test runner

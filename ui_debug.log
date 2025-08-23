@@ -1,53 +1,164 @@
-2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
-2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
-2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-23 00:41:52 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-23 00:41:52 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-23 00:41:52 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
-2025-08-23 00:41:52 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x3aaaa9e0) at 0x7ad584690b40>
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - WARNING - OPENROUTER_API_KEY не найден в переменных окружения
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🔌 OpenRouterClient инициализирован
-2025-08-23 00:41:52 - tools.gopiai_integration.model_config_manager - INFO - 📋 Загружено 349 конфигураций
-2025-08-23 00:41:52 - tools.gopiai_integration.model_config_manager - INFO - 🔧 ModelConfigurationManager инициализирован (конфиг: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/model_configurations.json)
-2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
-2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
-2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🔄 Получаем список моделей OpenRouter...
-2025-08-23 00:41:52 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
-2025-08-23 00:41:52 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
-2025-08-23 00:41:52 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
-2025-08-23 00:41:52 - gopiai.ui.components.tools_tab - ERROR - Ошибка загрузки: 404
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
-2025-08-23 00:41:52 - gopiai.ui.components.agents_tab - ERROR - Ошибка загрузки: 404
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1755889912
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
-2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] Используем динамический порт CrewAI API: http://127.0.0.1:5053
-2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-23 00:41:52 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с переданным ModelConfigurationManager
-2025-08-23 00:41:52 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с улучшенной системой ротации
-2025-08-23 00:41:52 - gopiai_integration.emotional_classifier - INFO - ✅ EmotionalClassifier: model_config_manager найден в ai_router
-2025-08-23 00:41:52 - gopiai_integration.emotional_classifier - INFO - EmotionalClassifier инициализирован
-2025-08-23 00:41:52 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
-2025-08-23 00:41:52 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
-2025-08-23 00:41:52 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x3de530e0) at 0x7ad5845e35c0>
-2025-08-23 00:41:52 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - ✅ Получено 316 моделей OpenRouter (все показаны)
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 🆓 Бесплатных моделей: 55
-2025-08-23 00:41:52 - tools.gopiai_integration.openrouter_client - INFO - 💰 Платных моделей: 261
-2025-08-23 00:41:52 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
-2025-08-23 00:41:53 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
-2025-08-23 00:41:55 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
-2025-08-23 00:41:58 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 6 сообщений из истории
-2025-08-23 00:42:04 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-08-23 00:42:04 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
+2025-08-23 22:41:29 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 22:41:29 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 22:41:29 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
+2025-08-23 22:41:29 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-08-23 22:41:29 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 22:41:29 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 22:41:29 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-23 22:41:29 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-23 22:41:29 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-08-23 22:41:29 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x256c4370) at 0x737e1fa8d300>
+2025-08-23 22:41:29 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-08-23 22:41:29 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-08-23 22:41:30 - tools.gopiai_integration.openrouter_client - INFO - 🔌 OpenRouterClient инициализирован
+2025-08-23 22:41:30 - tools.gopiai_integration.model_config_manager - INFO - 📋 Загружено 349 конфигураций
+2025-08-23 22:41:30 - tools.gopiai_integration.model_config_manager - INFO - 🔧 ModelConfigurationManager инициализирован (конфиг: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/model_configurations.json)
+2025-08-23 22:41:30 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
+2025-08-23 22:41:30 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
+2025-08-23 22:41:30 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
+2025-08-23 22:41:30 - tools.gopiai_integration.openrouter_client - INFO - 🔄 Получаем список моделей OpenRouter...
+2025-08-23 22:41:30 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
+2025-08-23 22:41:30 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
+2025-08-23 22:41:30 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1755969090
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-08-23 22:41:30 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-23 22:41:30 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с переданным ModelConfigurationManager
+2025-08-23 22:41:30 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с улучшенной системой ротации
+2025-08-23 22:41:30 - gopiai_integration.emotional_classifier - INFO - ✅ EmotionalClassifier: model_config_manager найден в ai_router
+2025-08-23 22:41:30 - gopiai_integration.emotional_classifier - INFO - EmotionalClassifier инициализирован
+2025-08-23 22:41:30 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-08-23 22:41:30 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-08-23 22:41:30 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x25caee10) at 0x737df03732c0>
+2025-08-23 22:41:30 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-08-23 22:41:30 - tools.gopiai_integration.openrouter_client - INFO - ✅ Получено 316 моделей OpenRouter (все показаны)
+2025-08-23 22:41:30 - tools.gopiai_integration.openrouter_client - INFO - 🆓 Бесплатных моделей: 55
+2025-08-23 22:41:30 - tools.gopiai_integration.openrouter_client - INFO - 💰 Платных моделей: 261
+2025-08-23 22:41:30 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-23 22:41:30 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-23 22:41:33 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-08-23 22:41:38 - gopiai.ui.components.chat_widget - INFO - [MODEL] Провайдер изменен на: openrouter
+2025-08-23 22:41:38 - gopiai.ui.components.unified_models_tab - INFO - Переключение на провайдера: openrouter
+2025-08-23 22:41:38 - gopiai.ui.components.unified_models_tab - INFO - Используем модель по умолчанию для OpenRouter: google/gemini-2.5-pro-exp-03-25
+2025-08-23 22:41:38 - gopiai.ui.components.unified_models_tab - INFO - Состояние провайдера/модели синхронизировано с сервером: openrouter/google/gemini-2.5-pro-exp-03-25
+2025-08-23 22:41:46 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 15 сообщений из истории
+2025-08-23 22:41:56 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-23 22:41:56 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: привет
+2025-08-23 22:41:56 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
+2025-08-23 22:41:56 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 88 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-23 22:41:56 - gopiai_integration.tools_instruction_manager - INFO - ✅ Tools Instruction Manager инициализирован. Найдено 12 инструкций
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 16 сообщений из истории для сессии session_1755863547
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - привет
+2025-08-23 22:41:56 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 🧠 Обработка промпта 1/1
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 🧠 Высокий приоритет интеллекта
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 1: Выбрана модель 'google/gemini-2.0-flash-exp:free' (приоритет: 3, score: 0.3)
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 1: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:41:56 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:41:57 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:41:57 - gopiai_integration.ai_router_llm - INFO - ⏱️ Задержка 4 секунд перед попыткой 2
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 2: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель google/gemini-2.0-flash-exp:free уже использована или во временном blacklist — запрашиваем следующую
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель google/gemini-2.0-flash-exp:free уже использована или во временном blacklists — запрашиваем следующую доступную
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 2: Выбрана модель 'google/gemini-2.0-flash-exp:free' (приоритет: 3, score: 0.3)
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 1: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:42:01 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:02 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:02 - gopiai_integration.ai_router_llm - INFO - ⏱️ Задержка 4 секунд перед попыткой 2
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 2: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель google/gemini-2.0-flash-exp:free уже использована или во временном blacklist — запрашиваем следующую
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель google/gemini-2.0-flash-exp:free уже использована или во временном blacklists — запрашиваем следующую доступную
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 3: Выбрана модель 'google/gemini-2.0-flash-exp:free' (приоритет: 3, score: 0.3)
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 1: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:42:06 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:07 - gopiai_integration.ai_router_llm - INFO - 📋 Стандартный LLM создан для модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:07 - gopiai_integration.ai_router_llm - INFO - ⏱️ Задержка 4 секунд перед попыткой 2
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - INFO - 🔄 Попытка 2: Отправляем запрос к модели google/gemini-2.0-flash-exp:free
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели google/gemini-2.0-flash-exp:free: используется прямой HTTP-клиент без safetySettings
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели google/gemini-2.0-flash-exp:free: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: litellm.BadRequestError: LLM Provider NOT provided. Pass in the LLM provider you are trying to call. You passed model=google/gemini-2.0-flash-exp:free
+ Pass model as E.g. For 'Huggingface' inference endpoints pass in `completion(model='huggingface/starcoder',..)` Learn more: https://docs.litellm.ai/docs/providers
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - ERROR - 💥 КРИТИЧЕСКАЯ СИТУАЦИЯ: Все модели недоступны для промпта 1
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - ERROR - Blacklist: {}
+2025-08-23 22:42:11 - gopiai_integration.ai_router_llm - ERROR - Попробованные модели: ['google/gemini-2.0-flash-exp:free', 'google/gemini-2.0-flash-exp:free', 'google/gemini-2.0-flash-exp:free']
+2025-08-23 22:42:11 - gopiai_integration.emotional_classifier - WARNING - Ошибка парсинга AI анализа эмоций: JSON не найден в ответе AI
+2025-08-23 22:42:11 - gopiai_integration.emotional_classifier - INFO - Эмоциональный анализ завершен: neutral (confidence: 0.60)
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Результат анализа эмоций: neutral
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: openrouter
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-23T22:42:11.547626', 'message': 'Task queued for processing', 'request_id': '3c77d8fb-e6e5-4061-99e5-e7f8ff486518', 'status': 'pending', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-23T22:42:11.547626', 'message': 'Task queued for processing', 'request_id': '3c77d8fb-e6e5-4061-99e5-e7f8ff486518', 'status': 'pending', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: pending
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': None, 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'processing', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:11 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: processing
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': None, 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'processing', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: processing
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/f21d00ad-fe23-4257-89df-7579228cbca9
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи f21d00ad-fe23-4257-89df-7579228cbca9: {'completed_at': '2025-08-23T22:42:12.251352', 'created_at': '2025-08-23T22:42:11.547626', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.7015435695648193, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-23T22:42:11.547808', 'status': 'completed', 'task_id': 'f21d00ad-fe23-4257-89df-7579228cbca9'}
+2025-08-23 22:42:12 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача f21d00ad-fe23-4257-89df-7579228cbca9 в процессе. Статус: completed
+2025-08-23 22:42:12 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-23 22:46:29 - gopiai.ui.components.openrouter_model_widget - INFO - Автообновление моделей OpenRouter...
+2025-08-23 22:46:29 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
+2025-08-23 22:46:29 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-23 22:46:30 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter

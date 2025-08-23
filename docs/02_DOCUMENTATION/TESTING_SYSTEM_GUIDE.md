@@ -108,26 +108,6 @@ Performance tests report:
 - **CPU Usage**: Processing time and efficiency
 - **Throughput**: Requests per second capacity
 
-## Environment Setup
-
-### Virtual Environments
-The testing system uses three isolated environments:
-
-1. **crewai_env**: For CrewAI server and AI components
-2. **gopiai_env**: For UI application and core modules
-3. **txtai_env**: For legacy memory system (if needed)
-
-### Activating Environments
-```bash
-# Windows
-call crewai_env\Scripts\activate.bat
-call gopiai_env\Scripts\activate.bat
-
-# Linux/Mac
-source crewai_env/bin/activate
-source gopiai_env/bin/activate
-```
-
 ### Required Services
 Some tests require running services:
 - **CrewAI API Server**: Port 5051 (for integration/E2E tests)

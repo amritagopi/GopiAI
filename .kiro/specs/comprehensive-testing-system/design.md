@@ -43,14 +43,6 @@ GopiAI Testing System
     └── CI/CD Integration
 ```
 
-### Структура тестовых окружений
-
-Система использует три изолированных окружения, соответствующих архитектуре проекта:
-
-1. **crewai_env**: Тестирование CrewAI сервера и AI компонентов
-2. **gopiai_env**: Тестирование UI приложения и основных модулей
-3. **txtai_env**: Тестирование системы памяти (legacy, для совместимости)
-
 ## Components and Interfaces
 
 ### 1. Test Discovery System (Система обнаружения тестов)
@@ -139,7 +131,6 @@ class TestSuite:
     category: TestCategory  # UNIT, INTEGRATION, UI, E2E, PERFORMANCE, SECURITY
     tests: List[TestResult]
     setup_requirements: List[str]
-    environment: str  # crewai_env, gopiai_env, txtai_env
 ```
 
 ### TestConfiguration

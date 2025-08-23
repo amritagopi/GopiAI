@@ -307,8 +307,7 @@ ImportError: No module named 'pytest_qt'
 #### Solutions:
 ```bash
 # Activate correct environment
-call gopiai_env\Scripts\activate.bat  # Windows
-source gopiai_env/bin/activate        # Linux/Mac
+
 
 # Install missing dependencies
 pip install pytest-qt pytest-benchmark memory-profiler

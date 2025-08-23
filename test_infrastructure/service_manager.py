@@ -101,77 +101,48 @@ class ServiceManager:
         configs = {}
         
         # CrewAI API Server
-        crewai_env_path = self.root_path / "GopiAI-CrewAI"
-        crewai_python = self._get_environment_python("crewai_env")
-        
-        if crewai_python and crewai_env_path.exists():
-            configs["crewai_server"] = ServiceConfig(
-                name="crewai_server",
-                command=[str(crewai_python), "crewai_api_server.py"],
-                working_directory=str(crewai_env_path),
-                environment_vars={
-                    "GOPIAI_ENV": "test",
-                    "CREWAI_TEST_MODE": "true",
-                    "FLASK_ENV": "testing"
-                },
-                health_check_url="http://localhost:5051/health",
-                port=5051,
-                log_file="test_crewai_server.log"
-            )
+        configs["crewai_server"] = ServiceConfig(
+            name="crewai_server",
+            command=[str(sys.executable), "crewai_api_server.py"],
+            working_directory=str(self.root_path / "GopiAI-CrewAI"),
+            environment_vars={
+                "CREWAI_TEST_MODE": "true",
+                "FLASK_ENV": "testing"
+            },
+            health_check_url="http://localhost:5051/health",
+            port=5051,
+            log_file="test_crewai_server.log"
+        )
         
         # UI Application (for E2E tests)
-        ui_env_path = self.root_path / "GopiAI-UI"
-        ui_python = self._get_environment_python("gopiai_env")
+        configs["ui_app"] = ServiceConfig(
+            name="ui_app",
+            command=[str(sys.executable), "-m", "gopiai.ui.main", "--test-mode"],
+            working_directory=str(self.root_path / "GopiAI-UI"),
+            environment_vars={
+                "QT_QPA_PLATFORM": "offscreen",  # For headless testing
+                "DISPLAY": ":99"  # Virtual display
+            },
+            startup_timeout=30,
+            log_file="test_ui_app.log"
+        )
         
-        if ui_python and ui_env_path.exists():
-            configs["ui_app"] = ServiceConfig(
-                name="ui_app",
-                command=[str(ui_python), "-m", "gopiai.ui.main", "--test-mode"],
-                working_directory=str(ui_env_path),
-                environment_vars={
-                    "GOPIAI_ENV": "test",
-                    "QT_QPA_PLATFORM": "offscreen",  # For headless testing
-                    "DISPLAY": ":99"  # Virtual display
-                },
-                startup_timeout=30,
-                log_file="test_ui_app.log"
-            )
-        
-        # Memory System (txtai) - if needed separately
-        txtai_env_path = self.root_path / "rag_memory_system"
-        txtai_python = self._get_environment_python("txtai_env")
-        
-        if txtai_python and txtai_env_path.exists():
-            configs["memory_system"] = ServiceConfig(
-                name="memory_system",
-                command=[str(txtai_python), "memory_server.py"],
-                working_directory=str(txtai_env_path),
-                environment_vars={
-                    "GOPIAI_ENV": "test",
-                    "TXTAI_TEST_MODE": "true"
-                },
-                health_check_url="http://localhost:8000/health",
-                port=8000,
-                log_file="test_memory_system.log"
-            )
+        # Memory System (txtai)
+        configs["memory_system"] = ServiceConfig(
+            name="memory_system",
+            command=[str(sys.executable), "memory_server.py"],
+            working_directory=str(self.root_path / "rag_memory_system"),
+            environment_vars={
+                "TXTAI_TEST_MODE": "true"
+            },
+            health_check_url="http://localhost:8000/health",
+            port=8000,
+            log_file="test_memory_system.log"
+        )
         
         return configs
     
-    def _get_environment_python(self, env_name: str) -> Optional[Path]:
-        """Get Python executable for a specific environment."""
-        env_path = self.root_path / env_name
-        
-        # Windows
-        python_exe = env_path / "Scripts" / "python.exe"
-        if python_exe.exists():
-            return python_exe
-        
-        # Unix
-        python_exe = env_path / "bin" / "python"
-        if python_exe.exists():
-            return python_exe
-        
-        return None
+    
     
     def start_service(self, service_name: str) -> bool:
         """Start a specific service."""
@@ -504,7 +475,6 @@ class ServiceManager:
                 # Check that CrewAI is using test environment
                 test_indicators = [
                     os.environ.get("CREWAI_TEST_MODE") == "true",
-                    os.environ.get("GOPIAI_ENV") == "test",
                     os.environ.get("FLASK_ENV") == "testing"
                 ]
                 return all(test_indicators)
@@ -512,7 +482,6 @@ class ServiceManager:
             elif service_name == "ui_app":
                 # Check that UI is using test mode and headless display
                 test_indicators = [
-                    os.environ.get("GOPIAI_ENV") == "test",
                     os.environ.get("QT_QPA_PLATFORM") == "offscreen"
                 ]
                 return all(test_indicators)
@@ -520,8 +489,6 @@ class ServiceManager:
             elif service_name == "memory_system":
                 # Check that memory system is using test paths
                 test_indicators = [
-                    os.environ.get("TXTAI_TEST_MODE") == "true",
-                    os.environ.get("GOPIAI_ENV") == "test",
                     str(self.test_data_paths["memory"]) in os.environ.get("TXTAI_INDEX_PATH", "")
                 ]
                 return all(test_indicators)
@@ -543,31 +510,19 @@ class ServiceManager:
             
             # Check if Python executable exists
             if service_name == "crewai_server":
-                python_exe = self._get_environment_python("crewai_env")
-                if not python_exe or not python_exe.exists():
-                    return False
-                
                 # Check if required modules are available
                 required_modules = ["flask", "crewai", "gopiai.crewai"]
-                return self._check_python_modules(python_exe, required_modules)
+                return self._check_python_modules(sys.executable, required_modules)
             
             elif service_name == "ui_app":
-                python_exe = self._get_environment_python("gopiai_env")
-                if not python_exe or not python_exe.exists():
-                    return False
-                
                 # Check if required modules are available
                 required_modules = ["PySide6", "gopiai.ui"]
-                return self._check_python_modules(python_exe, required_modules)
+                return self._check_python_modules(sys.executable, required_modules)
             
             elif service_name == "memory_system":
-                python_exe = self._get_environment_python("txtai_env")
-                if not python_exe or not python_exe.exists():
-                    return False
-                
                 # Check if required modules are available
                 required_modules = ["txtai", "numpy"]
-                return self._check_python_modules(python_exe, required_modules)
+                return self._check_python_modules(sys.executable, required_modules)
             
             return True
             
@@ -748,7 +703,7 @@ class ServiceManager:
         
         # Set environment variables for test isolation
         test_env_vars = {
-            "GOPIAI_ENV": "test",
+            
             "GOPIAI_TEST_MODE": "true",
             "GOPIAI_CONVERSATIONS_DIR": str(self.test_data_paths["conversations"]),
             "GOPIAI_MEMORY_DIR": str(self.test_data_paths["memory"]),
@@ -789,7 +744,7 @@ class ServiceManager:
         """Backup environment variables that will be modified."""
         self._env_backup = {}
         vars_to_backup = [
-            "GOPIAI_ENV", "GOPIAI_TEST_MODE", "GOPIAI_CONVERSATIONS_DIR",
+            "GOPIAI_TEST_MODE", "GOPIAI_CONVERSATIONS_DIR",
             "GOPIAI_MEMORY_DIR", "GOPIAI_LOGS_DIR", "GOPIAI_CACHE_DIR",
             "GOPIAI_CONFIG_DIR", "CREWAI_TEST_MODE", "TXTAI_TEST_MODE",
             "DATABASE_URL", "TXTAI_INDEX_PATH", "QT_QPA_PLATFORM", "DISPLAY"
@@ -843,10 +798,8 @@ class ServiceManager:
         # Create test .env file
         test_env_content = """
 # Test Environment Configuration
-GOPIAI_ENV=test
 GOPIAI_TEST_MODE=true
 CREWAI_TEST_MODE=true
-TXTAI_TEST_MODE=true
 
 # Test API Keys (mock values)
 OPENAI_API_KEY=test_openai_key
@@ -877,17 +830,13 @@ USE_MOCK_RESPONSES=true
         
         # Check environment variables
         required_env_vars = [
-            "GOPIAI_ENV",
             "GOPIAI_TEST_MODE", 
             "GOPIAI_CONVERSATIONS_DIR",
             "GOPIAI_MEMORY_DIR"
         ]
         
         for var in required_env_vars:
-            if os.environ.get(var) != "test" and var == "GOPIAI_ENV":
-                self.logger.error(f"Environment variable {var} not set to 'test'")
-                return False
-            elif var != "GOPIAI_ENV" and not os.environ.get(var):
+            if not os.environ.get(var):
                 self.logger.error(f"Environment variable {var} not set")
                 return False
         
@@ -935,10 +884,10 @@ USE_MOCK_RESPONSES=true
         
         # Clean up test-specific environment variables
         test_env_vars = [
-            "GOPIAI_ENV", "GOPIAI_TEST_MODE", "GOPIAI_CONVERSATIONS_DIR",
+            "GOPIAI_TEST_MODE", "GOPIAI_CONVERSATIONS_DIR",
             "GOPIAI_MEMORY_DIR", "GOPIAI_LOGS_DIR", "GOPIAI_CACHE_DIR",
-            "GOPIAI_CONFIG_DIR", "CREWAI_TEST_MODE", "TXTAI_TEST_MODE",
-            "DATABASE_URL", "TXTAI_INDEX_PATH", "USE_MOCK_RESPONSES",
+            "GOPIAI_CONFIG_DIR", "CREWAI_TEST_MODE",
+            "DATABASE_URL", "USE_MOCK_RESPONSES",
             "ENABLE_EXTERNAL_APIS", "FLASK_ENV"
         ]
         

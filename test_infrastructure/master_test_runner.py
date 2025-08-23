@@ -29,7 +29,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed, Future
 import queue
 import random
 
-from test_discovery import TestDiscovery, TestCategory, TestEnvironment
+from test_discovery import TestDiscovery, TestCategory
 from problem_discovery import ProblemDiscovery
 
 # Try to import service manager, but handle gracefully if not available
@@ -74,7 +74,6 @@ class TestExecution:
     """Represents a test execution result."""
     module: str
     category: str
-    environment: str
     command: str
     result: TestResult
     duration: float
@@ -130,25 +129,6 @@ class MasterTestRunner:
         
         # Test prioritization mapping
         self.priority_mapping = self._create_priority_mapping()
-        
-        # Environment configurations
-        self.env_configs = {
-            TestEnvironment.CREWAI_ENV: {
-                "venv_path": self.root_path / "GopiAI-CrewAI" / "crewai_env",
-                "python_path": self.root_path / "GopiAI-CrewAI" / "crewai_env" / "Scripts" / "python.exe",
-                "activate_script": self.root_path / "GopiAI-CrewAI" / "crewai_env" / "Scripts" / "activate.bat",
-            },
-            TestEnvironment.GOPIAI_ENV: {
-                "venv_path": self.root_path / "gopiai_env",
-                "python_path": self.root_path / "gopiai_env" / "Scripts" / "python.exe",
-                "activate_script": self.root_path / "gopiai_env" / "Scripts" / "activate.bat",
-            },
-            TestEnvironment.TXTAI_ENV: {
-                "venv_path": self.root_path / "txtai_env",
-                "python_path": self.root_path / "txtai_env" / "Scripts" / "python.exe",
-                "activate_script": self.root_path / "txtai_env" / "Scripts" / "activate.bat",
-            }
-        }
     
     def _create_priority_mapping(self) -> Dict[str, TestPriority]:
         """Create mapping of test patterns to priorities."""
@@ -227,8 +207,7 @@ class MasterTestRunner:
         # Filter tests if specified
         if categories:
             test_modules = [m for m in test_modules if m.category in categories]
-        if environments:
-            test_modules = [m for m in test_modules if m.environment in environments]
+        
         
         self.logger.info(f"🎯 Running {len(test_modules)} test modules after filtering")
         
@@ -256,38 +235,29 @@ class MasterTestRunner:
         """Create an execution plan with priorities and dependencies."""
         execution_plan = []
         
-        # Group tests by environment for efficient execution
-        env_groups = {}
-        for module in test_modules:
-            if module.environment not in env_groups:
-                env_groups[module.environment] = []
-            env_groups[module.environment].append(module)
+        # Group tests by GopiAI module for efficient execution
+        module_groups = {}
+        for test_module in test_modules:
+            gopiai_module = test_module.module_name
+            if gopiai_module not in module_groups:
+                module_groups[gopiai_module] = []
+            module_groups[gopiai_module].append(test_module)
         
-        # Create execution tasks
-        for environment, modules in env_groups.items():
-            # Group modules by GopiAI module for efficient execution
-            module_groups = {}
-            for test_module in modules:
-                gopiai_module = test_module.module_name
-                if gopiai_module not in module_groups:
-                    module_groups[gopiai_module] = []
-                module_groups[gopiai_module].append(test_module)
+        # Create tasks for each module/category combination
+        for gopiai_module, test_modules_list in module_groups.items():
+            category_groups = {}
+            for test_module in test_modules_list:
+                category = test_module.category
+                if category not in category_groups:
+                    category_groups[category] = []
+                category_groups[category].append(test_module)
             
-            # Create tasks for each module/category combination
-            for gopiai_module, test_modules_list in module_groups.items():
-                category_groups = {}
-                for test_module in test_modules_list:
-                    category = test_module.category
-                    if category not in category_groups:
-                        category_groups[category] = []
-                    category_groups[category].append(test_module)
+            for category, modules_in_category in category_groups.items():
+                priority = self._determine_test_priority(gopiai_module, category.value)
+                dependencies = self._determine_dependencies(gopiai_module, category.value)
                 
-                for category, modules_in_category in category_groups.items():
-                    priority = self._determine_test_priority(gopiai_module, category.value)
-                    dependencies = self._determine_dependencies(gopiai_module, category.value)
-                    
-                    task = (gopiai_module, category.value, environment.value, priority, dependencies)
-                    execution_plan.append(task)
+                task = (gopiai_module, category.value, priority, dependencies)
+                execution_plan.append(task)
         
         # Sort by priority if enabled
         if prioritize:
@@ -332,7 +302,7 @@ class MasterTestRunner:
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             # Submit initial tasks that have no dependencies
             for task in execution_plan:
-                module, category, environment, priority, dependencies = task
+                module, category, priority, dependencies = task
                 
                 if not dependencies or all(dep in completed_tasks for dep in dependencies):
                     future = executor.submit(self._execute_test_task, module, category, environment, priority)
@@ -360,7 +330,7 @@ class MasterTestRunner:
                             if (r_task_key not in completed_tasks and 
                                 all(dep in completed_tasks for dep in r_dependencies)):
                                 
-                                future = executor.submit(self._execute_test_task, r_module, r_category, r_environment, r_priority)
+                                future = executor.submit(self._execute_test_task, r_module, r_category, r_priority)
                                 task_futures[future] = remaining_task
                         
                         # Handle retry if test failed and retry is enabled
@@ -382,7 +352,7 @@ class MasterTestRunner:
             progress_made = False
             
             for task in execution_plan:
-                module, category, environment, priority, dependencies = task
+                module, category, priority, dependencies = task
                 task_key = f"{module}:{category}"
                 
                 if task_key in completed_tasks:
@@ -455,32 +425,11 @@ class MasterTestRunner:
         # Add retry executions to main results
         self.executions.extend(retry_executions)
     
-    def _execute_test_task(self, module: str, category: str, environment: str, 
-                          priority: TestPriority, retry_count: int = 0) -> TestExecution:
+    def _execute_test_task(self, module: str, category: str, priority: TestPriority, retry_count: int = 0) -> TestExecution:
         """Execute a single test task with enhanced error handling."""
         self.logger.info(f"🧪 Executing {module}:{category} (priority: {priority.name}, retry: {retry_count})")
         
-        env_config = self.env_configs[TestEnvironment(environment)]
-        
-        # Check if environment exists
-        if not env_config["venv_path"].exists():
-            self.logger.error(f"❌ Environment {environment} not found at {env_config['venv_path']}")
-            return TestExecution(
-                module=module,
-                category=category,
-                environment=environment,
-                command="",
-                result=TestResult.ERROR,
-                duration=0.0,
-                output="",
-                error_output=f"Environment {environment} not found",
-                exit_code=-1,
-                retry_count=retry_count,
-                priority=priority
-            )
-        
-        # Build pytest command
-        python_exe = env_config["python_path"]
+        python_exe = sys.executable
         module_path = self.root_path / module
         
         if not module_path.exists():
@@ -632,7 +581,6 @@ class MasterTestRunner:
         """Run UI tests with optional component filtering."""
         return self.run_all_tests(
             categories=[TestCategory.UI],
-            environments=[TestEnvironment.GOPIAI_ENV],
             **kwargs
         )
 
@@ -677,8 +625,7 @@ class MasterTestRunner:
                 "total_duration": sum(e.duration for e in self.executions),
                 "by_result": {},
                 "by_module": {},
-                "by_category": {},
-                "by_environment": {}
+                "by_category": {}
             },
             "executions": []
         }
@@ -687,6 +634,7 @@ class MasterTestRunner:
         for execution in self.executions:
             exec_dict = asdict(execution)
             exec_dict["result"] = execution.result.value
+            exec_dict["priority"] = execution.priority.name
             report["executions"].append(exec_dict)
         
         # Calculate summary statistics
@@ -703,9 +651,7 @@ class MasterTestRunner:
             category = execution.category
             report["summary"]["by_category"][category] = report["summary"]["by_category"].get(category, 0) + 1
             
-            # By environment
-            environment = execution.environment
-            report["summary"]["by_environment"][environment] = report["summary"]["by_environment"].get(environment, 0) + 1
+            
         
         # Write report
         report_file = "test_execution_report.json"
@@ -792,17 +738,7 @@ class MasterTestRunner:
             elif execution.result in [TestResult.FAILED, TestResult.ERROR]:
                 summary["by_priority"][priority]["failed"] += 1
         
-        # Calculate statistics by environment
-        for execution in self.executions:
-            env = execution.environment
-            if env not in summary["by_environment"]:
-                summary["by_environment"][env] = {"total": 0, "passed": 0, "failed": 0}
-            
-            summary["by_environment"][env]["total"] += 1
-            if execution.result == TestResult.PASSED:
-                summary["by_environment"][env]["passed"] += 1
-            elif execution.result in [TestResult.FAILED, TestResult.ERROR]:
-                summary["by_environment"][env]["failed"] += 1
+        
         
         # Calculate statistics by category
         for execution in self.executions:
@@ -840,8 +776,6 @@ Examples:
     test_group.add_argument("--all", action="store_true", help="Run all tests")
     test_group.add_argument("--category", choices=["unit", "integration", "ui", "e2e", "performance", "security"],
                            help="Run tests of specific category")
-    test_group.add_argument("--environment", choices=["crewai_env", "gopiai_env", "txtai_env"],
-                           help="Run tests in specific environment")
     test_group.add_argument("--priority-only", action="store_true", 
                            help="Run only critical and high priority tests")
     
@@ -941,7 +875,6 @@ Examples:
         # Run tests
         summary = runner.run_all_tests(
             categories=categories,
-            environments=environments,
             parallel=parallel,
             prioritize=prioritize,
             enable_retry=enable_retry,

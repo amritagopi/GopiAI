@@ -1,1 +1,0 @@
-Manual install mcp-use in crewai_env: call GopiAI-CrewAI/crewai_env/Scripts/activate.bat && pip install mcp-use

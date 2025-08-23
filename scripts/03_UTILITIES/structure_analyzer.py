@@ -59,9 +59,6 @@ class StructureAnalyzer(BaseAnalyzer):
         '.git': 'vcs',
         '.vscode': 'config',
         '.windsurf': 'config',
-        'gopiai_env': 'environment',
-        'crewai_env': 'environment',
-        'txtai_env': 'environment',
         'potential_conflicts': 'temporary',
         'project_health': 'analysis',
         'rag_memory_system': 'legacy'

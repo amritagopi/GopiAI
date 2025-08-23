@@ -84,12 +84,7 @@ if not exist "..\project_health\reports" (
 )
 
 REM Activate the Python environment if available
-if exist "..\gopiai_env\Scripts\activate.bat" (
-    echo Activating gopiai_env environment...
-    call ..\gopiai_env\Scripts\activate.bat
-) else (
-    echo Warning: gopiai_env not found, using system Python
-)
+
 
 echo.
 echo Running Project Cleanup Analyzer...
@@ -116,9 +111,7 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 REM Deactivate the Python environment if it was activated
-if exist "..\gopiai_env\Scripts\activate.bat" (
-    call deactivate
-)
+
 
 echo.
 echo Press any key to exit...

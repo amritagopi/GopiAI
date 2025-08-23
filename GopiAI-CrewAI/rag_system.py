@@ -25,36 +25,12 @@ if TYPE_CHECKING:
 else:
     EmbeddingsType = Any
 
-# Путь к интерпретатору txtai_env и воркеру
-# Предпочитаем переменную окружения TXTAI_PYTHON, затем стандартные пути txtai_env, иначе fallback на текущий интерпретатор
+
 import sys
 
 def _resolve_txtai_python() -> Path:
-    # 1) Явная переменная окружения
-    env_path = os.environ.get("TXTAI_PYTHON")
-    if env_path:
-        p = Path(env_path)
-        if p.exists():
-            logger.info(f"Using TXTAI_PYTHON from env: {p}")
-            return p
-        else:
-            logger.warning(f"TXTAI_PYTHON set but not found: {p}")
-
-    # 2) Попытка определить стандартный путь GOPI_AI_MODULES/txtai_env
-    root = os.environ.get("GOPI_AI_ROOT", r"C:\\Users\\crazy\\GOPI_AI_MODULES")
-    # Windows Scripts/python.exe, POSIX bin/python
-    if os.name == 'nt':
-        candidate = Path(root) / "txtai_env" / "Scripts" / "python.exe"
-    else:
-        candidate = Path(root) / "txtai_env" / "bin" / "python"
-    if candidate.exists():
-        logger.info(f"Using txtai_env python: {candidate}")
-        return candidate
-
-    # 3) Fallback: текущий интерпретатор (может не содержать txtai)
-    fallback = Path(sys.executable)
-    logger.warning(f"txtai_env python not found, falling back to current interpreter: {fallback}")
-    return fallback
+    # Always use the current interpreter
+    return Path(sys.executable)
 
 TXTAI_PYTHON = _resolve_txtai_python()
 WORKER_PATH = Path(__file__).with_name("rag_worker.py")
@@ -72,7 +48,7 @@ class _WorkerProc:
             if self.proc and self.proc.poll() is None:
                 return True
             if not self.python_path.exists():
-                logger.error(f"txtai_env python not found: {self.python_path}")
+                
                 return False
             if not self.worker_script.exists():
                 logger.error(f"rag_worker.py not found: {self.worker_script}")
@@ -166,7 +142,7 @@ class _WorkerProc:
 
 class RAGSystem:
     """
-    Proxy RAG system: API совместимо, но операции выполняются в отдельном процессе (txtai_env).
+    Proxy RAG system: API compatible, operations are performed in a separate process.
     """
     _instance: Optional['RAGSystem'] = None
 

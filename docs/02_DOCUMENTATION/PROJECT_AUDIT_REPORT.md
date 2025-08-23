@@ -100,12 +100,8 @@ project_health/reports/health_check_report_20250623_225708.md
 */ОБЩАЯ ИНФОРМАЦИЯ О ПРОЕКТЕ/О_ПРОЕКТЕ.md
 ```
 
-### ⚠️ УСЛОВНОЕ УДАЛЕНИЕ (после проверки)
-
-#### Старые конфигурации:
+#### Старые снапшоты:
 ```bash
-GopiAI-CrewAI/crewai_env/Scripts/*        # Виртуальное окружение
-.sonarlint/connectedMode.json             # Старые настройки SonarLint
 .snapshots/snapshot-2025-06-23*          # Старые снапшоты
 ```
 

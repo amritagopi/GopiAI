@@ -76,7 +76,8 @@ class AgentsTab(QWidget):
     
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.api_base = "http://localhost:5051"
+        from gopiai.ui.utils.network import get_crewai_server_base_url
+        self.api_base = get_crewai_server_base_url()
         self.agents_data = []
         self.attached_agents = []
         self.attached_flow = None

@@ -58,7 +58,7 @@ Tests multi-user scenarios:
 1. **Service Dependencies**: Ensure all required services can be started:
    - CrewAI server (GopiAI-CrewAI)
    - Memory system (txtai)
-   - Required Python environments (crewai_env, gopiai_env, txtai_env)
+   
 
 2. **Environment Setup**: The tests will automatically set up test isolation, but ensure:
    - All virtual environments are properly configured
@@ -219,7 +219,7 @@ Check service logs for detailed error information:
 ### Environment Variables
 
 Key environment variables for E2E tests:
-- `GOPIAI_ENV=test` - Enables test mode
+
 - `GOPIAI_TEST_MODE=true` - Additional test mode flag
 - `CREWAI_TEST_MODE=true` - CrewAI test mode
 - `TXTAI_TEST_MODE=true` - Memory system test mode

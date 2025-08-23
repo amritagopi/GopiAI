@@ -13,12 +13,6 @@
 - **Web APIs**: FastAPI, Flask, uvicorn
 - **NLP**: spaCy, transformers, tiktoken
 
-## Virtual Environments
-The project uses three isolated environments:
-1. **crewai_env**: CrewAI server and AI orchestration
-2. **gopiai_env**: Main UI application 
-3. **txtai_env**: Legacy RAG/memory system (deprecated in v2.0+)
-
 ## Common Commands
 
 ### Development Startup
@@ -29,14 +23,6 @@ The project uses three isolated environments:
 # Individual services
 ./start_gopiai_ui.bat          # UI application
 ./start_crewai_api_server.bat  # CrewAI API server
-```
-
-### Environment Management
-```bash
-# Activate environments (Windows)
-call crewai_env\Scripts\activate.bat
-call gopiai_env\Scripts\activate.bat
-call txtai_env\Scripts\activate.bat
 ```
 
 ### Module Installation

@@ -78,10 +78,6 @@ python run_all_tests.py --max-retries 5 --retry-delay 2.0
 # Disable test prioritization
 python run_all_tests.py --no-prioritize
 
-# Environment-specific testing
-python run_all_tests.py --env crewai_env
-```
-
 ### Discovery and Reporting
 
 ```bash

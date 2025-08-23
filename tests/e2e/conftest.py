@@ -82,7 +82,6 @@ def e2e_test_session():
     # Set test environment variables
     original_env = os.environ.copy()
     test_env_vars = {
-        "GOPIAI_ENV": "test",
         "GOPIAI_TEST_MODE": "true",
         "CREWAI_TEST_MODE": "true",
         "TXTAI_TEST_MODE": "true",
@@ -370,8 +369,4 @@ def pytest_runtest_setup(item):
         if os.environ.get("CI") and not os.environ.get("E2E_TESTS_ENABLED"):
             pytest.skip("E2E tests disabled in CI environment")
         
-        # Check for required environment variables
-        required_env_vars = ["GOPIAI_ENV"]
-        missing_vars = [var for var in required_env_vars if not os.environ.get(var)]
-        if missing_vars:
-            pytest.skip(f"Missing required environment variables: {missing_vars}")
+        

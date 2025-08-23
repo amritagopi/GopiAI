@@ -23,13 +23,13 @@ from dotenv import load_dotenv
 
 def _load_env_multi():
     """Поддержка загрузки .env из типичных путей, чтобы .exe работал "из коробки".
-    Приоритет: GOPIAI_ENV_PATH (файл/директория) → CWD → script dir → parent → exe dir.
+    Приоритет: CWD → script dir → parent → exe dir.
     Каждая найденная .env загружается с override=True.
     """
     candidates = []
 
     # 1) Явный путь
-    custom = os.getenv('GOPIAI_ENV_PATH')
+    
     if custom:
         p = Path(custom)
         if p.is_file():

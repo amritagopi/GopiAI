@@ -154,13 +154,15 @@ class ChatAsyncHandler(QObject):
             if not is_available:
                 print("[DEBUG-ASYNC-BG-ERROR] CrewAI API недоступен!")
                 logger.error("[ASYNC-ERROR] CrewAI API недоступен!")
+                from gopiai.ui.utils.network import get_crewai_server_base_url
+                base_url = get_crewai_server_base_url()
                 error_message = {
-                    "response": "**Ошибка подключения к серверу**\n\n"
-                               "Сервер CrewAI в настоящее время недоступен. Пожалуйста, убедитесь, что:\n\n"
-                               "1. Сервер CrewAI запущен и работает\n"
-                               "2. Сервер доступен по адресу http://127.0.0.1:5051\n"
-                               "3. Нет проблем с сетевыми настройками\n\n"
-                               "Вы можете перезапустить сервер с помощью скрипта `start_auto_development.bat`."
+                    "response": f"**Ошибка подключения к серверу**\n\n"
+                               f"Сервер CrewAI в настоящее время недоступен. Пожалуйста, убедитесь, что:\n\n"
+                               f"1. Сервер CrewAI запущен и работает\n"
+                               f"2. Сервер доступен по адресу {base_url}\n"
+                               f"3. Нет проблем с сетевыми настройками\n\n"
+                               f"Вы можете перезапустить сервер с помощью скрипта `start_linux.sh`."
                 }
                 self.message_error.emit(error_message.get("response", "Ошибка сервера"))
                 return

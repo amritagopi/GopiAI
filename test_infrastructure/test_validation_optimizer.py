@@ -40,7 +40,7 @@ class TestPerformanceMetrics:
     """Performance metrics for test execution."""
     test_name: str
     category: str
-    environment: str
+    
     execution_time: float
     memory_usage_mb: float
     cpu_usage_percent: float
@@ -140,7 +140,7 @@ class TestSystemValidator:
             # Compile validation result
             validation_result.total_tests_run = len(test_results)
             validation_result.validation_success = (
-                discovery_valid and env_valid and service_valid and 
+                discovery_valid and service_valid and 
                 len([r for r in test_results if r.success]) > len(test_results) * 0.8
             )
             validation_result.performance_score = performance_analysis['overall_score']
@@ -188,41 +188,7 @@ class TestSystemValidator:
             self.logger.error(f"Test discovery validation failed: {e}")
             return False
     
-    def _validate_test_environments(self) -> bool:
-        """Validate test environments are properly configured."""
-        environments = [TestEnvironment.GOPIAI_ENV, TestEnvironment.CREWAI_ENV, TestEnvironment.TXTAI_ENV]
-        valid_envs = 0
-        
-        for env in environments:
-            env_path = self.project_root / env.value
-            
-            if env_path.exists():
-                # Check for Python executable
-                python_exe = env_path / "Scripts" / "python.exe"  # Windows
-                if not python_exe.exists():
-                    python_exe = env_path / "bin" / "python"  # Unix
-                
-                if python_exe.exists():
-                    # Test Python execution
-                    try:
-                        result = subprocess.run([str(python_exe), "--version"], 
-                                              capture_output=True, text=True, timeout=10)
-                        if result.returncode == 0:
-                            valid_envs += 1
-                            self.logger.info(f"✅ Environment {env.value} valid: {result.stdout.strip()}")
-                        else:
-                            self.logger.warning(f"⚠️ Environment {env.value} Python not working")
-                    except Exception as e:
-                        self.logger.warning(f"⚠️ Environment {env.value} test failed: {e}")
-                else:
-                    self.logger.warning(f"⚠️ Environment {env.value} missing Python executable")
-            else:
-                self.logger.warning(f"⚠️ Environment {env.value} directory not found")
-        
-        env_validity = valid_envs / len(environments)
-        self.logger.info(f"🌍 Environment validation: {valid_envs}/{len(environments)} valid ({env_validity:.1%})")
-        
-        return env_validity >= 0.67  # At least 2/3 environments should be valid
+    
     
     def _run_validation_tests(self, config: OptimizationConfig) -> List[TestPerformanceMetrics]:
         """Run comprehensive validation tests with performance monitoring."""
@@ -269,7 +235,6 @@ class TestSystemValidator:
                     metrics = TestPerformanceMetrics(
                         test_name=f"validation_{category.value}",
                         category=category.value,
-                        environment="mixed",
                         execution_time=category_duration,
                         memory_usage_mb=0.0,  # Will be filled by resource monitor
                         cpu_usage_percent=0.0,  # Will be filled by resource monitor
@@ -288,7 +253,6 @@ class TestSystemValidator:
                     metrics = TestPerformanceMetrics(
                         test_name=f"validation_{category.value}",
                         category=category.value,
-                        environment="mixed",
                         execution_time=time.time() - category_start,
                         memory_usage_mb=0.0,
                         cpu_usage_percent=0.0,
@@ -627,7 +591,7 @@ class TestExecutionOptimizer:
                         'name': m.module_name,
                         'path': str(m.path),
                         'category': m.category.value,
-                        'environment': m.environment.value
+                        
                     }
                     for m in test_modules
                 ]
@@ -712,16 +676,16 @@ class TestExecutionOptimizer:
             discovery = TestDiscovery(str(self.project_root))
             test_modules = discovery.discover_all_tests()
             
-            # Group by environment and category
-            env_groups = {}
+            # Group by category
+            category_groups = {}
             for module in test_modules:
-                key = f"{module.environment.value}_{module.category.value}"
-                if key not in env_groups:
-                    env_groups[key] = []
-                env_groups[key].append(module)
+                key = module.category.value
+                if key not in category_groups:
+                    category_groups[key] = []
+                category_groups[key].append(module)
             
             # Create parallel groups
-            for group_name, modules in env_groups.items():
+            for group_name, modules in category_groups.items():
                 if len(modules) > 1:  # Only create groups with multiple modules
                     groups.append({
                         'name': group_name,
@@ -1374,8 +1338,7 @@ def main():
     )
     
     config = OptimizationConfig(
-        max_parallel_workers=args.max_workers,
-        memory_threshold_mb=args.memory_threshold
+        max_parallel_workers=args.max_workers
     )
     
     if args.all or args.validate:

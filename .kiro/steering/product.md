@@ -14,7 +14,6 @@ GopiAI is a modular AI desktop application with extensible architecture supporti
 - **Desktop-Native**: PySide6 GUI application, not web-based
 
 ## Architecture Patterns
-- **Multi-Environment**: Isolated Python virtual environments (crewai_env, gopiai_env, txtai_env)
 - **API-First**: Internal communication via REST APIs (CrewAI server on port 5051)
 - **Event-Driven**: Asynchronous communication between UI and backend services
 - **Embedded Memory**: v2.0+ uses embedded txtai, no separate RAG server required

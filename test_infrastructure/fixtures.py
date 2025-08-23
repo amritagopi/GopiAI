@@ -139,7 +139,7 @@ def mock_env_vars():
         "ANTHROPIC_API_KEY": "test-anthropic-key",
         "GOOGLE_API_KEY": "test-google-key",
         "CREWAI_API_URL": "http://localhost:5051",
-        "GOPIAI_ENV": "test"
+        
     }
     
     os.environ.update(test_env)

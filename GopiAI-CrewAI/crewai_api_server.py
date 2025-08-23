@@ -432,7 +432,7 @@ def process_task(task_id: str):
 
     try:
         task.start_processing()
-        logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'message': task.message})
+        logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
         
         response_data = smart_delegator_instance.process_request(
             message=task.message,
@@ -953,7 +953,8 @@ if __name__ == '__main__':
         base_port = int(env_port) if env_port else int(PORT)
     except Exception:
         base_port = int(PORT)
-    selected_port = _find_available_port(base_port, max_tries=20)
+    # selected_port = _find_available_port(base_port, max_tries=20)
+    selected_port = base_port
     if selected_port != base_port:
         logger.warning(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")
         print(f"[STARTUP] Порт {base_port} занят. Переключаемся на {selected_port}")

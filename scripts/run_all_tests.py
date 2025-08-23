@@ -131,7 +131,7 @@ Examples:
     
     # Environment selection
     env_group = parser.add_argument_group('Environment Options')
-    env_group.add_argument('--env', choices=['crewai_env', 'gopiai_env', 'txtai_env'],
+    env_group.add_argument('--env', choices=['.venv'],
                           help='Run tests in specific environment only')
     
     # Advanced options

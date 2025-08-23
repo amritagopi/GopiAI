@@ -48,8 +48,7 @@ Examples:
   python run_tests.py --performance            # Run only performance tests
   python run_tests.py --security               # Run only security tests
   
-  python run_tests.py --env crewai_env          # Run tests in CrewAI environment
-  python run_tests.py --env gopiai_env          # Run tests in GopiAI environment
+  python run_tests.py --env .venv          # Run tests in environment
   
   python run_tests.py --module GopiAI-UI        # Run tests for specific module
   python run_tests.py --discover-problems      # Run problem discovery only
@@ -78,7 +77,7 @@ Examples:
     
     # Environment options
     env_group = parser.add_argument_group('Environment Options')
-    env_group.add_argument('--env', choices=['crewai_env', 'gopiai_env', 'txtai_env'],
+    env_group.add_argument('--env', choices=['.venv'],
                           help='Run tests in specific environment')
     
     # Module options

@@ -207,8 +207,7 @@ def main():
             '*/BraveSoftware/*', '*/Google/Chrome/*', '*/Microsoft/Edge/*',
             '*/Mozilla/Firefox/*', '*/Opera/*', '*/Safari/*',
             # Исключаем виртуальные окружения проекта
-            'gopiai_env/*', 'txtai_env/*', 'crewai_env/*',
-            'GopiAI-CrewAI/crewai_env/*'
+            '*/.venv/*',
         ]
     )
     

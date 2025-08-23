@@ -227,13 +227,8 @@ class E2ETestRunner:
                 }
             
             # Check Python environments
-            environments = ["crewai_env", "gopiai_env", "txtai_env"]
-            for env in environments:
-                python_exe = self.service_manager._get_environment_python(env)
-                validation_results["dependencies"][env] = {
-                    "python_available": python_exe is not None and python_exe.exists() if python_exe else False,
-                    "path": str(python_exe) if python_exe else None
-                }
+            # No longer checking specific Python environments as they are managed by the system
+            validation_results["dependencies"] = {"status": "not_applicable", "message": "Python environments are managed by the system."}
             
             # Generate recommendations
             if not validation_results["test_isolation"]:

@@ -29,7 +29,7 @@ import psutil
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from master_test_runner import MasterTestRunner, TestCategory, TestEnvironment
+    from master_test_runner import MasterTestRunner, TestCategory
     from test_discovery import TestDiscovery
     from test_performance_monitor import TestPerformanceMonitor
     from service_manager import ServiceManager
@@ -138,7 +138,7 @@ class SystemValidator:
             validation_result.tests_failed = validation_result.total_tests_run - validation_result.tests_passed
             validation_result.execution_time_seconds = time.time() - start_time
             validation_result.validation_success = (
-                discovery_valid and env_valid and service_valid and 
+                discovery_valid and service_valid and 
                 validation_result.tests_passed > validation_result.total_tests_run * 0.8
             )
             validation_result.performance_score = performance_analysis['overall_score']
@@ -377,31 +377,7 @@ class SystemValidator:
             self.logger.error(f"Test discovery validation failed: {e}")
             return False
     
-    def _validate_environments(self) -> bool:
-        """Validate test environments are properly configured."""
-        environments = [TestEnvironment.GOPIAI_ENV, TestEnvironment.CREWAI_ENV, TestEnvironment.TXTAI_ENV]
-        valid_envs = 0
-        
-        for env in environments:
-            env_path = self.project_root / env.value
-            
-            if env_path.exists():
-                python_exe = env_path / "Scripts" / "python.exe"
-                if not python_exe.exists():
-                    python_exe = env_path / "bin" / "python"
-                
-                if python_exe.exists():
-                    try:
-                        result = subprocess.run([str(python_exe), "--version"], 
-                                              capture_output=True, text=True, timeout=10)
-                        if result.returncode == 0:
-                            valid_envs += 1
-                            self.logger.info(f"✅ Environment {env.value} valid")
-                    except Exception as e:
-                        self.logger.warning(f"⚠️ Environment {env.value} test failed: {e}")
-        
-        env_validity = valid_envs / len(environments)
-        return env_validity >= 0.67
+    
     
     def _run_real_data_validation(self) -> List[Dict]:
         """Run comprehensive validation tests with real project data."""
@@ -768,21 +744,16 @@ class SystemValidator:
         # Analyze test characteristics
         test_modules = self.test_discovery.discover_all_tests()
         
-        # Count tests by category and environment
+        # Count tests by category
         category_counts = {}
-        env_counts = {}
         
         for module in test_modules:
             category = module.category.value
-            environment = module.environment.value
             
             category_counts[category] = category_counts.get(category, 0) + 1
-            env_counts[environment] = env_counts.get(environment, 0) + 1
         
         # Determine best distribution strategy
-        if len(env_counts) > 1 and max(env_counts.values()) > len(test_modules) * 0.6:
-            return "environment_based"
-        elif len(category_counts) > 1 and max(category_counts.values()) > len(test_modules) * 0.6:
+        if len(category_counts) > 1 and max(category_counts.values()) > len(test_modules) * 0.6:
             return "category_based"
         else:
             return "round_robin"
@@ -907,7 +878,7 @@ class SystemValidator:
                     timestamp TEXT NOT NULL,
                     test_name TEXT NOT NULL,
                     category TEXT,
-                    environment TEXT,
+                    
                     execution_time REAL,
                     memory_usage_mb REAL,
                     cpu_usage_percent REAL,

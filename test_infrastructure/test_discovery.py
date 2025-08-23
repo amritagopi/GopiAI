@@ -28,11 +28,7 @@ class TestCategory(Enum):
     SECURITY = "security"
 
 
-class TestEnvironment(Enum):
-    """Test environments for GopiAI modules."""
-    CREWAI_ENV = "crewai_env"
-    GOPIAI_ENV = "gopiai_env"
-    TXTAI_ENV = "txtai_env"
+
 
 
 @dataclass
@@ -41,7 +37,6 @@ class TestModule:
     file_path: str
     module_name: str
     category: TestCategory
-    environment: TestEnvironment
     test_functions: List[str]
     dependencies: List[str]
     markers: List[str]
@@ -54,7 +49,6 @@ class TestSuite:
     """Represents a collection of test modules."""
     name: str
     category: TestCategory
-    environment: TestEnvironment
     modules: List[TestModule]
     setup_requirements: List[str]
     total_tests: int = 0
@@ -70,14 +64,7 @@ class TestDiscovery:
         self.test_suites: List[TestSuite] = []
         self.logger = logging.getLogger(__name__)
         
-        # Module to environment mapping
-        self.module_environments = {
-            "GopiAI-Core": TestEnvironment.GOPIAI_ENV,
-            "GopiAI-UI": TestEnvironment.GOPIAI_ENV,
-            "GopiAI-CrewAI": TestEnvironment.CREWAI_ENV,
-            "GopiAI-Assets": TestEnvironment.GOPIAI_ENV,
-            "test_infrastructure": TestEnvironment.GOPIAI_ENV,
-        }
+        
         
         # Test category patterns
         self.category_patterns = {
@@ -190,8 +177,7 @@ class TestDiscovery:
         # Determine test category
         category = self._determine_test_category(file_path)
         
-        # Determine environment
-        environment = self.module_environments.get(module_name, TestEnvironment.GOPIAI_ENV)
+        
         
         # Determine service requirements
         requires_services = self._determine_service_requirements(content, dependencies)
@@ -200,7 +186,7 @@ class TestDiscovery:
             file_path=str(file_path.relative_to(self.root_path)),
             module_name=module_name,
             category=category,
-            environment=environment,
+            
             test_functions=test_functions,
             dependencies=dependencies,
             markers=markers,
@@ -247,26 +233,20 @@ class TestDiscovery:
         """Create test suites by grouping test modules."""
         self.test_suites = []
         
-        # Group by category and environment
+        # Group by category
         suite_groups = {}
         for module in self.test_modules:
-            key = (module.category, module.environment)
+            key = module.category
             if key not in suite_groups:
                 suite_groups[key] = []
             suite_groups[key].append(module)
         
         # Create test suites
-        for (category, environment), modules in suite_groups.items():
+        for category, modules in suite_groups.items():
             suite_name = f"{category.value}_{environment.value}"
             
             # Determine setup requirements
-            setup_requirements = []
-            if environment == TestEnvironment.CREWAI_ENV:
-                setup_requirements.extend(["crewai_env", "crewai_server"])
-            elif environment == TestEnvironment.GOPIAI_ENV:
-                setup_requirements.extend(["gopiai_env"])
-            elif environment == TestEnvironment.TXTAI_ENV:
-                setup_requirements.extend(["txtai_env", "memory_system"])
+            setup_requirements = ["crewai_server", "memory_system"] # Assuming these are always required
             
             # Add service requirements
             for module in modules:
@@ -280,7 +260,7 @@ class TestDiscovery:
             suite = TestSuite(
                 name=suite_name,
                 category=category,
-                environment=environment,
+                
                 modules=modules,
                 setup_requirements=setup_requirements,
                 total_tests=total_tests
@@ -292,14 +272,12 @@ class TestDiscovery:
         """Get all test modules of a specific category."""
         return [module for module in self.test_modules if module.category == category]
 
-    def get_tests_by_environment(self, environment: TestEnvironment) -> List[TestModule]:
-        """Get all test modules for a specific environment."""
-        return [module for module in self.test_modules if module.environment == environment]
+    
 
-    def get_test_suite(self, category: TestCategory, environment: TestEnvironment) -> Optional[TestSuite]:
+    def get_test_suite(self, category: TestCategory) -> Optional[TestSuite]:
         """Get a specific test suite."""
         for suite in self.test_suites:
-            if suite.category == category and suite.environment == environment:
+            if suite.category == category:
                 return suite
         return None
 
@@ -311,7 +289,6 @@ class TestDiscovery:
                 "total_suites": len(self.test_suites),
                 "total_tests": sum(len(module.test_functions) for module in self.test_modules),
                 "by_category": {},
-                "by_environment": {},
                 "by_module": {}
             },
             "test_modules": [],
@@ -329,7 +306,7 @@ class TestDiscovery:
         for suite in self.test_suites:
             suite_dict = asdict(suite)
             suite_dict["category"] = suite.category.value
-            suite_dict["environment"] = suite.environment.value
+            
             # Convert modules to just file paths to avoid duplication
             suite_dict["modules"] = [module.file_path for module in suite.modules]
             report["test_suites"].append(suite_dict)
@@ -340,9 +317,7 @@ class TestDiscovery:
             category = module.category.value
             report["summary"]["by_category"][category] = report["summary"]["by_category"].get(category, 0) + 1
             
-            # By environment
-            environment = module.environment.value
-            report["summary"]["by_environment"][environment] = report["summary"]["by_environment"].get(environment, 0) + 1
+            
             
             # By module
             module_name = module.module_name
@@ -373,9 +348,7 @@ def main():
     for category, count in report["summary"]["by_category"].items():
         print(f"  {category}: {count}")
     
-    print("\nSummary by environment:")
-    for environment, count in report["summary"]["by_environment"].items():
-        print(f"  {environment}: {count}")
+    
     
     print("\nSummary by module:")
     for module, count in report["summary"]["by_module"].items():

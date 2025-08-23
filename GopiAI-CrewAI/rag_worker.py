@@ -2,7 +2,7 @@
 """
 RAG Worker (out-of-process) for GopiAI-CrewAI.
 
-Runs inside txtai_env. Communicates via stdin/stdout JSON lines:
+
 REQ: {"cmd": "init", "memory_dir": "...", "vectors_dir": "...", "chats_file": "...", "model": "..."}
 REQ: {"cmd": "reindex"}
 REQ: {"cmd": "search", "query": "...", "limit": 3}

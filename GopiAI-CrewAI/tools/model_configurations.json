@@ -4191,7 +4191,7 @@
   },
   "current": {
     "provider": "openrouter",
-    "model_id": "google/gemini-2.0-flash-exp:free"
+    "model_id": "google/gemini-2.5-pro-exp-03-25"
   },
   "version": "1.0",
   "last_updated": "1755692252.4066398"

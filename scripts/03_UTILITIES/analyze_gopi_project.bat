@@ -15,12 +15,7 @@ if not exist "project_cleanup_cli.py" (
 )
 
 REM Активируем окружение Python, если оно доступно
-if exist "..\gopiai_env\Scripts\activate.bat" (
-    echo 🔄 Активация окружения gopiai_env...
-    call ..\gopiai_env\Scripts\activate.bat
-) else (
-    echo ℹ️ Окружение gopiai_env не найдено, используем системный Python
-)
+
 
 echo.
 echo 🔍 Запуск анализа проекта GopiAI...
@@ -39,9 +34,7 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 REM Деактивируем окружение, если оно было активировано
-if exist "..\gopiai_env\Scripts\activate.bat" (
-    call deactivate
-)
+
 
 echo.
 echo Нажмите любую клавишу для выхода...

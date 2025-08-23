@@ -52,7 +52,6 @@ def main():
         exclude_patterns=[
             '*.pyc', '__pycache__', '.git', '.vscode', 'node_modules',
             '*.egg-info', '.pytest_cache', '.tox', 'venv', '*_env',
-            '*/gopiai_env/*', '*/mcp_env/*', '*/txtai_env/*', '*/crewai_env/*',
             '*/site-packages/*', '*/Lib/site-packages/*', '*/lib/python*/site-packages/*',
             # Дополнительные исключения для ускорения анализа
             '*.dll', '*.exe', '*.pyd', '*.so', '*.dylib',

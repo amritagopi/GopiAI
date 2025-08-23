@@ -77,10 +77,11 @@ except Exception:
             raise ImportError("llm_rotation_config.py not found under GopiAI-CrewAI")
 
 # Path to user .env
-ENV_PATH = Path(os.getenv("GOPIAI_ENV_FILE", Path(__file__).resolve().parents[4] / ".env"))
+
 
 # Backend API base URL
-BACKEND_BASE_URL = "http://localhost:5051"
+from gopiai.ui.utils.network import get_crewai_server_base_url
+BACKEND_BASE_URL = get_crewai_server_base_url()
 
 
 class ModelSelectorWidget(QWidget):
