@@ -209,3 +209,4 @@ GopiAI-UI/nul
 GopiAI-CrewAI/memory/chats.json
 /GopiAI-CrewAI/memory
 .aider*
+.kilocode*
