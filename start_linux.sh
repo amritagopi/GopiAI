@@ -27,13 +27,61 @@ source "$VENV_DIR/bin/activate"
 # Добавляем GopiAI-CrewAI в PYTHONPATH для корректного импорта
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI"
 
+# Функция для остановки всех процессов при выходе
+cleanup() {
+    echo -e "\n🛑 Остановка всех процессов..."
+    pkill -f "python.*crewai_api_server.py" 2>/dev/null || true
+    pkill -f "python.*gopiai.ui.main" 2>/dev/null || true
+    echo "✅ Все процессы остановлены"
+    exit 0
+}
+
+# Устанавливаем обработчик сигналов для корректного завершения
+trap cleanup SIGINT SIGTERM
+
+# Запускаем сервер CrewAI в фоновом режиме
+echo "🚀 Запуск сервера CrewAI..."
+cd GopiAI-CrewAI
+python crewai_api_server.py > ../crewai_server.log 2>&1 &
+CREWAI_PID=$!
+cd ..
+
+# Ждем запуска сервера
+echo "⏳ Ожидание запуска сервера CrewAI..."
+for i in {1..30}; do
+    curl -s http://127.0.0.1:5051/api/health > /dev/null 2>&1
+    CURL_EXIT_CODE=$?
+    if [ $CURL_EXIT_CODE -eq 0 ]; then
+        echo "✅ Сервер CrewAI запущен успешно (PID: $CREWAI_PID)"
+        break
+    elif [ $CURL_EXIT_CODE -ne 7 ]; then
+        echo "❌ Ошибка curl при проверке статуса сервера (exit code: $CURL_EXIT_CODE)"
+        echo "Проверьте сетевое соединение или корректность адреса сервера."
+        echo "📋 Логи сервера:"
+        tail -20 crewai_server.log
+        cleanup
+        exit 1
+    fi
+    if [ $i -eq 30 ]; then
+        echo "❌ Сервер CrewAI не запустился за 30 секунд"
+        echo "📋 Логи сервера:"
+        tail -20 crewai_server.log
+        cleanup
+    fi
+    sleep 1
+done
+
 # Запускаем основной UI приложения
-echo "Запуск GopiAI UI..."
+echo "🎨 Запуск GopiAI UI..."
 python -m gopiai.ui.main 2> ui_errors.log || {
-    echo 'Ошибка при запуске UI. Логи сохранены в ui_errors.log'
+    echo '❌ Ошибка при запуске UI. Логи сохранены в ui_errors.log'
     cat ui_errors.log
     echo 'Нажмите Enter для выхода...'
     read
+    cleanup
 }
+
+# Вызываем cleanup при нормальном завершении
+cleanup
 
 echo -e "\n=== Приложение GopiAI завершило работу ===\n"

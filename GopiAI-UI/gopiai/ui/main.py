@@ -15,6 +15,10 @@ import sys
 import os
 import warnings
 import logging
+import subprocess
+import time
+import requests
+import atexit
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, cast
@@ -23,6 +27,93 @@ import chardet
 
 # Исправляем конфликт OpenMP библиотек
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
+# Глобальная переменная для хранения процесса сервера CrewAI
+_crewai_server_process = None
+
+def start_crewai_server():
+    """Запускает сервер CrewAI автоматически"""
+    global _crewai_server_process
+    
+    # Проверяем, не запущен ли уже сервер
+    try:
+        response = requests.get("http://127.0.0.1:5051/api/health", timeout=2)
+        if response.status_code == 200:
+            print("[CREWAI] ✅ Сервер CrewAI уже запущен")
+            return True
+    except requests.exceptions.RequestException:
+        # Сервер не отвечает, это ожидаемое поведение, если он не запущен
+        pass
+    
+    # Ищем путь к серверу CrewAI
+    possible_paths = [
+        Path("GopiAI-CrewAI/crewai_api_server.py"),
+        Path("../GopiAI-CrewAI/crewai_api_server.py"),
+        Path("../../GopiAI-CrewAI/crewai_api_server.py"),
+    ]
+    
+    server_path = None
+    for path in possible_paths:
+        if path.exists():
+            server_path = path.resolve()
+            break
+    
+    if not server_path:
+        print("[CREWAI] ❌ Не найден файл crewai_api_server.py")
+        return False
+    
+    try:
+        print(f"[CREWAI] 🚀 Запуск сервера CrewAI из {server_path}")
+        
+        # Запускаем сервер в фоновом режиме
+        _crewai_server_process = subprocess.Popen(
+            [sys.executable, str(server_path)],
+            cwd=server_path.parent,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        
+        # Ждем запуска сервера (максимум 30 секунд)
+        print("[CREWAI] ⏳ Ожидание запуска сервера...")
+        for i in range(30):
+            try:
+                response = requests.get("http://127.0.0.1:5051/api/health", timeout=1)
+                if response.status_code == 200:
+                    print(f"[CREWAI] ✅ Сервер CrewAI запущен успешно (PID: {_crewai_server_process.pid})")
+                    return True
+            except:
+                pass
+            time.sleep(1)
+        
+        print("[CREWAI] ❌ Сервер CrewAI не запустился за 30 секунд")
+        if _crewai_server_process:
+            _crewai_server_process.terminate()
+            _crewai_server_process = None
+        return False
+        
+    except Exception as e:
+        print(f"[CREWAI] ❌ Ошибка запуска сервера: {e}")
+        return False
+
+def stop_crewai_server():
+    """Останавливает сервер CrewAI"""
+    global _crewai_server_process
+    
+    if _crewai_server_process:
+        print("[CREWAI] 🛑 Остановка сервера CrewAI...")
+        try:
+            _crewai_server_process.terminate()
+            _crewai_server_process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            _crewai_server_process.kill()
+        except:
+            pass
+        _crewai_server_process = None
+        print("[CREWAI] ✅ Сервер CrewAI остановлен")
+
+# Регистрируем функцию остановки сервера при выходе из программы
+atexit.register(stop_crewai_server)
 
 # Собственная функция для загрузки переменных окружения из .env файла
 def load_env_file():
@@ -1131,6 +1222,9 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
 def main():
     """Основная функция запуска приложения"""
     print("[LAUNCH] Запуск модульного GopiAI...")
+
+    # Автоматический запуск сервера CrewAI
+    start_crewai_server()
 
     # Настройка логирования - каждый запуск перезаписывает файл лога
     try:
