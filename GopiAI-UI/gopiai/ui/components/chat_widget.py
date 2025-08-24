@@ -147,6 +147,8 @@ class ChatWidget(QWidget):
         self.history = QTextEdit(self)
         self.history.setObjectName("ChatHistory")
         self.history.setReadOnly(True)
+        # Добавляем обработчик клавиш для области истории
+        self.history.keyPressEvent = self._history_key_press_event
         # Включаем корректные переносы и ограничение ширины
         opt = self.history.document().defaultTextOption()
         opt.setWrapMode(QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere)
@@ -299,6 +301,9 @@ class ChatWidget(QWidget):
         self.input.setPlaceholderText("Введите сообщение...")
         self.input.setObjectName("ChatInput")
         self.input.keyPressEvent = self._input_key_press_event
+        # Устанавливаем фокус на поле ввода и настраиваем политику фокуса
+        self.input.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.input.setFocus()
         bottom_layout.addWidget(self.input, 1)
 
         self._setup_action_buttons(bottom_layout)
@@ -946,10 +951,20 @@ class ChatWidget(QWidget):
         event.acceptProposedAction()
 
     def _input_key_press_event(self, event):
+        """Обработка нажатий клавиш в поле ввода"""
+        # Enter/Return - отправка сообщения (без Shift)
         if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter) and not (event.modifiers() & Qt.KeyboardModifier.ShiftModifier):
             self.send_message()
             event.accept()
-        elif event.key() == Qt.Key.Key_V and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            return
+        
+        # Shift+Enter - новая строка (стандартное поведение QTextEdit)
+        if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter) and (event.modifiers() & Qt.KeyboardModifier.ShiftModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+V - вставка (включая изображения)
+        if event.key() == Qt.Key.Key_V and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
             clipboard = QApplication.clipboard()
             mime = clipboard.mimeData()
             if mime.hasImage():
@@ -959,6 +974,8 @@ class ChatWidget(QWidget):
                     if writer.write(image):
                         self.attached_files.append({'path': tmp.name, 'type': 'image'})
                         self._append_message_with_style('system', 'Image pasted from clipboard')
+                event.accept()
+                return
             elif mime.hasUrls():
                 for url in mime.urls():
                     if url.isLocalFile():
@@ -968,9 +985,82 @@ class ChatWidget(QWidget):
                         att_type = 'image' if ext in ['.png', '.jpg', '.jpeg'] else 'file'
                         self.attached_files.append({'path': path, 'type': att_type})
                         self._append_message_with_style('system', f'{att_type.capitalize()} pasted: {name}')
-            event.accept()
-        else:
+                event.accept()
+                return
+            # Если нет изображений/файлов, выполняем стандартную вставку текста
             QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+C - копирование
+        if event.key() == Qt.Key.Key_C and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+X - вырезание
+        if event.key() == Qt.Key.Key_X and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+A - выделить всё
+        if event.key() == Qt.Key.Key_A and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+Z - отмена
+        if event.key() == Qt.Key.Key_Z and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Ctrl+Y - повтор
+        if event.key() == Qt.Key.Key_Y and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.input, event)
+            return
+        
+        # Все остальные клавиши - стандартная обработка
+        QTextEdit.keyPressEvent(self.input, event)
+
+    def _history_key_press_event(self, event):
+        """Обработка нажатий клавиш в области истории чата"""
+        # Ctrl+C - копирование выделенного текста
+        if event.key() == Qt.Key.Key_C and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.history, event)
+            return
+        
+        # Ctrl+A - выделить всё
+        if event.key() == Qt.Key.Key_A and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.history, event)
+            return
+        
+        # Ctrl+F - поиск (если поддерживается)
+        if event.key() == Qt.Key.Key_F and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            QTextEdit.keyPressEvent(self.history, event)
+            return
+        
+        # Стрелки, Page Up/Down, Home/End - навигация
+        if event.key() in (Qt.Key.Key_Up, Qt.Key.Key_Down, Qt.Key.Key_Left, Qt.Key.Key_Right,
+                          Qt.Key.Key_PageUp, Qt.Key.Key_PageDown, Qt.Key.Key_Home, Qt.Key.Key_End):
+            QTextEdit.keyPressEvent(self.history, event)
+            return
+        
+        # Все остальные клавиши - стандартная обработка для read-only поля
+        QTextEdit.keyPressEvent(self.history, event)
+
+    def keyPressEvent(self, event):
+        """Глобальная обработка клавиш для всего виджета чата"""
+        # Ctrl+Enter - отправка сообщения (альтернативный способ)
+        if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter) and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            self.send_message()
+            event.accept()
+            return
+        
+        # Escape - очистка поля ввода
+        if event.key() == Qt.Key.Key_Escape:
+            self.input.clear()
+            event.accept()
+            return
+        
+        # Передаем обработку родительскому классу
+        super().keyPressEvent(event)
             
     def attach_file(self):
         """Обработчик прикрепления файла"""
