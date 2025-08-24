@@ -49,9 +49,18 @@ cd ..
 # Ждем запуска сервера
 echo "⏳ Ожидание запуска сервера CrewAI..."
 for i in {1..30}; do
-    if curl -s http://127.0.0.1:5051/api/health > /dev/null 2>&1; then
+    curl -s http://127.0.0.1:5051/api/health > /dev/null 2>&1
+    CURL_EXIT_CODE=$?
+    if [ $CURL_EXIT_CODE -eq 0 ]; then
         echo "✅ Сервер CrewAI запущен успешно (PID: $CREWAI_PID)"
         break
+    elif [ $CURL_EXIT_CODE -ne 7 ]; then
+        echo "❌ Ошибка curl при проверке статуса сервера (exit code: $CURL_EXIT_CODE)"
+        echo "Проверьте сетевое соединение или корректность адреса сервера."
+        echo "📋 Логи сервера:"
+        tail -20 crewai_server.log
+        cleanup
+        exit 1
     fi
     if [ $i -eq 30 ]; then
         echo "❌ Сервер CrewAI не запустился за 30 секунд"
