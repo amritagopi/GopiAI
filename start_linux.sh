@@ -15,9 +15,14 @@ if [ ! -d "$VENV_DIR" ]; then
     exit 1
 fi
 
+# Убиваем процессы, использующие порт 5051
+echo "Останавливаем предыдущий экземпляр сервера CrewAI (если запущен)..."
+pkill -f "python3 GopiAI-CrewAI/crewai_api_server.py" || true
+echo "Предыдущий экземпляр остановлен (или не был запущен)."
+
 # Активируем виртуальное окружение
 echo "Активация окружения: $VENV_DIR"
-source "$VENV_DIR/bin/activate"
+source "$VENV_DIR/bin/activate
 
 # Добавляем GopiAI-CrewAI в PYTHONPATH для корректного импорта
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI"

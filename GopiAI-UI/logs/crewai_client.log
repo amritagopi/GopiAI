@@ -1,35 +1,39 @@
-2025-08-24 01:38:18 - INFO - ✅ spaCy и языковые модели успешно загружены
-2025-08-24 01:38:18 - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-24 01:38:18 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
-2025-08-24 01:38:18 - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-24 01:38:18 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
-2025-08-24 01:40:41 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-08-24 01:40:41 - DEBUG - [REQUEST] Сообщение: привет
-2025-08-24 01:40:41 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-08-24 01:40:41 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-08-24 01:40:41 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-08-24 01:40:41 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-08-24 01:40:41 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
-2025-08-24 01:40:41 - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1755863547
-2025-08-24 01:40:41 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-08-24 01:40:41 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-08-24 01:40:41 - DEBUG - привет
-2025-08-24 01:40:41 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Результат анализа эмоций: neutral
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-08-24 01:40:44 - INFO - [MODEL] Запрос с провайдером: gemini
-2025-08-24 01:40:44 - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-08-24 01:40:44 - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-24T01:40:44.953639', 'message': 'Task queued for processing', 'request_id': '34995c60-7768-4b85-bb8e-19130ee562cb', 'status': 'pending', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:44 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-24T01:40:44.953639', 'message': 'Task queued for processing', 'request_id': '34995c60-7768-4b85-bb8e-19130ee562cb', 'status': 'pending', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:44 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:44 - DEBUG - [TASK-START] Начальный статус задачи: pending
-2025-08-24 01:40:45 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:45 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:45 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1d54292d-91e1-4fb6-b92c-992cbf7f42d8: {'completed_at': '2025-08-24T01:40:44.986859', 'created_at': '2025-08-24T01:40:44.953639', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.03063511848449707, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-24T01:40:44.953848', 'status': 'completed', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:45 - INFO - [TASK-PROGRESS] Задача 1d54292d-91e1-4fb6-b92c-992cbf7f42d8 в процессе. Статус: completed
+2025-08-24 14:42:43 - INFO - ✅ spaCy и языковые модели успешно загружены
+2025-08-24 14:42:43 - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-24 14:42:43 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-24 14:42:44 - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-24 14:42:44 - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-24 14:42:55 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-08-24 14:42:55 - DEBUG - [REQUEST] Сообщение: привет
+2025-08-24 14:42:55 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-08-24 14:42:55 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-08-24 14:42:55 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-08-24 14:42:55 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-08-24 14:42:55 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
+2025-08-24 14:42:55 - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1755863547
+2025-08-24 14:42:55 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-08-24 14:42:55 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-08-24 14:42:55 - DEBUG - привет
+2025-08-24 14:42:55 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Результат анализа эмоций: neutral
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-08-24 14:42:58 - INFO - [MODEL] Запрос с провайдером: gemini
+2025-08-24 14:42:58 - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-08-24 14:42:58 - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-24T14:42:58.608243', 'message': 'Task queued for processing', 'request_id': '6c83543d-2c46-4d77-96c0-010dbf39da2c', 'status': 'pending', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-24T14:42:58.608243', 'message': 'Task queued for processing', 'request_id': '6c83543d-2c46-4d77-96c0-010dbf39da2c', 'status': 'pending', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - DEBUG - [TASK-START] Начальный статус задачи: pending
+2025-08-24 14:42:58 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - DEBUG - [TASK-CHECK] Получен ответ для задачи 408ade7d-c87d-4af5-a6c2-cef436c8e100: {'completed_at': None, 'created_at': '2025-08-24T14:42:58.608243', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-24T14:42:58.608537', 'status': 'processing', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - INFO - [TASK-PROGRESS] Задача 408ade7d-c87d-4af5-a6c2-cef436c8e100 в процессе. Статус: processing
+2025-08-24 14:42:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи 408ade7d-c87d-4af5-a6c2-cef436c8e100: {'completed_at': '2025-08-24T14:42:58.915741', 'created_at': '2025-08-24T14:42:58.608243', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.3046104907989502, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-24T14:42:58.608537', 'status': 'completed', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:59 - INFO - [TASK-PROGRESS] Задача 408ade7d-c87d-4af5-a6c2-cef436c8e100 в процессе. Статус: completed

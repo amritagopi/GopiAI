@@ -1,124 +1,128 @@
-2025-08-24 01:38:18 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-24 01:38:18 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-24 01:38:18 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
-2025-08-24 01:38:18 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
-2025-08-24 01:38:18 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-24 01:38:18 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-24 01:38:18 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-24 01:38:18 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-24 01:38:18 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
-2025-08-24 01:38:18 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x18503f40) at 0x7cad102b1d40>
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
-2025-08-24 01:38:18 - tools.gopiai_integration.openrouter_client - INFO - 🔌 OpenRouterClient инициализирован
-2025-08-24 01:38:18 - tools.gopiai_integration.model_config_manager - INFO - 📋 Загружено 349 конфигураций
-2025-08-24 01:38:18 - tools.gopiai_integration.model_config_manager - INFO - 🔧 ModelConfigurationManager инициализирован (конфиг: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/model_configurations.json)
-2025-08-24 01:38:18 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
-2025-08-24 01:38:18 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
-2025-08-24 01:38:18 - tools.gopiai_integration.openrouter_client - INFO - 🔄 Получаем список моделей OpenRouter...
-2025-08-24 01:38:18 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
-2025-08-24 01:38:18 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
-2025-08-24 01:38:18 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
-2025-08-24 01:38:18 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1755979698
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
-2025-08-24 01:38:18 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ ModelConfigManager успешно получен
-2025-08-24 01:38:18 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с переданным ModelConfigurationManager
-2025-08-24 01:38:18 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с улучшенной системой ротации
-2025-08-24 01:38:18 - gopiai_integration.emotional_classifier - INFO - ✅ EmotionalClassifier: model_config_manager найден в ai_router
-2025-08-24 01:38:18 - gopiai_integration.emotional_classifier - INFO - EmotionalClassifier инициализирован
-2025-08-24 01:38:18 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
-2025-08-24 01:38:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
-2025-08-24 01:38:18 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x1bb2f8a0) at 0x7cad002e1e40>
-2025-08-24 01:38:18 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
-2025-08-24 01:38:19 - tools.gopiai_integration.openrouter_client - INFO - ✅ Получено 316 моделей OpenRouter (все показаны)
-2025-08-24 01:38:19 - tools.gopiai_integration.openrouter_client - INFO - 🆓 Бесплатных моделей: 55
-2025-08-24 01:38:19 - tools.gopiai_integration.openrouter_client - INFO - 💰 Платных моделей: 261
-2025-08-24 01:38:19 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
-2025-08-24 01:38:19 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
-2025-08-24 01:38:21 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
-2025-08-24 01:40:34 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 19 сообщений из истории
-2025-08-24 01:40:41 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-08-24 01:40:41 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: привет
-2025-08-24 01:40:41 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
-2025-08-24 01:40:41 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 92 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-08-24 01:40:41 - gopiai_integration.tools_instruction_manager - INFO - ✅ Tools Instruction Manager инициализирован. Найдено 12 инструкций
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1755863547
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - привет
-2025-08-24 01:40:41 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - INFO - 🧠 Обработка промпта 1/1
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - INFO - 🧠 Высокий приоритет интеллекта
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 1: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:41 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklist — запрашиваем следующую
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklists — запрашиваем следующую доступную
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 2: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:42 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklist — запрашиваем следующую
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklists — запрашиваем следующую доступную
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 3: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:43 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - ERROR - 💥 КРИТИЧЕСКАЯ СИТУАЦИЯ: Все модели недоступны для промпта 1
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - ERROR - Blacklist: {}
-2025-08-24 01:40:44 - gopiai_integration.ai_router_llm - ERROR - Попробованные модели: ['gemini/gemini-1.5-flash', 'gemini/gemini-1.5-flash', 'gemini/gemini-1.5-flash']
-2025-08-24 01:40:44 - gopiai_integration.emotional_classifier - WARNING - Ошибка парсинга AI анализа эмоций: JSON не найден в ответе AI
-2025-08-24 01:40:44 - gopiai_integration.emotional_classifier - INFO - Эмоциональный анализ завершен: neutral (confidence: 0.60)
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Результат анализа эмоций: neutral
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-24T01:40:44.953639', 'message': 'Task queued for processing', 'request_id': '34995c60-7768-4b85-bb8e-19130ee562cb', 'status': 'pending', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-24T01:40:44.953639', 'message': 'Task queued for processing', 'request_id': '34995c60-7768-4b85-bb8e-19130ee562cb', 'status': 'pending', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:44 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: pending
-2025-08-24 01:40:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/1d54292d-91e1-4fb6-b92c-992cbf7f42d8
-2025-08-24 01:40:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 1d54292d-91e1-4fb6-b92c-992cbf7f42d8: {'completed_at': '2025-08-24T01:40:44.986859', 'created_at': '2025-08-24T01:40:44.953639', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.03063511848449707, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-24T01:40:44.953848', 'status': 'completed', 'task_id': '1d54292d-91e1-4fb6-b92c-992cbf7f42d8'}
-2025-08-24 01:40:45 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 1d54292d-91e1-4fb6-b92c-992cbf7f42d8 в процессе. Статус: completed
-2025-08-24 01:40:45 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-24 14:42:43 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-24 14:42:43 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-24 14:42:43 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
+2025-08-24 14:42:43 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-08-24 14:42:44 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-24 14:42:44 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-24 14:42:44 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-24 14:42:44 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-24 14:42:44 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-08-24 14:42:44 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x389d6dd0) at 0x7c754c102c00>
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-08-24 14:42:44 - tools.gopiai_integration.openrouter_client - INFO - 🔌 OpenRouterClient инициализирован
+2025-08-24 14:42:44 - tools.gopiai_integration.model_config_manager - INFO - 📋 Загружено 350 конфигураций
+2025-08-24 14:42:44 - tools.gopiai_integration.model_config_manager - INFO - 🔧 ModelConfigurationManager инициализирован (конфиг: /home/amritagopi/GopiAI/GopiAI-CrewAI/tools/model_configurations.json)
+2025-08-24 14:42:44 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
+2025-08-24 14:42:44 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
+2025-08-24 14:42:44 - gopiai.ui.components.openrouter_model_widget - INFO - Загружаем модели OpenRouter в фоновом потоке...
+2025-08-24 14:42:44 - tools.gopiai_integration.openrouter_client - INFO - 🔄 Получаем список моделей OpenRouter...
+2025-08-24 14:42:44 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
+2025-08-24 14:42:44 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
+2025-08-24 14:42:44 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756026764
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-08-24 14:42:44 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ ModelConfigManager успешно получен
+2025-08-24 14:42:44 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с переданным ModelConfigurationManager
+2025-08-24 14:42:44 - gopiai_integration.ai_router_llm - INFO - ✅ AIRouterLLM инициализирован с улучшенной системой ротации
+2025-08-24 14:42:44 - gopiai_integration.emotional_classifier - INFO - ✅ EmotionalClassifier: model_config_manager найден в ai_router
+2025-08-24 14:42:44 - gopiai_integration.emotional_classifier - INFO - EmotionalClassifier инициализирован
+2025-08-24 14:42:44 - gopiai.ui.components.crewai_client - INFO - [INIT] ✅ Эмоциональный классификатор инициализирован с AI Router
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-08-24 14:42:44 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-08-24 14:42:44 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x38e60b20) at 0x7c754c103180>
+2025-08-24 14:42:44 - tools.gopiai_integration.openrouter_client - INFO - ✅ Получено 316 моделей OpenRouter (все показаны)
+2025-08-24 14:42:44 - tools.gopiai_integration.openrouter_client - INFO - 🆓 Бесплатных моделей: 55
+2025-08-24 14:42:44 - tools.gopiai_integration.openrouter_client - INFO - 💰 Платных моделей: 261
+2025-08-24 14:42:44 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-24 14:42:44 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-08-24 14:42:45 - gopiai.ui.components.openrouter_model_widget - INFO - Загружено 316 моделей OpenRouter
+2025-08-24 14:42:47 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-08-24 14:42:48 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 24 сообщений из истории
+2025-08-24 14:42:55 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-24 14:42:55 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: привет
+2025-08-24 14:42:55 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
+2025-08-24 14:42:55 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 98 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-24 14:42:55 - gopiai_integration.tools_instruction_manager - INFO - ✅ Tools Instruction Manager инициализирован. Найдено 12 инструкций
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1755863547
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1755863547
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - привет
+2025-08-24 14:42:55 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - INFO - 🧠 Обработка промпта 1/1
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - INFO - 🧠 Высокий приоритет интеллекта
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 1: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:55 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklist — запрашиваем следующую
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklists — запрашиваем следующую доступную
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 2: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:56 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklist — запрашиваем следующую
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - ↩️ Модель gemini/gemini-1.5-flash уже использована или во временном blacklists — запрашиваем следующую доступную
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - 🎯 Попытка 3: Выбрана модель 'gemini/gemini-1.5-flash' (приоритет: 3, score: 0.5)
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:57 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 1/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - INFO - 🔥 Используем GeminiDirectClient для обхода ограничений безопасности модели gemini/gemini-1.5-flash
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - WARNING - ❌ Ошибка при запросе к модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - INFO - 🔍 Диагностика Google/Gemini модели gemini/gemini-1.5-flash: используется прямой HTTP-клиент без safetySettings
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - WARNING - ⚠️ Retry 2/2 для модели gemini/gemini-1.5-flash: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - WARNING - 🔄 Переключаемся на следующую модель из-за ошибки: BaseLLM.__init__() got an unexpected keyword argument 'max_tokens'
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - ERROR - 💥 КРИТИЧЕСКАЯ СИТУАЦИЯ: Все модели недоступны для промпта 1
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - ERROR - Blacklist: {}
+2025-08-24 14:42:58 - gopiai_integration.ai_router_llm - ERROR - Попробованные модели: ['gemini/gemini-1.5-flash', 'gemini/gemini-1.5-flash', 'gemini/gemini-1.5-flash']
+2025-08-24 14:42:58 - gopiai_integration.emotional_classifier - WARNING - Ошибка парсинга AI анализа эмоций: JSON не найден в ответе AI
+2025-08-24 14:42:58 - gopiai_integration.emotional_classifier - INFO - Эмоциональный анализ завершен: neutral (confidence: 0.60)
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Результат анализа эмоций: neutral
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - INFO - [MODEL] Используется провайдер по умолчанию: Gemini
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Адаптация системного промпта на основе эмоции: neutral
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5051/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'created_at': '2025-08-24T14:42:58.608243', 'message': 'Task queued for processing', 'request_id': '6c83543d-2c46-4d77-96c0-010dbf39da2c', 'status': 'pending', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-08-24T14:42:58.608243', 'message': 'Task queued for processing', 'request_id': '6c83543d-2c46-4d77-96c0-010dbf39da2c', 'status': 'pending', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: pending
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 408ade7d-c87d-4af5-a6c2-cef436c8e100: {'completed_at': None, 'created_at': '2025-08-24T14:42:58.608243', 'error': None, 'message': 'привет', 'result': None, 'started_at': '2025-08-24T14:42:58.608537', 'status': 'processing', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:58 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 408ade7d-c87d-4af5-a6c2-cef436c8e100 в процессе. Статус: processing
+2025-08-24 14:42:59 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:59 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5051/api/task/408ade7d-c87d-4af5-a6c2-cef436c8e100
+2025-08-24 14:42:59 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 408ade7d-c87d-4af5-a6c2-cef436c8e100: {'completed_at': '2025-08-24T14:42:58.915741', 'created_at': '2025-08-24T14:42:58.608243', 'error': None, 'message': 'привет', 'result': {'analysis': {'analysis_time': 0.3046104907989502, 'complexity': 1, 'forced_selections': {'agents': [], 'flow': None, 'tools': []}, 'requires_crewai': False, 'type': 'general'}, 'formatted': True, 'has_commands': False, 'model_info': {'display_name': 'Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)', 'model_id': 'google/gemini-2.5-pro-exp-03-25', 'provider': 'openrouter'}, 'processed_with_crewai': False, 'response': 'Пустой ответ от OpenRouter модели'}, 'started_at': '2025-08-24T14:42:58.608537', 'status': 'completed', 'task_id': '408ade7d-c87d-4af5-a6c2-cef436c8e100'}
+2025-08-24 14:42:59 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 408ade7d-c87d-4af5-a6c2-cef436c8e100 в процессе. Статус: completed
+2025-08-24 14:42:59 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
