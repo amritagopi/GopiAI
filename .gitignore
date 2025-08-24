@@ -210,3 +210,4 @@ GopiAI-CrewAI/memory/chats.json
 /GopiAI-CrewAI/memory
 .aider*
 .kilocode*
+.kilocode/mcp.json
