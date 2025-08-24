@@ -41,7 +41,8 @@ def start_crewai_server():
         if response.status_code == 200:
             print("[CREWAI] ✅ Сервер CrewAI уже запущен")
             return True
-    except:
+    except requests.exceptions.RequestException:
+        # Сервер не отвечает, это ожидаемое поведение, если он не запущен
         pass
     
     # Ищем путь к серверу CrewAI
