@@ -4188,10 +4188,10 @@
         "max_tokens": 4096
       }
     },
-    "openrouter_google/gemini-1.5-flash-preview-05-14": {
+    "openrouter_google/gemini-2.5-pro-exp-03-25": {
       "provider": "openrouter",
-      "model_id": "google/gemini-1.5-flash-preview-05-14",
-      "display_name": "Google: Gemini 1.5 Flash Preview (google/gemini-1.5-flash-preview-05-14)",
+      "model_id": "google/gemini-2.5-pro-exp-03-25",
+      "display_name": "Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)",
       "api_key_env": "OPENROUTER_API_KEY",
       "is_active": false,
       "is_default": false,
@@ -4206,5 +4206,5 @@
     "model_id": "google/gemini-1.5-flash-preview-05-14"
   },
   "version": "1.0",
-  "last_updated": "1755986046.4688802"
+  "last_updated": "1756030599.4963155"
 }
