@@ -22,7 +22,7 @@ echo "Предыдущий экземпляр остановлен (или не 
 
 # Активируем виртуальное окружение
 echo "Активация окружения: $VENV_DIR"
-source "$VENV_DIR/bin/activate
+source "$VENV_DIR/bin/activate"
 
 # Добавляем GopiAI-CrewAI в PYTHONPATH для корректного импорта
 export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI"

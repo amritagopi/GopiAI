@@ -101,8 +101,8 @@
       "model_id": "deepseek/deepseek-chat-v3-0324:free",
       "display_name": "DeepSeek: DeepSeek V3 0324 (free) (deepseek/deepseek-chat-v3-0324:free)",
       "api_key_env": "OPENROUTER_API_KEY",
-      "is_active": false,
-      "is_default": false,
+      "is_active": true,
+      "is_default": true,
       "parameters": {
         "temperature": 0.7,
         "max_tokens": 4096
@@ -1179,7 +1179,7 @@
     "openrouter_cognitivecomputations/dolphin-mixtral-8x22b": {
       "provider": "openrouter",
       "model_id": "cognitivecomputations/dolphin-mixtral-8x22b",
-      "display_name": "Dolphin 2.9.2 Mixtral 8x22B 🐬 (cognitivecomputations/dolphin-mixtral-8x22b)",
+      "display_name": "Dolphin 2.9.2 Mixtral 8x22B \ud83d\udc2c (cognitivecomputations/dolphin-mixtral-8x22b)",
       "api_key_env": "OPENROUTER_API_KEY",
       "is_active": false,
       "is_default": false,
@@ -4188,10 +4188,10 @@
         "max_tokens": 4096
       }
     },
-    "openrouter_google/gemini-1.5-flash-preview-05-14": {
+    "openrouter_google/gemini-2.5-pro-exp-03-25": {
       "provider": "openrouter",
-      "model_id": "google/gemini-1.5-flash-preview-05-14",
-      "display_name": "Google: Gemini 1.5 Flash Preview (google/gemini-1.5-flash-preview-05-14)",
+      "model_id": "google/gemini-2.5-pro-exp-03-25",
+      "display_name": "Google: Gemini 2.5 Pro Experimental (google/gemini-2.5-pro-exp-03-25)",
       "api_key_env": "OPENROUTER_API_KEY",
       "is_active": false,
       "is_default": false,
@@ -4203,8 +4203,8 @@
   },
   "current": {
     "provider": "openrouter",
-    "model_id": "google/gemini-1.5-flash-preview-05-14"
+    "model_id": "deepseek/deepseek-chat-v3-0324:free"
   },
   "version": "1.0",
-  "last_updated": "1755986046.4688802"
+  "last_updated": "1756031044.6216428"
 }
