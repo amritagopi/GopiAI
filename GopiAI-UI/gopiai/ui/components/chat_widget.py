@@ -991,28 +991,10 @@ class ChatWidget(QWidget):
             QTextEdit.keyPressEvent(self.input, event)
             return
         
-        # Ctrl+C - копирование
-        if event.key() == Qt.Key.Key_C and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
-            QTextEdit.keyPressEvent(self.input, event)
-            return
-        
-        # Ctrl+X - вырезание
-        if event.key() == Qt.Key.Key_X and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
-            QTextEdit.keyPressEvent(self.input, event)
-            return
-        
-        # Ctrl+A - выделить всё
-        if event.key() == Qt.Key.Key_A and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
-            QTextEdit.keyPressEvent(self.input, event)
-            return
-        
-        # Ctrl+Z - отмена
-        if event.key() == Qt.Key.Key_Z and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
-            QTextEdit.keyPressEvent(self.input, event)
-            return
-        
-        # Ctrl+Y - повтор
-        if event.key() == Qt.Key.Key_Y and (event.modifiers() & Qt.KeyboardModifier.ControlModifier):
+        # Стандартные комбинации клавиш (Ctrl+C/X/A/Z/Y)
+        if event.modifiers() & Qt.KeyboardModifier.ControlModifier and event.key() in (
+            Qt.Key.Key_C, Qt.Key.Key_X, Qt.Key.Key_A, Qt.Key.Key_Z, Qt.Key.Key_Y
+        ):
             QTextEdit.keyPressEvent(self.input, event)
             return
         
