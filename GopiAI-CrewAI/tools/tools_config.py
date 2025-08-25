@@ -5,7 +5,7 @@
 
 import os
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from pathlib import Path
 
 class ToolsConfig:
@@ -191,6 +191,21 @@ class ToolsConfig:
             print(f"✅ Конфигурация сохранена: {path}")
         except Exception as e:
             print(f"❌ Ошибка сохранения конфигурации: {e}")
+    
+    def get_available_tools(self) -> List[str]:
+        """Возвращает список всех доступных инструментов"""
+        return [
+            "filesystem", 
+            "terminal", 
+            "web_search", 
+            "web_viewer", 
+            "memory", 
+            "communication",
+            "simple_filesystem",
+            "simple_code_executor",
+            "command_executor",
+            "code_interpreter"
+        ]
     
     def get_active_tools(self) -> List[str]:
         """Возвращает список активных инструментов"""

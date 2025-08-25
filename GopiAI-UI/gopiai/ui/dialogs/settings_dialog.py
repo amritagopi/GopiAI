@@ -278,7 +278,7 @@ class GopiAISettingsDialog(QDialog):
             b = max(0, int(b * (1 - amount)))
             
             return f"#{r:02x}{g:02x}{b:02x}"
-        except:
+        except (ValueError, IndexError, TypeError):
             return color
     
     def _lighten_color(self, color, amount):
@@ -296,7 +296,7 @@ class GopiAISettingsDialog(QDialog):
             b = min(255, int(b + (255 - b) * amount))
             
             return f"#{r:02x}{g:02x}{b:02x}"
-        except:
+        except (ValueError, IndexError, TypeError):
             return color
         
     def _apply_theme_styles(self):

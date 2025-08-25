@@ -429,7 +429,7 @@ class CustomTabWidget(QTabWidget):
                     # Принудительное удаление в случае ошибки
                     try:
                         self.removeTab(0)
-                    except:
+                    except (RuntimeError, IndexError):
                         break
 
             if iteration >= max_iterations:

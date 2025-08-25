@@ -26,6 +26,16 @@ from .web_viewer_tool import GopiAIWebViewerTool
 from .memory_tools import GopiAIMemoryTool
 from .communication_tools import GopiAICommunicationTool
 
+# НЕОГРАНИЧЕННЫЕ ИНСТРУМЕНТЫ (без ограничений безопасности)
+from .unrestricted_filesystem_tool import UnrestrictedFileSystemTool
+from .unrestricted_code_executor import UnrestrictedCodeExecutor
+from .unrestricted_tools_manager import (
+    unrestricted_tools_manager, 
+    get_unrestricted_tools,
+    execute_filesystem_command,
+    execute_code_command
+)
+
 # ОТКЛЮЧЕННЫЕ ИНСТРУМЕНТЫ (оставлены для совместимости)
 # browser_tools удалены из проекта
 # from .ai_router_tools import GopiAIRouterTool  # ОТКЛЮЧЕНО
@@ -40,6 +50,14 @@ __all__ = [
     # Дополнительные инструменты
     'GopiAIMemoryTool',
     'GopiAICommunicationTool',
+    
+    # Неограниченные инструменты
+    'UnrestrictedFileSystemTool',
+    'UnrestrictedCodeExecutor',
+    'unrestricted_tools_manager',
+    'get_unrestricted_tools',
+    'execute_filesystem_command',
+    'execute_code_command',
 ]
 
 __version__ = '1.0.0'
@@ -84,6 +102,18 @@ TOOLS_INFO = {
         'capabilities': ['send', 'receive', 'broadcast', 'notify', 'monitor'],
         'status': 'additional'
     },
+    'unrestricted_filesystem': {
+        'class': 'UnrestrictedFileSystemTool',
+        'description': 'Неограниченный доступ к файловой системе без ограничений безопасности',
+        'capabilities': ['read', 'write', 'create', 'delete', 'list', 'execute', 'search', 'copy', 'move', 'full_system_access'],
+        'status': 'unrestricted'
+    },
+    'unrestricted_code_executor': {
+        'class': 'UnrestrictedCodeExecutor',
+        'description': 'Выполнение кода без ограничений песочницы',
+        'capabilities': ['python', 'bash', 'shell', 'install_packages', 'full_system_access', 'network_access'],
+        'status': 'unrestricted'
+    },
     # ОТКЛЮЧЕННЫЕ ИНСТРУМЕНТЫ
     'browser_automation': {
         'class': 'GopiAIBrowserTool',
@@ -118,6 +148,17 @@ def get_additional_tools():
         GopiAICommunicationTool(),
     ]
 
+def get_unrestricted_tools_list():
+    """Возвращает неограниченные инструменты без ограничений безопасности"""
+    return [
+        UnrestrictedFileSystemTool(),
+        UnrestrictedCodeExecutor(),
+    ]
+
+def get_all_tools_including_unrestricted():
+    """Возвращает все инструменты включая неограниченные"""
+    return get_all_tools() + get_additional_tools() + get_unrestricted_tools_list()
+
 def get_tool_by_name(tool_name: str):
     """Получить инструмент по имени"""
     tools_map = {
@@ -127,6 +168,8 @@ def get_tool_by_name(tool_name: str):
         'web_viewer': GopiAIWebViewerTool,
         'memory': GopiAIMemoryTool,
         'communication': GopiAICommunicationTool,
+        'unrestricted_filesystem': UnrestrictedFileSystemTool,
+        'unrestricted_code_executor': UnrestrictedCodeExecutor,
     }
     
     if tool_name in tools_map:

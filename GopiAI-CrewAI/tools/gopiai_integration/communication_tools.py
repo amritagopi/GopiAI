@@ -181,7 +181,7 @@ class GopiAICommunicationTool(BaseTool):
             # Парсим метаданные
             try:
                 meta_dict = json.loads(metadata)
-            except:
+            except (json.JSONDecodeError, TypeError, ValueError):
                 meta_dict = {}
             
             # Загружаем очередь
@@ -273,7 +273,7 @@ class GopiAICommunicationTool(BaseTool):
             # Парсим метаданные
             try:
                 meta_dict = json.loads(metadata)
-            except:
+            except (json.JSONDecodeError, TypeError, ValueError):
                 meta_dict = {}
             
             # Загружаем уведомления

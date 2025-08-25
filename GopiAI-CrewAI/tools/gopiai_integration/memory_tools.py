@@ -144,7 +144,7 @@ class GopiAIMemoryTool(BaseTool):
             try:
                 msg = json.loads(mem["data"])
                 messages.append((msg.get("timestamp", ""), msg.get("role", "unknown"), msg.get("content", "")))
-            except:
+            except (json.JSONDecodeError, KeyError, TypeError):
                 continue
                 
         messages.sort(key=lambda x: x[0])  # Сортировка по timestamp
@@ -252,7 +252,7 @@ class GopiAIMemoryTool(BaseTool):
                 try:
                     msg = json.loads(display_data)
                     display_data = f"{msg.get('role', 'unknown')}: {msg.get('content', '')}"
-                except:
+                except (json.JSONDecodeError, KeyError, TypeError):
                     pass
                     
             result.append(f"{i}. [Категория: {mem.get('category', 'неизвестно')}] "
@@ -326,7 +326,7 @@ class GopiAIMemoryTool(BaseTool):
                 try:
                     msg = json.loads(mem.get("data", "{}"))
                     content = f"{msg.get('role', 'unknown')}: {msg.get('content', '')}"
-                except:
+                except (json.JSONDecodeError, KeyError, TypeError):
                     content = mem.get("data", "")
             else:
                 content = mem.get("data", "")
