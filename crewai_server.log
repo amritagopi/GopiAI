@@ -1,0 +1,14 @@
+[OK] Логирование настроено с записью в файл: /home/amritagopi/.gopiai/logs/crewai_api_server_debug.log
+[OK] Доп. логирование включено (перезапись на старте): /home/amritagopi/GopiAI/GopiAI-CrewAI/crewai_api_server_debug_local.log
+Traceback (most recent call last):
+  File "/home/amritagopi/GopiAI/GopiAI-CrewAI/crewai_api_server.py", line 174, in <module>
+    from tools.gopiai_integration.smart_delegator import SmartDelegator
+  File "/home/amritagopi/GopiAI/GopiAI-CrewAI/tools/__init__.py", line 56, in <module>
+    tools_config = ToolsConfig()
+                   ^^^^^^^^^^^^^
+  File "/home/amritagopi/GopiAI/GopiAI-CrewAI/tools/tools_config.py", line 18, in __init__
+    self._load_env_config()
+  File "/home/amritagopi/GopiAI/GopiAI-CrewAI/tools/tools_config.py", line 127, in _load_env_config
+    self.config[section][key] = value
+    ~~~~~~~~~~~^^^^^^^^^
+KeyError: 'api_keys'

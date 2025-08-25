@@ -20,6 +20,19 @@ class ToolsConfig:
     def _load_default_config(self) -> Dict[str, Any]:
         """Загружает конфигурацию по умолчанию"""
         return {
+            "api_keys": {
+                # Поисковые API
+                "exa_api_key": "",
+                "tavily_api_key": "",
+                "brave_api_key": "",
+                "firecrawl_api_key": "",
+                
+                # LLM API
+                "openai_api_key": "",
+                "openrouter_api_key": "",
+                "google_api_key": "",
+                "gemini_api_key": ""
+            },
             "filesystem": {
                 "enabled": True,
                 "safe_mode": True,
@@ -102,10 +115,19 @@ class ToolsConfig:
     def _load_env_config(self):
         """Загружает конфигурацию из переменных окружения"""
         env_mappings = {
-            "SERPER_API_KEY": ("api_keys", "serper_api_key"),
-            "SERPAPI_API_KEY": ("api_keys", "serpapi_api_key"),
+            # Поисковые API
+            "EXA_API_KEY": ("api_keys", "exa_api_key"),
+            "TAVILY_API_KEY": ("api_keys", "tavily_api_key"),
+            "BRAVE_API_KEY": ("api_keys", "brave_api_key"),
+            "FIRECRAWL_API_KEY": ("api_keys", "firecrawl_api_key"),
+            
+            # LLM API
             "OPENAI_API_KEY": ("api_keys", "openai_api_key"),
+            "OPENROUTER_API_KEY": ("api_keys", "openrouter_api_key"),
             "GOOGLE_API_KEY": ("api_keys", "google_api_key"),
+            "GEMINI_API_KEY": ("api_keys", "gemini_api_key"),
+            
+            # Настройки приложения
             "GOPIAI_TERMINAL_UNSAFE": ("terminal", "safe_mode"),
             "GOPIAI_WEB_SEARCH_ENGINE": ("web_search", "default_engine"),
             "GOPIAI_LOG_LEVEL": ("logging", "level")

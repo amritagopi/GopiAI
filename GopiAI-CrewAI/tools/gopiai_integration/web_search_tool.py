@@ -1,38 +1,54 @@
 """
 🔍 GopiAI Web Search Tool для CrewAI
-Простой инструмент для поиска в интернете с поддержкой разных поисковых систем
+Инструмент для поиска в интернете с поддержкой разных поисковых систем:
+- Brave Search API
+- Tavily API
+- Exa AI Search
+- Firecrawl API
 """
 
-import requests
+import json
 import logging
 import os
-from typing import Type, Any, Optional, Dict, List
-from pydantic import BaseModel, Field
-from bs4 import BeautifulSoup
-import json
 import time
-from urllib.parse import quote_plus
+from typing import Dict, List, Optional, Type, Union
+from urllib.parse import parse_qs, quote_plus, urlparse
 
-# Импортируем BaseTool из crewai
-from crewai.tools.base_tool import BaseTool
+from bs4 import BeautifulSoup
+from pydantic import BaseModel, Field
+
+from crewai.tools import BaseTool
+from crewai.utilities import get_from_dict_or_env
+
 
 class WebSearchInput(BaseModel):
     """Схема входных данных для инструмента поиска в интернете"""
     query: str = Field(description="Поисковый запрос")
-    search_engine: str = Field(default="duckduckgo", description="Поисковая система: duckduckgo, google_scrape, serper, serpapi")
-    num_results: int = Field(default=10, description="Количество результатов (максимум 20)")
-    language: str = Field(default="ru", description="Язык поиска (ru, en)")
+    search_engine: str = Field(
+        default="auto", 
+        description="Поисковая система: auto, brave, tavily, exa, firecrawl, duckduckgo, google_scrape"
+    )
+    num_results: int = Field(default=5, description="Количество результатов (максимум 20)")
+    language: str = Field(default="ru", description="Язык поиска (ru, en, etc.)")
+    include_domains: Optional[List[str]] = Field(
+        default=None, 
+        description="Список доменов для включения в результаты (поддерживается не всеми API)"
+    )
+
 
 class GopiAIWebSearchTool(BaseTool):
     """
     Инструмент для поиска в интернете
     
-    Возможности:
-    - Поиск через DuckDuckGo (без API ключа)
-    - Поиск через Google (скрапинг)
-    - Поиск через Serper API (с ключом)
-    - Поиск через SerpAPI (с ключом)
-    - Автоматический выбор доступного метода
+    Поддерживаемые поисковые системы:
+    - Brave Search API (требуется API ключ)
+    - Tavily API (требуется API ключ)
+    - Exa AI Search (требуется API ключ)
+    - Firecrawl API (требуется API ключ)
+    - DuckDuckGo (без API ключа)
+    - Google (скрапинг, без API ключа)
+    
+    При выборе 'auto' автоматически выбирает лучший доступный метод.
     """
     
     name: str = Field(default="gopiai_web_search", description="Инструмент поиска в интернете")
@@ -96,10 +112,12 @@ class GopiAIWebSearchTool(BaseTool):
                 return self._search_duckduckgo(query, num_results, language)
             elif search_engine == "google_scrape":
                 return self._search_google_scrape(query, num_results, language)
-            elif search_engine == "serper" and self.serper_key:
-                return self._search_serper(query, num_results, language)
-            elif search_engine == "serpapi" and self.serpapi_key:
-                return self._search_serpapi(query, num_results, language)
+            elif search_engine == "brave" and os.getenv("BRAVE_API_KEY"):
+                return self._search_brave(query, num_results, language)
+            elif search_engine == "tavily" and os.getenv("TAVILY_API_KEY"):
+                return self._search_tavily(query, num_results, language)
+            elif search_engine == "exa" and os.getenv("EXA_API_KEY"):
+                return self._search_exa(query, num_results, language)
             else:
                 # Fallback к DuckDuckGo
                 return self._search_duckduckgo(query, num_results, language)
@@ -110,11 +128,17 @@ class GopiAIWebSearchTool(BaseTool):
     
     def _choose_best_search_engine(self) -> str:
         """Выбирает лучший доступный поисковый движок"""
-        if self.serper_key:
-            return "serper"
-        elif self.serpapi_key:
-            return "serpapi"
+        # Проверяем наличие API ключей в порядке приоритета
+        if os.getenv("BRAVE_API_KEY"):
+            return "brave"
+        elif os.getenv("TAVILY_API_KEY"):
+            return "tavily"
+        elif os.getenv("EXA_API_KEY"):
+            return "exa"
+        elif os.getenv("FIRECRAWL_API_KEY"):
+            return "firecrawl"
         else:
+            # Если нет API ключей, используем бесплатные варианты
             return "duckduckgo"
     
     def _search_duckduckgo(self, query: str, num_results: int, language: str) -> str:
@@ -165,7 +189,7 @@ class GopiAIWebSearchTool(BaseTool):
             
             # Формируем ответ
             if results:
-                response_text = f"🔍 Результаты поиска DuckDuckGo для '{query}' ({len(results)} результатов):\n\n"
+                response_text = f" Результаты поиска DuckDuckGo для '{query}' ({len(results)} результатов):\n\n"
                 for i, result in enumerate(results, 1):
                     response_text += f"{i}. **{result['title']}**\n"
                     response_text += f"   {result['link']}\n"
@@ -174,10 +198,10 @@ class GopiAIWebSearchTool(BaseTool):
                     response_text += "\n"
                 return response_text
             else:
-                return f"❌ Результаты поиска не найдены для запроса '{query}' в DuckDuckGo"
+                return f" Результаты поиска не найдены для запроса '{query}' в DuckDuckGo"
                 
         except Exception as e:
-            return f"❌ Ошибка поиска в DuckDuckGo: {str(e)}"
+            return f" Ошибка поиска в DuckDuckGo: {str(e)}"
     
     def _search_google_scrape(self, query: str, num_results: int, language: str) -> str:
         """Поиск через Google (скрапинг)"""
@@ -229,7 +253,7 @@ class GopiAIWebSearchTool(BaseTool):
             
             # Формируем ответ
             if results:
-                response_text = f"🔍 Результаты поиска Google для '{query}' ({len(results)} результатов):\n\n"
+                response_text = f" Результаты поиска Google для '{query}' ({len(results)} результатов):\n\n"
                 for i, result in enumerate(results, 1):
                     response_text += f"{i}. **{result['title']}**\n"
                     response_text += f"   {result['link']}\n"
@@ -238,116 +262,124 @@ class GopiAIWebSearchTool(BaseTool):
                     response_text += "\n"
                 return response_text
             else:
-                return f"❌ Результаты поиска не найдены для запроса '{query}' в Google"
+                return f" Результаты поиска не найдены для запроса '{query}' в Google"
                 
         except Exception as e:
-            return f"❌ Ошибка поиска в Google: {str(e)}"
+            return f" Ошибка поиска в Google: {str(e)}"
     
-    def _search_serper(self, query: str, num_results: int, language: str) -> str:
-        """Поиск через Serper API"""
+    def _search_brave(self, query: str, num_results: int = 10, language: str = "ru") -> List[Dict]:
+        """Поиск через Brave Search API"""
         try:
-            url = "https://google.serper.dev/search"
-            
-            payload = {
-                "q": query,
-                "num": num_results
-            }
-            
-            if language == "ru":
-                payload["gl"] = "ru"
-                payload["hl"] = "ru"
-            
+            api_key = os.getenv("BRAVE_API_KEY")
+            if not api_key:
+                self.logger.warning("BRAVE_API_KEY не найден в переменных окружения")
+                return []
+                
             headers = {
-                "X-API-KEY": self.serper_key,
-                "Content-Type": "application/json"
+                "X-Subscription-Token": api_key,
+                "Accept": "application/json",
             }
-            
-            response = requests.post(url, json=payload, headers=headers, timeout=self.timeout)
-            response.raise_for_status()
-            
-            data = response.json()
-            results = []
-            
-            # Извлекаем органические результаты
-            if 'organic' in data:
-                for result in data['organic'][:num_results]:
-                    results.append({
-                        'title': result.get('title', ''),
-                        'link': result.get('link', ''),
-                        'snippet': result.get('snippet', '')
-                    })
-            
-            # Формируем ответ
-            if results:
-                response_text = f"🔍 Результаты поиска Serper для '{query}' ({len(results)} результатов):\n\n"
-                for i, result in enumerate(results, 1):
-                    response_text += f"{i}. **{result['title']}**\n"
-                    response_text += f"   {result['link']}\n"
-                    if result['snippet']:
-                        response_text += f"   {result['snippet']}\n"
-                    response_text += "\n"
-                return response_text
-            else:
-                return f"❌ Результаты поиска не найдены для запроса '{query}' в Serper"
-                
-        except Exception as e:
-            return f"❌ Ошибка поиска в Serper: {str(e)}"
-    
-    def _search_serpapi(self, query: str, num_results: int, language: str) -> str:
-        """Поиск через SerpAPI"""
-        try:
-            url = "https://serpapi.com/search"
             
             params = {
-                "engine": "google",
                 "q": query,
-                "num": num_results,
-                "api_key": self.serpapi_key
+                "count": num_results,
+                "country": "ru" if language == "ru" else "us",
+                "ui_lang": language
             }
             
-            if language == "ru":
-                params["gl"] = "ru"
-                params["hl"] = "ru"
-            
-            response = requests.get(url, params=params, timeout=self.timeout)
+            response = requests.get(
+                "https://api.search.brave.com/res/v1/web/search",
+                headers=headers,
+                params=params,
+                timeout=self.timeout
+            )
             response.raise_for_status()
             
             data = response.json()
             results = []
             
-            # Извлекаем органические результаты
-            if 'organic_results' in data:
-                for result in data['organic_results'][:num_results]:
+            if 'web' in data and 'results' in data['web']:
+                for i, result in enumerate(data['web']['results'][:num_results], 1):
                     results.append({
                         'title': result.get('title', ''),
-                        'link': result.get('link', ''),
-                        'snippet': result.get('snippet', '')
+                        'link': result.get('url', ''),
+                        'snippet': result.get('description', '')[:200] + '...' if 'description' in result else '',
+                        'source': 'brave',
+                        'position': i
                     })
             
-            # Формируем ответ
-            if results:
-                response_text = f"🔍 Результаты поиска SerpAPI для '{query}' ({len(results)} результатов):\n\n"
-                for i, result in enumerate(results, 1):
-                    response_text += f"{i}. **{result['title']}**\n"
-                    response_text += f"   {result['link']}\n"
-                    if result['snippet']:
-                        response_text += f"   {result['snippet']}\n"
-                    response_text += "\n"
-                return response_text
-            else:
-                return f"❌ Результаты поиска не найдены для запроса '{query}' в SerpAPI"
-                
+            return results
+            
         except Exception as e:
-            return f"❌ Ошибка поиска в SerpAPI: {str(e)}"
-    
+            self.logger.error(f"Ошибка при поиске через Brave API: {e}")
+            return []
+            
+    def _search_tavily(self, query: str, num_results: int = 5, language: str = "ru") -> List[Dict]:
+        """Поиск через Tavily API"""
+        try:
+            api_key = os.getenv("TAVILY_API_KEY")
+            if not api_key:
+                self.logger.warning("TAVILY_API_KEY не найден в переменных окружения")
+                return []
+                
+            url = "https://api.tavily.com/search"
+            
+            payload = {
+                "api_key": api_key,
+                "query": query,
+                "include_answer": False,
+                "include_raw_content": False,
+                "max_results": num_results,
+                "include_domains": [],
+                "exclude_domains": [],
+                "search_depth": "basic",
+            }
+            
+            if language == "ru":
+                payload["include_domains"] = [".ru", ".рф"]
+            
+            response = requests.post(
+                url,
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=self.timeout
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            results = []
+            
+            if 'results' in data:
+                for i, result in enumerate(data['results'][:num_results], 1):
+                    results.append({
+                        'title': result.get('title', ''),
+                        'link': result.get('url', ''),
+                        'snippet': result.get('content', '')[:200] + '...' if 'content' in result else '',
+                        'source': 'tavily',
+                        'position': i
+                    })
+            
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Ошибка при поиске через Tavily API: {e}")
+            return []
+            
     def get_available_engines(self) -> List[str]:
         """Возвращает список доступных поисковых движков"""
         engines = ["duckduckgo", "google_scrape"]
         
-        if self.serper_key:
-            engines.append("serper")
-        
-        if self.serpapi_key:
-            engines.append("serpapi")
+        # Добавляем API-зависимые движки, если ключи доступны
+        if os.getenv("BRAVE_API_KEY"):
+            engines.append("brave")
+            
+        if os.getenv("TAVILY_API_KEY"):
+            engines.append("tavily")
+            
+        if os.getenv("EXA_API_KEY"):
+            engines.append("exa")
+            
+        if os.getenv("FIRECRAWL_API_KEY"):
+            engines.append("firecrawl")
         
         return engines
