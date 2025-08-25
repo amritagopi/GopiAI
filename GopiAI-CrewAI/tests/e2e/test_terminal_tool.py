@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tools.gopiai_integration.terminal_tool import TerminalTool
+from gopiai_tools.terminal_tool import TerminalTool
 
 
 def test_terminal_tool_pwd_unsafe_mode(tmp_path, monkeypatch):

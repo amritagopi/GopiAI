@@ -4,7 +4,7 @@ import unittest
 # Импортируем только SmartDelegator — устаревший CommandExecutor удалён.
 # Если импорт тянет тяжёлые опциональные зависимости (chromadb и пр.) — пропустим тесты.
 try:
-    from tools.gopiai_integration.smart_delegator import SmartDelegator
+    from gopiai_tools.smart_delegator import SmartDelegator
     _IMPORT_ERROR = None
 except Exception as _e:  # noqa: N816
     SmartDelegator = None  # type: ignore

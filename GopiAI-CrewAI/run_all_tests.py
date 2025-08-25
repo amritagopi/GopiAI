@@ -39,6 +39,8 @@ def run_test_script(script_name, description):
         print(f"❌ Ошибка при запуске {script_name}: {e}")
         return False
 
+import time
+
 def main():
     """Основная функция."""
     print("🚀 Запуск полного тестирования системы переключения провайдеров")
@@ -53,7 +55,13 @@ def main():
     passed = 0
     total = len(tests)
     
-    for script_name, description in tests:
+    for i, (script_name, description) in enumerate(tests):
+        if i == 1:  # Перед тестами API
+            print("\n" + "-"*60)
+            print("⏳ Пауза 5 секунд для запуска сервера...")
+            print("-"*60)
+            time.sleep(5)
+
         if run_test_script(script_name, description):
             passed += 1
             print(f"✅ {description} - ПРОЙДЕН")

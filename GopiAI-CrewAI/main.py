@@ -16,7 +16,7 @@ from typing import Dict, List, Any, Optional, Union
 current_dir = Path(__file__).parent
 sys.path.append(str(current_dir.parent))  # GOPI_AI_MODULES
 sys.path.append(str(current_dir))  # GopiAI-CrewAI
-sys.path.append(str(current_dir / 'tools'))  # tools directory
+sys.path.append(str(current_dir / 'gopiai_tools'))  # gopiai_tools directory
 
 # Загружаем переменные окружения (.env из нескольких локаций)
 from dotenv import load_dotenv
@@ -66,7 +66,7 @@ _load_env_multi()
 
 # Импорт CrewAI
 from crewai import Agent, Task, Crew, LLM
-from tools.gopiai_integration.ai_router_llm import AIRouterLLM
+from gopiai_tools.ai_router_llm import AIRouterLLM
 from crewai.tasks.task_output import TaskOutput
 
 # Импорт RAG системы
@@ -74,23 +74,23 @@ from rag_system import RAGSystem, get_rag_system
 
 # Импорт всех GopiAI инструментов
 try:
-    from tools.gopiai_integration.base.base_tool import GopiAIBaseTool
-    from tools.gopiai_integration.browser_tools import GopiAIBrowserTool
-    from tools.gopiai_integration.filesystem_tools import GopiAIFileSystemTool
-    from tools.gopiai_integration.ai_router_tools import GopiAIRouterTool
-    from tools.gopiai_integration.memory_tools import GopiAIMemoryTool
-    from tools.gopiai_integration.communication_tools import GopiAICommunicationTool
-    from tools.gopiai_integration.huggingface_tools import GopiAIHuggingFaceTool
-    from tools.gopiai_integration.terminal_tool import TerminalTool
+    from gopiai_tools.base.base_tool import GopiAIBaseTool
+    from gopiai_tools.browser_tools import GopiAIBrowserTool
+    from gopiai_tools.filesystem_tools import GopiAIFileSystemTool
+    from gopiai_tools.ai_router_tools import GopiAIRouterTool
+    from gopiai_tools.memory_tools import GopiAIMemoryTool
+    from gopiai_tools.communication_tools import GopiAICommunicationTool
+    from gopiai_tools.huggingface_tools import GopiAIHuggingFaceTool
+    from gopiai_tools.terminal_tool import TerminalTool
     
     # Импорт системы динамических инструкций
-    from tools.gopiai_integration.crewai_tools_integration import (
+    from gopiai_tools.crewai_tools_integration import (
         enhance_crew_with_instructions,
         enhance_agent_with_instructions,
         with_dynamic_instructions,
         get_tools_integrator
     )
-    from tools.gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
+    from gopiai_tools.tools_instruction_manager import get_tools_instruction_manager
     
     print("🔍 === ПРОВЕРКА ОКРУЖЕНИЯ ===")
     print("✅ Система динамических инструкций загружена")
@@ -219,7 +219,7 @@ def test_all_tools():
     print(f"📊 Результат: {working_tools}/{total_tools} инструментов работают")
     return working_tools > 0
 
-from tools.gopiai_integration.agent_templates import AgentTemplateSystem
+from gopiai_tools.agent_templates import AgentTemplateSystem
 from crewai import Agent
 from llm_rotation_config import LLM_MODELS_CONFIG, select_llm_model, rag_answer
 

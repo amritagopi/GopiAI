@@ -21,17 +21,14 @@ from gopiai.ui.utils.icon_helpers import create_icon_button
 
 # Унифицированные иконки берём через icon_helpers.create_icon_button; без локальных менеджеров
 
-# Добавляем пути к gopiai_integration инструментам из GopiAI-CrewAI для статического анализа и рантайма
+# Добавляем пути к gopiai_tools из GopiAI-CrewAI для статического анализа и рантайма
 try:
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../"))
-    crew_tools_path = os.path.join(repo_root, "GopiAI-CrewAI", "tools")
-    gopiai_integration_path = os.path.join(crew_tools_path, "gopiai_integration")
-    # Добавляем оба, так как часть модулей может импортироваться как "tools.gopiai_integration.*" и "gopiai_integration.*"
-    for p in (crew_tools_path, gopiai_integration_path):
-        if os.path.isdir(p) and p not in sys.path:
-            sys.path.append(p)
+    gopiai_tools_path = os.path.join(repo_root, "GopiAI-CrewAI", "gopiai_tools")
+    if os.path.isdir(gopiai_tools_path) and gopiai_tools_path not in sys.path:
+        sys.path.append(gopiai_tools_path)
 except Exception as e:
-    print(f"Не удалось добавить пути для gopiai_integration: {e}")
+    print(f"Не удалось добавить пути для gopiai_tools: {e}")
 
 logger = logging.getLogger(__name__)
 
@@ -262,16 +259,8 @@ class OpenRouterModelWidget(QWidget):
     def _initialize_backend_clients(self):
         """Инициализирует клиенты backend"""
         try:
-            # Импортируем из пространства имен tools.gopiai_integration если доступно,
-            # иначе пробуем прямой пакет gopiai_integration.*
-            try:
-                from tools.gopiai_integration.openrouter_client import get_openrouter_client  # type: ignore
-            except ImportError:
-                from gopiai_integration.openrouter_client import get_openrouter_client  # type: ignore
-            try:
-                from tools.gopiai_integration.model_config_manager import get_model_config_manager  # type: ignore
-            except ImportError:
-                from gopiai_integration.model_config_manager import get_model_config_manager  # type: ignore
+            from gopiai_tools.openrouter_client import get_openrouter_client
+            from gopiai_tools.model_config_manager import get_model_config_manager
 
             self.openrouter_client = get_openrouter_client()
             self.model_config_manager = get_model_config_manager()

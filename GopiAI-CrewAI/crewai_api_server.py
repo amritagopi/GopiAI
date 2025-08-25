@@ -167,11 +167,13 @@ except Exception:
 
 # --- Настройка путей и импортов ---
 current_dir = Path(__file__).parent
+sys.path.append(str(current_dir.parent.parent))
+sys.path.append(str(current_dir.parent))
 sys.path.append(str(current_dir))
 
 # ### ИЗМЕНЕНО: Импортируем правильные фабричные функции ###
 from rag_system import get_rag_system
-from tools.gopiai_integration.smart_delegator import SmartDelegator
+from gopiai_tools.smart_delegator import SmartDelegator
 
 # Импортируем функции для работы с провайдерами и моделями
 try:
@@ -288,7 +290,7 @@ app = Flask(__name__)
  
 # --- Settings manager for UI toggle ---
 try:
-    from tools.gopiai_integration.settings_manager import (
+    from gopiai_tools.settings_manager import (
         read_settings as _read_settings,
         write_settings as _write_settings,
         set_terminal_unsafe as _set_terminal_unsafe,
@@ -367,7 +369,7 @@ try:
     smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
     
     # 3. Инициализируем интегратор инструментов
-    from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
+    from gopiai_tools.crewai_tools_integrator import get_crewai_tools_integrator
     tools_integrator_instance = get_crewai_tools_integrator()
     
     logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
@@ -594,7 +596,7 @@ def update_provider_model_state():
         
         # Обновляем текущую модель в ModelConfigManager
         try:
-            from tools.gopiai_integration.model_config_manager import get_model_config_manager
+            from gopiai_tools.model_config_manager import get_model_config_manager
             mcm = get_model_config_manager()
             if mcm:
                 mcm.switch_to_provider(provider)
@@ -764,7 +766,7 @@ def set_tool_key():
 def get_agents():
     """Получить список доступных агент-шаблонов (и флоу, если появятся)"""
     try:
-        from tools.gopiai_integration.agent_templates import AgentTemplateSystem
+        from gopiai_tools.agent_templates import AgentTemplateSystem
         ats = AgentTemplateSystem(verbose=False)
         template_names = ats.list_available_templates()
 

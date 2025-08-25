@@ -10,7 +10,7 @@ from pathlib import Path
 # Добавляем пути для импорта
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
-sys.path.insert(0, str(project_root / "tools"))
+sys.path.insert(0, str(project_root / "gopiai_tools"))
 
 # Загружаем переменные окружения из .env
 from dotenv import load_dotenv
@@ -70,7 +70,7 @@ def test_crewai_integrator():
     print("\n🔧 Тестирование CrewAI Tools Integrator...")
     
     try:
-        from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
+        from gopiai_tools.crewai_tools_integrator import get_crewai_tools_integrator
         
         integrator = get_crewai_tools_integrator()
         print("✅ CrewAI Tools Integrator загружен")

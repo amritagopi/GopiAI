@@ -10,7 +10,7 @@ from pathlib import Path
 # Добавляем пути для импорта
 current_dir = Path(__file__).parent
 sys.path.append(str(current_dir))
-sys.path.append(str(current_dir / 'tools'))
+sys.path.append(str(current_dir / 'gopiai_tools'))
 
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew, LLM
@@ -25,7 +25,7 @@ def demo_system_overview():
     print("="*80)
     
     try:
-        from tools.gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
+        from gopiai_tools.tools_instruction_manager import get_tools_instruction_manager
         
         manager = get_tools_instruction_manager()
         
@@ -58,9 +58,9 @@ def demo_agent_enhancement():
     print("="*60)
     
     try:
-        from tools.gopiai_integration.crewai_tools_integration import enhance_agent_with_instructions
-        from tools.gopiai_integration.filesystem_tools import GopiAIFileSystemTool
-        from tools.gopiai_integration.browser_tools import GopiAIBrowserTool
+        from gopiai_tools.crewai_tools_integration import enhance_agent_with_instructions
+        from gopiai_tools.filesystem_tools import GopiAIFileSystemTool
+        from gopiai_tools.browser_tools import GopiAIBrowserTool
         
         # Создаем LLM
         llm = LLM(
@@ -120,9 +120,9 @@ def demo_crew_enhancement():
     print("="*60)
     
     try:
-        from tools.gopiai_integration.crewai_tools_integration import enhance_crew_with_instructions
-        from tools.gopiai_integration.filesystem_tools import GopiAIFileSystemTool
-        from tools.gopiai_integration.local_mcp_tools import get_local_mcp_tools
+        from gopiai_tools.crewai_tools_integration import enhance_crew_with_instructions
+        from gopiai_tools.filesystem_tools import GopiAIFileSystemTool
+        from gopiai_tools.local_mcp_tools import get_local_mcp_tools
         
         # Создаем LLM
         llm = LLM(
@@ -200,7 +200,7 @@ def demo_instruction_details():
     print("="*60)
     
     try:
-        from tools.gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
+        from gopiai_tools.tools_instruction_manager import get_tools_instruction_manager
         
         manager = get_tools_instruction_manager()
         

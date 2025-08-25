@@ -82,8 +82,8 @@ if %errorlevel% neq 0 (
 
 REM Проверка структуры инструментов
 echo 🔧 Checking tools structure...
-if exist "tools\gopiai_integration" (
-    dir /b tools\gopiai_integration\*.py 2>nul | find /c ".py" >temp_count.txt
+if exist "gopiai_tools" (
+    dir /b gopiai_tools\*.py 2>nul | find /c ".py" >temp_count.txt
     set /p TOOL_COUNT=<temp_count.txt
     del temp_count.txt
     echo ✅ Found %TOOL_COUNT% GopiAI tools

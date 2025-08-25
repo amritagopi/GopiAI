@@ -91,8 +91,8 @@ except ImportError as e:
 
 # Проверка структуры инструментов
 echo "🔧 Checking tools structure..."
-if [ -d "tools/gopiai_integration" ]; then
-    TOOL_COUNT=$(find tools/gopiai_integration -name "*.py" | wc -l)
+if [ -d "gopiai_tools" ]; then
+    TOOL_COUNT=$(find gopiai_tools -name "*.py" | wc -l)
     echo "✅ Found $TOOL_COUNT GopiAI tools"
 else
     echo "❌ GopiAI tools directory not found"
