@@ -272,7 +272,8 @@ class GopiAIBaseTool(BaseTool):
                 try:
                     if os.path.exists(path):
                         os.unlink(path)
-                except:
+                except (OSError, IOError) as e:
+                    # Игнорируем ошибки удаления временных файлов
                     pass
 
 

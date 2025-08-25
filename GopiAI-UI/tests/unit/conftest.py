@@ -52,7 +52,7 @@ def setup_test_environment():
     try:
         if QApplication.instance():
             QApplication.instance().quit()
-    except:
+    except (RuntimeError, AttributeError):
         pass
 
 

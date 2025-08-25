@@ -432,7 +432,7 @@ class LocalMCPTools:
                     import requests
                     response = requests.get("http://127.0.0.1:5051/api/health", timeout=2)
                     status["crewai_server"] = "running" if response.status_code == 200 else "stopped"
-                except:
+                except (requests.RequestException, ImportError, ConnectionError, TimeoutError):
                     status["crewai_server"] = "stopped"
                 
                 # Проверка процессов
@@ -463,7 +463,7 @@ class LocalMCPTools:
                         health["crewai_data"] = response.json()
                     else:
                         health["crewai_server"] = "unhealthy"
-                except:
+                except (requests.RequestException, ImportError, ConnectionError, TimeoutError, json.JSONDecodeError):
                     health["crewai_server"] = "down"
                 
                 return {"success": True, "health": health}
@@ -725,7 +725,7 @@ class LocalMCPTools:
             # Пытаемся парсить JSON
             try:
                 response_data = response.json()
-            except:
+            except (json.JSONDecodeError, ValueError):
                 response_data = response.text
             
             return {
@@ -830,7 +830,7 @@ class LocalMCPTools:
                                 "size": len(response.content),
                                 "content_type": response.headers.get('content-type', '')
                             })
-                    except:
+                    except (requests.RequestException, ConnectionError, TimeoutError):
                         continue
                 
                 return {
