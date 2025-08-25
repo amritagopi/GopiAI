@@ -1296,21 +1296,35 @@ class SmartDelegator:
             if self.model_config_manager:
                 current_config = self.model_config_manager.get_current_configuration()
             
+            # Флаг для отслеживания, нужно ли использовать систему ротации
+            use_rotation_system = False
+            model_id = None
+            
             if current_config and current_config.is_available():
-                # Используем выбранную пользователем модель
+                # Пробуем использовать выбранную пользователем модель
                 model_id = current_config.model_id
-                logger.info(f"[LLM] Используем выбранную пользователем модель: {model_id} ({current_config.display_name})")
+                logger.info(f"[LLM] Пробуем выбранную пользователем модель: {model_id} ({current_config.display_name})")
                 logger.info(f"[LLM] Провайдер: {current_config.provider.value}")
                 
-                # Специальная обработка для OpenRouter моделей
-                if current_config.provider == ModelProvider.OPENROUTER:
-                    logger.info("[LLM] OpenRouter provider выбран, используем унифицированный OpenRouter-путь")
-                    # Не делаем ранний return — продолжим до секции is_openrouter
-                elif current_config.provider == ModelProvider.GEMINI:
-                    return self._make_gemini_request(messages, model_id)
-            
-            # Если нет выбранной модели, используем систему ротации
+                # Специальная обработка для Gemini моделей (ранний возврат)
+                if current_config.provider == ModelProvider.GEMINI:
+                    try:
+                        return self._make_gemini_request(messages, model_id)
+                    except Exception as e:
+                        logger.warning(f"[LLM] Ошибка с выбранной Gemini моделью {model_id}: {e}")
+                        logger.info("[LLM] Переключаемся на систему ротации из-за ошибки")
+                        use_rotation_system = True
+                        model_id = None
+                
+                # Для OpenRouter моделей продолжаем до основной секции обработки
+                elif current_config.provider == ModelProvider.OPENROUTER:
+                    logger.info("[LLM] OpenRouter provider выбран, будем пробовать в основной секции")
             else:
+                # Если нет выбранной модели, сразу используем систему ротации
+                use_rotation_system = True
+            
+            # Если нет выбранной модели ИЛИ нужно использовать ротацию из-за ошибки
+            if use_rotation_system or not model_id:
                 # Выбор модели с использованием ротации (только если нет выбранной модели)
                 has_image = any(
                     isinstance(msg.get('content'), list) and any(item.get('type') == 'image_url' for item in msg['content'])
@@ -1441,9 +1455,21 @@ class SmartDelegator:
                     # если добрались сюда — не удалось получить ответ
                     if last_err:
                         logger.error(f"❌ Ошибка OpenRouter после ретраев/фолбэка: {last_err}")
+                    
+                    # Если это была выбранная пользователем модель, пробуем систему ротации
+                    if current_config and current_config.provider == ModelProvider.OPENROUTER:
+                        logger.warning("[LLM] Выбранная OpenRouter модель не работает, переключаемся на систему ротации")
+                        return self._try_rotation_system(messages, estimated_tokens)
+                    
                     return "Пустой ответ от OpenRouter модели"
                 except Exception as e:
                     logger.error(f"❌ Ошибка OpenRouter: {str(e)}")
+                    
+                    # Если это была выбранная пользователем модель, пробуем систему ротации
+                    if current_config and current_config.provider == ModelProvider.OPENROUTER:
+                        logger.warning("[LLM] Критическая ошибка с выбранной OpenRouter моделью, переключаемся на систему ротации")
+                        return self._try_rotation_system(messages, estimated_tokens)
+                    
                     # Продолжаем со стандартным litellm
             
             # 🔥 КАСТОМНЫЙ ОБХОД ОГРАНИЧЕНИЙ GEMINI API!
@@ -1810,5 +1836,68 @@ class SmartDelegator:
         except Exception as e:
             logger.error(f"❌ Ошибка обновления моделей OpenRouter: {e}")
             return False
+
+    def _try_rotation_system(self, messages: List[Dict], estimated_tokens: int) -> str:
+        """Пробует использовать систему ротации моделей как fallback."""
+        try:
+            logger.info("[ROTATION-FALLBACK] Пробуем систему ротации моделей")
+            
+            # Определяем тип задачи
+            has_image = any(
+                isinstance(msg.get('content'), list) and any(item.get('type') == 'image_url' for item in msg['content'])
+                for msg in messages if msg.get('role') == 'user'
+            )
+            task_type = 'vision' if has_image else 'dialog'
+            logger.info(f"[ROTATION-FALLBACK] Тип задачи: {task_type}, токенов: {estimated_tokens}")
+            
+            # Пробуем получить модель из системы ротации
+            from llm_rotation_config import select_llm_model_safe
+            model_cfg = select_llm_model_safe(task_type, tokens=estimated_tokens)
+            
+            if not model_cfg:
+                # Пробуем другие типы задач
+                for alt_task in ['code', 'simple', 'summarize']:
+                    if alt_task != task_type:
+                        logger.info(f"[ROTATION-FALLBACK] Пробуем тип '{alt_task}'")
+                        model_cfg = select_llm_model_safe(alt_task, tokens=estimated_tokens)
+                        if model_cfg:
+                            break
+            
+            if model_cfg:
+                model_id = None
+                if isinstance(model_cfg, dict):
+                    model_id = model_cfg.get('id') or model_cfg.get('model_id') or model_cfg.get('name')
+                elif isinstance(model_cfg, str):
+                    model_id = model_cfg
+                
+                if model_id:
+                    logger.info(f"[ROTATION-FALLBACK] Выбрана модель из ротации: {model_id}")
+                    
+                    # Рекурсивно вызываем _call_llm с новой моделью
+                    # Но сначала временно очищаем current_config, чтобы избежать бесконечной рекурсии
+                    original_config = None
+                    if self.model_config_manager:
+                        original_config = self.model_config_manager.get_current_configuration()
+                        # Временно устанавливаем модель из ротации
+                        self.model_config_manager.set_current_model(None, model_id)
+                    
+                    try:
+                        result = self._call_llm(messages)
+                        logger.info("[ROTATION-FALLBACK] ✅ Система ротации сработала успешно")
+                        return result
+                    finally:
+                        # Восстанавливаем оригинальную конфигурацию
+                        if self.model_config_manager and original_config:
+                            self.model_config_manager.set_current_model(
+                                original_config.provider.value, 
+                                original_config.model_id
+                            )
+            
+            logger.warning("[ROTATION-FALLBACK] Не удалось найти доступную модель в системе ротации")
+            return "Система ротации не смогла найти доступную модель"
+            
+        except Exception as e:
+            logger.error(f"[ROTATION-FALLBACK] Ошибка в системе ротации: {e}")
+            return f"Ошибка системы ротации: {str(e)}"
 
 # --- END OF FILE smart_delegator.py ---
