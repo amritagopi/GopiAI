@@ -14,8 +14,8 @@ class ToolsConfig:
     def __init__(self):
         """Инициализация конфигурации"""
         self.config = self._load_default_config()
-        self._load_user_config()
         self._load_env_config()
+        self._load_user_config()
     
     def _load_default_config(self) -> Dict[str, Any]:
         """Загружает конфигурацию по умолчанию"""
@@ -136,10 +136,13 @@ class ToolsConfig:
         for env_var, (section, key) in env_mappings.items():
             value = os.getenv(env_var)
             if value:
+                if section not in self.config:
+                    self.config[section] = {}
+                
                 if key == "safe_mode" and env_var == "GOPIAI_TERMINAL_UNSAFE":
                     # Инвертируем значение для safe_mode
                     value = not self._str_to_bool(value)
-                elif key in ["serper_api_key", "serpapi_api_key", "openai_api_key", "google_api_key"]:
+                elif "api_key" in key:
                     # API ключи остаются строками
                     pass
                 else:

@@ -155,6 +155,7 @@ class OpenRouterModelWidget(QWidget):
         self.filtered_models = []
         self.selected_model = None
         self.model_items = []
+        self.load_worker = None
         
         self._setup_ui()
         self._initialize_backend_clients()
