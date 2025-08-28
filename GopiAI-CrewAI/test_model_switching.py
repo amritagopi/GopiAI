@@ -7,8 +7,10 @@ import tempfile
 from pathlib import Path
 
 # Добавляем пути для импорта
-sys.path.insert(0, str(Path(__file__).parent))
-sys.path.insert(0, str(Path(__file__).parent.parent / "GopiAI-UI" / "gopiai"))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from llm_rotation_config import (
     UsageTracker, 

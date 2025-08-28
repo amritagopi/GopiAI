@@ -40,9 +40,10 @@ class PathManager:
 
         # Добавляем путь
         if position == 0:
-            sys.path.insert(0, path)
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
         else:
-            sys.path.append(path)
+    # Заменено на использование path_manager: sys.path.append(path)
 
         self.added_paths.add(path)
         print(f"[INFO] Добавлен путь: {path}")
@@ -61,34 +62,41 @@ class PathManager:
 
             # Тестовая инфраструктура
             self.project_root / "test_infrastructure",
+            
+            # Тесты
+            self.project_root / "tests",
+            self.project_root / "tests" / "e2e",
+            self.project_root / "tests" / "memory",
+            self.project_root / "tests" / "unit",
+            self.project_root / "tests" / "integration",
+            
+            # UI тесты
+            self.project_root / "GopiAI-UI" / "tests",
+            self.project_root / "GopiAI-UI" / "tests" / "e2e",
+            self.project_root / "GopiAI-UI" / "tests" / "unit",
+            self.project_root / "GopiAI-UI" / "tests" / "ui",
 
             # CI/CD
             self.project_root / "ci_cd",
         ]
 
+        # Добавляем пути к проекту
         for path in paths_to_add:
             self.add_path(str(path), position=0)
-
-    def add_gopiai_integration(self) -> bool:
-        """
-        Добавить путь к gopiai_integration если существует
-
-        Returns:
-            bool: True если путь был добавлен
-        """
-        # Сначала проверяем основную директорию
-        primary_path = self.project_root / "GopiAI-CrewAI" / "tools" / "gopiai_integration"
-        if self.add_path(str(primary_path), position=0):
-            return True
-
-        # Если основной путь не существует, проверяем backup
-        backup_path = self.project_root / "GopiAI-CrewAI" / "tools_backup_20250828_101657" / "gopiai_integration"
-        if self.add_path(str(backup_path), position=0):
-            print("[WARNING] Используется backup версия gopiai_integration")
-            return True
-
-        print("[ERROR] Модуль gopiai_integration не найден ни в основной, ни в backup директории")
-        return False
+            
+        # Добавляем родительские директории для тестов
+        test_paths = [
+            self.project_root / "test_infrastructure" / "tests",
+            self.project_root / "test_infrastructure" / "tests" / "unit",
+            self.project_root / "test_infrastructure" / "tests" / "integration",
+        ]
+        
+        for path in test_paths:
+            self.add_path(str(path), position=0)
+            
+        # Добавляем корневую директорию проекта в конец, если её ещё нет
+        if str(self.project_root) not in sys.path:
+    # Заменено на использование path_manager: sys.path.append(str(self.project_root))
 
     def cleanup_invalid_paths(self):
         """Удалить недействительные пути из sys.path"""
@@ -121,9 +129,11 @@ def setup_project_paths():
     return path_manager
 
 
+# Функция оставлена для обратной совместимости, но теперь просто возвращает False
 def add_gopiai_integration():
-    """Добавить gopiai_integration в путь"""
-    return path_manager.add_gopiai_integration()
+    """Устаревшая функция. gopiai_integration больше не поддерживается."""
+    print("[WARNING] Функция add_gopiai_integration() устарела. gopiai_integration больше не поддерживается.")
+    return False
 
 
 def get_path_manager():

@@ -15,7 +15,8 @@ from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
 # Add test infrastructure to path
-sys.path.insert(0, str(Path(__file__).parent))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 try:
     from system_validator import SystemValidator, ValidationResult, OptimizationResult

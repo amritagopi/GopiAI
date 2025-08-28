@@ -16,7 +16,8 @@ from unittest.mock import patch, MagicMock
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 
 def pytest_configure(config):

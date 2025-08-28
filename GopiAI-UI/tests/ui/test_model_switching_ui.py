@@ -12,7 +12,7 @@ from unittest.mock import MagicMock, patch
 
 # Add test infrastructure to path
 test_infrastructure_path = Path(__file__).parent.parent.parent.parent / "test_infrastructure"
-sys.path.append(str(test_infrastructure_path))
+    # Заменено на использование path_manager: sys.path.append(str(test_infrastructure_path))
 
 from ui_fixtures import (
     qtbot, mock_model_selector, mock_chat_widget, mock_main_window,

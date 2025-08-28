@@ -44,18 +44,19 @@ try:
             break
     
     if tools_path and tools_path not in sys.path:
-        sys.path.append(tools_path)
+    # Заменено на использование path_manager: sys.path.append(tools_path)
         print(f"[INFO] Successfully loaded tools from: {tools_path}")
     
-    # Импортируем ModelProvider
-    # Импортируем ModelProvider, но не привязываем локальный тип напрямую, чтобы не конфликтовать с фолбэком
-    from gopiai_integration.model_config_manager import ModelProvider as ExternalModelProvider
-    ModelProvider = ExternalModelProvider  # type: ignore[assignment]
-    MODEL_PROVIDER_AVAILABLE = True
-    print(f"[INFO] ModelProvider imported successfully: {list(ModelProvider)}")
+    # Создаем fallback enum, так как gopiai_integration был удален
+    from enum import Enum
+    class ModelProvider(Enum):  # type: ignore[no-redef]
+        GEMINI = "gemini"
+        OPENROUTER = "openrouter"
+    
+    MODEL_PROVIDER_AVAILABLE = False
+    print("[WARNING] Using fallback ModelProvider as gopiai_integration was removed")
 except Exception as e:
-    print(f"[WARNING] Could not import ModelProvider from backend, using fallback. Error: {e}")
-    # Создаем fallback enum, совпадающий по имени с ожидаемым
+    # Fallback в случае других ошибок
     from enum import Enum
     class ModelProvider(Enum):  # type: ignore[no-redef]
         GEMINI = "gemini"
@@ -185,18 +186,44 @@ class UnifiedModelWidget(QWidget):
     def _initialize_backend_clients(self):
         """Инициализирует клиенты backend"""
         try:
-            # ModelConfigurationManager
-            from gopiai_integration.model_config_manager import get_model_config_manager
-            self.model_config_manager = get_model_config_manager()
-            logger.info("✅ ModelConfigurationManager инициализирован")
+            # Инициализируем заглушки, так как gopiai_integration был удален
+            self.model_config_manager = None
+            self.openrouter_client = None
             
-            # OpenRouter клиент
-            from gopiai_integration.openrouter_client import OpenRouterClient
-            self.openrouter_client = OpenRouterClient()
-            logger.info("✅ OpenRouterClient инициализирован")
+            logger.warning("gopiai_integration был удален. Используются заглушки для model_config_manager и openrouter_client")
+            
+            # Создаем базовую реализацию для совместимости
+            class DummyConfigManager:
+                def get_models(self, provider=None):
+                    return []
+                
+                def get_model_info(self, model_id):
+                    return {
+                        "id": model_id,
+                        "name": model_id,
+                        "provider": "unknown",
+                        "capabilities": []
+                    }
+            
+            class DummyOpenRouterClient:
+                def get_models(self):
+                    return []
+                
+                def get_model_info(self, model_id):
+                    return {
+                        "id": model_id,
+                        "name": model_id,
+                        "description": "Model information not available"
+                    }
+            
+            self.model_config_manager = DummyConfigManager()
+            self.openrouter_client = DummyOpenRouterClient()
             
         except Exception as e:
             logger.error(f"❌ Ошибка инициализации backend клиентов: {e}")
+            # Убедимся, что атрибуты определены даже в случае ошибки
+            self.model_config_manager = None
+            self.openrouter_client = None
     
     def _setup_connections(self):
         """Настраивает соединения сигналов"""
@@ -523,19 +550,26 @@ class UnifiedModelWidget(QWidget):
 
 def test_unified_widget():
     """Тестовая функция для объединенного виджета"""
-    import sys
-    from PySide6.QtWidgets import QApplication
+    app = QApplication.instance() or QApplication(sys.argv)
     
-    app = QApplication(sys.argv)
+    # Настройка логирования
+    logging.basicConfig(level=logging.DEBUG)
     
+    # Создаем и настраиваем виджет
     widget = UnifiedModelWidget()
+    widget.setWindowTitle("Unified Model Widget Test (gopiai_integration removed)")
+    widget.resize(800, 600)
     widget.show()
     
-    sys.exit(app.exec())
+    # Выводим предупреждение о том, что функциональность ограничена
+    print("\n" + "="*80)
+    print("ВНИМАНИЕ: gopiai_integration был удален. Используется ограниченный функционал.")
+    print("="*80 + "\n")
+    
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
     # Настройка логирования для тестирования
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    
     test_unified_widget()

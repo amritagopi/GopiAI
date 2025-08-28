@@ -168,7 +168,7 @@ except Exception:
 
 # --- Настройка путей и импортов ---
 current_dir = Path(__file__).parent
-sys.path.append(str(current_dir))
+    # Заменено на использование path_manager: sys.path.append(str(current_dir))
 
 # ### ИЗМЕНЕНО: Импортируем правильные фабричные функции ###
 from rag_system import get_rag_system

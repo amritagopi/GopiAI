@@ -4,6 +4,7 @@ import time
 from typing import List, Optional, Any, Mapping, ClassVar
 from pydantic import Field
 
+from path_manager import setup_project_paths
 # Импорт нашего кастомного клиента для обхода ограничений безопасности Gemini
 from .gemini_crewai_adapter import GeminiDirectLLM, create_gemini_direct_llm
 from langchain.llms.base import BaseLLM
@@ -13,7 +14,7 @@ import os
 
 # Добавляем путь к корню GopiAI-CrewAI
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(project_root)
+    # Заменено на использование path_manager: sys.path.append(project_root)
 
 from llm_rotation_config import (
     select_llm_model_safe, 

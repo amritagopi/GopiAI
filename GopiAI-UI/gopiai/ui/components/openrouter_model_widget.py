@@ -19,19 +19,20 @@ from PySide6.QtCore import Qt, Signal, QTimer, QThread
 from PySide6.QtGui import QFont, QPixmap, QIcon
 from gopiai.ui.utils.icon_helpers import create_icon_button
 
+# Инициализация логгера
+logger = logging.getLogger(__name__)
+
 # Унифицированные иконки берём через icon_helpers.create_icon_button; без локальных менеджеров
 
 # Добавляем пути к инструментам CrewAI
 try:
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../"))
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
     crew_tools_path = os.path.join(repo_root, "GopiAI-CrewAI", "tools")
     if os.path.isdir(crew_tools_path) and crew_tools_path not in sys.path:
-        sys.path.append(crew_tools_path)
+        # Заменено на использование path_manager: sys.path.append(crew_tools_path)
         logger.debug(f"[INIT] Добавлен путь к инструментам CrewAI: {crew_tools_path}")
 except Exception as e:
     logger.warning(f"Не удалось добавить пути для инструментов CrewAI: {e}")
-
-logger = logging.getLogger(__name__)
 
 class ModelLoadWorker(QThread):
     """Воркер для асинхронной загрузки моделей OpenRouter"""

@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 # Add test infrastructure to path
 test_infrastructure_path = Path(__file__).parent.parent.parent.parent / "test_infrastructure"
-sys.path.append(str(test_infrastructure_path))
+    # Заменено на использование path_manager: sys.path.append(str(test_infrastructure_path))
 
 
 class UITestRunner:

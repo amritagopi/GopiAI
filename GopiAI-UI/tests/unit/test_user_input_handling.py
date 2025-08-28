@@ -10,7 +10,7 @@ import os
 from unittest.mock import MagicMock, patch, Mock
 
 # Import test infrastructure
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
 from ui_fixtures import (
     qtbot, mock_chat_widget, mock_drag_drop, mock_keyboard_shortcuts, ui_test_data

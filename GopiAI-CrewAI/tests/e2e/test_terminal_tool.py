@@ -3,10 +3,12 @@ import sys
 import pathlib
 import pytest
 
+from path_manager import setup_project_paths
 # Ensure project root on path
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from tools.gopiai_integration.terminal_tool import TerminalTool
 

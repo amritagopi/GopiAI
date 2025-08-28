@@ -19,7 +19,8 @@ from dataclasses import dataclass, asdict
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from ci_cd.notification_system import NotificationSystem, TestResult
 

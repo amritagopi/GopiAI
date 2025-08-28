@@ -9,7 +9,7 @@ from typing import Dict, Any
 from pathlib import Path
 
 # Добавляем путь к GopiAI модулям
-sys.path.append(str(Path(__file__).parent.parent.parent))
+    # Заменено на использование path_manager: sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from crewai import Agent, Task, Crew, Process
 import yaml

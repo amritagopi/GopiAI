@@ -12,13 +12,13 @@ import sys
 import os
 
 # Add test infrastructure to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
 from fixtures import ai_service_mocker, mock_tool_manager
 from crewai_fixtures import mock_command_processor, mock_tool_executor
 
 # Import the modules we're testing
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 class TestCommandProcessing:

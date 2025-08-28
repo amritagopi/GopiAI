@@ -1,6 +1,7 @@
 import urllib.parse
 import re
 
+from path_manager import setup_project_paths
 """
 🔌 CrewAI API Client
 Клиент для интеграции с CrewAI через REST API
@@ -46,7 +47,8 @@ except ImportError as e:
         # Добавляем путь к инструментам CrewAI
         crewai_tools_path = project_root / 'GopiAI-CrewAI' / 'tools'
         if crewai_tools_path.exists() and str(crewai_tools_path) not in sys.path:
-            sys.path.insert(0, str(crewai_tools_path))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
             logger.debug(f"[INIT] Добавлен путь к инструментам CrewAI: {crewai_tools_path}")
 
     except IndexError:
@@ -151,27 +153,29 @@ class CrewAIClient:
         self.emotional_classifier = None
         if EMOTIONAL_CLASSIFIER_AVAILABLE and AIRouterLLM and EmotionalClassifier:
             try:
-                # Создаем AI Router для эмоционального классификатора
-                model_config_manager = None
-                try:
-                    from gopiai_integration.model_config_manager import get_model_config_manager
-                    model_config_manager = get_model_config_manager()
-                    logger.info("[INIT] ✅ ModelConfigManager успешно получен")
-                except Exception as mcm_error:
-                    logger.warning(f"[INIT] ⚠️ Не удалось получить ModelConfigManager: {mcm_error}")
-                    logger.info("[INIT] ℹ️ Будет использована заглушка ModelConfigManager")
+                # Создаем экземпляр AIRouterLLM с заглушкой model_config_manager
+                # Так как gopiai_integration был удален, используем None для model_config_manager
+                logger.warning("[INIT] ⚠️ gopiai_integration был удален. Используется ограниченный функционал эмоционального классификатора.")
                 
-                # Создаем экземпляр AIRouterLLM с явной передачей model_config_manager
-                # AIRouterLLM сам создаст заглушку, если model_config_manager=None
-                ai_router = AIRouterLLM(model_config_manager=model_config_manager)
+                # Создаем базовую реализацию model_config_manager для совместимости
+                class DummyConfigManager:
+                    def get_models(self, provider=None):
+                        return []
+                    
+                    def get_model_info(self, model_id):
+                        return {
+                            "id": model_id,
+                            "name": model_id,
+                            "provider": "unknown",
+                            "capabilities": []
+                        }
                 
-                # Проверяем, что model_config_manager успешно инициализирован в ai_router
-                if hasattr(ai_router, 'model_config_manager') and ai_router.model_config_manager is not None:
-                    self.emotional_classifier = EmotionalClassifier(ai_router)
-                    logger.info("[INIT] ✅ Эмоциональный классификатор инициализирован с AI Router")
-                else:
-                    logger.error("[INIT] ❌ model_config_manager не инициализирован в AIRouterLLM")
-                    self.emotional_classifier = None
+                # Создаем экземпляр AIRouterLLM с заглушкой
+                ai_router = AIRouterLLM(model_config_manager=DummyConfigManager())
+                
+                # Инициализируем эмоциональный классификатор
+                self.emotional_classifier = EmotionalClassifier(ai_router)
+                logger.info("[INIT] ✅ Эмоциональный классификатор инициализирован с ограниченным функционалом")
             except Exception as e:
                 logger.error(f"[INIT] ❌ Ошибка инициализации эмоционального классификатора: {e}")
                 self.emotional_classifier = None

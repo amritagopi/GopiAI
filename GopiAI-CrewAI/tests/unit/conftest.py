@@ -12,7 +12,7 @@ from unittest.mock import MagicMock, patch
 import json
 
 # Add test infrastructure to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
 # Import shared fixtures
 from fixtures import temp_dir, ai_service_mocker, mock_crewai_server, mock_tool_manager
@@ -26,7 +26,7 @@ from crewai_fixtures import (
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent.parent
-sys.path.append(str(project_root))
+    # Заменено на использование path_manager: sys.path.append(str(project_root))
 
 
 @pytest.fixture(scope="session")

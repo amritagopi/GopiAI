@@ -12,7 +12,8 @@ from pathlib import Path
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 # Import the comprehensive E2E tests
 from tests.e2e.test_complete_scenarios import (

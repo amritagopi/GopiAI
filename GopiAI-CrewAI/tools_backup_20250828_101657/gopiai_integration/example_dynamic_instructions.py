@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Добавляем пути для импорта
 current_dir = Path(__file__).parent
-sys.path.append(str(current_dir.parent.parent))
+    # Заменено на использование path_manager: sys.path.append(str(current_dir.parent.parent))
 
 from crewai import Agent, Task, Crew, LLM
 from dotenv import load_dotenv

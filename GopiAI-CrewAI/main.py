@@ -14,9 +14,9 @@ from typing import Dict, List, Any, Optional, Union
 
 # Добавляем пути для импорта
 current_dir = Path(__file__).parent
-sys.path.append(str(current_dir.parent))  # GOPI_AI_MODULES
-sys.path.append(str(current_dir))  # GopiAI-CrewAI
-sys.path.append(str(current_dir / 'tools'))  # tools directory
+    # Заменено на использование path_manager: sys.path.append(str(current_dir.parent))  # GOPI_AI_MODULES
+    # Заменено на использование path_manager: sys.path.append(str(current_dir))  # GopiAI-CrewAI
+    # Заменено на использование path_manager: sys.path.append(str(current_dir / 'tools'))  # tools directory
 
 # Загружаем переменные окружения (.env из нескольких локаций)
 from dotenv import load_dotenv

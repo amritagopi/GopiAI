@@ -11,8 +11,10 @@ from typing import Dict, Any, List
 
 # Добавляем пути для импорта
 project_root = Path(__file__).parent
-sys.path.insert(0, str(project_root))
-sys.path.insert(0, str(project_root / "tools"))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 # Загружаем переменные окружения из .env
 from dotenv import load_dotenv

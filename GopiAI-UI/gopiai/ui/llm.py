@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Callable, Any
 # Добавляем путь к CrewAI модулям для доступа к llm_rotation_config
 crewai_path = Path(__file__).parent.parent.parent.parent / "GopiAI-CrewAI"
 if str(crewai_path) not in sys.path:
-    sys.path.append(str(crewai_path))
+    # Заменено на использование path_manager: sys.path.append(str(crewai_path))
 
 # Для статической типизации Pyright и надёжного рантайм-импорта
 if TYPE_CHECKING:

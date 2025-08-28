@@ -202,7 +202,8 @@ project_root = r"/home/amritagopi/GopiAI"  # Прямое указание пу�
 tools_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools')
 if os.path.exists(tools_path):
     if tools_path not in sys.path:
-        sys.path.insert(0, tools_path)
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
         print(f"✅ Добавлен путь к tools: {tools_path}")
     else:
         print(f"ℹ️ Путь к tools уже в sys.path: {tools_path}")
@@ -232,7 +233,8 @@ module_paths = [
 
 for path in module_paths:
     if path not in sys.path:
-        sys.path.insert(0, path)
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 print("Модульная версия GopiAI v0.3.2 с централизованной системой тем")
 print("Добавленные пути для модулей:")

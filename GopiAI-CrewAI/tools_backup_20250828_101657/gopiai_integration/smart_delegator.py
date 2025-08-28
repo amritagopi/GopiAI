@@ -16,7 +16,8 @@ try:
     current_dir = os.path.dirname(os.path.abspath(__file__))
     crewai_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
     if crewai_root not in sys.path:
-        sys.path.insert(0, crewai_root)
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
         logger.info(f"Добавлен путь в sys.path: {crewai_root}")
     
     # Импортируем все наборы инструментов
@@ -209,7 +210,7 @@ from typing import Dict, List, Any, Optional
 import re # Added for command extraction
 
 # Импортируем модуль ротации моделей
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    # Заменено на использование path_manager: sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from llm_rotation_config import select_llm_model_safe, rate_limit_monitor
 
 # Импортируем RAGSystem

@@ -14,13 +14,13 @@ from unittest.mock import MagicMock, patch, mock_open
 import sys
 
 # Add test infrastructure to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
 from fixtures import temp_dir
 from crewai_fixtures import mock_state_manager
 
 # Import the modules we're testing
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 class TestStateManager:

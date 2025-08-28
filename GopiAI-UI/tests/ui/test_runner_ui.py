@@ -13,7 +13,7 @@ from typing import List, Dict, Any
 
 # Add test infrastructure to path
 test_infrastructure_path = Path(__file__).parent.parent.parent.parent / "test_infrastructure"
-sys.path.append(str(test_infrastructure_path))
+    # Заменено на использование path_manager: sys.path.append(str(test_infrastructure_path))
 
 from test_config import TestConfig
 from fixtures import setup_test_environment, cleanup_test_environment

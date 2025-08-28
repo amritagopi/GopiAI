@@ -32,7 +32,8 @@ class CrewAIToolsIntegrator:
         # Добавляем путь к crewai_toolkit
         toolkit_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "crewai_toolkit")
         if toolkit_path not in sys.path:
-            sys.path.insert(0, toolkit_path)
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
         
         self._discover_tools()
         self.logger.info(f"✅ CrewAI Tools Integrator инициализирован. Найдено {len(self.available_tools)} инструментов")
