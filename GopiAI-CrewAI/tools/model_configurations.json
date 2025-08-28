@@ -3827,6 +3827,138 @@
         "temperature": 0.7,
         "max_tokens": 4096
       }
+    },
+    "openrouter_deepseek/deepseek-chat-v3.1:free": {
+      "provider": "openrouter",
+      "model_id": "deepseek/deepseek-chat-v3.1:free",
+      "display_name": "DeepSeek: DeepSeek V3.1 (free) (deepseek/deepseek-chat-v3.1:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_google/gemini-2.5-flash-image-preview:free": {
+      "provider": "openrouter",
+      "model_id": "google/gemini-2.5-flash-image-preview:free",
+      "display_name": "Google: Gemini 2.5 Flash Image Preview (free) (google/gemini-2.5-flash-image-preview:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_meta-llama/llama-3.3-8b-instruct:free": {
+      "provider": "openrouter",
+      "model_id": "meta-llama/llama-3.3-8b-instruct:free",
+      "display_name": "Meta: Llama 3.3 8B Instruct (free) (meta-llama/llama-3.3-8b-instruct:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_meta-llama/llama-4-maverick:free": {
+      "provider": "openrouter",
+      "model_id": "meta-llama/llama-4-maverick:free",
+      "display_name": "Meta: Llama 4 Maverick (free) (meta-llama/llama-4-maverick:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_meta-llama/llama-4-scout:free": {
+      "provider": "openrouter",
+      "model_id": "meta-llama/llama-4-scout:free",
+      "display_name": "Meta: Llama 4 Scout (free) (meta-llama/llama-4-scout:free)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_google/gemini-2.5-flash-image-preview": {
+      "provider": "openrouter",
+      "model_id": "google/gemini-2.5-flash-image-preview",
+      "display_name": "Google: Gemini 2.5 Flash Image Preview (google/gemini-2.5-flash-image-preview)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_nousresearch/hermes-4-405b": {
+      "provider": "openrouter",
+      "model_id": "nousresearch/hermes-4-405b",
+      "display_name": "Nous: Hermes 4 405B (nousresearch/hermes-4-405b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_nousresearch/hermes-4-70b": {
+      "provider": "openrouter",
+      "model_id": "nousresearch/hermes-4-70b",
+      "display_name": "Nous: Hermes 4 70B (nousresearch/hermes-4-70b)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_qwen/qwen3-30b-a3b-thinking-2507": {
+      "provider": "openrouter",
+      "model_id": "qwen/qwen3-30b-a3b-thinking-2507",
+      "display_name": "Qwen: Qwen3 30B A3B Thinking 2507 (qwen/qwen3-30b-a3b-thinking-2507)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_qwen/qwen3-coder-30b-a3b-instruct": {
+      "provider": "openrouter",
+      "model_id": "qwen/qwen3-coder-30b-a3b-instruct",
+      "display_name": "Qwen: Qwen3 Coder 30B A3B Instruct (qwen/qwen3-coder-30b-a3b-instruct)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
+    },
+    "openrouter_x-ai/grok-code-fast-1": {
+      "provider": "openrouter",
+      "model_id": "x-ai/grok-code-fast-1",
+      "display_name": "xAI: Grok Code Fast 1 (x-ai/grok-code-fast-1)",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "is_active": false,
+      "is_default": false,
+      "parameters": {
+        "temperature": 0.7,
+        "max_tokens": 4096
+      }
     }
   },
   "current": {
@@ -3834,5 +3966,5 @@
     "model_id": "deepseek/deepseek-chat-v3-0324:free"
   },
   "version": "1.0",
-  "last_updated": "1756030599.4963155"
+  "last_updated": "1756196614.926041"
 }

@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 from pydantic import BaseModel, Field
 
 from crewai.tools import BaseTool
-from crewai.utilities import get_from_dict_or_env
+
 
 
 class WebSearchInput(BaseModel):

@@ -4,7 +4,7 @@
 """
 
 from typing import List, Dict, Any, Optional
-from crewai_tools import BaseTool
+from crewai.tools.base_tool import BaseTool
 import logging
 
 from .unrestricted_filesystem_tool import UnrestrictedFileSystemTool

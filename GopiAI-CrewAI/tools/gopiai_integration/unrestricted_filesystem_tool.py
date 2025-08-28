@@ -13,7 +13,7 @@ import json
 import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
-from crewai_tools import BaseTool
+from crewai.tools.base_tool import BaseTool
 from pydantic import BaseModel, Field
 
 
