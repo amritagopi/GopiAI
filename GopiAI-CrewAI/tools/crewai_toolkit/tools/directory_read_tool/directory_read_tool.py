@@ -1,7 +1,7 @@
 import os
 from typing import Any, Optional, Type
 
-from crewai.tools import BaseTool
+from crewai.tools.base_tool import BaseTool
 from pydantic import BaseModel, Field
 
 
