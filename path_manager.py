@@ -40,10 +40,9 @@ class PathManager:
 
         # Добавляем путь
         if position == 0:
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
+            sys.path.insert(0, path)
         else:
-    # Заменено на использование path_manager: sys.path.append(path)
+            sys.path.append(path)
 
         self.added_paths.add(path)
         print(f"[INFO] Добавлен путь: {path}")
@@ -96,7 +95,7 @@ class PathManager:
             
         # Добавляем корневую директорию проекта в конец, если её ещё нет
         if str(self.project_root) not in sys.path:
-    # Заменено на использование path_manager: sys.path.append(str(self.project_root))
+            sys.path.append(str(self.project_root))
 
     def cleanup_invalid_paths(self):
         """Удалить недействительные пути из sys.path"""

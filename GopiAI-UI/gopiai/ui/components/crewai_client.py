@@ -1,7 +1,6 @@
 import urllib.parse
 import re
 
-from path_manager import setup_project_paths
 """
 🔌 CrewAI API Client
 Клиент для интеграции с CrewAI через REST API
@@ -34,25 +33,11 @@ print('sys.path:', sys.path)
 
 # --- Централизованное управление путями ---
 try:
-    from ....path_manager import setup_project_paths
+    from path_manager import setup_project_paths
     path_manager = setup_project_paths()
     logger.info("[INIT] ✅ Пути проекта настроены через централизованный менеджер")
 except ImportError as e:
     logger.warning(f"[INIT] ⚠️ Не удалось импортировать path_manager: {e}")
-    # Fallback to old method
-    try:
-        # Определяем корневую директорию проекта (GOPI_AI_MODULES)
-        project_root = Path(__file__).resolve().parents[4]
-
-        # Добавляем путь к инструментам CrewAI
-        crewai_tools_path = project_root / 'GopiAI-CrewAI' / 'tools'
-        if crewai_tools_path.exists() and str(crewai_tools_path) not in sys.path:
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
-            logger.debug(f"[INIT] Добавлен путь к инструментам CrewAI: {crewai_tools_path}")
-
-    except IndexError:
-        logger.error("[INIT] Не удалось определить корневую директорию проекта. Проверьте структуру папок.")
 
 # Эмоциональный классификатор отключен после рефакторинга
 EMOTIONAL_CLASSIFIER_AVAILABLE = False

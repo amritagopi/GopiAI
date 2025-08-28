@@ -157,7 +157,7 @@ try:
 except Exception:
     # fallback no-op if module not available
     def jlog(*args, **kwargs):  # type: ignore
-        logging.getLogger(__name__).log(getattr(logging, kwargs.get("level","INFO")), kwargs.get("message",""))
+        logging.getLogger(__name__).log(getattr(logging, kwargs.get("level","INFO")), kwargs.get("message", ""))
     def ensure_request_id(existing=None):  # type: ignore
         return str(uuid.uuid4())
     def mask_headers(h):  # type: ignore
@@ -356,15 +356,38 @@ try:
     # 1. Инициализируем RAG систему
     rag_system_instance = get_rag_system()
     
-    # 2. Создаем базовый обработчик запросов (замена SmartDelegator)
-    smart_delegator_instance = None  # Временно отключен после рефакторинга
+    # 2. Создаем простого агента для обработки задач
+    from crewai import Agent, Task, Crew
+    from tools.crewai_toolkit.tools.directory_read_tool.directory_read_tool import DirectoryReadTool
+
+    directory_read_tool = DirectoryReadTool()
+
+    agent = Agent(
+        role="File System Expert",
+        goal="List the contents of a directory.",
+        backstory="You are an expert in navigating file systems and listing directory contents.",
+        tools=[directory_read_tool],
+        verbose=True,
+    )
+
+    def process_crew_task(message):
+        task = Task(
+            description=f"List the contents of the directory specified in the message: {message}",
+            expected_output="A list of files and directories.",
+            agent=agent,
+        )
+        crew = Crew(
+            agents=[agent],
+            tasks=[task],
+            verbose=2,
+        )
+        return crew.kickoff()
+
+    smart_delegator_instance = process_crew_task
     
-    # 3. Инициализируем интегратор инструментов (временно отключен)
-    # from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
-    # tools_integrator_instance = get_crewai_tools_integrator()
-    tools_integrator_instance = None  # Временно отключен после рефакторинга
+    tools_integrator_instance = None
     
-    logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
+    logger.info("✅ Simple agent for task processing initialized.")
     SERVER_IS_READY = True
 
 except Exception as e:
@@ -422,7 +445,7 @@ def process_task(task_id: str):
         return
 
     if not smart_delegator_instance:
-        err_msg = "Smart Delegator not initialized (temporarily disabled after refactoring). Cannot process task."
+        err_msg = "Smart Delegator not initialized. Cannot process task."
         logger.error(err_msg, extra={'task_id': task_id})
         task.fail(err_msg)
         return
@@ -431,15 +454,10 @@ def process_task(task_id: str):
         task.start_processing()
         logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
 
-        # Temporary basic response until SmartDelegator is reimplemented
-        response_data = {
-            "response": f"Обработка запроса '{task.message}' временно недоступна после рефакторинга инструментов.",
-            "status": "refactoring_in_progress",
-            "message": "Система находится в процессе рефакторинга. Кастомные инструменты были удалены, нативные CrewAI инструменты сохранены."
-        }
+        result = smart_delegator_instance(task.message)
 
-        logger.info(f"Task {task_id} processed with temporary response. Response data: {response_data}", extra={'task_id': task_id})
-        task.complete(response_data)
+        logger.info(f"Task {task_id} processed. Response data: {result}", extra={'task_id': task_id})
+        task.complete(result)
 
     except Exception as e:
         error_msg = f"An unexpected error occurred while processing task {task_id}."
@@ -477,27 +495,27 @@ def process_request():
     op_start = now_ms()
     jlog(level="INFO", event="api_entry", request_id=rid, route="/api/process", method="POST")
     if not SERVER_IS_READY:
-        return jsonify({"error": "Server started in limited mode due to initialization error."}), 503
+        return jsonify({"error": "Server started in limited mode due to initialization error."} ), 503
 
     try:
         data = request.get_json()
         if data is None:
             logger.warning("Request received with non-JSON or empty body.", extra={'request_id': rid})
-            return jsonify({"error": "Invalid request: body must be a valid JSON."}), 400
+            return jsonify({"error": "Invalid request: body must be a valid JSON."} ), 400
 
         jlog(level="DEBUG", event="api_payload", request_id=rid, payload_keys=list(data.keys()))
 
         message = data.get('message')
         if not message:
             logger.warning("Request is missing 'message' field.", extra={'request_id': rid})
-            return jsonify({"error": "Missing required 'message' field in JSON payload."}), 400
+            return jsonify({"error": "Missing required 'message' field in JSON payload."} ), 400
 
         metadata = data.get('metadata', {})
         logger.info(f"Received task with message: '{message}'", extra={'request_id': rid})
         
     except Exception as e:
         logger.error(f"Failed to parse JSON payload: {e}", exc_info=True, extra={'request_id': rid})
-        return jsonify({"error": f"Invalid JSON format: {e}"}), 400
+        return jsonify({"error": f"Invalid JSON format: {e}"} ), 400
 
     task_id = str(uuid.uuid4())
     task = Task(task_id, message, metadata)
@@ -616,7 +634,7 @@ def update_provider_model_state():
         
     except Exception as e:
         logger.error(f"Error updating state: {str(e)}", exc_info=True)
-        return jsonify({"error": f"Failed to update state: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to update state: {str(e)}"} ), 500
 
 @app.route('/settings/effective', methods=['GET'])
 def get_effective_config():
@@ -630,7 +648,7 @@ def get_effective_config():
         return jsonify(EFFECTIVE_CONFIG_LAST)
     except Exception as e:
         logger.error(f"Error in /settings/effective: {e}", exc_info=True)
-        return jsonify({"error": f"Failed to fetch effective config: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to fetch effective config: {str(e)}"} ), 500
 
 
 @app.route('/internal/state', methods=['GET'])
@@ -641,7 +659,7 @@ def get_current_state():
         return jsonify(state)
     except Exception as e:
         logger.error(f"Error loading state: {str(e)}", exc_info=True)
-        return jsonify({"error": f"Failed to load state: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to load state: {str(e)}"} ), 500
 
 # --- API endpoints for Tools Management ---
 
@@ -886,8 +904,8 @@ def ui_terminal_unsafe():
     <!doctype html>
     <html lang=\"ru\">
     <head>
-      <meta charset=\"utf-8\" />
-      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+      <meta charset=\"utf-8" />
+      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1" />
       <title>GopiAI — Настройки терминала</title>
       <style>
         body { font-family: system-ui, Arial, sans-serif; padding: 24px; background: #111; color: #eee; }
@@ -905,22 +923,22 @@ def ui_terminal_unsafe():
       </style>
     </head>
     <body>
-      <div class=\"card\">
+      <div class="card">
         <h1>Настройки терминала</h1>
-        <p class=\"desc\">Переключатель небезопасного режима терминала. Включай только если доверяешь задачам и окружению.</p>
-        <div class=\"row\">
+        <p class="desc">Переключатель небезопасного режима терминала. Включай только если доверяешь задачам и окружению.</p>
+        <div class="row">
           <label>
-            <input id=\"toggle\" type=\"checkbox\" /> Разрешить терминал без ограничений
+            <input id="toggle" type="checkbox" /> Разрешить терминал без ограничений
           </label>
         </div>
-        <div class=\"row status\">
-          <span id=\"source\" class=\"badge\"></span>
+        <div class="row status">
+          <span id="source" class="badge"></span>
         </div>
-        <div class=\"row\">
-          <button id=\"save\">Сохранить</button>
-          <span id=\"saved\" style=\"margin-left:10px;color:#7bd87b;display:none;\">Сохранено ✔</span>
+        <div class="row">
+          <button id="save">Сохранить</button>
+          <span id="saved" style="margin-left:10px;color:#7bd87b;display:none;">Сохранено ✔</span>
         </div>
-        <div class=\"row\" style=\"margin-top:12px;color:#aaa;\">
+        <div class="row" style="margin-top:12px;color:#aaa;">
           Приоритет: <code>GOPIAI_TERMINAL_UNSAFE</code> в среде > <code>settings.json</code>
         </div>
       </div>
