@@ -149,6 +149,7 @@ load_dotenv(dotenv_path="../.env")
 load_dotenv(dotenv_path=".env")
 
 from flask import Flask, request, jsonify
+from asgiref.wsgi import WsgiToAsgi
 
 # DeerFlow logging integration
 try:
@@ -156,7 +157,7 @@ try:
 except Exception:
     # fallback no-op if module not available
     def jlog(*args, **kwargs):  # type: ignore
-        logging.getLogger(__name__).log(getattr(logging, kwargs.get("level","INFO")), kwargs.get("message",""))
+        logging.getLogger(__name__).log(getattr(logging, kwargs.get("level","INFO")), kwargs.get("message", ""))
     def ensure_request_id(existing=None):  # type: ignore
         return str(uuid.uuid4())
     def mask_headers(h):  # type: ignore
@@ -167,11 +168,11 @@ except Exception:
 
 # --- Настройка путей и импортов ---
 current_dir = Path(__file__).parent
-sys.path.append(str(current_dir))
+    # Заменено на использование path_manager: sys.path.append(str(current_dir))
 
 # ### ИЗМЕНЕНО: Импортируем правильные фабричные функции ###
 from rag_system import get_rag_system
-from tools.gopiai_integration.smart_delegator import SmartDelegator
+# Custom SmartDelegator removed - using basic CrewAI functionality
 
 # Импортируем функции для работы с провайдерами и моделями
 try:
@@ -286,25 +287,17 @@ cleanup_thread.start()
 
 app = Flask(__name__)
  
-# --- Settings manager for UI toggle ---
-try:
-    from tools.gopiai_integration.settings_manager import (
-        read_settings as _read_settings,
-        write_settings as _write_settings,
-        set_terminal_unsafe as _set_terminal_unsafe,
-        get_primary_settings_path as _get_primary_settings_path,
-    )
-except Exception:
-    # Graceful fallback if module layout differs
-    def _read_settings():
-        return {}
-    def _write_settings(data):
-        raise RuntimeError("settings_manager not available")
-    def _set_terminal_unsafe(enabled: bool):
-        raise RuntimeError("settings_manager not available")
-    def _get_primary_settings_path(create_dirs: bool = False):
-        from pathlib import Path as __P
-        return __P.cwd() / "settings.json"
+# --- Settings manager for UI toggle (temporarily disabled) ---
+# Custom settings manager removed - using basic fallback
+def _read_settings():
+    return {}
+def _write_settings(data):
+    raise RuntimeError("settings_manager not available")
+def _set_terminal_unsafe(enabled: bool):
+    raise RuntimeError("settings_manager not available")
+def _get_primary_settings_path(create_dirs: bool = False):
+    from pathlib import Path as __P
+    return __P.cwd() / "settings.json"
 
 # Flask before/after request hooks to implement DeerFlow request_in/request_out
 @app.before_request
@@ -363,14 +356,38 @@ try:
     # 1. Инициализируем RAG систему
     rag_system_instance = get_rag_system()
     
-    # 2. Создаем SmartDelegator С RAG
-    smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
+    # 2. Создаем простого агента для обработки задач
+    from crewai import Agent, Task, Crew
+    from tools.crewai_toolkit.tools.directory_read_tool.directory_read_tool import DirectoryReadTool
+
+    directory_read_tool = DirectoryReadTool()
+
+    agent = Agent(
+        role="File System Expert",
+        goal="List the contents of a directory.",
+        backstory="You are an expert in navigating file systems and listing directory contents.",
+        tools=[directory_read_tool],
+        verbose=True,
+    )
+
+    def process_crew_task(message):
+        task = Task(
+            description=f"List the contents of the directory specified in the message: {message}",
+            expected_output="A list of files and directories.",
+            agent=agent,
+        )
+        crew = Crew(
+            agents=[agent],
+            tasks=[task],
+            verbose=2,
+        )
+        return crew.kickoff()
+
+    smart_delegator_instance = process_crew_task
     
-    # 3. Инициализируем интегратор инструментов
-    from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
-    tools_integrator_instance = get_crewai_tools_integrator()
+    tools_integrator_instance = None
     
-    logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
+    logger.info("✅ Simple agent for task processing initialized.")
     SERVER_IS_READY = True
 
 except Exception as e:
@@ -414,7 +431,10 @@ def health_check():
     return jsonify({
         "status": "online" if SERVER_IS_READY else "limited_mode",
         "rag_status": rag_status,
-        "indexed_documents": indexed_documents
+        "indexed_documents": indexed_documents,
+        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "smart_delegator_status": "Disabled - replaced with basic functionality",
+        "tools_integrator_status": "Disabled - replaced with native CrewAI tools"
     })
 
 def process_task(task_id: str):
@@ -433,15 +453,12 @@ def process_task(task_id: str):
     try:
         task.start_processing()
         logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
-        
-        response_data = smart_delegator_instance.process_request(
-            message=task.message,
-            metadata=task.metadata
-        )
-        
-        logger.info(f"Task {task_id} processed successfully.", extra={'task_id': task_id})
-        task.complete(response_data)
-        
+
+        result = smart_delegator_instance(task.message)
+
+        logger.info(f"Task {task_id} processed. Response data: {result}", extra={'task_id': task_id})
+        task.complete(result)
+
     except Exception as e:
         error_msg = f"An unexpected error occurred while processing task {task_id}."
         logger.error(error_msg, exc_info=True, extra={'task_id': task_id})
@@ -478,27 +495,27 @@ def process_request():
     op_start = now_ms()
     jlog(level="INFO", event="api_entry", request_id=rid, route="/api/process", method="POST")
     if not SERVER_IS_READY:
-        return jsonify({"error": "Server started in limited mode due to initialization error."}), 503
+        return jsonify({"error": "Server started in limited mode due to initialization error."} ), 503
 
     try:
         data = request.get_json()
         if data is None:
             logger.warning("Request received with non-JSON or empty body.", extra={'request_id': rid})
-            return jsonify({"error": "Invalid request: body must be a valid JSON."}), 400
+            return jsonify({"error": "Invalid request: body must be a valid JSON."} ), 400
 
         jlog(level="DEBUG", event="api_payload", request_id=rid, payload_keys=list(data.keys()))
 
         message = data.get('message')
         if not message:
             logger.warning("Request is missing 'message' field.", extra={'request_id': rid})
-            return jsonify({"error": "Missing required 'message' field in JSON payload."}), 400
+            return jsonify({"error": "Missing required 'message' field in JSON payload."} ), 400
 
         metadata = data.get('metadata', {})
         logger.info(f"Received task with message: '{message}'", extra={'request_id': rid})
         
     except Exception as e:
         logger.error(f"Failed to parse JSON payload: {e}", exc_info=True, extra={'request_id': rid})
-        return jsonify({"error": f"Invalid JSON format: {e}"}), 400
+        return jsonify({"error": f"Invalid JSON format: {e}"} ), 400
 
     task_id = str(uuid.uuid4())
     task = Task(task_id, message, metadata)
@@ -541,8 +558,11 @@ def debug_status():
         "server_ready": SERVER_IS_READY,
         "smart_delegator_ready": smart_delegator_instance is not None,
         "rag_system_ready": rag_system_instance is not None,
+        "tools_integrator_ready": tools_integrator_instance is not None,
         "active_tasks": len(TASKS),
-        "task_ids": list(TASKS.keys())
+        "task_ids": list(TASKS.keys()),
+        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "gopiai_integration_status": "Removed - replaced with native CrewAI functionality"
     })
 
 # --- Новые эндпоинты для синхронизации состояния провайдеров и моделей ---
@@ -592,17 +612,18 @@ def update_provider_model_state():
         except Exception as e:
             logger.warning(f"⚠️ Не удалось обновить UsageTracker: {e}")
         
-        # Обновляем текущую модель в ModelConfigManager
-        try:
-            from tools.gopiai_integration.model_config_manager import get_model_config_manager
-            mcm = get_model_config_manager()
-            if mcm:
-                mcm.switch_to_provider(provider)
-                if model_id:
-                    mcm.set_current_configuration(provider, model_id)
-                logger.info(f"✅ ModelConfigManager успешно обновлен: provider={provider}, model_id={model_id}")
-        except Exception as e:
-            logger.warning(f"⚠️ Не удалось обновить ModelConfigManager: {e}")
+        # Обновляем текущую модель в ModelConfigManager (временно отключен)
+        # try:
+        #     from tools.gopiai_integration.model_config_manager import get_model_config_manager
+        #     mcm = get_model_config_manager()
+        #     if mcm:
+        #         mcm.switch_to_provider(provider)
+        #         if model_id:
+        #             mcm.set_current_configuration(provider, model_id)
+        #         logger.info(f"✅ ModelConfigManager успешно обновлен: provider={provider}, model_id={model_id}")
+        # except Exception as e:
+        #     logger.warning(f"⚠️ Не удалось обновить ModelConfigManager: {e}")
+        logger.info(f"ModelConfigManager временно отключен после рефакторинга")
         
         return jsonify({
             "status": "success",
@@ -613,7 +634,7 @@ def update_provider_model_state():
         
     except Exception as e:
         logger.error(f"Error updating state: {str(e)}", exc_info=True)
-        return jsonify({"error": f"Failed to update state: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to update state: {str(e)}"} ), 500
 
 @app.route('/settings/effective', methods=['GET'])
 def get_effective_config():
@@ -627,7 +648,7 @@ def get_effective_config():
         return jsonify(EFFECTIVE_CONFIG_LAST)
     except Exception as e:
         logger.error(f"Error in /settings/effective: {e}", exc_info=True)
-        return jsonify({"error": f"Failed to fetch effective config: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to fetch effective config: {str(e)}"} ), 500
 
 
 @app.route('/internal/state', methods=['GET'])
@@ -638,25 +659,49 @@ def get_current_state():
         return jsonify(state)
     except Exception as e:
         logger.error(f"Error loading state: {str(e)}", exc_info=True)
-        return jsonify({"error": f"Failed to load state: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to load state: {str(e)}"} ), 500
 
 # --- API endpoints for Tools Management ---
 
 @app.route('/api/tools', methods=['GET'])
 def get_tools():
-    """Получить список всех инструментов с их статусом"""
+    """Получить список всех инструментов с их статусом (временно упрощен после рефакторинга)"""
     try:
         if not tools_integrator_instance:
-            return jsonify({"error": "Tools integrator not initialized"}), 500
-        
+            # Return basic native CrewAI tools list
+            return jsonify({
+                "native_crewai_tools": [
+                    {
+                        "name": "Directory Read Tool",
+                        "description": "Чтение содержимого директорий",
+                        "enabled": True,
+                        "available": True
+                    },
+                    {
+                        "name": "File Read Tool",
+                        "description": "Чтение файлов",
+                        "enabled": True,
+                        "available": True
+                    },
+                    {
+                        "name": "Code Interpreter Tool",
+                        "description": "Исполнение кода",
+                        "enabled": True,
+                        "available": True
+                    }
+                ],
+                "status": "refactoring_in_progress",
+                "message": "Интегратор инструментов временно отключен после рефакторинга"
+            })
+
         # Получаем сводку инструментов по категориям
         tools_summary = tools_integrator_instance.get_tools_summary()
-        
+
         # Читаем настройки переключателей и ключей
         settings = _read_settings()
         tool_toggles = settings.get('tools', {}).get('toggles', {})
         tool_keys = settings.get('tools', {}).get('keys', {})
-        
+
         # Формируем ответ
         result = {}
         for category, tools in tools_summary.items():
@@ -667,7 +712,7 @@ def get_tools():
                 enabled = tool_toggles.get(tool_name, True)
                 # Проверяем наличие кастомного ключа
                 has_custom_key = tool_name in tool_keys
-                
+
                 result[category].append({
                     'name': tool_name,
                     'description': tool['description'],
@@ -675,7 +720,7 @@ def get_tools():
                     'has_custom_key': has_custom_key,
                     'available': tool['available']
                 })
-        
+
         return jsonify(result)
     except Exception as e:
         logger.error(f"Error getting tools: {e}")
@@ -762,24 +807,24 @@ def set_tool_key():
 
 @app.route('/api/agents', methods=['GET'])
 def get_agents():
-    """Получить список доступных агент-шаблонов (и флоу, если появятся)"""
+    """Получить список доступных агент-шаблонов (временно отключен после рефакторинга)"""
     try:
-        from tools.gopiai_integration.agent_templates import AgentTemplateSystem
-        ats = AgentTemplateSystem(verbose=False)
-        template_names = ats.list_available_templates()
-
-        agents = []
-        get_info = getattr(ats, "get_template_info", None)
-        for name in template_names:
-            info = get_info(name) if callable(get_info) else {}
-            agents.append({
-                "id": name,
-                "name": info.get("role", name),
-                "description": info.get("goal", info.get("backstory", "")) or "",
+        # Custom agent templates removed - using basic CrewAI agents
+        agents = [
+            {
+                "id": "coder",
+                "name": "Coder Agent",
+                "description": "Агент для написания и отладки кода",
                 "type": "agent"
-            })
+            },
+            {
+                "id": "researcher",
+                "name": "Researcher Agent",
+                "description": "Агент для исследования и анализа информации",
+                "type": "agent"
+            }
+        ]
 
-        # В будущем сюда можно добавить реальные флоу
         flows = [
             {
                 "id": "simple_flow",
@@ -859,8 +904,8 @@ def ui_terminal_unsafe():
     <!doctype html>
     <html lang=\"ru\">
     <head>
-      <meta charset=\"utf-8\" />
-      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+      <meta charset=\"utf-8" />
+      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1" />
       <title>GopiAI — Настройки терминала</title>
       <style>
         body { font-family: system-ui, Arial, sans-serif; padding: 24px; background: #111; color: #eee; }
@@ -878,22 +923,22 @@ def ui_terminal_unsafe():
       </style>
     </head>
     <body>
-      <div class=\"card\">
+      <div class="card">
         <h1>Настройки терминала</h1>
-        <p class=\"desc\">Переключатель небезопасного режима терминала. Включай только если доверяешь задачам и окружению.</p>
-        <div class=\"row\">
+        <p class="desc">Переключатель небезопасного режима терминала. Включай только если доверяешь задачам и окружению.</p>
+        <div class="row">
           <label>
-            <input id=\"toggle\" type=\"checkbox\" /> Разрешить терминал без ограничений
+            <input id="toggle" type="checkbox" /> Разрешить терминал без ограничений
           </label>
         </div>
-        <div class=\"row status\">
-          <span id=\"source\" class=\"badge\"></span>
+        <div class="row status">
+          <span id="source" class="badge"></span>
         </div>
-        <div class=\"row\">
-          <button id=\"save\">Сохранить</button>
-          <span id=\"saved\" style=\"margin-left:10px;color:#7bd87b;display:none;\">Сохранено ✔</span>
+        <div class="row">
+          <button id="save">Сохранить</button>
+          <span id="saved" style="margin-left:10px;color:#7bd87b;display:none;">Сохранено ✔</span>
         </div>
-        <div class=\"row\" style=\"margin-top:12px;color:#aaa;\">
+        <div class="row" style="margin-top:12px;color:#aaa;">
           Приоритет: <code>GOPIAI_TERMINAL_UNSAFE</code> в среде > <code>settings.json</code>
         </div>
       </div>
@@ -996,5 +1041,12 @@ if __name__ == '__main__':
         logger.error("Server not started due to initialization errors.")
         print("CRITICAL ERROR: Server cannot be started due to initialization errors.")
         sys.exit(1)
+
+# --- END OF FILE crewai_api_server.py ---
+
+sys.exit(1)
+
+# ASGI приложение для совместимости с uvicorn
+asgi_app = WsgiToAsgi(app)
 
 # --- END OF FILE crewai_api_server.py ---

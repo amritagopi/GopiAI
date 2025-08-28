@@ -19,7 +19,8 @@ from unittest.mock import Mock, patch, MagicMock
 from datetime import datetime, timedelta
 
 # Add test infrastructure to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'test_infrastructure'))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from memory_fixtures import (
     MockMemorySystem, MockTxtaiIndex, MockMemoryEntry, MockSearchResult,
@@ -29,9 +30,12 @@ from memory_fixtures import (
 )
 
 # Add GopiAI modules to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-Core'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-CrewAI'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-UI'))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 
 class TestConversationStorage:

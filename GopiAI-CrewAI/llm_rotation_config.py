@@ -26,6 +26,7 @@ import base64
 import os
 import time
 import re
+import logging
 from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
@@ -133,6 +134,20 @@ MODELS: list[dict] = [
         "rpd": 100,
         "base_score": 0.3,
     },
+    # Локальные модели (без API ключей)
+    {
+        "display_name": "TinyLlama 1.1B (local)",
+        "id": "local/tinyllama-1.1b",
+        "provider": "local",
+        "rpm": 5,
+        "tpm": 1000,
+        "type": ["simple", "dialog", "code"],
+        "priority": 5,
+        "rpd": 0,
+        "base_score": 0.4,
+        "local_model": True,
+        "model_path": "TheBloke/TinyLlama-1.1B-Chat-v0.3-GGUF/tinyllama-1.1b-chat-v0.3.Q2_K.gguf"
+    }
 ]
 
 ###############################################################################
@@ -222,14 +237,27 @@ class UsageTracker:
         
         # Проверяем черный список
         if self._check_blacklist(mid):
+            logger.warning(f"❌ Модель {mid} заблокирована в черном списке (осталось: {self._usage[mid].blacklisted_until - time.time():.1f} сек)")
             return False
             
         usage = self._usage[mid]
-        return (
+        can_use = (
             usage.rpm < model_cfg["rpm"]
             and usage.tpm + tokens < model_cfg["tpm"]
             and usage.rpd < model_cfg["rpd"]
         )
+        
+        if not can_use:
+            reasons = []
+            if usage.rpm >= model_cfg["rpm"]:
+                reasons.append(f"RPM лимит: {usage.rpm}/{model_cfg['rpm']}")
+            if usage.tpm + tokens >= model_cfg["tpm"]:
+                reasons.append(f"TPM лимит: {usage.tpm + tokens}/{model_cfg['tpm']}")
+            if usage.rpd >= model_cfg["rpd"]:
+                reasons.append(f"RPD лимит: {usage.rpd}/{model_cfg['rpd']}")
+            logger.warning(f"❌ Модель {mid} недоступна: {', '.join(reasons)}")
+            
+        return can_use
 
     def register_use(self, model_cfg: dict, tokens: int = 0) -> None:
         mid = model_cfg["id"]
@@ -250,7 +278,7 @@ class UsageTracker:
                 # Блокировка на N секунд, где N = 60 / rpm_limit
                 block_duration = 60.0 / model_cfg["rpm"]
                 usage.blacklisted_until = now + block_duration
-                print(f"[BLACKLIST] Model {mid} blocked for {block_duration:.1f} seconds due to RPM violation")
+                logger.warning(f"🔒 Модель {mid} заблокирована на {block_duration:.1f} сек из-за превышения RPM (текущий: {usage.rpm}, лимит: {model_cfg['rpm']})")
 
     def get_stats(self, model_id: str) -> dict:
         u = self._usage[model_id]

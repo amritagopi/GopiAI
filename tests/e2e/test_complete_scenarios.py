@@ -21,7 +21,8 @@ import sys
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from test_infrastructure.service_manager import ServiceManager
 from test_infrastructure.fixtures import AIServiceMocker, MockConversation

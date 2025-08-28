@@ -223,6 +223,9 @@ class ToolsTab(QWidget):
         
         # Создаем группы по категориям
         for category, tools in self.tools_data.items():
+            if not isinstance(tools, list):
+                continue
+
             if not tools:
                 continue
                 
@@ -234,11 +237,12 @@ class ToolsTab(QWidget):
             
             # Добавляем инструменты в группу
             for tool in tools:
-                tool_widget = ToolItemWidget(tool['name'], tool)
-                tool_widget.tool_toggled.connect(self._on_tool_toggled)
-                tool_widget.tool_attached.connect(self._on_tool_attached)
-                tool_widget.key_set.connect(self._on_key_set)
-                group_layout.addWidget(tool_widget)
+                if isinstance(tool, dict) and 'name' in tool:
+                    tool_widget = ToolItemWidget(tool['name'], tool)
+                    tool_widget.tool_toggled.connect(self._on_tool_toggled)
+                    tool_widget.tool_attached.connect(self._on_tool_attached)
+                    tool_widget.key_set.connect(self._on_key_set)
+                    group_layout.addWidget(tool_widget)
             
             self.tools_layout.addWidget(group_box)
         

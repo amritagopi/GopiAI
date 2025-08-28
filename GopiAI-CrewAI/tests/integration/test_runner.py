@@ -21,7 +21,8 @@ from typing import List, Dict, Any, Optional
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 try:
     from test_infrastructure.service_manager import ServiceManager

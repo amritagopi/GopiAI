@@ -12,7 +12,7 @@ if [ -d ".venv" ]; then
 fi
 
 # Добавляем пути в PYTHONPATH
-export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI"
+export PYTHONPATH="${PYTHONPATH}:$(pwd)/GopiAI-CrewAI:$(pwd)/GopiAI-UI"
 
 # Функция для корректного завершения
 cleanup() {

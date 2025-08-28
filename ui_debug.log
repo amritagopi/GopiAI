@@ -1,36 +1,36 @@
-2025-08-26 02:43:05 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-26 02:43:05 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-26 02:43:05 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
-2025-08-26 02:43:05 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
-2025-08-26 02:43:05 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-26 02:43:05 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-26 02:43:05 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-08-26 02:43:05 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-08-26 02:43:05 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
-2025-08-26 02:43:05 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x488de930) at 0x7886b7895600>
-2025-08-26 02:43:05 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
-2025-08-26 02:43:05 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
-2025-08-26 02:43:05 - gopiai.ui.components.openrouter_model_widget - ERROR - Ошибка инициализации backend клиентов: cannot import name 'get_from_dict_or_env' from 'crewai.utilities' (/home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/crewai/utilities/__init__.py)
-2025-08-26 02:43:05 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
-2025-08-26 02:43:05 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
-2025-08-26 02:43:05 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
-2025-08-26 02:43:05 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
-2025-08-26 02:43:06 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
-2025-08-26 02:43:06 - gopiai.ui.components.tools_tab - ERROR - Ошибка подключения: HTTPConnectionPool(host='127.0.0.1', port=5051): Max retries exceeded with url: /api/tools (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x78868c1497f0>: Failed to establish a new connection: [Errno 111] В соединении отказано'))
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
-2025-08-26 02:43:06 - gopiai.ui.components.agents_tab - ERROR - Ошибка подключения: HTTPConnectionPool(host='127.0.0.1', port=5051): Max retries exceeded with url: /api/agents (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x78868c14a960>: Failed to establish a new connection: [Errno 111] В соединении отказано'))
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756156386
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
-2025-08-26 02:43:06 - gopiai.ui.components.crewai_client - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
-2025-08-26 02:43:06 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
-2025-08-26 02:43:06 - gopiai_integration.terminal_tool - INFO - Терминальный виджет установлен: <gopiai.ui.components.terminal_widget.TerminalWidget(0x48be8bd0) at 0x78868c188a00>
-2025-08-26 02:43:06 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
-2025-08-26 02:43:08 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
-2025-08-26 02:43:11 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 11 сообщений из истории
-2025-08-26 02:43:38 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-08-26 02:43:38 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
+2025-08-29 00:18:40 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-29 00:18:40 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-29 00:18:40 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Material Sky (dark)
+2025-08-29 00:18:40 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-08-29 00:18:41 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-29 00:18:41 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-29 00:18:41 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-08-29 00:18:41 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-08-29 00:18:41 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-08-29 00:18:41 - gopiai.ui.components.openrouter_model_widget - WARNING - Функциональность OpenRouter отключена после удаления gopiai_integration
+2025-08-29 00:18:41 - gopiai.ui.components.openrouter_model_widget - INFO - Backend клиенты инициализированы
+2025-08-29 00:18:41 - gopiai.ui.components.openrouter_model_widget - WARNING - OpenRouter клиент не инициализирован
+2025-08-29 00:18:41 - gopiai.ui.components.openrouter_model_widget - INFO - OpenRouterModelWidget инициализирован
+2025-08-29 00:18:41 - gopiai.ui.components.unified_models_tab - INFO - UnifiedModelsTab инициализирован
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка моделей с переключателем инициализирована
+2025-08-29 00:18:41 - gopiai.ui.components.personality_tab - ERROR - Файл system_prompts.py не найден
+2025-08-29 00:18:41 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-08-29 00:18:41 - gopiai.ui.components.tools_tab - ERROR - Ошибка подключения: HTTPConnectionPool(host='127.0.0.1', port=5051): Max retries exceeded with url: /api/tools (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x725f0816fc80>: Failed to establish a new connection: [Errno 111] В соединении отказано'))
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-08-29 00:18:41 - gopiai.ui.components.agents_tab - ERROR - Ошибка подключения: HTTPConnectionPool(host='127.0.0.1', port=5051): Max retries exceeded with url: /api/agents (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x725ef912cf20>: Failed to establish a new connection: [Errno 111] В соединении отказано'))
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756406921
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-08-29 00:18:41 - gopiai.ui.components.crewai_client - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-08-29 00:18:41 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-08-29 00:18:41 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-08-29 00:18:44 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.model_selector_widget', 'gopiai.ui.components.openrouter_model_widget', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.unified_model_widget', 'gopiai.ui.components.unified_models_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-08-29 00:19:15 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 54 сообщений из истории
+2025-08-29 00:19:21 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-08-29 00:19:21 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: пожалуйста, посмотри мои файлы /home/amritagopi и ...

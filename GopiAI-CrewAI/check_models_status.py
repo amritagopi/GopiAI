@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append('.')
+from path_manager import setup_project_paths
+    # Заменено на использование path_manager: sys.path.append('.')
 
 from llm_rotation_config import rate_limit_monitor, LLM_MODELS_CONFIG
 

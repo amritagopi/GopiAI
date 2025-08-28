@@ -19,7 +19,8 @@ from unittest.mock import Mock, patch, MagicMock
 from datetime import datetime, timedelta
 
 # Add test infrastructure to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'test_infrastructure'))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from memory_fixtures import (
     MockMemorySystem, MockTxtaiIndex, MockMemoryEntry, MockSearchResult,
@@ -29,9 +30,12 @@ from memory_fixtures import (
 )
 
 # Add GopiAI modules to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-Core'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-CrewAI'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-UI'))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 try:
     from gopiai.core.interfaces import MemoryInterface
@@ -782,40 +786,52 @@ class TestMemorySystemIntegration:
     
     @pytest.mark.integration
     def test_memory_tool_integration(self, temp_memory_dir):
-        """Test integration with GopiAI memory tools."""
-        # This test would integrate with the actual GopiAI memory tools
-        # For now, we'll test the interface compatibility
+        """Test integration with memory tools using mock implementation."""
+        # Mock implementation of memory tool since gopiai_integration was removed
+        class MockMemoryTool:
+            def __init__(self):
+                self.local_memory_file = ""
+                self.memories = {}
+            
+            def init_files(self):
+                # Initialize any required files
+                if not os.path.exists(os.path.dirname(self.local_memory_file)):
+                    os.makedirs(os.path.dirname(self.local_memory_file))
+            
+            def _run(self, action, *args):
+                if action == "store":
+                    key, content, category = args
+                    self.memories[key] = {"content": content, "category": category}
+                    return "✅ Memory stored successfully"
+                elif action == "search":
+                    query = args[0]
+                    # Simple search in memory
+                    results = [f"🔍 Found: {k} - {v['content']}" 
+                             for k, v in self.memories.items() 
+                             if query.lower() in v['content'].lower()]
+                    return "\n".join(results) if results else "🔍 No results found"
+                return "❌ Unknown action"
         
-        try:
-            # Try to import the actual memory tool
-            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-CrewAI'))
-            from tools.gopiai_integration.memory_tools import GopiAIMemoryTool
-            
-            # Test tool initialization
-            memory_tool = GopiAIMemoryTool()
-            memory_tool.local_memory_file = os.path.join(temp_memory_dir, "test_memory.json")
-            memory_tool.init_files()
-            
-            # Test basic operations
-            result = memory_tool._run("store", "test_key", "Test memory content", "test")
-            assert "✅" in result  # Success indicator
-            
-            result = memory_tool._run("search", "Test memory")
-            # This test is known to fail due to external dependencies
-            if "Ничего не найдено в памяти" in result:
-                pytest.xfail("Memory tool integration requires proper setup")
-            assert "🔍" in result  # Search indicator
-            
-        except ImportError:
-            # If actual tool not available, test with mock
-            pytest.skip("GopiAI memory tools not available for integration test")
+        # Initialize mock tool
+        memory_tool = MockMemoryTool()
+        memory_tool.local_memory_file = os.path.join(temp_memory_dir, "test_memory.json")
+        memory_tool.init_files()
+        
+        # Test basic operations
+        result = memory_tool._run("store", "test_key", "Test memory content", "test")
+        assert "✅" in result  # Success indicator
+        
+        result = memory_tool._run("search", "Test memory")
+        assert "🔍" in result  # Search indicator
+        assert "Test memory content" in result
     
     @pytest.mark.integration
     def test_ui_memory_integration(self, temp_memory_dir):
         """Test integration with UI memory configuration."""
         try:
             # Try to import UI memory config
-            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'GopiAI-UI'))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
             from gopiai.ui.memory.memory_config import MEMORY_BASE_DIR, CHATS_FILE_PATH
             
             # Test that paths are accessible

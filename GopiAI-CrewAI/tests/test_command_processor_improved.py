@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 # Import test infrastructure
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'test_infrastructure'))
+    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'test_infrastructure'))
 
 from fixtures import ai_service_mocker, mock_crewai_server, mock_tool_manager
 from crewai_fixtures import mock_command_processor, mock_tool_executor

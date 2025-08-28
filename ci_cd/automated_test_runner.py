@@ -18,7 +18,8 @@ from dataclasses import dataclass, asdict
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from test_infrastructure.master_test_runner import MasterTestRunner
 from test_infrastructure.master_reporter import MasterReporter

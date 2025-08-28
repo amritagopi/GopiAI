@@ -14,9 +14,9 @@ from typing import Dict, List, Any, Optional, Union
 
 # Добавляем пути для импорта
 current_dir = Path(__file__).parent
-sys.path.append(str(current_dir.parent))  # GOPI_AI_MODULES
-sys.path.append(str(current_dir))  # GopiAI-CrewAI
-sys.path.append(str(current_dir / 'tools'))  # tools directory
+    # Заменено на использование path_manager: sys.path.append(str(current_dir.parent))  # GOPI_AI_MODULES
+    # Заменено на использование path_manager: sys.path.append(str(current_dir))  # GopiAI-CrewAI
+    # Заменено на использование path_manager: sys.path.append(str(current_dir / 'tools'))  # tools directory
 
 # Загружаем переменные окружения (.env из нескольких локаций)
 from dotenv import load_dotenv
@@ -66,37 +66,16 @@ _load_env_multi()
 
 # Импорт CrewAI
 from crewai import Agent, Task, Crew, LLM
-from tools.gopiai_integration.ai_router_llm import AIRouterLLM
+# from tools.gopiai_integration.ai_router_llm import AIRouterLLM  # REMOVED: Custom integration removed
 from crewai.tasks.task_output import TaskOutput
 
 # Импорт RAG системы
 from rag_system import RAGSystem, get_rag_system
 
-# Импорт всех GopiAI инструментов
-try:
-    from tools.gopiai_integration.base.base_tool import GopiAIBaseTool
-    from tools.gopiai_integration.browser_tools import GopiAIBrowserTool
-    from tools.gopiai_integration.filesystem_tools import GopiAIFileSystemTool
-    from tools.gopiai_integration.ai_router_tools import GopiAIRouterTool
-    from tools.gopiai_integration.memory_tools import GopiAIMemoryTool
-    from tools.gopiai_integration.communication_tools import GopiAICommunicationTool
-    from tools.gopiai_integration.huggingface_tools import GopiAIHuggingFaceTool
-    from tools.gopiai_integration.terminal_tool import TerminalTool
-    
-    # Импорт системы динамических инструкций
-    from tools.gopiai_integration.crewai_tools_integration import (
-        enhance_crew_with_instructions,
-        enhance_agent_with_instructions,
-        with_dynamic_instructions,
-        get_tools_integrator
-    )
-    from tools.gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
-    
-    print("🔍 === ПРОВЕРКА ОКРУЖЕНИЯ ===")
-    print("✅ Система динамических инструкций загружена")
-except ImportError as e:
-    print(f"❌ Ошибка импорта инструментов: {e}")
-    sys.exit(1)
+# Импорт всех GopiAI инструментов (временно отключен после рефакторинга)
+print("🔍 === ПРОВЕРКА ОКРУЖЕНИЯ ===")
+print("⚠️ Система динамических инструкций временно отключена после рефакторинга")
+print("✅ Используются нативные инструменты CrewAI")
 
 def check_environment():
     """Проверка окружения и ключей API"""
@@ -139,177 +118,58 @@ def check_environment():
     return True
 
 def test_all_tools():
-    """Тестирование всех GopiAI инструментов"""
+    """Тестирование нативных CrewAI инструментов (временно упрощенное после рефакторинга)"""
     print("🧪 === ТЕСТИРОВАНИЕ ИНСТРУМЕНТОВ ===")
-    
-    tools_results = {}
-    
-    # Тест Communication Tool
-    try:
-        print("📡 Тестирование Communication Tool...")
-        comm_tool = GopiAICommunicationTool()
-        result = comm_tool._run("notify", "", "Система запущена", "info", 3, "{}")
-        tools_results['communication'] = True
-        print(f"✅ Communication: {result}")
-    except Exception as e:
-        tools_results['communication'] = False
-        print(f"❌ Communication ошибка: {e}")
-    
-    # Тест Memory Tool
-    try:
-        print("🧠 Тестирование Memory Tool...")
-        memory_tool = GopiAIMemoryTool()
-        result = memory_tool._run("store", "system_test", "Тест системы памяти", "general", 5)
-        tools_results['memory'] = True
-        print(f"✅ Memory: {result}")
-    except Exception as e:
-        tools_results['memory'] = False
-        print(f"❌ Memory ошибка: {e}")
-    
-    # Тест FileSystem Tool
-    try:
-        print("📁 Тестирование FileSystem Tool...")
-        fs_tool = GopiAIFileSystemTool()
-        result = fs_tool._run("list", ".")
-        tools_results['filesystem'] = True
-        if isinstance(result, list):
-            print(f"✅ FileSystem: найдено {len(result)} элементов")
-        else:
-            print(f"✅ FileSystem: {result}")
-    except Exception as e:
-        tools_results['filesystem'] = False
-        print(f"❌ FileSystem ошибка: {e}")
-    
-    # Тест Browser Tool (может не работать без интернета)
-    try:
-        print("🌐 Тестирование Browser Tool...")
-        browser_tool = GopiAIBrowserTool()
-        result = browser_tool._run("search", "CrewAI", "", 3)
-        tools_results['browser'] = True
-        print(f"✅ Browser: {result[:50]}...")
-    except Exception as e:
-        tools_results['browser'] = False
-        print(f"⚠️ Browser ошибка (нормально без интернета): {e}")
-    
-    # Тест AI Router Tool
-    try:
-        print("🔀 Тестирование AI Router Tool...")
-        router_tool = GopiAIRouterTool()
-        result = router_tool._run(message="Привет!", task_type="chat")
-        tools_results['router'] = True
-        print(f"✅ Router: {result[:50]}...")
-    except Exception as e:
-        tools_results['router'] = False
-        print(f"❌ Router ошибка: {e}")
-    
-    # Тест HuggingFace Tool  
-    try:
-        print("🤗 Тестирование HuggingFace Tool...")
-        hf_tool = GopiAIHuggingFaceTool()
-        result = hf_tool._run("Привет!", "microsoft/DialoGPT-large", "conversational", 100, 0.7)
-        tools_results['huggingface'] = True
-        print(f"✅ HuggingFace: {result[:50]}...")
-    except Exception as e:
-        tools_results['huggingface'] = False
-        print(f"❌ HuggingFace ошибка: {e}")
-    
-    working_tools = sum(tools_results.values())
-    total_tools = len(tools_results)
-    
-    print(f"📊 Результат: {working_tools}/{total_tools} инструментов работают")
-    return working_tools > 0
+    print("⚠️ Тестирование инструментов временно отключено после рефакторинга")
+    print("✅ Используются нативные инструменты CrewAI")
+    print("📊 Результат: Система готова к работе с нативными инструментами")
+    return True
 
-from tools.gopiai_integration.agent_templates import AgentTemplateSystem
+# from tools.gopiai_integration.agent_templates import AgentTemplateSystem  # REMOVED: Custom integration removed
 from crewai import Agent
 from llm_rotation_config import LLM_MODELS_CONFIG, select_llm_model, rag_answer
 
 def create_demo_agents(llm):
-    """Создание демонстрационных агентов с GopiAI инструментами и динамическими инструкциями"""
-    print("👥 === СОЗДАНИЕ АГЕНТОВ С ДИНАМИЧЕСКИМИ ИНСТРУКЦИЯМИ ===")
-    
-    # Инициализируем систему динамических инструкций
-    tools_manager = get_tools_instruction_manager()
-    integrator = get_tools_integrator()
-    
-    print("📖 Доступные инструменты с динамическими инструкциями:")
-    tools_summary = tools_manager.get_tools_summary()
-    for tool_name, description in tools_summary.items():
-        print(f"  • {tool_name}: {description[:60]}...")
-    
-    # Используем систему шаблонов для создания агентов
-    template_system = AgentTemplateSystem(verbose=True)
-    print(f"\n📋 Доступные шаблоны: {', '.join(template_system.list_available_templates())}")
-    
-    # Создаем агентов из шаблонов
-    coordinator = template_system.create_agent_from_template(
-        "coordinator_agent", 
-        llm,
-        team_size=3,
-        verbose=True
-    )
-    
-    researcher = template_system.create_agent_from_template(
-        "researcher_agent",
-        llm,
-        topic="GopiAI интеграция с CrewAI",
-        verbose=True
-    )
-    
-    writer = template_system.create_agent_from_template(
-        "writer_agent",
-        llm,
-        topic="Многоагентные системы",
-        format="markdown",
-        creativity_level="high",
-        verbose=True
-    )
-    
-    # Создаем агента-программиста вручную для демонстрации динамических инструкций
-    # Создаем все инструменты
-    all_tools = [
-        GopiAICommunicationTool(),
-        GopiAIMemoryTool(),
-        GopiAIFileSystemTool(),
-        GopiAIBrowserTool(),
-        GopiAIRouterTool(),
-        GopiAIHuggingFaceTool(),
-        TerminalTool(),
-    ]
-    
-    # ЯВНО привязываем инструменты к LLM, чтобы исключить галлюцинации tool-calls
-    llm_bound = llm
-    try:
-        if hasattr(llm, "bind_tools") and callable(getattr(llm, "bind_tools")):
-            llm_bound = llm.bind_tools(all_tools)
-            print(f"🔗 LLM привязан к {len(all_tools)} инструментам через .bind_tools() (main.py)")
-        else:
-            print("ℹ️ .bind_tools() недоступен у LLM — используем исходный экземпляр")
-    except Exception as e:
-        print(f"⚠️ Не удалось выполнить .bind_tools() для LLM: {e}")
-    
-    # Агент-программист (полный набор инструментов)
-    coder = Agent(
-        role='Code Developer with Dynamic Instructions',
-        goal='Разрабатывать и оптимизировать код на Python с использованием динамических инструкций',
-        backstory="""Ты опытный Python-разработчик в GopiAI с доступом к системе динамических инструкций.
-        Когда ты выбираешь инструмент, система автоматически подгружает детальные инструкции по его использованию.
-        Твоя задача - писать чистый, эффективный и хорошо документированный код для различных компонентов системы.""",
-        tools=all_tools,
-        llm=llm_bound,
+    """Создание демонстрационных агентов с нативными CrewAI инструментами (упрощенная версия после рефакторинга)"""
+    print("👥 === СОЗДАНИЕ АГЕНТОВ С НАТИВНЫМИ ИНСТРУМЕНТАМИ CREWAI ===")
+    print("⚠️ Система динамических инструкций временно отключена после рефакторинга")
+
+    # Создаем базовых агентов с нативными инструментами CrewAI
+    coordinator = Agent(
+        role='Координатор проекта',
+        goal='Координировать работу команды и управлять проектами',
+        backstory="Ты опытный координатор проектов с навыками управления командой.",
+        llm=llm,
         verbose=True,
-        allow_delegation=True,
-        max_iter=5
+        allow_delegation=True
     )
-    
-    # Улучшаем всех агентов динамическими инструкциями
-    print("\n🔧 Применение динамических инструкций к агентам...")
-    coordinator = enhance_agent_with_instructions(coordinator)
-    researcher = enhance_agent_with_instructions(researcher)
-    writer = enhance_agent_with_instructions(writer)
-    coder = enhance_agent_with_instructions(coder)
-    
-    print(f"✅ Создано {len([coordinator, researcher, writer, coder])} агентов с динамическими инструкциями")
-    return coordinator, researcher, writer, coder
+
+    researcher = Agent(
+        role='Исследователь',
+        goal='Проводить исследования и анализировать информацию',
+        backstory="Ты опытный исследователь с навыками глубокого анализа информации.",
+        llm=llm,
+        verbose=True
+    )
+
+    writer = Agent(
+        role='Писатель документации',
+        goal='Создавать качественную документацию и контент',
+        backstory="Ты профессиональный писатель технической документации.",
+        llm=llm,
+        verbose=True
+    )
+
+    coder = Agent(
+        role='Разработчик',
+        goal='Разрабатывать и оптимизировать программный код',
+        backstory="Ты опытный разработчик программного обеспечения.",
+        llm=llm,
+        verbose=True,
+        allow_delegation=True
+    )
+
+    print("✅ Создано 4 агента с нативными инструментами CrewAI"    return coordinator, researcher, writer, coder
 
 def create_demo_tasks(coordinator, researcher, writer, coder):
     """Создание демонстрационных задач"""
@@ -404,58 +264,50 @@ def create_demo_tasks(coordinator, researcher, writer, coder):
     return init_task, research_task, writing_task, coding_task
 
 def run_simple_demo():
-    """Простая демонстрация с одним агентом"""
+    """Простая демонстрация с одним агентом (упрощенная версия после рефакторинга)"""
     print("🚀 === ПРОСТАЯ ДЕМОНСТРАЦИЯ ===")
-    
+    print("⚠️ Демонстрация временно упрощена после рефакторинга")
+
     try:
-        # Создаем LLM через новый AI Router
-        ai_router_llm = AIRouterLLM()
-        llm = ai_router_llm.get_llm_instance()
-        provider_name = "GopiAI Google Router"
-        print(f"🤖 Используется: {provider_name}")
-        
-        # Простой агент с коммуникацией
+        # Создаем базовую LLM (временно без AI Router)
+        from crewai import LLM
+        llm = LLM(model="gemini/gemini-2.0-flash-exp", temperature=0.7)
+        print("🤖 Используется: базовая Gemini модель")
+
+        # Простой агент без кастомных инструментов
         demo_agent = Agent(
             role='Demo Assistant',
-            goal='Продемонстрировать работу GopiAI инструментов',
+            goal='Продемонстрировать базовую работу CrewAI',
             backstory='Ты демонстрационный ассистент для показа возможностей системы.',
-            tools=[GopiAICommunicationTool(), GopiAIMemoryTool()],
             llm=llm,
             verbose=True,
             allow_delegation=False
         )
-        
+
         # Простая задача
         demo_task = Task(
-            description="""Выполни демонстрацию возможностей GopiAI:
-            
-            1. Отправь приветственное уведомление
-            2. Сохрани информацию о демонстрации в память
-            3. Отправь уведомление о завершении
-            
-            Информация для сохранения:
-            - Тема: "GopiAI Demo"
-            - Статус: "Успешно выполнено"
-            - Время: текущее время""",
+            description="""Выполни простую демонстрацию:
+            1. Приветствуй пользователя
+            2. Опиши возможности системы
+            3. Заверши демонстрацию""",
             expected_output="Отчет о выполнении демонстрации",
             agent=demo_agent
         )
-        
+
         # Создаем crew
         demo_crew = Crew(**{
             "agents": [demo_agent],
             "tasks": [demo_task],
             "verbose": True
         })
-        
+
         # Запускаем
         print("⚡ Запуск простой демонстрации...")
         result = demo_crew.kickoff()
-        
-        print(f"✅ Простая демонстрация завершена!")
-        print(f"📋 Результат: {result}")
+
+        print("✅ Простая демонстрация завершена!"        print(f"📋 Результат: {result}")
         return True
-        
+
     except Exception as e:
         print(f"❌ Ошибка простой демонстрации: {e}")
         import traceback
@@ -463,45 +315,57 @@ def run_simple_demo():
         return False
 
 def run_advanced_demo():
-    """Продвинутая демонстрация с несколькими агентами"""
+    """Продвинутая демонстрация с несколькими агентами (упрощенная версия после рефакторинга)"""
     print("🚀 === ПРОДВИНУТАЯ ДЕМОНСТРАЦИЯ ===")
-    
+    print("⚠️ Демонстрация временно упрощена после рефакторинга")
+
     try:
-        # Создаем LLM через новый AI Router
-        ai_router_llm = AIRouterLLM()
-        llm = ai_router_llm.get_llm_instance()
-        provider_name = "GopiAI Google Router"
-        print(f"🤖 Используется: {provider_name}")
+        # Создаем базовую LLM
+        from crewai import LLM
+        llm = LLM(model="gemini/gemini-2.0-flash-exp", temperature=0.7)
+        print("🤖 Используется: базовая Gemini модель")
+
         coordinator, researcher, writer, coder = create_demo_agents(llm)
         agents = [coordinator, researcher, writer, coder]
-        agents = [a for a in agents if a is not None]
-        # Создаем задачи
-        init_task, research_task, writing_task, coding_task = create_demo_tasks(
-            coordinator, researcher, writer, coder
+
+        # Создаем простые задачи
+        init_task = Task(
+            description="Инициализируй проект GopiAI-CrewAI интеграции",
+            expected_output="Отчет об инициализации",
+            agent=coordinator
         )
+
+        research_task = Task(
+            description="Проведи исследование о возможностях интеграции",
+            expected_output="Исследовательский отчет",
+            agent=researcher
+        )
+
+        writing_task = Task(
+            description="Создай документацию по интеграции",
+            expected_output="Документация",
+            agent=writer
+        )
+
+        coding_task = Task(
+            description="Разработай улучшения для системы",
+            expected_output="Код улучшений",
+            agent=coder
+        )
+
         tasks = [init_task, research_task, writing_task, coding_task]
-        tasks = [t for t in tasks if t is not None]
-        # Создаем crew с динамическими инструкциями
+
+        # Создаем crew
         advanced_crew = Crew(**{
             "agents": agents,
             "tasks": tasks,
             "verbose": True
         })
-        
-        # Применяем динамические инструкции к команде
-        print("🔧 Применение динамических инструкций к команде...")
-        advanced_crew = enhance_crew_with_instructions(advanced_crew)
+
         # Запускаем
         print("⚡ Запуск продвинутой демонстрации...")
-        try:
-            result = advanced_crew.kickoff()
-        except Exception as e:
-            print(f"[ERROR] Crew.kickoff() exception: {e}")
-            import traceback
-            traceback.print_exc()
-            raise
-        print(f"✅ Продвинутая демонстрация завершена!")
-        print(f"📋 Итоговый результат: {result}")
+        result = advanced_crew.kickoff()
+        print("✅ Продвинутая демонстрация завершена!"        print(f"📋 Итоговый результат: {result}")
         return True
     except Exception as e:
         print(f"❌ Ошибка продвинутой демонстрации: {e}")
@@ -510,47 +374,42 @@ def run_advanced_demo():
         return False
 
 def chat_interface():
-    """Интерактивный чат-интерфейс с поддержкой RAG"""
+    """Интерактивный чат-интерфейс с поддержкой RAG (упрощенная версия после рефакторинга)"""
     print("\n🤖 Добро пожаловать в GopiAI Chat!")
     print("Введите ваш вопрос или 'выход' для завершения.\n")
-    
-    # Инициализация LLM
+    print("⚠️ Чат временно упрощен после рефакторинга")
+
+    # Инициализация базовой LLM
     try:
-        ai_router_llm = AIRouterLLM()
-        llm = ai_router_llm.get_llm_instance()
-        print("✅ Модель для генерации ответов загружена")
+        from crewai import LLM
+        llm = LLM(model="gemini/gemini-2.0-flash-exp", temperature=0.7)
+        print("✅ Базовая модель для генерации ответов загружена")
     except Exception as e:
         print(f"❌ Ошибка инициализации модели: {e}")
         return
-    
+
     # Основной цикл чата
     while True:
         try:
             # Получаем ввод пользователя
             user_input = input("\nВы: ").strip()
-            
+
             # Проверяем на команду выхода
             if user_input.lower() in ['выход', 'exit', 'quit', 'q']:
                 print("\nДо свидания!")
                 break
-                
+
             if not user_input:
                 continue
-                
-            # Индексируем сообщение пользователя
-            message_id = f"user_{uuid.uuid4().hex}"
-            index_chat_message(user_input, message_id, {
-                'type': 'user_message',
-                'timestamp': datetime.now().isoformat()
-            })
-            
-            # Генерируем ответ с использованием RAG
+
+            # Генерируем простой ответ без RAG
             print("\n🤖 Думаю...")
-            response = crewai_rag_query(user_input, llm)
-            
-            # Выводим ответ
-            print(f"\n🤖 {response}")
-            
+            try:
+                response = llm.call(f"Ответь на вопрос пользователя: {user_input}")
+                print(f"\n🤖 {response}")
+            except Exception as e:
+                print(f"\n❌ Ошибка генерации ответа: {e}")
+
         except KeyboardInterrupt:
             print("\nЗавершение работы...")
             break

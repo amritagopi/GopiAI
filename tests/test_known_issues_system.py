@@ -16,7 +16,8 @@ import time
 from pathlib import Path
 
 # Add test_infrastructure to path
-sys.path.insert(0, str(Path(__file__).parent / "test_infrastructure"))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 from known_issues_manager import KnownIssuesManager, IssueStatus, IssuePriority
 from automatic_resolution_detector import AutomaticResolutionDetector

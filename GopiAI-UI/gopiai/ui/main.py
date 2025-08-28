@@ -183,6 +183,14 @@ from PySide6.QtGui import QAction, QPalette
 
 # Импорт компонентов тем
 try:
+    from path_manager import setup_project_paths
+    print("✅ path_manager импортирован успешно")
+    path_manager = setup_project_paths()
+except ImportError as e:
+    print(f"⚠️ Не удалось импортировать path_manager: {e}")
+    path_manager = None
+
+try:
     from gopiai.ui.utils.theme_manager import ThemeManager
     print("✅ ThemeManager импортирован успешно")
 except ImportError as e:
@@ -195,21 +203,11 @@ except ImportError as e:
     print(f"⚠️ Не удалось импортировать GopiAISettingsDialog: {e}")
     GopiAISettingsDialog = None
 
-# Добавляем правильные пути к tools для импорта gopiai_integration
-# Правильное формирование project_root
-project_root = r"/home/amritagopi/GopiAI"  # Прямое указание пути
-# Путь к tools (а не к GopiAI-CrewAI!) для импорта gopiai_integration
-tools_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools')
-if os.path.exists(tools_path):
-    if tools_path not in sys.path:
-        sys.path.insert(0, tools_path)
-        print(f"✅ Добавлен путь к tools: {tools_path}")
-    else:
-        print(f"ℹ️ Путь к tools уже в sys.path: {tools_path}")
-else:
-    print(f"⚠️ Путь к tools не найден: {tools_path}")
-
-from gopiai_integration.terminal_tool import set_terminal_widget
+# Функция-заглушка для set_terminal_widget (удалена вместе с gopiai_integration)
+def set_terminal_widget(widget):
+    """Заглушка для set_terminal_widget - функция больше не нужна после рефакторинга"""
+    print("ℹ️ set_terminal_widget: функция отключена после рефакторинга")
+    pass
 
 # Настройка путей для импорта модулей GopiAI
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -228,7 +226,7 @@ module_paths = [
 
 for path in module_paths:
     if path not in sys.path:
-        sys.path.insert(0, path)
+        sys.path.append(path)
 
 print("Модульная версия GopiAI v0.3.2 с централизованной системой тем")
 print("Добавленные пути для модулей:")
@@ -955,7 +953,7 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
                 if "chat" in panels:
                     self.chat_widget.setVisible(panels["chat"])
                 print(
-                    "✅ Видимость панелей обновлена"
+                    "✅ Видимость панелей обновлена" 
                 )  # Применяем настройки расширений
             if "extensions" in settings_dict:
                 extensions = settings_dict["extensions"]
@@ -1020,7 +1018,7 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
     def _on_open_file(self):
         """Открытие файла"""
         file_path, _ = QFileDialog.getOpenFileName(
-            self, "Открыть файл", "", "Все файлы (*.*)"
+            self,"Открыть файл", "", "Все файлы (*.*)"
         )
         if file_path:
             try:
@@ -1050,7 +1048,7 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
                     QMessageBox.information(self, "Успех", "Файл сохранён успешно!")
                 except Exception as e:
                     QMessageBox.warning(
-                        self, "Ошибка", f"Не удалось сохранить файл: {e}"
+                        self,"Ошибка", f"Не удалось сохранить файл: {e}"
                     )
 
     def _toggle_chat(self):

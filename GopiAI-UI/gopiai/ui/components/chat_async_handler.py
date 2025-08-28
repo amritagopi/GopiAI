@@ -68,9 +68,9 @@ class ChatAsyncHandler(QObject):
         # Настройки оптимизированного polling
         self.polling_active = False
         self.last_response_length = 0
-        self.initial_delay = 300  # 300ms начальная задержка
-        self.max_delay = 3000     # 3s максимальная задержка
-        self.delay_multiplier = 1.2  # Множитель для экспоненциальной задержки
+        self.initial_delay = 200  # 200ms начальная задержка для более быстрого отклика
+        self.max_delay = 2000     # 2s максимальная задержка для более быстрой реакции на изменения
+        self.delay_multiplier = 1.3  # Увеличенный множитель для более быстрого роста задержки
         self.current_delay = self.initial_delay
         
         # Подключаем сигналы
@@ -211,7 +211,7 @@ class ChatAsyncHandler(QObject):
         # стартуем с текущей адаптивной задержкой
         self._polling_timer.start(self.current_delay)
         logger.info(f"[POLLING] Запущен опрос статуса для task_id: {task_id} с initial_delay={self.current_delay}ms")
-        self.status_update.emit("Обрабатываю запрос...")
+        self.status_update.emit("Обработка запроса начата...")
 
     def _check_task_status(self) -> None:
         """Периодически опрашивает сервер о ходе выполнения задачи."""
@@ -298,13 +298,26 @@ class ChatAsyncHandler(QObject):
                     self._polling_timer.start(self.current_delay)
                     logger.debug(f"[POLLING-BACKOFF] attempt={self._current_polling_attempt}, delay: {prev_delay}ms -> {self.current_delay}ms")
                 
-                # Проверяем на зацикливание - если больше 30 попыток, останавливаем
-                if self._current_polling_attempt > 30:
+                # Проверяем таймаут - если прошло больше 10 секунд, останавливаем
+                if hasattr(self, '_polling_start_time'):
+                    elapsed = time.time() - self._polling_start_time
+                    if elapsed > 10:
+                        logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (10s) для задачи {self._current_task_id}")
+                        self._polling_timer.stop()
+                        self._current_task_id = None
+                        self._current_polling_attempt = 0
+                        self.message_error.emit("Превышено время ожидания ответа от сервера (10 секунд).")
+                        return
+                else:
+                    self._polling_start_time = time.time()
+                    
+                # Проверяем на зацикливание - если больше 20 попыток, останавливаем
+                if self._current_polling_attempt > 20:
                     logger.warning(f"[POLLING-TIMEOUT] Превышено максимальное количество попыток опроса для задачи {self._current_task_id}")
                     self._polling_timer.stop()
                     self._current_task_id = None
                     self._current_polling_attempt = 0
-                    self.message_error.emit("Превышено время ожидания ответа от сервера.")
+                    self.message_error.emit("Превышено максимальное количество попыток опроса статуса.")
         except Exception as e:
             logger.error(f"[POLLING-ERROR] Ошибка при опросе статуса задачи {self._current_task_id}: {e}", exc_info=True)
             self._polling_timer.stop()

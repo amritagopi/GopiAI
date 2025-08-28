@@ -34,7 +34,8 @@ except ImportError:
     print("Warning: psutil not available, using mock resource monitoring")
 
 # Add test infrastructure to path
-sys.path.insert(0, str(Path(__file__).parent))
+    # Инициализируем пути проекта
+    path_manager = setup_project_paths()
 
 try:
     from master_test_runner import MasterTestRunner, TestCategory
