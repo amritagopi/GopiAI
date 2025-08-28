@@ -1,84 +1,28 @@
 """
 GopiAI Tools Package
 
-Этот пакет содержит все инструменты для AI ассистента GopiAI,
-включая неограниченные инструменты для работы с файловой системой и выполнения кода.
+Этот пакет содержит нативные инструменты CrewAI для AI ассистента GopiAI.
+Все кастомные инструменты были удалены для упрощения архитектуры.
 """
 
-from .tools_config import ToolsConfig
-from .command_executor import CommandExecutor
-from .simple_filesystem_tool import SimpleFileSystemTool
-from .simple_code_executor import SimpleCodeExecutor
-
-# Попытка импорта дополнительных инструментов (могут отсутствовать зависимости)
+# Импорт нативных инструментов CrewAI
 try:
-    from .code_interpreter_tool import CodeInterpreterTool
+    from .crewai_toolkit.tools.code_interpreter_tool import CodeInterpreterTool
     CODE_INTERPRETER_AVAILABLE = True
 except ImportError:
     CODE_INTERPRETER_AVAILABLE = False
 
-try:
-    from .unrestricted_filesystem_tool import UnrestrictedFileSystemTool
-    UNRESTRICTED_FS_AVAILABLE = True
-except ImportError:
-    UNRESTRICTED_FS_AVAILABLE = False
+__all__ = []
 
-try:
-    from .unrestricted_code_executor import UnrestrictedCodeExecutor
-    UNRESTRICTED_CODE_AVAILABLE = True
-except ImportError:
-    UNRESTRICTED_CODE_AVAILABLE = False
-
-try:
-    from .unrestricted_tools_manager import UnrestrictedToolsManager
-    TOOLS_MANAGER_AVAILABLE = True
-except ImportError:
-    TOOLS_MANAGER_AVAILABLE = False
-
-__all__ = [
-    'ToolsConfig',
-    'CommandExecutor', 
-    'SimpleFileSystemTool',
-    'SimpleCodeExecutor'
-]
-
-# Добавляем дополнительные инструменты если доступны
+# Добавляем нативные инструменты CrewAI если доступны
 if CODE_INTERPRETER_AVAILABLE:
     __all__.append('CodeInterpreterTool')
-if UNRESTRICTED_FS_AVAILABLE:
-    __all__.append('UnrestrictedFileSystemTool')
-if UNRESTRICTED_CODE_AVAILABLE:
-    __all__.append('UnrestrictedCodeExecutor')
-if TOOLS_MANAGER_AVAILABLE:
-    __all__.append('UnrestrictedToolsManager')
 
-# Создаем глобальные экземпляры для удобства использования
-tools_config = ToolsConfig()
-command_executor = CommandExecutor()
-simple_fs = SimpleFileSystemTool()
-simple_code = SimpleCodeExecutor()
-
-# Создаем дополнительные экземпляры если доступны
-if UNRESTRICTED_FS_AVAILABLE:
+# Создаем глобальные экземпляры нативных инструментов CrewAI
+if CODE_INTERPRETER_AVAILABLE:
     try:
-        unrestricted_fs = UnrestrictedFileSystemTool()
+        code_interpreter = CodeInterpreterTool()
     except Exception:
-        unrestricted_fs = None
+        code_interpreter = None
 else:
-    unrestricted_fs = None
-
-if UNRESTRICTED_CODE_AVAILABLE:
-    try:
-        unrestricted_code = UnrestrictedCodeExecutor()
-    except Exception:
-        unrestricted_code = None
-else:
-    unrestricted_code = None
-
-if TOOLS_MANAGER_AVAILABLE:
-    try:
-        tools_manager = UnrestrictedToolsManager()
-    except Exception:
-        tools_manager = None
-else:
-    tools_manager = None
+    code_interpreter = None

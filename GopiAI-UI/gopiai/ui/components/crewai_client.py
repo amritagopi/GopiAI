@@ -31,124 +31,48 @@ import os
 print('Current working directory:', os.getcwd())
 print('sys.path:', sys.path)
 
-# --- ИСПРАВЛЕНО: Более надежный способ добавления путей ---
+# --- Централизованное управление путями ---
 try:
-    # Определяем корневую директорию проекта (GOPI_AI_MODULES)
-    project_root = Path(__file__).resolve().parents[4]
-
-    # Добавляем путь к инструментам CrewAI
-    crewai_tools_path = project_root / 'GopiAI-CrewAI' / 'tools'
-    if crewai_tools_path.exists() and str(crewai_tools_path) not in sys.path:
-        sys.path.insert(0, str(crewai_tools_path))
-        logger.debug(f"[INIT] Добавлен путь к инструментам CrewAI: {crewai_tools_path}")
-
-    # Добавляем путь к gopiai_integration
-    gopiai_integration_path = crewai_tools_path / 'gopiai_integration'
-    if gopiai_integration_path.exists() and str(gopiai_integration_path) not in sys.path:
-        sys.path.insert(0, str(gopiai_integration_path))
-        logger.debug(f"[INIT] Добавлен путь к gopiai_integration: {gopiai_integration_path}")
-
-except IndexError:
-    logger.error("[INIT] Не удалось определить корневую директорию проекта. Проверьте структуру папок.")
+    from ....path_manager import setup_project_paths
+    path_manager = setup_project_paths()
+    logger.info("[INIT] ✅ Пути проекта настроены через централизованный менеджер")
+except ImportError as e:
+    logger.warning(f"[INIT] ⚠️ Не удалось импортировать path_manager: {e}")
     # Fallback to old method
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    gopiai_integration_path = os.path.join(project_root, 'GopiAI-CrewAI', 'tools', 'gopiai_integration')
-    sys.path.append(gopiai_integration_path)
+    try:
+        # Определяем корневую директорию проекта (GOPI_AI_MODULES)
+        project_root = Path(__file__).resolve().parents[4]
 
-# Импортируем эмоциональный классификатор и AI Router
+        # Добавляем путь к инструментам CrewAI
+        crewai_tools_path = project_root / 'GopiAI-CrewAI' / 'tools'
+        if crewai_tools_path.exists() and str(crewai_tools_path) not in sys.path:
+            sys.path.insert(0, str(crewai_tools_path))
+            logger.debug(f"[INIT] Добавлен путь к инструментам CrewAI: {crewai_tools_path}")
+
+    except IndexError:
+        logger.error("[INIT] Не удалось определить корневую директорию проекта. Проверьте структуру папок.")
+
+# Эмоциональный классификатор отключен после рефакторинга
 EMOTIONAL_CLASSIFIER_AVAILABLE = False
 EmotionalClassifier = None
 EmotionalState = None
 AIRouterLLM = None
 
-try:
-    import spacy
-    try:
-        # Пытаемся импортировать как пакет с sys.path
-        from gopiai_integration.emotional_classifier import EmotionalClassifier as _EmotionalClassifier, EmotionalState as _EmotionalState
-        from gopiai_integration.ai_router_llm import AIRouterLLM as _AIRouterLLM
-        from gopiai_integration.model_config_manager import get_model_config_manager
-        EmotionalClassifier = _EmotionalClassifier
-        EmotionalState = _EmotionalState
-        AIRouterLLM = _AIRouterLLM
-        EMOTIONAL_CLASSIFIER_AVAILABLE = True
-        logger.debug("[INIT] Эмоциональный классификатор и AI Router успешно импортированы")
-    except ImportError as e1:
-        # Фоллбек: прямой импорт из файлового пути при известной структуре проекта
-        try:
-            import importlib.util
-            ec_path = str((Path(project_root) / 'GopiAI-CrewAI' / 'tools' / 'gopiai_integration' / 'emotional_classifier.py').resolve())
-            ar_path = str((Path(project_root) / 'GopiAI-CrewAI' / 'tools' / 'gopiai_integration' / 'ai_router_llm.py').resolve())
-            mcm_path = str((Path(project_root) / 'GopiAI-CrewAI' / 'tools' / 'gopiai_integration' / 'model_config_manager.py').resolve())
-            spec_ec = importlib.util.spec_from_file_location("gopiai_integration.emotional_classifier", ec_path)
-            spec_ar = importlib.util.spec_from_file_location("gopiai_integration.ai_router_llm", ar_path)
-            spec_mcm = importlib.util.spec_from_file_location("gopiai_integration.model_config_manager", mcm_path)
-            if spec_ec and spec_ar and spec_mcm and spec_ec.loader and spec_ar.loader and spec_mcm.loader:
-                ec_module = importlib.util.module_from_spec(spec_ec)
-                ar_module = importlib.util.module_from_spec(spec_ar)
-                mcm_module = importlib.util.module_from_spec(spec_mcm)
-                sys.modules["gopiai_integration.emotional_classifier"] = ec_module
-                sys.modules["gopiai_integration.ai_router_llm"] = ar_module
-                sys.modules["gopiai_integration.model_config_manager"] = mcm_module
-                spec_ec.loader.exec_module(ec_module)
-                spec_ar.loader.exec_module(ar_module)
-                spec_mcm.loader.exec_module(mcm_module)
-                EmotionalClassifier = getattr(ec_module, "EmotionalClassifier", None)
-                EmotionalState = getattr(ec_module, "EmotionalState", None)
-                AIRouterLLM = getattr(ar_module, "AIRouterLLM", None)
-                get_model_config_manager = getattr(mcm_module, "get_model_config_manager", None)
-                if EmotionalClassifier and EmotionalState and AIRouterLLM and get_model_config_manager:
-                    EMOTIONAL_CLASSIFIER_AVAILABLE = True
-                    logger.debug("[INIT] Эмоциональный классификатор и AI Router импортированы через прямые пути")
-                else:
-                    EMOTIONAL_CLASSIFIER_AVAILABLE = False
-                    logger.error("[INIT] Классы не найдены при импорте через прямой путь")
-            else:
-                EMOTIONAL_CLASSIFIER_AVAILABLE = False
-                logger.error("[INIT] Не удалось создать спецификации модулей для прямого импорта")
-        except Exception as e2:
-            logger.error(f"[INIT] Ошибка импорта модулей emotional_classifier/ai_router_llm: {e1} | fallback: {e2}")
-            logger.error(f"[INIT] Пути в sys.path: {sys.path}")
-            logger.error(f"[INIT] Проверьте наличие файлов в: {gopiai_integration_path}")
-            EMOTIONAL_CLASSIFIER_AVAILABLE = False
-except ImportError as e:
-    logger.error(f"[INIT] Ошибка импорта модуля spacy: {e}")
-    logger.error("[INIT] Модуль spacy недоступен, эмоциональный классификатор отключен")
+# Заглушка для get_model_config_manager
+def get_model_config_manager():
+    """Заглушка для get_model_config_manager - функция больше не нужна после рефакторинга"""
+    logger.debug("[INIT] get_model_config_manager: функция отключена после рефакторинга")
+    return None
+
+logger.info("[INIT] Эмоциональный классификатор отключен после рефакторинга - используется только базовый анализ")
 
 # === ИНТЕГРАЦИЯ СИСТЕМЫ ДИНАМИЧЕСКИХ ИНСТРУКЦИЙ ===
 # Импортируем систему динамических инструкций для реального UI-чата
 TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
 ToolsInstructionManager = None
 
-try:
-    # Пытаемся импортировать стандартно
-    from gopiai_integration.tools_instruction_manager import get_tools_instruction_manager
-    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
-    logger.info("[INIT] ✅ Система динамических инструкций успешно импортирована в UI-чат")
-except ImportError as e1:
-    # Фоллбек на прямой путь
-    try:
-        import importlib.util
-        tim_path = str((Path(project_root) / 'GopiAI-CrewAI' / 'tools' / 'gopiai_integration' / 'tools_instruction_manager.py').resolve())
-        spec_tim = importlib.util.spec_from_file_location("gopiai_integration.tools_instruction_manager", tim_path)
-        if spec_tim and spec_tim.loader:
-            tim_module = importlib.util.module_from_spec(spec_tim)
-            sys.modules["gopiai_integration.tools_instruction_manager"] = tim_module
-            spec_tim.loader.exec_module(tim_module)
-            get_tools_instruction_manager = getattr(tim_module, "get_tools_instruction_manager", None)  # type: ignore[assignment]
-            if get_tools_instruction_manager:
-                TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
-                logger.info("[INIT] ✅ Система динамических инструкций импортирована через прямой путь")
-            else:
-                TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
-                logger.error("[INIT] ❌ Функция get_tools_instruction_manager не найдена в модуле")
-        else:
-            TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
-            logger.error("[INIT] ❌ Не удалось создать спецификацию для tools_instruction_manager")
-    except Exception as e2:
-        logger.error(f"[INIT] ❌ Ошибка импорта системы динамических инструкций: {e1} | fallback: {e2}")
-        logger.error("[INIT] UI-чат будет работать без динамических инструкций")
-        TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+logger.info("[INIT] Система динамических инструкций отключена после рефакторинга")
 
 # Создаем директорию для логов, если её нет
 # Используем текущую директорию или директорию приложения

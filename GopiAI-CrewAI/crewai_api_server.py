@@ -149,6 +149,7 @@ load_dotenv(dotenv_path="../.env")
 load_dotenv(dotenv_path=".env")
 
 from flask import Flask, request, jsonify
+from asgiref.wsgi import WsgiToAsgi
 
 # DeerFlow logging integration
 try:
@@ -171,7 +172,7 @@ sys.path.append(str(current_dir))
 
 # ### ИЗМЕНЕНО: Импортируем правильные фабричные функции ###
 from rag_system import get_rag_system
-from tools.gopiai_integration.smart_delegator import SmartDelegator
+# Custom SmartDelegator removed - using basic CrewAI functionality
 
 # Импортируем функции для работы с провайдерами и моделями
 try:
@@ -286,25 +287,17 @@ cleanup_thread.start()
 
 app = Flask(__name__)
  
-# --- Settings manager for UI toggle ---
-try:
-    from tools.gopiai_integration.settings_manager import (
-        read_settings as _read_settings,
-        write_settings as _write_settings,
-        set_terminal_unsafe as _set_terminal_unsafe,
-        get_primary_settings_path as _get_primary_settings_path,
-    )
-except Exception:
-    # Graceful fallback if module layout differs
-    def _read_settings():
-        return {}
-    def _write_settings(data):
-        raise RuntimeError("settings_manager not available")
-    def _set_terminal_unsafe(enabled: bool):
-        raise RuntimeError("settings_manager not available")
-    def _get_primary_settings_path(create_dirs: bool = False):
-        from pathlib import Path as __P
-        return __P.cwd() / "settings.json"
+# --- Settings manager for UI toggle (temporarily disabled) ---
+# Custom settings manager removed - using basic fallback
+def _read_settings():
+    return {}
+def _write_settings(data):
+    raise RuntimeError("settings_manager not available")
+def _set_terminal_unsafe(enabled: bool):
+    raise RuntimeError("settings_manager not available")
+def _get_primary_settings_path(create_dirs: bool = False):
+    from pathlib import Path as __P
+    return __P.cwd() / "settings.json"
 
 # Flask before/after request hooks to implement DeerFlow request_in/request_out
 @app.before_request
@@ -363,12 +356,13 @@ try:
     # 1. Инициализируем RAG систему
     rag_system_instance = get_rag_system()
     
-    # 2. Создаем SmartDelegator С RAG
-    smart_delegator_instance = SmartDelegator(rag_system=rag_system_instance)
+    # 2. Создаем базовый обработчик запросов (замена SmartDelegator)
+    smart_delegator_instance = None  # Временно отключен после рефакторинга
     
-    # 3. Инициализируем интегратор инструментов
-    from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
-    tools_integrator_instance = get_crewai_tools_integrator()
+    # 3. Инициализируем интегратор инструментов (временно отключен)
+    # from tools.gopiai_integration.crewai_tools_integrator import get_crewai_tools_integrator
+    # tools_integrator_instance = get_crewai_tools_integrator()
+    tools_integrator_instance = None  # Временно отключен после рефакторинга
     
     logger.info("✅ Smart Delegator (с RAG) и Tools Integrator успешно инициализированы.")
     SERVER_IS_READY = True
@@ -414,7 +408,10 @@ def health_check():
     return jsonify({
         "status": "online" if SERVER_IS_READY else "limited_mode",
         "rag_status": rag_status,
-        "indexed_documents": indexed_documents
+        "indexed_documents": indexed_documents,
+        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "smart_delegator_status": "Disabled - replaced with basic functionality",
+        "tools_integrator_status": "Disabled - replaced with native CrewAI tools"
     })
 
 def process_task(task_id: str):
@@ -425,7 +422,7 @@ def process_task(task_id: str):
         return
 
     if not smart_delegator_instance:
-        err_msg = "Smart Delegator not initialized. Cannot process task."
+        err_msg = "Smart Delegator not initialized (temporarily disabled after refactoring). Cannot process task."
         logger.error(err_msg, extra={'task_id': task_id})
         task.fail(err_msg)
         return
@@ -433,15 +430,17 @@ def process_task(task_id: str):
     try:
         task.start_processing()
         logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
-        
-        response_data = smart_delegator_instance.process_request(
-            message=task.message,
-            metadata=task.metadata
-        )
-        
-        logger.info(f"Task {task_id} processed successfully.", extra={'task_id': task_id})
+
+        # Temporary basic response until SmartDelegator is reimplemented
+        response_data = {
+            "response": f"Обработка запроса '{task.message}' временно недоступна после рефакторинга инструментов.",
+            "status": "refactoring_in_progress",
+            "message": "Система находится в процессе рефакторинга. Кастомные инструменты были удалены, нативные CrewAI инструменты сохранены."
+        }
+
+        logger.info(f"Task {task_id} processed with temporary response. Response data: {response_data}", extra={'task_id': task_id})
         task.complete(response_data)
-        
+
     except Exception as e:
         error_msg = f"An unexpected error occurred while processing task {task_id}."
         logger.error(error_msg, exc_info=True, extra={'task_id': task_id})
@@ -541,8 +540,11 @@ def debug_status():
         "server_ready": SERVER_IS_READY,
         "smart_delegator_ready": smart_delegator_instance is not None,
         "rag_system_ready": rag_system_instance is not None,
+        "tools_integrator_ready": tools_integrator_instance is not None,
         "active_tasks": len(TASKS),
-        "task_ids": list(TASKS.keys())
+        "task_ids": list(TASKS.keys()),
+        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "gopiai_integration_status": "Removed - replaced with native CrewAI functionality"
     })
 
 # --- Новые эндпоинты для синхронизации состояния провайдеров и моделей ---
@@ -592,17 +594,18 @@ def update_provider_model_state():
         except Exception as e:
             logger.warning(f"⚠️ Не удалось обновить UsageTracker: {e}")
         
-        # Обновляем текущую модель в ModelConfigManager
-        try:
-            from tools.gopiai_integration.model_config_manager import get_model_config_manager
-            mcm = get_model_config_manager()
-            if mcm:
-                mcm.switch_to_provider(provider)
-                if model_id:
-                    mcm.set_current_configuration(provider, model_id)
-                logger.info(f"✅ ModelConfigManager успешно обновлен: provider={provider}, model_id={model_id}")
-        except Exception as e:
-            logger.warning(f"⚠️ Не удалось обновить ModelConfigManager: {e}")
+        # Обновляем текущую модель в ModelConfigManager (временно отключен)
+        # try:
+        #     from tools.gopiai_integration.model_config_manager import get_model_config_manager
+        #     mcm = get_model_config_manager()
+        #     if mcm:
+        #         mcm.switch_to_provider(provider)
+        #         if model_id:
+        #             mcm.set_current_configuration(provider, model_id)
+        #         logger.info(f"✅ ModelConfigManager успешно обновлен: provider={provider}, model_id={model_id}")
+        # except Exception as e:
+        #     logger.warning(f"⚠️ Не удалось обновить ModelConfigManager: {e}")
+        logger.info(f"ModelConfigManager временно отключен после рефакторинга")
         
         return jsonify({
             "status": "success",
@@ -644,19 +647,43 @@ def get_current_state():
 
 @app.route('/api/tools', methods=['GET'])
 def get_tools():
-    """Получить список всех инструментов с их статусом"""
+    """Получить список всех инструментов с их статусом (временно упрощен после рефакторинга)"""
     try:
         if not tools_integrator_instance:
-            return jsonify({"error": "Tools integrator not initialized"}), 500
-        
+            # Return basic native CrewAI tools list
+            return jsonify({
+                "native_crewai_tools": [
+                    {
+                        "name": "Directory Read Tool",
+                        "description": "Чтение содержимого директорий",
+                        "enabled": True,
+                        "available": True
+                    },
+                    {
+                        "name": "File Read Tool",
+                        "description": "Чтение файлов",
+                        "enabled": True,
+                        "available": True
+                    },
+                    {
+                        "name": "Code Interpreter Tool",
+                        "description": "Исполнение кода",
+                        "enabled": True,
+                        "available": True
+                    }
+                ],
+                "status": "refactoring_in_progress",
+                "message": "Интегратор инструментов временно отключен после рефакторинга"
+            })
+
         # Получаем сводку инструментов по категориям
         tools_summary = tools_integrator_instance.get_tools_summary()
-        
+
         # Читаем настройки переключателей и ключей
         settings = _read_settings()
         tool_toggles = settings.get('tools', {}).get('toggles', {})
         tool_keys = settings.get('tools', {}).get('keys', {})
-        
+
         # Формируем ответ
         result = {}
         for category, tools in tools_summary.items():
@@ -667,7 +694,7 @@ def get_tools():
                 enabled = tool_toggles.get(tool_name, True)
                 # Проверяем наличие кастомного ключа
                 has_custom_key = tool_name in tool_keys
-                
+
                 result[category].append({
                     'name': tool_name,
                     'description': tool['description'],
@@ -675,7 +702,7 @@ def get_tools():
                     'has_custom_key': has_custom_key,
                     'available': tool['available']
                 })
-        
+
         return jsonify(result)
     except Exception as e:
         logger.error(f"Error getting tools: {e}")
@@ -762,24 +789,24 @@ def set_tool_key():
 
 @app.route('/api/agents', methods=['GET'])
 def get_agents():
-    """Получить список доступных агент-шаблонов (и флоу, если появятся)"""
+    """Получить список доступных агент-шаблонов (временно отключен после рефакторинга)"""
     try:
-        from tools.gopiai_integration.agent_templates import AgentTemplateSystem
-        ats = AgentTemplateSystem(verbose=False)
-        template_names = ats.list_available_templates()
-
-        agents = []
-        get_info = getattr(ats, "get_template_info", None)
-        for name in template_names:
-            info = get_info(name) if callable(get_info) else {}
-            agents.append({
-                "id": name,
-                "name": info.get("role", name),
-                "description": info.get("goal", info.get("backstory", "")) or "",
+        # Custom agent templates removed - using basic CrewAI agents
+        agents = [
+            {
+                "id": "coder",
+                "name": "Coder Agent",
+                "description": "Агент для написания и отладки кода",
                 "type": "agent"
-            })
+            },
+            {
+                "id": "researcher",
+                "name": "Researcher Agent",
+                "description": "Агент для исследования и анализа информации",
+                "type": "agent"
+            }
+        ]
 
-        # В будущем сюда можно добавить реальные флоу
         flows = [
             {
                 "id": "simple_flow",
@@ -996,5 +1023,12 @@ if __name__ == '__main__':
         logger.error("Server not started due to initialization errors.")
         print("CRITICAL ERROR: Server cannot be started due to initialization errors.")
         sys.exit(1)
+
+# --- END OF FILE crewai_api_server.py ---
+
+sys.exit(1)
+
+# ASGI приложение для совместимости с uvicorn
+asgi_app = WsgiToAsgi(app)
 
 # --- END OF FILE crewai_api_server.py ---

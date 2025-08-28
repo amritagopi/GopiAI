@@ -209,7 +209,11 @@ if os.path.exists(tools_path):
 else:
     print(f"⚠️ Путь к tools не найден: {tools_path}")
 
-from gopiai_integration.terminal_tool import set_terminal_widget
+# Функция-заглушка для set_terminal_widget (удалена вместе с gopiai_integration)
+def set_terminal_widget(widget):
+    """Заглушка для set_terminal_widget - функция больше не нужна после рефакторинга"""
+    print("ℹ️ set_terminal_widget: функция отключена после рефакторинга")
+    pass
 
 # Настройка путей для импорта модулей GopiAI
 script_dir = os.path.dirname(os.path.abspath(__file__))
