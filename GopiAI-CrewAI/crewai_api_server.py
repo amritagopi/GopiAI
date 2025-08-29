@@ -401,6 +401,7 @@ except Exception as e:
 
 # --- Flask routes ---
 
+@app.route('/health', methods=['GET'])
 @app.route('/api/health', methods=['GET'])
 def health_check():
     # Безопасные проверки на None для Pyright и рантайма
@@ -425,7 +426,7 @@ def health_check():
                     rag_status = "OK"
     except Exception as _e:
         # В случае любой ошибки оставляем значения по умолчанию
-        rag_status = "ERROR"
+        rag_status = f"ERROR: {str(_e)}"
         indexed_documents = 0
 
     return jsonify({
