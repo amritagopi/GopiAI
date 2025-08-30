@@ -1,0 +1,16 @@
+[Unit]
+Description=CrewAI API Server
+After=network.target
+
+[Service]
+User=amritagopi
+WorkingDirectory=/home/amritagopi/GopiAI
+Environment="PYTHONPATH=/home/amritagopi/GopiAI"
+ExecStart=/home/amritagopi/GopiAI/start_crewai_server.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
