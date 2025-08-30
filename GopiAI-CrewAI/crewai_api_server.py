@@ -4,6 +4,13 @@ import logging
 import os
 import uuid
 from typing import Any, Dict
+from enum import Enum # Добавлено для TaskStatus
+
+class TaskStatus(str, Enum):
+    PENDING = "pending"
+    PROCESSING = "processing"
+    COMPLETED = "completed"
+    FAILED = "failed"
 
 # Настройка читаемого логирования для CrewAI сервера
 # Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
@@ -174,6 +181,47 @@ current_dir = Path(__file__).parent
 from rag_system import get_rag_system
 # Custom SmartDelegator removed - using basic CrewAI functionality
 
+# Добавляем импорты для динамической загрузки инструментов
+import importlib.util
+from crewai.tools.base_tool import BaseTool # Исправлено: BaseTool теперь импортируется из crewai.tools.base_tool
+
+def load_tools_from_directory(directory_path: Path) -> list:
+    """
+    Динамически загружает инструменты из указанной директории.
+    Инструменты должны быть классами, унаследованными от BaseTool.
+    """
+    loaded_tools = []
+    if not directory_path.is_dir():
+        logger.warning(f"Директория инструментов не найдена: {directory_path}")
+        return loaded_tools
+
+    for tool_file in directory_path.iterdir():
+        # Исключаем директорию gopiai_integration
+        if tool_file.is_dir() and tool_file.name == "gopiai_integration":
+            logger.info(f"Пропускаем директорию: {tool_file.name}")
+            continue
+
+        if tool_file.suffix == ".py" and tool_file.name != "__init__.py":
+            module_name = tool_file.stem
+            spec = importlib.util.spec_from_file_location(module_name, tool_file)
+            if spec and spec.loader:
+                try:
+                    module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(module)
+
+                    for name, obj in module.__dict__.items():
+                        if isinstance(obj, type) and issubclass(obj, BaseTool) and obj is not BaseTool: # Возвращено: BaseTool
+                            try:
+                                loaded_tools.append(obj())
+                                logger.info(f"✅ Загружен инструмент: {name} из {tool_file.name}")
+                            except Exception as e:
+                                logger.error(f"❌ Не удалось инстанцировать инструмент {name} из {tool_file.name}: {e}")
+                except Exception as e:
+                    logger.error(f"❌ Не удалось загрузить модуль инструмента {tool_file.name}: {e}")
+            else:
+                logger.warning(f"Не удалось получить спецификацию для {tool_file.name}")
+    return loaded_tools
+
 # Импортируем функции для работы с провайдерами и моделями
 try:
     from llm_rotation_config import get_available_models, update_state, PROVIDER_KEY_ENV
@@ -185,7 +233,7 @@ except ImportError:
 
 # --- Настройки сервера ---
 HOST = "0.0.0.0"  # Слушаем на всех интерфейсах
-PORT = 5051  # Стандартный порт для CrewAI API сервера
+PORT = 5052  # Измененный порт для CrewAI API сервера
 DEBUG = False
 TASK_CLEANUP_INTERVAL = 300
 
@@ -221,20 +269,9 @@ def _write_selected_port(port_value: int) -> None:
     except Exception as _e:
         logger.warning(f"Не удалось сохранить выбранный порт: {port_value}: {_e}")
 
-# --- Глобальное хранилище задач ---
-TASKS = {}
-TASKS_LOCK = threading.Lock()
 
-# Храним последнюю effective-конфигурацию (без секретов) для echo-эндпоинта
-EFFECTIVE_CONFIG_LAST: Optional[Dict[str, Any]] = None
 
-class TaskStatus:
-    PENDING = "pending"
-    PROCESSING = "processing"
-    COMPLETED = "completed"
-    FAILED = "failed"
-
-class Task:
+class ServerTask:
     def __init__(self, task_id, message, metadata):
         self.task_id = task_id
         self.message = message
@@ -272,6 +309,10 @@ class Task:
             "started_at": self.started_at.isoformat() if self.started_at else None,
             "completed_at": self.completed_at.isoformat() if self.completed_at else None
         }
+
+# --- Глобальное хранилище задач ---
+TASKS: Dict[str, ServerTask] = {}
+TASKS_LOCK = threading.Lock()
 
 def cleanup_old_tasks():
     while True:
@@ -356,24 +397,34 @@ try:
     # 1. Инициализируем RAG систему
     rag_system_instance = get_rag_system()
     
-    # 2. Создаем простого агента для обработки задач
+    # 2. Динамически загружаем инструменты
+    TOOLS_DIR = Path(__file__).parent / "tools" / "crewai_toolkit" / "tools"
+    available_tools = load_tools_from_directory(TOOLS_DIR)
+    
+    # 3. Создаем агента с загруженными инструментами
     from crewai import Agent, Task, Crew
-    from tools.crewai_toolkit.tools.directory_read_tool.directory_read_tool import DirectoryReadTool
 
-    directory_read_tool = DirectoryReadTool()
+    # Если инструментов нет, агент не сможет работать
+    if not available_tools:
+        logger.warning("Нет доступных инструментов. Агент будет инициализирован без инструментов.")
+        agent_tools = []
+    else:
+        agent_tools = available_tools
 
     agent = Agent(
-        role="File System Expert",
-        goal="List the contents of a directory.",
-        backstory="You are an expert in navigating file systems and listing directory contents.",
-        tools=[directory_read_tool],
+        role="General Purpose Assistant",
+        goal="Perform tasks using available tools.",
+        backstory="You are a versatile AI assistant capable of performing a wide range of tasks by leveraging various tools.",
+        tools=agent_tools,
         verbose=True,
     )
 
-    def process_crew_task(message):
+    def process_crew_task(message: str) -> str:
+        # Здесь мы используем `smart_delegator_instance` как обертку для запуска Crew
+        # Агент уже инициализирован с доступными инструментами.
         task = Task(
-            description=f"List the contents of the directory specified in the message: {message}",
-            expected_output="A list of files and directories.",
+            description=message,
+            expected_output="Result of the task performed using tools.",
             agent=agent,
         )
         crew = Crew(
@@ -384,10 +435,9 @@ try:
         return crew.kickoff()
 
     smart_delegator_instance = process_crew_task
+    tools_integrator_instance = None # Оставляем None, т.к. ToolsIntegrator удален
     
-    tools_integrator_instance = None
-    
-    logger.info("✅ Simple agent for task processing initialized.")
+    logger.info(f"✅ Агент инициализирован с {len(available_tools)} инструментами.")
     SERVER_IS_READY = True
 
 except Exception as e:
@@ -433,14 +483,14 @@ def health_check():
         "status": "online" if SERVER_IS_READY else "limited_mode",
         "rag_status": rag_status,
         "indexed_documents": indexed_documents,
-        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "refactoring_status": "Dynamic tool loading enabled, custom tools removed",
         "smart_delegator_status": "Disabled - replaced with basic functionality",
-        "tools_integrator_status": "Disabled - replaced with native CrewAI tools"
+        "tools_integrator_status": "Disabled - replaced with native CrewAI tools" # Это сообщение можно будет удалить, когда tools_integrator_instance будет полностью реализован
     })
 
 def process_task(task_id: str):
     """Processes a task in a separate thread."""
-    task = TASKS.get(task_id)
+    task: ServerTask = TASKS.get(task_id)
     if not task:
         logger.error(f"Task {task_id} not found in TASKS dictionary.", extra={'task_id': task_id})
         return
@@ -519,7 +569,7 @@ def process_request():
         return jsonify({"error": f"Invalid JSON format: {e}"} ), 400
 
     task_id = str(uuid.uuid4())
-    task = Task(task_id, message, metadata)
+    task = ServerTask(task_id, message, metadata)
 
     with TASKS_LOCK:
         TASKS[task_id] = task
@@ -562,7 +612,7 @@ def debug_status():
         "tools_integrator_ready": tools_integrator_instance is not None,
         "active_tasks": len(TASKS),
         "task_ids": list(TASKS.keys()),
-        "refactoring_status": "Custom tools removed, native CrewAI tools preserved",
+        "refactoring_status": "Dynamic tool loading enabled",
         "gopiai_integration_status": "Removed - replaced with native CrewAI functionality"
     })
 
@@ -668,32 +718,20 @@ def get_current_state():
 def get_tools():
     """Получить список всех инструментов с их статусом (временно упрощен после рефакторинга)"""
     try:
-        if not tools_integrator_instance:
-            # Return basic native CrewAI tools list
-            return jsonify({
-                "native_crewai_tools": [
-                    {
-                        "name": "Directory Read Tool",
-                        "description": "Чтение содержимого директорий",
-                        "enabled": True,
-                        "available": True
-                    },
-                    {
-                        "name": "File Read Tool",
-                        "description": "Чтение файлов",
-                        "enabled": True,
-                        "available": True
-                    },
-                    {
-                        "name": "Code Interpreter Tool",
-                        "description": "Исполнение кода",
-                        "enabled": True,
-                        "available": True
-                    }
-                ],
-                "status": "refactoring_in_progress",
-                "message": "Интегратор инструментов временно отключен после рефакторинга"
+        # Здесь мы используем глобальную переменную available_tools, которая загружается при старте сервера
+        loaded_tool_data = []
+        for tool in available_tools:
+            loaded_tool_data.append({
+                "name": tool.name,
+                "description": tool.description,
+                "enabled": True, # Предполагаем, что загруженные инструменты включены
+                "available": True
             })
+        return jsonify({
+            "dynamic_crewai_tools": loaded_tool_data,
+            "status": "dynamic_loading_enabled",
+            "message": "Инструменты загружаются динамически из директории"
+        })
 
         # Получаем сводку инструментов по категориям
         tools_summary = tools_integrator_instance.get_tools_summary()

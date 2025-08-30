@@ -452,78 +452,93 @@ class CrewAIClient:
             
         logger.debug(f"[REQUEST] Подготовка к отправке запроса в CrewAI API")
         
-        try:
-            # Увеличиваем таймаут для первого запроса, так как сервер может обрабатывать его дольше
-            first_request_timeout = max(30, (timeout or self.timeout) * 2)
-            logger.debug(f"[REQUEST] Установлен таймаут {first_request_timeout} секунд для запроса")
-            
-            url = f"{self.base_url}/api/process"
-            logger.debug(f"[REQUEST] Отправка POST запроса на {url} с заголовком Content-Type: application/json; charset=utf-8")
-            
-            response = requests.post(
-                url,
-                json=message,
-                headers={"Content-Type": "application/json; charset=utf-8"},
-                timeout=first_request_timeout
-            )
-            
-            logger.debug(f"[REQUEST] Получен ответ от сервера: HTTP {response.status_code}")
-            response.raise_for_status()
-            
-            # Обработка ответа
-            result: Dict[str, Any] = response.json()
-            logger.debug(f'Полный ответ Gemini: {result}')
-            logger.debug(f"[REQUEST] Успешно парсим JSON ответ: {result}")
-            
-            # Если ответ содержит только текст, оборачиваем его в словарь
-            if isinstance(result, str):
-                logger.debug("[REQUEST] Получен текстовый ответ, преобразуем в словарь")
-                result = {"response": result}
-            
-            # Проверяем, вернул ли сервер task_id для асинхронной обработки
-            if 'task_id' in result and 'status' in result:
-                logger.info(f"[TASK-START] [ASYNC] Получен task_id для асинхронной обработки: {result['task_id']}")
-                logger.debug(f"[TASK-START] Начальный статус задачи: {result['status']}")
-                return result
+        max_retries = 5
+        retry_delay = 5  # seconds
+
+        for attempt in range(max_retries):
+            try:
+                # Увеличиваем таймаут для первого запроса, так как сервер может обрабатывать его дольше
+                first_request_timeout = max(30, (timeout or self.timeout) * 2)
+                logger.debug(f"[REQUEST] Установлен таймаут {first_request_timeout} секунд для запроса (попытка {attempt + 1}/{max_retries})")
                 
-            # Если это синхронный ответ, добавляем анализ эмоций
-            if 'metadata' in message and 'emotion_analysis' in message['metadata']:
-                logger.debug("[REQUEST] Добавляем анализ эмоций в синхронный ответ")
-                result['emotion_analysis'] = message['metadata']['emotion_analysis']
+                url = f"{self.base_url}/api/process"
+                logger.debug(f"[REQUEST] Отправка POST запроса на {url} с заголовком Content-Type: application/json; charset=utf-8")
                 
-                # Добавляем рекомендации по ответу на основе эмоций
-                recommendations = message['metadata']['emotion_analysis'].get('recommendations', [])
-                if recommendations and 'metadata' not in result:
-                    result['metadata'] = {}
-                if recommendations:
-                    logger.debug(f"[REQUEST] Добавлены рекомендации по ответу: {recommendations}")
-                    result['metadata']['recommended_responses'] = recommendations
-            
-            # Добавляем обработку терминального вывода
-            if isinstance(result, dict) and 'terminal_output' in result:
-                term_out = result['terminal_output']
-                formatted_output = f"Команда '{term_out['command']}' выполнена в терминале.\nВывод: {term_out['output']}\nОшибки: {term_out['error'] if term_out['error'] else 'Нет'}"
-                result['response'] = formatted_output
-                result['metadata'] = result.get('metadata', {})
-                result['metadata']['terminal_output'] = term_out
-                logger.info(f"[TERMINAL] Обработан терминальный вывод для команды: {term_out['command']}")
-            
-            # Убедимся, что ответ содержит хотя бы пустую строку, а не None
-            if 'response' not in result or result['response'] is None:
-                logger.debug("[REQUEST] Ответ не содержит 'response', добавляем пустую строку")
-                result['response'] = ""
-            else:
-                logger.debug(f"[REQUEST] Получен ответ: {result['response'][:50]}..." if len(result['response']) > 50 else result['response'])
+                response = requests.post(
+                    url,
+                    json=message,
+                    headers={"Content-Type": "application/json; charset=utf-8"},
+                    timeout=first_request_timeout
+                )
                 
-            return result
-            
-        except requests.exceptions.RequestException as e:
-            logger.error(f"[REQUEST-ERROR] Ошибка при отправке запроса в CrewAI: {str(e)}")
-            return {
-                "response": f"Ошибка при отправке запроса: {str(e)}",
-                "error": "request_error",
-                "processed_with_crewai": False
-            }
+                logger.debug(f"[REQUEST] Получен ответ от сервера: HTTP {response.status_code}")
+                response.raise_for_status()
+                
+                # Обработка ответа
+                result: Dict[str, Any] = response.json()
+                logger.debug(f'Полный ответ Gemini: {result}')
+                logger.debug(f"[REQUEST] Успешно парсим JSON ответ: {result}")
+                
+                # Если ответ содержит только текст, оборачиваем его в словарь
+                if isinstance(result, str):
+                    logger.debug("[REQUEST] Получен текстовый ответ, преобразуем в словарь")
+                    result = {"response": result}
+                
+                # Проверяем, вернул ли сервер task_id для асинхронной обработки
+                if 'task_id' in result and 'status' in result:
+                    logger.info(f"[TASK-START] [ASYNC] Получен task_id для асинхронной обработки: {result['task_id']}")
+                    logger.debug(f"[TASK-START] Начальный статус задачи: {result['status']}")
+                    return result
+                    
+                # Если это синхронный ответ, добавляем анализ эмоций
+                if 'metadata' in message and 'emotion_analysis' in message['metadata']:
+                    logger.debug("[REQUEST] Добавляем анализ эмоций в синхронный ответ")
+                    result['emotion_analysis'] = message['metadata']['emotion_analysis']
+                    
+                    # Добавляем рекомендации по ответу на основе эмоций
+                    recommendations = message['metadata']['emotion_analysis'].get('recommendations', [])
+                    if recommendations and 'metadata' not in result:
+                        result['metadata'] = {}
+                    if recommendations:
+                        logger.debug(f"[REQUEST] Добавлены рекомендации по ответу: {recommendations}")
+                        result['metadata']['recommended_responses'] = recommendations
+                
+                # Добавляем обработку терминального вывода
+                if isinstance(result, dict) and 'terminal_output' in result:
+                    term_out = result['terminal_output']
+                    formatted_output = f"Команда '{term_out['command']}' выполнена в терминале.\nВывод: {term_out['output']}\nОшибки: {term_out['error'] if term_out['error'] else 'Нет'}"
+                    result['response'] = formatted_output
+                    result['metadata'] = result.get('metadata', {})
+                    result['metadata']['terminal_output'] = term_out
+                    logger.info(f"[TERMINAL] Обработан терминальный вывод для команды: {term_out['command']}")
+                
+                # Убедимся, что ответ содержит хотя бы пустую строку, а не None
+                if 'response' not in result or result['response'] is None:
+                    logger.debug("[REQUEST] Ответ не содержит 'response', добавляем пустую строку")
+                    result['response'] = ""
+                else:
+                    logger.debug(f"[REQUEST] Получен ответ: {result['response'][:50]}..." if len(result['response']) > 50 else result['response'])
+                    
+                return result # Return here on success
+
+            except requests.exceptions.ConnectionError as e:
+                logger.warning(f"[REQUEST-RETRY] Ошибка подключения к CrewAI (попытка {attempt + 1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                else:
+                    logger.error(f"[REQUEST-ERROR] Все попытки подключения к CrewAI исчерпаны: {str(e)}")
+                    return {
+                        "response": f"Ошибка: Не удалось подключиться к серверу CrewAI после {max_retries} попыток",
+                        "error": "connection_failed",
+                        "processed_with_crewai": False
+                    }
+            except requests.exceptions.RequestException as e:
+                logger.error(f"[REQUEST-ERROR] Ошибка при отправке запроса в CrewAI: {str(e)}")
+                return {
+                    "response": f"Ошибка при отправке запроса: {str(e)}",
+                    "error": "request_error",
+                    "processed_with_crewai": False
+                }
             
     def check_task_status(self, task_id):
         """

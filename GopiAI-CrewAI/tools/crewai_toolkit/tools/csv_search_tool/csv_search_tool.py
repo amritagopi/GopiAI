@@ -3,7 +3,7 @@ from typing import Any, Optional, Type
 from embedchain.models.data_type import DataType
 from pydantic import BaseModel, Field
 
-from ..rag.rag_tool import RagTool
+from txtai.agent.tool.embeddings import EmbeddingsTool
 
 
 class FixedCSVSearchToolSchema(BaseModel):
@@ -21,7 +21,7 @@ class CSVSearchToolSchema(FixedCSVSearchToolSchema):
     csv: str = Field(..., description="Mandatory csv path you want to search")
 
 
-class CSVSearchTool(RagTool):
+class CSVSearchTool(EmbeddingsTool):
     name: str = "Search a CSV's content"
     description: str = (
         "A tool that can be used to semantic search a query from a CSV's content."

@@ -1,33 +1,11 @@
 {
-    "servers": {
-        "serena": {
-            "command": "uv",
-            "args": [
-                "run",
-                "--directory",
-                "C:/Users/crazy/mcp_servers/serena",
-                "serena-mcp-server"
-            ],
-            "type": "stdio"
-        },
-        "acf-tool": {
-            "command": "C:\\Program Files\\nodejs\\node.exe",
-            "args": [
-                "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework\\bin\\agentic-control-framework-mcp",
-                "--workspaceRoot",
-                "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework"
-            ],
-            "env": {
-                "ACF_PATH": "C:\\Users\\crazy\\mcp_servers\\agentic-control-framework",
-                "WORKSPACE_ROOT": "C:\\Users\\crazy\\GOPI_AI_MODULES",
-                "ALLOWED_DIRS": "C:\\Users\\crazy\\GOPI_AI_MODULES;C:\\Users\\crazy\\mcp_servers\\agentic-control-framework;C:\\tmp",
-                "READONLY_MODE": "false",
-                "BROWSER_HEADLESS": "false", 
-                "DEFAULT_SHELL": "cmd.exe", 
-                "NODE_ENV": "production", 
-                "MCP_CONNECTION_RETRY": "5" 
-            }
+    "mcp": {
+      "servers": {
+        "docfork": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "docfork"]
         }
+      }
     }
-
-}
+  }
