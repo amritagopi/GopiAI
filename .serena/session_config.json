@@ -1,0 +1,9 @@
+{
+  "session_management": {
+    "persist_session": true,
+    "resume_from_last_state": true,
+    "autosave_interval": 30,
+    "clear_on_shutdown": false
+  }
+}
+
