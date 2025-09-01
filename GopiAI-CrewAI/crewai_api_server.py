@@ -5,6 +5,24 @@ import os
 import uuid
 from typing import Any, Dict
 from enum import Enum, auto # Добавлено auto для TaskStatus
+from dotenv import load_dotenv
+from pathlib import Path
+
+# --- НАЧАЛО ВАЖНОГО БЛОКА ---
+# Четко указываем путь к .env файлу в той же папке, что и наш скрипт
+env_path = Path(__file__).parent / '.env'
+
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+    print(f"[DEBUG] Переменные окружения успешно загружены из: {env_path}")
+    # Диагностический вывод: проверяем ключи
+    tavily_key = os.getenv('TAVILY_API_KEY')
+    openrouter_key = os.getenv('OPENROUTER_API_KEY')
+    print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
+    print(f"[DEBUG] OPENROUTER_API_KEY: {'Ключ найден!' if openrouter_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
+else:
+    print(f"[ERROR] Файл .env не найден по пути: {env_path}")
+# --- КОНЕЦ ВАЖНОГО БЛОКА ---
 
 class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
     PENDING = auto()
@@ -326,18 +344,17 @@ class ServerTask:
 
     def to_dict(self):
         # Конвертируем result в сериализуемый формат
-        serializable_result = None
-        if self.result is not None:
-            if hasattr(self.result, 'raw'):
-                # Если это CrewOutput, берем raw string
-                serializable_result = str(self.result.raw)
-            else:
-                # Иначе преобразуем в строку
-                serializable_result = str(self.result)
-        
+        serialized_result = self.result
+        if hasattr(self.result, 'raw'):
+            # Если это CrewOutput, берем raw значение
+            serialized_result = str(self.result.raw)
+        elif self.result and not isinstance(self.result, (str, int, float, bool, list, dict, type(None))):
+            # Если это другой несериализуемый объект, конвертируем в строку
+            serialized_result = str(self.result)
+            
         return {
             "task_id": self.task_id, "status": self.status.name, "message": self.message,
-            "result": serializable_result, "error": self.error,
+            "result": serialized_result, "error": self.error,
             "created_at": self.created_at.isoformat(),
             "started_at": self.started_at.isoformat() if self.started_at else None,
             "completed_at": self.completed_at.isoformat() if self.completed_at else None
@@ -444,51 +461,65 @@ try:
     else:
         agent_tools = available_tools
 
-    # Инициализируем LLM с помощью доступных API ключей
-    # Приоритет: Gemini > OpenRouter
-    llm = None
-    
-    if os.getenv("GEMINI_API_KEY"):
-        try:
-            from langchain_google_genai import ChatGoogleGenerativeAI
-            llm = ChatGoogleGenerativeAI(
-                model="gemini-pro",
-                google_api_key=os.getenv("GEMINI_API_KEY"),
-                temperature=0.7
-            )
-            logger.info("✅ Инициализирован LLM: Gemini Pro")
-        except Exception as e:
-            logger.warning(f"⚠️ Не удалось инициализировать Gemini: {e}")
-    
-    if llm is None and os.getenv("OPENROUTER_API_KEY"):
-        try:
-            from langchain_openai import ChatOpenAI
-            llm = ChatOpenAI(
-                model="openai/gpt-4o-mini",
-                api_key=os.getenv("OPENROUTER_API_KEY"),
-                base_url=os.getenv("OPENROUTER_API_BASE", "https://openrouter.ai/api/v1"),
-                temperature=0.7
-            )
-            logger.info("✅ Инициализирован LLM: OpenRouter GPT-4o-mini")
-        except Exception as e:
-            logger.warning(f"⚠️ Не удалось инициализировать OpenRouter: {e}")
-    
-    if llm is None:
-        logger.error("❌ Не удалось инициализировать ни один LLM. Проверьте API ключи.")
-        raise RuntimeError("Отсутствуют работающие API ключи для LLM")
+    def get_llm(metadata=None):
+        """Создает и возвращает экземпляр LLM на основе текущих настроек или metadata из запроса."""
+        if metadata:
+            # Приоритет metadata из запроса
+            provider = metadata.get("preferred_provider") or metadata.get("model_provider", "OpenRouter")
+            model_id = metadata.get("preferred_model") or metadata.get("model_id", "google/gemini-flash-1.5")
+        else:
+            # Fallback к глобальным настройкам
+            provider = _CURRENT_MODEL_SETTINGS.get("provider", "OpenRouter")
+            model_id = _CURRENT_MODEL_SETTINGS.get("model", "google/gemini-flash-1.5")
+        
+        if provider == "Gemini" and os.getenv("GEMINI_API_KEY"):
+            try:
+                from langchain_google_genai import ChatGoogleGenerativeAI
+                llm = ChatGoogleGenerativeAI(
+                    model="gemini-pro",  # Gemini пока не поддерживает динамический выбор, используем стандартную
+                    google_api_key=os.getenv("GEMINI_API_KEY"),
+                    temperature=0.7
+                )
+                logger.info(f"✅ Инициализирован LLM: Gemini Pro")
+                return llm
+            except Exception as e:
+                logger.warning(f"⚠️ Не удалось инициализировать Gemini: {e}")
 
-    agent = Agent(
-        role="General Purpose Assistant",
-        goal="Perform tasks using available tools.",
-        backstory="You are a versatile AI assistant capable of performing a wide range of tasks by leveraging various tools.",
-        tools=agent_tools,
-        llm=llm, # Явно указываем LLM
-        verbose=True,
-    )
+        if os.getenv("OPENROUTER_API_KEY"):
+            try:
+                from langchain_community.chat_models import ChatLiteLLM
+                # Для litellm модели от OpenRouter должны иметь префикс 'openrouter/'
+                llm = ChatLiteLLM(
+                    model=f"openrouter/{model_id}",
+                    api_key=os.getenv("OPENROUTER_API_KEY"),
+                    base_url=os.getenv("OPENROUTER_API_BASE", "https://openrouter.ai/api/v1"),
+                    temperature=0.7
+                )
+                logger.info(f"✅ Инициализирован LLM: OpenRouter {model_id}")
+                return llm
+            except Exception as e:
+                logger.warning(f"⚠️ Не удалось инициализировать OpenRouter с моделью {model_id}: {e}")
+        
+        logger.error("❌ Не удалось инициализировать ни один LLM. Проверьте API ключи и настройки.")
+        return None
 
-    def process_crew_task(message: str) -> str:
+    def process_crew_task(message: str, metadata=None) -> str:
         # Здесь мы используем `smart_delegator_instance` как обертку для запуска Crew
         # Агент уже инициализирован с доступными инструментами.
+        
+        llm = get_llm(metadata)
+        if not llm:
+            raise RuntimeError("Не удалось создать LLM для выполнения задачи.")
+
+        agent = Agent(
+            role="General Purpose Assistant",
+            goal="Perform tasks using available tools.",
+            backstory="You are a versatile AI assistant capable of performing a wide range of tasks by leveraging various tools.",
+            tools=agent_tools,
+            llm=llm, # Явно указываем LLM
+            verbose=True,
+        )
+
         task = Task(
             description=message,
             expected_output="Result of the task performed using tools.",
@@ -572,7 +603,7 @@ def process_task(task_id: str):
         task.start_processing()
         logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
 
-        result = smart_delegator_instance(task.message)
+        result = smart_delegator_instance(task.message, task.metadata)
 
         logger.info(f"Task {task_id} processed. Response data: {result}", extra={'task_id': task_id})
         task.complete(result)
@@ -962,7 +993,7 @@ def get_openrouter_models():
 # Глобальная переменная для хранения настроек модели
 _CURRENT_MODEL_SETTINGS = {
     "provider": "OpenRouter",
-    "model": "openai/gpt-4o-mini"  # По умолчанию из логов
+    "model": "google/gemini-flash-1.5"  # Стабильная модель по умолчанию
 }
 
 @app.route('/api/model/set', methods=['POST'])

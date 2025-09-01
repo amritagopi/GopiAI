@@ -40,9 +40,9 @@ class ModelLoadWorker(QThread):
     models_loaded = Signal(list)  # Сигнал с загруженными моделями
     error_occurred = Signal(str)  # Сигнал об ошибке
     
-    def __init__(self, api_base):
+    def __init__(self):
         super().__init__()
-        self.api_base = api_base
+        self.api_base = "https://openrouter.ai/api/v1"
         self.force_refresh = False
     
     def set_force_refresh(self, force: bool):
@@ -56,11 +56,11 @@ class ModelLoadWorker(QThread):
             logger.info("Загружаем модели OpenRouter через API...")
             
             # Запрос к API для получения моделей OpenRouter
-            response = requests.get(f"{self.api_base}/api/models/openrouter", timeout=30)
+            response = requests.get(f"{self.api_base}/models", timeout=30)
             
             if response.status_code == 200:
                 data = response.json()
-                models_data = data.get('models', [])
+                models_data = data.get('data', [])
                 
                 # Создаем объекты моделей из данных API
                 models = []
@@ -218,6 +218,7 @@ class OpenRouterModelWidget(QWidget):
         self.selected_model = None
         self.model_items = []
         self.load_worker = None
+        self.api_base = "http://127.0.0.1:5052"
         
         self._setup_ui()
         self._initialize_backend_clients()
@@ -325,24 +326,8 @@ class OpenRouterModelWidget(QWidget):
     def _initialize_backend_clients(self):
         """Инициализирует клиенты backend через API"""
         try:
-            # Используем API для работы с моделями OpenRouter
-            import requests
-            self.api_base = "http://127.0.0.1:5052"
-            
-            # Проверяем подключение к серверу
-            try:
-                response = requests.get(f"{self.api_base}/api/health", timeout=5)
-                if response.status_code == 200:
-                    self.openrouter_client = True  # Флаг работоспособности API
-                    logger.info("Подключение к CrewAI API установлено")
-                else:
-                    raise Exception(f"Сервер недоступен: {response.status_code}")
-            except requests.exceptions.RequestException as e:
-                raise Exception(f"Не удается подключиться к CrewAI серверу: {e}")
-            
-            logger.info("Backend клиенты инициализированы через API")
-            
-            # Запускаем загрузку моделей
+            self.openrouter_client = True
+            logger.info("Backend клиенты инициализированы.")
             self._load_models()
             
         except Exception as e:
@@ -371,7 +356,7 @@ class OpenRouterModelWidget(QWidget):
         self.stats_label.setText("Загружаем модели OpenRouter...")
         
         # Создаем воркер для загрузки
-        self.load_worker = ModelLoadWorker(self.api_base)
+        self.load_worker = ModelLoadWorker()
         self.load_worker.models_loaded.connect(self._on_models_loaded)
         self.load_worker.error_occurred.connect(self._on_load_error)
         self.load_worker.start()
@@ -386,7 +371,7 @@ class OpenRouterModelWidget(QWidget):
         self.stats_label.setText("Обновляем список моделей...")
         
         # Создаем воркер с принудительным обновлением
-        self.load_worker = ModelLoadWorker(self.api_base)
+        self.load_worker = ModelLoadWorker()
         self.load_worker.set_force_refresh(True)
         self.load_worker.models_loaded.connect(self._on_models_loaded)
         self.load_worker.error_occurred.connect(self._on_load_error)
@@ -553,7 +538,7 @@ class OpenRouterModelWidget(QWidget):
                 # Уведомляем API о выборе модели
                 response = requests.post(
                     f"{self.api_base}/api/model/set",
-                    json={"model_id": model_id, "provider": "openrouter"},
+                    json={"model": model_id, "provider": "openrouter"},
                     timeout=10
                 )
                 
