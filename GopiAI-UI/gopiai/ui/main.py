@@ -37,7 +37,7 @@ def start_crewai_server():
     
     # Проверяем, не запущен ли уже сервер
     try:
-        response = requests.get("http://127.0.0.1:5051/api/health", timeout=2)
+        response = requests.get("http://127.0.0.1:5052/api/health", timeout=2)
         if response.status_code == 200:
             print("[CREWAI] ✅ Сервер CrewAI уже запущен")
             return True
@@ -78,7 +78,7 @@ def start_crewai_server():
         print("[CREWAI] ⏳ Ожидание запуска сервера...")
         for i in range(30):
             try:
-                response = requests.get("http://127.0.0.1:5051/api/health", timeout=1)
+                response = requests.get("http://127.0.0.1:5052/api/health", timeout=1)
                 if response.status_code == 200:
                     print(f"[CREWAI] ✅ Сервер CrewAI запущен успешно (PID: {_crewai_server_process.pid})")
                     return True

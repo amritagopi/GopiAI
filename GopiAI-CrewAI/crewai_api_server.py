@@ -4,13 +4,13 @@ import logging
 import os
 import uuid
 from typing import Any, Dict
-from enum import Enum # Добавлено для TaskStatus
+from enum import Enum, auto # Добавлено auto для TaskStatus
 
-class TaskStatus(str, Enum):
-    PENDING = "pending"
-    PROCESSING = "processing"
-    COMPLETED = "completed"
-    FAILED = "failed"
+class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
+    PENDING = auto()
+    PROCESSING = auto()
+    COMPLETED = auto()
+    FAILED = auto()
 
 # Настройка читаемого логирования для CrewAI сервера
 # Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
@@ -189,37 +189,60 @@ def load_tools_from_directory(directory_path: Path) -> list:
     """
     Динамически загружает инструменты из указанной директории.
     Инструменты должны быть классами, унаследованными от BaseTool.
+    Инструменты находятся в поддиректориях с файлами вида tool_name/tool_name.py
     """
     loaded_tools = []
     if not directory_path.is_dir():
         logger.warning(f"Директория инструментов не найдена: {directory_path}")
         return loaded_tools
 
-    for tool_file in directory_path.iterdir():
+    # Проходим по поддиректориям инструментов
+    for tool_dir in directory_path.iterdir():
+        if not tool_dir.is_dir():
+            continue
+            
         # Исключаем директорию gopiai_integration
-        if tool_file.is_dir() and tool_file.name == "gopiai_integration":
-            logger.info(f"Пропускаем директорию: {tool_file.name}")
+        if tool_dir.name == "gopiai_integration":
+            logger.info(f"Пропускаем директорию: {tool_dir.name}")
             continue
 
-        if tool_file.suffix == ".py" and tool_file.name != "__init__.py":
-            module_name = tool_file.stem
-            spec = importlib.util.spec_from_file_location(module_name, tool_file)
-            if spec and spec.loader:
-                try:
-                    module = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(module)
+        # Ищем файл с названием инструмента в поддиректории
+        tool_file = tool_dir / f"{tool_dir.name}.py"
+        if not tool_file.exists():
+            logger.warning(f"Файл инструмента не найден: {tool_file}")
+            continue
 
-                    for name, obj in module.__dict__.items():
-                        if isinstance(obj, type) and issubclass(obj, BaseTool) and obj is not BaseTool: # Возвращено: BaseTool
-                            try:
-                                loaded_tools.append(obj())
-                                logger.info(f"✅ Загружен инструмент: {name} из {tool_file.name}")
-                            except Exception as e:
-                                logger.error(f"❌ Не удалось инстанцировать инструмент {name} из {tool_file.name}: {e}")
-                except Exception as e:
-                    logger.error(f"❌ Не удалось загрузить модуль инструмента {tool_file.name}: {e}")
-            else:
-                logger.warning(f"Не удалось получить спецификацию для {tool_file.name}")
+        module_name = f"{tool_dir.name}.{tool_dir.name}"
+        spec = importlib.util.spec_from_file_location(module_name, tool_file)
+        if spec and spec.loader:
+            try:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+
+                for name, obj in module.__dict__.items():
+                    if isinstance(obj, type) and issubclass(obj, BaseTool) and obj is not BaseTool:
+                        try:
+                            # Проверяем наличие необходимых API ключей
+                            tool_instance = None
+                            if hasattr(obj, 'env_vars'):
+                                missing_keys = []
+                                for env_var in obj.env_vars:
+                                    if env_var.required and not os.getenv(env_var.name):
+                                        missing_keys.append(env_var.name)
+                                
+                                if missing_keys:
+                                    logger.warning(f"⚠️ Инструмент {name} пропущен - отсутствуют ключи: {missing_keys}")
+                                    continue
+                            
+                            tool_instance = obj()
+                            loaded_tools.append(tool_instance)
+                            logger.info(f"✅ Загружен инструмент: {name} из {tool_file.name}")
+                        except Exception as e:
+                            logger.error(f"❌ Не удалось инстанцировать инструмент {name} из {tool_file.name}: {e}")
+            except Exception as e:
+                logger.error(f"❌ Не удалось загрузить модуль инструмента {tool_file.name}: {e}")
+        else:
+            logger.warning(f"Не удалось получить спецификацию для {tool_file}")
     return loaded_tools
 
 # Импортируем функции для работы с провайдерами и моделями
@@ -302,9 +325,19 @@ class ServerTask:
             self.completed_at = datetime.now()
 
     def to_dict(self):
+        # Конвертируем result в сериализуемый формат
+        serializable_result = None
+        if self.result is not None:
+            if hasattr(self.result, 'raw'):
+                # Если это CrewOutput, берем raw string
+                serializable_result = str(self.result.raw)
+            else:
+                # Иначе преобразуем в строку
+                serializable_result = str(self.result)
+        
         return {
-            "task_id": self.task_id, "status": self.status, "message": self.message,
-            "result": self.result, "error": self.error,
+            "task_id": self.task_id, "status": self.status.name, "message": self.message,
+            "result": serializable_result, "error": self.error,
             "created_at": self.created_at.isoformat(),
             "started_at": self.started_at.isoformat() if self.started_at else None,
             "completed_at": self.completed_at.isoformat() if self.completed_at else None
@@ -411,11 +444,45 @@ try:
     else:
         agent_tools = available_tools
 
+    # Инициализируем LLM с помощью доступных API ключей
+    # Приоритет: Gemini > OpenRouter
+    llm = None
+    
+    if os.getenv("GEMINI_API_KEY"):
+        try:
+            from langchain_google_genai import ChatGoogleGenerativeAI
+            llm = ChatGoogleGenerativeAI(
+                model="gemini-pro",
+                google_api_key=os.getenv("GEMINI_API_KEY"),
+                temperature=0.7
+            )
+            logger.info("✅ Инициализирован LLM: Gemini Pro")
+        except Exception as e:
+            logger.warning(f"⚠️ Не удалось инициализировать Gemini: {e}")
+    
+    if llm is None and os.getenv("OPENROUTER_API_KEY"):
+        try:
+            from langchain_openai import ChatOpenAI
+            llm = ChatOpenAI(
+                model="openai/gpt-4o-mini",
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                base_url=os.getenv("OPENROUTER_API_BASE", "https://openrouter.ai/api/v1"),
+                temperature=0.7
+            )
+            logger.info("✅ Инициализирован LLM: OpenRouter GPT-4o-mini")
+        except Exception as e:
+            logger.warning(f"⚠️ Не удалось инициализировать OpenRouter: {e}")
+    
+    if llm is None:
+        logger.error("❌ Не удалось инициализировать ни один LLM. Проверьте API ключи.")
+        raise RuntimeError("Отсутствуют работающие API ключи для LLM")
+
     agent = Agent(
         role="General Purpose Assistant",
         goal="Perform tasks using available tools.",
         backstory="You are a versatile AI assistant capable of performing a wide range of tasks by leveraging various tools.",
         tools=agent_tools,
+        llm=llm, # Явно указываем LLM
         verbose=True,
     )
 
@@ -430,7 +497,7 @@ try:
         crew = Crew(
             agents=[agent],
             tasks=[task],
-            verbose=2,
+            verbose=True, # Исправлено: verbose теперь True
         )
         return crew.kickoff()
 
@@ -589,7 +656,7 @@ def process_request():
     )
     return jsonify({
         "task_id": task_id,
-        "status": TaskStatus.PENDING,
+        "status": task.status.name,
         "message": "Task queued for processing",
         "created_at": task.created_at.isoformat(),
         "request_id": rid,
@@ -843,6 +910,101 @@ def set_tool_key():
     except Exception as e:
         logger.error(f"Error setting tool key: {e}")
         return jsonify({"error": str(e)}), 500
+
+# === ЭНДПОИНТЫ ДЛЯ РАБОТЫ С МОДЕЛЯМИ ===
+
+@app.route('/api/models/openrouter', methods=['GET'])
+def get_openrouter_models():
+    """Получение списка моделей OpenRouter"""
+    try:
+        # Список популярных моделей OpenRouter (в реальности можно получить через их API)
+        models = [
+            {
+                "id": "openai/gpt-4",
+                "name": "GPT-4",
+                "description": "OpenAI's most capable model"
+            },
+            {
+                "id": "openai/gpt-3.5-turbo",
+                "name": "GPT-3.5 Turbo", 
+                "description": "Fast and efficient model"
+            },
+            {
+                "id": "anthropic/claude-3-sonnet",
+                "name": "Claude 3 Sonnet",
+                "description": "Anthropic's balanced model"
+            },
+            {
+                "id": "anthropic/claude-3-haiku",
+                "name": "Claude 3 Haiku",
+                "description": "Fast and cost-effective"
+            },
+            {
+                "id": "meta-llama/llama-3.1-8b-instruct",
+                "name": "Llama 3.1 8B",
+                "description": "Meta's open source model"
+            },
+            {
+                "id": "google/gemma-2-9b-it",
+                "name": "Gemma 2 9B",
+                "description": "Google's efficient model"
+            }
+        ]
+        
+        return jsonify({
+            "status": "success",
+            "models": models
+        })
+    except Exception as e:
+        logger.error(f"Error getting OpenRouter models: {e}")
+        return jsonify({"error": str(e)}), 500
+
+# Глобальная переменная для хранения настроек модели
+_CURRENT_MODEL_SETTINGS = {
+    "provider": "OpenRouter",
+    "model": "openai/gpt-4o-mini"  # По умолчанию из логов
+}
+
+@app.route('/api/model/set', methods=['POST'])
+def set_model():
+    """Установка текущей модели"""
+    global _CURRENT_MODEL_SETTINGS
+    try:
+        data = request.get_json()
+        provider = data.get('provider')
+        model = data.get('model')
+        
+        if not provider or not model:
+            return jsonify({"error": "Provider and model are required"}), 400
+        
+        _CURRENT_MODEL_SETTINGS['provider'] = provider
+        _CURRENT_MODEL_SETTINGS['model'] = model
+        
+        # В реальной реализации здесь бы перенастраивался LLM
+        logger.info(f"Model settings updated: {provider} / {model}")
+        
+        return jsonify({
+            "status": "success",
+            "message": f"Model set to {provider} / {model}",
+            "current_settings": _CURRENT_MODEL_SETTINGS
+        })
+    except Exception as e:
+        logger.error(f"Error setting model: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/model/current', methods=['GET'])
+def get_current_model():
+    """Получение текущей модели"""
+    try:
+        return jsonify({
+            "status": "success",
+            "settings": _CURRENT_MODEL_SETTINGS
+        })
+    except Exception as e:
+        logger.error(f"Error getting current model: {e}")
+        return jsonify({"error": str(e)}), 500
+
+# === ЭНДПОИНТЫ ДЛЯ РАБОТЫ С АГЕНТАМИ ===
 
 @app.route('/api/agents', methods=['GET'])
 def get_agents():

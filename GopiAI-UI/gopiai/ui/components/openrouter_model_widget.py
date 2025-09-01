@@ -35,14 +35,14 @@ except Exception as e:
     logger.warning(f"Не удалось добавить пути для инструментов CrewAI: {e}")
 
 class ModelLoadWorker(QThread):
-    """Воркер для асинхронной загрузки моделей OpenRouter"""
+    """Воркер для асинхронной загрузки моделей OpenRouter через API"""
     
     models_loaded = Signal(list)  # Сигнал с загруженными моделями
     error_occurred = Signal(str)  # Сигнал об ошибке
     
-    def __init__(self, openrouter_client):
+    def __init__(self, api_base):
         super().__init__()
-        self.openrouter_client = openrouter_client
+        self.api_base = api_base
         self.force_refresh = False
     
     def set_force_refresh(self, force: bool):
@@ -52,13 +52,76 @@ class ModelLoadWorker(QThread):
     def run(self):
         """Выполняет загрузку моделей в отдельном потоке"""
         try:
-            logger.info("Загружаем модели OpenRouter в фоновом потоке...")
-            models = self.openrouter_client.get_models_sync(force_refresh=self.force_refresh)
-            self.models_loaded.emit(models)
-            logger.info(f"Загружено {len(models)} моделей OpenRouter")
+            import requests
+            logger.info("Загружаем модели OpenRouter через API...")
+            
+            # Запрос к API для получения моделей OpenRouter
+            response = requests.get(f"{self.api_base}/api/models/openrouter", timeout=30)
+            
+            if response.status_code == 200:
+                data = response.json()
+                models_data = data.get('models', [])
+                
+                # Создаем объекты моделей из данных API
+                models = []
+                for model_data in models_data:
+                    # Создаем модель с правильными замыканиями
+                    model = self._create_model_object(model_data)
+                    models.append(model)
+                
+                self.models_loaded.emit(models)
+                logger.info(f"Загружено {len(models)} моделей OpenRouter через API")
+            else:
+                raise Exception(f"API ошибка: {response.status_code} - {response.text}")
+                
         except Exception as e:
-            logger.error(f"Ошибка загрузки моделей: {e}")
+            logger.error(f"Ошибка загрузки моделей через API: {e}")
             self.error_occurred.emit(str(e))
+    
+    def _create_model_object(self, model_data):
+        """Создает объект модели с правильными замыканиями"""
+        class OpenRouterModel:
+            def __init__(self, data):
+                self.id = data.get('id', '')
+                self.name = data.get('name', '')
+                self.description = data.get('description', '')
+                self.context_length = data.get('context_length', 0)
+                self.pricing = data.get('pricing', {})
+                self.is_free = self.pricing.get('prompt', '0') == '0'
+                self.provider = self.id.split('/')[0] if '/' in self.id else 'unknown'
+            
+            def get_display_name(self):
+                return self.name or self.id
+            
+            def get_price_info(self):
+                return self._format_price_info(self.pricing)
+            
+            def _format_price_info(self, pricing_data):
+                if not pricing_data:
+                    return "Неизвестно"
+                
+                prompt_price = pricing_data.get('prompt', '0')
+                completion_price = pricing_data.get('completion', '0')
+                
+                if prompt_price == '0' and completion_price == '0':
+                    return "Бесплатная модель"
+                else:
+                    return f"${prompt_price}/{completion_price} за 1K токенов"
+        
+        return OpenRouterModel(model_data)
+    
+    def _format_price_info(self, pricing_data):
+        """Форматирует информацию о ценах"""
+        if not pricing_data:
+            return "Неизвестно"
+        
+        prompt_price = pricing_data.get('prompt', '0')
+        completion_price = pricing_data.get('completion', '0')
+        
+        if prompt_price == '0' and completion_price == '0':
+            return "Бесплатная модель"
+        else:
+            return f"${prompt_price}/{completion_price} за 1K токенов"
 
 class ModelListItem(QWidget):
     """Кастомный элемент списка для отображения модели"""
@@ -260,14 +323,24 @@ class OpenRouterModelWidget(QWidget):
         layout.addWidget(info_group)
     
     def _initialize_backend_clients(self):
-        """Инициализирует клиенты backend"""
+        """Инициализирует клиенты backend через API"""
         try:
-            # Импортируем напрямую, так как gopiai_integration удален
-            self.openrouter_client = None
-            self.model_config_manager = None
-            logger.warning("Функциональность OpenRouter отключена после удаления gopiai_integration")
+            # Используем API для работы с моделями OpenRouter
+            import requests
+            self.api_base = "http://127.0.0.1:5052"
             
-            logger.info("Backend клиенты инициализированы")
+            # Проверяем подключение к серверу
+            try:
+                response = requests.get(f"{self.api_base}/api/health", timeout=5)
+                if response.status_code == 200:
+                    self.openrouter_client = True  # Флаг работоспособности API
+                    logger.info("Подключение к CrewAI API установлено")
+                else:
+                    raise Exception(f"Сервер недоступен: {response.status_code}")
+            except requests.exceptions.RequestException as e:
+                raise Exception(f"Не удается подключиться к CrewAI серверу: {e}")
+            
+            logger.info("Backend клиенты инициализированы через API")
             
             # Запускаем загрузку моделей
             self._load_models()
@@ -275,6 +348,7 @@ class OpenRouterModelWidget(QWidget):
         except Exception as e:
             logger.error(f"Ошибка инициализации backend клиентов: {e}")
             self.stats_label.setText(f"Ошибка подключения: {e}")
+            self.openrouter_client = None
     
     def _setup_connections(self):
         """Настраивает соединения сигналов"""
@@ -286,9 +360,10 @@ class OpenRouterModelWidget(QWidget):
         self.select_btn.clicked.connect(self._select_current_model)
     
     def _load_models(self):
-        """Загружает модели OpenRouter"""
+        """Загружает модели OpenRouter через API"""
         if not self.openrouter_client:
-            logger.warning("OpenRouter клиент не инициализирован")
+            logger.warning("OpenRouter API недоступен")
+            self.stats_label.setText("API недоступен")
             return
         
         self.progress_bar.setVisible(True)
@@ -296,13 +371,13 @@ class OpenRouterModelWidget(QWidget):
         self.stats_label.setText("Загружаем модели OpenRouter...")
         
         # Создаем воркер для загрузки
-        self.load_worker = ModelLoadWorker(self.openrouter_client)
+        self.load_worker = ModelLoadWorker(self.api_base)
         self.load_worker.models_loaded.connect(self._on_models_loaded)
         self.load_worker.error_occurred.connect(self._on_load_error)
         self.load_worker.start()
     
     def _refresh_models(self):
-        """Принудительно обновляет модели"""
+        """Принудительно обновляет модели через API"""
         if not self.openrouter_client:
             return
         
@@ -311,7 +386,7 @@ class OpenRouterModelWidget(QWidget):
         self.stats_label.setText("Обновляем список моделей...")
         
         # Создаем воркер с принудительным обновлением
-        self.load_worker = ModelLoadWorker(self.openrouter_client)
+        self.load_worker = ModelLoadWorker(self.api_base)
         self.load_worker.set_force_refresh(True)
         self.load_worker.models_loaded.connect(self._on_models_loaded)
         self.load_worker.error_occurred.connect(self._on_load_error)
@@ -469,10 +544,27 @@ class OpenRouterModelWidget(QWidget):
         self.selected_info.setHtml(info_text)
     
     def _select_current_model(self):
-        """Выбирает текущую модель"""
+        """Выбирает текущую модель и уведомляет API"""
         if self.selected_model:
-            logger.info(f"Выбрана модель OpenRouter: {self.selected_model['id']}")
-            self.model_selected.emit(self.selected_model)
+            try:
+                import requests
+                model_id = self.selected_model['id']
+                
+                # Уведомляем API о выборе модели
+                response = requests.post(
+                    f"{self.api_base}/api/model/set",
+                    json={"model_id": model_id, "provider": "openrouter"},
+                    timeout=10
+                )
+                
+                if response.status_code == 200:
+                    logger.info(f"Выбрана модель OpenRouter: {model_id}")
+                    self.model_selected.emit(self.selected_model)
+                else:
+                    logger.error(f"Не удалось установить модель: {response.text}")
+                    
+            except Exception as e:
+                logger.error(f"Ошибка при установке модели: {e}")
     
     def get_current_model(self):
         """Возвращает текущую выбранную модель"""

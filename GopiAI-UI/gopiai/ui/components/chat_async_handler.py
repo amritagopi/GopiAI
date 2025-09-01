@@ -301,18 +301,18 @@ class ChatAsyncHandler(QObject):
                 # Проверяем таймаут - если прошло больше 10 секунд, останавливаем
                 if hasattr(self, '_polling_start_time'):
                     elapsed = time.time() - self._polling_start_time
-                    if elapsed > 10:
-                        logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (10s) для задачи {self._current_task_id}")
+                    if elapsed > 120:
+                        logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (120s) для задачи {self._current_task_id}")
                         self._polling_timer.stop()
                         self._current_task_id = None
                         self._current_polling_attempt = 0
-                        self.message_error.emit("Превышено время ожидания ответа от сервера (10 секунд).")
+                        self.message_error.emit("Превышено время ожидания ответа от сервера (120 секунд).")
                         return
                 else:
                     self._polling_start_time = time.time()
                     
-                # Проверяем на зацикливание - если больше 20 попыток, останавливаем
-                if self._current_polling_attempt > 20:
+                # Проверяем на зацикливание - если больше 120 попыток, останавливаем
+                if self._current_polling_attempt > 120:
                     logger.warning(f"[POLLING-TIMEOUT] Превышено максимальное количество попыток опроса для задачи {self._current_task_id}")
                     self._polling_timer.stop()
                     self._current_task_id = None

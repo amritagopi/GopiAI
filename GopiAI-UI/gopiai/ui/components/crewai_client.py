@@ -567,17 +567,30 @@ class CrewAIClient:
                 logger.debug(f"[TASK-CHECK] Получен ответ для задачи {task_id}: {result}")
                 
                 # Подробное логирование состояния задачи
-                if result.get("done"):
+                status = result.get('status', '').upper()
+                is_completed = (result.get("done") or status == "COMPLETED")
+                
+                if is_completed:
+                    # Задача завершена - добавляем поле done для совместимости
+                    result["done"] = True
+                    
                     # Извлекаем информацию о модели из ответа
-                    task_result = result.get('result', {})
-                    model_info = task_result.get('model_info', {})
+                    task_result = result.get('result', '')
+                    if isinstance(task_result, str):
+                        # Если result - строка, оборачиваем в объект
+                        result['result'] = {'response': task_result}
+                        task_result = result['result']
+                    
+                    model_info = task_result.get('model_info', {}) if isinstance(task_result, dict) else {}
                     
                     if model_info:
                         model_display = f"{model_info.get('display_name', 'Unknown')} ({model_info.get('provider', 'unknown')}/{model_info.get('model_id', 'unknown')})"
                         logger.info(f"[TASK-COMPLETE] ✅ Задача {task_id} завершена. Ответ от модели: {model_display}")
-                        logger.info(f"[RESPONSE-FROM-MODEL] 🤖 Модель: {model_display} | Ответ: {task_result.get('response', '')[:100]}...")
+                        response_text = task_result.get('response', '') if isinstance(task_result, dict) else str(task_result)
+                        logger.info(f"[RESPONSE-FROM-MODEL] 🤖 Модель: {model_display} | Ответ: {response_text[:100]}...")
                     else:
-                        logger.info(f"[TASK-COMPLETE] Задача {task_id} завершена. Результат: {task_result.get('response', '')[:100]}...")
+                        response_text = task_result.get('response', '') if isinstance(task_result, dict) else str(task_result)
+                        logger.info(f"[TASK-COMPLETE] Задача {task_id} завершена. Результат: {response_text[:100]}...")
                 else:
                     logger.info(f"[TASK-PROGRESS] Задача {task_id} в процессе. Статус: {result.get('status', 'неизвестно')}")
                 

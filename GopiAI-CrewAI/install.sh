@@ -15,7 +15,9 @@ PYTHON_VERSION=$(python3 -c 'import sys; print(".".join(map(str, sys.version_inf
 echo "✅ Python version: $PYTHON_VERSION"
 
 # Проверка минимальной версии Python
-if [[ $(echo "$PYTHON_VERSION < 3.8" | bc -l) -eq 1 ]]; then
+if python3 -c 'import sys; exit(1) if sys.version_info < (3, 8) else exit(0)'; then
+    echo "✅ Python version $PYTHON_VERSION is compatible."
+else
     echo "❌ Требуется Python 3.8+. Текущая версия: $PYTHON_VERSION"
     exit 1
 fi
@@ -45,11 +47,11 @@ pip install --upgrade pip
 
 # Установка зависимостей
 echo "📦 Installing dependencies..."
-if [ -f "requirements.txt" ]; then
-    pip install -r requirements.txt
+if [ -f "requirements_server.txt" ]; then
+    pip install -r requirements_server.txt
     echo "✅ Dependencies installed"
 else
-    echo "❌ requirements.txt not found"
+    echo "❌ requirements_server.txt not found"
     exit 1
 fi
 
