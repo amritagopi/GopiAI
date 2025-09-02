@@ -614,7 +614,370 @@ TROPICAL_BOUQUET_THEME = {
     "font_weights": {"bold": 600, "medium": 500, "regular": 400}
 }
 
-THEME_COLLECTION = [MATERIAL_SKY_THEME, EMERALD_GARDEN_THEME, CRIMSON_RELIC_THEME, GOLDEN_EMBER_THEME, SUNLIT_MEADOW_THEME, MINT_FROST_THEME, VIOLET_DREAM_THEME, INDIGO_CANDY_THEME, PINK_MIRAGE_THEME, OLIVE_LIBRARY_THEME, LAVENDER_MIST_THEME, GRAPHITE_NIGHT_THEME, PUMPKIN_FIELD_THEME, SCARLET_FIRE_THEME, MORNING_ROSE_THEME, RUBY_THEME, DUSTY_ROSE_THEME, TROPICAL_BOUQUET_THEME]
+OCEAN_BLUE_THEME = {
+    "name": "Ocean Blue",
+    "description": "Глубокие океанские тона с яркими зелеными акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#01f446",
+        "control_color": "#014946",
+        "accent_color": "#018b46",
+        "titlebar_background": "#01d446",
+        "button_color": "#018d46",
+        "button_hover_color": "#01b346",
+        "button_active_color": "#014946",
+        "text_color": "#013246",
+        "border_color": "#019946",
+        "titlebar_text": "#011646"
+    },
+    "dark": {
+        "main_color": "#013246",
+        "header_color": "#01c436",
+        "control_color": "#012936",
+        "accent_color": "#016b36",
+        "titlebar_background": "#01b436",
+        "button_color": "#016d36",
+        "button_hover_color": "#019336",
+        "button_active_color": "#012936",
+        "text_color": "#01b346",
+        "border_color": "#017936",
+        "titlebar_text": "#01f446"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+FOREST_GREEN_THEME = {
+    "name": "Forest Green",
+    "description": "Свежие лесные тона с естественными зелеными акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#b9f47d",
+        "control_color": "#3b6a00",
+        "accent_color": "#00cc9c",
+        "titlebar_background": "#b9f47d",
+        "button_color": "#71c318",
+        "button_hover_color": "#9ed764",
+        "button_active_color": "#3b6a00",
+        "text_color": "#4f6538",
+        "border_color": "#97ab59",
+        "titlebar_text": "#0e2000"
+    },
+    "dark": {
+        "main_color": "#4f6538",
+        "header_color": "#99d45d",
+        "control_color": "#1b4a00",
+        "accent_color": "#00ac7c",
+        "titlebar_background": "#99d45d",
+        "button_color": "#51a318",
+        "button_hover_color": "#7ed744",
+        "button_active_color": "#1b4a00",
+        "text_color": "#b9f47d",
+        "border_color": "#778b39",
+        "titlebar_text": "#0e2000"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+CITRUS_ORANGE_THEME = {
+    "name": "Citrus Orange",
+    "description": "Теплые цитрусовые тона с желто-оранжевыми акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#ecf47b",
+        "control_color": "#ec4900",
+        "accent_color": "#ec8b00",
+        "titlebar_background": "#ecd47b",
+        "button_color": "#ec8d18",
+        "button_hover_color": "#ecb365",
+        "button_active_color": "#ec4900",
+        "text_color": "#93442a",
+        "border_color": "#ec9959",
+        "titlebar_text": "#ec1600"
+    },
+    "dark": {
+        "main_color": "#93442a",
+        "header_color": "#ccb45b",
+        "control_color": "#cc2900",
+        "accent_color": "#cc6b00",
+        "titlebar_background": "#ccb45b",
+        "button_color": "#cc6d18",
+        "button_hover_color": "#cc9345",
+        "button_active_color": "#cc2900",
+        "text_color": "#ecf47b",
+        "border_color": "#cc7939",
+        "titlebar_text": "#ec1600"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+MYSTIC_PURPLE_THEME = {
+    "name": "Mystic Purple",
+    "description": "Мистические фиолетовые тона с яркими зелеными контрастами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#14f446",
+        "control_color": "#144946",
+        "accent_color": "#148b46",
+        "titlebar_background": "#14d446",
+        "button_color": "#148d46",
+        "button_hover_color": "#14b346",
+        "button_active_color": "#144946",
+        "text_color": "#140146",
+        "border_color": "#149946",
+        "titlebar_text": "#141646"
+    },
+    "dark": {
+        "main_color": "#140146",
+        "header_color": "#14c436",
+        "control_color": "#142936",
+        "accent_color": "#146b36",
+        "titlebar_background": "#14b436",
+        "button_color": "#146d36",
+        "button_hover_color": "#149336",
+        "button_active_color": "#142936",
+        "text_color": "#14f446",
+        "border_color": "#147936",
+        "titlebar_text": "#14f446"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+GOLDEN_YELLOW_THEME = {
+    "name": "Golden Yellow",
+    "description": "Теплые золотистые тона с янтарными акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#f4ce7b",
+        "control_color": "#6b4900",
+        "accent_color": "#cc8b00",
+        "titlebar_background": "#f4d47b",
+        "button_color": "#c38d18",
+        "button_hover_color": "#d7b365",
+        "button_active_color": "#6b4900",
+        "text_color": "#665538",
+        "border_color": "#ab9959",
+        "titlebar_text": "#1f1600"
+    },
+    "dark": {
+        "main_color": "#665538",
+        "header_color": "#d4ae5b",
+        "control_color": "#4b2900",
+        "accent_color": "#ac6b00",
+        "titlebar_background": "#d4b45b",
+        "button_color": "#a36d18",
+        "button_hover_color": "#b79345",
+        "button_active_color": "#4b2900",
+        "text_color": "#f4ce7b",
+        "border_color": "#8b7939",
+        "titlebar_text": "#0f0600"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+SEAFOAM_THEME = {
+    "name": "Seafoam",
+    "description": "Морские пенные тона с бирюзовыми и зелеными акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#01f4d7",
+        "control_color": "#014900",
+        "accent_color": "#018b00",
+        "titlebar_background": "#01d47b",
+        "button_color": "#018d18",
+        "button_hover_color": "#01b365",
+        "button_active_color": "#014900",
+        "text_color": "#01442a",
+        "border_color": "#019959",
+        "titlebar_text": "#011600"
+    },
+    "dark": {
+        "main_color": "#01442a",
+        "header_color": "#01d4b7",
+        "control_color": "#012900",
+        "accent_color": "#016b00",
+        "titlebar_background": "#01b45b",
+        "button_color": "#016d18",
+        "button_hover_color": "#019345",
+        "button_active_color": "#012900",
+        "text_color": "#01f4d7",
+        "border_color": "#017939",
+        "titlebar_text": "#010600"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+AUTUMN_FIRE_THEME = {
+    "name": "Autumn Fire",
+    "description": "Темные осенние тона с теплыми оранжево-желтыми акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#aa7100",
+        "control_color": "#6a4a00",
+        "accent_color": "#ca9c00",
+        "titlebar_background": "#ea7300",
+        "button_color": "#6d7400",
+        "button_hover_color": "#ca9400",
+        "button_active_color": "#697400",
+        "text_color": "#4a4a00",
+        "border_color": "#8c4700",
+        "titlebar_text": "#431600"
+    },
+    "dark": {
+        "main_color": "#4a4a00",
+        "header_color": "#8a5100",
+        "control_color": "#4a2a00",
+        "accent_color": "#aa7c00",
+        "titlebar_background": "#ca5300",
+        "button_color": "#4d5400",
+        "button_hover_color": "#aa7400",
+        "button_active_color": "#495400",
+        "text_color": "#ea7300",
+        "border_color": "#6c2700",
+        "titlebar_text": "#631600"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+SAGE_GARDEN_THEME = {
+    "name": "Sage Garden",
+    "description": "Приглушенные серо-зеленые тона шалфея с желтыми акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#7a7a00",
+        "control_color": "#616100",
+        "accent_color": "#c2c200",
+        "titlebar_background": "#999900",
+        "button_color": "#9e9e00",
+        "button_hover_color": "#ffff00",
+        "button_active_color": "#adad00",
+        "text_color": "#4e4e3c",
+        "border_color": "#948a00",
+        "titlebar_text": "#4e4e00"
+    },
+    "dark": {
+        "main_color": "#4e4e3c",
+        "header_color": "#5a5a00",
+        "control_color": "#414100",
+        "accent_color": "#a2a200",
+        "titlebar_background": "#797900",
+        "button_color": "#7e7e00",
+        "button_hover_color": "#dfdf00",
+        "button_active_color": "#8d8d00",
+        "text_color": "#c2c200",
+        "border_color": "#746a00",
+        "titlebar_text": "#2e2e00"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+DESERT_SAND_THEME = {
+    "name": "Desert Sand",
+    "description": "Песочные серо-желтые тона пустыни с теплыми акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#7a7a42",
+        "control_color": "#616142",
+        "accent_color": "#c2c242",
+        "titlebar_background": "#999942",
+        "button_color": "#9e9e42",
+        "button_hover_color": "#ffff42",
+        "button_active_color": "#adad42",
+        "text_color": "#4e4e42",
+        "border_color": "#948a42",
+        "titlebar_text": "#4e4e42"
+    },
+    "dark": {
+        "main_color": "#4e4e42",
+        "header_color": "#5a5a22",
+        "control_color": "#414122",
+        "accent_color": "#a2a222",
+        "titlebar_background": "#797922",
+        "button_color": "#7e7e22",
+        "button_hover_color": "#dfdf22",
+        "button_active_color": "#8d8d22",
+        "text_color": "#c2c242",
+        "border_color": "#746a22",
+        "titlebar_text": "#2e2e22"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+TWILIGHT_MEADOW_THEME = {
+    "name": "Twilight Meadow",
+    "description": "Лавандово-желтые вечерние тона с мягкими переходами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#7a7a63",
+        "control_color": "#616163",
+        "accent_color": "#c2c263",
+        "titlebar_background": "#999963",
+        "button_color": "#9e9e63",
+        "button_hover_color": "#ffff63",
+        "button_active_color": "#adad63",
+        "text_color": "#4e4e63",
+        "border_color": "#948a63",
+        "titlebar_text": "#4e4e63"
+    },
+    "dark": {
+        "main_color": "#4e4e63",
+        "header_color": "#5a5a43",
+        "control_color": "#414143",
+        "accent_color": "#a2a243",
+        "titlebar_background": "#797943",
+        "button_color": "#7e7e43",
+        "button_hover_color": "#dfdf43",
+        "button_active_color": "#8d8d43",
+        "text_color": "#c2c263",
+        "border_color": "#746a43",
+        "titlebar_text": "#2e2e43"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+NEON_PINK_THEME = {
+    "name": "Neon Pink",
+    "description": "Яркие неоновые розово-пурпурные тона с энергичными акцентами",
+    "light": {
+        "main_color": "#ffffff",
+        "header_color": "#7a004d",
+        "control_color": "#61004d",
+        "accent_color": "#c2004d",
+        "titlebar_background": "#99004d",
+        "button_color": "#9e004d",
+        "button_hover_color": "#ff004d",
+        "button_active_color": "#ad004d",
+        "text_color": "#4b004d",
+        "border_color": "#94004d",
+        "titlebar_text": "#4e004d"
+    },
+    "dark": {
+        "main_color": "#4b004d",
+        "header_color": "#5a002d",
+        "control_color": "#41002d",
+        "accent_color": "#a2002d",
+        "titlebar_background": "#79002d",
+        "button_color": "#7e002d",
+        "button_hover_color": "#df002d",
+        "button_active_color": "#8d002d",
+        "text_color": "#ff004d",
+        "border_color": "#74002d",
+        "titlebar_text": "#2e002d"
+    },
+    "font_family": "Inter",
+    "font_weights": {"bold": 600, "medium": 500, "regular": 400}
+}
+
+THEME_COLLECTION = [MATERIAL_SKY_THEME, EMERALD_GARDEN_THEME, CRIMSON_RELIC_THEME, GOLDEN_EMBER_THEME, SUNLIT_MEADOW_THEME, MINT_FROST_THEME, VIOLET_DREAM_THEME, INDIGO_CANDY_THEME, PINK_MIRAGE_THEME, OLIVE_LIBRARY_THEME, LAVENDER_MIST_THEME, GRAPHITE_NIGHT_THEME, PUMPKIN_FIELD_THEME, SCARLET_FIRE_THEME, MORNING_ROSE_THEME, RUBY_THEME, DUSTY_ROSE_THEME, TROPICAL_BOUQUET_THEME, OCEAN_BLUE_THEME, FOREST_GREEN_THEME, CITRUS_ORANGE_THEME, MYSTIC_PURPLE_THEME, GOLDEN_YELLOW_THEME, SEAFOAM_THEME, AUTUMN_FIRE_THEME, SAGE_GARDEN_THEME, DESERT_SAND_THEME, TWILIGHT_MEADOW_THEME, NEON_PINK_THEME]
 
 # --- ФУНКЦИИ ДЛЯ РАБОТЫ С ТЕМАМИ ---
 def theme_palette_to_struct(palette):

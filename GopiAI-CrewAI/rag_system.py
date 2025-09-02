@@ -29,7 +29,12 @@ else:
 import sys
 
 def _resolve_txtai_python() -> Path:
-    # Always use the current interpreter
+    # Use CrewAI environment python if available
+    current_dir = Path(__file__).parent
+    crewai_python = current_dir / "venv" / "bin" / "python"
+    if crewai_python.exists():
+        return crewai_python
+    # Fallback to current interpreter
     return Path(sys.executable)
 
 TXTAI_PYTHON = _resolve_txtai_python()

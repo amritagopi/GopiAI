@@ -487,11 +487,11 @@ try:
         if metadata:
             # Приоритет metadata из запроса
             provider = metadata.get("preferred_provider") or metadata.get("model_provider", "OpenRouter")
-            model_id = metadata.get("preferred_model") or metadata.get("model_id", "gemini/gemini-1.5-flash")
+            model_id = metadata.get("preferred_model") or metadata.get("model_id", "qwen/qwen3-235b-a22b:free")
         else:
             # Fallback к глобальным настройкам
             provider = _CURRENT_MODEL_SETTINGS.get("provider", "OpenRouter")
-            model_id = _CURRENT_MODEL_SETTINGS.get("model", "gemini/gemini-1.5-flash")
+            model_id = _CURRENT_MODEL_SETTINGS.get("model", "qwen/qwen3-235b-a22b:free")
         
         if provider == "Gemini" and os.getenv("GEMINI_API_KEY"):
             try:
@@ -627,7 +627,22 @@ def process_task(task_id: str):
         task.start_processing()
         logger.info(f"Starting task {task_id}", extra={'task_id': task_id, 'task_message': task.message})
 
-        result = smart_delegator_instance(task.message, task.metadata)
+        # НОВАЯ ЛОГИКА: Проверяем, нужен ли рефинемент
+        try:
+            from response_refinement_integration import process_with_refinement
+            refinement_result = process_with_refinement(task.message, task.metadata)
+            
+            if refinement_result["used_refinement"]:
+                logger.info(f"Task {task_id}: Использован рефинемент ({refinement_result['refinement_iterations']} итераций)", 
+                          extra={'task_id': task_id})
+                result = refinement_result["response"]
+            else:
+                # Стандартная обработка через smart_delegator
+                result = smart_delegator_instance(task.message, task.metadata)
+        except ImportError:
+            logger.warning(f"Task {task_id}: Рефинемент недоступен, используем стандартную обработку", 
+                         extra={'task_id': task_id})
+            result = smart_delegator_instance(task.message, task.metadata)
 
         logger.info(f"Task {task_id} processed. Response data: {result}", extra={'task_id': task_id})
         task.complete(result)
@@ -655,7 +670,7 @@ def process_task(task_id: str):
                 logger.error(f"Error args for task {task_id}: {e.args}", extra={'task_id': task_id})
             
             # РЕАЛИЗАЦИЯ НАСТОЯЩЕГО FALLBACK МЕХАНИЗМА
-            fallback_msg = "Server will attempt fallback to backup model (gemini/gemini-1.5-flash)"
+            fallback_msg = "Server will attempt fallback to backup model (qwen/qwen3-235b-a22b:free)"
             logger.info(f"Task {task_id}: {fallback_msg}", extra={'task_id': task_id})
             
             # Пытаемся выполнить задачу с резервной моделью
@@ -663,8 +678,8 @@ def process_task(task_id: str):
                 # Создаем новые метаданные с резервной моделью
                 fallback_metadata = task.metadata.copy() if task.metadata else {}
                 fallback_metadata.update({
-                    'provider': 'google',
-                    'model': 'gemini/gemini-1.5-flash',
+                    'provider': 'openrouter',
+                    'model': 'qwen/qwen3-235b-a22b:free',
                     'fallback_attempt': True,
                     'original_provider': fallback_metadata.get('provider', 'openrouter'),
                     'original_model': fallback_metadata.get('model', 'unknown')
@@ -791,6 +806,69 @@ def debug_status():
         "refactoring_status": "Dynamic tool loading enabled",
         "gopiai_integration_status": "Removed - replaced with native CrewAI functionality"
     })
+
+@app.route('/api/process/refine', methods=['POST'])
+def process_request_with_refinement():
+    """
+    Эндпоинт для явного запроса обработки с рефинементом
+    """
+    rid = request.environ.get("gopiai.request_id") or ensure_request_id(request.headers.get("X-Request-ID"))
+    op_start = now_ms()
+    jlog(level="INFO", event="api_entry", request_id=rid, route="/api/process/refine", method="POST")
+    
+    if not SERVER_IS_READY:
+        return jsonify({"error": "Server started in limited mode due to initialization error."}), 503
+
+    try:
+        data = request.get_json()
+        if data is None:
+            return jsonify({"error": "Invalid request: body must be a valid JSON."}), 400
+
+        message = data.get('message')
+        if not message:
+            return jsonify({"error": "Missing required 'message' field in JSON payload."}), 400
+
+        # Принудительно включаем рефинемент
+        metadata = data.get('metadata', {})
+        metadata['use_refinement'] = True
+        metadata['refinement_max_rounds'] = data.get('max_rounds', 3)
+        metadata['include_history'] = data.get('include_history', False)
+
+        logger.info(f"Received refinement request: '{message}'", extra={'request_id': rid})
+
+        # Создаем задачу как обычно
+        task_id = str(uuid.uuid4())
+        task = ServerTask(task_id, message, metadata)
+
+        with TASKS_LOCK:
+            TASKS[task_id] = task
+
+        thread = threading.Thread(target=process_task, args=(task_id,), daemon=True)
+        thread.start()
+
+        jlog(
+            level="INFO",
+            event="request_out", 
+            request_id=rid,
+            route="/api/process/refine",
+            method="POST",
+            status_code=202,
+            latency_ms=now_ms() - op_start,
+            success=True,
+        )
+        
+        return jsonify({
+            "task_id": task_id,
+            "status": task.status.name,
+            "message": "Task queued for refinement processing",
+            "created_at": task.created_at.isoformat(),
+            "request_id": rid,
+            "refinement_enabled": True
+        }), 202
+
+    except Exception as e:
+        logger.error(f"Failed to process refinement request: {e}", exc_info=True, extra={'request_id': rid})
+        return jsonify({"error": f"Failed to process refinement request: {e}"}), 500
 
 # --- Новые эндпоинты для синхронизации состояния провайдеров и моделей ---
 
@@ -1071,7 +1149,7 @@ def get_openrouter_models():
 # Глобальная переменная для хранения настроек модели
 _CURRENT_MODEL_SETTINGS = {
     "provider": "OpenRouter",
-    "model": "gemini/gemini-1.5-flash"  # Стабильная модель по умолчанию
+    "model": "google/gemini-flash-1.5"  # Стабильная модель по умолчанию
 }
 
 @app.route('/api/model/set', methods=['POST'])
