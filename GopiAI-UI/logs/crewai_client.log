@@ -1,289 +1,154 @@
-2025-09-02 07:50:22 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
-2025-09-02 07:50:22 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-09-02 07:50:38 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Сообщение: ты тут?
-2025-09-02 07:50:58 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:50:58 - INFO - [REQUEST] Получено 8 сообщений из истории для сессии session_1756766989
-2025-09-02 07:50:58 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:50:58 - DEBUG - ты тут?
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:50:58 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:50:58 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
-2025-09-02 07:50:58 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:50:58 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:50:58.742795', 'message': 'Task queued for processing', 'request_id': '87adc367-c653-4113-b62e-04ddec3f5125', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:50:58 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:50:58.742795', 'message': 'Task queued for processing', 'request_id': '87adc367-c653-4113-b62e-04ddec3f5125', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:50:58 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:58 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:50:58 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:58 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:58 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:50:58 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:50:59 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:50:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:50:59 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:00 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:00 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:01 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:02 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:02 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:02 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:02 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:03 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:05 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:05 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:05 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:05 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:07 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:07 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:07 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:07 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': None, 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T07:50:58.742997', 'status': 'PROCESSING', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:09 - INFO - [TASK-PROGRESS] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 в процессе. Статус: PROCESSING
-2025-09-02 07:51:10 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:10 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/1ab9a66f-ab0e-4835-89ce-bca2259fe388
-2025-09-02 07:51:10 - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab9a66f-ab0e-4835-89ce-bca2259fe388: {'completed_at': '2025-09-02T07:51:09.962431', 'created_at': '2025-09-02T07:50:58.742795', 'error': None, 'message': 'ты тут?', 'result': 'Да, я здесь.', 'started_at': '2025-09-02T07:50:58.742997', 'status': 'COMPLETED', 'task_id': '1ab9a66f-ab0e-4835-89ce-bca2259fe388'}
-2025-09-02 07:51:10 - INFO - [TASK-COMPLETE] Задача 1ab9a66f-ab0e-4835-89ce-bca2259fe388 завершена. Результат: Да, я здесь....
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Сообщение: у тебя есть доступ к моим файлам? посмотри что леж...
-2025-09-02 07:52:08 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:52:08 - INFO - [REQUEST] Получено 10 сообщений из истории для сессии session_1756766989
-2025-09-02 07:52:08 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Извлеченный текст сообщения: у тебя есть доступ к моим файлам? посмотри что леж...
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:52:08 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:52:08 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
-2025-09-02 07:52:08 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:52:08 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:52:08.778362', 'message': 'Task queued for processing', 'request_id': '1ef77900-4983-412a-a653-7357f523f223', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:08 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:52:08.778362', 'message': 'Task queued for processing', 'request_id': '1ef77900-4983-412a-a653-7357f523f223', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:08 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:08 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:52:08 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:08 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:08 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:08 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:09 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:09 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:10 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:10 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:10 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:11 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:11 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:11 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:11 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:12 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:12 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:12 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:12 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:13 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:13 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:13 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': None, 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': None, 'started_at': '2025-09-02T07:52:08.778540', 'status': 'PROCESSING', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:13 - INFO - [TASK-PROGRESS] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 в процессе. Статус: PROCESSING
-2025-09-02 07:52:15 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:15 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/98cbddd1-dd53-451b-8552-1ac49fa0ce91
-2025-09-02 07:52:15 - DEBUG - [TASK-CHECK] Получен ответ для задачи 98cbddd1-dd53-451b-8552-1ac49fa0ce91: {'completed_at': '2025-09-02T07:52:14.180801', 'created_at': '2025-09-02T07:52:08.778362', 'error': None, 'message': 'у тебя есть доступ к моим файлам? посмотри что лежит в /home/amritagopi и скажи мне', 'result': 'I cannot access local files on your system.  Therefore, I cannot provide the contents of the `/home/amritagopi` directory.', 'started_at': '2025-09-02T07:52:08.778540', 'status': 'COMPLETED', 'task_id': '98cbddd1-dd53-451b-8552-1ac49fa0ce91'}
-2025-09-02 07:52:15 - INFO - [TASK-COMPLETE] Задача 98cbddd1-dd53-451b-8552-1ac49fa0ce91 завершена. Результат: I cannot access local files on your system.  Therefore, I cannot provide the contents of the `/home/...
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Сообщение: а какие инструменты у тебя есть?
-2025-09-02 07:52:35 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:52:35 - INFO - [REQUEST] Получено 12 сообщений из истории для сессии session_1756766989
-2025-09-02 07:52:35 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:52:35 - DEBUG - а какие инструменты у тебя есть?
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:52:35 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:52:35 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
-2025-09-02 07:52:35 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:52:35 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:52:35.903123', 'message': 'Task queued for processing', 'request_id': '13ca7b71-d932-4b41-9ad9-5066329d59cf', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:35 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:52:35.903123', 'message': 'Task queued for processing', 'request_id': '13ca7b71-d932-4b41-9ad9-5066329d59cf', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:35 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:35 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:36 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:36 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:36 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:36 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:37 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:37 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:38 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:38 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:38 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:38 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:39 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:39 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:39 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': None, 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': None, 'started_at': '2025-09-02T07:52:35.903285', 'status': 'PROCESSING', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:39 - INFO - [TASK-PROGRESS] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c в процессе. Статус: PROCESSING
-2025-09-02 07:52:40 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:40 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/27a9ae0a-aade-4b2a-9857-d194d055437c
-2025-09-02 07:52:40 - DEBUG - [TASK-CHECK] Получен ответ для задачи 27a9ae0a-aade-4b2a-9857-d194d055437c: {'completed_at': '2025-09-02T07:52:39.628309', 'created_at': '2025-09-02T07:52:35.903123', 'error': None, 'message': 'а какие инструменты у тебя есть?', 'result': "I have the following tools available: Code Interpreter, File Writer Tool, Read a file's content, Brave Web Search the internet, Firecrawl web search tool, Tavily Search, Read a website content, List files in directory.", 'started_at': '2025-09-02T07:52:35.903285', 'status': 'COMPLETED', 'task_id': '27a9ae0a-aade-4b2a-9857-d194d055437c'}
-2025-09-02 07:52:40 - INFO - [TASK-COMPLETE] Задача 27a9ae0a-aade-4b2a-9857-d194d055437c завершена. Результат: I have the following tools available: Code Interpreter, File Writer Tool, Read a file's content, Bra...
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Сообщение: List files in directory - вот же! используй его чт...
-2025-09-02 07:53:28 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:53:28 - INFO - [REQUEST] Получено 14 сообщений из истории для сессии session_1756766989
-2025-09-02 07:53:28 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Извлеченный текст сообщения: List files in directory - вот же! используй его чт...
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:53:28 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:53:28 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
-2025-09-02 07:53:28 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:53:28 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:53:28.757449', 'message': 'Task queued for processing', 'request_id': 'd2904613-f82d-40e1-acaf-4e60b176c17f', 'status': 'PROCESSING', 'task_id': '2a1693d0-c484-4947-a548-e8250d62cac1'}
-2025-09-02 07:53:28 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:53:28.757449', 'message': 'Task queued for processing', 'request_id': 'd2904613-f82d-40e1-acaf-4e60b176c17f', 'status': 'PROCESSING', 'task_id': '2a1693d0-c484-4947-a548-e8250d62cac1'}
-2025-09-02 07:53:28 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 2a1693d0-c484-4947-a548-e8250d62cac1
-2025-09-02 07:53:28 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:53:28 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 2a1693d0-c484-4947-a548-e8250d62cac1
-2025-09-02 07:53:28 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/2a1693d0-c484-4947-a548-e8250d62cac1
-2025-09-02 07:53:28 - DEBUG - [TASK-CHECK] Получен ответ для задачи 2a1693d0-c484-4947-a548-e8250d62cac1: {'completed_at': None, 'created_at': '2025-09-02T07:53:28.757449', 'error': None, 'message': 'List files in directory - вот же! используй его чтобы посмотреть что находится в /home/amritagopi', 'result': None, 'started_at': '2025-09-02T07:53:28.757610', 'status': 'PROCESSING', 'task_id': '2a1693d0-c484-4947-a548-e8250d62cac1'}
-2025-09-02 07:53:28 - INFO - [TASK-PROGRESS] Задача 2a1693d0-c484-4947-a548-e8250d62cac1 в процессе. Статус: PROCESSING
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Сообщение: List files in directory - вот же! используй его чт...
-2025-09-02 07:53:39 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:53:39 - INFO - [REQUEST] Получено 15 сообщений из истории для сессии session_1756766989
-2025-09-02 07:53:39 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Извлеченный текст сообщения: List files in directory - вот же! используй его чт...
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:53:39 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:53:39 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
-2025-09-02 07:53:39 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:53:39 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:53:39.159065', 'message': 'Task queued for processing', 'request_id': '3113d718-ee7a-411f-b9ef-b867bb50fe7e', 'status': 'PROCESSING', 'task_id': 'b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4'}
-2025-09-02 07:53:39 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:53:39.159065', 'message': 'Task queued for processing', 'request_id': '3113d718-ee7a-411f-b9ef-b867bb50fe7e', 'status': 'PROCESSING', 'task_id': 'b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4'}
-2025-09-02 07:53:39 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4
-2025-09-02 07:53:39 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:53:39 - DEBUG - [TASK-CHECK] Проверка статуса задачи: b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4
-2025-09-02 07:53:39 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4
-2025-09-02 07:53:39 - DEBUG - [TASK-CHECK] Получен ответ для задачи b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4: {'completed_at': None, 'created_at': '2025-09-02T07:53:39.159065', 'error': None, 'message': 'List files in directory - вот же! используй его чтобы посмотреть что находится в /home/amritagopi', 'result': None, 'started_at': '2025-09-02T07:53:39.159697', 'status': 'PROCESSING', 'task_id': 'b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4'}
-2025-09-02 07:53:39 - INFO - [TASK-PROGRESS] Задача b48ac6e3-d61d-4d4a-8a6c-c6b230237ff4 в процессе. Статус: PROCESSING
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Сообщение: List files in directory - вот же! используй его чт...
-2025-09-02 07:54:19 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:54:19 - INFO - [REQUEST] Получено 16 сообщений из истории для сессии session_1756766989
-2025-09-02 07:54:19 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Извлеченный текст сообщения: List files in directory - вот же! используй его чт...
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:54:19 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:54:19 - INFO - [MODEL] Выбранная модель: openai/gpt-oss-120b:free
-2025-09-02 07:54:19 - INFO - [MODEL] Настроен запрос для OpenRouter модели: openai/gpt-oss-120b:free
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:54:19 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:54:19.270640', 'message': 'Task queued for processing', 'request_id': '0b8f52dc-5a4a-4047-a434-e6c2cd118d4c', 'status': 'PROCESSING', 'task_id': 'c32431e3-b45d-4963-bca1-fde296292157'}
-2025-09-02 07:54:19 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:54:19.270640', 'message': 'Task queued for processing', 'request_id': '0b8f52dc-5a4a-4047-a434-e6c2cd118d4c', 'status': 'PROCESSING', 'task_id': 'c32431e3-b45d-4963-bca1-fde296292157'}
-2025-09-02 07:54:19 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: c32431e3-b45d-4963-bca1-fde296292157
-2025-09-02 07:54:19 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:54:19 - DEBUG - [TASK-CHECK] Проверка статуса задачи: c32431e3-b45d-4963-bca1-fde296292157
-2025-09-02 07:54:19 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/c32431e3-b45d-4963-bca1-fde296292157
-2025-09-02 07:54:19 - DEBUG - [TASK-CHECK] Получен ответ для задачи c32431e3-b45d-4963-bca1-fde296292157: {'completed_at': None, 'created_at': '2025-09-02T07:54:19.270640', 'error': None, 'message': 'List files in directory - вот же! используй его чтобы посмотреть что находится в /home/amritagopi', 'result': None, 'started_at': '2025-09-02T07:54:19.270783', 'status': 'PROCESSING', 'task_id': 'c32431e3-b45d-4963-bca1-fde296292157'}
-2025-09-02 07:54:19 - INFO - [TASK-PROGRESS] Задача c32431e3-b45d-4963-bca1-fde296292157 в процессе. Статус: PROCESSING
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Сообщение: ты где пропадаешь снова?
-2025-09-02 07:54:35 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756766989
-2025-09-02 07:54:35 - INFO - [REQUEST] Получено 17 сообщений из истории для сессии session_1756766989
-2025-09-02 07:54:35 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-02 07:54:35 - DEBUG - ты где пропадаешь снова?
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-02 07:54:35 - INFO - [MODEL] Запрос с провайдером: openrouter
-2025-09-02 07:54:35 - INFO - [MODEL] Выбранная модель: openai/gpt-oss-120b:free
-2025-09-02 07:54:35 - INFO - [MODEL] Настроен запрос для OpenRouter модели: openai/gpt-oss-120b:free
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-02 07:54:35 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T07:54:35.522349', 'message': 'Task queued for processing', 'request_id': 'ffa32b9e-c62f-4204-bcbd-34f9dd473883', 'status': 'PROCESSING', 'task_id': '086b3738-14a8-492d-89ac-6249271b490b'}
-2025-09-02 07:54:35 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T07:54:35.522349', 'message': 'Task queued for processing', 'request_id': 'ffa32b9e-c62f-4204-bcbd-34f9dd473883', 'status': 'PROCESSING', 'task_id': '086b3738-14a8-492d-89ac-6249271b490b'}
-2025-09-02 07:54:35 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 086b3738-14a8-492d-89ac-6249271b490b
-2025-09-02 07:54:35 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
-2025-09-02 07:54:35 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 086b3738-14a8-492d-89ac-6249271b490b
-2025-09-02 07:54:35 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/086b3738-14a8-492d-89ac-6249271b490b
-2025-09-02 07:54:35 - DEBUG - [TASK-CHECK] Получен ответ для задачи 086b3738-14a8-492d-89ac-6249271b490b: {'completed_at': None, 'created_at': '2025-09-02T07:54:35.522349', 'error': None, 'message': 'ты где пропадаешь снова?', 'result': None, 'started_at': '2025-09-02T07:54:35.522530', 'status': 'PROCESSING', 'task_id': '086b3738-14a8-492d-89ac-6249271b490b'}
-2025-09-02 07:54:35 - INFO - [TASK-PROGRESS] Задача 086b3738-14a8-492d-89ac-6249271b490b в процессе. Статус: PROCESSING
+2025-09-02 13:19:01 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
+2025-09-02 13:19:01 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-02 13:19:11 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Сообщение: ты тут?
+2025-09-02 14:09:40 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756797125
+2025-09-02 14:09:40 - INFO - [REQUEST] Получено 5 сообщений из истории для сессии session_1756797125
+2025-09-02 14:09:40 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-02 14:09:40 - DEBUG - ты тут?
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-02 14:09:40 - INFO - [MODEL] Запрос с провайдером: openrouter
+2025-09-02 14:09:40 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
+2025-09-02 14:09:40 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-02 14:09:40 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T14:09:40.909319', 'message': 'Task queued for processing', 'request_id': '6671ad44-f6b2-48c6-a677-a668d9ba324c', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:40 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T14:09:40.909319', 'message': 'Task queued for processing', 'request_id': '6671ad44-f6b2-48c6-a677-a668d9ba324c', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:40 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:40 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:41 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:41 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:41 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:41 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:42 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:42 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:42 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:43 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:43 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:43 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:43 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:44 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:44 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:44 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': None, 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': None, 'started_at': '2025-09-02T14:09:40.909551', 'status': 'PROCESSING', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:44 - INFO - [TASK-PROGRESS] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 в процессе. Статус: PROCESSING
+2025-09-02 14:09:45 - DEBUG - [TASK-CHECK] Проверка статуса задачи: d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:45 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29
+2025-09-02 14:09:45 - DEBUG - [TASK-CHECK] Получен ответ для задачи d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29: {'completed_at': '2025-09-02T14:09:45.481475', 'created_at': '2025-09-02T14:09:40.909319', 'error': None, 'message': 'ты тут?', 'result': 'Да, Анютка, я тут.', 'started_at': '2025-09-02T14:09:40.909551', 'status': 'COMPLETED', 'task_id': 'd0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29'}
+2025-09-02 14:09:45 - INFO - [TASK-COMPLETE] Задача d0f8321b-e4e1-41ce-8e2f-c61b1dfc0c29 завершена. Результат: Да, Анютка, я тут....
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Сообщение: Давай инструменты тестировать? По моей задумке у т...
+2025-09-02 14:09:56 - WARNING - [DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756797125
+2025-09-02 14:09:56 - INFO - [REQUEST] Получено 7 сообщений из истории для сессии session_1756797125
+2025-09-02 14:09:56 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Извлеченный текст сообщения: Давай инструменты тестировать? По моей задумке у т...
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-02 14:09:56 - INFO - [MODEL] Запрос с провайдером: openrouter
+2025-09-02 14:09:56 - INFO - [MODEL] Выбранная модель: google/gemini-flash-1.5
+2025-09-02 14:09:56 - INFO - [MODEL] Настроен запрос для OpenRouter модели: google/gemini-flash-1.5
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-02 14:09:56 - DEBUG - Полный ответ Gemini: {'created_at': '2025-09-02T14:09:56.975317', 'message': 'Task queued for processing', 'request_id': '991c417e-0859-41e6-a2c1-90b67c3d9aa6', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:56 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'created_at': '2025-09-02T14:09:56.975317', 'message': 'Task queued for processing', 'request_id': '991c417e-0859-41e6-a2c1-90b67c3d9aa6', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:56 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:56 - DEBUG - [TASK-START] Начальный статус задачи: PROCESSING
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:57 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:57 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:57 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:58 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:58 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:58 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:09:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:09:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:09:59 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:00 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:01 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:03 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:05 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:05 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:05 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:05 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:07 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:07 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:07 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:07 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:09 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:11 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:11 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:11 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:11 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:13 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:13 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:13 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:13 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:15 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:15 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:15 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:15 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:17 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:17 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:17 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:17 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:19 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:19 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:19 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:19 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:21 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:21 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:21 - DEBUG - [TASK-CHECK] Получен ответ для задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: {'completed_at': None, 'created_at': '2025-09-02T14:09:56.975317', 'error': None, 'message': 'Давай инструменты тестировать? По моей задумке у тебя должна быть возможность взаимодеййствия с моей файловой системой. Я очень старалась настроить всё для тебя, давай попробуем. Скажи, ты видишь содержимое директории /home/amritagopi? скажи что там есть, если можешь прочесть', 'result': None, 'started_at': '2025-09-02T14:09:56.975538', 'status': 'PROCESSING', 'task_id': '252a3aaf-b426-41da-9f4d-2ca8778db61a'}
+2025-09-02 14:10:21 - INFO - [TASK-PROGRESS] Задача 252a3aaf-b426-41da-9f4d-2ca8778db61a в процессе. Статус: PROCESSING
+2025-09-02 14:10:23 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:23 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/252a3aaf-b426-41da-9f4d-2ca8778db61a
+2025-09-02 14:10:33 - ERROR - [TASK-ERROR] Ошибка соединения при проверке задачи 252a3aaf-b426-41da-9f4d-2ca8778db61a: HTTPConnectionPool(host='127.0.0.1', port=5052): Read timed out. (read timeout=10)

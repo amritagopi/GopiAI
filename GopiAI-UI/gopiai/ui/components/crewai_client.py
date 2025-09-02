@@ -58,8 +58,25 @@ logger.info("[INIT] Эмоциональный классификатор отк
 TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
 ToolsInstructionManager = None
 
-TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
-logger.info("[INIT] Система динамических инструкций отключена после рефакторинга")
+# Попытаемся загрузить систему динамических инструкций
+try:
+    import sys
+    crewai_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '..', 'GopiAI-CrewAI')
+    if os.path.exists(crewai_path):
+        sys.path.insert(0, crewai_path)
+        
+        from tools.dynamic_instructions_system.tools_instruction_manager import ToolsInstructionManager, get_tools_instruction_manager
+        TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
+        logger.info("[INIT] ✅ Система динамических инструкций включена успешно")
+    else:
+        logger.warning(f"[INIT] CrewAI путь не найден: {crewai_path}")
+        TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+except ImportError as e:
+    logger.warning(f"[INIT] ❌ Не удалось загрузить систему динамических инструкций: {e}")
+    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+except Exception as e:
+    logger.error(f"[INIT] ❌ Ошибка при загрузке системы динамических инструкций: {e}")
+    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
 
 # Создаем директорию для логов, если её нет
 # Используем текущую директорию или директорию приложения

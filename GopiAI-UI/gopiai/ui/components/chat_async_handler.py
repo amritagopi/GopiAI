@@ -241,13 +241,35 @@ class ChatAsyncHandler(QObject):
             status: Dict[str, Any] = status_raw if isinstance(status_raw, dict) else {"status": str(status_raw)}
             
             # Ожидаем, что сервер возвращает словарь с ключами `done` и `result`
-            # Также проверяем статус на "completed" или "error" для завершения опроса
-            done = bool(status.get("done")) or status.get("status") in ("completed", "error")
+            # Также проверяем статус на "completed", "error" или "failed" для завершения опроса
+            done = (bool(status.get("done")) or 
+                   status.get("status") in ("completed", "error", "failed", "cancelled"))
+            
             if done:
-                logger.info(f"[POLLING-COMPLETE] Задача {self._current_task_id} завершена после {self._current_polling_attempt} попыток")
+                task_status = status.get("status")
+                logger.info(f"[POLLING-COMPLETE] Задача {self._current_task_id} завершена после {self._current_polling_attempt} попыток со статусом: {task_status}")
                 self._polling_timer.stop()
                 
-                # Проверяем наличие результата
+                # Обработка различных статусов завершения
+                if task_status == "failed":
+                    error_msg = status.get("error", "Task failed with unknown error")
+                    logger.error(f"[POLLING-FAILED] Задача {self._current_task_id} завершилась с ошибкой: {error_msg}")
+                    self.message_error.emit(error_msg)
+                    self._current_task_id = None
+                    return
+                elif task_status == "error":
+                    error_msg = status.get("error", "Task ended with error status")
+                    logger.error(f"[POLLING-ERROR] Задача {self._current_task_id} завершилась с ошибкой: {error_msg}")
+                    self.message_error.emit(error_msg)
+                    self._current_task_id = None
+                    return
+                elif task_status == "cancelled":
+                    logger.warning(f"[POLLING-CANCELLED] Задача {self._current_task_id} была отменена")
+                    self.message_error.emit("Task was cancelled")
+                    self._current_task_id = None
+                    return
+                
+                # Для статуса "completed" проверяем наличие результата
                 result = status.get("result")
                 if result:
                     logger.debug("[POLLING-RESULT] Получен результат: %s", result)

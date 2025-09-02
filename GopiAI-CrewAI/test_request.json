@@ -1,0 +1,6 @@
+{
+  "message": "Привет, Гипатия! Кратко представься.",
+  "metadata": {
+    "preferred_model": "invalid-model-to-test-fallback"
+  }
+}

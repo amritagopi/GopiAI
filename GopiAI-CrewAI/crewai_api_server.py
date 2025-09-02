@@ -8,6 +8,18 @@ from enum import Enum, auto # Добавлено auto для TaskStatus
 from dotenv import load_dotenv
 from pathlib import Path
 
+# Импорт системных промптов для Гипатии
+try:
+    from tools.gopiai_integration.system_prompts import get_default_prompt, get_agent_prompt
+    print("[DEBUG] Системные промпты Гипатии успешно загружены")
+except ImportError as e:
+    print(f"[ERROR] Не удалось загрузить системные промпты: {e}")
+    # Fallback функция
+    def get_default_prompt():
+        return "You are a helpful AI assistant."
+    def get_agent_prompt(role="default"):
+        return get_default_prompt()
+
 # --- НАЧАЛО ВАЖНОГО БЛОКА ---
 # Четко указываем путь к .env файлу в той же папке, что и наш скрипт
 env_path = Path(__file__).parent / '.env'
@@ -219,9 +231,9 @@ def load_tools_from_directory(directory_path: Path) -> list:
         if not tool_dir.is_dir():
             continue
             
-        # Исключаем директорию gopiai_integration
-        if tool_dir.name == "gopiai_integration":
-            logger.info(f"Пропускаем директорию: {tool_dir.name}")
+        # Исключаем служебные директории
+        if tool_dir.name in ["gopiai_integration", "__pycache__"]:
+            logger.debug(f"Пропускаем служебную директорию: {tool_dir.name}")
             continue
 
         # Ищем файл с названием инструмента в поддиректории
@@ -329,18 +341,27 @@ class ServerTask:
         with self.lock:
             self.status = TaskStatus.PROCESSING
             self.started_at = datetime.now()
+            # Обновляем в глобальном хранилище
+            with TASKS_LOCK:
+                TASKS[self.task_id] = self
 
     def complete(self, result):
         with self.lock:
             self.status = TaskStatus.COMPLETED
             self.result = result
             self.completed_at = datetime.now()
+            # Обновляем в глобальном хранилище
+            with TASKS_LOCK:
+                TASKS[self.task_id] = self
 
     def fail(self, error):
         with self.lock:
             self.status = TaskStatus.FAILED
             self.error = str(error)
             self.completed_at = datetime.now()
+            # Обновляем в глобальном хранилище
+            with TASKS_LOCK:
+                TASKS[self.task_id] = self
 
     def to_dict(self):
         # Конвертируем result в сериализуемый формат
@@ -466,11 +487,11 @@ try:
         if metadata:
             # Приоритет metadata из запроса
             provider = metadata.get("preferred_provider") or metadata.get("model_provider", "OpenRouter")
-            model_id = metadata.get("preferred_model") or metadata.get("model_id", "google/gemini-flash-1.5")
+            model_id = metadata.get("preferred_model") or metadata.get("model_id", "gemini/gemini-1.5-flash")
         else:
             # Fallback к глобальным настройкам
             provider = _CURRENT_MODEL_SETTINGS.get("provider", "OpenRouter")
-            model_id = _CURRENT_MODEL_SETTINGS.get("model", "google/gemini-flash-1.5")
+            model_id = _CURRENT_MODEL_SETTINGS.get("model", "gemini/gemini-1.5-flash")
         
         if provider == "Gemini" and os.getenv("GEMINI_API_KEY"):
             try:
@@ -511,10 +532,13 @@ try:
         if not llm:
             raise RuntimeError("Не удалось создать LLM для выполнения задачи.")
 
+        # Получаем системный промпт Гипатии
+        system_prompt = get_default_prompt()
+        
         agent = Agent(
-            role="General Purpose Assistant",
-            goal="Perform tasks using available tools.",
-            backstory="You are a versatile AI assistant capable of performing a wide range of tasks by leveraging various tools.",
+            role="Гипатия - GopiAI Assistant",
+            goal="Помогать пользователю, используя все доступные инструменты с характером и личностью Гипатии.",
+            backstory=system_prompt,
             tools=agent_tools,
             llm=llm, # Явно указываем LLM
             verbose=True,
@@ -610,8 +634,62 @@ def process_task(task_id: str):
 
     except Exception as e:
         error_msg = f"An unexpected error occurred while processing task {task_id}."
-        logger.error(error_msg, exc_info=True, extra={'task_id': task_id})
-        # Capture full traceback for the task's error field
+        
+        # Улучшенное логирование ошибок провайдера
+        error_details = str(e)
+        is_provider_error = any(keyword in error_details for keyword in [
+            "404", "500", "No endpoints found", "Internal Server Error",
+            "OpenrouterException", "OpenRouterException", "APIError"
+        ])
+        
+        if is_provider_error:
+            logger.error(f"Provider/model error for task {task_id}: {error_details}", extra={'task_id': task_id})
+            # Дамп детальной информации об ошибке провайдера
+            if hasattr(e, 'response'):
+                try:
+                    response_text = getattr(e.response, 'text', 'No response text')
+                    logger.error(f"Provider response for task {task_id}: {response_text}", extra={'task_id': task_id})
+                except:
+                    pass
+            if hasattr(e, 'args') and e.args:
+                logger.error(f"Error args for task {task_id}: {e.args}", extra={'task_id': task_id})
+            
+            # РЕАЛИЗАЦИЯ НАСТОЯЩЕГО FALLBACK МЕХАНИЗМА
+            fallback_msg = "Server will attempt fallback to backup model (gemini/gemini-1.5-flash)"
+            logger.info(f"Task {task_id}: {fallback_msg}", extra={'task_id': task_id})
+            
+            # Пытаемся выполнить задачу с резервной моделью
+            try:
+                # Создаем новые метаданные с резервной моделью
+                fallback_metadata = task.metadata.copy() if task.metadata else {}
+                fallback_metadata.update({
+                    'provider': 'google',
+                    'model': 'gemini/gemini-1.5-flash',
+                    'fallback_attempt': True,
+                    'original_provider': fallback_metadata.get('provider', 'openrouter'),
+                    'original_model': fallback_metadata.get('model', 'unknown')
+                })
+                
+                logger.info(f"Task {task_id}: Attempting fallback with Gemini model", extra={'task_id': task_id})
+                result = smart_delegator_instance(task.message, fallback_metadata)
+                
+                logger.info(f"Task {task_id} completed successfully with fallback model. Response data: {result}", extra={'task_id': task_id})
+                task.complete(result)
+                return  # Успешное выполнение с fallback
+                
+            except Exception as fallback_error:
+                fallback_error_details = str(fallback_error)
+                logger.error(f"Task {task_id}: Fallback model also failed: {fallback_error_details}", extra={'task_id': task_id})
+                
+                # Если и fallback не сработал - записываем детали обеих ошибок
+                combined_error = f"Primary model failed: {error_details}\nFallback model failed: {fallback_error_details}"
+                tb = traceback.format_exc()
+                task.fail(f"Both primary and fallback models failed. Details: {combined_error}\n{tb}")
+                return
+        else:
+            logger.error(error_msg, exc_info=True, extra={'task_id': task_id})
+            
+        # Capture full traceback for the task's error field (только для не-провайдерских ошибок)
         tb = traceback.format_exc()
         task.fail(f"{error_msg} Details: {e}\n{tb}")
 
@@ -993,7 +1071,7 @@ def get_openrouter_models():
 # Глобальная переменная для хранения настроек модели
 _CURRENT_MODEL_SETTINGS = {
     "provider": "OpenRouter",
-    "model": "google/gemini-flash-1.5"  # Стабильная модель по умолчанию
+    "model": "gemini/gemini-1.5-flash"  # Стабильная модель по умолчанию
 }
 
 @app.route('/api/model/set', methods=['POST'])
@@ -1007,6 +1085,32 @@ def set_model():
         
         if not provider or not model:
             return jsonify({"error": "Provider and model are required"}), 400
+        
+        # Проверяем доступность модели перед установкой
+        full_model = f"{provider}/{model}" if provider != "openai" else model
+        
+        try:
+            import litellm
+            # Простая проверка модели через тестовый вызов
+            test_response = litellm.completion(
+                model=full_model,
+                messages=[{"role": "user", "content": "test"}],
+                max_tokens=1,
+                timeout=10
+            )
+            logger.info(f"Model {full_model} validated successfully")
+        except Exception as model_error:
+            logger.warning(f"Model {full_model} validation failed: {model_error}")
+            # Проверяем, если это 404 или модель недоступна - откатываемся
+            if "404" in str(model_error) or "No endpoints found" in str(model_error):
+                logger.warning(f"Model {full_model} unavailable, keeping current settings")
+                return jsonify({
+                    "status": "error",
+                    "message": f"Model {full_model} is not available. Please check the model name and your API access.",
+                    "error_details": str(model_error)
+                }), 400
+            # Для других ошибок - продолжаем (может быть проблема с API ключами и т.п.)
+            logger.info(f"Model validation failed but proceeding: {model_error}")
         
         _CURRENT_MODEL_SETTINGS['provider'] = provider
         _CURRENT_MODEL_SETTINGS['model'] = model
