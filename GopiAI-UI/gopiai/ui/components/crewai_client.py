@@ -393,16 +393,15 @@ class CrewAIClient:
         logger.debug("[REQUEST] Установлен флаг async_processing=True")
         
         # Обрабатываем информацию о выбранной модели
-        model_provider = message.get('metadata', {}).get('model_provider', 'gemini')
-        model_id = message.get('metadata', {}).get('model_id')
+        model_provider = message.get('metadata', {}).get('model_provider', 'openrouter')
+        model_id = message.get('metadata', {}).get('model_id') or 'google/gemini-flash-1.5'
         model_data = message.get('metadata', {}).get('model_data')
         
         logger.info(f"[MODEL] Запрос с провайдером: {model_provider}")
-        if model_id:
-            logger.info(f"[MODEL] Выбранная модель: {model_id}")
+        logger.info(f"[MODEL] Выбранная модель: {model_id}")
             
         # Добавляем информацию о модели в метаданные для сервера
-        if model_provider == 'openrouter' and model_id:
+        if model_provider == 'openrouter' or model_id:
             message['metadata']['preferred_provider'] = 'openrouter'
             message['metadata']['preferred_model'] = model_id
             if model_data:

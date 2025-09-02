@@ -1,0 +1,15 @@
+{
+  "main_color": "#01442a",
+  "header_color": "#01f4d7",
+  "control_color": "#014900",
+  "accent_color": "#018b00",
+  "titlebar_background": "#01d47b",
+  "button_color": "#018d18",
+  "button_hover_color": "#01b365",
+  "button_active_color": "#014900",
+  "text_color": "#01b365",
+  "border_color": "#019959",
+  "titlebar_text": "#011600",
+  "name": "Sea",
+  "variant": "light"
+}

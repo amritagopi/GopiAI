@@ -421,6 +421,7 @@ def get_current_provider() -> str:
 
 RateLimitMonitor = UsageTracker  # old alias
 rate_limit_monitor = _usage_tracker  # legacy lowercase symbol
+usage_tracker = _usage_tracker  # export for server imports
 LLM_MODELS_CONFIG = MODELS  # historical constant expected by ai_router_llm
 
 def get_models_by_intelligence(min_score: float = 0.0):

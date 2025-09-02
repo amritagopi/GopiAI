@@ -1,0 +1,15 @@
+{
+  "main_color": "#013246",
+  "header_color": "#01f446",
+  "control_color": "#014946",
+  "accent_color": "#018b46",
+  "titlebar_background": "#01d446",
+  "button_color": "#018d46",
+  "button_hover_color": "#01b346",
+  "button_active_color": "#014946",
+  "text_color": "#01b346",
+  "border_color": "#019946",
+  "titlebar_text": "#011646",
+  "name": "Blue",
+  "variant": "light"
+}

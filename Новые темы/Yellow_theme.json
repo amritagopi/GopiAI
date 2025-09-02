@@ -1,0 +1,15 @@
+{
+  "main_color": "#665538",
+  "header_color": "#f4ce7b",
+  "control_color": "#6b4900",
+  "accent_color": "#cc8b00",
+  "titlebar_background": "#f4d47b",
+  "button_color": "#c38d18",
+  "button_hover_color": "#d7b365",
+  "button_active_color": "#6b4900",
+  "text_color": "#d7b365",
+  "border_color": "#ab9959",
+  "titlebar_text": "#1f1600",
+  "name": "Lemon",
+  "variant": "light"
+}

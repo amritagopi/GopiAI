@@ -1,0 +1,15 @@
+{
+  "main_color": "#4e4e3c",
+  "header_color": "#7a7a00",
+  "control_color": "#616100",
+  "accent_color": "#c2c200",
+  "titlebar_background": "#999900",
+  "button_color": "#9e9e00",
+  "button_hover_color": "#4e4e00",
+  "button_active_color": "#adad00",
+  "text_color": "#ffff00",
+  "border_color": "#948a00",
+  "titlebar_text": "#4e4e00",
+  "name": "Grey_green",
+  "variant": "light"
+}

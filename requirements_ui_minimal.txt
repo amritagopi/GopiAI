@@ -1,0 +1,22 @@
+# Минимальные зависимости только для UI
+# Размер окружения: ~500MB вместо 9.1GB
+
+# Core UI Framework
+PySide6>=6.7.3
+PySide6-Addons>=6.7.3
+PySide6-Essentials>=6.7.3
+shiboken6>=6.7.3
+
+# HTTP клиент для API к CrewAI серверу
+requests>=2.32.3
+
+# Утилиты
+chardet>=5.2.0
+python-dotenv>=1.0.1
+colorama>=0.4.6
+click>=8.1.7
+rich>=13.7.1
+
+# Development & Testing (опционально)
+pytest>=8.0.2
+pytest-qt>=4.2.0
