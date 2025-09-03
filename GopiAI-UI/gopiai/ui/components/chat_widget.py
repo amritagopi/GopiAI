@@ -22,14 +22,12 @@ from PySide6.QtWidgets import QMessageBox
 
 # Импорт виджетов моделей
 try:
-    from .unified_model_widget import UnifiedModelWidget
+    from .gemini_model_widget import GeminiModelWidget
     # Оставляем старые импорты для совместимости
-    from .openrouter_model_widget import OpenRouterModelWidget
     from .model_selector_widget import ModelSelectorWidget
 except ImportError as e:
     print(f"Не удалось импортировать виджеты моделей: {e}")
-    UnifiedModelWidget = None
-    OpenRouterModelWidget = None
+    GeminiModelWidget = None
     ModelSelectorWidget = None
 
 logger = logging.getLogger(__name__)
@@ -52,7 +50,7 @@ class ChatWidget(QWidget):
         
         # Опциональные атрибуты для типизатора/проверок
         self.model_selector_widget = None
-        self.openrouter_widget = None
+        self._widget = None
 
         self.session_id = None
         self._waiting_message_id = None
@@ -191,7 +189,7 @@ class ChatWidget(QWidget):
         history_layout.addWidget(self.sessions_list)
         self.tab_widget.addTab(history_tab, "История")
 
-        # Вкладка моделей с переключателем Gemini/OpenRouter
+        # Вкладка моделей с переключателем Gemini/
         try:
             from .unified_models_tab import UnifiedModelsTab
             self.models_tab = UnifiedModelsTab()
@@ -205,16 +203,16 @@ class ChatWidget(QWidget):
         except ImportError:
             logger.warning("⚠️ UnifiedModelsTab недоступен, используем fallback")
             
-            # Fallback: старая вкладка OpenRouter
-            if OpenRouterModelWidget:
-                self.openrouter_widget = OpenRouterModelWidget()
-                self.tab_widget.addTab(self.openrouter_widget, "OpenRouter")
+            # Fallback: старая вкладка 
+            if ModelWidget:
+                self._widget = ModelWidget()
+                self.tab_widget.addTab(self._widget, "")
                 
                 # Подключаем сигналы
-                self.openrouter_widget.model_selected.connect(self._on_openrouter_model_selected)
-                self.openrouter_widget.provider_switch_requested.connect(self._on_provider_switch_requested)
+                self._widget.model_selected.connect(self._on__model_selected)
+                self._widget.provider_switch_requested.connect(self._on_provider_switch_requested)
                 
-                logger.info("✅ Fallback: вкладка OpenRouter восстановлена")
+                logger.info("✅ Fallback: вкладка  восстановлена")
 
         # Вкладка персонализации
         try:
@@ -1159,16 +1157,16 @@ class ChatWidget(QWidget):
         # Автоматически переключаемся на вкладку чата
         self.switch_to_chat_tab()
     
-    def _on_openrouter_model_selected(self, model_data: dict):
-        """Обработчик выбора модели OpenRouter"""
+    def _on__model_selected(self, model_data: dict):
+        """Обработчик выбора модели """
         model_id = model_data.get('id', 'unknown')
-        self.current_provider = "openrouter"
+        self.current_provider = ""
         self.current_model_id = model_id
         self.current_model_data = model_data
         
-        logger.info(f"[MODEL] Выбрана модель OpenRouter: {model_id}")
+        logger.info(f"[MODEL] Выбрана модель : {model_id}")
         logger.debug(f"[MODEL] Данные модели: {model_data}")
-        print(f"Выбрана модель OpenRouter: {model_id}")
+        print(f"Выбрана модель : {model_id}")
         
         # Автоматически переключаемся на вкладку чата
         self.switch_to_chat_tab()
@@ -1184,28 +1182,28 @@ class ChatWidget(QWidget):
                 if self.tab_widget.widget(i) == self.model_selector_widget:
                     self.tab_widget.setCurrentIndex(i)
                     break
-        elif provider == "openrouter" and hasattr(self, 'openrouter_widget'):
-            # Находим индекс вкладки с OpenRouterModelWidget
+        elif provider == "" and hasattr(self, '_widget'):
+            # Находим индекс вкладки с ModelWidget
             for i in range(self.tab_widget.count()):
-                if self.tab_widget.widget(i) == self.openrouter_widget:
+                if self.tab_widget.widget(i) == self._widget:
                     self.tab_widget.setCurrentIndex(i)
                     break
     
-    def get_openrouter_widget(self):
-        """Возвращает виджет OpenRouter для внешнего доступа"""
-        return getattr(self, 'openrouter_widget', None)
+    def get__widget(self):
+        """Возвращает виджет  для внешнего доступа"""
+        return getattr(self, '_widget', None)
     
     def get_model_selector_widget(self):
         """Возвращает виджет выбора моделей для внешнего доступа"""
         return getattr(self, 'model_selector_widget', None)
     
-    def switch_to_openrouter_tab(self):
-        """Переключается на вкладку OpenRouter"""
-        if hasattr(self, 'openrouter_widget'):
+    def switch_to__tab(self):
+        """Переключается на вкладку """
+        if hasattr(self, '_widget'):
             for i in range(self.tab_widget.count()):
-                if self.tab_widget.widget(i) == self.openrouter_widget:
+                if self.tab_widget.widget(i) == self._widget:
                     self.tab_widget.setCurrentIndex(i)
-                    print("Переключились на вкладку OpenRouter")
+                    print("Переключились на вкладку ")
                     return True
         return False
     

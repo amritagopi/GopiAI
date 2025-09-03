@@ -181,14 +181,9 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QAction, QPalette
 
-# Импорт компонентов тем
-try:
-    from path_manager import setup_project_paths
-    print("✅ path_manager импортирован успешно")
-    path_manager = setup_project_paths()
-except ImportError as e:
-    print(f"⚠️ Не удалось импортировать path_manager: {e}")
-    path_manager = None
+# Статические пути проекта (path_manager больше не используется)
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+CREWAI_DIR = PROJECT_ROOT / "GopiAI-CrewAI"
 
 try:
     from gopiai.ui.utils.theme_manager import ThemeManager

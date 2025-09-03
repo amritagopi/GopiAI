@@ -78,6 +78,44 @@ RESEARCH_PROMPT = """
 5. Предоставляй актуальную информацию
 """
 
+ITERATIVE_EXECUTION_PROMPT = """
+## ИНСТРУКЦИИ ПО ВЫПОЛНЕНИЮ КОМАНД
+
+Когда пользователь просит выполнить команду в терминале, ты ДОЛЖЕН использовать следующий формат:
+
+```tool_code
+bash: команда_для_выполнения
+```
+
+ПРИМЕРЫ:
+
+Пользователь: "Выполни ls -la"
+Твой ответ:
+```tool_code
+bash: ls -la
+```
+
+Пользователь: "Посмотри содержимое файла /etc/hosts"  
+Твой ответ:
+```tool_code
+bash: cat /etc/hosts
+```
+
+Пользователь: "Создай папку test"
+Твой ответ:
+```tool_code
+bash: mkdir test
+```
+
+ВАЖНО:
+- Всегда используй блок ```tool_code для команд терминала
+- Внутри блока указывай "bash: " перед командой
+- После выполнения команды я покажу тебе результат
+- Если нужно выполнить несколько команд - создай отдельный блок для каждой
+
+Формат ОБЯЗАТЕЛЕН для всех команд терминала!
+"""
+
 # Функции для получения промптов
 def get_default_prompt():
     """Возвращает основной системный промпт"""
@@ -90,6 +128,10 @@ def get_coding_prompt():
 def get_research_prompt():
     """Возвращает промпт для исследовательских задач"""
     return DEFAULT_SYSTEM_PROMPT + "\n\n" + RESEARCH_PROMPT
+
+def get_iterative_execution_prompt():
+    """Возвращает промпт для итеративного выполнения команд"""
+    return DEFAULT_SYSTEM_PROMPT + "\n\n" + ITERATIVE_EXECUTION_PROMPT
 
 def get_custom_prompt(additional_instructions=""):
     """Возвращает кастомный промпт с дополнительными инструкциями"""
@@ -109,3 +151,50 @@ AGENT_PROMPTS = {
 def get_agent_prompt(role="default"):
     """Получить промпт для конкретной роли агента"""
     return AGENT_PROMPTS.get(role, DEFAULT_SYSTEM_PROMPT)
+
+class SystemPrompts:
+    """Класс для управления системными промптами"""
+    
+    def __init__(self):
+        self.base_prompt = DEFAULT_SYSTEM_PROMPT
+    
+    def get_assistant_prompt_with_context(self, rag_context=None):
+        """Получить промпт ассистента с RAG контекстом"""
+        prompt = self.base_prompt
+        
+        if rag_context:
+            prompt += f"\n\n## Контекст из базы знаний:\n{rag_context}\n"
+            prompt += "\nИспользуй этот контекст для более точного ответа на вопросы пользователя.\n"
+        
+        return prompt
+    
+    def get_coding_prompt_with_context(self, rag_context=None):
+        """Получить промпт для программирования с контекстом"""
+        prompt = get_coding_prompt()
+        
+        if rag_context:
+            prompt += f"\n\n## Контекст из базы знаний:\n{rag_context}\n"
+        
+        return prompt
+    
+    def get_research_prompt_with_context(self, rag_context=None):
+        """Получить исследовательский промпт с контекстом"""
+        prompt = get_research_prompt()
+        
+        if rag_context:
+            prompt += f"\n\n## Контекст из базы знаний:\n{rag_context}\n"
+        
+        return prompt
+    
+    def get_iterative_execution_prompt_with_context(self, rag_context=None):
+        """Получить промпт для итеративного выполнения с контекстом"""
+        prompt = get_iterative_execution_prompt()
+        
+        if rag_context:
+            prompt += f"\n\n## Контекст из базы знаний:\n{rag_context}\n"
+        
+        return prompt
+
+def get_system_prompts():
+    """Фабричная функция для создания экземпляра SystemPrompts"""
+    return SystemPrompts()

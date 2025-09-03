@@ -58,11 +58,8 @@ export PYTHONPATH="${PYTHONPATH}:$(pwd):$(pwd)/GopiAI-UI"
 
 ### Environment Variables
 The project uses `.env` file for API keys:
-- `OPENAI_API_KEY`
-- `ANTHROPIC_API_KEY` 
-- `GOOGLE_API_KEY`
 - `GEMINI_API_KEY`
-- `OPENROUTER_API_KEY`
+-
 - Various other API keys for tools (TAVILY, FIRECRAWL, BRAVE, etc.)
 
 ### Port Configuration

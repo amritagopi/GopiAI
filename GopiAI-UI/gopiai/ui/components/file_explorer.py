@@ -255,5 +255,4 @@ class FileExplorerWidget(QWidget):
             file_path = self.model.filePath(index)
             self.file_double_clicked.emit(file_path)
     
-    # === Обработчики сигналов для OpenRouter интеграции ===
-    # Методы обработки сигналов моделей перенесены в ChatWidget
+

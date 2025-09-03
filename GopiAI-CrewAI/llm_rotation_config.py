@@ -2,7 +2,7 @@
 
 Key features
 ------------
-1. Support two providers out of the box: Google Gemini and OpenRouter.
+1. Support two providers out of the box: Google Gemini
 2. All model metadata lives in a single `MODELS` list; each item contains
    provider, id, human-readable name, supported task types and optional
    extra params (rpm, tpm, rpd, base_score).
@@ -36,7 +36,6 @@ from typing import Dict, List, Optional
 ###############################################################################
 PROVIDER_KEY_ENV: dict[str, str] = {
     "gemini": "GEMINI_API_KEY",
-    "openrouter": "OPENROUTER_API_KEY",
 }
 
 ###############################################################################
@@ -44,109 +43,94 @@ PROVIDER_KEY_ENV: dict[str, str] = {
 ###############################################################################
 
 MODELS: list[dict] = [
-    # Google Gemini
+    # Google Gemini - все бесплатные модели из Free Tier
+    {
+        "display_name": "Gemini 2.5 Pro",
+        "id": "gemini/gemini-2.5-pro",
+        "provider": "gemini",
+        "rpm": 2,  # Консервативная оценка для новых моделей
+        "tpm": 32_000,  # На основе context window
+        "type": ["complex", "reasoning", "code", "multimodal"],
+        "priority": 1,
+        "rpd": 15,  # Консервативно
+        "base_score": 0.9,
+    },
+    {
+        "display_name": "Gemini 2.5 Flash",
+        "id": "gemini/gemini-2.5-flash", 
+        "provider": "gemini",
+        "rpm": 15,
+        "tpm": 1_000_000,
+        "type": ["simple", "dialog", "code", "summarize", "vision"],
+        "priority": 2,
+        "rpd": 50,
+        "base_score": 0.8,
+    },
+    {
+        "display_name": "Gemini 2.5 Flash-Lite",
+        "id": "gemini/gemini-2.5-flash-lite",
+        "provider": "gemini", 
+        "rpm": 30,
+        "tpm": 1_000_000,
+        "type": ["simple", "dialog", "high_volume"],
+        "priority": 3,
+        "rpd": 100,
+        "base_score": 0.7,
+    },
+    {
+        "display_name": "Gemini 2.0 Flash",
+        "id": "gemini/gemini-2.0-flash",
+        "provider": "gemini",
+        "rpm": 15,
+        "tpm": 1_000_000, 
+        "type": ["simple", "dialog", "code", "vision", "agents"],
+        "priority": 4,
+        "rpd": 50,
+        "base_score": 0.75,
+    },
+    {
+        "display_name": "Gemini 2.0 Flash-Lite", 
+        "id": "gemini/gemini-2.0-flash-lite",
+        "provider": "gemini",
+        "rpm": 30,
+        "tpm": 1_000_000,
+        "type": ["simple", "high_volume"],
+        "priority": 5,
+        "rpd": 100, 
+        "base_score": 0.6,
+    },
     {
         "display_name": "Gemini 1.5 Flash",
         "id": "gemini/gemini-1.5-flash",
         "provider": "gemini",
         "rpm": 15,
-        "tpm": 2_500_000,
-        "type": ["simple", "dialog", "code", "summarize"],
-        "priority": 3,
+        "tpm": 1_000_000,
+        "type": ["simple", "dialog", "code", "vision"],
+        "priority": 6,
         "rpd": 50,
-        "base_score": 0.5,
+        "base_score": 0.65,
     },
     {
-        "display_name": "Gemini 2.0 Flash-Lite",
-        "id": "gemini/gemini-2.0-flash-lite",
+        "display_name": "Gemini 1.5 Flash-8B",
+        "id": "gemini/gemini-1.5-flash-8b", 
         "provider": "gemini",
         "rpm": 30,
-        "tpm": 10_000_000,
-        "type": ["simple", "dialog", "code", "summarize"],
-        "priority": 4,
-        "rpd": 200,
+        "tpm": 1_000_000,
+        "type": ["simple", "high_volume"],
+        "priority": 7,
+        "rpd": 100,
         "base_score": 0.5,
     },
     {
-        "display_name": "Gemini 3",
-        "id": "gemini/gemini-3",
+        "display_name": "Gemini 1.5 Pro",
+        "id": "gemini/gemini-1.5-pro",
         "provider": "gemini",
-        "rpm": 30,
-        "tpm": 1_440_000,
-        "type": ["simple", "lookup", "short_answer"],
-        "priority": 1,
-        "rpd": 0,
-        "base_score": 0.5,
-    },
-    # ---------------------- OpenRouter block ----------------------
-    {
-        "display_name": "Venice: Uncensored (free)",
-        "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
-        "provider": "openrouter",
-        "rpm": 20,
-        "tpm": 2_000_000,
-        "type": ["dialog", "simple", "code", "summarize"],
-        "priority": 1,
-        "rpd": 100,
-        "base_score": 0.8,
-    },
-    {
-        "display_name": "DeepSeek R1 Distill Qwen 14B (free)",
-        "id": "deepseek/deepseek-r1-distill-qwen-14b:free",
-        "provider": "openrouter",
-        "rpm": 15,
-        "tpm": 1_500_000,
-        "type": ["dialog", "simple", "code"],
-        "priority": 2,
-        "rpd": 80,
-        "base_score": 0.7,
-    },
-    {
-        "display_name": "Dolphin3.0 Mistral 24B (free)",
-        "id": "cognitivecomputations/dolphin3.0-mistral-24b:free",
-        "provider": "openrouter",
-        "rpm": 18,
-        "tpm": 1_800_000,
-        "type": ["dialog", "simple", "code"],
-        "priority": 2,
-        "rpd": 90,
-        "base_score": 0.6,
-    },
-    {
-        "display_name": "Qwen 3 Coder (OpenRouter)",
-        "id": "qwen/qwen3-coder:free",
-        "provider": "openrouter",
-        "rpm": 20,
-        "tpm": 2_000_000,
-        "type": ["simple", "code"],
-        "priority": 3,
-        "rpd": 100,
-        "base_score": 0.4,
-    },
-    {
-        "display_name": "Gemini 2.0 Flash-Exp (OpenRouter)",
-        "id": "google/gemini-2.0-flash-exp:free",
-        "provider": "openrouter",
-        "rpm": 10,
-        "tpm": 4_000_000,
-        "type": ["dialog", "summarize", "code"],
-        "priority": 4,
-        "rpd": 100,
-        "base_score": 0.3,
-    },
-    # Локальные модели (без API ключей)
-    {
-        "display_name": "TinyLlama 1.1B (local)",
-        "id": "local/tinyllama-1.1b",
-        "provider": "local",
-        "rpm": 5,
-        "tpm": 1000,
-        "type": ["simple", "dialog", "code"],
-        "priority": 5,
-        "rpd": 0,
-        "base_score": 0.4,
-        "local_model": True,
-        "model_path": "TheBloke/TinyLlama-1.1B-Chat-v0.3-GGUF/tinyllama-1.1b-chat-v0.3.Q2_K.gguf"
+        "rpm": 2,  # Более тяжёлая модель
+        "tpm": 2_000_000,  # 2M context window
+        "type": ["complex", "reasoning", "code", "multimodal"],
+        "priority": 8,
+        "rpd": 15,
+        "base_score": 0.85,
     }
 ]
 
@@ -173,27 +157,7 @@ class UsageTracker:
         self._usage: Dict[str, _ModelUsage] = {
             m["id"]: _ModelUsage() for m in models
         }
-        self._current_provider: str = "gemini"  # текущий провайдер
-        self._last_provider: str = "gemini"     # последний провайдер
-
-    def set_current_provider(self, provider: str) -> None:
-        """Устанавливает текущий провайдер и сбрасывает лимиты для других провайдеров."""
-        if provider not in PROVIDER_KEY_ENV:
-            raise ValueError(f"Unknown provider: {provider}")
-            
-        self._last_provider = self._current_provider
-        self._current_provider = provider
-        
-        # Сбрасываем окна лимитов для моделей, принадлежащих другим провайдерам
-        now = time.time()
-        for model_id, usage in self._usage.items():
-            # Находим модель в MODELS по ID
-            model_cfg = next((m for m in MODELS if m["id"] == model_id), None)
-            if model_cfg and model_cfg["provider"] != provider:
-                # Сбрасываем лимиты для моделей других провайдеров
-                usage.rpm = 0
-                usage.tpm = 0
-                usage.last_reset = now
+        # Используем только Gemini, никаких переключений провайдеров
 
     # ---------------------------------------------------------------------
     # internal helpers
@@ -313,8 +277,8 @@ class UsageTracker:
 
     @property
     def current_provider(self) -> str:
-        """Возвращает текущий провайдер."""
-        return self._current_provider
+        """Возвращает текущий провайдер (всегда gemini)."""
+        return "gemini"
 
 ###############################################################################
 # Global tracker instance
@@ -331,25 +295,9 @@ except ImportError:
     # when imported from other packages relative path may fail
     from state_manager import load_state, save_state  # type: ignore
 
-_state = load_state()
-_current_provider = _state.get("provider", "gemini")
-_current_model = _state.get("model_id", "")
-
-# expose helpers for other modules/UI
-CURRENT_PROVIDER = _current_provider
-CURRENT_MODEL_ID = _current_model
-
-def update_state(provider: str, model_id: str):
-    """Persist new provider/model choice to state file."""
-    global CURRENT_PROVIDER, CURRENT_MODEL_ID
-    CURRENT_PROVIDER = provider
-    CURRENT_MODEL_ID = model_id
-    save_state(provider, model_id)
-    # Обновляем текущий провайдер в tracker
-    _usage_tracker.set_current_provider(provider)
-
-# init tracker current provider (basic reset logic)
-_usage_tracker.set_current_provider(_current_provider)  # type: ignore
+# Всегда используем Gemini
+CURRENT_PROVIDER = "gemini"
+CURRENT_MODEL_ID = "gemini/gemini-1.5-flash"
 
 
 ###############################################################################
@@ -411,8 +359,8 @@ def is_model_blacklisted(model_id: str) -> bool:
 
 
 def get_current_provider() -> str:
-    """Возвращает текущий провайдер."""
-    return _usage_tracker.current_provider
+    """Возвращает текущий провайдер (всегда gemini)."""
+    return "gemini"
 
 
 ###############################################################################

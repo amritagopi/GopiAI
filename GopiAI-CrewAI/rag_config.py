@@ -24,8 +24,8 @@ CHATS_FILE_PATH = MEMORY_BASE_DIR / "chats.json"
 # Путь к папке с векторным индексом
 VECTOR_INDEX_PATH = MEMORY_BASE_DIR / "vectors"
 
-# Модель для создания эмбеддингов
-EMBEDDING_MODEL = "sentence-transformers/nli-mpnet-base-v2"
+# Модель для создания эмбеддингов (переход на легковесную модель для экономии памяти)
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # 22MB вместо 420MB
 
 if __name__ == "__main__":
     print("--- RAG Server Configuration ---")

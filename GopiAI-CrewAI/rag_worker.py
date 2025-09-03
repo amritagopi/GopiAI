@@ -74,8 +74,15 @@ class RAGEngine:
             if not self.chats_file.exists():
                 self.chats_file.write_text("[]", encoding="utf-8")
 
-            # Init embeddings
-            config = {"path": self.model, "content": True}
+            # Init embeddings with memory optimization
+            config = {
+                "path": self.model, 
+                "content": True,
+                # Memory optimization settings
+                "batch": 256,  # Process in smaller batches
+                "threads": 2,  # Limit CPU threads
+                "device": "cpu",  # Force CPU to avoid GPU memory issues
+            }
             self.embeddings = Embeddings(config)
 
             # Load index if present
@@ -164,6 +171,11 @@ class RAGEngine:
                         out.append(str(r))
                 except Exception:
                     out.append(str(r))
+            
+            # Force garbage collection to free memory after search
+            import gc
+            gc.collect()
+            
             return {"ok": True, "data": out}
         except Exception as e:
             return {"ok": False, "error": f"search failed: {e}", "trace": traceback.format_exc()}

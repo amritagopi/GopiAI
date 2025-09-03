@@ -31,13 +31,12 @@ import os
 print('Current working directory:', os.getcwd())
 print('sys.path:', sys.path)
 
-# --- Централизованное управление путями ---
-try:
-    from path_manager import setup_project_paths
-    path_manager = setup_project_paths()
-    logger.info("[INIT] ✅ Пути проекта настроены через централизованный менеджер")
-except ImportError as e:
-    logger.warning(f"[INIT] ⚠️ Не удалось импортировать path_manager: {e}")
+# --- Статические пути проекта (path_manager больше не используется) ---
+# Используем статические пути относительно структуры проекта
+CURRENT_DIR = Path(__file__).parent
+UI_DIR = CURRENT_DIR.parent.parent
+PROJECT_ROOT = UI_DIR.parent
+CREWAI_DIR = PROJECT_ROOT / "GopiAI-CrewAI"
 
 # Эмоциональный классификатор отключен после рефакторинга
 EMOTIONAL_CLASSIFIER_AVAILABLE = False
@@ -54,29 +53,57 @@ def get_model_config_manager():
 logger.info("[INIT] Эмоциональный классификатор отключен после рефакторинга - используется только базовый анализ")
 
 # === ИНТЕГРАЦИЯ СИСТЕМЫ ДИНАМИЧЕСКИХ ИНСТРУКЦИЙ ===
-# Импортируем систему динамических инструкций для реального UI-чата
+# Заглушка для tools_instruction_manager (после рефакторинга)
 TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
 ToolsInstructionManager = None
 
-# Попытаемся загрузить систему динамических инструкций
+class MockToolsInstructionManager:
+    """Заглушка для tools_instruction_manager после рефакторинга"""
+    
+    def get_tools_summary(self):
+        return {
+            "filesystem_tools": ["file_read", "file_write", "directory_read"],
+            "web_search": ["tavily_search", "brave_search"],
+            "web_scraping": ["firecrawl_scrape", "selenium_scrape"]
+        }
+    
+    def get_tool_detailed_instructions(self, tool_name):
+        basic_instructions = {
+            "filesystem_tools": "Используй инструменты для работы с файловой системой осторожно. Всегда проверяй пути.",
+            "web_search": "Для поиска информации используй поисковые инструменты. Проверяй актуальность результатов.",
+            "web_scraping": "При скрапинге веб-страниц учитывай robots.txt и не перегружай сервера."
+        }
+        return basic_instructions.get(tool_name, f"Базовые инструкции для {tool_name}")
+
+def get_tools_instruction_manager():
+    """Возвращает заглушку менеджера инструкций"""
+    return MockToolsInstructionManager()
+
+# Попытаемся загрузить реальную систему динамических инструкций  
 try:
     import sys
-    crewai_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '..', 'GopiAI-CrewAI')
+    crewai_path = str(CREWAI_DIR)
     if os.path.exists(crewai_path):
         sys.path.insert(0, crewai_path)
         
-        from tools.dynamic_instructions_system.tools_instruction_manager import ToolsInstructionManager, get_tools_instruction_manager
-        TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
-        logger.info("[INIT] ✅ Система динамических инструкций включена успешно")
+        # Проверяем существование файла
+        tools_manager_path = os.path.join(crewai_path, 'tools', 'dynamic_instructions_system', 'tools_instruction_manager.py')
+        if os.path.exists(tools_manager_path):
+            from tools.dynamic_instructions_system.tools_instruction_manager import ToolsInstructionManager, get_tools_instruction_manager
+            TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
+            logger.info("[INIT] ✅ Система динамических инструкций включена успешно")
+        else:
+            logger.warning(f"[INIT] Файл tools_instruction_manager.py не найден: {tools_manager_path}")
+            logger.info("[INIT] ✅ Используется заглушка tools_instruction_manager")
     else:
         logger.warning(f"[INIT] CrewAI путь не найден: {crewai_path}")
-        TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+        logger.info("[INIT] ✅ Используется заглушка tools_instruction_manager")
 except ImportError as e:
     logger.warning(f"[INIT] ❌ Не удалось загрузить систему динамических инструкций: {e}")
-    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+    logger.info("[INIT] ✅ Используется заглушка tools_instruction_manager")
 except Exception as e:
     logger.error(f"[INIT] ❌ Ошибка при загрузке системы динамических инструкций: {e}")
-    TOOLS_INSTRUCTION_MANAGER_AVAILABLE = False
+    logger.info("[INIT] ✅ Используется заглушка tools_instruction_manager")
 
 # Создаем директорию для логов, если её нет
 # Используем текущую директорию или директорию приложения
@@ -410,27 +437,23 @@ class CrewAIClient:
         logger.debug("[REQUEST] Установлен флаг async_processing=True")
         
         # Обрабатываем информацию о выбранной модели
-        model_provider = message.get('metadata', {}).get('model_provider', 'openrouter')
-        model_id = message.get('metadata', {}).get('model_id') or 'google/gemini-flash-1.5'
+        model_provider = message.get('metadata', {}).get('model_provider', 'gemini')
+        model_id = message.get('metadata', {}).get('model_id') or 'gemini/gemini-1.5-flash'
         model_data = message.get('metadata', {}).get('model_data')
         
         logger.info(f"[MODEL] Запрос с провайдером: {model_provider}")
         logger.info(f"[MODEL] Выбранная модель: {model_id}")
             
         # Добавляем информацию о модели в метаданные для сервера
-        if model_provider == 'openrouter' or model_id:
-            message['metadata']['preferred_provider'] = 'openrouter'
-            message['metadata']['preferred_model'] = model_id
-            if model_data:
-                message['metadata']['model_info'] = {
-                    'name': model_data.get('name', model_id),
-                    'context_length': model_data.get('context_length', 4096),
-                    'pricing': model_data.get('pricing', {})
-                }
-            logger.info(f"[MODEL] Настроен запрос для OpenRouter модели: {model_id}")
-        else:
-            message['metadata']['preferred_provider'] = 'gemini'
-            logger.info(f"[MODEL] Используется провайдер по умолчанию: Gemini")
+        message['metadata']['preferred_provider'] = 'gemini'
+        message['metadata']['preferred_model'] = model_id
+        if model_data:
+            message['metadata']['model_info'] = {
+                'name': model_data.get('name', model_id),
+                'context_length': model_data.get('context_length', 8192),
+                'pricing': model_data.get('pricing', {})
+            }
+        logger.info(f"[MODEL] Настроен запрос для Gemini модели: {model_id}")
         
         # Добавляем системный промпт, если его нет
         system_prompt = (
@@ -737,13 +760,8 @@ class CrewAIClient:
         if not message_text:
             return {}
         
-        # Проверяем доступность менеджера инструкций
-        if not TOOLS_INSTRUCTION_MANAGER_AVAILABLE:
-            logger.warning("[DYNAMIC-TOOLS] ❌ tools_instruction_manager недоступен, возвращаем пустые инструкции")
-            return {}
-        
         try:
-            # Получаем экземпляр менеджера инструкций
+            # Получаем экземпляр менеджера инструкций (реальный или заглушку)
             manager = get_tools_instruction_manager()
             if not manager:
                 logger.error("[DYNAMIC-TOOLS] ❌ Не удалось получить экземпляр tools_instruction_manager")
@@ -760,10 +778,8 @@ class CrewAIClient:
             # Проверяем ключевые слова в сообщении
             tool_keywords = {
                 "filesystem_tools": ["файл", "директор", "папк", "zip", "архив", "поиск файл", "json", "csv"],
-                "local_mcp_tools": ["сайт", "скрап", "парс", "api", "запрос", "post", "get", "http"],
-                "browser_tools": ["браузер", "открой сайт", "перейди", "нажми", "скриншот", "selenium"],
                 "web_search": ["найди", "поиск", "погугли", "поищи", "google", "yandex", "найти информацию"],
-                "page_analyzer": ["проанализируй", "анализ сайта", "seo", "оцени сайт", "скорость сайта"]
+                "web_scraping": ["сайт", "скрап", "парс", "api", "запрос", "post", "get", "http", "браузер", "открой сайт", "перейди", "нажми", "скриншот"]
             }
             
             # Выявляем инструменты по ключевым словам
@@ -784,6 +800,10 @@ class CrewAIClient:
                         result[tool_name] = detailed_instructions
                         logger.info(f"[DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: {tool_name}")
             
+            # Если tools_instruction_manager недоступен, используем упрощенные инструкции
+            if not TOOLS_INSTRUCTION_MANAGER_AVAILABLE:
+                logger.debug("[DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager")
+                
             logger.debug(f"[DYNAMIC-TOOLS] Сформированы инструкции для {len(result)} инструментов")
             return result
             
