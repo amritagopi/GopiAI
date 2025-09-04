@@ -4,15 +4,15 @@ Local LLM Client for GopiAI UI
 """
 
 import logging
-import os
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Any
+from typing import TYPE_CHECKING, Callable, Any, Optional, Dict
 
 # Добавляем путь к CrewAI модулям для доступа к llm_rotation_config
 crewai_path = Path(__file__).parent.parent.parent.parent / "GopiAI-CrewAI"
 if str(crewai_path) not in sys.path:
     # Заменено на использование path_manager: sys.path.append(str(crewai_path))
+    pass
 
 # Для статической типизации Pyright и надёжного рантайм-импорта
 if TYPE_CHECKING:
@@ -32,7 +32,7 @@ else:
     except Exception:
         # Fallback если не удается импортировать
         def select_llm_model_safe(task_type: str, **kwargs: Any) -> dict:
-            return {"id": "gemini/gemini-1.5-flash", "name": "Gemini 1.5 Flash"}
+            return {"id": "gemini/gemini-2.0-flash", "name": "Gemini 2.0 Flash"}
         
         def safe_llm_call(prompt: str, llm_call_func: Callable[[str], str], task_type: str, **kwargs: Any) -> str:
             return "LLM недоступен"
@@ -54,7 +54,7 @@ class SimpleLLMClient:
             return model
         except Exception as e:
             logger.error(f"Error selecting LLM model: {e}")
-            return {"id": "gemini/gemini-1.5-flash", "name": "Gemini 1.5 Flash"}
+            return {"id": "gemini/gemini-2.0-flash", "name": "Gemini 2.0 Flash"}
     
     def call(self, prompt, task_type="dialog", **kwargs):
         """Вызов LLM с промптом"""

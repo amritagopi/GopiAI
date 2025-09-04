@@ -59,8 +59,8 @@ echo "⏳ Ждем 5 секунд, пока сервер CrewAI запустит
 sleep 5
 
 # Устанавливаем зависимости для UI
-echo "📦 Установка зависимостей для GopiAI UI..."
-/home/amritagopi/GopiAI/.venv/bin/pip install -r GopiAI-UI/requirements_ui.txt
+#echo "📦 Установка зависимостей для GopiAI UI..."
+#/home/amritagopi/GopiAI/.venv/bin/pip install -r GopiAI-UI/requirements_ui.txt
 
 # Запускаем UI в текущем процессе
 echo "🎨 Запуск GopiAI UI..."

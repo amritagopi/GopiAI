@@ -208,10 +208,21 @@ class ToolsTab(QWidget):
     
     def _count_tools(self) -> int:
         """Подсчитывает общее количество инструментов"""
-        count = 0
-        for category_tools in self.tools_data.values():
-            count += len(category_tools)
-        return count
+        # Проверяем формат ответа от API
+        if isinstance(self.tools_data, dict):
+            if 'count' in self.tools_data:
+                # Новый формат API: {"tools": [...], "count": N}
+                return self.tools_data['count']
+            else:
+                # Старый формат API: {category: [tools]}
+                count = 0
+                for category_tools in self.tools_data.values():
+                    if isinstance(category_tools, (list, tuple)):
+                        count += len(category_tools)
+                    elif isinstance(category_tools, int):
+                        count += category_tools
+                return count
+        return 0
     
     def _render_tools(self):
         """Отображает инструменты по категориям"""
@@ -221,30 +232,50 @@ class ToolsTab(QWidget):
             if child.widget():
                 child.widget().deleteLater()
         
-        # Создаем группы по категориям
-        for category, tools in self.tools_data.items():
-            if not isinstance(tools, list):
-                continue
-
-            if not tools:
-                continue
+        # Обрабатываем данные в зависимости от формата API
+        if 'tools' in self.tools_data:
+            # Новый формат API: {"tools": [...], "count": N}
+            tools_list = self.tools_data.get('tools', [])
+            
+            # Группируем инструменты по категориям
+            categories = {}
+            for tool in tools_list:
+                category = tool.get('category', 'other')
+                if category not in categories:
+                    categories[category] = []
+                categories[category].append(tool)
+            
+            # Создаем группы по категориям
+            for category, tools in categories.items():
+                self._create_category_group(category, tools)
+        else:
+            # Старый формат API: {category: [tools]}
+            for category, tools in self.tools_data.items():
+                if not isinstance(tools, list):
+                    continue
+                self._create_category_group(category, tools)
+    
+    def _create_category_group(self, category, tools):
+        """Создает группу инструментов для категории"""
+        if not tools:
+            return
                 
-            # Группа для категории
-            group_box = QGroupBox(category.replace('_', ' ').title())
-            group_layout = QVBoxLayout(group_box)
-            group_layout.setContentsMargins(8, 8, 8, 8)
-            group_layout.setSpacing(2)
-            
-            # Добавляем инструменты в группу
-            for tool in tools:
-                if isinstance(tool, dict) and 'name' in tool:
-                    tool_widget = ToolItemWidget(tool['name'], tool)
-                    tool_widget.tool_toggled.connect(self._on_tool_toggled)
-                    tool_widget.tool_attached.connect(self._on_tool_attached)
-                    tool_widget.key_set.connect(self._on_key_set)
-                    group_layout.addWidget(tool_widget)
-            
-            self.tools_layout.addWidget(group_box)
+        # Группа для категории
+        group_box = QGroupBox(category.replace('_', ' ').title())
+        group_layout = QVBoxLayout(group_box)
+        group_layout.setContentsMargins(8, 8, 8, 8)
+        group_layout.setSpacing(2)
+        
+        # Добавляем инструменты в группу
+        for tool in tools:
+            if isinstance(tool, dict) and 'name' in tool:
+                tool_widget = ToolItemWidget(tool['name'], tool)
+                tool_widget.tool_toggled.connect(self._on_tool_toggled)
+                tool_widget.tool_attached.connect(self._on_tool_attached)
+                tool_widget.key_set.connect(self._on_key_set)
+                group_layout.addWidget(tool_widget)
+        
+        self.tools_layout.addWidget(group_box)
         
         # Добавляем растягивающийся элемент в конец
         self.tools_layout.addStretch()

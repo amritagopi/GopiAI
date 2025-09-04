@@ -1,12 +1,61 @@
-2025-09-04 03:05:34 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 03:05:34 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 03:05:34 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Morning Rose (dark)
-2025-09-04 03:05:34 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
-2025-09-04 03:05:34 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 03:05:34 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 03:05:34 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 03:05:34 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 03:05:34 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
-2025-09-04 03:05:34 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
-2025-09-04 03:05:34 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
-2025-09-04 03:05:34 - gopiai.ui.components.chat_widget - WARNING - ⚠️ UnifiedModelsTab недоступен, используем fallback
+2025-09-04 10:00:30 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 10:00:30 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 10:00:30 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Morning Rose (dark)
+2025-09-04 10:00:30 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-09-04 10:00:30 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 10:00:30 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 10:00:30 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 10:00:30 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 10:00:31 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - WARNING - ⚠️ UnifiedModelsTab недоступен, используем fallback
+2025-09-04 10:00:31 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
+2025-09-04 10:00:31 - gopiai.ui.components.personality_tab - WARNING - Fallback загрузки персонализации по абсолютным строкам
+2025-09-04 10:00:31 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756960231
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-09-04 10:00:31 - gopiai.ui.components.crewai_client - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-09-04 10:00:31 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-09-04 10:00:31 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-09-04 10:00:33 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.gemini_model_widget', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-09-04 10:00:38 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 10:00:38 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: привет...
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: привет
+2025-09-04 10:00:38 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
+2025-09-04 10:00:38 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 237 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756960231
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 1 сообщений из истории для сессии session_1756960231
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - привет
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [MODEL] Выбранная модель: gemini/gemini-1.5-flash
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-1.5-flash
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': 'a502d989-0ab0-4a41-b3c5-72361191df4c', 'status': 'processing', 'task_id': '3ba15555-f029-4473-8fcc-2d3b0c277da2'}
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': 'a502d989-0ab0-4a41-b3c5-72361191df4c', 'status': 'processing', 'task_id': '3ba15555-f029-4473-8fcc-2d3b0c277da2'}
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:38 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-04 10:00:39 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:39 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:39 - gopiai.ui.components.crewai_client - ERROR - [TASK-ERROR] Ошибка при проверке статуса задачи 3ba15555-f029-4473-8fcc-2d3b0c277da2: HTTP 404 - {"available_endpoints":["/api/health","/health (legacy)","/api/tasks [POST, GET]","/api/tasks/<task_id> [GET]","/api/tools [GET]","/api/agents [GET]","/api/process [POST]"],"error":"\u041f\u0443\u0442\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d","path":"/api/task/3ba15555-f029-4473-8fcc-2d3b0c277da2"}
+

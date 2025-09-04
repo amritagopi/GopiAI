@@ -1,2 +1,33 @@
-2025-09-04 03:05:34 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
-2025-09-04 03:05:34 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-04 10:00:29 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
+2025-09-04 10:00:29 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-04 10:00:31 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Сообщение: привет
+2025-09-04 10:00:38 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-09-04 10:00:38 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-09-04 10:00:38 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-04 10:00:38 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-09-04 10:00:38 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756960231
+2025-09-04 10:00:38 - INFO - [REQUEST] Получено 1 сообщений из истории для сессии session_1756960231
+2025-09-04 10:00:38 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-04 10:00:38 - DEBUG - привет
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-04 10:00:38 - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-04 10:00:38 - INFO - [MODEL] Выбранная модель: gemini/gemini-1.5-flash
+2025-09-04 10:00:38 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-1.5-flash
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-04 10:00:38 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': 'a502d989-0ab0-4a41-b3c5-72361191df4c', 'status': 'processing', 'task_id': '3ba15555-f029-4473-8fcc-2d3b0c277da2'}
+2025-09-04 10:00:38 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': 'a502d989-0ab0-4a41-b3c5-72361191df4c', 'status': 'processing', 'task_id': '3ba15555-f029-4473-8fcc-2d3b0c277da2'}
+2025-09-04 10:00:38 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:38 - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-04 10:00:39 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:39 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/task/3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:39 - ERROR - [TASK-ERROR] Ошибка при проверке статуса задачи 3ba15555-f029-4473-8fcc-2d3b0c277da2: HTTP 404 - {"available_endpoints":["/api/health","/health (legacy)","/api/tasks [POST, GET]","/api/tasks/<task_id> [GET]","/api/tools [GET]","/api/agents [GET]","/api/process [POST]"],"error":"\u041f\u0443\u0442\u044c \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d","path":"/api/task/3ba15555-f029-4473-8fcc-2d3b0c277da2"}
+

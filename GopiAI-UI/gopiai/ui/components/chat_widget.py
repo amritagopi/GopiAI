@@ -203,16 +203,6 @@ class ChatWidget(QWidget):
         except ImportError:
             logger.warning("⚠️ UnifiedModelsTab недоступен, используем fallback")
             
-            # Fallback: старая вкладка 
-            if ModelWidget:
-                self._widget = ModelWidget()
-                self.tab_widget.addTab(self._widget, "")
-                
-                # Подключаем сигналы
-                self._widget.model_selected.connect(self._on__model_selected)
-                self._widget.provider_switch_requested.connect(self._on_provider_switch_requested)
-                
-                logger.info("✅ Fallback: вкладка  восстановлена")
 
         # Вкладка персонализации
         try:

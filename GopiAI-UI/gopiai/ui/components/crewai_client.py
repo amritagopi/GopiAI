@@ -438,7 +438,7 @@ class CrewAIClient:
         
         # Обрабатываем информацию о выбранной модели
         model_provider = message.get('metadata', {}).get('model_provider', 'gemini')
-        model_id = message.get('metadata', {}).get('model_id') or 'gemini/gemini-1.5-flash'
+        model_id = message.get('metadata', {}).get('model_id') or 'gemini/gemini-2.0-flash'
         model_data = message.get('metadata', {}).get('model_data')
         
         logger.info(f"[MODEL] Запрос с провайдером: {model_provider}")

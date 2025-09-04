@@ -14,8 +14,7 @@ logger = logging.getLogger(__name__)
 class GeminiDirectClient:
     """Прямой клиент для Gemini API с обходом safety restrictions"""
     
-    def __init__(self, api_key: str, model: str = "gemini-1.5-flash"):
-        self.api_key = api_key
+    def __init__(self, api_key: str, model: str = "gemini-2.0-flash"):
         self.model = model
         self.base_url = "https://generativelanguage.googleapis.com/v1beta/models"
         

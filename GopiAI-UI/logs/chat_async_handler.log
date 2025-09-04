@@ -1,1 +1,15 @@
-2025-09-04 03:05:34 - INFO - Логирование инициализировано (режим перезаписи)
+2025-09-04 10:00:29 - INFO - Логирование инициализировано (режим перезаписи)
+2025-09-04 10:00:31 - INFO - [ChatAsyncHandler] Объединенный обработчик чата инициализирован
+2025-09-04 10:00:38 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'привет', 'metadata': {'session_id': 'session_1756960231', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'привет', 'timestamp': '2025-09-04T10:00:38.856317'}], 'attachments': [], 'attached_files': [], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
+2025-09-04 10:00:38 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
+2025-09-04 10:00:38 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: привет
+2025-09-04 10:00:38 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
+2025-09-04 10:00:38 - DEBUG - [ASYNC] CrewAI API доступен: True
+2025-09-04 10:00:38 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
+2025-09-04 10:00:38 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': 'a502d989-0ab0-4a41-b3c5-72361191df4c', 'status': 'processing', 'task_id': '3ba15555-f029-4473-8fcc-2d3b0c277da2'}
+2025-09-04 10:00:38 - INFO - [ASYNC] Получен task_id: 3ba15555-f029-4473-8fcc-2d3b0c277da2, запуск опроса статуса
+2025-09-04 10:00:38 - INFO - [POLLING] Запущен опрос статуса для task_id: 3ba15555-f029-4473-8fcc-2d3b0c277da2 с initial_delay=200ms
+2025-09-04 10:00:39 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи 3ba15555-f029-4473-8fcc-2d3b0c277da2
+2025-09-04 10:00:39 - DEBUG - [POLLING] Получен статус: {'error': 'Ошибка сервера: 404', 'status': 'error'}
+2025-09-04 10:00:39 - INFO - [POLLING-COMPLETE] Задача 3ba15555-f029-4473-8fcc-2d3b0c277da2 завершена после 1 попыток со статусом: error
+2025-09-04 10:00:39 - ERROR - [POLLING-ERROR] Задача 3ba15555-f029-4473-8fcc-2d3b0c277da2 завершилась с ошибкой: Ошибка сервера: 404

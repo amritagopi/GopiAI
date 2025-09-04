@@ -437,13 +437,13 @@ class SmartDelegator:
 
                 if not model_dict:
                     # Если всё ещё нет модели, используем резервную
-                    model_id = "gemini/gemini-1.5-flash"
+                    model_id = "gemini/gemini-2.0-flash"
                     logger.warning(f"[LLM] Не удалось выбрать модель через ротацию, используем резервную: {model_id}")
                 else:
-                    model_id = model_dict.get("id", "gemini/gemini-1.5-flash")
+                    model_id = model_dict.get("id", "gemini/gemini-2.0-flash")
                     logger.info(f"[LLM] Выбрана модель через ротацию (code): {model_id}")
             else:
-                model_id = model_dict.get("id", "gemini/gemini-1.5-flash") 
+                model_id = model_dict.get("id", "gemini/gemini-2.0-flash") 
                 logger.info(f"[LLM] Выбрана модель через ротацию: {model_id}")
 
             # 🔥 ДОПОЛНИТЕЛЬНАЯ ДИАГНОСТИКА
@@ -452,11 +452,11 @@ class SmartDelegator:
             # ЗАЩИТА: Убеждаемся, что model_id - это строка, а не словарь
             if isinstance(model_id, dict):
                 logger.error(f"[LLM-ERROR] model_id является словарем вместо строки: {model_id}")
-                model_id = model_id.get("id", "gemini/gemini-1.5-flash")
+                model_id = model_id.get("id", "gemini/gemini-2.0-flash")
                 logger.info(f"[LLM-FIX] Исправлен model_id: {model_id}")
             elif not isinstance(model_id, str):
                 logger.error(f"[LLM-ERROR] model_id не является строкой: {model_id} (тип: {type(model_id)})")
-                model_id = "gemini/gemini-1.5-flash"
+                model_id = "gemini/gemini-2.0-flash"
                 logger.info(f"[LLM-FIX] Используем резервный model_id: {model_id}")
             
             # Безопасная проверка строки только ПОСЛЕ приведения к строке
@@ -536,7 +536,7 @@ class SmartDelegator:
                 # Пробуем другую модель
                 fallback_model_dict = select_llm_model_safe("dialog", tokens=estimated_tokens)
                 if fallback_model_dict:
-                    fallback_model_id = fallback_model_dict.get("id", "gemini/gemini-1.5-flash")
+                    fallback_model_id = fallback_model_dict.get("id", "gemini/gemini-2.0-flash")
                     logger.info(f"[LLM] Пробуем запасную модель: {fallback_model_id}")
                     try:
                         response = litellm.completion(
