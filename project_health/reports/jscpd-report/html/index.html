@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Copy/Paste Detector Report</title><link href="styles/tailwind.css" rel="stylesheet"><link href="styles/prism.css" rel="stylesheet"></head><body class="bg-gray-100"><header class="bg-white shadow py-4"><div class="container mx-auto px-4"><h1 class="text-3xl font-semibold text-gray-800">jscpd - copy/paste report</h1></div></header><main class="container mx-auto my-8 p-4 bg-white shadow rounded"><section class="mb-8" id="dashboard"><h2 class="text-2xl font-semibold text-gray-700 mb-4">Dashboard</h2><div class="grid grid-cols-4 gap-4"><div class="bg-blue-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-blue-800 mb-2">Total Files</h3><span class="text-4xl font-bold text-blue-800">92</span></div><div class="bg-green-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-green-800 mb-2">Total Lines of Code</h3><span class="text-4xl font-bold text-green-800">16560</span></div><div class="bg-yellow-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-yellow-800 mb-2">Number of Clones</h3><span class="text-4xl font-bold text-yellow-800">6</span></div><div class="bg-red-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-red-800 mb-2">Duplicated Lines</h3><span class="text-4xl font-bold text-red-800">120 (0.72%)</span></div></div></section><section class="mb-8" id="formats"><h2 class="text-2xl font-semibold text-gray-700 mb-4">Formats with Duplications</h2><table class="w-full table-auto"><thead><tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"><th class="py-3 px-6 text-left">Format</th><th class="py-3 px-6 text-left">Files</th><th class="py-3 px-6 text-left">Lines</th><th class="py-3 px-6 text-left">Clones</th><th class="py-3 px-6 text-left">Duplicated Lines</th><th class="py-3 px-6 text-left">Duplicated Tokens</th></tr></thead><tbody><tr class="bg-white border-b border-gray-200 text-gray-800 text-sm"><td class="py-3 px-6"><a class="text-blue-600 hover:underline" href="#python-clones">python</a></td><td class="py-3 px-6">92</td><td class="py-3 px-6">16560</td><td class="py-3 px-6">6</td><td class="py-3 px-6">120</td><td class="py-3 px-6">991</td></tr></tbody></table></section><section class="mb-8" id="txt-clones"><a name="python-clones"></a><h2 class="text-2xl font-semibold text-gray-700 mb-4">python</h2><div class="divide-y divide-gray-200 border-b-2"><div class="py-4"><p class="text-gray-600">GopiAI-UI/gopiai/ui/utils/icon_mapping.py (Line 100:16 - Line 150:10), GopiAI-UI/gopiai/ui/utils/icon_mapping.py (Line 50:11 - Line 100:14)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn0" onclick="toggleCodeBlock('cloneGroup0', 'expandBtn0', 'collapseBtn0')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn0" onclick="toggleCodeBlock('cloneGroup0', 'expandBtn0', 'collapseBtn0')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup0"><code class="language-python text-sm text-gray-800">,    &quot;float_black&quot;: &quot;box&quot;,
+    &quot;float_white&quot;: &quot;box&quot;,
+    &quot;git&quot;: &quot;git-branch&quot;,
+    # Дополнительные маппинги для браузера
+    &quot;back&quot;: &quot;chevron-left&quot;,
+    &quot;forward&quot;: &quot;chevron-right&quot;,
+    &quot;stop&quot;: &quot;x-circle&quot;,
+    &quot;analyze&quot;: &quot;search-check&quot;,
+    &quot;view&quot;: &quot;eye&quot;,
+    &quot;clear&quot;: &quot;trash-2&quot;,
+    # Дополнительные маппинги для типов файлов
+    &quot;js_file&quot;: &quot;file-code&quot;,
+    &quot;html_file&quot;: &quot;file-code&quot;,
+    &quot;css_file&quot;: &quot;file-code&quot;,
+    &quot;json&quot;: &quot;braces&quot;,
+    &quot;image_file&quot;: &quot;image&quot;,
+    &quot;document&quot;: &quot;file-text&quot;,
+    &quot;spreadsheet&quot;: &quot;table&quot;,
+    &quot;pdf&quot;: &quot;file-text&quot;,
+    &quot;archive&quot;: &quot;archive&quot;,
+    &quot;home_folder&quot;: &quot;home&quot;,
+    &quot;drive&quot;: &quot;hard-drive&quot;,
+    &quot;agent&quot;: &quot;bot&quot;,
+    &quot;tools&quot;: &quot;tool&quot;,
+    &quot;console&quot;: &quot;terminal&quot;,
+    &quot;inspect&quot;: &quot;search&quot;,
+    &quot;message-square&quot;: &quot;message-square&quot;,
+    &quot;check-circle&quot;: &quot;check-circle&quot;,
+    &quot;file-plus&quot;: &quot;file-plus&quot;,
+    &quot;save-all&quot;: &quot;save-all&quot;,
+    &quot;grid&quot;: &quot;grid&quot;,
+    &quot;palette&quot;: &quot;palette&quot;,
+    &quot;file-code&quot;: &quot;file-code&quot;,
+    &quot;undo&quot;: &quot;undo&quot;,
+    &quot;redo&quot;: &quot;redo&quot;,
+    # Дополнительные иконки для различных UI компонентов
+    &quot;minimize&quot;: &quot;minimize&quot;,
+    &quot;maximize&quot;: &quot;maximize&quot;,
+    &quot;restore&quot;: &quot;move&quot;,
+    &quot;dock&quot;: &quot;layout&quot;,
+    &quot;pin&quot;: &quot;pin&quot;,
+    &quot;unpin&quot;: &quot;pin-off&quot;,
+    &quot;edit&quot;: &quot;edit&quot;,
+    &quot;delete&quot;: &quot;trash&quot;,
+    &quot;add&quot;: &quot;plus&quot;,
+    &quot;remove&quot;: &quot;minus&quot;,
+    &quot;check&quot;: &quot;check&quot;,    &quot;x-circle&quot;: &quot;x-circle&quot;,
+    &quot;alert&quot;: &quot;alert-triangle&quot;,
+    &quot;warning&quot;: &quot;alert-triangle&quot;,
+    &quot;error&quot;: &quot;alert-octagon&quot;,
+    &quot;success&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">GopiAI-UI/gopiai/ui/components/icon_file_system_model.py (Line 449:9 - Line 454:4), GopiAI-UI/gopiai/ui/components/icon_file_system_model.py (Line 427:9 - Line 431:9)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn1" onclick="toggleCodeBlock('cloneGroup1', 'expandBtn1', 'collapseBtn1')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn1" onclick="toggleCodeBlock('cloneGroup1', 'expandBtn1', 'collapseBtn1')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup1"><code class="language-python text-sm text-gray-800">painter.setPen(QColor(&quot;#444444&quot;))
+        margin = size.width() // 4
+        painter.drawLine(margin, size.height() // 2, 
+                         size.width() - margin, size.height() // 2)
+        
+        painter.end</code></pre></div><div class="py-4"><p class="text-gray-600">GopiAI-UI/gopiai/ui/components/agents_tab.py (Line 105:9 - Line 115:23), GopiAI-UI/gopiai/ui/components/tools_tab.py (Line 152:9 - Line 162:5)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn2" onclick="toggleCodeBlock('cloneGroup2', 'expandBtn2', 'collapseBtn2')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn2" onclick="toggleCodeBlock('cloneGroup2', 'expandBtn2', 'collapseBtn2')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup2"><code class="language-python text-sm text-gray-800">attached_frame = QFrame()
+        attached_frame.setFrameStyle(QFrame.Shape.Box)
+        attached_layout = QVBoxLayout(attached_frame)
+        
+        attached_title = QLabel(&quot;Прикрепленные к сообщению:&quot;)
+        attached_title_font = QFont()
+        attached_title_font.setBold(True)
+        attached_title.setFont(attached_title_font)
+        attached_layout.addWidget(attached_title)
+        
+        # Прикрепленные агенты</code></pre></div><div class="py-4"><p class="text-gray-600">GopiAI-CrewAI/tools/gopiai_integration/gemini_direct_client.py (Line 117:12 - Line 129:24), GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py (Line 381:5 - Line 391:4)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn3" onclick="toggleCodeBlock('cloneGroup3', 'expandBtn3', 'collapseBtn3')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn3" onclick="toggleCodeBlock('cloneGroup3', 'expandBtn3', 'collapseBtn3')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup3"><code class="language-python text-sm text-gray-800">,
+                    'parts': [{'text': content}]
+                })
+            elif isinstance(content, list):
+                parts = []
+                for item in content:
+                    if isinstance(item, str):
+                        parts.append({'text': item})
+                    elif isinstance(item, dict) and 'type' in item:
+                        if item['type'] == 'text':
+                            parts.append({'text': item.get('text', '')})
+                        elif item['type'] == 'image_url':
+                            # Обработка изображений</code></pre></div><div class="py-4"><p class="text-gray-600">GopiAI-CrewAI/tools/gopiai_integration/gemini_direct_client.py (Line 132:33 - Line 143:12), GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py (Line 393:33 - Line 397:5)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn4" onclick="toggleCodeBlock('cloneGroup4', 'expandBtn4', 'collapseBtn4')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn4" onclick="toggleCodeBlock('cloneGroup4', 'expandBtn4', 'collapseBtn4')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup4"><code class="language-python text-sm text-gray-800">mime, data = url.split(',', 1)
+                                mime = mime.split(';')[0].split(':')[1]
+                                parts.append({
+                                    'inline_data': {
+                                        'mime_type': mime,
+                                        'data': data
+                                    }
+                                })
+                
+                if parts:
+                    gemini_messages.append({
+                        'role': gemini_role</code></pre></div><div class="py-4"><p class="text-gray-600">GopiAI-CrewAI/tools/crewai_toolkit/tools/tavily_search_tool/tavily_search_tool.py (Line 217:13 - Line 249:2), GopiAI-CrewAI/tools/crewai_toolkit/tools/tavily_search_tool/tavily_search_tool.py (Line 164:7 - Line 196:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn5" onclick="toggleCodeBlock('cloneGroup5', 'expandBtn5', 'collapseBtn5')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn5" onclick="toggleCodeBlock('cloneGroup5', 'expandBtn5', 'collapseBtn5')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup5"><code class="language-python text-sm text-gray-800">.search(
+            query=query,
+            search_depth=self.search_depth,
+            topic=self.topic,
+            time_range=self.time_range,
+            days=self.days,
+            max_results=self.max_results,
+            include_domains=self.include_domains,
+            exclude_domains=self.exclude_domains,
+            include_answer=self.include_answer,
+            include_raw_content=self.include_raw_content,
+            include_images=self.include_images,
+            timeout=self.timeout,
+        )
+
+        if (
+            isinstance(raw_results, dict)
+            and &quot;results&quot; in raw_results
+            and isinstance(raw_results[&quot;results&quot;], list)
+        ):
+            for item in raw_results[&quot;results&quot;]:
+                if (
+                    isinstance(item, dict)
+                    and &quot;content&quot; in item
+                    and isinstance(item[&quot;content&quot;], str)
+                ):
+                    if len(item[&quot;content&quot;]) &gt; self.max_content_length_per_result:
+                        item[&quot;content&quot;] = (
+                            item[&quot;content&quot;][: self.max_content_length_per_result]
+                            + &quot;...&quot;
+                        )
+
+        return json.dumps(raw_results, indent=2)</code></pre></div><!-- Add more clone groups for .txt format as needed         // Add more clone groups for .txt format as needed--></div></section><!-- Add more sections for other formats and clone groups as needed--></main><footer class="bg-white shadow mt-8 py-4"><div class="container mx-auto px-4 text-center"><p class="text-sm text-gray-600">This report is generated by jscpd, an open-source copy/paste detector.</p><p class="text-sm text-gray-600">jscpd is licensed under the MIT License.</p><a class="text-blue-500 text-sm" href="https://github.com/kucherenko/jscpd" target="_blank" rel="noopener noreferrer">View jscpd on GitHub</a></div></footer><script src="js/prism.js"></script><script>function toggleCodeBlock(codeBlockId, expandBtnId, collapseBtnId) {
+  const codeBlock = document.getElementById(codeBlockId);
+  const expandBtn = document.getElementById(expandBtnId);
+  const collapseBtn = document.getElementById(collapseBtnId);
+
+  codeBlock.classList.toggle('hidden');
+  expandBtn.classList.toggle('hidden');
+  collapseBtn.classList.toggle('hidden');
+}</script></body></html>

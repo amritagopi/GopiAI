@@ -189,6 +189,7 @@ cython_debug/
 config.toml
 
 *.dll
+*.ipynb
 *.pyd
 *.bin
 *.lib
@@ -211,3 +212,10 @@ GopiAI-CrewAI/memory/chats.json
 .aider*
 .kilocode*
 .kilocode/mcp.json
+
+
+rag_memory_system/
+test_infrastructure/
+tests/
+*test*/
+*test*

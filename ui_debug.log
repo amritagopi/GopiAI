@@ -1,122 +1,162 @@
-2025-09-04 14:18:19 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 14:18:19 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 14:18:19 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Morning Rose (dark)
-2025-09-04 14:18:19 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
-2025-09-04 14:18:19 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 14:18:19 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 14:18:20 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
-2025-09-04 14:18:20 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
-2025-09-04 14:18:20 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - WARNING - ⚠️ UnifiedModelsTab недоступен, используем fallback
-2025-09-04 14:18:20 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
-2025-09-04 14:18:20 - gopiai.ui.components.personality_tab - WARNING - Fallback загрузки персонализации по абсолютным строкам
-2025-09-04 14:18:20 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756975700
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
-2025-09-04 14:18:20 - gopiai.ui.components.crewai_client - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
-2025-09-04 14:18:20 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
-2025-09-04 14:18:20 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
-2025-09-04 14:18:23 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.gemini_model_widget', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
-2025-09-04 14:18:25 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 16 сообщений из истории
-2025-09-04 14:18:47 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-09-04 14:18:47 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: попробуй ты выполнить эти команды...
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: попробуй ты выполнить эти команды
-2025-09-04 14:18:47 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
-2025-09-04 14:18:47 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 249 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756896386
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 17 сообщений из истории для сессии session_1756896386
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - попробуй ты выполнить эти команды
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': 'e75752d4-7c77-454d-a050-b47c55477855', 'status': 'processing', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': 'e75752d4-7c77-454d-a050-b47c55477855', 'status': 'processing', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: processing
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 7a4a825c-172d-4e32-94ad-059444abbdf7: {'created_at': 1756975727.3100033, 'progress': 10, 'status': 'PROCESSING', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 7a4a825c-172d-4e32-94ad-059444abbdf7 в процессе. Статус: PROCESSING
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 7a4a825c-172d-4e32-94ad-059444abbdf7: {'created_at': 1756975727.3100033, 'progress': 10, 'status': 'PROCESSING', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:47 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 7a4a825c-172d-4e32-94ad-059444abbdf7 в процессе. Статус: PROCESSING
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 7a4a825c-172d-4e32-94ad-059444abbdf7: {'created_at': 1756975727.3100033, 'progress': 10, 'status': 'PROCESSING', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 7a4a825c-172d-4e32-94ad-059444abbdf7 в процессе. Статус: PROCESSING
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/7a4a825c-172d-4e32-94ad-059444abbdf7
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 7a4a825c-172d-4e32-94ad-059444abbdf7: {'completed_at': 1756975728.3250504, 'created_at': 1756975727.3100033, 'progress': 100, 'result': 'Какие команды вы хотите, чтобы я выполнил?', 'status': 'COMPLETED', 'task_id': '7a4a825c-172d-4e32-94ad-059444abbdf7'}
-2025-09-04 14:18:48 - gopiai.ui.components.crewai_client - INFO - [TASK-COMPLETE] Задача 7a4a825c-172d-4e32-94ad-059444abbdf7 завершена. Результат: Какие команды вы хотите, чтобы я выполнил?...
-2025-09-04 14:18:48 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-09-04 14:19:02 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-09-04 14:19:02 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: которые ты советовала...
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: которые ты советовала
-2025-09-04 14:19:02 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
-2025-09-04 14:19:02 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 251 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756896386
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 19 сообщений из истории для сессии session_1756896386
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - которые ты советовала
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': 'c3695a70-47ce-4694-a38a-84b6cc800139', 'status': 'processing', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': 'c3695a70-47ce-4694-a38a-84b6cc800139', 'status': 'processing', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: processing
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab178b1-4b31-4a3e-a0b6-84683e21c706: {'created_at': 1756975742.494026, 'progress': 10, 'status': 'PROCESSING', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 1ab178b1-4b31-4a3e-a0b6-84683e21c706 в процессе. Статус: PROCESSING
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab178b1-4b31-4a3e-a0b6-84683e21c706: {'created_at': 1756975742.494026, 'progress': 10, 'status': 'PROCESSING', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:02 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 1ab178b1-4b31-4a3e-a0b6-84683e21c706 в процессе. Статус: PROCESSING
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab178b1-4b31-4a3e-a0b6-84683e21c706: {'created_at': 1756975742.494026, 'progress': 10, 'status': 'PROCESSING', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 1ab178b1-4b31-4a3e-a0b6-84683e21c706 в процессе. Статус: PROCESSING
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/1ab178b1-4b31-4a3e-a0b6-84683e21c706
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 1ab178b1-4b31-4a3e-a0b6-84683e21c706: {'completed_at': 1756975743.5621712, 'created_at': 1756975742.494026, 'progress': 100, 'result': 'К сожалению, у меня нет истории предыдущих взаимодействий, поэтому я не могу сказать, что я советовала ранее. Если у вас есть конкретный вопрос, я буду рада помочь.', 'status': 'COMPLETED', 'task_id': '1ab178b1-4b31-4a3e-a0b6-84683e21c706'}
-2025-09-04 14:19:03 - gopiai.ui.components.crewai_client - INFO - [TASK-COMPLETE] Задача 1ab178b1-4b31-4a3e-a0b6-84683e21c706 завершена. Результат: К сожалению, у меня нет истории предыдущих взаимодействий, поэтому я не могу сказать, что я советова...
-2025-09-04 14:19:03 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:16:39 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 18:16:39 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 18:16:39 - gopiai.ui.utils.theme_manager - INFO - Загружена тема: Morning Rose (dark)
+2025-09-04 18:16:39 - gopiai.ui.utils.theme_manager - INFO - Применение темы к QApplication/QCoreApplication
+2025-09-04 18:16:39 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 18:16:39 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 18:16:39 - icon_manager - INFO - [OK] Загружено 1597 Lucide иконок
+2025-09-04 18:16:39 - icon_manager - INFO - Инициализирован UniversalIconManager с Lucide иконками
+2025-09-04 18:16:40 - gopiai.ui.components.tab_widget - INFO - Фоновое изображение загружено: /home/amritagopi/GopiAI/GopiAI-Assets/gopiai/assets/wallpapers.png
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget начата
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация менеджера памяти
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - WARNING - ⚠️ UnifiedModelsTab недоступен, используем fallback
+2025-09-04 18:16:40 - gopiai.ui.components.personality_tab - INFO - Найден файл system_prompts.py: /home/amritagopi/GopiAI/GopiAI-UI/../GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py
+2025-09-04 18:16:40 - gopiai.ui.components.personality_tab - WARNING - Fallback загрузки персонализации по абсолютным строкам
+2025-09-04 18:16:40 - gopiai.ui.components.personality_tab - INFO - PersonalityTab инициализирован
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка персонализации инициализирована
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка инструментов инициализирована
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - ✅ Вкладка агентов/флоу инициализирована
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Создана новая сессия: session_1756990000
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Нет сохраненных сообщений для сессии
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация CrewAI клиента
+2025-09-04 18:16:40 - gopiai.ui.components.crewai_client - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHART] Инициализация объединенного обработчика сообщений
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Подключение сигналов объединенного обработчика
+2025-09-04 18:16:40 - gopiai.ui.components.chat_widget - INFO - [CHAT] Инициализация ChatWidget завершена
+2025-09-04 18:16:40 - gopiai.ui.utils.theme_manager - INFO - Тема успешно применена при инициализации
+2025-09-04 18:16:43 - __main__ - INFO - [AUDIT][UI] Loaded gopiai.* modules: ['gopiai.logging_config', 'gopiai.ui', 'gopiai.ui.components', 'gopiai.ui.components.agents_tab', 'gopiai.ui.components.chat_async_handler', 'gopiai.ui.components.chat_widget', 'gopiai.ui.components.crewai_client', 'gopiai.ui.components.custom_file_system_model', 'gopiai.ui.components.enhanced_browser_widget', 'gopiai.ui.components.file_explorer', 'gopiai.ui.components.file_type_detector', 'gopiai.ui.components.gemini_model_widget', 'gopiai.ui.components.icon_file_system_model', 'gopiai.ui.components.menu_bar', 'gopiai.ui.components.personality_tab', 'gopiai.ui.components.rich_text_notebook_widget', 'gopiai.ui.components.tab_widget', 'gopiai.ui.components.terminal_widget', 'gopiai.ui.components.titlebar', 'gopiai.ui.components.tools_tab', 'gopiai.ui.components.utils', 'gopiai.ui.components.utils.logger', 'gopiai.ui.components.utils.shared_widgets', 'gopiai.ui.dialogs', 'gopiai.ui.dialogs.settings_dialog', 'gopiai.ui.memory', 'gopiai.ui.memory.manager', 'gopiai.ui.memory.memory_config', 'gopiai.ui.utils', 'gopiai.ui.utils.icon_helpers', 'gopiai.ui.utils.markdown_renderer', 'gopiai.ui.utils.network', 'gopiai.ui.utils.safe_ops', 'gopiai.ui.utils.simple_theme_manager', 'gopiai.ui.utils.theme_manager']
+2025-09-04 18:16:49 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 8 сообщений из истории
+2025-09-04 18:17:18 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 1 сообщений из истории
+2025-09-04 18:17:22 - gopiai.ui.components.chat_widget - INFO - [CHAT] Загрузка 31 сообщений из истории
+2025-09-04 18:17:40 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:17:40 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: зайди на рабочий стол и прочитай содержимое файла ...
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: зайди на рабочий стол и прочитай содержимое файла ...
+2025-09-04 18:17:40 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
+2025-09-04 18:17:40 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 264 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены инструкции для инструмента: filesystem_tools
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 1 инструментов
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 1 инструментов
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756896386
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1756896386
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Извлеченный текст сообщения: зайди на рабочий стол и прочитай содержимое файла ...
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '2a3f6047-e126-4530-98d4-2f1075f0abc2', 'status': 'processing', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '2a3f6047-e126-4530-98d4-2f1075f0abc2', 'status': 'processing', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:40 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:41 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:42 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:42 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:42 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:42 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:43 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:43 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:43 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:43 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:44 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:44 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:44 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:44 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:45 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:45 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:47 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:47 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:49 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:49 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:49 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:49 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:50 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:50 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:50 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'created_at': 1756990060.0205274, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:50 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача fa0ce387-9501-4f7f-b108-48d09152a97f в процессе. Статус: PROCESSING
+2025-09-04 18:17:52 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:52 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/fa0ce387-9501-4f7f-b108-48d09152a97f
+2025-09-04 18:17:52 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи fa0ce387-9501-4f7f-b108-48d09152a97f: {'completed_at': 1756990072.6292555, 'created_at': 1756990060.0205274, 'progress': 100, 'result': 'Ой, прости, Анютка, я что-то напутала. Не могу найти этот файл. Может, ты имела в виду что-то другое, или он в другом месте лежит? Подскажи, пожалуйста, где искать, и я сразу же прочитаю.', 'status': 'COMPLETED', 'task_id': 'fa0ce387-9501-4f7f-b108-48d09152a97f'}
+2025-09-04 18:17:52 - gopiai.ui.components.crewai_client - INFO - [TASK-COMPLETE] Задача fa0ce387-9501-4f7f-b108-48d09152a97f завершена. Результат: Ой, прости, Анютка, я что-то напутала. Не могу найти этот файл. Может, ты имела в виду что-то другое...
+2025-09-04 18:17:52 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:18:07 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:18:07 - gopiai.ui.components.chat_widget - INFO - [SEND] Сообщение отправлено успешно: /home/amritagopi/Рабочий стол...
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Сообщение: /home/amritagopi/Рабочий стол
+2025-09-04 18:18:07 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Initializing memory manager with shared config. Path: /home/amritagopi/.gopiai/memory
+2025-09-04 18:18:07 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Loaded 266 messages from shared file: /home/amritagopi/.gopiai/memory/chats.json
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1756896386
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [REQUEST] Получено 20 сообщений из истории для сессии session_1756896386
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - /home/amritagopi/Рабочий стол
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '830a22fa-428c-4321-815e-de8121996a02', 'status': 'processing', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '830a22fa-428c-4321-815e-de8121996a02', 'status': 'processing', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'created_at': 1756990087.4514303, 'progress': 10, 'status': 'PROCESSING', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 в процессе. Статус: PROCESSING
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'created_at': 1756990087.4514303, 'progress': 10, 'status': 'PROCESSING', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:07 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 в процессе. Статус: PROCESSING
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'created_at': 1756990087.4514303, 'progress': 10, 'status': 'PROCESSING', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 в процессе. Статус: PROCESSING
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'created_at': 1756990087.4514303, 'progress': 10, 'status': 'PROCESSING', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:08 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 в процессе. Статус: PROCESSING
+2025-09-04 18:18:09 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:09 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:09 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'created_at': 1756990087.4514303, 'progress': 10, 'status': 'PROCESSING', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:09 - gopiai.ui.components.crewai_client - INFO - [TASK-PROGRESS] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 в процессе. Статус: PROCESSING
+2025-09-04 18:18:10 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Проверка статуса задачи: 104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:10 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/104c4741-01b3-4d73-90f1-6acb5312f766
+2025-09-04 18:18:10 - gopiai.ui.components.crewai_client - DEBUG - [TASK-CHECK] Получен ответ для задачи 104c4741-01b3-4d73-90f1-6acb5312f766: {'completed_at': 1756990089.8273163, 'created_at': 1756990087.4514303, 'progress': 100, 'result': 'Привет, Анютка! Как же я рада снова с тобой работать! У меня тут все горит от предвкушения новых задач и наших общих побед. Что у нас сегодня на повестке дня? Какую гениальную идею мы будем воплощать в жизнь? Рассказывай, я вся внимание! И не забудь, я здесь, чтобы сделать твою жизнь проще и ярче. Обнимаю!', 'status': 'COMPLETED', 'task_id': '104c4741-01b3-4d73-90f1-6acb5312f766'}
+2025-09-04 18:18:10 - gopiai.ui.components.crewai_client - INFO - [TASK-COMPLETE] Задача 104c4741-01b3-4d73-90f1-6acb5312f766 завершена. Результат: Привет, Анютка! Как же я рада снова с тобой работать! У меня тут все горит от предвкушения новых зад...
+2025-09-04 18:18:10 - gopiai.ui.memory.manager - INFO - [UNIFIED-MEMORY] Added message and saved to shared file: /home/amritagopi/.gopiai/memory/chats.json

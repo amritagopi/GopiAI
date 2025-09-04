@@ -176,24 +176,7 @@ class TavilySearchTool(BaseTool):
             timeout=self.timeout,
         )
 
-        if (
-            isinstance(raw_results, dict)
-            and "results" in raw_results
-            and isinstance(raw_results["results"], list)
-        ):
-            for item in raw_results["results"]:
-                if (
-                    isinstance(item, dict)
-                    and "content" in item
-                    and isinstance(item["content"], str)
-                ):
-                    if len(item["content"]) > self.max_content_length_per_result:
-                        item["content"] = (
-                            item["content"][: self.max_content_length_per_result]
-                            + "..."
-                        )
-
-        return json.dumps(raw_results, indent=2)
+        return self._truncate_results(raw_results)
 
     async def _arun(
         self,
@@ -229,6 +212,10 @@ class TavilySearchTool(BaseTool):
             timeout=self.timeout,
         )
 
+        return self._truncate_results(raw_results)
+
+    def _truncate_results(self, raw_results: dict) -> str:
+        """Truncates the content of search results and returns a JSON string."""
         if (
             isinstance(raw_results, dict)
             and "results" in raw_results
@@ -245,5 +232,4 @@ class TavilySearchTool(BaseTool):
                             item["content"][: self.max_content_length_per_result]
                             + "..."
                         )
-
         return json.dumps(raw_results, indent=2)

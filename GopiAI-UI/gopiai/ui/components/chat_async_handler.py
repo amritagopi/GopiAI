@@ -83,6 +83,21 @@ class ChatAsyncHandler(QObject):
         
         logger.info("[ChatAsyncHandler] Объединенный обработчик чата инициализирован")
 
+    def _stop_and_reset_polling(self) -> None:
+        """Останавливает таймер и сбрасывает связанные с опросом поля (без изменения task_id)."""
+        try:
+            if hasattr(self, "_polling_timer") and self._polling_timer.isActive():
+                self._polling_timer.stop()
+        except Exception:
+            # defensive: ничего не делаем, просто гарантируем очистку состояния
+            pass
+        # Сбрасываем состояние, чтобы не было остаточных значений от прошлых задач
+        self._polling_start_time = None
+        self._current_polling_attempt = 0
+        # Сбрасываем delay к начальному состоянию — безопасно
+        self.current_delay = self.initial_delay
+        logger.debug("[POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset")
+
     def send_message(self, message: str, metadata: Optional[Dict[str, Any]] = None) -> bool:
         """
         Отправка сообщения и начало асинхронной обработки (улучшенный интерфейс)
@@ -205,19 +220,33 @@ class ChatAsyncHandler(QObject):
     # ### ИЗМЕНЕНО: Создаем новый слот, который будет выполняться в основном потоке ###
     @Slot(str)
     def _start_polling_from_main_thread(self, task_id: str):
-        """Запускает таймер для опроса статуса задачи. Должен вызываться из основного UI потока."""
+        """Запускает/перезапускает таймер для опроса статуса задачи — безопасно сбрасывает старое состояние."""
+        # Останавливаем и сбрасываем любое старое состояние, чтобы избежать гонок
+        self._stop_and_reset_polling()
+
+        # Устанавливаем новую задачу и начальное состояние
         self._current_task_id = task_id
         self._current_polling_attempt = 0
-        # стартуем с текущей адаптивной задержкой
+        self.current_delay = self.initial_delay
+
+        # Устанавливаем стартовое время опроса ЗДЕСЬ, чтобы _check_task_status не видел "старое" значение
+        # Используем monotonic() для устойчивости к изменениям системного времени
+        try:
+            self._polling_start_time = time.monotonic()
+        except Exception:
+            # на всякий случай — fallback к time.time()
+            self._polling_start_time = time.time()
+
+        # Запускаем таймер с текущей задержкой
         self._polling_timer.start(self.current_delay)
-        logger.info(f"[POLLING] Запущен опрос статуса для task_id: {task_id} с initial_delay={self.current_delay}ms")
+        logger.info(f"[POLLING] (re)started polling for task_id={task_id} initial_delay={self.current_delay}ms start_time={self._polling_start_time}")
         self.status_update.emit("Обработка запроса начата...")
 
     def _check_task_status(self) -> None:
         """Периодически опрашивает сервер о ходе выполнения задачи."""
         if self._current_task_id is None:
             logger.warning("[POLLING] Попытка опроса статуса без task_id, останавливаем таймер")
-            self._polling_timer.stop()
+            self._stop_and_reset_polling()
             return
 
         try:
@@ -240,17 +269,14 @@ class ChatAsyncHandler(QObject):
             logger.debug("[POLLING] Получен статус: %s", status_raw)
             status: Dict[str, Any] = status_raw if isinstance(status_raw, dict) else {"status": str(status_raw)}
             
-            # Ожидаем, что сервер возвращает словарь с ключами `done` и `result`
-            # Также проверяем статус на "completed", "error" или "failed" для завершения опроса
-            done = (bool(status.get("done")) or 
+            done = (bool(status.get("done")) or
                    status.get("status") in ("completed", "error", "failed", "cancelled"))
             
             if done:
                 task_status = status.get("status")
                 logger.info(f"[POLLING-COMPLETE] Задача {self._current_task_id} завершена после {self._current_polling_attempt} попыток со статусом: {task_status}")
-                self._polling_timer.stop()
+                self._stop_and_reset_polling()
                 
-                # Обработка различных статусов завершения
                 if task_status == "failed":
                     error_msg = status.get("error", "Task failed with unknown error")
                     logger.error(f"[POLLING-FAILED] Задача {self._current_task_id} завершилась с ошибкой: {error_msg}")
@@ -269,19 +295,15 @@ class ChatAsyncHandler(QObject):
                     self._current_task_id = None
                     return
                 
-                # Для статуса "completed" проверяем наличие результата
                 result = status.get("result")
                 if result:
                     logger.debug("[POLLING-RESULT] Получен результат: %s", result)
                 else:
                     logger.warning("[POLLING-RESULT] Задача завершена, но результат пуст")
                 
-                # Сбрасываем счетчик и идентификатор задачи
                 task_id = self._current_task_id
                 self._current_task_id = None
-                self._current_polling_attempt = 0
                 
-                # Отправляем результат в UI (нормализуем до dict)
                 norm_result: Dict[str, Any]
                 if isinstance(result, dict):
                     norm_result = result
@@ -292,27 +314,22 @@ class ChatAsyncHandler(QObject):
                 self.response_ready.emit(norm_result)
                 logger.info(f"[POLLING-COMPLETE] Результат задачи {task_id} отправлен в UI")
             else:
-                # Обновляем статус в UI
                 status_text = str(status.get("status", "Обрабатываю запрос..."))
                 logger.debug(f"[POLLING-PROGRESS] Задача {self._current_task_id} в процессе: {status_text}")
                 self.status_update.emit(status_text)
                 
-                # Проверяем статус на "completed" или "error" для завершения опроса
                 if status_text in ("completed", "error"):
                     logger.info(f"[POLLING-STATUS-COMPLETE] Задача {self._current_task_id} завершена со статусом: {status_text}")
-                    self._polling_timer.stop()
+                    self._stop_and_reset_polling()
                     result = status.get("result", {"response": f"Задача завершена со статусом: {status_text}"})
                     self._current_task_id = None
-                    self._current_polling_attempt = 0
                     if status_text == "error":
-                        # Нормализуем и отправляем ошибку
                         resp_text = result.get("response") if isinstance(result, dict) else str(result)
                         self.message_error.emit(resp_text or "Ошибка обработки")
                     else:
                         norm_result = result if isinstance(result, dict) else {"response": str(result)}
                         self.response_ready.emit(norm_result)
                 else:
-                    # Адаптивная (экспоненциальная) задержка: увеличиваем интервал до потолка
                     prev_delay = self.current_delay
                     self.current_delay = int(min(self.max_delay, max(self.initial_delay, int(self.current_delay * self.delay_multiplier))))
                     if self._polling_timer.isActive():
@@ -320,31 +337,32 @@ class ChatAsyncHandler(QObject):
                     self._polling_timer.start(self.current_delay)
                     logger.debug(f"[POLLING-BACKOFF] attempt={self._current_polling_attempt}, delay: {prev_delay}ms -> {self.current_delay}ms")
                 
-                # Проверяем таймаут - если прошло больше 10 секунд, останавливаем
-                if hasattr(self, '_polling_start_time'):
-                    elapsed = time.time() - self._polling_start_time
+                if hasattr(self, '_polling_start_time') and self._polling_start_time is not None:
+                    try:
+                        elapsed = time.monotonic() - self._polling_start_time
+                    except Exception:
+                        elapsed = time.time() - self._polling_start_time
                     if elapsed > 120:
                         logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (120s) для задачи {self._current_task_id}")
-                        self._polling_timer.stop()
+                        self._stop_and_reset_polling()
                         self._current_task_id = None
-                        self._current_polling_attempt = 0
                         self.message_error.emit("Превышено время ожидания ответа от сервера (120 секунд).")
                         return
                 else:
-                    self._polling_start_time = time.time()
+                    try:
+                        self._polling_start_time = time.monotonic()
+                    except Exception:
+                        self._polling_start_time = time.time()
                     
-                # Проверяем на зацикливание - если больше 120 попыток, останавливаем
                 if self._current_polling_attempt > 120:
                     logger.warning(f"[POLLING-TIMEOUT] Превышено максимальное количество попыток опроса для задачи {self._current_task_id}")
-                    self._polling_timer.stop()
+                    self._stop_and_reset_polling()
                     self._current_task_id = None
-                    self._current_polling_attempt = 0
                     self.message_error.emit("Превышено максимальное количество попыток опроса статуса.")
         except Exception as e:
             logger.error(f"[POLLING-ERROR] Ошибка при опросе статуса задачи {self._current_task_id}: {e}", exc_info=True)
-            self._polling_timer.stop()
+            self._stop_and_reset_polling()
             self._current_task_id = None
-            self._current_polling_attempt = 0
             self.message_error.emit(str(e))
 
 # --- КОНЕЦ ФАЙЛА chat_async_handler.py ---

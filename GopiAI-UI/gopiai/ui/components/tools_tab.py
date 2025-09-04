@@ -7,7 +7,7 @@ import logging
 import json
 from typing import Dict, List, Optional
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QGroupBox, 
+    QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QGroupBox,
     QPushButton, QLabel, QLineEdit, QCheckBox, QMessageBox,
     QInputDialog, QFrame, QSizePolicy
 )
@@ -15,6 +15,7 @@ from PySide6.QtCore import Qt, Signal, QTimer
 from PySide6.QtGui import QFont
 import requests
 from gopiai.ui.utils.icon_helpers import create_icon_button, get_icon
+from gopiai.ui.components.utils.shared_widgets import create_attached_frame
 
 logger = logging.getLogger(__name__)
 
@@ -149,15 +150,8 @@ class ToolsTab(QWidget):
         layout.addWidget(self.status_label)
         
         # Прикрепленные инструменты
-        attached_frame = QFrame()
-        attached_frame.setFrameStyle(QFrame.Shape.Box)
-        attached_layout = QVBoxLayout(attached_frame)
-        
-        attached_title = QLabel("Прикрепленные к сообщению:")
-        attached_title_font = QFont()
-        attached_title_font.setBold(True)
-        attached_title.setFont(attached_title_font)
-        attached_layout.addWidget(attached_title)
+        attached_frame = create_attached_frame("Прикрепленные к сообщению:")
+        attached_layout = attached_frame.layout()
         
         self.attached_label = QLabel("нет")
         self.attached_label.setWordWrap(True)

@@ -30,6 +30,7 @@ except ImportError:
 
 # Импортируем наш модуль системных промптов
 from .system_prompts import get_system_prompts
+from .gemini_utils import convert_to_gemini_format
 
 # Импортируем восстановленные компоненты
 from .local_mcp_tools import get_local_mcp_tools
@@ -371,34 +372,6 @@ class SmartDelegator:
         messages.append(tool_result_message)
         return messages
 
-    def _convert_to_gemini_format(self, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        gemini_messages = []
-        for msg in messages:
-            role = msg.get('role', 'user')
-            content = msg.get('content')
-
-            if isinstance(content, str):
-                gemini_messages.append({'role': role, 'parts': [{'text': content}]})
-            elif isinstance(content, list):
-                parts = []
-                for item in content:
-                    if isinstance(item, str):
-                        parts.append({'text': item})
-                    elif isinstance(item, dict) and 'type' in item:
-                        if item['type'] == 'text':
-                            parts.append({'text': item.get('text', '')})
-                        elif item['type'] == 'image_url':
-                            url = item['image_url'].get('url', '')
-                            if ',' in url:
-                                mime, data = url.split(',', 1)
-                                mime = mime.split(';')[0].split(':')[1]
-                                parts.append({'inline_data': {'mime_type': mime, 'data': data}})
-                if parts:
-                    gemini_messages.append({'role': role, 'parts': parts})
-            else:
-                logger.warning(f"Skipping unsupported message format: {msg}")
-
-        return gemini_messages
 
     def _call_llm(self, messages: List[Dict]) -> str:
         """

@@ -1,0 +1,14 @@
+{
+  "gitignore": true,
+  "ignore": [
+    "**/node_modules/**",
+    "**/venv/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/__pycache__/**",
+    "**/Новые темы/**",
+    "**/free-models-rate-limits/**"
+  ],
+  "files": ["**/*.py"]
+}
+

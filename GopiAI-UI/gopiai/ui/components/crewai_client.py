@@ -35,7 +35,7 @@ print('sys.path:', sys.path)
 # Используем статические пути относительно структуры проекта
 CURRENT_DIR = Path(__file__).parent
 UI_DIR = CURRENT_DIR.parent.parent
-PROJECT_ROOT = UI_DIR.parent
+PROJECT_ROOT = UI_DIR.parent.parent
 CREWAI_DIR = PROJECT_ROOT / "GopiAI-CrewAI"
 
 # Эмоциональный классификатор отключен после рефакторинга

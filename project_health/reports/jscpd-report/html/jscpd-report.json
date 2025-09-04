@@ -1,0 +1,1358 @@
+{
+  "statistics": {
+    "detectionDate": "2025-09-04T11:21:09.053Z",
+    "formats": {
+      "python": {
+        "sources": {
+          "scripts/update_imports.py": {
+            "lines": 96,
+            "tokens": 689,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "quick_rag_import.py": {
+            "lines": 113,
+            "tokens": 754,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "fix_free_models.py": {
+            "lines": 80,
+            "tokens": 531,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "add_chat_to_rag.py": {
+            "lines": 202,
+            "tokens": 1404,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/simple_emotion_classifier.py": {
+            "lines": 75,
+            "tokens": 558,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/utils/performance.py": {
+            "lines": 152,
+            "tokens": 1151,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/theme_manager.py": {
+            "lines": 343,
+            "tokens": 2140,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/safe_ops.py": {
+            "lines": 56,
+            "tokens": 355,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/network.py": {
+            "lines": 24,
+            "tokens": 133,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/markdown_renderer.py": {
+            "lines": 26,
+            "tokens": 168,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/icon_system.py": {
+            "lines": 300,
+            "tokens": 2004,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/icon_mapping.py": {
+            "lines": 331,
+            "tokens": 2140,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 100,
+            "duplicatedTokens": 692,
+            "percentage": 30.21,
+            "percentageTokens": 32.34,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/icon_helpers.py": {
+            "lines": 156,
+            "tokens": 1145,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/emoji_to_icon.py": {
+            "lines": 236,
+            "tokens": 1255,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/utils/__init__.py": {
+            "lines": 19,
+            "tokens": 108,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/memory/memory_config.py": {
+            "lines": 38,
+            "tokens": 222,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/memory/manager.py": {
+            "lines": 174,
+            "tokens": 1483,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/memory/__init__.py": {
+            "lines": 13,
+            "tokens": 27,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/llm.py": {
+            "lines": 85,
+            "tokens": 671,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/dialogs/__init__.py": {
+            "lines": 11,
+            "tokens": 22,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/utils/logger.py": {
+            "lines": 57,
+            "tokens": 299,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/utils/__init__.py": {
+            "lines": 8,
+            "tokens": 19,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/tools_tab.py": {
+            "lines": 350,
+            "tokens": 2919,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 78,
+            "percentage": 2.86,
+            "percentageTokens": 2.67,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/tools_panel_utils.py": {
+            "lines": 200,
+            "tokens": 1313,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/titlebar.py": {
+            "lines": 283,
+            "tokens": 2226,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/terminal_widget.py": {
+            "lines": 202,
+            "tokens": 1605,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/rich_text_notebook_widget.py": {
+            "lines": 85,
+            "tokens": 801,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/personality_tab.py": {
+            "lines": 333,
+            "tokens": 2630,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/model_selector_widget.py": {
+            "lines": 282,
+            "tokens": 2015,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/minimal_gemini_widget.py": {
+            "lines": 165,
+            "tokens": 1085,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/menu_bar.py": {
+            "lines": 334,
+            "tokens": 2706,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/icon_file_system_model.py": {
+            "lines": 541,
+            "tokens": 4654,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 146,
+            "percentage": 1.85,
+            "percentageTokens": 3.14,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/gemini_model_widget.py": {
+            "lines": 267,
+            "tokens": 1962,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/file_type_detector.py": {
+            "lines": 242,
+            "tokens": 1922,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/file_explorer.py": {
+            "lines": 255,
+            "tokens": 1926,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/enhanced_browser_widget.py": {
+            "lines": 288,
+            "tokens": 2268,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/custom_file_system_model.py": {
+            "lines": 80,
+            "tokens": 599,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/crewai_client.py": {
+            "lines": 878,
+            "tokens": 6527,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/chat_context.py": {
+            "lines": 129,
+            "tokens": 1224,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/chat_async_handler.py": {
+            "lines": 349,
+            "tokens": 2911,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/ai_tools/__init__.py": {
+            "lines": 68,
+            "tokens": 355,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/agents_tab.py": {
+            "lines": 299,
+            "tokens": 2444,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 78,
+            "percentage": 3.34,
+            "percentageTokens": 3.19,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/components/__init__.py": {
+            "lines": 24,
+            "tokens": 105,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/ui/__init__.py": {
+            "lines": 19,
+            "tokens": 57,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-UI/gopiai/logging_config.py": {
+            "lines": 69,
+            "tokens": 382,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/terminal_tool.py": {
+            "lines": 108,
+            "tokens": 720,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/system_prompts.py": {
+            "lines": 204,
+            "tokens": 1043,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py": {
+            "lines": 554,
+            "tokens": 4399,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 234,
+            "percentage": 4.15,
+            "percentageTokens": 5.32,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/response_formatter.py": {
+            "lines": 149,
+            "tokens": 1111,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/local_mcp_tools.py": {
+            "lines": 258,
+            "tokens": 1859,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/gemini_direct_client.py": {
+            "lines": 164,
+            "tokens": 1252,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 234,
+            "percentage": 14.02,
+            "percentageTokens": 18.69,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/gopiai_integration/command_executor.py": {
+            "lines": 403,
+            "tokens": 3201,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/tavily_search_tool/tavily_search_tool.py": {
+            "lines": 248,
+            "tokens": 1584,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 64,
+            "duplicatedTokens": 520,
+            "percentage": 25.81,
+            "percentageTokens": 32.83,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/selenium_scraping_tool/selenium_scraping_tool.py": {
+            "lines": 185,
+            "tokens": 1455,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/firecrawl_search_tool/firecrawl_search_tool.py": {
+            "lines": 115,
+            "tokens": 692,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/file_writer_tool/file_writer_tool.py": {
+            "lines": 61,
+            "tokens": 510,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/file_read_tool/file_read_tool.py": {
+            "lines": 96,
+            "tokens": 576,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/directory_read_tool/directory_read_tool.py": {
+            "lines": 46,
+            "tokens": 366,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/csv_search_tool/csv_search_tool.py": {
+            "lines": 75,
+            "tokens": 636,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/code_interpreter_tool/code_interpreter_tool.py": {
+            "lines": 391,
+            "tokens": 2033,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/brave_search_tool/brave_search_tool.py": {
+            "lines": 120,
+            "tokens": 850,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/tools/__init__.py": {
+            "lines": 31,
+            "tokens": 175,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/printer.py": {
+            "lines": 130,
+            "tokens": 525,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/adapters/tool_collection.py": {
+            "lines": 63,
+            "tokens": 609,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/adapters/pdf_embedchain_adapter.py": {
+            "lines": 51,
+            "tokens": 400,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/adapters/mcp_adapter.py": {
+            "lines": 156,
+            "tokens": 536,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/adapters/lancedb_adapter.py": {
+            "lines": 55,
+            "tokens": 502,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/crewai_toolkit/adapters/embedchain_adapter.py": {
+            "lines": 64,
+            "tokens": 384,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/tools/__init__.py": {
+            "lines": 45,
+            "tokens": 203,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/state_manager.py": {
+            "lines": 59,
+            "tokens": 509,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/start_model_switching_system.py": {
+            "lines": 140,
+            "tokens": 746,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/response_refinement_integration.py": {
+            "lines": 185,
+            "tokens": 1075,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/rag_worker.py": {
+            "lines": 242,
+            "tokens": 2347,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/rag_system.py": {
+            "lines": 258,
+            "tokens": 2372,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/rag_config.py": {
+            "lines": 36,
+            "tokens": 151,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/main.py": {
+            "lines": 616,
+            "tokens": 3242,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/llm_rotation_config.py": {
+            "lines": 390,
+            "tokens": 2824,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/llm_config_examples.py": {
+            "lines": 148,
+            "tokens": 913,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/iterative_smart_delegator.py": {
+            "lines": 275,
+            "tokens": 1482,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/iterative_execution_system.py": {
+            "lines": 524,
+            "tokens": 3609,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/gopiai/middleware/log_middleware.py": {
+            "lines": 88,
+            "tokens": 587,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/gopiai/logging/json_logger.py": {
+            "lines": 87,
+            "tokens": 916,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/gopiai/llm/tool_executor.py": {
+            "lines": 82,
+            "tokens": 635,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/gopiai/llm/__init__.py": {
+            "lines": 3,
+            "tokens": 39,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/crews/refinement_crew/refinement_crew.py": {
+            "lines": 242,
+            "tokens": 1287,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/crewai_api_server.py": {
+            "lines": 852,
+            "tokens": 5814,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/check_models_status.py": {
+            "lines": 73,
+            "tokens": 662,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/check_imports.py": {
+            "lines": 43,
+            "tokens": 339,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/check_flask.py": {
+            "lines": 24,
+            "tokens": 131,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/check_crewai_class.py": {
+            "lines": 5,
+            "tokens": 44,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-CrewAI/audio_tool.py": {
+            "lines": 73,
+            "tokens": 591,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "GopiAI-Assets/gopiai/assets/__init__.py": {
+            "lines": 6,
+            "tokens": 7,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 16560,
+          "tokens": 117857,
+          "sources": 92,
+          "clones": 6,
+          "duplicatedLines": 120,
+          "duplicatedTokens": 991,
+          "percentage": 0.72,
+          "percentageTokens": 0.84,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 16560,
+      "tokens": 117857,
+      "sources": 92,
+      "clones": 6,
+      "duplicatedLines": 120,
+      "duplicatedTokens": 991,
+      "percentage": 0.72,
+      "percentageTokens": 0.84,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "python",
+      "lines": 51,
+      "fragment": ",    \"float_black\": \"box\",\n    \"float_white\": \"box\",\n    \"git\": \"git-branch\",\n    # Дополнительные маппинги для браузера\n    \"back\": \"chevron-left\",\n    \"forward\": \"chevron-right\",\n    \"stop\": \"x-circle\",\n    \"analyze\": \"search-check\",\n    \"view\": \"eye\",\n    \"clear\": \"trash-2\",\n    # Дополнительные маппинги для типов файлов\n    \"js_file\": \"file-code\",\n    \"html_file\": \"file-code\",\n    \"css_file\": \"file-code\",\n    \"json\": \"braces\",\n    \"image_file\": \"image\",\n    \"document\": \"file-text\",\n    \"spreadsheet\": \"table\",\n    \"pdf\": \"file-text\",\n    \"archive\": \"archive\",\n    \"home_folder\": \"home\",\n    \"drive\": \"hard-drive\",\n    \"agent\": \"bot\",\n    \"tools\": \"tool\",\n    \"console\": \"terminal\",\n    \"inspect\": \"search\",\n    \"message-square\": \"message-square\",\n    \"check-circle\": \"check-circle\",\n    \"file-plus\": \"file-plus\",\n    \"save-all\": \"save-all\",\n    \"grid\": \"grid\",\n    \"palette\": \"palette\",\n    \"file-code\": \"file-code\",\n    \"undo\": \"undo\",\n    \"redo\": \"redo\",\n    # Дополнительные иконки для различных UI компонентов\n    \"minimize\": \"minimize\",\n    \"maximize\": \"maximize\",\n    \"restore\": \"move\",\n    \"dock\": \"layout\",\n    \"pin\": \"pin\",\n    \"unpin\": \"pin-off\",\n    \"edit\": \"edit\",\n    \"delete\": \"trash\",\n    \"add\": \"plus\",\n    \"remove\": \"minus\",\n    \"check\": \"check\",    \"x-circle\": \"x-circle\",\n    \"alert\": \"alert-triangle\",\n    \"warning\": \"alert-triangle\",\n    \"error\": \"alert-octagon\",\n    \"success\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-UI/gopiai/ui/utils/icon_mapping.py",
+        "start": 100,
+        "end": 150,
+        "startLoc": {
+          "line": 100,
+          "column": 16,
+          "position": 638
+        },
+        "endLoc": {
+          "line": 150,
+          "column": 10,
+          "position": 984
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-UI/gopiai/ui/utils/icon_mapping.py",
+        "start": 50,
+        "end": 100,
+        "startLoc": {
+          "line": 50,
+          "column": 11,
+          "position": 294
+        },
+        "endLoc": {
+          "line": 100,
+          "column": 14,
+          "position": 640
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 6,
+      "fragment": "painter.setPen(QColor(\"#444444\"))\n        margin = size.width() // 4\n        painter.drawLine(margin, size.height() // 2, \n                         size.width() - margin, size.height() // 2)\n        \n        painter.end",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-UI/gopiai/ui/components/icon_file_system_model.py",
+        "start": 449,
+        "end": 454,
+        "startLoc": {
+          "line": 449,
+          "column": 9,
+          "position": 3873
+        },
+        "endLoc": {
+          "line": 454,
+          "column": 4,
+          "position": 3946
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-UI/gopiai/ui/components/icon_file_system_model.py",
+        "start": 427,
+        "end": 431,
+        "startLoc": {
+          "line": 427,
+          "column": 9,
+          "position": 3653
+        },
+        "endLoc": {
+          "line": 431,
+          "column": 9,
+          "position": 3724
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 11,
+      "fragment": "attached_frame = QFrame()\n        attached_frame.setFrameStyle(QFrame.Shape.Box)\n        attached_layout = QVBoxLayout(attached_frame)\n        \n        attached_title = QLabel(\"Прикрепленные к сообщению:\")\n        attached_title_font = QFont()\n        attached_title_font.setBold(True)\n        attached_title.setFont(attached_title_font)\n        attached_layout.addWidget(attached_title)\n        \n        # Прикрепленные агенты",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-UI/gopiai/ui/components/agents_tab.py",
+        "start": 105,
+        "end": 115,
+        "startLoc": {
+          "line": 105,
+          "column": 9,
+          "position": 826
+        },
+        "endLoc": {
+          "line": 115,
+          "column": 23,
+          "position": 904
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-UI/gopiai/ui/components/tools_tab.py",
+        "start": 152,
+        "end": 162,
+        "startLoc": {
+          "line": 152,
+          "column": 9,
+          "position": 1223
+        },
+        "endLoc": {
+          "line": 162,
+          "column": 5,
+          "position": 1301
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 13,
+      "fragment": ",\n                    'parts': [{'text': content}]\n                })\n            elif isinstance(content, list):\n                parts = []\n                for item in content:\n                    if isinstance(item, str):\n                        parts.append({'text': item})\n                    elif isinstance(item, dict) and 'type' in item:\n                        if item['type'] == 'text':\n                            parts.append({'text': item.get('text', '')})\n                        elif item['type'] == 'image_url':\n                            # Обработка изображений",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-CrewAI/tools/gopiai_integration/gemini_direct_client.py",
+        "start": 117,
+        "end": 129,
+        "startLoc": {
+          "line": 117,
+          "column": 12,
+          "position": 819
+        },
+        "endLoc": {
+          "line": 129,
+          "column": 24,
+          "position": 961
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py",
+        "start": 381,
+        "end": 391,
+        "startLoc": {
+          "line": 381,
+          "column": 5,
+          "position": 2902
+        },
+        "endLoc": {
+          "line": 391,
+          "column": 4,
+          "position": 3041
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 12,
+      "fragment": "mime, data = url.split(',', 1)\n                                mime = mime.split(';')[0].split(':')[1]\n                                parts.append({\n                                    'inline_data': {\n                                        'mime_type': mime,\n                                        'data': data\n                                    }\n                                })\n                \n                if parts:\n                    gemini_messages.append({\n                        'role': gemini_role",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-CrewAI/tools/gopiai_integration/gemini_direct_client.py",
+        "start": 132,
+        "end": 143,
+        "startLoc": {
+          "line": 132,
+          "column": 33,
+          "position": 994
+        },
+        "endLoc": {
+          "line": 143,
+          "column": 12,
+          "position": 1086
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-CrewAI/tools/gopiai_integration/smart_delegator.py",
+        "start": 393,
+        "end": 397,
+        "startLoc": {
+          "line": 393,
+          "column": 33,
+          "position": 3069
+        },
+        "endLoc": {
+          "line": 397,
+          "column": 5,
+          "position": 3148
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 33,
+      "fragment": ".search(\n            query=query,\n            search_depth=self.search_depth,\n            topic=self.topic,\n            time_range=self.time_range,\n            days=self.days,\n            max_results=self.max_results,\n            include_domains=self.include_domains,\n            exclude_domains=self.exclude_domains,\n            include_answer=self.include_answer,\n            include_raw_content=self.include_raw_content,\n            include_images=self.include_images,\n            timeout=self.timeout,\n        )\n\n        if (\n            isinstance(raw_results, dict)\n            and \"results\" in raw_results\n            and isinstance(raw_results[\"results\"], list)\n        ):\n            for item in raw_results[\"results\"]:\n                if (\n                    isinstance(item, dict)\n                    and \"content\" in item\n                    and isinstance(item[\"content\"], str)\n                ):\n                    if len(item[\"content\"]) > self.max_content_length_per_result:\n                        item[\"content\"] = (\n                            item[\"content\"][: self.max_content_length_per_result]\n                            + \"...\"\n                        )\n\n        return json.dumps(raw_results, indent=2)",
+      "tokens": 0,
+      "firstFile": {
+        "name": "GopiAI-CrewAI/tools/crewai_toolkit/tools/tavily_search_tool/tavily_search_tool.py",
+        "start": 217,
+        "end": 249,
+        "startLoc": {
+          "line": 217,
+          "column": 13,
+          "position": 1324
+        },
+        "endLoc": {
+          "line": 249,
+          "column": 2,
+          "position": 1584
+        }
+      },
+      "secondFile": {
+        "name": "GopiAI-CrewAI/tools/crewai_toolkit/tools/tavily_search_tool/tavily_search_tool.py",
+        "start": 164,
+        "end": 196,
+        "startLoc": {
+          "line": 164,
+          "column": 7,
+          "position": 997
+        },
+        "endLoc": {
+          "line": 196,
+          "column": 2,
+          "position": 1257
+        }
+      }
+    }
+  ],
+  "filename": "/home/amritagopi/.nvm/versions/node/v20.19.4/lib/node_modules/jscpd/node_modules/@jscpd/html-reporter/dist/templates/main.pug"
+}

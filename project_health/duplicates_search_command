@@ -1,0 +1,2 @@
+git ls-files '*.py' -z | xargs -0 jscpd --reporters html --output project_health/reports/jscpd-report
+
