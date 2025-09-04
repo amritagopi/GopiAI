@@ -228,7 +228,7 @@ class TestServiceErrorHandling:
         invalid_task_id = str(uuid.uuid4())
         
         response = requests.get(
-            f"http://localhost:5051/api/task/{invalid_task_id}",
+            f"http://localhost:5051/api/tasks/{invalid_task_id}",
             timeout=10
         )
         

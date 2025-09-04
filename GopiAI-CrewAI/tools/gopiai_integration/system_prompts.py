@@ -9,12 +9,17 @@ import os
 def load_personality():
     """Загружает файл с личностью ассистента"""
     try:
-        personality_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'Personality')
+        # Путь к файлу Personality в той же папке gopiai_integration
+        personality_path = os.path.join(os.path.dirname(__file__), 'Personality')
         if os.path.exists(personality_path):
             with open(personality_path, 'r', encoding='utf-8') as f:
-                return f.read()
+                content = f.read()
+                print(f"✅ Загружен файл Personality из: {personality_path}")
+                return content
+        else:
+            print(f"❌ Файл Personality не найден: {personality_path}")
     except Exception as e:
-        print(f"Ошибка загрузки файла Personality: {e}")
+        print(f"❌ Ошибка загрузки файла Personality: {e}")
     
     # Fallback базовая личность
     return """

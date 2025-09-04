@@ -116,16 +116,216 @@ CORS(app)
 # Глобальное хранилище задач
 tasks_storage = {}
 
+# Определяем инструменты для работы с файловой системой
+from langchain_core.tools import tool
+import subprocess
+import os as os_module
+
+@tool(description="Читает содержимое файла или папки")
+def read_file_or_directory(path: str) -> str:
+    """Читает содержимое файла или показывает содержимое директории."""
+    try:
+        if os_module.path.isfile(path):
+            # Это файл - читаем его содержимое
+            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+                return f"Содержимое файла {path}:\n{content}"
+        elif os_module.path.isdir(path):
+            # Это директория - показываем список файлов
+            items = os_module.listdir(path)
+            items_list = '\n'.join(f"{'📁' if os_module.path.isdir(os_module.path.join(path, item)) else '📄'} {item}" for item in sorted(items))
+            return f"Содержимое папки {path}:\n{items_list}"
+        else:
+            return f"Путь {path} не существует или недоступен"
+    except Exception as e:
+        return f"Ошибка при чтении {path}: {str(e)}"
+
+@tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
+def execute_terminal_command(command: str) -> str:
+    """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
+    import re
+    from enum import Enum
+    
+    class RiskLevel(Enum):
+        SAFE = "safe"
+        LOW = "low"
+        MEDIUM = "medium"
+        HIGH = "high"
+        CRITICAL = "critical"
+    
+    def assess_command_risk(command: str) -> RiskLevel:
+        """Оценивает риск выполнения команды"""
+        command_lower = command.lower().strip()
+        
+        # Критический риск - команды, которые могут нанести серьезный ущерб
+        critical_patterns = [
+            r'rm\s+.*-rf.*/',  # rm -rf с путями
+            r'format\s+[cd]:',  # format диска
+            r'del\s+/[fsq]',  # del с флагами
+            r'shutdown',  # выключение
+            r'reboot',  # перезагрузка
+            r'init\s+[06]',  # init 0/6
+            r'fdisk',  # работа с разделами
+            r'mkfs',  # форматирование
+            r'dd\s+.*=/dev/',  # dd на устройства
+        ]
+        
+        # Высокий риск
+        high_patterns = [
+            r'sudo\s+rm',  # sudo rm
+            r'chmod\s+.*777',  # chmod 777
+            r'chown\s+.*root',  # chown root
+            r'rm\s+.*\*',  # rm с wildcard
+            r'kill\s+-9',  # kill -9
+            r'pkill',  # pkill
+            r'killall',  # killall
+            r'crontab\s+-r',  # удаление crontab
+        ]
+        
+        # Средний риск
+        medium_patterns = [
+            r'sudo',  # любые sudo команды
+            r'pip\s+install',  # установка пакетов
+            r'apt\s+install',  # apt install
+            r'wget',  # скачивание файлов
+            r'curl.*-o',  # curl с сохранением
+            r'git\s+clone',  # клонирование репозиториев
+            r'python.*\.py',  # выполнение python скриптов
+            r'bash.*\.sh',  # выполнение bash скриптов
+            r'chmod',  # изменение прав
+            r'chown',  # изменение владельца  
+        ]
+        
+        # Низкий риск
+        low_patterns = [
+            r'cat\s+/etc/',  # чтение системных файлов
+            r'less\s+/etc/',
+            r'more\s+/etc/',
+            r'tail\s+-f',  # tail -f
+            r'head.*-n\s*\d+',  # head с большими числами
+        ]
+        
+        # Безопасные команды (явно разрешенные)
+        safe_patterns = [
+            r'^ls(\s|$)',  # ls
+            r'^pwd(\s|$)',  # pwd  
+            r'^date(\s|$)',  # date
+            r'^whoami(\s|$)',  # whoami
+            r'^id(\s|$)',  # id
+            r'^uname(\s|$)',  # uname
+            r'^which\s+\w+$',  # which command
+            r'^echo\s+',  # echo
+            r'^cat\s+[^/]',  # cat файлов (не системных)
+            r'^head\s+[^/]',  # head файлов
+            r'^tail\s+[^/]',  # tail файлов
+            r'^wc\s+',  # wc
+            r'^grep\s+',  # grep
+            r'^find\s+.*-name',  # find по имени
+            r'^locate\s+',  # locate
+        ]
+        
+        # Проверяем от самого опасного к безопасному
+        for pattern in critical_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.CRITICAL
+                
+        for pattern in high_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.HIGH
+                
+        for pattern in medium_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.MEDIUM
+                
+        for pattern in low_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.LOW
+                
+        for pattern in safe_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.SAFE
+        
+        # Если команда не попала ни под один паттерн - средний риск
+        return RiskLevel.MEDIUM
+    
+    def ask_user_permission(command: str, risk_level: RiskLevel) -> bool:
+        """Запрашивает разрешение пользователя на выполнение команды"""
+        if risk_level == RiskLevel.SAFE:
+            return True
+            
+        # В серверном контексте автоматически разрешаем безопасные и низкорисковые команды
+        # а для остальных возвращаем False с пояснением
+        risk_messages = {
+            RiskLevel.LOW: "🟡 Низкий риск",
+            RiskLevel.MEDIUM: "🟠 Средний риск", 
+            RiskLevel.HIGH: "🔴 Высокий риск",
+            RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИЙ РИСК"
+        }
+        
+        # В серверном режиме не можем запрашивать интерактивное подтверждение
+        # поэтому блокируем все команды выше низкого риска
+        if risk_level in [RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL]:
+            return False
+        
+        return True  # Разрешаем только SAFE и LOW
+    
+    try:
+        if not command or not command.strip():
+            return "Пустая команда"
+        
+        command = command.strip()
+        
+        # Оцениваем риск команды
+        risk_level = assess_command_risk(command)
+        
+        # Запрашиваем разрешение у пользователя для опасных команд
+        if not ask_user_permission(command, risk_level):
+            risk_msg = {
+                RiskLevel.MEDIUM: "🟠 Команда среднего риска заблокирована",
+                RiskLevel.HIGH: "🔴 Команда высокого риска заблокирована", 
+                RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИ ОПАСНАЯ команда заблокирована"
+            }
+            return f"{risk_msg.get(risk_level, 'Команда заблокирована')}: '{command}'. Для безопасности сервера выполнение таких команд запрещено."
+        
+        # Выполняем команду
+        result = subprocess.run(
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            cwd=os_module.getcwd()
+        )
+        
+        stdout = result.stdout or ""
+        stderr = result.stderr or ""
+        
+        if result.returncode == 0:
+            if stdout:
+                return f"Команда: {command}\nВывод:\n{stdout}"
+            else:
+                return f"Команда: {command}\nВыполнена успешно (без вывода)"
+        else:
+            return f"Ошибка выполнения команды '{command}' (код: {result.returncode}):\n{stderr}"
+            
+    except subprocess.TimeoutExpired:
+        return f"Таймаут при выполнении команды '{command}'"
+    except Exception as e:
+        return f"Ошибка выполнения команды '{command}': {str(e)}"
+
 # Инициализация Gemini LLM
 try:
     logger.info("🤖 Инициализация Gemini LLM...")
-    gemini_llm = ChatGoogleGenerativeAI(
-        model="gemini-pro",
+    base_llm = ChatGoogleGenerativeAI(
+        model="gemini-2.0-flash",
         google_api_key=os.getenv('GEMINI_API_KEY'),
         temperature=0.7,
         convert_system_message_to_human=True
     )
-    logger.info("✅ Gemini LLM успешно инициализирован")
+    
+    # Привязываем инструменты к модели
+    gemini_llm = base_llm.bind_tools([read_file_or_directory, execute_terminal_command])
+    logger.info("✅ Gemini LLM с инструментами успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Gemini LLM: {e}")
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
@@ -497,7 +697,7 @@ def process_message():
         return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
 
 def process_message_async(task_id, message):
-    """Асинхронная обработка сообщения"""
+    """Асинхронная обработка сообщения с использованием Gemini LLM"""
     try:
         task = tasks_storage.get(task_id)
         if not task:
@@ -508,15 +708,80 @@ def process_message_async(task_id, message):
         
         logger.info(f"🔄 Начата обработка задачи {task_id}")
         
-        # Имитация обработки с простым ответом
-        import time
-        time.sleep(2)  # Имитация обработки
+        # Обращение к Gemini LLM для получения реального ответа
+        logger.info(f"🤖 Отправка сообщения в Gemini: '{message[:50]}{'...' if len(message) > 50 else ''}'")
         
-        response = f"Получено сообщение: '{message}'. Это базовый ответ от сервера."
+        try:
+            # Используем инициализированный gemini_llm для обработки сообщения
+            from langchain_core.messages import HumanMessage, ToolMessage, SystemMessage
+            from tools.gopiai_integration.system_prompts import get_default_prompt
+            
+            # Добавляем системный промпт с личностью ассистента
+            system_prompt = get_default_prompt()
+            messages = [
+                SystemMessage(content=system_prompt),
+                HumanMessage(content=message)
+            ]
+            response = gemini_llm.invoke(messages)
+            
+            logger.info(f"📊 Ответ получен. Tool calls: {len(response.tool_calls) if response.tool_calls else 0}")
+            
+            # Если есть tool calls, выполняем их
+            if response.tool_calls:
+                logger.info(f"🔧 Выполнение {len(response.tool_calls)} tool calls...")
+                
+                # Добавляем ответ модели в историю
+                messages.append(response)
+                
+                # Выполняем каждый tool call
+                for tool_call in response.tool_calls:
+                    tool_name = tool_call["name"]
+                    tool_args = tool_call["args"]
+                    tool_id = tool_call["id"]
+                    
+                    logger.info(f"🔧 Выполняем {tool_name} с аргументами: {tool_args}")
+                    
+                    # Выполняем функцию в зависимости от её имени
+                    try:
+                        if tool_name == "read_file_or_directory":
+                            tool_result = read_file_or_directory.invoke(tool_args)
+                        elif tool_name == "execute_terminal_command":
+                            tool_result = execute_terminal_command.invoke(tool_args)
+                        else:
+                            tool_result = f"Неизвестный инструмент: {tool_name}"
+                        
+                        logger.info(f"✅ Результат {tool_name}: {tool_result[:100]}{'...' if len(tool_result) > 100 else ''}")
+                        
+                        # Добавляем результат выполнения инструмента
+                        messages.append(ToolMessage(
+                            content=tool_result,
+                            tool_call_id=tool_id
+                        ))
+                        
+                    except Exception as tool_error:
+                        logger.error(f"❌ Ошибка выполнения {tool_name}: {tool_error}")
+                        messages.append(ToolMessage(
+                            content=f"Ошибка при выполнении {tool_name}: {str(tool_error)}",
+                            tool_call_id=tool_id
+                        ))
+                
+                # Получаем финальный ответ от модели с учетом результатов инструментов
+                final_response = gemini_llm.invoke(messages)
+                result_text = final_response.content
+                
+            else:
+                # Нет tool calls - используем обычный ответ
+                result_text = response.content
+                
+            logger.info(f"✅ Получен финальный ответ от Gemini: '{result_text[:100]}{'...' if len(result_text) > 100 else ''}'")
+            
+        except Exception as llm_error:
+            logger.error(f"❌ Ошибка при обращении к Gemini LLM: {llm_error}")
+            result_text = f"Извините, произошла ошибка при обработке вашего сообщения: {str(llm_error)}"
         
         task['status'] = TaskStatus.COMPLETED
         task['progress'] = 100
-        task['result'] = response
+        task['result'] = result_text
         task['completed_at'] = time.time()
         
         logger.info(f"✅ Задача {task_id} завершена успешно")

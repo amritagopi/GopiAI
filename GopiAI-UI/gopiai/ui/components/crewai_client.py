@@ -596,7 +596,7 @@ class CrewAIClient:
             return {"error": "Сервер CrewAI недоступен", "status": "error"}
             
         try:
-            url = f"{self.base_url}/api/task/{task_id}"
+            url = f"{self.base_url}/api/tasks/{task_id}"
             logger.debug(f"[TASK-CHECK] Отправка GET запроса на: {url}")
             
             response = requests.get(url, timeout=10)
