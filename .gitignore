@@ -214,8 +214,3 @@ GopiAI-CrewAI/memory/chats.json
 .kilocode/mcp.json
 
 
-rag_memory_system/
-test_infrastructure/
-tests/
-*test*/
-*test*
