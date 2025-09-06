@@ -4,8 +4,6 @@
 Извлечен из GopiAI-Widgets/gopiai/widgets/core/icon_adapter.py
 """
 
-from typing import Optional
-
 # Карта соответствия старых имен иконок новым именам Lucide
 ICON_NAME_MAPPING = {
     # Общие иконки

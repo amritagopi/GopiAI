@@ -5,20 +5,24 @@ import time
 import os
 import html
 import re
-from typing import Optional, cast
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, 
-                               QFileDialog, QSizePolicy, QMessageBox, QListWidget, QListWidgetItem, QTabWidget,
-                               QComboBox, QLabel)
-from PySide6.QtCore import Qt, Slot, QPoint, QTimer
-from PySide6.QtGui import QResizeEvent, QTextCursor, QDropEvent, QDragEnterEvent, QTextCharFormat, QColor, QTextOption
+from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QFileDialog, QSizePolicy, QListWidget, QListWidgetItem, QTabWidget
+)
+from PySide6.QtCore import Qt, Slot, QTimer
+from PySide6.QtGui import QResizeEvent, QTextCursor, QTextOption
 import uuid
 from datetime import datetime
 from PySide6.QtGui import QDragEnterEvent, QDropEvent, QImageWriter
-from PySide6.QtCore import QUrl, QMimeData
 import tempfile
 from PySide6.QtWidgets import QApplication
 from PySide6.QtWidgets import QMenu
 from PySide6.QtWidgets import QMessageBox
+
+# --- Импорты наших новых модулей-обработчиков ---
+from .crewai_client import CrewAIClient
+from ..memory import get_memory_manager
+from .chat_async_handler import ChatAsyncHandler
+from gopiai.ui.utils.icon_helpers import create_icon_button
+from .enhanced_browser_widget import EnhancedBrowserWidget
 
 # Импорт виджетов моделей
 try:
@@ -31,15 +35,6 @@ except ImportError as e:
     ModelSelectorWidget = None
 
 logger = logging.getLogger(__name__)
-
-# --- Импорты наших новых модулей-обработчиков ---
-from .crewai_client import CrewAIClient
-from ..memory import get_memory_manager
-from .chat_async_handler import ChatAsyncHandler
-# from .optimized_chat_widget import OptimizedChatWidget  # Модуль не найден, закомментировано
-from .terminal_widget import TerminalWidget
-from gopiai.ui.utils.icon_helpers import create_icon_button
-from .enhanced_browser_widget import EnhancedBrowserWidget
 
 class ChatWidget(QWidget):
     
@@ -196,7 +191,7 @@ class ChatWidget(QWidget):
             self.tab_widget.addTab(self.models_tab, "Модели")
             
             # Подключаем сигналы
-            self.models_tab.provider_changed.connect(self._on_provider_changed)
+            # У нас только Gemini провайдер, поэтому provider_changed не нужен
             self.models_tab.model_changed.connect(self._on_model_changed)
             
             logger.info("✅ Вкладка моделей с переключателем инициализирована")
@@ -642,7 +637,7 @@ class ChatWidget(QWidget):
         text = re.sub(r'^\d+\. (.+)$', r'<ol><li>\1</li></ol>', text, flags=re.MULTILINE)
         
         # Ссылки
-        text = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'<a href="\2">\1</a>', text)
+        text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
         
         # Горизонтальная линия
         text = re.sub(r'^---$', r'<hr>', text, flags=re.MULTILINE)
@@ -892,13 +887,13 @@ class ChatWidget(QWidget):
         """Расширенная очистка от лишних символов и меток"""
         import re
         # Удаляем JSON артефакты
-        match = re.search(r"'response':\s*['\"](.*?)['\"]", message, re.DOTALL)
+        match = re.search(r"'response':\s*['\"](.+?)['\"]", message, re.DOTALL)
         if match:
             message = match.group(1).strip()
         
         # Удаляем системные префиксы/суффиксы
-        message = re.sub(r"^\{.*'response':", '', message, flags=re.DOTALL)
-        message = re.sub(r"\}.*$", '', message, flags=re.DOTALL)
+        message = re.sub(r"^\{{.*'response':", '', message, flags=re.DOTALL)
+        message = re.sub(r"\}}.*$", '', message, flags=re.DOTALL)
         message = re.sub(r"analysis\.time: [\d.]+, 'complexity': \d+, 'requires\.crewai': (True|False), 'type': '[^']+', 'processed\.with_crewai': (True|False),", '', message)
         
         # Удаляем лишние символы: кавычки, скобки, даты, тесты

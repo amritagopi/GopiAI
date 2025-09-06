@@ -4,12 +4,9 @@ Test Documentation Validation Script
 
 This script validates that all test documentation is complete, accurate, and up-to-date.
 """
-
-import os
 import re
 import sys
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
 import subprocess
 import json
 

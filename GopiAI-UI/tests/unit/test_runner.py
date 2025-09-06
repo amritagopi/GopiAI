@@ -8,10 +8,9 @@ Provides organized test execution, reporting, and error handling.
 
 import pytest
 import sys
-import os
 from pathlib import Path
 import logging
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 # Configure logging
 logging.basicConfig(

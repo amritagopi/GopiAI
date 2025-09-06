@@ -12,7 +12,7 @@ and the existing test infrastructure, including:
 import json
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List
 from dataclasses import dataclass
 
 from known_issues_manager import KnownIssuesManager, IssueStatus, IssuePriority

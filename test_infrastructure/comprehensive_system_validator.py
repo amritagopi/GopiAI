@@ -10,20 +10,13 @@ This module implements Task 18 of the comprehensive testing system:
 
 Requirements: 5.1, 6.4
 """
-
-import os
-import sys
 import json
 import time
-import threading
-import statistics
-import subprocess
 import sqlite3
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Any
 from dataclasses import dataclass, asdict
-from datetime import datetime, timedelta
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 import logging
 
 try:

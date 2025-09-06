@@ -4,14 +4,12 @@
 """
 
 import logging
-import json
-from typing import Dict, List, Optional
+from typing import Dict, List
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QGroupBox,
-    QPushButton, QLabel, QLineEdit, QCheckBox, QMessageBox,
-    QInputDialog, QFrame, QSizePolicy
+    QLabel, QInputDialog
 )
-from PySide6.QtCore import Qt, Signal, QTimer
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QFont
 import requests
 from gopiai.ui.utils.icon_helpers import create_icon_button, get_icon

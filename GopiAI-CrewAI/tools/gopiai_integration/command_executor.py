@@ -5,10 +5,9 @@ Command Executor - исполнитель команд из ответов Gemin
 
 import logging
 import re
-import json
 import subprocess
 import os
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Dict, Any, List, Tuple
 from dataclasses import dataclass
 from enum import Enum
 

@@ -1,5 +1,4 @@
 
-import os
 from pathlib import Path
 
 def get_crewai_server_port():

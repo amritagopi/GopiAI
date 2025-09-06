@@ -10,8 +10,7 @@ from llm_rotation_config import (
     get_models_by_intelligence,
     update_model_deprecated_status,
     get_model_usage_stats,
-    select_llm_model_safe,
-    rate_limit_monitor
+    select_llm_model_safe
 )
 
 def demo_new_features():

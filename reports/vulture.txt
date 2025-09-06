@@ -1,0 +1,2032 @@
+Vulture report for project: /home/amritagopi/GopiAI
+Excluded: .venv, GopiAI-CrewAI/venv
+Run at: 2025-09-06T12:34:55+05:30
+
+GopiAI/GopiAI-CrewAI/test_direct_github.py:13: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/test_working_github.py:13: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/crewai_api_server.py:22: trailing comma not allowed without surrounding parentheses at "AIMessage, HumanMessage, SystemMessage,"
+GopiAI/GopiAI-CrewAI/main.py:172: invalid syntax at "print("✅ Создано 4 агента с нативными инструментами CrewAI"    return coordinator, researcher, writer, coder"
+GopiAI/GopiAI-CrewAI/test_github_alternative.py:13: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/test_official_crewai_tools.py:15: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/test_github_tool.py:13: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/test_next_tools.py:15: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/scripts/update_imports.py:47: expected an indented block after 'if' statement on line 45 at "path_manager = setup_project_paths()"
+GopiAI/tests/test_known_issues.py:11: expected '(' at "def mark_known_issues_GopiAI-CrewAI_tools_crewai_toolkit_tools_llamaindex_tool_llamaindex_tool():"
+GopiAI/tests/test_known_issues_system.py:20: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/test_infrastructure/pytest_markers.py:11: expected '(' at "def mark_known_issues_GopiAI-CrewAI_tools_gopiai_integration_tools_config():"
+GopiAI/test_infrastructure/system_validator.py:30: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/test_infrastructure/test_validation_optimizer.py:28: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/test_infrastructure/test_system_validation.py:19: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/test_infrastructure/test_task_18_validation.py:21: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/tests/integration/test_runner.py:25: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/GopiAI-CrewAI/tests/integration/test_setup_verification.py:17: unexpected indent at "path_manager = setup_project_paths()"
+GopiAI/.venv/lib/python3.12/site-packages/tika/pdf.py:19: invalid syntax at "import .tika.parser"
+/home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/pysbd/segmenter.py:66: SyntaxWarning: invalid escape sequence '\s'
+  for match in re.finditer('{0}\s*'.format(re.escape(sent)), self.original_text):
+/home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/ttstokenizer/g2p.py:158: SyntaxWarning: invalid escape sequence '\-'
+  text = re.sub("[^ a-z'.,?!\-]", "", text)
+GopiAI/.venv/lib/python3.12/site-packages/smart_open/azure.py:213: expected an indented block after function definition on line 124 at "# type: azure.storage.blob.BlobClient"
+Traceback (most recent call last):
+  File "/home/amritagopi/venvs/dev-tools/bin/vulture", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 678, in main
+    vulture.scavenge(config["paths"], exclude=config["exclude"])
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 299, in scavenge
+    self.scan(module_string, filename=module)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 261, in scan
+    self.visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 661, in generic_visit
+    self.visit(item)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 661, in generic_visit
+    self.visit(item)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 661, in generic_visit
+    self.visit(item)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 663, in generic_visit
+    self.visit(value)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 629, in visit
+    self.generic_visit(node)
+  File "/home/amritagopi/venvs/dev-tools/lib/python3.12/site-packages/vulture/core.py", line 657, in generic_visit
+    for _, value in ast.iter_fields(node):
+                    ^^^^^^^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded

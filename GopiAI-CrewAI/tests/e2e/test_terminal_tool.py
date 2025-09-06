@@ -4,13 +4,13 @@ import pathlib
 import pytest
 
 from path_manager import setup_project_paths
+from tools.gopiai_integration.terminal_tool import TerminalTool
+
 # Ensure project root on path
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     # Инициализируем пути проекта
     path_manager = setup_project_paths()
-
-from tools.gopiai_integration.terminal_tool import TerminalTool
 
 
 def test_terminal_tool_pwd_unsafe_mode(tmp_path, monkeypatch):

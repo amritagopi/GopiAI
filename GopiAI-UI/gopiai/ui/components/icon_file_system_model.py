@@ -10,16 +10,14 @@ GopiAI Universal Icon Manager - Универсальный менеджер ик
 Автор: Crazy Coder  
 Версия: 1.0.0
 """
-
-import os
 import sys
 from pathlib import Path
-from typing import Dict, Optional, Union, List
+from typing import Optional, Union
 import logging
 
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon, QPixmap, QPainter, QColor, QPen, QFont
+from PySide6.QtGui import QIcon, QPixmap, QColor
 from PySide6.QtGui import QPainter
 
 # Константы

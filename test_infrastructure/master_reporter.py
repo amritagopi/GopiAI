@@ -4,7 +4,6 @@ Coordinates all reporting components and generates comprehensive reports.
 """
 
 import json
-import os
 import subprocess
 import sys
 from datetime import datetime
@@ -12,7 +11,6 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 import concurrent.futures
-import threading
 
 # Import our reporting components
 from .coverage_reporter import CoverageReporter

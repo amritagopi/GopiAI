@@ -13,16 +13,14 @@ test failures that are expected due to known issues.
 """
 
 import json
-import os
 import re
 import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
 import sqlite3
-import pytest
 
 
 class IssueStatus(Enum):

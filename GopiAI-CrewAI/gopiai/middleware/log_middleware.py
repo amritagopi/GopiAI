@@ -1,7 +1,6 @@
 import time
-from typing import Callable
 
-from fastapi import Request, Response
+from fastapi import Request
 from starlette.types import ASGIApp
 
 from gopiai.logging.json_logger import jlog, ensure_request_id

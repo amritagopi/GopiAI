@@ -1,35 +1,26 @@
-import urllib.parse
-import re
-
 """
 🔌 CrewAI API Client
 Клиент для интеграции с CrewAI через REST API
 """
 
-import requests
-import requests.exceptions
-import threading
-import time
+import base64
 import json
 import logging
-import logging.handlers
 import os
+import re
 import sys
+import time
 from pathlib import Path
-import base64
-from typing import Dict, Any, List, Optional, Union
+from typing import Any, Dict, Optional, Union
+
+import requests
+import requests.exceptions
+
+from gopiai.ui.utils.network import get_crewai_server_base_url
+from ..memory.manager import MemoryManager
 
 # Настройка логирования для CrewAI клиента
 logger = logging.getLogger(__name__)
-
-# Импортируем менеджер памяти для работы с историей чата
-from ..memory.manager import MemoryManager
-
-# Добавляем путь к модулю emotional_classifier
-import sys
-import os
-print('Current working directory:', os.getcwd())
-print('sys.path:', sys.path)
 
 # --- Статические пути проекта (path_manager больше не используется) ---
 # Используем статические пути относительно структуры проекта
@@ -81,7 +72,6 @@ def get_tools_instruction_manager():
 
 # Попытаемся загрузить реальную систему динамических инструкций  
 try:
-    import sys
     crewai_path = str(CREWAI_DIR)
     if os.path.exists(crewai_path):
         sys.path.insert(0, crewai_path)
@@ -89,7 +79,7 @@ try:
         # Проверяем существование файла
         tools_manager_path = os.path.join(crewai_path, 'tools', 'dynamic_instructions_system', 'tools_instruction_manager.py')
         if os.path.exists(tools_manager_path):
-            from tools.dynamic_instructions_system.tools_instruction_manager import ToolsInstructionManager, get_tools_instruction_manager
+            from tools.dynamic_instructions_system.tools_instruction_manager import get_tools_instruction_manager
             TOOLS_INSTRUCTION_MANAGER_AVAILABLE = True
             logger.info("[INIT] ✅ Система динамических инструкций включена успешно")
         else:
@@ -154,11 +144,6 @@ except Exception as e:
     logger.warning(f"⚠️ Не удалось загрузить spaCy или языковые модели: {e}")
     nlp_ru = None
     nlp_en = None
-
-# === РЕЗОЛЮЦИЯ ДИНАМИЧЕСКОГО ПОРТА ДЛЯ CrewAI API ===
-
-
-from gopiai.ui.utils.network import get_crewai_server_base_url
 
 class CrewAIClient:
     """
@@ -387,7 +372,7 @@ class CrewAIClient:
                 
                 # Добавляем историю сообщений в переданные данные
                 message['metadata']['chat_history'] = chat_history
-                logger.debug(f"[REQUEST] История сообщений добавлена в запрос")
+                logger.debug("[REQUEST] История сообщений добавлена в запрос")
             else:
                 logger.debug(f"[REQUEST] История сообщений для сессии {session_id} не найдена")
         except Exception as e:
@@ -395,7 +380,7 @@ class CrewAIClient:
             # Устанавливаем пустую историю в случае ошибки, чтобы не падать
             message['metadata']['chat_history'] = []
             
-        logger.debug(f"[REQUEST] Продолжаем с отправкой запроса к CrewAI API")
+        logger.debug("[REQUEST] Продолжаем с отправкой запроса к CrewAI API")
             
         # Process attachments if present
         attachments = message.get('metadata', {}).get('attachments', [])
@@ -489,7 +474,7 @@ class CrewAIClient:
             message['metadata']['system_prompt'] = system_prompt
             logger.debug("[REQUEST] Добавлен стандартный системный промпт в metadata")
             
-        logger.debug(f"[REQUEST] Подготовка к отправке запроса в CrewAI API")
+        logger.debug("[REQUEST] Подготовка к отправке запроса в CrewAI API")
         
         max_retries = 5
         retry_delay = 5  # seconds
@@ -767,8 +752,7 @@ class CrewAIClient:
                 logger.error("[DYNAMIC-TOOLS] ❌ Не удалось получить экземпляр tools_instruction_manager")
                 return {}
             
-            # Получаем список доступных инструментов
-            tools_summary = manager.get_tools_summary()
+            
             
             # Предварительная обработка сообщения для определения потенциальных инструментов
             message_lower = message_text.lower()

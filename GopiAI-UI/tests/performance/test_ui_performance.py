@@ -6,7 +6,6 @@ Tests UI responsiveness and performance under various conditions.
 """
 
 import pytest
-import time
 
 
 class TestUIPerformance:

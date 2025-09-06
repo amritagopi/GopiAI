@@ -19,10 +19,9 @@ File Explorer Component для GopiAI Standalone Interface
 
 import os
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QTreeView, QHBoxLayout, 
-QPushButton, QLineEdit, QHeaderView, QSizePolicy, QFileSystemModel, QTabWidget)
-from PySide6.QtCore import QDir, Signal, Qt, QModelIndex
-from PySide6.QtGui import QIcon
-from .file_type_detector import FileTypeDetector
+QPushButton, QLineEdit, QSizePolicy, QTabWidget
+)
+from PySide6.QtCore import QDir, Signal
 from .custom_file_system_model import CustomFileSystemModel
 
 # Виджеты моделей перенесены в ChatWidget

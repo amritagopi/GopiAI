@@ -1,5 +1,4 @@
 from __future__ import annotations
-import os
 
 # Optional imports with graceful degradation for type checkers and runtime
 try:

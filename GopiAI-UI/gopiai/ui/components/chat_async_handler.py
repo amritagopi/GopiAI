@@ -1,12 +1,10 @@
 # --- START OF FILE chat_async_handler.py (UNIFIED VERSION) ---
 
 import logging
-import logging.handlers
 import os
 import threading
 import time
-import json
-from typing import Dict, Any, Optional, TypedDict, Union, cast
+from typing import Dict, Any, Optional, cast
 from PySide6.QtCore import QObject, Signal, QTimer, Slot
 
 # Настройка логирования для ChatAsyncHandler

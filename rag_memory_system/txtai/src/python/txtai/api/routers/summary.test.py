@@ -2,8 +2,6 @@ import unittest
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
-
-from .. import application
 from ..api import summary
 
 

@@ -20,7 +20,7 @@ import os
 import json
 import traceback
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Optional, Dict, Any
 
 # Defensive: ensure output is line-buffered
 sys.stdout.reconfigure(encoding="utf-8", newline="\n")

@@ -6,8 +6,8 @@
 import json
 import os
 import logging
-from typing import Dict, List, Optional, Tuple
-from PySide6.QtWidgets import QPushButton, QLabel, QFrame, QVBoxLayout, QScrollArea, QWidget
+from typing import List, Optional, Tuple
+from PySide6.QtWidgets import QPushButton, QLabel, QFrame, QVBoxLayout
 from PySide6.QtCore import Qt, Signal, QObject
 from PySide6.QtGui import QCursor
 

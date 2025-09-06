@@ -2,9 +2,6 @@
 """
 Тестовый crew для проверки интеграции CrewAI с GopiAI
 """
-
-import os
-import sys
 from typing import Dict, Any
 from pathlib import Path
 
@@ -108,7 +105,7 @@ class TestCrew:
         crew = self.create_crew(agents, tasks)
         result = crew.kickoff(inputs=inputs)
         
-        print(f"✅ Crew завершил работу!")
+        print("✅ Crew завершил работу!")
         return str(result)
 
 if __name__ == "__main__":

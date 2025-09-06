@@ -1,0 +1,29 @@
+Unimport report (safe find) for project: /home/amritagopi/GopiAI
+Excluded patterns: .venv, GopiAI-CrewAI/venv, .git, __pycache__
+Run at: 2025-09-06T12:37:28+05:30
+
+unexpected indent (<unknown>, line 13) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_direct_github.py
+unexpected indent (<unknown>, line 13) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_working_github.py
+trailing comma not allowed without surrounding parentheses (<unknown>, line 22) at /home/amritagopi/GopiAI/GopiAI-CrewAI/crewai_api_server.py
+invalid syntax (<unknown>, line 172) at /home/amritagopi/GopiAI/GopiAI-CrewAI/main.py
+unexpected indent (<unknown>, line 13) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_github_alternative.py
+unexpected indent (<unknown>, line 25) at /home/amritagopi/GopiAI/GopiAI-CrewAI/tests/integration/test_runner.py
+unexpected indent (<unknown>, line 17) at /home/amritagopi/GopiAI/GopiAI-CrewAI/tests/integration/test_setup_verification.py
+unexpected indent (<unknown>, line 15) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_official_crewai_tools.py
+unexpected indent (<unknown>, line 13) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_github_tool.py
+unexpected indent (<unknown>, line 15) at /home/amritagopi/GopiAI/GopiAI-CrewAI/test_next_tools.py
+expected an indented block after 'if' statement on line 45 (<unknown>, line 47) at /home/amritagopi/GopiAI/scripts/update_imports.py
+unexpected indent (<unknown>, line 16) at /home/amritagopi/GopiAI/GopiAI-UI/tests/e2e/test_user_scenarios.py
+Refactoring '/home/amritagopi/GopiAI/tests/memory/test_txtai_integration.py'
+unexpected indent (<unknown>, line 24) at /home/amritagopi/GopiAI/tests/memory/test_search_performance.py
+unexpected indent (<unknown>, line 23) at /home/amritagopi/GopiAI/tests/memory/test_memory_system.py
+unexpected indent (<unknown>, line 22) at /home/amritagopi/GopiAI/tests/memory/test_data_migration.py
+unexpected indent (<unknown>, line 23) at /home/amritagopi/GopiAI/tests/memory/test_conversation_storage.py
+expected '(' (<unknown>, line 11) at /home/amritagopi/GopiAI/tests/test_known_issues.py
+unexpected indent (<unknown>, line 20) at /home/amritagopi/GopiAI/tests/e2e/test_runner_e2e.py
+unexpected indent (<unknown>, line 20) at /home/amritagopi/GopiAI/tests/test_known_issues_system.py
+expected '(' (<unknown>, line 11) at /home/amritagopi/GopiAI/test_infrastructure/pytest_markers.py
+unexpected indent (<unknown>, line 30) at /home/amritagopi/GopiAI/test_infrastructure/system_validator.py
+unexpected indent (<unknown>, line 28) at /home/amritagopi/GopiAI/test_infrastructure/test_validation_optimizer.py
+unexpected indent (<unknown>, line 19) at /home/amritagopi/GopiAI/test_infrastructure/test_system_validation.py
+unexpected indent (<unknown>, line 21) at /home/amritagopi/GopiAI/test_infrastructure/test_task_18_validation.py

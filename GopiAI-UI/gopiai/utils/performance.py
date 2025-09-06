@@ -3,10 +3,9 @@
 
 Содержит утилиты для асинхронного выполнения задач и кэширования.
 """
-from concurrent.futures import ThreadPoolExecutor, as_completed, Future
+from concurrent.futures import ThreadPoolExecutor, Future
 from functools import wraps, lru_cache
 from typing import Any, Callable, TypeVar, Optional, ParamSpec, Generic
-import time
 import logging
 from datetime import datetime, timedelta
 from threading import Lock

@@ -1,11 +1,9 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from smolagents import CodeAgent, ToolCallingAgent
+from smolagents import ToolCallingAgent
 
 from agent_factory import ProcessFactory
-from agent_factory.model import PipelineModel
-from agent_factory.tool import ToolFactory
 
 
 class TestProcessFactory(unittest.TestCase):

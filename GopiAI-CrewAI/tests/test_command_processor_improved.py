@@ -5,21 +5,16 @@ Improved tests for command processor using new fixtures.
 
 import pytest
 import json
-from unittest.mock import MagicMock, patch
-
-# Import test infrastructure
-import sys
-import os
     # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'test_infrastructure'))
 
-from fixtures import ai_service_mocker, mock_crewai_server, mock_tool_manager
+from fixtures import mock_tool_manager
 from crewai_fixtures import mock_command_processor, mock_tool_executor
 
 
 class TestCommandProcessorImproved:
     """Improved command processor tests using fixtures."""
     
-    def test_valid_json_command_processing(self, mock_command_processor):
+    def test_valid_json_command_processing(self):
         """Test processing of valid JSON commands."""
         # Test data
         command_data = {
@@ -36,7 +31,7 @@ class TestCommandProcessorImproved:
         assert "result" in result
         mock_command_processor.process_command.assert_called_once_with(command_text)
     
-    def test_array_of_commands(self, mock_command_processor):
+    def test_array_of_commands(self):
         """Test processing of multiple commands in array format."""
         commands_data = [
             {"tool": "filesystem_tools", "params": {"command": "ls", "path": "."}},
@@ -60,7 +55,7 @@ class TestCommandProcessorImproved:
         assert tools[0]["tool"] == "filesystem_tools"
         assert tools[1]["tool"] == "web_search"
     
-    def test_invalid_json_handling(self, mock_command_processor):
+    def test_invalid_json_handling(self):
         """Test handling of invalid JSON."""
         invalid_json = "not a json at all"
         
@@ -82,7 +77,7 @@ class TestCommandProcessorImproved:
         assert "Invalid JSON" in result["result"]
         assert len(result["tool_calls"]) == 0
     
-    def test_missing_required_fields(self, mock_command_processor):
+    def test_missing_required_fields(self):
         """Test handling of JSON with missing required fields."""
         # Missing params field
         incomplete_data = {"tool": "browser_tools"}
@@ -105,7 +100,7 @@ class TestCommandProcessorImproved:
         assert result["status"] == "error"
         assert "Missing required field" in result["result"]
     
-    def test_free_text_markdown_handling(self, mock_command_processor):
+    def test_free_text_markdown_handling(self):
         """Test that free text with markdown doesn't trigger command execution."""
         markdown_text = "О, зая моя любопытная...\n**filesystem_tools** могу всё...\n`lss*([^n]*)` ..."
         
@@ -121,7 +116,7 @@ class TestCommandProcessorImproved:
         assert not is_valid
         assert len(tools) == 0
     
-    def test_tool_execution_integration(self, mock_command_processor, mock_tool_executor):
+    def test_tool_execution_integration(self):
         """Test integration between command processor and tool executor."""
         # Test data
         command_data = {"tool": "filesystem_tools", "params": {"command": "ls", "path": "."}}
@@ -146,7 +141,7 @@ class TestCommandProcessorImproved:
         assert execution_result["status"] == "success"
         assert "file1.txt" in execution_result["output"]
     
-    def test_error_handling_in_tool_execution(self, mock_command_processor, mock_tool_executor):
+    def test_error_handling_in_tool_execution(self):
         """Test error handling during tool execution."""
         # Test data
         command_data = {"tool": "invalid_tool", "params": {"command": "test"}}
@@ -174,7 +169,7 @@ class TestCommandProcessorImproved:
         assert "not found" in execution_result["error"]
     
     @pytest.mark.integration
-    def test_full_command_processing_flow(self, mock_command_processor, mock_tool_executor, mock_tool_manager):
+    def test_full_command_processing_flow(self):
         """Test the complete flow from command to execution."""
         # Test data
         command_data = {"tool": "browser_tools", "params": {"command": "open", "url": "https://example.com"}}
@@ -206,15 +201,15 @@ class TestCommandProcessorImproved:
         assert result["status"] == "success"
         assert "Browser opened" in result["output"]
     
-    def test_command_validation_edge_cases(self, mock_command_processor):
+    def test_command_validation_edge_cases(self):
         """Test edge cases in command validation."""
         test_cases = [
             ("", False, "Empty string"),
             ("{}", False, "Empty JSON object"),
-            ('{"tool": ""}', False, "Empty tool name"),
-            ('{"tool": "valid_tool", "params": null}', False, "Null params"),
-            ('{"tool": "valid_tool", "params": "string"}', False, "String params instead of object"),
-            ('{"tool": "valid_tool", "params": {}}', True, "Valid minimal command"),
+            ('{\"tool\": ""}', False, "Empty tool name"),
+            ('{\"tool\": \"valid_tool\", \"params\": null}', False, "Null params"),
+            ('{\"tool\": \"valid_tool\", \"params\": \"string\"}', False, "String params instead of object"),
+            ('{\"tool\": \"valid_tool\", \"params\": {}}', True, "Valid minimal command"),
         ]
         
         for test_input, expected_valid, description in test_cases:
@@ -227,7 +222,7 @@ class TestCommandProcessorImproved:
             # Assertion with descriptive message
             assert is_valid == expected_valid, f"Failed for {description}: {test_input}"
     
-    def test_concurrent_command_processing(self, mock_command_processor):
+    def test_concurrent_command_processing(self):
         """Test handling of multiple concurrent commands."""
         commands = [
             {"tool": "tool1", "params": {"action": "test1"}},

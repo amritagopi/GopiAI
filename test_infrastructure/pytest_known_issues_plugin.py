@@ -8,7 +8,6 @@ integration with the known issues management system.
 import json
 import pytest
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from known_issues_manager import KnownIssuesManager, IssueStatus
 

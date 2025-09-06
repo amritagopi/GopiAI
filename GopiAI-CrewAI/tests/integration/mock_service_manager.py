@@ -8,9 +8,7 @@ external dependencies like psutil.
 
 import time
 import requests
-import subprocess
 import logging
-from typing import Dict, Any, Optional
 
 
 class MockServiceManager:

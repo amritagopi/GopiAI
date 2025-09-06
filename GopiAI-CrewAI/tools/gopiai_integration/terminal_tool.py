@@ -6,8 +6,7 @@ Terminal Tool - инструмент для выполнения команд в
 import logging
 import subprocess
 import os
-import shlex
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 logger = logging.getLogger(__name__)
 

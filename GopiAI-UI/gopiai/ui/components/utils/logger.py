@@ -5,10 +5,8 @@ This module provides a centralized logging system for all UI components.
 """
 
 import logging
-import os
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Create a logger with the specified name
 def get_logger(name: str) -> logging.Logger:

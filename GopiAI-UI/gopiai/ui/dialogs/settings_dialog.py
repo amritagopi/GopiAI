@@ -9,22 +9,14 @@ from PySide6.QtWidgets import (
     QPushButton,
     QTabWidget,
     QWidget,
-    QGroupBox,
     QCheckBox,
-    QSlider,
     QSpinBox,
-    QLineEdit,
-    QTextEdit,
     QScrollArea,
     QFrame,
-    QSizePolicy,
-    QGridLayout,
-    QFormLayout,
-    QSpacerItem,
+    QFormLayout
 )
-from PySide6.QtCore import Qt, Signal, QSize
-from PySide6.QtGui import QFont, QIcon, QPixmap
-from pathlib import Path
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QFont
 from gopiai.ui.utils.icon_helpers import create_icon_button
 
 # Клиент CrewAI API для работы с настройкой небезопасного терминала

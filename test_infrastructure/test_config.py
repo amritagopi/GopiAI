@@ -4,8 +4,6 @@ Test Configuration for GopiAI Testing Infrastructure
 
 Centralized configuration for all testing environments and modules.
 """
-
-import os
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, List, Optional

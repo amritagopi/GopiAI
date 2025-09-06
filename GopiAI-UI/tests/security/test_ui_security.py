@@ -9,8 +9,6 @@ Requirements: 7.1, 7.2, 7.3, 7.4
 import pytest
 import os
 import tempfile
-import json
-from pathlib import Path
 from unittest.mock import patch, MagicMock
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QLineEdit, QTextEdit

@@ -1,0 +1,20 @@
+tool:
+  pyexamine:
+    paths:
+      - GopiAI-CrewAI
+      - GopiAI-UI
+      - GopiAI-Assets
+    exclude:
+      - .venv
+      - build
+      - dist
+    checks:
+      broken_imports: true
+      unused_functions: true
+      unused_classes: true
+      unused_imports: true
+      circular_dependencies: true
+    output:
+      format: table
+      color: true
+

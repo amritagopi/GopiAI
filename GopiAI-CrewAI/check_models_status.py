@@ -1,6 +1,3 @@
-import sys
-import os
-from path_manager import setup_project_paths
     # Заменено на использование path_manager: sys.path.append('.')
 
 from llm_rotation_config import rate_limit_monitor, LLM_MODELS_CONFIG
@@ -53,7 +50,7 @@ for model in LLM_MODELS_CONFIG:
     print(f"   Использовано: RPM={usage.get('rpm', 0)}, TPM={usage.get('tpm', 0)}, RPD={usage.get('rpd', 0)}")
     print(f"   Статус: {'🚫 ЗАБЛОКИРОВАНА' if is_blocked else '✅ Доступна' if can_use else '⚠️ Лимиты исчерпаны'}")
 
-print(f"\n📈 Общая статистика:")
+print("\n📈 Общая статистика:")
 available_count = sum(
     1
     for m in LLM_MODELS_CONFIG

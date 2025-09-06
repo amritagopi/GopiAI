@@ -4,9 +4,7 @@ File path is resolved to user's home directory: ~/.gopiai_state.json
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
-from typing import Optional
 
 # Храним состояние в $HOME/.gopiai/state.json, гарантируем наличие каталога
 STATE_DIR = Path.home() / ".gopiai"

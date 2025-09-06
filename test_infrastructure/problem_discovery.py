@@ -5,13 +5,11 @@ Problem Discovery System for GopiAI Testing Infrastructure
 This module discovers and categorizes existing problems in the GopiAI codebase
 to help prioritize testing efforts and mark known issues.
 """
-
-import os
 import ast
 import json
 import logging
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, Optional
+from typing import List, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
 import re

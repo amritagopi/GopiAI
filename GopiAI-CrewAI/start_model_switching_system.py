@@ -7,7 +7,6 @@ import subprocess
 import sys
 import os
 import time
-import threading
 from pathlib import Path
 
 def start_api_server():

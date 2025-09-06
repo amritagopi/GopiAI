@@ -1,7 +1,5 @@
 import unittest
 from unittest.mock import MagicMock
-
-from smolagents import Tool
 from smolagents.tools.function_tool import FunctionTool
 
 

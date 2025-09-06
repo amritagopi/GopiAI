@@ -5,8 +5,6 @@ from fastapi import FastAPI
 
 from typing import List
 
-from fastapi import APIRouter, Body
-
 
 class MockApplication:
     def __init__(self):

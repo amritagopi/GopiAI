@@ -7,14 +7,11 @@ Tests command extraction, validation, and execution functionality.
 
 import pytest
 import json
-from unittest.mock import MagicMock, patch, Mock
-import sys
-import os
 
 # Add test infrastructure to path
     # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
-from fixtures import ai_service_mocker, mock_tool_manager
+from fixtures import mock_tool_manager
 from crewai_fixtures import mock_command_processor, mock_tool_executor
 
 # Import the modules we're testing
@@ -57,7 +54,7 @@ class TestCommandProcessing:
             # Missing required "params" field
         }
     
-    def test_valid_single_command_processing(self, mock_command_processor, valid_command_json):
+    def test_valid_single_command_processing(self, valid_command_json):
         """Test processing of valid single command."""
         command_text = json.dumps(valid_command_json, ensure_ascii=False)
         
@@ -82,7 +79,7 @@ class TestCommandProcessing:
         assert result["status"] == "success"
         assert len(result["tool_calls"]) == 1
     
-    def test_valid_array_command_processing(self, mock_command_processor, valid_command_array):
+    def test_valid_array_command_processing(self, valid_command_array):
         """Test processing of valid command array."""
         command_text = json.dumps(valid_command_array, ensure_ascii=False)
         
@@ -108,7 +105,7 @@ class TestCommandProcessing:
         assert result["status"] == "success"
         assert len(result["tool_calls"]) == 2
     
-    def test_invalid_json_handling(self, mock_command_processor):
+    def test_invalid_json_handling(self):
         """Test handling of invalid JSON."""
         invalid_json = "not a json at all"
         
@@ -132,7 +129,7 @@ class TestCommandProcessing:
         assert result["status"] == "error"
         assert "Invalid JSON" in result["result"]
     
-    def test_missing_required_fields(self, mock_command_processor, invalid_command_json):
+    def test_missing_required_fields(self, invalid_command_json):
         """Test handling of commands with missing required fields."""
         command_text = json.dumps(invalid_command_json, ensure_ascii=False)
         
@@ -156,7 +153,7 @@ class TestCommandProcessing:
         assert result["status"] == "error"
         assert "Missing required field" in result["result"]
     
-    def test_empty_command_handling(self, mock_command_processor):
+    def test_empty_command_handling(self):
         """Test handling of empty commands."""
         test_cases = [
             ("", "Empty string"),
@@ -178,7 +175,7 @@ class TestCommandProcessing:
             assert is_valid is False, f"Failed for {description}: {test_input}"
             assert len(tools) == 0, f"Failed for {description}: {test_input}"
     
-    def test_malformed_json_handling(self, mock_command_processor):
+    def test_malformed_json_handling(self):
         """Test handling of malformed JSON."""
         malformed_cases = [
             '{"tool": "test", "params":}',  # Missing value
@@ -207,7 +204,7 @@ class TestCommandProcessing:
             assert len(tools) == 0
             assert result["status"] == "error"
     
-    def test_free_text_filtering(self, mock_command_processor):
+    def test_free_text_filtering(self):
         """Test that free text doesn't trigger command execution."""
         free_text_cases = [
             "Hello, how are you?",
@@ -231,7 +228,7 @@ class TestCommandProcessing:
             assert is_valid is False, f"Free text should not be valid: {free_text}"
             assert len(tools) == 0, f"Free text should not extract tools: {free_text}"
     
-    def test_tool_execution_success(self, mock_tool_executor, valid_command_json):
+    def test_tool_execution_success(self, valid_command_json):
         """Test successful tool execution."""
         # Configure mock for successful execution
         mock_tool_executor.is_available.return_value = True
@@ -252,7 +249,7 @@ class TestCommandProcessing:
         assert result["error"] is None
         mock_tool_executor.execute.assert_called_once_with(valid_command_json)
     
-    def test_tool_execution_failure(self, mock_tool_executor, valid_command_json):
+    def test_tool_execution_failure(self, valid_command_json):
         """Test tool execution failure."""
         # Configure mock for execution failure
         mock_tool_executor.is_available.return_value = True
@@ -270,7 +267,7 @@ class TestCommandProcessing:
         assert result["output"] is None
         assert "Permission denied" in result["error"]
     
-    def test_tool_unavailable(self, mock_tool_executor, valid_command_json):
+    def test_tool_unavailable(self, valid_command_json):
         """Test handling when tool is unavailable."""
         # Configure mock for unavailable tool
         mock_tool_executor.is_available.return_value = False
@@ -289,7 +286,7 @@ class TestCommandProcessing:
         assert result["status"] == "error"
         assert "not available" in result["error"]
     
-    def test_tool_schema_validation(self, mock_tool_executor):
+    def test_tool_schema_validation(self):
         """Test tool schema validation."""
         # Configure mock schema
         expected_schema = {
@@ -316,7 +313,7 @@ class TestCommandProcessing:
         assert "command" in schema["parameters"]["properties"]
         assert "command" in schema["parameters"]["required"]
     
-    def test_concurrent_command_execution(self, mock_command_processor, mock_tool_executor, valid_command_array):
+    def test_concurrent_command_execution(self, valid_command_array):
         """Test concurrent execution of multiple commands."""
         command_text = json.dumps(valid_command_array, ensure_ascii=False)
         
@@ -349,7 +346,7 @@ class TestCommandProcessing:
         assert "Browser opened" in results[1]["output"]
         assert mock_tool_executor.execute.call_count == 2
     
-    def test_command_validation_edge_cases(self, mock_command_processor):
+    def test_command_validation_edge_cases(self):
         """Test edge cases in command validation."""
         test_cases = [
             ('{"tool": "", "params": {}}', False, "Empty tool name"),
@@ -370,7 +367,7 @@ class TestCommandProcessing:
             # Assertion with descriptive message
             assert is_valid == expected_valid, f"Failed for {description}: {test_input}"
     
-    def test_command_parameter_validation(self, mock_command_processor):
+    def test_command_parameter_validation(self):
         """Test validation of command parameters."""
         # Test cases with different parameter types
         parameter_cases = [
@@ -395,7 +392,7 @@ class TestCommandProcessing:
             # Assertion
             assert is_valid == expected_valid, f"Failed for {description}: {params}"
     
-    def test_error_recovery_in_command_processing(self, mock_command_processor, mock_tool_executor):
+    def test_error_recovery_in_command_processing(self):
         """Test error recovery during command processing."""
         # Command that will cause tool execution error
         failing_command = {
@@ -429,7 +426,7 @@ class TestCommandProcessing:
         mock_tool_executor.execute.assert_called_once()
     
     @pytest.mark.integration
-    def test_full_command_processing_pipeline(self, mock_command_processor, mock_tool_executor, mock_tool_manager, valid_command_json):
+    def test_full_command_processing_pipeline(self, valid_command_json):
         """Test the complete command processing pipeline."""
         command_text = json.dumps(valid_command_json, ensure_ascii=False)
         

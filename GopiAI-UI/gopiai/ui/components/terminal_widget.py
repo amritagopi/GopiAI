@@ -4,15 +4,10 @@ Terminal Widget Component для GopiAI Standalone Interface
 
 Интерактивный виджет терминала с вкладками и поддержкой выполнения команд.
 """
-
-import subprocess
-import threading
-import os
-import sys
-from typing import Optional, cast, Any
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTabWidget, QTextEdit, QLineEdit
-from PySide6.QtCore import QTimer, Signal, Qt, QProcess
-from PySide6.QtGui import QTextCursor, QFont, QKeyEvent
+from typing import cast, Any
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QTabWidget, QTextEdit
+from PySide6.QtCore import Signal, Qt, QProcess
+from PySide6.QtGui import QTextCursor, QFont
 from gopiai.ui.utils.icon_helpers import create_icon_button
 # Импорт ansi2html с fallback
 try:

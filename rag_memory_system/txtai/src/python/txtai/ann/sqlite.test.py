@@ -1,6 +1,4 @@
 import unittest
-import os
-import sqlite3
 from unittest.mock import patch, MagicMock
 
 from annlite.backends.sqlite import SQLite

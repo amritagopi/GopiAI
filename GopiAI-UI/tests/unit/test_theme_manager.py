@@ -5,9 +5,7 @@ Tests theme switching, theme application, and theme persistence.
 """
 
 import pytest
-import sys
-import os
-from unittest.mock import MagicMock, patch, Mock, mock_open
+from unittest.mock import MagicMock
 
 # Import test infrastructure
     # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))

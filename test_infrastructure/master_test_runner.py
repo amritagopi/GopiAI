@@ -12,8 +12,6 @@ Enhanced master test runner that provides:
 This module provides a unified interface for running tests across all GopiAI modules
 with proper environment management and service coordination.
 """
-
-import os
 import sys
 import subprocess
 import logging
@@ -25,7 +23,7 @@ from typing import Dict, List, Optional, Tuple, Set
 from dataclasses import dataclass, asdict
 from enum import Enum
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed, Future
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import queue
 import random
 

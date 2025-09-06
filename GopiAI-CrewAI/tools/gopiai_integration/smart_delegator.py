@@ -6,7 +6,7 @@ import time
 import traceback
 import sys
 import os
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Optional
 import re  # Added for command extraction
 
 # Импортируем модуль ротации моделей
@@ -30,7 +30,6 @@ except ImportError:
 
 # Импортируем наш модуль системных промптов
 from .system_prompts import get_system_prompts
-from .gemini_utils import convert_to_gemini_format
 
 # Импортируем восстановленные компоненты
 from .local_mcp_tools import get_local_mcp_tools

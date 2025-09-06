@@ -5,11 +5,9 @@ Coordinates execution of all UI tests and provides comprehensive reporting.
 """
 
 import pytest
-import sys
-import os
 from pathlib import Path
 import time
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 # Add test infrastructure to path
 test_infrastructure_path = Path(__file__).parent.parent.parent.parent / "test_infrastructure"

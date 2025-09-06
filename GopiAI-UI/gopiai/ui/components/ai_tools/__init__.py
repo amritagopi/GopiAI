@@ -3,9 +3,7 @@ UI Tools for AI Assistant
 
 This module provides UI-specific tools that the AI can use to assist the user.
 """
-
-from typing import Dict, Any, Optional
-from PySide6.QtCore import QObject, Signal, Slot
+from PySide6.QtCore import QObject, Signal
 from ..utils.logger import get_logger
 
 logger = get_logger(__name__)

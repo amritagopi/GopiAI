@@ -1,12 +1,36 @@
 # --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 
+# Standard library imports
 import logging
 import os
+import re
+import subprocess
+import time
+import traceback
 import uuid
-from typing import Any, Dict
-from enum import Enum, auto # Добавлено auto для TaskStatus
-from dotenv import load_dotenv
+from enum import Enum, auto
 from pathlib import Path
+from threading import Thread
+
+# Third-party imports
+from crewai import Agent, Crew, Task
+from crewai_tools import TavilySearchTool, WebsiteSearchTool
+from dotenv import load_dotenv
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from langchain_core.messages import (
+    AIMessage, HumanMessage, SystemMessage, ToolMessage
+)
+from langchain_core.tools import tool
+
+# Local application imports
+from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
+# The following import is inside a try-except block in the original code,
+# which is good practice if the module is not always available.
+# However, for consistency, we can try to import it here.
+# If it causes issues, it should be moved back inside the function.
+from tools.gopiai_integration.system_prompts import get_default_prompt
+
 
 # --- НАЧАЛО ВАЖНОГО БЛОКА ---
 # Четко указываем путь к .env файлу в той же папке, что и наш скрипт
@@ -32,15 +56,16 @@ class TaskStatus(Enum): # Изменено: убрано str, добавлено
 
 # Настройка читаемого логирования для CrewAI сервера
 # Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
-from pathlib import Path as _Path
-_LOG_DIR = _Path.home() / ".gopiai" / "logs"
+_LOG_DIR = Path.home() / ".gopiai" / "logs"
 try:
     _LOG_DIR.mkdir(parents=True, exist_ok=True)
 except Exception as _e:
     # В случае ошибки — fallback в текущий каталог
     print(f"[WARNING] Не удалось создать каталог логов {_LOG_DIR}: {_e}. Используем текущий каталог.")
-    _LOG_DIR = _Path(".")
+    _LOG_DIR = Path(".")
+# Используем два файла для логирования: общий и локальный
 log_file = str(_LOG_DIR / "crewai_api_server_debug.log")
+local_log_file = str(Path(__file__).parent / "crewai_api_server_debug_local.log")
 
 class UltraCleanFormatter(logging.Formatter):
     """Форматтер который убирает ВСЕ нечитаемые символы"""
@@ -55,8 +80,7 @@ class UltraCleanFormatter(logging.Formatter):
         """Убираем все проблемные символы из логов"""
         formatted = super().format(record)
         # Убираем ANSI escape codes
-        import re
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-?]*[ -/]*[@-~])')
         formatted = ansi_escape.sub('', formatted)
         
         # Убираем другие управляющие символы
@@ -64,13 +88,14 @@ class UltraCleanFormatter(logging.Formatter):
         
         return formatted
 
-# Настраиваем логирование
+# Настраиваем логирование с двумя файлами
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s [%(levelname)s] %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler(log_file, encoding='utf-8'),
+        logging.FileHandler(log_file, mode='w', encoding='utf-8'),
+        logging.FileHandler(local_log_file, mode='w', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -89,25 +114,8 @@ logging.getLogger('httpx').setLevel(logging.WARNING)
 
 logger.info("🚀 Запуск CrewAI API сервера...")
 logger.info(f"📁 Логи сохраняются в: {log_file}")
-
-from flask import Flask, request, jsonify
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
-import traceback
-from threading import Thread
-import time
-from flask_cors import CORS
-
-# Импорт модулей CrewAI
-try:
-    logger.info("📦 Импорт модулей CrewAI...")
-    from crewai import Agent, Task, Crew
-    from crewai_tools import TavilySearchTool, WebsiteSearchTool
-    from langchain_google_genai import ChatGoogleGenerativeAI
-    logger.info("✅ Модули CrewAI успешно импортированы")
-except ImportError as e:
-    logger.error(f"❌ Ошибка импорта CrewAI модулей: {e}")
-    logger.error("💡 Убедитесь, что CrewAI установлен: pip install crewai crewai-tools langchain-google-genai")
-    exit(1)
+logger.info(f"📁 Локальные логи: {local_log_file}")
+logger.debug("DEBUG: Детальное логирование включено")
 
 # Инициализация Flask приложения
 app = Flask(__name__)
@@ -116,24 +124,19 @@ CORS(app)
 # Глобальное хранилище задач
 tasks_storage = {}
 
-# Определяем инструменты для работы с файловой системой
-from langchain_core.tools import tool
-import subprocess
-import os as os_module
-
 @tool(description="Читает содержимое файла или папки")
 def read_file_or_directory(path: str) -> str:
     """Читает содержимое файла или показывает содержимое директории."""
     try:
-        if os_module.path.isfile(path):
+        if os.path.isfile(path):
             # Это файл - читаем его содержимое
             with open(path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
                 return f"Содержимое файла {path}:\n{content}"
-        elif os_module.path.isdir(path):
+        elif os.path.isdir(path):
             # Это директория - показываем список файлов
-            items = os_module.listdir(path)
-            items_list = '\n'.join(f"{'📁' if os_module.path.isdir(os_module.path.join(path, item)) else '📄'} {item}" for item in sorted(items))
+            items = os.listdir(path)
+            items_list = '\n'.join(f"{('📁' if os.path.isdir(os.path.join(path, item)) else '📄')} {item}" for item in sorted(items))
             return f"Содержимое папки {path}:\n{items_list}"
         else:
             return f"Путь {path} не существует или недоступен"
@@ -143,8 +146,6 @@ def read_file_or_directory(path: str) -> str:
 @tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
 def execute_terminal_command(command: str) -> str:
     """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
-    import re
-    from enum import Enum
     
     class RiskLevel(Enum):
         SAFE = "safe"
@@ -162,66 +163,66 @@ def execute_terminal_command(command: str) -> str:
             r'rm\s+.*-rf.*/',  # rm -rf с путями
             r'format\s+[cd]:',  # format диска
             r'del\s+/[fsq]',  # del с флагами
-            r'shutdown',  # выключение
-            r'reboot',  # перезагрузка
-            r'init\s+[06]',  # init 0/6
-            r'fdisk',  # работа с разделами
-            r'mkfs',  # форматирование
-            r'dd\s+.*=/dev/',  # dd на устройства
+            r'shutdown',
+            r'reboot',
+            r'init\s+[06]',
+            r'fdisk',
+            r'mkfs',
+            r'dd\s+.*=/dev/',
         ]
         
         # Высокий риск
         high_patterns = [
-            r'sudo\s+rm',  # sudo rm
-            r'chmod\s+.*777',  # chmod 777
-            r'chown\s+.*root',  # chown root
-            r'rm\s+.*\*',  # rm с wildcard
-            r'kill\s+-9',  # kill -9
-            r'pkill',  # pkill
-            r'killall',  # killall
-            r'crontab\s+-r',  # удаление crontab
+            r'sudo\s+rm',
+            r'chmod\s+.*777',
+            r'chown\s+.*root',
+            r'rm\s+.*\*',
+            r'kill\s+-9',
+            r'pkill',
+            r'killall',
+            r'crontab\s+-r',
         ]
         
         # Средний риск
         medium_patterns = [
-            r'sudo',  # любые sudo команды
-            r'pip\s+install',  # установка пакетов
-            r'apt\s+install',  # apt install
-            r'wget',  # скачивание файлов
-            r'curl.*-o',  # curl с сохранением
-            r'git\s+clone',  # клонирование репозиториев
-            r'python.*\.py',  # выполнение python скриптов
-            r'bash.*\.sh',  # выполнение bash скриптов
-            r'chmod',  # изменение прав
-            r'chown',  # изменение владельца  
+            r'sudo',
+            r'pip\s+install',
+            r'apt\s+install',
+            r'wget',
+            r'curl.*-o',
+            r'git\s+clone',
+            r'python.*\.py',
+            r'bash.*\.sh',
+            r'chmod',
+            r'chown',
         ]
         
         # Низкий риск
         low_patterns = [
-            r'cat\s+/etc/',  # чтение системных файлов
+            r'cat\s+/etc/',
             r'less\s+/etc/',
             r'more\s+/etc/',
-            r'tail\s+-f',  # tail -f
-            r'head.*-n\s*\d+',  # head с большими числами
+            r'tail\s+-f',
+            r'head.*-n\s*\d+',
         ]
         
         # Безопасные команды (явно разрешенные)
         safe_patterns = [
-            r'^ls(\s|$)',  # ls
-            r'^pwd(\s|$)',  # pwd  
-            r'^date(\s|$)',  # date
-            r'^whoami(\s|$)',  # whoami
-            r'^id(\s|$)',  # id
-            r'^uname(\s|$)',  # uname
-            r'^which\s+\w+$',  # which command
-            r'^echo\s+',  # echo
-            r'^cat\s+[^/]',  # cat файлов (не системных)
-            r'^head\s+[^/]',  # head файлов
-            r'^tail\s+[^/]',  # tail файлов
-            r'^wc\s+',  # wc
-            r'^grep\s+',  # grep
-            r'^find\s+.*-name',  # find по имени
-            r'^locate\s+',  # locate
+            r'^ls(\s|$)',
+            r'^pwd(\s|$)',
+            r'^date(\s|$)',
+            r'^whoami(\s|$)',
+            r'^id(\s|$)',
+            r'^uname(\s|$)',
+            r'^which\s+\w+$',
+            r'^echo\s+',
+            r'^cat\s+[^/]',
+            r'^head\s+[^/]',
+            r'^tail\s+[^/]',
+            r'^wc\s+',
+            r'^grep\s+',
+            r'^find\s+.*-name',
+            r'^locate\s+',
         ]
         
         # Проверяем от самого опасного к безопасному
@@ -255,12 +256,6 @@ def execute_terminal_command(command: str) -> str:
             
         # В серверном контексте автоматически разрешаем безопасные и низкорисковые команды
         # а для остальных возвращаем False с пояснением
-        risk_messages = {
-            RiskLevel.LOW: "🟡 Низкий риск",
-            RiskLevel.MEDIUM: "🟠 Средний риск", 
-            RiskLevel.HIGH: "🔴 Высокий риск",
-            RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИЙ РИСК"
-        }
         
         # В серверном режиме не можем запрашивать интерактивное подтверждение
         # поэтому блокируем все команды выше низкого риска
@@ -294,7 +289,7 @@ def execute_terminal_command(command: str) -> str:
             capture_output=True,
             text=True,
             timeout=30,
-            cwd=os_module.getcwd()
+            cwd=os.getcwd()
         )
         
         stdout = result.stdout or ""
@@ -313,21 +308,22 @@ def execute_terminal_command(command: str) -> str:
     except Exception as e:
         return f"Ошибка выполнения команды '{command}': {str(e)}"
 
-# Инициализация Gemini LLM
+# Инициализация Gemini LLM с поддержкой code_execution
 try:
-    logger.info("🤖 Инициализация Gemini LLM...")
-    base_llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
-        google_api_key=os.getenv('GEMINI_API_KEY'),
-        temperature=0.7,
-        convert_system_message_to_human=True
-    )
+    logger.info("🤖 Инициализация Gemini LLM с code_execution...")
+    logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
     
-    # Привязываем инструменты к модели
-    gemini_llm = base_llm.bind_tools([read_file_or_directory, execute_terminal_command])
-    logger.info("✅ Gemini LLM с инструментами успешно инициализирован")
+    # Используем новый Gemini провайдер с code_execution
+    gemini_llm = create_crewai_gemini_llm(
+        model="gemini-2.5-flash",
+        enable_code_execution=True,
+        temperature=0.7
+    )
+    logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
+    logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Gemini LLM: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
     exit(1)
 
@@ -356,6 +352,10 @@ def create_agent(role, goal, backstory):
             tools.append(search_tool)
         if website_tool:
             tools.append(website_tool)
+        
+        # Добавляем инструменты файловой системы и терминала
+        tools.append(read_file_or_directory)
+        tools.append(execute_terminal_command)
         
         if not tools:
             logger.warning(f"⚠️ Агент {role} создается без инструментов")
@@ -654,14 +654,21 @@ def process_message():
     """Основной endpoint для обработки сообщений"""
     try:
         logger.debug("💬 Запрос на обработку сообщения")
+        logger.debug(f"DEBUG: Получен request.json: {request.json}")
         
         if not request.json:
+            logger.error("DEBUG: Отсутствует JSON данные в запросе")
             return jsonify({'error': 'Отсутствует JSON данные'}), 400
             
         message = request.json.get('message', '')
         session_id = request.json.get('session_id', str(uuid.uuid4()))
+        provider = request.json.get('provider', 'gemini')
+        model = request.json.get('model', 'gemini-2.0-flash')
+        
+        logger.debug(f"DEBUG: Извлеченные данные - message: '{message[:100]}...', session_id: {session_id}, provider: {provider}, model: {model}")
         
         if not message:
+            logger.error("DEBUG: Сообщение пустое")
             return jsonify({'error': 'Сообщение не может быть пустым'}), 400
         
         # Создаем задачу обработки
@@ -681,7 +688,7 @@ def process_message():
         logger.info(f"📝 Создана задача обработки сообщения: {task_id}")
         
         # Запускаем обработку в отдельном потоке
-        thread = Thread(target=process_message_async, args=(task_id, message))
+        thread = Thread(target=process_message_async, args=(task_id, request.json))
         thread.daemon = True
         thread.start()
         
@@ -696,33 +703,63 @@ def process_message():
         logger.error(f"❌ Ошибка обработки сообщения: {e}")
         return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
 
-def process_message_async(task_id, message):
+def process_message_async(task_id, request_data):
     """Асинхронная обработка сообщения с использованием Gemini LLM"""
     try:
+        logger.debug(f"DEBUG: Входим в process_message_async для task_id: {task_id}")
         task = tasks_storage.get(task_id)
         if not task:
+            logger.error(f"DEBUG: Задача {task_id} не найдена в хранилище")
             return
             
         task['status'] = TaskStatus.PROCESSING
         task['progress'] = 10
+        logger.debug(f"DEBUG: Статус задачи {task_id} изменен на PROCESSING")
         
         logger.info(f"🔄 Начата обработка задачи {task_id}")
         
+        # Извлекаем данные из запроса
+        message = request_data.get('message', '')
+        metadata = request_data.get('metadata', {})
+        chat_history = metadata.get('chat_history', [])
+        
+        logger.debug(f"DEBUG: Получена chat_history с {len(chat_history)} сообщениями")
+        
         # Обращение к Gemini LLM для получения реального ответа
         logger.info(f"🤖 Отправка сообщения в Gemini: '{message[:50]}{'...' if len(message) > 50 else ''}'")
+        logger.debug(f"DEBUG: Полное сообщение: {message}")
         
         try:
+            logger.debug("DEBUG: Начинается импорт модулей langchain")
             # Используем инициализированный gemini_llm для обработки сообщения
-            from langchain_core.messages import HumanMessage, ToolMessage, SystemMessage
-            from tools.gopiai_integration.system_prompts import get_default_prompt
+            logger.debug("DEBUG: Импорт модулей langchain завершен")
             
             # Добавляем системный промпт с личностью ассистента
+            logger.debug("DEBUG: Получение системного промпта")
             system_prompt = get_default_prompt()
-            messages = [
-                SystemMessage(content=system_prompt),
-                HumanMessage(content=message)
-            ]
+            logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
+            
+            # Начинаем с системного промпта
+            messages = [SystemMessage(content=system_prompt)]
+            
+            # Добавляем историю чата (последние 20 сообщений)
+            for hist_msg in chat_history:
+                role = hist_msg.get('role')
+                content = hist_msg.get('content', '')
+                if role == 'user':
+                    messages.append(HumanMessage(content=content))
+                elif role == 'assistant':
+                    messages.append(AIMessage(content=content))
+            
+            # Добавляем текущее сообщение пользователя
+            messages.append(HumanMessage(content=message))
+            
+            logger.debug(f"DEBUG: Сформированы сообщения для отправки: {len(messages)} сообщений (системное + {len(chat_history)} историческое + 1 текущее)")
+            
+            logger.debug("DEBUG: Вызов gemini_llm.invoke()")
             response = gemini_llm.invoke(messages)
+            logger.debug(f"DEBUG: Получен ответ от gemini_llm: type={type(response)}")
+            logger.debug(f"DEBUG: Содержимое ответа: {response.content[:200] if hasattr(response, 'content') else 'НЕТ КОНТЕНТА'}...")
             
             logger.info(f"📊 Ответ получен. Tool calls: {len(response.tool_calls) if response.tool_calls else 0}")
             
@@ -831,7 +868,7 @@ if __name__ == '__main__':
         logger.info("   GET  /api/tasks/<id> - статус конкретной задачи")
         logger.info("")
         logger.info("🚀 Сервер готов к работе на http://localhost:5052")
-        logger.info("📁 Логи сохраняются в: " + log_file)
+        logger.info(f"📁 Логи сохраняются в: {log_file}")
         logger.info("⚡ Для остановки нажмите Ctrl+C")
         
         app.run(

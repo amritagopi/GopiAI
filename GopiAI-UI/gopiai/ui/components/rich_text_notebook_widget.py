@@ -8,7 +8,6 @@ RichTextNotebookWidget
 
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QToolBar, QTextEdit, QFontComboBox, QComboBox
 from PySide6.QtGui import QFont, QKeySequence, QAction
-import chardet
 from PySide6.QtCore import QSize
 
 # Чистый rich text notebook для вкладок: тулбар + QTextEdit (или rich движок).

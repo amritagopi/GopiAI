@@ -7,35 +7,22 @@ Part of task 8: Реализовать тесты системы памяти.
 """
 
 import os
-import sys
-import json
 import pytest
-import tempfile
-import shutil
 import time
-from pathlib import Path
-from typing import Dict, List, Any, Optional
-from unittest.mock import Mock, patch, MagicMock
-from datetime import datetime
+from unittest.mock import patch
 
 # Add test infrastructure to path
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
+# Инициализируем пути проекта
+path_manager = setup_project_paths()
 
 from memory_fixtures import (
-    MockTxtaiIndex, MockMemorySystem, MockMemoryEntry, MockSearchResult,
-    MemoryTestUtils, temp_memory_dir, mock_memory_system, mock_txtai_index,
-    sample_memory_entries, sample_conversations, memory_performance_data,
-    mock_embedding_model, memory_migration_data
+    MockTxtaiIndex, MockMemoryEntry, MockSearchResult,
+    temp_memory_dir, mock_memory_system, mock_txtai_index,
+    sample_conversations, memory_performance_data,
+    mock_embedding_model
 )
 
-# Add GopiAI modules to path
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
+# GopiAI modules are now in path thanks to the call above
 
 try:
     from gopiai.core.interfaces import MemoryInterface

@@ -7,15 +7,11 @@ Requirements: 7.1, 7.2, 7.3, 7.4
 """
 
 import pytest
-import os
 import json
-import tempfile
-import subprocess
 import re
 import time
 from pathlib import Path
 from typing import List, Dict, Any
-from unittest.mock import patch, MagicMock
 
 
 class TestSystemWideSecurity:

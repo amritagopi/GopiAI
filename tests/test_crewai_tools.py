@@ -1,23 +1,16 @@
 """
 Comprehensive tests for CrewAI Tools implementation
 """
-
-import os
 import sys
 import unittest
-import tempfile
-import shutil
 from pathlib import Path
-from unittest.mock import patch, MagicMock
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "GopiAI-CrewAI"))
 
 from crewai_tools import (
     model_manager,
-    tool_manager,
-    ModelConfiguration,
-    ModelProvider
+    tool_manager
 )
 
 class TestModelManager(unittest.TestCase):

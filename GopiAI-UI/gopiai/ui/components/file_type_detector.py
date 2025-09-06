@@ -6,7 +6,6 @@ File Type Detector для системы иконок файлов
 """
 
 import os
-from typing import Dict, Optional
 
 
 class FileTypeDetector:

@@ -16,13 +16,11 @@ import json
 import signal
 import logging
 import subprocess
-import threading
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from enum import Enum
 import requests
-import psutil
 
 
 class ServiceStatus(Enum):

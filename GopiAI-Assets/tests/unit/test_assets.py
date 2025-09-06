@@ -6,7 +6,6 @@ Tests asset loading, management, and validation functionality.
 """
 
 import pytest
-import os
 from pathlib import Path
 
 

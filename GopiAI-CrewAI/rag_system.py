@@ -1,12 +1,14 @@
 # --- START OF FILE rag_system.py (OUT-OF-PROCESS RAG PROXY) ---
 
-import os
 import json
 import logging
 import subprocess
+import sys
 import threading
 from pathlib import Path
 from typing import List, Dict, Optional, TYPE_CHECKING, Any
+
+from rag_config import MEMORY_BASE_DIR, CHATS_FILE_PATH, VECTOR_INDEX_PATH, EMBEDDING_MODEL
 
 # --- Настройка логирования ---
 logging.basicConfig(
@@ -15,18 +17,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# --- Загрузка конфигурации ---
-from rag_config import MEMORY_BASE_DIR, CHATS_FILE_PATH, VECTOR_INDEX_PATH, EMBEDDING_MODEL
-
 # Ранее txtai импортировался напрямую и создавал конфликты зависимостей.
 # В этой реализации всё выполняется в отдельном процессе, поэтому здесь не импортируем txtai.
 if TYPE_CHECKING:
     EmbeddingsType = Any
 else:
     EmbeddingsType = Any
-
-
-import sys
 
 def _resolve_txtai_python() -> Path:
     # Use CrewAI environment python if available

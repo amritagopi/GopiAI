@@ -5,7 +5,6 @@ Analyzes test failures and provides actionable recommendations for fixes.
 
 import json
 import re
-import traceback
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple

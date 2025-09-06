@@ -4,9 +4,7 @@ UI performance tests for PySide6 application responsiveness.
 import pytest
 import time
 import statistics
-from typing import List, Dict, Any
-import threading
-from unittest.mock import Mock, patch
+from typing import Dict
 
 
 try:

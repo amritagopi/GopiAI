@@ -20,10 +20,23 @@ import time
 import requests
 import atexit
 from pathlib import Path
-from datetime import datetime
-from typing import Optional, cast
 
 import chardet
+
+from PySide6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QWidget,
+    QVBoxLayout,
+    QSplitter,
+    QMenuBar,
+    QLabel,
+    QFileDialog,
+    QMessageBox,
+    QSizePolicy,
+    QDockWidget
+)
+from PySide6.QtCore import Qt
 
 # Исправляем конфликт OpenMP библиотек
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
@@ -82,7 +95,7 @@ def start_crewai_server():
                 if response.status_code == 200:
                     print(f"[CREWAI] ✅ Сервер CrewAI запущен успешно (PID: {_crewai_server_process.pid})")
                     return True
-            except:
+            except Exception:
                 pass
             time.sleep(1)
         
@@ -107,7 +120,7 @@ def stop_crewai_server():
             _crewai_server_process.wait(timeout=5)
         except subprocess.TimeoutExpired:
             _crewai_server_process.kill()
-        except:
+        except Exception:
             pass
         _crewai_server_process = None
         print("[CREWAI] ✅ Сервер CrewAI остановлен")
@@ -120,11 +133,11 @@ def load_env_file():
     try:
         # Список возможных путей для поиска .env файла
         possible_paths = [
-            Path('.') / '.env',                                  # Текущая директория
-            Path('..') / '.env',                                # Родительская директория
-            Path('..') / '..' / '.env',                         # Родительская директория родительской директории
-            Path('..') / '..' / '..' / '.env',                  # Корень проекта (если запуск из gopiai/ui)
-            Path(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))) / '.env'  # Абсолютный путь к корню проекта
+            Path('.') / '.env',
+            Path('..') / '.env',
+            Path('..') / '..' / '.env',
+            Path('..') / '..' / '..' / '.env',
+            Path(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))) / '.env'
         ]
         
         # Добавляем путь к корню проекта GOPI_AI
@@ -159,27 +172,6 @@ def load_env_file():
 
 # Загружаем переменные окружения из .env файла
 load_env_file()
-
-# Настройка WebEngine для предотвращения графических ошибок
-
-
-from PySide6.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QSplitter,
-    QMenuBar,
-    QLabel,
-    QFileDialog,
-    QMessageBox,
-    QTabWidget,
-    QSizePolicy,
-    QDockWidget,
-)
-from PySide6.QtCore import Qt, QTimer
-from PySide6.QtGui import QAction, QPalette
 
 # Статические пути проекта (path_manager больше не используется)
 PROJECT_ROOT = Path(__file__).parent.parent.parent
@@ -249,19 +241,6 @@ try:
         memory_manager = get_memory_manager()
         print("[MEMORY] Инициализирован MemoryManager")
         
-        # Простой тест работы памяти (удалён для чистоты истории)
-        # try:
-        #     test_session = "test_session_" + str(hash('test'))
-        #     test_msg = "Тестовая запись от " + str(datetime.now())
-        #     memory_manager.add_message(
-        #         session_id=test_session,
-        #         role="system",
-        #         content=test_msg
-        #     )
-        #     print("[MEMORY] Тестовая запись успешно добавлена")
-        # except Exception as test_err:
-        #     print(f"[WARNING] Предупреждение при тестировании памяти: {test_err}")
-            
     except Exception as e:
         print(f"[ERROR] Ошибка при инициализации памяти: {e}")
         print("[WARNING] Приложение продолжит работу с ограниченной функциональностью памяти")
@@ -310,12 +289,12 @@ except ImportError as e:
             pass
 
     StandaloneMenuBar = SimpleMenuBar
-    StandaloneTitlebar = lambda parent=None: SimpleWidget("Titlebar")
-    StandaloneTitlebarWithMenu = lambda parent=None: SimpleWidget("TitlebarWithMenu")
-    CustomGrip = lambda parent, direction: QWidget()
-    FileExplorerWidget = lambda parent=None, icon_manager=None: SimpleWidget("FileExplorer")
-    TabDocumentWidget = lambda parent=None: SimpleWidget("TabDocument")
-    TerminalWidget = lambda parent=None: SimpleWidget("Terminal")
+    def StandaloneTitlebar(parent=None): return SimpleWidget("Titlebar")
+    def StandaloneTitlebarWithMenu(parent=None): return SimpleWidget("TitlebarWithMenu")
+    def CustomGrip(parent, direction): return QWidget()
+    def FileExplorerWidget(parent=None, icon_manager=None): return SimpleWidget("FileExplorer")
+    def TabDocumentWidget(parent=None): return SimpleWidget("TabDocument")
+    def TerminalWidget(parent=None): return SimpleWidget("Terminal")
 
     # ThemeManager будет определен ниже как FallbackThemeManager если недоступен
 
@@ -804,9 +783,7 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
                 menu_bar.openTerminalRequested.connect(self._toggle_terminal)
             if hasattr(menu_bar, "toggleFileExplorerRequested"):
                 menu_bar.toggleFileExplorerRequested.connect(
-                    lambda: self.file_explorer.setVisible(
-                        not self.file_explorer.isVisible()
-                    )
+                    lambda: self.file_explorer.setVisible(not self.file_explorer.isVisible())
                 )
             if hasattr(menu_bar, "togglePanelsRequested"):
 

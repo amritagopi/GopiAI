@@ -4,10 +4,9 @@ GeminiDirectClient - прямой клиент для Gemini API с обходо
 """
 
 import logging
-import os
 import json
 import requests
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from .gemini_utils import convert_to_gemini_format
 
 logger = logging.getLogger(__name__)

@@ -6,16 +6,14 @@
 import os
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Добавляем пути для импорта
 project_root = Path(__file__).parent
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
-    # Инициализируем пути проекта
-    path_manager = setup_project_paths()
+# Инициализируем пути проекта
+path_manager = setup_project_paths()
 
 # Загружаем переменные окружения из .env
-from dotenv import load_dotenv
 load_dotenv()
 
 def test_github_with_mock_openai():

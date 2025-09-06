@@ -5,17 +5,14 @@ Gemini Model Widget для GopiAI UI
 """
 
 import logging
-import sys
-import os
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
 from datetime import datetime
 
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton, QLabel, 
     QGroupBox, QTextEdit, QProgressBar
 )
-from PySide6.QtCore import Qt, Signal, QTimer
-from PySide6.QtGui import QFont
+from PySide6.QtCore import Signal
 
 logger = logging.getLogger(__name__)
 

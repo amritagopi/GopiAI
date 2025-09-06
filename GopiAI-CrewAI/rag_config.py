@@ -3,10 +3,6 @@ RAG Configuration for GopiAI Server
 
 This module configures the txtai-based RAG system for the server.
 """
-
-# --- START OF FILE rag_config.py ---
-
-import os
 from pathlib import Path
 
 # Определяем корневую директорию проекта (там, где лежит этот файл)

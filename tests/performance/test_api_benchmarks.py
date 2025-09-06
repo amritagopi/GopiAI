@@ -4,12 +4,9 @@ API performance benchmarks for CrewAI server endpoints.
 import pytest
 import requests
 import time
-import asyncio
-import aiohttp
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Dict, Any
+from typing import Dict
 import statistics
-import json
 
 
 class APIBenchmark:

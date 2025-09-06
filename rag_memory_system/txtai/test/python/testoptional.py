@@ -5,10 +5,6 @@ Optional module tests
 import sys
 import unittest
 
-# pylint: disable=C0415,W0611,W0621
-import timm
-import txtai
-
 
 class TestOptional(unittest.TestCase):
     """
@@ -126,7 +122,7 @@ class TestOptional(unittest.TestCase):
         """
 
         with self.assertRaises(ImportError):
-            import txtai.api
+            pass
 
     def testConsole(self):
         """

@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import MagicMock
 
 from smolagents import ChatMessage
-from smolagents.models import get_tool_call_from_text, remove_stop_sequences
 from your_module import PipelineModel  # Replace your_module
 
 

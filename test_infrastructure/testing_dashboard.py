@@ -5,9 +5,9 @@ Provides a web-based dashboard for visualizing test results and quality metrics.
 
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict
 import webbrowser
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import threading

@@ -10,14 +10,12 @@ This module provides an interface for managing chat history for the current UI s
 
 import json
 import logging
-import os
-from pathlib import Path
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 import uuid
 
 # Импортируем локальную конфигурацию памяти
-from .memory_config import MEMORY_BASE_DIR, CHATS_FILE_PATH, VECTOR_INDEX_PATH
+from .memory_config import MEMORY_BASE_DIR, CHATS_FILE_PATH
 
 logger = logging.getLogger(__name__)
 

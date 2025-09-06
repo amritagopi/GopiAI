@@ -4,7 +4,6 @@ Test the improved fixtures to ensure they work correctly.
 """
 
 import pytest
-from unittest.mock import MagicMock
 
 
 def test_ai_service_mocker(ai_service_mocker):

@@ -21,15 +21,13 @@ This module aims to be drop-in compatible with existing import points
 relies on removed helper functions – import them from here or migrate.
 """
 from __future__ import annotations
-
-import base64
 import os
 import time
-import re
 import logging
-from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 ###############################################################################
 # Provider –> env variable map
@@ -290,10 +288,10 @@ _usage_tracker = UsageTracker(MODELS)
 # Load persisted state (provider/model)
 #############################################
 try:
-    from .state_manager import load_state, save_state  # type: ignore
+    pass
 except ImportError:
     # when imported from other packages relative path may fail
-    from state_manager import load_state, save_state  # type: ignore
+    pass
 
 # Всегда используем Gemini
 CURRENT_PROVIDER = "gemini"

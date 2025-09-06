@@ -7,8 +7,6 @@
 import os
 import json
 import logging
-import math
-from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QColor, QPalette
 from PySide6.QtCore import Qt
 
@@ -1337,6 +1335,3 @@ def choose_theme_dialog(app):
                     logger.error(f"Ошибка при сохранении темы: {e}")
 
     return None
-
-# Добавляем импорт Qt для apply_theme
-from PySide6.QtCore import Qt

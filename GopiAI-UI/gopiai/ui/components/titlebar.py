@@ -7,7 +7,7 @@ Titlebar Component для GopiAI Standalone Interface
 
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
 from PySide6.QtCore import Signal, Qt, QPoint, QRect
-from PySide6.QtGui import QMouseEvent, QIcon
+from PySide6.QtGui import QMouseEvent
 import os
 from gopiai.ui.utils.icon_helpers import create_icon_button
 

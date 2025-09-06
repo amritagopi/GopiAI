@@ -5,8 +5,6 @@
 Добавляет возможность итеративной обработки ответов через
 паттерн researcher → analyst → editor
 """
-
-import os
 import sys
 import logging
 from typing import Dict, Any, Optional

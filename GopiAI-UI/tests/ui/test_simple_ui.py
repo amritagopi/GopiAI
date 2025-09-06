@@ -4,8 +4,6 @@ Simple UI test to verify pytest-qt setup.
 """
 
 import pytest
-import sys
-import os
 from pathlib import Path
 
 # Add test infrastructure to path

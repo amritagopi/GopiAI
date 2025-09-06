@@ -12,11 +12,9 @@ Requirements covered:
 
 import pytest
 import requests
-import json
 import os
 import time
-from typing import Dict, Any, Optional
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 try:
     from test_infrastructure.service_manager import ServiceManager

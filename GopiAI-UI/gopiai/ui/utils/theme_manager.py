@@ -12,7 +12,7 @@
 import os
 import json
 import logging
-from typing import Dict, Optional, Union, Any
+from typing import Dict, Optional, Union
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import QObject, Signal, QCoreApplication, QTimer

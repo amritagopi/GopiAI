@@ -1,6 +1,4 @@
 import unittest
-from unittest.mock import patch
-import pytest
 
 class TestAPIImports(unittest.TestCase):
 

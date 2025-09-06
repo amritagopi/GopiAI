@@ -5,10 +5,6 @@ from vectordb.index.ann import ANNFactory
 from vectordb.index.ann.annoy import Annoy
 from vectordb.index.ann.faiss import Faiss
 from vectordb.index.ann.hnsw import HNSW
-from vectordb.index.ann.numpy import NumPy
-from vectordb.index.ann.pgvector import PGVector
-from vectordb.index.ann.sqlite import SQLite
-from vectordb.index.ann.torch import Torch
 
 
 class TestANNFactory(unittest.TestCase):

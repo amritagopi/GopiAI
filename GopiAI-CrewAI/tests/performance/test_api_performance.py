@@ -6,8 +6,6 @@ Tests API performance, response times, and throughput.
 """
 
 import pytest
-import time
-import asyncio
 
 
 class TestAPIPerformance:

@@ -6,23 +6,18 @@ This module provides comprehensive monitoring of test performance itself,
 tracking execution times, resource usage, and identifying performance bottlenecks
 in the testing system.
 """
-
-import os
-import sys
 import json
 import time
 import threading
 import statistics
 import sqlite3
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 import psutil
 from contextlib import contextmanager
-import queue
-import subprocess
 
 
 @dataclass

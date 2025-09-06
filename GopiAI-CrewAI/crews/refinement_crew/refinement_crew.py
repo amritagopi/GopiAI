@@ -5,12 +5,7 @@ Response Refinement Crew для GopiAI
 Реализует паттерн researcher → analyst → editor с итеративной обработкой
 для превращения сырых ответов агентов в цельные, читаемые ответы.
 """
-
-import os
-import sys
 import signal
-from typing import Dict, Any, Optional, List
-from pathlib import Path
 
 from crewai import Agent, Task, Crew, Process
 

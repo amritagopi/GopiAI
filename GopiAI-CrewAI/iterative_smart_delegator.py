@@ -8,11 +8,9 @@
 
 import logging
 import time
-import json
-import re
 import sys
 import os
-from typing import Dict, List, Any, Optional
+from typing import Dict
 
 # Импортируем нашу итеративную систему
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))

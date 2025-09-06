@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch
-import numpy as np
 from txtai.vectors import VectorsFactory
 
 class TestWordVectorsUnit(unittest.TestCase):

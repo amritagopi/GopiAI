@@ -82,7 +82,6 @@ class TestANN(unittest.TestCase):
         name = "txtai.ann.faiss"
         module = sys.modules[name]
         del sys.modules[name]
-        import txtai.ann.faiss
 
         # Run tests
         self.runTests("faiss")

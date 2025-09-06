@@ -1,12 +1,11 @@
 """
 Performance test runner for coordinated execution of all performance tests.
 """
-import pytest
 import time
 import json
 import os
 from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 import statistics
 
 

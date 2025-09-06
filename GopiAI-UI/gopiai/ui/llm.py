@@ -6,7 +6,7 @@ Local LLM Client for GopiAI UI
 import logging
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Any, Optional, Dict
+from typing import TYPE_CHECKING, Callable, Any
 
 # Добавляем путь к CrewAI модулям для доступа к llm_rotation_config
 crewai_path = Path(__file__).parent.parent.parent.parent / "GopiAI-CrewAI"

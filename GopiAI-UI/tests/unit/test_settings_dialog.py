@@ -5,15 +5,13 @@ Tests settings dialog initialization, configuration management, and user interac
 """
 
 import pytest
-import sys
-import os
-from unittest.mock import MagicMock, patch, Mock
+from unittest.mock import MagicMock
 
 # Import test infrastructure
     # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
 
 from ui_fixtures import (
-    qtbot, mock_settings_dialog, mock_theme_manager, ui_test_data
+    mock_settings_dialog, mock_theme_manager, ui_test_data
 )
 
 

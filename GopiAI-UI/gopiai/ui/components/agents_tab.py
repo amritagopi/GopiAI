@@ -4,13 +4,12 @@
 """
 
 import logging
-import json
 from typing import Dict, List, Optional
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QGroupBox,
-    QPushButton, QLabel, QFrame, QSizePolicy, QButtonGroup, QRadioButton
+    QLabel
 )
-from PySide6.QtCore import Qt, Signal, QSize
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QFont
 import requests
 from gopiai.ui.utils.icon_helpers import create_icon_button
@@ -152,10 +151,22 @@ class AgentsTab(QWidget):
         scroll_area.setWidget(self.agents_container)
         layout.addWidget(scroll_area, 1)
         
-        # Кнопка обновления (иконка)
+        # Кнопки управления
+        control_buttons = QHBoxLayout()
+        
+        # Кнопка мастера создания команд
+        wizard_btn = create_icon_button("magic-wand", "Мастер создания команды")
+        wizard_btn.clicked.connect(self._open_crew_wizard)
+        control_buttons.addWidget(wizard_btn)
+        
+        # Кнопка обновления
         refresh_btn = create_icon_button("refresh-cw", "Обновить список агентов")
         refresh_btn.clicked.connect(self._load_agents)
-        layout.addWidget(refresh_btn)
+        control_buttons.addWidget(refresh_btn)
+        
+        control_buttons.addStretch()
+        
+        layout.addLayout(control_buttons)
     
     def _load_agents(self):
         """Загружает список агентов с сервера"""
@@ -292,3 +303,39 @@ class AgentsTab(QWidget):
     def get_attached_flow(self) -> Optional[Dict]:
         """Возвращает прикрепленный флоу"""
         return self.attached_flow.copy() if self.attached_flow else None
+    
+    def _open_crew_wizard(self):
+        """Открывает мастер создания команды"""
+        try:
+            from gopiai.ui.components.crew_wizard import CrewWizardDialog
+            
+            wizard = CrewWizardDialog(self)
+            wizard.crew_created.connect(self._on_crew_created)
+            wizard.exec()
+            
+        except ImportError as e:
+            logger.error(f"Не удалось загрузить мастер создания команд: {e}")
+            from PySide6.QtWidgets import QMessageBox
+            QMessageBox.warning(
+                self, 
+                "Ошибка", 
+                "Мастер создания команд недоступен.\nПроверьте установку компонентов."
+            )
+        except Exception as e:
+            logger.error(f"Ошибка открытия мастера: {e}")
+            from PySide6.QtWidgets import QMessageBox
+            QMessageBox.critical(
+                self, 
+                "Ошибка", 
+                f"Не удалось открыть мастер создания команд:\n{str(e)}"
+            )
+    
+    def _on_crew_created(self, crew_config: Dict):
+        """Обрабатывает создание новой команды"""
+        logger.info(f"Создана команда: {crew_config['name']}")
+        
+        # Обновляем список агентов
+        self._load_agents()
+        
+        # Показываем уведомление
+        self.status_label.setText(f"Команда '{crew_config['name']}' создана успешно")

@@ -5,10 +5,8 @@ Tests file handling, drag-and-drop, import/export, and file management through U
 """
 
 import pytest
-import sys
-import os
 from pathlib import Path
-from unittest.mock import MagicMock, patch, mock_open
+from unittest.mock import MagicMock
 
 # Add test infrastructure to path
 test_infrastructure_path = Path(__file__).parent.parent.parent.parent / "test_infrastructure"

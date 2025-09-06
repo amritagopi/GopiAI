@@ -1,4 +1,4 @@
-from typing import Any, Optional, Type
+from typing import Optional, Type
 
 from embedchain.models.data_type import DataType
 from pydantic import BaseModel, Field

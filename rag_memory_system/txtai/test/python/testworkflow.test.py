@@ -3,25 +3,12 @@ from unittest.mock import patch
 import os
 import tempfile
 import io
-import contextlib
-import numpy as np
-import torch
-
-from txtai.api import API
-from txtai.embeddings import Documents, Embeddings
-from txtai.pipeline import Nop, Segmentation, Summary, Translation, Textractor
 from txtai.workflow import (
     Workflow,
     Task,
     ConsoleTask,
     ExportTask,
-    FileTask,
-    ImageTask,
-    RagTask,
-    RetrieveTask,
-    StorageTask,
-    TemplateTask,
-    WorkflowTask,
+    ImageTask
 )
 
 from utils import Utils

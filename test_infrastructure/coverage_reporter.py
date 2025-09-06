@@ -4,12 +4,10 @@ Generates detailed code coverage reports with analysis and recommendations.
 """
 
 import json
-import os
 import subprocess
-import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 import coverage
 

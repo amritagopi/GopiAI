@@ -8,10 +8,7 @@ GopiAI Icon System - Автоматическая система иконок
 Автор: Crazy Coder  
 Версия: 1.0.0
 """
-
-import os
-from pathlib import Path
-from typing import Dict, Optional
+from typing import Optional
 from PySide6.QtCore import QSize, QTimer
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtWidgets import QMenuBar, QWidget

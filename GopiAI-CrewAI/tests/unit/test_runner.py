@@ -7,16 +7,9 @@ Runs all unit tests and provides comprehensive reporting.
 
 import pytest
 import sys
-import os
 from pathlib import Path
-import subprocess
 import json
 from datetime import datetime
-
-# Add test infrastructure to path
-    # Заменено на использование path_manager: sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'test_infrastructure'))
-
-from fixtures import temp_dir
 # from test_config import TestConfig
 
 class TestConfig:

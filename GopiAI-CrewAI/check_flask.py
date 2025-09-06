@@ -2,8 +2,6 @@
 import sys
 from importlib import metadata
 
-import flask
-
 def get_pkg_version(pkg_name: str) -> str:
     try:
         return metadata.version(pkg_name)

@@ -6,21 +6,21 @@ Tab Widget Component для GopiAI Standalone Interface
 """
 
 import logging
+import os
 from gopiai.ui.utils.safe_ops import safe_widget_operation, stable_widget_creation
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QTabWidget,
-    QTextEdit,
     QHBoxLayout,
-    QPushButton,
     QLineEdit,
     QMenu,
     QLabel,
     QStackedWidget,
     QToolButton,
+    QTextEdit
 )
-from PySide6.QtCore import Qt, QUrl, QPoint, QEvent, QSize
+from PySide6.QtCore import Qt, QUrl, QEvent, QSize
 from PySide6.QtGui import QPixmap
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWebEngineCore import QWebEnginePage
@@ -28,7 +28,6 @@ from gopiai.ui.utils.icon_helpers import create_icon_button, get_icon
 
 import chardet
 import traceback
-import weakref
 from typing import Optional, Dict, Any
 
 # --------- Simplified build (no stability subsystem in this branch) ---------
@@ -84,12 +83,7 @@ class _NoopErrorDisplay:
 def show_critical_error(*args, **kwargs): pass  # type: ignore
 ErrorDisplayWidget = _NoopErrorDisplay  # type: ignore
 
-# Импортируем продвинутый текстовый редактор
-import sys
-import os
-
 # Полный отказ от зависимости gopiai.widgets: используем локальный минимальный редактор.
-from PySide6.QtWidgets import QTextEdit
 class TextEditorWidget(QTextEdit):  # type: ignore
     # минимальная совместимость: .text_editor и .setPlainText доступны
     def __init__(self, *a, **k):
@@ -817,8 +811,6 @@ class TabDocumentWidget(QWidget):
                 if recovery_success:
                     return self._create_fallback_notebook(title, content)
             
-            fallback_used = True
-
             # Показываем ошибку пользователю
             if self._error_display:
                 self._error_display.show_component_error(
@@ -1086,7 +1078,7 @@ class TabDocumentWidget(QWidget):
 
     def add_browser_tab(self, url="about:blank", title="Браузер"):
         """Добавление новой вкладки с браузером"""  # type: ignore
-        logger.info(f"Создаем встроенный браузер...")
+        logger.info("Создаем встроенный браузер...")
         try:
             # Создаем главный виджет браузера
             browser_widget = QWidget()
@@ -1134,7 +1126,6 @@ class TabDocumentWidget(QWidget):
             # ==============================================
 
             # 🔥 ИСПРАВЛЕНИЕ: Создаем персистентный профиль для сохранения данных
-            import os
             from pathlib import Path
             from PySide6.QtWebEngineCore import QWebEngineProfile
 
@@ -1261,7 +1252,7 @@ class TabDocumentWidget(QWidget):
             else:
                 # Загрузка Google
                 url = "https://google.com"
-                logger.info(f"📡 Загружаем Google")
+                logger.info("📡 Загружаем Google")
                 address_bar.setText(url)
 
             web_view.load(QUrl(url))
