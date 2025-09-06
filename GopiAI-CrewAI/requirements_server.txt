@@ -1,7 +1,0 @@
-flask
-flask-cors
-python-dotenv
-crewai
-crewai-tools
-google-genai
-langchain-core

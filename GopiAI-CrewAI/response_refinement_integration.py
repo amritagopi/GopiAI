@@ -1,184 +1,263 @@
-#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Интеграция системы Response Refinement для GopiAI
+Response Refinement Integration for GopiAI CrewAI
+Система итеративной обработки ответов с использованием паттерна "агенты → черновик → редактор → финал"
 
-Добавляет возможность итеративной обработки ответов через
-паттерн researcher → analyst → editor
+Based on the response refinement patterns documented in "Response обработка"
 """
-import sys
+
+from crewai import Agent, Task, Crew, Process
 import logging
-from typing import Dict, Any, Optional
-from pathlib import Path
-
-# Добавляем путь к crews
-sys.path.append(str(Path(__file__).parent / "crews"))
-
-try:
-    from crews.refinement_crew.refinement_crew import iterative_refinement
-    REFINEMENT_AVAILABLE = True
-    print("[REFINEMENT] Система рефинемента успешно загружена")
-except ImportError as e:
-    REFINEMENT_AVAILABLE = False
-    print(f"[REFINEMENT-ERROR] Не удалось загрузить систему рефинемента: {e}")
-    
-    def iterative_refinement(query: str, context: str = "", max_rounds: int = 3):
-        """Fallback функция когда рефинемент недоступен"""
-        return f"Рефинемент недоступен. Исходный запрос: {query}", []
 
 logger = logging.getLogger(__name__)
 
 
-class ResponseRefinementService:
-    """Сервис для управления итеративным рефинементом ответов"""
+class RefinementCrew:
+    """
+    Crew для итеративной обработки ответов
+    Паттерн: Researcher → Analyst → Editor → Final Answer
+    """
     
-    def __init__(self):
-        self.enabled = REFINEMENT_AVAILABLE
-        self.default_max_rounds = 2  # Уменьшили для скорости
-        
-    def should_use_refinement(self, message: str, metadata: Dict[str, Any]) -> bool:
-        """
-        Определяет, нужно ли использовать рефинемент для данного запроса
-        
-        Критерии для использования рефинемента:
-        1. Пользователь явно запросил детальный анализ
-        2. Запрос касается исследовательских/аналитических тем  
-        3. Включен флаг use_refinement в metadata
-        """
-        if not self.enabled:
-            return False
-            
-        # Явный флаг в метаданных
-        if metadata.get("use_refinement", False):
-            return True
-            
-        # Автоматическое определение по ключевым словам
-        analysis_keywords = [
-            "анализ", "исследование", "изучи", "разбери", "объясни подробно",
-            "что содержится", "опиши содержимое", "расскажи о", "проанализируй"
-        ]
-        
-        message_lower = message.lower()
-        for keyword in analysis_keywords:
-            if keyword in message_lower:
-                return True
-                
-        return False
+    def researcher(self) -> Agent:
+        return Agent(
+            role="Researcher",
+            goal="Собрать факты, ссылки и короткие цитаты по теме {topic}",
+            backstory="Систематический исследователь. Отдавай ответы списком с источниками.",
+            reasoning=True,
+            max_iter=3,
+            verbose=True
+        )
+
+    def analyst(self) -> Agent:
+        return Agent(
+            role="Analyst", 
+            goal="Структурировать вывод Researcher: 5 ключевых тезисов, пробелы в данных",
+            backstory="Критичный аналитик, формирует список вопросов для уточнения.",
+            reasoning=True,
+            max_iter=2,
+            verbose=True
+        )
+
+    def editor(self) -> Agent:
+        return Agent(
+            role="Editor",
+            goal=(
+                "Получив research_output, analysis_output и previous_draft, "
+                "собери единый читабельный ответ. Если считаешь ответ финальным — "
+                "в конце отдельной строкой напиши: DONE"
+            ),
+            backstory="Опытный редактор: убирает повторы, исправляет стиль и факты.",
+            reasoning=True,
+            max_iter=5,
+            verbose=True
+        )
+
+    def research_task(self):
+        return Task(
+            description="Researcher: собери факты/ссылки по теме: {topic}",
+            agent=self.researcher(),
+            expected_output="Структурированный список фактов с источниками"
+        )
+
+    def analysis_task(self):
+        return Task(
+            description="Analyst: на основе research_task.output сформируй тезисы и пробелы",
+            agent=self.analyst(),
+            expected_output="5 ключевых тезисов и выявленные пробелы в данных"
+        )
+
+    def edit_task(self):
+        return Task(
+            description=(
+                "Editor: входы: research_task.raw, analysis_task.raw, previous_draft.\n"
+                "Задача: собрать всё в аккуратный финал. Если финал — допиши в конце 'DONE'."
+            ),
+            agent=self.editor(),
+            expected_output="Финальный отполированный ответ"
+        )
+
+    def crew(self) -> Crew:
+        return Crew(
+            agents=[self.researcher(), self.analyst(), self.editor()],
+            tasks=[self.research_task(), self.analysis_task(), self.edit_task()],
+            process=Process.sequential,
+            planning=True,  # позволяет AgentPlanner править план между итерациями
+            verbose=True
+        )
+
+
+def iterative_refinement(topic, max_rounds=4, llm=None):
+    """
+    Основная функция итеративной обработки ответов
     
-    def refine_response(
-        self, 
-        query: str, 
-        context: str = "", 
-        max_rounds: Optional[int] = None
-    ) -> tuple[str, list[str]]:
-        """
-        Запускает процесс рефинемента ответа
+    Args:
+        topic: Тема для исследования и обработки
+        max_rounds: Максимальное количество итераций
+        llm: LLM для использования в агентах
         
-        Returns:
-            tuple[refined_answer, refinement_history]
-        """
-        if not self.enabled:
-            return f"Рефинемент недоступен. Запрос: {query}", []
-            
-        rounds = max_rounds or self.default_max_rounds
+    Returns:
+        Финальный обработанный ответ
+    """
+    logger.info(f"🔄 Запуск итеративной обработки для темы: {topic}")
+    
+    try:
+        crew_instance = RefinementCrew()
+        crew_obj = crew_instance.crew()
         
-        try:
-            logger.info(f"Запуск рефинемента для запроса: {query[:100]}...")
+        # Если передан LLM, применяем его к агентам
+        if llm:
+            for agent in crew_obj.agents:
+                agent.llm = llm
+        
+        previous = ""
+        
+        for i in range(max_rounds):
+            logger.info(f"🔄 Итерация {i+1}/{max_rounds}")
             
-            refined_answer, history = iterative_refinement(
-                query=query,
-                context=context,
-                max_rounds=rounds,
-                timeout_per_iteration=45  # 45 секунд на итерацию
+            result = crew_obj.kickoff(inputs={
+                "topic": topic, 
+                "previous_draft": previous
+            })
+            
+            out = result.raw if hasattr(result, 'raw') else str(result)
+            
+            logger.info(f"[Итерация {i+1}] Получен результат длиной {len(out)} символов")
+            
+            # Проверяем условие завершения
+            if "DONE" in out:
+                logger.info("✅ Получен финальный результат")
+                return out.replace("DONE", "").strip()
+            
+            previous = out
+            
+        logger.info("⏰ Достигнуто максимальное количество итераций")
+        return previous
+        
+    except Exception as e:
+        logger.error(f"❌ Ошибка в итеративной обработке: {e}")
+        raise
+
+
+def simple_iterative_reasoning(prompt, llm, max_rounds=5):
+    """
+    Упрощенная версия итеративного рассуждения для одного агента
+    
+    Args:
+        prompt: Исходный промпт
+        llm: LLM для обработки
+        max_rounds: Максимальное количество итераций
+        
+    Returns:
+        Tuple (финальный_ответ, история_итераций)
+    """
+    logger.info(f"🤔 Запуск простого итеративного рассуждения")
+    
+    draft = prompt
+    history = []
+    
+    try:
+        for i in range(max_rounds):
+            system_msg = (
+                f"Это итерация {i+1}. Проанализируй текст и улучши его. "
+                f"Если всё готово, закончи словом DONE."
             )
             
-            logger.info(f"Рефинемент завершен. Итераций: {len(history)}")
-            return refined_answer, history
+            # Используем LLM для обработки
+            if hasattr(llm, 'invoke'):
+                # Для LangChain-совместимых LLM
+                response = llm.invoke([
+                    {"role": "system", "content": system_msg},
+                    {"role": "user", "content": draft}
+                ])
+                text = response.content if hasattr(response, 'content') else str(response)
+            else:
+                # Для других LLM
+                text = str(llm.generate([draft]))
             
-        except Exception as e:
-            logger.error(f"Ошибка в процессе рефинемента: {e}", exc_info=True)
-            return f"Ошибка рефинемента: {str(e)}", []
-    
-    def extract_context_from_metadata(self, metadata: Dict[str, Any]) -> str:
-        """Извлекает контекст из метаданных запроса"""
-        contexts = []
+            history.append(text)
+            logger.info(f"[Итерация {i+1}] Обработано {len(text)} символов")
+            
+            if "DONE" in text:
+                logger.info("✅ Простое рассуждение завершено")
+                return text.replace("DONE", "").strip(), history
+            else:
+                draft = text  # Улучшенный текст идёт на следующий круг
         
-        # Файловый контекст
-        if "selected_file" in metadata:
-            contexts.append(f"Выбранный файл: {metadata['selected_file']}")
-            
-        # История чата
-        if "chat_history" in metadata and metadata["chat_history"]:
-            contexts.append(f"Предыдущий контекст из {len(metadata['chat_history'])} сообщений")
-            
-        # Дополнительные инструкции
-        if "instructions" in metadata:
-            contexts.append(f"Инструкции: {metadata['instructions']}")
-            
-        return "; ".join(contexts) if contexts else "Без дополнительного контекста"
+        logger.info("⏰ Достигнуто максимальное количество итераций в простом рассуждении")
+        return history[-1], history
+        
+    except Exception as e:
+        logger.error(f"❌ Ошибка в простом итеративном рассуждении: {e}")
+        raise
 
 
-# Глобальный экземпляр сервиса
-refinement_service = ResponseRefinementService()
-
-
-def process_with_refinement(message: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
+class ResponseRefinementService:
     """
-    Обрабатывает запрос с возможным использованием рефинемента
-    
-    Возвращает структуру:
-    {
-        "response": "финальный ответ",  
-        "used_refinement": bool,
-        "refinement_iterations": int,
-        "refinement_history": [список итераций] (если включен)
-    }
+    Сервис для управления различными типами рефайнмента ответов
     """
     
-    # Проверяем, нужен ли рефинемент
-    use_refinement = refinement_service.should_use_refinement(message, metadata)
+    def __init__(self, llm=None):
+        self.llm = llm
+        logger.info("🔧 Инициализирован ResponseRefinementService")
     
-    if not use_refinement:
-        # Стандартная обработка без рефинемента
-        return {
-            "response": f"[Стандартный ответ] {message}",
-            "used_refinement": False,
-            "refinement_iterations": 0,
-            "refinement_history": []
-        }
+    def refine_with_crew(self, topic, max_rounds=4):
+        """Рефайнмент с использованием полного crew"""
+        return iterative_refinement(topic, max_rounds, self.llm)
     
-    # Извлекаем контекст и настройки
-    context = refinement_service.extract_context_from_metadata(metadata)
-    max_rounds = metadata.get("refinement_max_rounds", 3)
+    def refine_simple(self, prompt, max_rounds=5):
+        """Простой рефайнмент с одним агентом"""
+        if not self.llm:
+            raise ValueError("LLM не установлен для простого рефайнмента")
+        return simple_iterative_reasoning(prompt, self.llm, max_rounds)
     
-    # Запускаем рефинемент  
-    refined_answer, history = refinement_service.refine_response(
-        query=message,
-        context=context, 
-        max_rounds=max_rounds
-    )
-    
-    return {
-        "response": refined_answer,
-        "used_refinement": True,
-        "refinement_iterations": len(history),
-        "refinement_history": history if metadata.get("include_history", False) else []
-    }
+    def auto_refine(self, content, refinement_type="auto"):
+        """
+        Автоматический выбор типа рефайнмента на основе контента
+        
+        Args:
+            content: Контент для обработки
+            refinement_type: "crew", "simple", или "auto"
+        """
+        logger.info(f"🎯 Автоматический рефайнмент типа: {refinement_type}")
+        
+        if refinement_type == "auto":
+            # Автоматически выбираем тип на основе длины и сложности
+            if len(content) > 500 or "исследование" in content.lower():
+                refinement_type = "crew"
+            else:
+                refinement_type = "simple"
+        
+        if refinement_type == "crew":
+            return self.refine_with_crew(content)
+        elif refinement_type == "simple":
+            result, _ = self.refine_simple(content)
+            return result
+        else:
+            raise ValueError(f"Неизвестный тип рефайнмента: {refinement_type}")
+
+
+# Utility functions for integration
+
+def create_refinement_service(llm=None):
+    """Фабричная функция для создания сервиса рефайнмента"""
+    return ResponseRefinementService(llm)
+
+def quick_refine(content, llm=None, method="auto"):
+    """Быстрая функция для рефайнмента контента"""
+    service = create_refinement_service(llm)
+    return service.auto_refine(content, method)
 
 
 if __name__ == "__main__":
-    # Тест интеграции
-    test_metadata = {
-        "use_refinement": True,
-        "selected_file": "/home/user/test.txt",
-        "include_history": True
-    }
+    # Пример использования
+    logging.basicConfig(level=logging.INFO)
     
-    result = process_with_refinement(
-        message="Проанализируй содержимое файла и опиши основные моменты",
-        metadata=test_metadata
-    )
+    # Тестирование системы
+    test_topic = "Искусственный интеллект в образовании"
     
-    print("Результат тестирования рефинемента:")
-    print(f"Использован рефинемент: {result['used_refinement']}")
-    print(f"Итераций: {result['refinement_iterations']}")
-    print(f"Ответ: {result['response'][:200]}...")
+    try:
+        result = iterative_refinement(test_topic, max_rounds=2)
+        print("🎉 Результат итеративной обработки:")
+        print(result)
+    except Exception as e:
+        print(f"❌ Ошибка тестирования: {e}")

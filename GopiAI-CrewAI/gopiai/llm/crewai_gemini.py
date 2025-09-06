@@ -9,7 +9,7 @@ from langchain_core.outputs import ChatResult, ChatGeneration
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from pydantic import PrivateAttr
 
-from .gemini_provider import create_gemini_provider
+import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
 
@@ -38,11 +38,22 @@ class CrewAIGeminiLLM(BaseChatModel):
         self.enable_code_execution = enable_code_execution
         self._original_model = model  # Сохраняем оригинальное имя для Gemini SDK
         
-        # Инициализируем Gemini провайдер
-        self._gemini_provider = create_gemini_provider(
-            model=self._original_model,  # Используем оригинальное имя
-            enable_code_execution=self.enable_code_execution,
+        # Инициализируем Gemini провайдер с поддержкой code execution
+        import os
+        genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
+        
+        # Настройки генерации с поддержкой code execution
+        generation_config = genai.types.GenerationConfig(
             temperature=self.temperature
+        )
+        
+        # Создаем модель с поддержкой code execution
+        tools = [genai.protos.Tool(code_execution={})] if self.enable_code_execution else None
+        
+        self._gemini_model = genai.GenerativeModel(
+            model_name=self._original_model,
+            generation_config=generation_config,
+            tools=tools
         )
         
         logger.info(f"🚀 CrewAI Gemini LLM инициализирован (model: {corrected_model}, code_execution: {self.enable_code_execution})")
@@ -72,8 +83,9 @@ class CrewAIGeminiLLM(BaseChatModel):
             
             prompt = "\n".join(prompt_parts)
             
-            # Генерируем ответ через Gemini провайдер
-            response_text = self._gemini_provider.generate_content(prompt)
+            # Генерируем ответ через Gemini модель
+            response = self._gemini_model.generate_content(prompt)
+            response_text = response.text
             
             # Создаем результат
             message = AIMessage(content=response_text)

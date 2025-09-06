@@ -15,6 +15,7 @@ from threading import Thread
 # Third-party imports
 from crewai import Agent, Crew, Task
 from crewai_tools import TavilySearchTool, WebsiteSearchTool
+from tools.crewai_toolkit.tools import BraveSearchTool
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -30,6 +31,12 @@ from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
 # However, for consistency, we can try to import it here.
 # If it causes issues, it should be moved back inside the function.
 from tools.gopiai_integration.system_prompts import get_default_prompt
+from response_refinement_integration import (
+    ResponseRefinementService, iterative_refinement, quick_refine
+)
+from iterative_execution_system import (
+    IterativeExecutor, process_message_iteratively
+)
 
 
 # --- НАЧАЛО ВАЖНОГО БЛОКА ---
@@ -80,7 +87,7 @@ class UltraCleanFormatter(logging.Formatter):
         """Убираем все проблемные символы из логов"""
         formatted = super().format(record)
         # Убираем ANSI escape codes
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-?]*[ -/]*[@-~])')
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-9]*[ -/]*[@-~])')
         formatted = ansi_escape.sub('', formatted)
         
         # Убираем другие управляющие символы
@@ -88,24 +95,38 @@ class UltraCleanFormatter(logging.Formatter):
         
         return formatted
 
-# Настраиваем логирование с двумя файлами
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    handlers=[
-        logging.FileHandler(log_file, mode='w', encoding='utf-8'),
-        logging.FileHandler(local_log_file, mode='w', encoding='utf-8'),
-        logging.StreamHandler()
-    ]
-)
-
-# Применяем чистый форматтер ко всем хендлерам
-clean_formatter = UltraCleanFormatter()
-for handler in logging.getLogger().handlers:
-    handler.setFormatter(clean_formatter)
-
+# Создаем логгер
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Удаляем все существующие хендлеры, чтобы избежать дублирования
+for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
+
+# Создаем форматтер
+clean_formatter = UltraCleanFormatter()
+
+# Хендлер для основного файла логов (перезаписывается при каждом запуске)
+file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
+file_handler.setFormatter(clean_formatter)
+logger.addHandler(file_handler)
+
+# Хендлер для локального файла логов (перезаписывается при каждом запуске)
+local_file_handler = logging.FileHandler(local_log_file, mode='w', encoding='utf-8')
+local_file_handler.setFormatter(clean_formatter)
+logger.addHandler(local_file_handler)
+
+# Хендлер для вывода в консоль
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(clean_formatter)
+logger.addHandler(console_handler)
+
+# Применяем форматтер к корневому логгеру
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+for handler in root_logger.handlers[:]:
+    root_logger.removeHandler(handler)
+root_logger.addHandler(console_handler)
 
 # Подавляем ненужные логи от сторонних библиотек
 logging.getLogger('urllib3').setLevel(logging.WARNING)
@@ -116,6 +137,14 @@ logger.info("🚀 Запуск CrewAI API сервера...")
 logger.info(f"📁 Логи сохраняются в: {log_file}")
 logger.info(f"📁 Локальные логи: {local_log_file}")
 logger.debug("DEBUG: Детальное логирование включено")
+
+# Import the more advanced refinement crew after logger is initialized
+try:
+    from crews.refinement_crew.refinement_crew import iterative_refinement as advanced_refinement
+    logger.info("✅ Импорт продвинутой refinement crew успешен")
+except ImportError as e:
+    logger.warning(f"⚠️ Не удалось импортировать продвинутую refinement crew: {e}")
+    advanced_refinement = None
 
 # Инициализация Flask приложения
 app = Flask(__name__)
@@ -313,7 +342,7 @@ try:
     logger.info("🤖 Инициализация Gemini LLM с code_execution...")
     logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
     
-    # Используем новый Gemini провайдер с code_execution
+    # Используем новый Gemini провайдер БЕЗ code_execution для работы с CrewAI инструментами
     gemini_llm = create_crewai_gemini_llm(
         model="gemini-2.5-flash",
         enable_code_execution=True,
@@ -327,18 +356,48 @@ except Exception as e:
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
     exit(1)
 
+# Инициализация Response Refinement Service
+try:
+    logger.info("🔄 Инициализация Response Refinement Service...")
+    refinement_service = ResponseRefinementService(llm=gemini_llm)
+    logger.info("✅ Response Refinement Service успешно инициализирован")
+except Exception as e:
+    logger.error(f"❌ Ошибка инициализации Response Refinement Service: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    # Не критическая ошибка, продолжаем работу без refinement
+    refinement_service = None
+    logger.warning("⚠️ Сервер запущен без Response Refinement Service")
+
+# Инициализация Iterative Execution System
+try:
+    logger.info("⚡ Инициализация Iterative Execution System...")
+    iterative_executor = IterativeExecutor()
+    logger.info("✅ Iterative Execution System успешно инициализирован")
+except Exception as e:
+    logger.error(f"❌ Ошибка инициализации Iterative Execution System: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    iterative_executor = None
+    logger.warning("⚠️ Сервер запущен без Iterative Execution System")
+
 # Инициализация инструментов
 try:
     logger.info("🔧 Инициализация инструментов...")
     search_tool = TavilySearchTool()
     website_tool = WebsiteSearchTool()
+    brave_tool = BraveSearchTool()
+    
+    # Создаем список всех инструментов
+    all_tools = [search_tool, website_tool, brave_tool]
     logger.info("✅ Инструменты успешно инициализированы")
+    logger.info(f"📋 Доступные инструменты: {[tool.__class__.__name__ for tool in all_tools]}")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации инструментов: {e}")
     logger.error("🔍 Проверьте настройки API ключей в .env файле")
     # Не выходим из программы, создаем заглушки
     search_tool = None
     website_tool = None
+    brave_tool = None
+    all_tools = []
     logger.warning("⚠️ Работаем без инструментов поиска")
 
 def create_agent(role, goal, backstory):
@@ -352,6 +411,8 @@ def create_agent(role, goal, backstory):
             tools.append(search_tool)
         if website_tool:
             tools.append(website_tool)
+        if brave_tool:
+            tools.append(brave_tool)
         
         # Добавляем инструменты файловой системы и терминала
         tools.append(read_file_or_directory)
@@ -580,6 +641,134 @@ def list_tasks():
         
     except Exception as e:
         logger.error(f"❌ Ошибка получения списка задач: {e}")
+        return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
+
+@app.route('/api/refine', methods=['POST'])
+def refine_response():
+    """Итеративная обработка ответа с использованием Response Refinement"""
+    try:
+        logger.info("🔄 Получен запрос на итеративную обработку ответа")
+        
+        data = request.get_json()
+        if not data or 'content' not in data:
+            logger.error("❌ Неверный формат данных в запросе на рефайнмент")
+            return jsonify({'error': 'Требуется поле content для обработки'}), 400
+        
+        if not refinement_service:
+            logger.error("❌ Response Refinement Service недоступен")
+            return jsonify({'error': 'Сервис итеративной обработки недоступен'}), 503
+        
+        content = data['content']
+        refinement_type = data.get('type', 'auto')  # auto, crew, simple, advanced
+        max_rounds = data.get('max_rounds', 4)
+        context = data.get('context', '')
+        
+        logger.info(f"🎯 Обработка контента типом: {refinement_type}, макс. итераций: {max_rounds}")
+        
+        # Выполняем итеративную обработку
+        try:
+            if refinement_type == 'advanced' and advanced_refinement:
+                # Используем продвинутую систему с таймаутами и оптимизациями
+                refined_result, history = advanced_refinement(
+                    query=content, 
+                    context=context, 
+                    max_rounds=min(max_rounds, 3),  # Ограничиваем для производительности
+                    timeout_per_iteration=60
+                )
+                # История не используется в ответе для краткости
+            elif refinement_type == 'crew':
+                refined_result = refinement_service.refine_with_crew(content, max_rounds)
+            elif refinement_type == 'simple':
+                refined_result, history = refinement_service.refine_simple(content, max_rounds)
+            else:  # auto
+                # Автоматический выбор: если длинный запрос или файловая операция - используем advanced
+                if advanced_refinement and (len(content) > 200 or any(word in content.lower() for word in ['файл', 'папка', 'директория', 'file', 'folder', 'directory'])):
+                    refined_result, _ = advanced_refinement(content, context, max_rounds=2)
+                else:
+                    refined_result = refinement_service.auto_refine(content, 'simple')
+            
+            logger.info(f"✅ Итеративная обработка завершена успешно")
+            
+            return jsonify({
+                'original_content': content,
+                'refined_result': refined_result,
+                'refinement_type': refinement_type,
+                'max_rounds_used': max_rounds,
+                'status': 'completed'
+            })
+            
+        except Exception as refine_error:
+            logger.error(f"❌ Ошибка при итеративной обработке: {refine_error}")
+            return jsonify({
+                'error': f'Ошибка обработки: {str(refine_error)}',
+                'original_content': content
+            }), 500
+        
+    except Exception as e:
+        logger.error(f"❌ Общая ошибка endpoint рефайнмента: {e}")
+        logger.error(f"🔍 Трассировка: {traceback.format_exc()}")
+        return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
+
+@app.route('/api/iterate', methods=['POST'])
+def iterate_execution():
+    """Итеративное выполнение команд с интерактивной обработкой"""
+    try:
+        logger.info("⚡ Получен запрос на итеративное выполнение")
+        
+        data = request.get_json()
+        if not data or 'message' not in data:
+            logger.error("❌ Неверный формат данных в запросе на итерацию")
+            return jsonify({'error': 'Требуется поле message для обработки'}), 400
+        
+        if not iterative_executor:
+            logger.error("❌ Iterative Execution System недоступен")
+            return jsonify({'error': 'Система итеративного выполнения недоступна'}), 503
+        
+        message = data['message']
+        metadata = data.get('metadata', {})
+        
+        logger.info(f"🎯 Итеративная обработка сообщения: {message[:100]}...")
+        
+        # Создаем простой LLM client adapter
+        class LLMClientAdapter:
+            def __init__(self, llm):
+                self.llm = llm
+            
+            def generate_response(self, message, metadata):
+                try:
+                    messages = [{"role": "user", "content": message}]
+                    response = self.llm.invoke(messages)
+                    return response.content if hasattr(response, 'content') else str(response)
+                except Exception as e:
+                    logger.error(f"Ошибка генерации ответа: {e}")
+                    return f"Ошибка: {str(e)}"
+        
+        llm_client = LLMClientAdapter(gemini_llm)
+        
+        # Выполняем итеративную обработку
+        try:
+            result = iterative_executor.process_iteratively(message, llm_client, metadata)
+            
+            logger.info(f"✅ Итеративная обработка завершена. Итераций: {result['iterations_count']}")
+            
+            return jsonify({
+                'final_response': result['final_response'],
+                'iterations_count': result['iterations_count'],
+                'execution_history': result['execution_history'],
+                'success': result['success'],
+                'status': 'completed'
+            })
+            
+        except Exception as iter_error:
+            logger.error(f"❌ Ошибка при итеративной обработке: {iter_error}")
+            return jsonify({
+                'error': f'Ошибка обработки: {str(iter_error)}',
+                'original_message': message
+            }), 500
+        
+    except Exception as e:
+        logger.error(f"❌ Общая ошибка endpoint итераций: {e}")
+        logger.error(f"🔍 Трассировка: {traceback.format_exc()}")
         return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
 
 # Добавленные endpoints для совместимости с UI
@@ -866,6 +1055,8 @@ if __name__ == '__main__':
         logger.info("   POST /api/tasks - создание новой задачи")
         logger.info("   GET  /api/tasks - список всех задач")
         logger.info("   GET  /api/tasks/<id> - статус конкретной задачи")
+        logger.info("   POST /api/refine - итеративная обработка ответов")
+        logger.info("   POST /api/iterate - итеративное выполнение команд")
         logger.info("")
         logger.info("🚀 Сервер готов к работе на http://localhost:5052")
         logger.info(f"📁 Логи сохраняются в: {log_file}")
