@@ -1,4 +1,5 @@
 # --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
+# --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 
 # Standard library imports
 import logging
@@ -14,7 +15,10 @@ from threading import Thread
 
 # Third-party imports
 import crewai_tools
+import crewai_tools
 from crewai import Agent, Crew, Task
+from crewai_tools import TavilySearchTool, BraveSearchTool
+# from tools.crewai_toolkit.tools import WebsiteSearchTool
 from crewai_tools import TavilySearchTool, BraveSearchTool
 # from tools.crewai_toolkit.tools import WebsiteSearchTool
 from dotenv import load_dotenv
@@ -23,9 +27,17 @@ from flask_cors import CORS
 from langchain_core.messages import (
     AIMessage, HumanMessage, SystemMessage, ToolMessage
 )
+from langchain_core.messages import (
+    AIMessage, HumanMessage, SystemMessage, ToolMessage
+)
 from langchain_core.tools import tool
 
 # Local application imports
+from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
+# The following import is inside a try-except block in the original code,
+# which is good practice if the module is not always available.
+# However, for consistency, we can try to import it here.
+# If it causes issues, it should be moved back inside the function.
 from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
 # The following import is inside a try-except block in the original code,
 # which is good practice if the module is not always available.
@@ -39,10 +51,18 @@ from iterative_execution_system import (
     IterativeExecutor, process_message_iteratively
 )
 
+from response_refinement_integration import (
+    ResponseRefinementService, iterative_refinement, quick_refine
+)
+from iterative_execution_system import (
+    IterativeExecutor, process_message_iteratively
+)
+
 
 # --- НАЧАЛО ВАЖНОГО БЛОКА ---
 # Четко указываем путь к .env файлу в той же папке, что и наш скрипт
 env_path = Path(__file__).parent / '.env'
+
 
 if env_path.exists():
     load_dotenv(dotenv_path=env_path)
@@ -52,10 +72,56 @@ if env_path.exists():
     gemini_key = os.getenv('GEMINI_API_KEY')
     print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
     print(f"[DEBUG] GEMINI_API_KEY: {'Ключ найден!' if gemini_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
+    # Диагностический вывод: проверяем ключи
+    tavily_key = os.getenv('TAVILY_API_KEY')
+    gemini_key = os.getenv('GEMINI_API_KEY')
+    print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
+    print(f"[DEBUG] GEMINI_API_KEY: {'Ключ найден!' if gemini_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
 else:
     print(f"[ERROR] Файл .env не найден по пути: {env_path}")
 # --- КОНЕЦ ВАЖНОГО БЛОКА ---
 
+class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
+    PENDING = auto()
+    PROCESSING = auto()
+    COMPLETED = auto()
+    FAILED = auto()
+
+# Настройка читаемого логирования для CrewAI сервера
+# Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
+_LOG_DIR = Path.home() / ".gopiai" / "logs"
+try:
+    _LOG_DIR.mkdir(parents=True, exist_ok=True)
+except Exception as _e:
+    # В случае ошибки — fallback в текущий каталог
+    print(f"[WARNING] Не удалось создать каталог логов {_LOG_DIR}: {_e}. Используем текущий каталог.")
+    _LOG_DIR = Path(".")
+# Используем два файла для логирования: общий и локальный
+log_file = str(_LOG_DIR / "crewai_api_server_debug.log")
+local_log_file = str(Path(__file__).parent / "crewai_api_server_debug_local.log")
+
+class UltraCleanFormatter(logging.Formatter):
+    """Форматтер который убирает ВСЕ нечитаемые символы"""
+    
+    def __init__(self):
+        super().__init__(
+            fmt='%(asctime)s [%(levelname)s] %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
+    
+    def format(self, record):
+        """Убираем все проблемные символы из логов"""
+        formatted = super().format(record)
+        # Убираем ANSI escape codes
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-9]*[ -/]*[@-~])')
+        formatted = ansi_escape.sub('', formatted)
+        
+        # Убираем другие управляющие символы
+        formatted = ''.join(char for char in formatted if ord(char) >= 32 or char in '\t\n')
+        
+        return formatted
+
+# Создаем логгер
 class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
     PENDING = auto()
     PROCESSING = auto()
@@ -146,10 +212,61 @@ try:
 except ImportError as e:
     logger.warning(f"⚠️ Не удалось импортировать продвинутую refinement crew: {e}")
     advanced_refinement = None
+logger.setLevel(logging.DEBUG)
+
+# Удаляем все существующие хендлеры, чтобы избежать дублирования
+for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
+
+# Создаем форматтер
+clean_formatter = UltraCleanFormatter()
+
+# Хендлер для основного файла логов (перезаписывается при каждом запуске)
+file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
+file_handler.setFormatter(clean_formatter)
+logger.addHandler(file_handler)
+
+# Хендлер для локального файла логов (перезаписывается при каждом запуске)
+local_file_handler = logging.FileHandler(local_log_file, mode='w', encoding='utf-8')
+local_file_handler.setFormatter(clean_formatter)
+logger.addHandler(local_file_handler)
+
+# Хендлер для вывода в консоль
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(clean_formatter)
+logger.addHandler(console_handler)
+
+# Применяем форматтер к корневому логгеру
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+for handler in root_logger.handlers[:]:
+    root_logger.removeHandler(handler)
+root_logger.addHandler(console_handler)
+
+# Подавляем ненужные логи от сторонних библиотек
+logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('requests').setLevel(logging.WARNING)
+logging.getLogger('httpx').setLevel(logging.WARNING)
+
+logger.info("🚀 Запуск CrewAI API сервера...")
+logger.info(f"📁 Логи сохраняются в: {log_file}")
+logger.info(f"📁 Локальные логи: {local_log_file}")
+logger.debug("DEBUG: Детальное логирование включено")
+
+# Import the more advanced refinement crew after logger is initialized
+try:
+    from crews.refinement_crew.refinement_crew import iterative_refinement as advanced_refinement
+    logger.info("✅ Импорт продвинутой refinement crew успешен")
+except ImportError as e:
+    logger.warning(f"⚠️ Не удалось импортировать продвинутую refinement crew: {e}")
+    advanced_refinement = None
 
 # Инициализация Flask приложения
 app = Flask(__name__)
 CORS(app)
+
+# Глобальный список инструментов
+all_tools = []
 
 # Глобальный список инструментов
 all_tools = []
@@ -163,10 +280,14 @@ def read_file_or_directory(path: str) -> str:
     try:
         if os.path.isfile(path):
             # Это файл - читаем его содержимое
+            # Это файл - читаем его содержимое
             with open(path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
                 return f"Содержимое файла {path}:\n{content}"
+                content = f.read()
+                return f"Содержимое файла {path}:\n{content}"
         elif os.path.isdir(path):
+            # Это директория - показываем список файлов
             # Это директория - показываем список файлов
             items = os.listdir(path)
             items_list = '\n'.join(f"{('📁' if os.path.isdir(os.path.join(path, item)) else '📄')} {item}" for item in sorted(items))
@@ -177,7 +298,146 @@ def read_file_or_directory(path: str) -> str:
         return f"Ошибка при чтении {path}: {str(e)}"
 
 @tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
+@tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
 def execute_terminal_command(command: str) -> str:
+    """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
+    
+    class RiskLevel(Enum):
+        SAFE = "safe"
+        LOW = "low"
+        MEDIUM = "medium"
+        HIGH = "high"
+        CRITICAL = "critical"
+    
+    def assess_command_risk(command: str) -> RiskLevel:
+        """Оценивает риск выполнения команды"""
+        command_lower = command.lower().strip()
+        
+        # Критический риск - команды, которые могут нанести серьезный ущерб
+        critical_patterns = [
+            r'rm\s+.*-rf.*/',  # rm -rf с путями
+            r'format\s+[cd]:',  # format диска
+            r'del\s+/[fsq]',  # del с флагами
+            r'shutdown',
+            r'reboot',
+            r'init\s+[06]',
+            r'fdisk',
+            r'mkfs',
+            r'dd\s+.*=/dev/',
+        ]
+        
+        # Высокий риск
+        high_patterns = [
+            r'sudo\s+rm',
+            r'chmod\s+.*777',
+            r'chown\s+.*root',
+            r'rm\s+.*\*',
+            r'kill\s+-9',
+            r'pkill',
+            r'killall',
+            r'crontab\s+-r',
+        ]
+        
+        # Средний риск
+        medium_patterns = [
+            r'sudo',
+            r'pip\s+install',
+            r'apt\s+install',
+            r'wget',
+            r'curl.*-o',
+            r'git\s+clone',
+            r'python.*\.py',
+            r'bash.*\.sh',
+            r'chmod',
+            r'chown',
+        ]
+        
+        # Низкий риск
+        low_patterns = [
+            r'cat\s+/etc/',
+            r'less\s+/etc/',
+            r'more\s+/etc/',
+            r'tail\s+-f',
+            r'head.*-n\s*\d+',
+        ]
+        
+        # Безопасные команды (явно разрешенные)
+        safe_patterns = [
+            r'^ls(\s|$)',
+            r'^pwd(\s|$)',
+            r'^date(\s|$)',
+            r'^whoami(\s|$)',
+            r'^id(\s|$)',
+            r'^uname(\s|$)',
+            r'^which\s+\w+$',
+            r'^echo\s+',
+            r'^cat\s+[^/]',
+            r'^head\s+[^/]',
+            r'^tail\s+[^/]',
+            r'^wc\s+',
+            r'^grep\s+',
+            r'^find\s+.*-name',
+            r'^locate\s+',
+        ]
+        
+        # Проверяем от самого опасного к безопасному
+        for pattern in critical_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.CRITICAL
+                
+        for pattern in high_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.HIGH
+                
+        for pattern in medium_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.MEDIUM
+                
+        for pattern in low_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.LOW
+                
+        for pattern in safe_patterns:
+            if re.search(pattern, command_lower):
+                return RiskLevel.SAFE
+        
+        # Если команда не попала ни под один паттерн - средний риск
+        return RiskLevel.MEDIUM
+    
+    def ask_user_permission(command: str, risk_level: RiskLevel) -> bool:
+        """Запрашивает разрешение пользователя на выполнение команды"""
+        if risk_level == RiskLevel.SAFE:
+            return True
+            
+        # В серверном контексте автоматически разрешаем безопасные и низкорисковые команды
+        # а для остальных возвращаем False с пояснением
+        
+        # В серверном режиме не можем запрашивать интерактивное подтверждение
+        # поэтому блокируем все команды выше низкого риска
+        if risk_level in [RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL]:
+            return False
+        
+        return True  # Разрешаем только SAFE и LOW
+    
+    try:
+        if not command or not command.strip():
+            return "Пустая команда"
+        
+        command = command.strip()
+        
+        # Оцениваем риск команды
+        risk_level = assess_command_risk(command)
+        
+        # Запрашиваем разрешение у пользователя для опасных команд
+        if not ask_user_permission(command, risk_level):
+            risk_msg = {
+                RiskLevel.MEDIUM: "🟠 Команда среднего риска заблокирована",
+                RiskLevel.HIGH: "🔴 Команда высокого риска заблокирована", 
+                RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИ ОПАСНАЯ команда заблокирована"
+            }
+            return f"{risk_msg.get(risk_level, 'Команда заблокирована')}: '{command}'. Для безопасности сервера выполнение таких команд запрещено."
+        
+        # Выполняем команду
     """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
     
     class RiskLevel(Enum):
@@ -338,9 +598,33 @@ def execute_terminal_command(command: str) -> str:
             
     except subprocess.TimeoutExpired:
         return f"Таймаут при выполнении команды '{command}'"
+        
+        stdout = result.stdout or ""
+        stderr = result.stderr or ""
+        
+        if result.returncode == 0:
+            if stdout:
+                return f"Команда: {command}\nВывод:\n{stdout}"
+            else:
+                return f"Команда: {command}\nВыполнена успешно (без вывода)"
+        else:
+            return f"Ошибка выполнения команды '{command}' (код: {result.returncode}):\n{stderr}"
+            
+    except subprocess.TimeoutExpired:
+        return f"Таймаут при выполнении команды '{command}'"
     except Exception as e:
         return f"Ошибка выполнения команды '{command}': {str(e)}"
 
+# Инициализация Gemini LLM с поддержкой code_execution
+try:
+    logger.info("🤖 Инициализация Gemini LLM с code_execution...")
+    logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
+    
+    # Используем новый Gemini провайдер БЕЗ code_execution для работы с CrewAI инструментами
+    gemini_llm = create_crewai_gemini_llm(
+        model="gemini-2.5-flash",
+        enable_code_execution=False,  # Отключаем code execution для работы с инструментами
+        temperature=0.7
 # Инициализация Gemini LLM с поддержкой code_execution
 try:
     logger.info("🤖 Инициализация Gemini LLM с code_execution...")
@@ -355,8 +639,36 @@ try:
     )
     logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
     logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
+    logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
+    logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Gemini LLM: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
+    exit(1)
+
+# Инициализация Response Refinement Service
+try:
+    logger.info("🔄 Инициализация Response Refinement Service...")
+    refinement_service = ResponseRefinementService(llm=gemini_llm)
+    logger.info("✅ Response Refinement Service успешно инициализирован")
+except Exception as e:
+    logger.error(f"❌ Ошибка инициализации Response Refinement Service: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    # Не критическая ошибка, продолжаем работу без refinement
+    refinement_service = None
+    logger.warning("⚠️ Сервер запущен без Response Refinement Service")
+
+# Инициализация Iterative Execution System
+try:
+    logger.info("⚡ Инициализация Iterative Execution System...")
+    iterative_executor = IterativeExecutor()
+    logger.info("✅ Iterative Execution System успешно инициализирован")
+except Exception as e:
+    logger.error(f"❌ Ошибка инициализации Iterative Execution System: {e}")
+    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    iterative_executor = None
+    logger.warning("⚠️ Сервер запущен без Iterative Execution System")
     logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
     exit(1)
@@ -1041,7 +1353,223 @@ def process_message_async(task_id, request_data):
         
         logger.info(f"✅ Задача {task_id} завершена успешно")
         
+    """Основной endpoint для обработки сообщений"""
+    try:
+        logger.debug("💬 Запрос на обработку сообщения")
+        logger.debug(f"DEBUG: Получен request.json: {request.json}")
+        
+        if not request.json:
+            logger.error("DEBUG: Отсутствует JSON данные в запросе")
+            return jsonify({'error': 'Отсутствует JSON данные'}), 400
+            
+        message = request.json.get('message', '')
+        session_id = request.json.get('session_id', str(uuid.uuid4()))
+        provider = request.json.get('provider', 'gemini')
+        model = request.json.get('model', 'gemini-2.0-flash')
+        
+        logger.debug(f"DEBUG: Извлеченные данные - message: '{message[:100]}...', session_id: {session_id}, provider: {provider}, model: {model}")
+        
+        if not message:
+            logger.error("DEBUG: Сообщение пустое")
+            return jsonify({'error': 'Сообщение не может быть пустым'}), 400
+        
+        # Создаем задачу обработки
+        task_id = str(uuid.uuid4())
+        task_data = {
+            'task_id': task_id,
+            'session_id': session_id,
+            'description': f'Обработка сообщения: {message[:50]}...' if len(message) > 50 else message,
+            'status': TaskStatus.PENDING,
+            'progress': 0,
+            'created_at': time.time(),
+            'message': message
+        }
+        
+        tasks_storage[task_id] = task_data
+        
+        logger.info(f"📝 Создана задача обработки сообщения: {task_id}")
+        
+        # Запускаем обработку в отдельном потоке
+        thread = Thread(target=process_message_async, args=(task_id, request.json))
+        thread.daemon = True
+        thread.start()
+        
+        return jsonify({
+            'task_id': task_id,
+            'session_id': session_id,
+            'status': 'processing',
+            'message': 'Сообщение принято к обработке'
+        }), 202
+        
     except Exception as e:
+        logger.error(f"❌ Ошибка обработки сообщения: {e}")
+        return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
+
+def process_message_async(task_id, request_data):
+    """Асинхронная обработка сообщения с использованием Gemini LLM"""
+    try:
+        logger.debug(f"DEBUG: Входим в process_message_async для task_id: {task_id}")
+        task = tasks_storage.get(task_id)
+        if not task:
+            logger.error(f"DEBUG: Задача {task_id} не найдена в хранилище")
+            return
+            
+        task['status'] = TaskStatus.PROCESSING
+        task['progress'] = 10
+        logger.debug(f"DEBUG: Статус задачи {task_id} изменен на PROCESSING")
+        
+        logger.info(f"🔄 Начата обработка задачи {task_id}")
+        
+        # Извлекаем данные из запроса
+        message = request_data.get('message', '')
+        metadata = request_data.get('metadata', {})
+        chat_history = metadata.get('chat_history', [])
+        
+        logger.debug(f"DEBUG: Получена chat_history с {len(chat_history)} сообщениями")
+        
+        # Обращение к Gemini LLM для получения реального ответа
+        logger.info(f"🤖 Отправка сообщения в Gemini: '{message[:50]}{'...' if len(message) > 50 else ''}'")
+        logger.debug(f"DEBUG: Полное сообщение: {message}")
+        
+        try:
+            logger.debug("DEBUG: Начинается импорт модулей langchain")
+            # Используем инициализированный gemini_llm для обработки сообщения
+            logger.debug("DEBUG: Импорт модулей langchain завершен")
+            
+            # Добавляем системный промпт с личностью ассистента
+            logger.debug("DEBUG: Получение системного промпта")
+            system_prompt = get_default_prompt()
+            logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
+            
+            # Создаём bound LLM с всеми инструментами
+            llm_with_tools = gemini_llm.bind_tools(all_tools)  # all_tools теперь глобальный
+            
+            # Обновляем system_prompt для tool calling
+            system_prompt += "\n\nИнструкция по инструментам: Вызывай инструменты через tool_call, например, для поиска используй TavilySearchTool с аргументами query='твой запрос'. Не пиши сырой Python-код с print() или импортами — система автоматически обработает tool_call и вернёт результат."
+            
+            # Начинаем с системного промпта
+            messages = [SystemMessage(content=system_prompt)]  # Пересоздаём messages с обновлённым промптом
+            logger.debug(f"DEBUG: Инициализировано сообщений с системным промптом: {len(messages)} сообщений")
+            
+            # Добавляем историю чата (последние 20 сообщений)
+            for hist_msg in chat_history:
+                role = hist_msg.get('role')
+                content = hist_msg.get('content', '')
+                if role == 'user':
+                    messages.append(HumanMessage(content=content))
+                elif role == 'assistant':
+                    messages.append(AIMessage(content=content))
+            
+            # Добавляем текущее сообщение пользователя (после перезаписи messages)
+            messages.append(HumanMessage(content=message))
+            
+            logger.debug(f"DEBUG: Сформированы сообщения для отправки: {len(messages)} сообщений (системное + {len(chat_history)} историческое + 1 текущее)")
+            
+            try:
+                logger.debug("DEBUG: Вызов gemini_llm.invoke()")
+                response = llm_with_tools.invoke(messages)
+            except Exception as bind_error:
+                logger.warning(f"⚠️ Bind_tools failed: {bind_error}. Falling back to gemini_llm.")
+                response = gemini_llm.invoke(messages)
+            
+            logger.debug(f"DEBUG: Получен ответ от gemini_llm: type={type(response)}")
+            logger.debug(f"DEBUG: Содержимое ответа: {response.content[:200] if hasattr(response, 'content') else 'НЕТ КОНТЕНТА'}...")
+            
+            logger.info(f"📊 Ответ получен. Tool calls: {len(response.tool_calls) if response.tool_calls else 0}")
+            
+            # Если есть tool calls, выполняем их
+            if response.tool_calls:
+                logger.info(f"🔧 Выполнение {len(response.tool_calls)} tool calls...")
+                
+                # Добавляем ответ модели в историю
+                messages.append(response)
+                
+                # Выполняем каждый tool call
+                for tool_call in response.tool_calls:
+                    tool_name = tool_call["name"]
+                    tool_args = tool_call["args"]
+                    tool_id = tool_call["id"]
+                    
+                    logger.info(f"🔧 Выполняем {tool_name} с аргументами: {tool_args}")
+                    
+                    # Выполняем функцию в зависимости от её имени
+                    try:
+                        if tool_name == "read_file_or_directory":
+                            tool_result = read_file_or_directory.invoke(tool_args)
+                        elif tool_name == "execute_terminal_command":
+                            tool_result = execute_terminal_command.invoke(tool_args)
+                        else:
+                            tool_result = f"Неизвестный инструмент: {tool_name}"
+                        
+                        logger.info(f"✅ Результат {tool_name}: {tool_result[:100]}{'...' if len(tool_result) > 100 else ''}")
+                        
+                        # Добавляем результат выполнения инструмента
+                        messages.append(ToolMessage(
+                            content=tool_result,
+                            tool_call_id=tool_id
+                        ))
+                        
+                    except Exception as tool_error:
+                        logger.error(f"❌ Ошибка выполнения {tool_name}: {tool_error}")
+                        messages.append(ToolMessage(
+                            content=f"Ошибка при выполнении {tool_name}: {str(tool_error)}",
+                            tool_call_id=tool_id
+                        ))
+                
+                # Получаем финальный ответ от модели с учетом результатов инструментов
+                final_response = gemini_llm.invoke(messages)
+                result_text = final_response.content
+                
+            else:
+                # Нет tool calls - используем обычный ответ
+                result_text = response.content
+                
+            logger.info(f"✅ Получен финальный ответ от Gemini: '{result_text[:100]}{'...' if len(result_text) > 100 else ''}'")
+            
+        except Exception as llm_error:
+            logger.error(f"❌ Ошибка при обращении к Gemini LLM: {llm_error}")
+            result_text = f"Извините, произошла ошибка при обработке вашего сообщения: {str(llm_error)}"
+        
+        task['status'] = TaskStatus.COMPLETED
+        task['progress'] = 100
+        task['result'] = result_text
+        task['completed_at'] = time.time()
+        
+        logger.info(f"✅ Задача {task_id} завершена успешно")
+        
+    except Exception as e:
+        logger.error(f"❌ Ошибка при асинхронной обработке задачи {task_id}: {e}")
+        task = tasks_storage.get(task_id)
+        if task:
+            task['status'] = TaskStatus.FAILED
+            task['error'] = str(e)
+
+@app.errorhandler(404)
+def not_found(error):
+    """Обработчик 404 ошибок"""
+    logger.warning(f"🔍 404: Путь не найден - {request.path}")
+    return jsonify({
+        'error': 'Путь не найден',
+        'path': request.path,
+        'available_endpoints': [
+            '/api/health',
+            '/health (legacy)',
+            '/api/tasks [POST, GET]',
+            '/api/tasks/<id> [GET]',
+            '/api/tools [GET]',
+            '/api/agents [GET]',
+            '/api/process [POST]'
+        ]
+    }), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    """Обработчик 500 ошибок"""
+    logger.error(f"💥 500: Внутренняя ошибка сервера - {error}")
+    return jsonify({
+        'error': 'Внутренняя ошибка сервера',
+        'message': 'Проверьте логи для получения подробной информации'
+    }), 500
         logger.error(f"❌ Ошибка при асинхронной обработке задачи {task_id}: {e}")
         task = tasks_storage.get(task_id)
         if task:
@@ -1076,6 +1604,38 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
+    try:
+        logger.info("✅ Запуск Flask сервера...")
+        logger.info("🔗 Доступные endpoints:")
+        logger.info("   GET  /api/health - проверка здоровья сервера")
+        logger.info("   GET  /health - проверка здоровья сервера (legacy)")
+        logger.info("   POST /api/tasks - создание новой задачи")
+        logger.info("   GET  /api/tasks - список всех задач")
+        logger.info("   GET  /api/tasks/<id> - статус конкретной задачи")
+        logger.info("   POST /api/refine - итеративная обработка ответов")
+        logger.info("   POST /api/iterate - итеративное выполнение команд")
+        logger.info("")
+        logger.info("🚀 Сервер готов к работе на http://localhost:5052")
+        logger.info(f"📁 Логи сохраняются в: {log_file}")
+        logger.info("⚡ Для остановки нажмите Ctrl+C")
+        
+        app.run(
+            host='0.0.0.0',
+            port=5052,
+            debug=False,
+            threaded=True
+        )
+        
+    except KeyboardInterrupt:
+        logger.info("👋 Получен сигнал остановки (Ctrl+C)")
+        logger.info("🔄 Завершение работы сервера...")
+    except Exception as e:
+        logger.error(f"💥 Критическая ошибка запуска сервера: {e}")
+        logger.error(f"🔍 Трассировка: {traceback.format_exc()}")
+    finally:
+        logger.info("👋 CrewAI API Server остановлен")
+
+# --- END OF FILE crewai_api_server.py ---
     try:
         logger.info("✅ Запуск Flask сервера...")
         logger.info("🔗 Доступные endpoints:")
