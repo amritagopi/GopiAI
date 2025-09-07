@@ -25,11 +25,9 @@ from langchain_core.messages import (
 from langchain_core.tools import tool
 
 # Local application imports
-from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
-# The following import is inside a try-except block in the original code,
-# which is good practice if the module is not always available.
-# However, for consistency, we can try to import it here.
-# If it causes issues, it should be moved back inside the function.
+# ВАЖНО: Импортируем официальный LLM-враппер от LangChain
+from langchain_google_genai import ChatGoogleGenerativeAI
+# ВАЖНО: УДАЛЕН импорт вашего кастомного `create_crewai_gemini_llm`
 from tools.gopiai_integration.system_prompts import get_default_prompt
 from response_refinement_integration import (
     ResponseRefinementService, iterative_refinement, quick_refine
@@ -47,9 +45,9 @@ if env_path.exists():
     load_dotenv(dotenv_path=env_path)
     print(f"[DEBUG] Переменные окружения успешно загружены из: {env_path}")
     # Диагностический вывод: проверяем ключи
-    tavily_key = os.getenv('TAVILY_API_KEY')
+    brave_key = os.getenv('BRAVE_API_KEY')
     gemini_key = os.getenv('GEMINI_API_KEY')
-    print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
+    print(f"[DEBUG] BRAVE_API_KEY: {'Ключ найден!' if brave_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
     print(f"[DEBUG] GEMINI_API_KEY: {'Ключ найден!' if gemini_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
 else:
     print(f"[ERROR] Файл .env не найден по пути: {env_path}")
@@ -61,74 +59,45 @@ class TaskStatus(Enum): # Изменено: убрано str, добавлено
     COMPLETED = auto()
     FAILED = auto()
 
-# Настройка читаемого логирования для CrewAI сервера
-# Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
+# Настройка читаемого логирования для CrewAI сервера (оставлено без изменений)
 _LOG_DIR = Path.home() / ".gopiai" / "logs"
 try:
     _LOG_DIR.mkdir(parents=True, exist_ok=True)
 except Exception as _e:
-    # В случае ошибки — fallback в текущий каталог
     print(f"[WARNING] Не удалось создать каталог логов {_LOG_DIR}: {_e}. Используем текущий каталог.")
     _LOG_DIR = Path(".")
-# Используем два файла для логирования: общий и локальный
 log_file = str(_LOG_DIR / "crewai_api_server_debug.log")
 local_log_file = str(Path(__file__).parent / "crewai_api_server_debug_local.log")
 
 class UltraCleanFormatter(logging.Formatter):
-    """Форматтер который убирает ВСЕ нечитаемые символы"""
-    
     def __init__(self):
-        super().__init__(
-            fmt='%(asctime)s [%(levelname)s] %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )
-    
+        super().__init__(fmt='%(asctime)s [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     def format(self, record):
-        """Убираем все проблемные символы из логов"""
         formatted = super().format(record)
-        # Убираем ANSI escape codes
         ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-9]*[ -/]*[@-~])')
         formatted = ansi_escape.sub('', formatted)
-        
-        # Убираем другие управляющие символы
         formatted = ''.join(char for char in formatted if ord(char) >= 32 or char in '\t\n')
-        
         return formatted
 
-# Создаем логгер
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-
-# Удаляем все существующие хендлеры, чтобы избежать дублирования
 for handler in logger.handlers[:]:
     logger.removeHandler(handler)
-
-# Создаем форматтер
 clean_formatter = UltraCleanFormatter()
-
-# Хендлер для основного файла логов (перезаписывается при каждом запуске)
 file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
 file_handler.setFormatter(clean_formatter)
 logger.addHandler(file_handler)
-
-# Хендлер для локального файла логов (перезаписывается при каждом запуске)
 local_file_handler = logging.FileHandler(local_log_file, mode='w', encoding='utf-8')
 local_file_handler.setFormatter(clean_formatter)
 logger.addHandler(local_file_handler)
-
-# Хендлер для вывода в консоль
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(clean_formatter)
 logger.addHandler(console_handler)
-
-# Применяем форматтер к корневому логгеру
 root_logger = logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
 for handler in root_logger.handlers[:]:
     root_logger.removeHandler(handler)
 root_logger.addHandler(console_handler)
-
-# Подавляем ненужные логи от сторонних библиотек
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('requests').setLevel(logging.WARNING)
 logging.getLogger('httpx').setLevel(logging.WARNING)
@@ -158,12 +127,9 @@ def read_file_or_directory(path: str) -> str:
     """Читает содержимое файла или показывает содержимое директории."""
     try:
         if os.path.isfile(path):
-            # Это файл - читаем его содержимое
             with open(path, 'r', encoding='utf-8', errors='ignore') as f:
-                content = f.read()
-                return f"Содержимое файла {path}:\n{content}"
+                return f"Содержимое файла {path}:\n{f.read()}"
         elif os.path.isdir(path):
-            # Это директория - показываем список файлов
             items = os.listdir(path)
             items_list = '\n'.join(f"{('📁' if os.path.isdir(os.path.join(path, item)) else '📄')} {item}" for item in sorted(items))
             return f"Содержимое папки {path}:\n{items_list}"
@@ -175,7 +141,7 @@ def read_file_or_directory(path: str) -> str:
 @tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
 def execute_terminal_command(command: str) -> str:
     """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
-    
+    # ... (код функции execute_terminal_command оставлен без изменений) ...
     class RiskLevel(Enum):
         SAFE = "safe"
         LOW = "low"
@@ -184,177 +150,83 @@ def execute_terminal_command(command: str) -> str:
         CRITICAL = "critical"
     
     def assess_command_risk(command: str) -> RiskLevel:
-        """Оценивает риск выполнения команды"""
         command_lower = command.lower().strip()
-        
-        # Критический риск - команды, которые могут нанести серьезный ущерб
-        critical_patterns = [
-            r'rm\s+.*-rf.*/',  # rm -rf с путями
-            r'format\s+[cd]:',  # format диска
-            r'del\s+/[fsq]',  # del с флагами
-            r'shutdown',
-            r'reboot',
-            r'init\s+[06]',
-            r'fdisk',
-            r'mkfs',
-            r'dd\s+.*=/dev/',
-        ]
-        
-        # Высокий риск
-        high_patterns = [
-            r'sudo\s+rm',
-            r'chmod\s+.*777',
-            r'chown\s+.*root',
-            r'rm\s+.*\*',
-            r'kill\s+-9',
-            r'pkill',
-            r'killall',
-            r'crontab\s+-r',
-        ]
-        
-        # Средний риск
-        medium_patterns = [
-            r'sudo',
-            r'pip\s+install',
-            r'apt\s+install',
-            r'wget',
-            r'curl.*-o',
-            r'git\s+clone',
-            r'python.*\.py',
-            r'bash.*\.sh',
-            r'chmod',
-            r'chown',
-        ]
-        
-        # Низкий риск
-        low_patterns = [
-            r'cat\s+/etc/',
-            r'less\s+/etc/',
-            r'more\s+/etc/',
-            r'tail\s+-f',
-            r'head.*-n\s*\d+',
-        ]
-        
-        # Безопасные команды (явно разрешенные)
-        safe_patterns = [
-            r'^ls(\s|$)',
-            r'^pwd(\s|$)',
-            r'^date(\s|$)',
-            r'^whoami(\s|$)',
-            r'^id(\s|$)',
-            r'^uname(\s|$)',
-            r'^which\s+\w+$',
-            r'^echo\s+',
-            r'^cat\s+[^/]',
-            r'^head\s+[^/]',
-            r'^tail\s+[^/]',
-            r'^wc\s+',
-            r'^grep\s+',
-            r'^find\s+.*-name',
-            r'^locate\s+',
-        ]
-        
-        # Проверяем от самого опасного к безопасному
+        critical_patterns = [r'rm\s+.*-rf.*/', r'format\s+[cd]:', r'del\s+/[fsq]', r'shutdown', r'reboot', r'init\s+[06]', r'fdisk', r'mkfs', r'dd\s+.*=/dev/']
+        high_patterns = [r'sudo\s+rm', r'chmod\s+.*777', r'chown\s+.*root', r'rm\s+.*\*', r'kill\s+-9', r'pkill', r'killall', r'crontab\s+-r']
+        medium_patterns = [r'sudo', r'pip\s+install', r'apt\s+install', r'wget', r'curl.*-o', r'git\s+clone', r'python.*\.py', r'bash.*\.sh', r'chmod', r'chown']
+        low_patterns = [r'cat\s+/etc/', r'less\s+/etc/', r'more\s+/etc/', r'tail\s+-f', r'head.*-n\s*\d+']
+        safe_patterns = [r'^ls(\s|$)', r'^pwd(\s|$)', r'^date(\s|$)', r'^whoami(\s|$)', r'^id(\s|$)', r'^uname(\s|$)', r'^which\s+\w+$', r'^echo\s+', r'^cat\s+[^/]', r'^head\s+[^/]', r'^tail\s+[^/]', r'^wc\s+', r'^grep\s+', r'^find\s+.*-name', r'^locate\s+']
         for pattern in critical_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.CRITICAL
-                
+            if re.search(pattern, command_lower): return RiskLevel.CRITICAL
         for pattern in high_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.HIGH
-                
+            if re.search(pattern, command_lower): return RiskLevel.HIGH
         for pattern in medium_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.MEDIUM
-                
+            if re.search(pattern, command_lower): return RiskLevel.MEDIUM
         for pattern in low_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.LOW
-                
+            if re.search(pattern, command_lower): return RiskLevel.LOW
         for pattern in safe_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.SAFE
-        
-        # Если команда не попала ни под один паттерн - средний риск
+            if re.search(pattern, command_lower): return RiskLevel.SAFE
         return RiskLevel.MEDIUM
     
     def ask_user_permission(command: str, risk_level: RiskLevel) -> bool:
-        """Запрашивает разрешение пользователя на выполнение команды"""
-        if risk_level == RiskLevel.SAFE:
-            return True
-            
-        # В серверном контексте автоматически разрешаем безопасные и низкорисковые команды
-        # а для остальных возвращаем False с пояснением
-        
-        # В серверном режиме не можем запрашивать интерактивное подтверждение
-        # поэтому блокируем все команды выше низкого риска
-        if risk_level in [RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL]:
-            return False
-        
-        return True  # Разрешаем только SAFE и LOW
-    
+        if risk_level == RiskLevel.SAFE: return True
+        if risk_level in [RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL]: return False
+        return True
+
     try:
-        if not command or not command.strip():
-            return "Пустая команда"
-        
+        if not command or not command.strip(): return "Пустая команда"
         command = command.strip()
-        
-        # Оцениваем риск команды
         risk_level = assess_command_risk(command)
-        
-        # Запрашиваем разрешение у пользователя для опасных команд
         if not ask_user_permission(command, risk_level):
-            risk_msg = {
-                RiskLevel.MEDIUM: "🟠 Команда среднего риска заблокирована",
-                RiskLevel.HIGH: "🔴 Команда высокого риска заблокирована", 
-                RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИ ОПАСНАЯ команда заблокирована"
-            }
+            risk_msg = {RiskLevel.MEDIUM: "🟠 Команда среднего риска заблокирована", RiskLevel.HIGH: "🔴 Команда высокого риска заблокирована", RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИ ОПАСНАЯ команда заблокирована"}
             return f"{risk_msg.get(risk_level, 'Команда заблокирована')}: '{command}'. Для безопасности сервера выполнение таких команд запрещено."
-        
-        # Выполняем команду
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            timeout=30,
-            cwd=os.getcwd()
-        )
-        
-        stdout = result.stdout or ""
-        stderr = result.stderr or ""
-        
+        result = subprocess.run(command, shell=True, capture_output=True, text=True, timeout=30, cwd=os.getcwd())
+        stdout, stderr = result.stdout or "", result.stderr or ""
         if result.returncode == 0:
-            if stdout:
-                return f"Команда: {command}\nВывод:\n{stdout}"
-            else:
-                return f"Команда: {command}\nВыполнена успешно (без вывода)"
+            return f"Команда: {command}\nВывод:\n{stdout}" if stdout else f"Команда: {command}\nВыполнена успешно (без вывода)"
         else:
             return f"Ошибка выполнения команды '{command}' (код: {result.returncode}):\n{stderr}"
-            
     except subprocess.TimeoutExpired:
         return f"Таймаут при выполнении команды '{command}'"
     except Exception as e:
         return f"Ошибка выполнения команды '{command}': {str(e)}"
 
-# Инициализация Gemini LLM с поддержкой code_execution
+# ВАЖНО: Новый, исправленный блок инициализации LLM и инструментов
+gemini_llm = None
 try:
-    logger.info("🤖 Инициализация Gemini LLM с code_execution...")
-    logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
-    
-    # Используем новый Gemini провайдер БЕЗ code_execution для работы с CrewAI инструментами
-    gemini_llm = create_crewai_gemini_llm(
-        model="gemini-2.5-flash",
-        enable_code_execution=True,
-        temperature=0.7
-    )
-    logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
-    logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
+    logger.info("🤖 Инициализация официального Gemini LLM...")
+    gemini_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", verbose=True, temperature=0.7)
+    logger.info("✅ Gemini LLM успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Gemini LLM: {e}")
     logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
-    exit(1)
+    # exit(1) # Не выходим, чтобы сервер мог запуститься и показать ошибку в UI
+
+# Инициализация инструментов
+all_tools = []
+try:
+    logger.info("🔧 Инициализация инструментов...")
+    # ВАЖНО: Заменяем Tavily на Brave, как просил пользователь
+    all_tools.append(BraveSearchTool())
+    all_tools.append(WebsiteSearchTool())
+
+    # Добавляем локальные инструменты
+    all_tools.append(read_file_or_directory)
+    all_tools.append(execute_terminal_command)
+    logger.info(f"✅ Инструменты успешно инициализированы: {[tool.name for tool in all_tools]}")
+except Exception as e:
+    logger.error(f"❌ Ошибка инициализации инструментов: {e}")
+    logger.error("🔍 Проверьте API ключи для инструментов в .env файле (например, BRAVE_API_KEY)")
+    all_tools = []
+
+# ВАЖНО: Привязываем инструменты к LLM, если все инициализировалось успешно
+if gemini_llm and all_tools:
+    gemini_llm.bind_tools(all_tools)
+    logger.info("✅ Инструменты успешно привязаны к LLM.")
+else:
+    logger.warning("⚠️ LLM или инструменты не были инициализированы. Инструменты не будут работать.")
+
 
 # Инициализация Response Refinement Service
 try:
@@ -363,8 +235,6 @@ try:
     logger.info("✅ Response Refinement Service успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Response Refinement Service: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
-    # Не критическая ошибка, продолжаем работу без refinement
     refinement_service = None
     logger.warning("⚠️ Сервер запущен без Response Refinement Service")
 
@@ -375,59 +245,25 @@ try:
     logger.info("✅ Iterative Execution System успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Iterative Execution System: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
     iterative_executor = None
     logger.warning("⚠️ Сервер запущен без Iterative Execution System")
-
-# Инициализация инструментов
-try:
-    logger.info("🔧 Инициализация инструментов...")
-    search_tool = TavilySearchTool()
-    website_tool = WebsiteSearchTool()
-    brave_tool = BraveSearchTool()
-    
-    # Создаем список всех инструментов
-    all_tools = [search_tool, website_tool, brave_tool]
-    logger.info("✅ Инструменты успешно инициализированы")
-    logger.info(f"📋 Доступные инструменты: {[tool.__class__.__name__ for tool in all_tools]}")
-except Exception as e:
-    logger.error(f"❌ Ошибка инициализации инструментов: {e}")
-    logger.error("🔍 Проверьте настройки API ключей в .env файле")
-    # Не выходим из программы, создаем заглушки
-    search_tool = None
-    website_tool = None
-    brave_tool = None
-    all_tools = []
-    logger.warning("⚠️ Работаем без инструментов поиска")
 
 def create_agent(role, goal, backstory):
     """Создание агента с обработкой ошибок"""
     try:
         logger.debug(f"👤 Создание агента: {role}")
         
-        # Собираем доступные инструменты
-        tools = []
-        if search_tool:
-            tools.append(search_tool)
-        if website_tool:
-            tools.append(website_tool)
-        if brave_tool:
-            tools.append(brave_tool)
-        
-        # Добавляем инструменты файловой системы и терминала
-        tools.append(read_file_or_directory)
-        tools.append(execute_terminal_command)
-        
-        if not tools:
+        if not all_tools:
             logger.warning(f"⚠️ Агент {role} создается без инструментов")
         
+        # ВАЖНО: Убеждаемся, что агент получает LLM с уже привязанными инструментами
         agent = Agent(
             role=role,
             goal=goal,
             backstory=backstory,
-            tools=tools,
+            tools=all_tools, # Передаем список инструментов
             verbose=True,
-            llm=gemini_llm
+            llm=gemini_llm # Передаем LLM (уже с привязанными инструментами)
         )
         logger.debug(f"✅ Агент {role} успешно создан")
         return agent

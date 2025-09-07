@@ -1,0 +1,10 @@
+crewai
+crewai-tools
+python-dotenv
+flask
+Flask-Cors
+langchain-core
+langchain-google-genai
+requests
+tavily-python
+google-generativeai
