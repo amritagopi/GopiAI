@@ -13,9 +13,10 @@ from pathlib import Path
 from threading import Thread
 
 # Third-party imports
+import crewai_tools
 from crewai import Agent, Crew, Task
-from crewai_tools import TavilySearchTool, WebsiteSearchTool
-from tools.crewai_toolkit.tools import BraveSearchTool
+from crewai_tools import TavilySearchTool, BraveSearchTool
+# from tools.crewai_toolkit.tools import WebsiteSearchTool
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -149,6 +150,9 @@ except ImportError as e:
 # Инициализация Flask приложения
 app = Flask(__name__)
 CORS(app)
+
+# Глобальный список инструментов
+all_tools = []
 
 # Глобальное хранилище задач
 tasks_storage = {}
@@ -346,7 +350,8 @@ try:
     gemini_llm = create_crewai_gemini_llm(
         model="gemini-2.5-flash",
         enable_code_execution=True,
-        temperature=0.7
+        temperature=0.7,
+        tool_choice='auto'
     )
     logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
     logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
@@ -382,23 +387,35 @@ except Exception as e:
 # Инициализация инструментов
 try:
     logger.info("🔧 Инициализация инструментов...")
-    search_tool = TavilySearchTool()
-    website_tool = WebsiteSearchTool()
-    brave_tool = BraveSearchTool()
-    
-    # Создаем список всех инструментов
-    all_tools = [search_tool, website_tool, brave_tool]
+    all_tools = []
+    try:
+        search_tool = TavilySearchTool()
+        all_tools.append(search_tool)
+    except Exception as e:
+        logger.warning(f"⚠️ TavilySearchTool failed to initialize: {e}")
+        search_tool = None
+    try:
+        # website_tool = WebsiteSearchTool()  # Комментирую, модуль не найден
+        # all_tools.append(website_tool)
+        # website_tool = None
+        pass
+    except Exception as e:
+        logger.warning(f"⚠️ WebsiteSearchTool failed to initialize: {e}")
+    try:
+        brave_tool = BraveSearchTool()
+        all_tools.append(brave_tool)
+    except Exception as e:
+        logger.warning(f"⚠️ BraveSearchTool failed to initialize: {e}")
+        brave_tool = None
+    all_tools.append(read_file_or_directory)
+    all_tools.append(execute_terminal_command)
     logger.info("✅ Инструменты успешно инициализированы")
     logger.info(f"📋 Доступные инструменты: {[tool.__class__.__name__ for tool in all_tools]}")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации инструментов: {e}")
     logger.error("🔍 Проверьте настройки API ключей в .env файле")
-    # Не выходим из программы, создаем заглушки
-    search_tool = None
-    website_tool = None
-    brave_tool = None
-    all_tools = []
-    logger.warning("⚠️ Работаем без инструментов поиска")
+    all_tools = [read_file_or_directory, execute_terminal_command]
+    logger.warning("⚠️ Работаем с базовыми инструментами (без поиска)")
 
 def create_agent(role, goal, backstory):
     """Создание агента с обработкой ошибок"""
@@ -928,8 +945,15 @@ def process_message_async(task_id, request_data):
             system_prompt = get_default_prompt()
             logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
             
+            # Создаём bound LLM с всеми инструментами
+            llm_with_tools = gemini_llm.bind_tools(all_tools)  # all_tools теперь глобальный
+            
+            # Обновляем system_prompt для tool calling
+            system_prompt += "\n\nИнструкция по инструментам: Вызывай инструменты через tool_call, например, для поиска используй TavilySearchTool с аргументами query='твой запрос'. Не пиши сырой Python-код с print() или импортами — система автоматически обработает tool_call и вернёт результат."
+            
             # Начинаем с системного промпта
-            messages = [SystemMessage(content=system_prompt)]
+            messages = [SystemMessage(content=system_prompt)]  # Пересоздаём messages с обновлённым промптом
+            logger.debug(f"DEBUG: Инициализировано сообщений с системным промптом: {len(messages)} сообщений")
             
             # Добавляем историю чата (последние 20 сообщений)
             for hist_msg in chat_history:
@@ -940,13 +964,18 @@ def process_message_async(task_id, request_data):
                 elif role == 'assistant':
                     messages.append(AIMessage(content=content))
             
-            # Добавляем текущее сообщение пользователя
+            # Добавляем текущее сообщение пользователя (после перезаписи messages)
             messages.append(HumanMessage(content=message))
             
             logger.debug(f"DEBUG: Сформированы сообщения для отправки: {len(messages)} сообщений (системное + {len(chat_history)} историческое + 1 текущее)")
             
-            logger.debug("DEBUG: Вызов gemini_llm.invoke()")
-            response = gemini_llm.invoke(messages)
+            try:
+                logger.debug("DEBUG: Вызов gemini_llm.invoke()")
+                response = llm_with_tools.invoke(messages)
+            except Exception as bind_error:
+                logger.warning(f"⚠️ Bind_tools failed: {bind_error}. Falling back to gemini_llm.")
+                response = gemini_llm.invoke(messages)
+            
             logger.debug(f"DEBUG: Получен ответ от gemini_llm: type={type(response)}")
             logger.debug(f"DEBUG: Содержимое ответа: {response.content[:200] if hasattr(response, 'content') else 'НЕТ КОНТЕНТА'}...")
             
@@ -1030,7 +1059,7 @@ def not_found(error):
             '/api/health',
             '/health (legacy)',
             '/api/tasks [POST, GET]',
-            '/api/tasks/<task_id> [GET]',
+            '/api/tasks/<id> [GET]',
             '/api/tools [GET]',
             '/api/agents [GET]',
             '/api/process [POST]'
@@ -1048,7 +1077,7 @@ def internal_error(error):
 
 if __name__ == '__main__':
     try:
-        logger.info("🌟 Запуск Flask сервера...")
+        logger.info("✅ Запуск Flask сервера...")
         logger.info("🔗 Доступные endpoints:")
         logger.info("   GET  /api/health - проверка здоровья сервера")
         logger.info("   GET  /health - проверка здоровья сервера (legacy)")
@@ -1070,7 +1099,7 @@ if __name__ == '__main__':
         )
         
     except KeyboardInterrupt:
-        logger.info("⏹️ Получен сигнал остановки (Ctrl+C)")
+        logger.info("👋 Получен сигнал остановки (Ctrl+C)")
         logger.info("🔄 Завершение работы сервера...")
     except Exception as e:
         logger.error(f"💥 Критическая ошибка запуска сервера: {e}")

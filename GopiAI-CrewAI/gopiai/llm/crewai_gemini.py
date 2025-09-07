@@ -21,6 +21,7 @@ class CrewAIGeminiLLM(BaseChatModel):
     model: str = "gemini-2.5-flash"
     temperature: float = 0.7
     enable_code_execution: bool = True
+    tool_choice: Optional[str] = 'auto'
     _gemini_provider: Any = PrivateAttr()
     
     def __init__(
@@ -132,5 +133,6 @@ def create_crewai_gemini_llm(
     return CrewAIGeminiLLM(
         model=model,
         temperature=temperature,
-        enable_code_execution=enable_code_execution
+        enable_code_execution=enable_code_execution,
+        tool_choice='auto'
     )
