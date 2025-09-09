@@ -66,10 +66,14 @@ class ChatAsyncHandler(QObject):
         # Настройки оптимизированного polling
         self.polling_active = False
         self.last_response_length = 0
-        self.initial_delay = 200  # 200ms начальная задержка для более быстрого отклика
-        self.max_delay = 2000     # 2s максимальная задержка для более быстрой реакции на изменения
-        self.delay_multiplier = 1.3  # Увеличенный множитель для более быстрого роста задержки
+        self.initial_delay = 500   # 500ms начальная задержка - оптимальный баланс
+        self.max_delay = 5000      # 5s максимальная задержка для долгих операций
+        self.delay_multiplier = 1.5  # Умеренный рост для лучшего опыта
         self.current_delay = self.initial_delay
+        
+        # Смарт-параметры для оптимизации
+        self.fast_polling_threshold = 10  # первые N попыток - быстрый polling
+        self.progress_reset_count = 0  # сброс задержки при прогрессе
         
         # Подключаем сигналы
         self.start_polling_signal.connect(self._start_polling_from_main_thread)
@@ -329,7 +333,26 @@ class ChatAsyncHandler(QObject):
                         self.response_ready.emit(norm_result)
                 else:
                     prev_delay = self.current_delay
-                    self.current_delay = int(min(self.max_delay, max(self.initial_delay, int(self.current_delay * self.delay_multiplier))))
+                    
+                    # Смарт-логика для оптимального backoff
+                    if self._current_polling_attempt <= self.fast_polling_threshold:
+                        # Первые попытки - быстрый polling
+                        next_delay = self.initial_delay
+                    else:
+                        # Exponential backoff с проверкой на прогресс
+                        current_progress = status.get("progress", 0)
+                        if hasattr(self, '_last_progress') and current_progress > self._last_progress:
+                            # Есть прогресс - сбрасываем задержку для отзывчивости
+                            self.progress_reset_count += 1
+                            next_delay = max(self.initial_delay, int(self.current_delay * 0.8))
+                            logger.debug(f"[POLLING-PROGRESS] Прогресс обнаружен ({self._last_progress} -> {current_progress}), уменьшаем задержку")
+                        else:
+                            # Нет прогресса - увеличиваем задержку
+                            next_delay = int(min(self.max_delay, self.current_delay * self.delay_multiplier))
+                        
+                        self._last_progress = current_progress
+                    
+                    self.current_delay = next_delay
                     if self._polling_timer.isActive():
                         self._polling_timer.stop()
                     self._polling_timer.start(self.current_delay)
@@ -340,11 +363,11 @@ class ChatAsyncHandler(QObject):
                         elapsed = time.monotonic() - self._polling_start_time
                     except Exception:
                         elapsed = time.time() - self._polling_start_time
-                    if elapsed > 120:
-                        logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (120s) для задачи {self._current_task_id}")
+                    if elapsed > 180:  # Увеличиваем UI timeout до 3 минут
+                        logger.warning(f"[POLLING-TIMEOUT] Превышено время ожидания (180s) для задачи {self._current_task_id}")
                         self._stop_and_reset_polling()
                         self._current_task_id = None
-                        self.message_error.emit("Превышено время ожидания ответа от сервера (120 секунд).")
+                        self.message_error.emit("Превышено время ожидания ответа от сервера (3 минуты).")
                         return
                 else:
                     try:

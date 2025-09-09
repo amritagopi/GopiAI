@@ -171,8 +171,31 @@ class IterativeExecutor:
         safe_commands = {
             'ls', 'cat', 'head', 'tail', 'pwd', 'date', 'whoami', 'id', 
             'ps', 'df', 'du', 'free', 'uptime', 'uname', 'which', 'type',
-            'echo', 'wc', 'sort', 'uniq', 'mkdir'
+            'echo', 'wc', 'sort', 'uniq', 'mkdir', 'file', 'grep', 'find',
+            'tree', 'stat', 'md5sum', 'sha256sum', 'history', 'env',
+            'python3 -c', 'node -e'
         }
+        
+        # Также проверяем популярные safe паттерны
+        safe_patterns = [
+            r'^ls( -[a-zA-Z]+)?( .+)?$',  # ls с любыми флагами
+            r'^cat [^|&;<>]+$',           # cat одного файла 
+            r'^file [^|&;<>]+$',          # file команда
+            r'^python3? -c ["\'].+["\']$',  # python -c с кодом в кавычках
+            r'^find [^|&;<>]+ -name [^|&;<>]+$',  # простой find
+            r'^grep [^|&;<>]+ [^|&;<>]+$',  # простой grep
+        ]
+        
+        # Проверяем safe паттерны сначала
+        for pattern in safe_patterns:
+            if re.match(pattern, command.strip()):
+                logger.info(f"[APPROVAL] Команда соответствует безопасному паттерну: {pattern}")
+                return {
+                    'needs_approval': False,
+                    'approved': True,
+                    'command_id': None,
+                    'reason': 'Safe pattern'
+                }
         
         # Если команда безопасная и не содержит опасных паттернов
         if cmd in safe_commands:
@@ -291,7 +314,7 @@ class IterativeExecutor:
                 logger.info(f"Ожидание подтверждения команды: {command} (ID: {command_id})")
                 
                 # Ожидаем подтверждения
-                if not self.wait_for_approval(command_id, timeout=120):  # 2 минуты
+                if not self.wait_for_approval(command_id, timeout=90):  # 1.5 минуты
                     return {
                         'success': False,
                         'error': f'Команда не подтверждена пользователем или истекло время ожидания: {command}',

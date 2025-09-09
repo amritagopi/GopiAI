@@ -463,10 +463,16 @@ except Exception as e:
 logger.info("🔄 Response Refinement Service настроен для динамического создания")
 refinement_service = None  # Будет создаваться по запросу
 
+# Shared store для pending команд с thread-safe access
+import threading
+pending_commands_store = {}
+pending_commands_lock = threading.Lock()
+
 # Инициализация Iterative Execution System
 try:
     logger.info("⚡ Инициализация Iterative Execution System...")
-    iterative_executor = IterativeExecutor()
+    iterative_executor = IterativeExecutor(pending_commands_store=pending_commands_store)
+    iterative_executor.pending_commands_lock = pending_commands_lock
     logger.info("✅ Iterative Execution System успешно инициализирован")
 except Exception as e:
     logger.error(f"❌ Ошибка инициализации Iterative Execution System: {e}")
@@ -1270,6 +1276,84 @@ def handle_internal_models():
         logger.error(f"Ошибка получения моделей: {e}")
         return jsonify({'error': 'Ошибка получения моделей'}), 500
 
+# === API ЭНДПОИНТЫ ДЛЯ УПРАВЛЕНИЯ ПОДТВЕРЖДЕНИЯМИ КОМАНД ===
+
+@app.route('/api/commands/pending', methods=['GET'])
+def get_pending_commands():
+    """Получить список команд, ожидающих подтверждения"""
+    try:
+        with pending_commands_lock:
+            pending = {cmd_id: cmd_info for cmd_id, cmd_info in pending_commands_store.items() 
+                      if cmd_info.get('status') == 'pending'}
+        
+        logger.debug(f"[APPROVAL-API] Запрос pending команд: {len(pending)} найдено")
+        return jsonify({
+            'success': True,
+            'pending_commands': pending
+        })
+    except Exception as e:
+        logger.error(f"[APPROVAL-API] Ошибка при получении pending команд: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/commands/<command_id>/approve', methods=['POST'])
+def approve_command(command_id):
+    """Подтвердить выполнение команды"""
+    try:
+        with pending_commands_lock:
+            if command_id in pending_commands_store:
+                pending_commands_store[command_id]['status'] = 'approved'
+                pending_commands_store[command_id]['approved_at'] = time.time()
+                logger.info(f"[APPROVAL-API] Команда {command_id} подтверждена пользователем")
+                return jsonify({'success': True, 'message': 'Command approved'})
+            else:
+                logger.warning(f"[APPROVAL-API] Команда {command_id} не найдена для подтверждения")
+                return jsonify({'success': False, 'error': 'Command not found'}), 404
+    except Exception as e:
+        logger.error(f"[APPROVAL-API] Ошибка при подтверждении команды {command_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/commands/<command_id>/reject', methods=['POST'])
+def reject_command(command_id):
+    """Отклонить выполнение команды"""
+    try:
+        with pending_commands_lock:
+            if command_id in pending_commands_store:
+                pending_commands_store[command_id]['status'] = 'rejected'
+                pending_commands_store[command_id]['rejected_at'] = time.time()
+                logger.info(f"[APPROVAL-API] Команда {command_id} отклонена пользователем")
+                return jsonify({'success': True, 'message': 'Command rejected'})
+            else:
+                logger.warning(f"[APPROVAL-API] Команда {command_id} не найдена для отклонения")
+                return jsonify({'success': False, 'error': 'Command not found'}), 404
+    except Exception as e:
+        logger.error(f"[APPROVAL-API] Ошибка при отклонении команды {command_id}: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/commands/status', methods=['GET'])
+def get_commands_status():
+    """Получить статистику по командам"""
+    try:
+        with pending_commands_lock:
+            total = len(pending_commands_store)
+            pending = sum(1 for cmd in pending_commands_store.values() if cmd.get('status') == 'pending')
+            approved = sum(1 for cmd in pending_commands_store.values() if cmd.get('status') == 'approved')
+            rejected = sum(1 for cmd in pending_commands_store.values() if cmd.get('status') == 'rejected')
+        
+        return jsonify({
+            'success': True,
+            'statistics': {
+                'total': total,
+                'pending': pending,
+                'approved': approved,
+                'rejected': rejected
+            }
+        })
+    except Exception as e:
+        logger.error(f"[APPROVAL-API] Ошибка при получении статистики команд: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# === ОБРАБОТЧИКИ ОШИБОК ===
+
 @app.errorhandler(404)
 def not_found(error):
     """Обработчик 404 ошибок"""
@@ -1285,6 +1369,10 @@ def not_found(error):
             '/api/tools [GET]',
             '/api/agents [GET]',
             '/api/process [POST]',
+            '/api/commands/pending [GET]',
+            '/api/commands/<id>/approve [POST]',
+            '/api/commands/<id>/reject [POST]',
+            '/api/commands/status [GET]',
             '/internal/state [GET, POST]',
             '/internal/models [GET]'
         ]

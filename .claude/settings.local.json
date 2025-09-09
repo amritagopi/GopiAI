@@ -82,7 +82,8 @@
       "Read(//home/amritagopi/venvs/**)",
       "Bash(./venv/bin/pip freeze)",
       "Bash(./venv/bin/pip install google-generativeai)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Read(//home/amritagopi/.gopiai/**)"
     ],
     "deny": [],
     "ask": []
