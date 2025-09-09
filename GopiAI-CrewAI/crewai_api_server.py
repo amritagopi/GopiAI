@@ -1,5 +1,4 @@
 # --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
-# --- START OF FILE crewai_api_server.py (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 
 # Standard library imports
 import logging
@@ -15,30 +14,19 @@ from threading import Thread
 
 # Third-party imports
 import crewai_tools
-import crewai_tools
 from crewai import Agent, Crew, Task
-from crewai_tools import TavilySearchTool, BraveSearchTool
-# from tools.crewai_toolkit.tools import WebsiteSearchTool
 from crewai_tools import TavilySearchTool, BraveSearchTool
 # from tools.crewai_toolkit.tools import WebsiteSearchTool
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from langchain_core.messages import (
-    AIMessage, HumanMessage, SystemMessage, ToolMessage
-)
-from langchain_core.messages import (
-    AIMessage, HumanMessage, SystemMessage, ToolMessage
+    AIMessage, HumanMessage, SystemMessage
 )
 from langchain_core.tools import tool
 
-# Local application imports
-from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
-# The following import is inside a try-except block in the original code,
-# which is good practice if the module is not always available.
-# However, for consistency, we can try to import it here.
-# If it causes issues, it should be moved back inside the function.
-from gopiai.llm.crewai_gemini import create_crewai_gemini_llm
+# Local application imports  
+from crewai import LLM
 # The following import is inside a try-except block in the original code,
 # which is good practice if the module is not always available.
 # However, for consistency, we can try to import it here.
@@ -50,19 +38,14 @@ from response_refinement_integration import (
 from iterative_execution_system import (
     IterativeExecutor, process_message_iteratively
 )
-
-from response_refinement_integration import (
-    ResponseRefinementService, iterative_refinement, quick_refine
-)
-from iterative_execution_system import (
-    IterativeExecutor, process_message_iteratively
+from llm_rotation_config import (
+    select_llm_model_safe, rate_limit_monitor, get_api_key_for_provider
 )
 
 
 # --- НАЧАЛО ВАЖНОГО БЛОКА ---
 # Четко указываем путь к .env файлу в той же папке, что и наш скрипт
 env_path = Path(__file__).parent / '.env'
-
 
 if env_path.exists():
     load_dotenv(dotenv_path=env_path)
@@ -72,56 +55,10 @@ if env_path.exists():
     gemini_key = os.getenv('GEMINI_API_KEY')
     print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
     print(f"[DEBUG] GEMINI_API_KEY: {'Ключ найден!' if gemini_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
-    # Диагностический вывод: проверяем ключи
-    tavily_key = os.getenv('TAVILY_API_KEY')
-    gemini_key = os.getenv('GEMINI_API_KEY')
-    print(f"[DEBUG] TAVILY_API_KEY: {'Ключ найден!' if tavily_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
-    print(f"[DEBUG] GEMINI_API_KEY: {'Ключ найден!' if gemini_key else 'КЛЮЧ НЕ НАЙДЕН!'}")
 else:
     print(f"[ERROR] Файл .env не найден по пути: {env_path}")
 # --- КОНЕЦ ВАЖНОГО БЛОКА ---
 
-class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
-    PENDING = auto()
-    PROCESSING = auto()
-    COMPLETED = auto()
-    FAILED = auto()
-
-# Настройка читаемого логирования для CrewAI сервера
-# Логи переносим в $HOME/.gopiai/logs с гарантированным созданием каталога.
-_LOG_DIR = Path.home() / ".gopiai" / "logs"
-try:
-    _LOG_DIR.mkdir(parents=True, exist_ok=True)
-except Exception as _e:
-    # В случае ошибки — fallback в текущий каталог
-    print(f"[WARNING] Не удалось создать каталог логов {_LOG_DIR}: {_e}. Используем текущий каталог.")
-    _LOG_DIR = Path(".")
-# Используем два файла для логирования: общий и локальный
-log_file = str(_LOG_DIR / "crewai_api_server_debug.log")
-local_log_file = str(Path(__file__).parent / "crewai_api_server_debug_local.log")
-
-class UltraCleanFormatter(logging.Formatter):
-    """Форматтер который убирает ВСЕ нечитаемые символы"""
-    
-    def __init__(self):
-        super().__init__(
-            fmt='%(asctime)s [%(levelname)s] %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )
-    
-    def format(self, record):
-        """Убираем все проблемные символы из логов"""
-        formatted = super().format(record)
-        # Убираем ANSI escape codes
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|[[0-9]*[ -/]*[@-~])')
-        formatted = ansi_escape.sub('', formatted)
-        
-        # Убираем другие управляющие символы
-        formatted = ''.join(char for char in formatted if ord(char) >= 32 or char in '\t\n')
-        
-        return formatted
-
-# Создаем логгер
 class TaskStatus(Enum): # Изменено: убрано str, добавлено Enum
     PENDING = auto()
     PROCESSING = auto()
@@ -212,54 +149,6 @@ try:
 except ImportError as e:
     logger.warning(f"⚠️ Не удалось импортировать продвинутую refinement crew: {e}")
     advanced_refinement = None
-logger.setLevel(logging.DEBUG)
-
-# Удаляем все существующие хендлеры, чтобы избежать дублирования
-for handler in logger.handlers[:]:
-    logger.removeHandler(handler)
-
-# Создаем форматтер
-clean_formatter = UltraCleanFormatter()
-
-# Хендлер для основного файла логов (перезаписывается при каждом запуске)
-file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
-file_handler.setFormatter(clean_formatter)
-logger.addHandler(file_handler)
-
-# Хендлер для локального файла логов (перезаписывается при каждом запуске)
-local_file_handler = logging.FileHandler(local_log_file, mode='w', encoding='utf-8')
-local_file_handler.setFormatter(clean_formatter)
-logger.addHandler(local_file_handler)
-
-# Хендлер для вывода в консоль
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(clean_formatter)
-logger.addHandler(console_handler)
-
-# Применяем форматтер к корневому логгеру
-root_logger = logging.getLogger()
-root_logger.setLevel(logging.DEBUG)
-for handler in root_logger.handlers[:]:
-    root_logger.removeHandler(handler)
-root_logger.addHandler(console_handler)
-
-# Подавляем ненужные логи от сторонних библиотек
-logging.getLogger('urllib3').setLevel(logging.WARNING)
-logging.getLogger('requests').setLevel(logging.WARNING)
-logging.getLogger('httpx').setLevel(logging.WARNING)
-
-logger.info("🚀 Запуск CrewAI API сервера...")
-logger.info(f"📁 Логи сохраняются в: {log_file}")
-logger.info(f"📁 Локальные логи: {local_log_file}")
-logger.debug("DEBUG: Детальное логирование включено")
-
-# Import the more advanced refinement crew after logger is initialized
-try:
-    from crews.refinement_crew.refinement_crew import iterative_refinement as advanced_refinement
-    logger.info("✅ Импорт продвинутой refinement crew успешен")
-except ImportError as e:
-    logger.warning(f"⚠️ Не удалось импортировать продвинутую refinement crew: {e}")
-    advanced_refinement = None
 
 # Инициализация Flask приложения
 app = Flask(__name__)
@@ -268,11 +157,14 @@ CORS(app)
 # Глобальный список инструментов
 all_tools = []
 
-# Глобальный список инструментов
-all_tools = []
-
 # Глобальное хранилище задач
 tasks_storage = {}
+
+# Состояние UI для синхронизации с model_selector_widget
+ui_state = {
+    "provider": "gemini",
+    "model_id": None  # Будет выбрана динамически
+}
 
 @tool(description="Читает содержимое файла или папки")
 def read_file_or_directory(path: str) -> str:
@@ -280,14 +172,10 @@ def read_file_or_directory(path: str) -> str:
     try:
         if os.path.isfile(path):
             # Это файл - читаем его содержимое
-            # Это файл - читаем его содержимое
             with open(path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
                 return f"Содержимое файла {path}:\n{content}"
-                content = f.read()
-                return f"Содержимое файла {path}:\n{content}"
         elif os.path.isdir(path):
-            # Это директория - показываем список файлов
             # Это директория - показываем список файлов
             items = os.listdir(path)
             items_list = '\n'.join(f"{('📁' if os.path.isdir(os.path.join(path, item)) else '📄')} {item}" for item in sorted(items))
@@ -298,146 +186,7 @@ def read_file_or_directory(path: str) -> str:
         return f"Ошибка при чтении {path}: {str(e)}"
 
 @tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
-@tool(description="Выполняет команду в терминале с интерактивным контролем безопасности")
 def execute_terminal_command(command: str) -> str:
-    """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
-    
-    class RiskLevel(Enum):
-        SAFE = "safe"
-        LOW = "low"
-        MEDIUM = "medium"
-        HIGH = "high"
-        CRITICAL = "critical"
-    
-    def assess_command_risk(command: str) -> RiskLevel:
-        """Оценивает риск выполнения команды"""
-        command_lower = command.lower().strip()
-        
-        # Критический риск - команды, которые могут нанести серьезный ущерб
-        critical_patterns = [
-            r'rm\s+.*-rf.*/',  # rm -rf с путями
-            r'format\s+[cd]:',  # format диска
-            r'del\s+/[fsq]',  # del с флагами
-            r'shutdown',
-            r'reboot',
-            r'init\s+[06]',
-            r'fdisk',
-            r'mkfs',
-            r'dd\s+.*=/dev/',
-        ]
-        
-        # Высокий риск
-        high_patterns = [
-            r'sudo\s+rm',
-            r'chmod\s+.*777',
-            r'chown\s+.*root',
-            r'rm\s+.*\*',
-            r'kill\s+-9',
-            r'pkill',
-            r'killall',
-            r'crontab\s+-r',
-        ]
-        
-        # Средний риск
-        medium_patterns = [
-            r'sudo',
-            r'pip\s+install',
-            r'apt\s+install',
-            r'wget',
-            r'curl.*-o',
-            r'git\s+clone',
-            r'python.*\.py',
-            r'bash.*\.sh',
-            r'chmod',
-            r'chown',
-        ]
-        
-        # Низкий риск
-        low_patterns = [
-            r'cat\s+/etc/',
-            r'less\s+/etc/',
-            r'more\s+/etc/',
-            r'tail\s+-f',
-            r'head.*-n\s*\d+',
-        ]
-        
-        # Безопасные команды (явно разрешенные)
-        safe_patterns = [
-            r'^ls(\s|$)',
-            r'^pwd(\s|$)',
-            r'^date(\s|$)',
-            r'^whoami(\s|$)',
-            r'^id(\s|$)',
-            r'^uname(\s|$)',
-            r'^which\s+\w+$',
-            r'^echo\s+',
-            r'^cat\s+[^/]',
-            r'^head\s+[^/]',
-            r'^tail\s+[^/]',
-            r'^wc\s+',
-            r'^grep\s+',
-            r'^find\s+.*-name',
-            r'^locate\s+',
-        ]
-        
-        # Проверяем от самого опасного к безопасному
-        for pattern in critical_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.CRITICAL
-                
-        for pattern in high_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.HIGH
-                
-        for pattern in medium_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.MEDIUM
-                
-        for pattern in low_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.LOW
-                
-        for pattern in safe_patterns:
-            if re.search(pattern, command_lower):
-                return RiskLevel.SAFE
-        
-        # Если команда не попала ни под один паттерн - средний риск
-        return RiskLevel.MEDIUM
-    
-    def ask_user_permission(command: str, risk_level: RiskLevel) -> bool:
-        """Запрашивает разрешение пользователя на выполнение команды"""
-        if risk_level == RiskLevel.SAFE:
-            return True
-            
-        # В серверном контексте автоматически разрешаем безопасные и низкорисковые команды
-        # а для остальных возвращаем False с пояснением
-        
-        # В серверном режиме не можем запрашивать интерактивное подтверждение
-        # поэтому блокируем все команды выше низкого риска
-        if risk_level in [RiskLevel.MEDIUM, RiskLevel.HIGH, RiskLevel.CRITICAL]:
-            return False
-        
-        return True  # Разрешаем только SAFE и LOW
-    
-    try:
-        if not command or not command.strip():
-            return "Пустая команда"
-        
-        command = command.strip()
-        
-        # Оцениваем риск команды
-        risk_level = assess_command_risk(command)
-        
-        # Запрашиваем разрешение у пользователя для опасных команд
-        if not ask_user_permission(command, risk_level):
-            risk_msg = {
-                RiskLevel.MEDIUM: "🟠 Команда среднего риска заблокирована",
-                RiskLevel.HIGH: "🔴 Команда высокого риска заблокирована", 
-                RiskLevel.CRITICAL: "💀 КРИТИЧЕСКИ ОПАСНАЯ команда заблокирована"
-            }
-            return f"{risk_msg.get(risk_level, 'Команда заблокирована')}: '{command}'. Для безопасности сервера выполнение таких команд запрещено."
-        
-        # Выполняем команду
     """Выполняет команду в терминале с умной оценкой рисков и запросом подтверждения для опасных команд."""
     
     class RiskLevel(Enum):
@@ -598,92 +347,121 @@ def execute_terminal_command(command: str) -> str:
             
     except subprocess.TimeoutExpired:
         return f"Таймаут при выполнении команды '{command}'"
-        
-        stdout = result.stdout or ""
-        stderr = result.stderr or ""
-        
-        if result.returncode == 0:
-            if stdout:
-                return f"Команда: {command}\nВывод:\n{stdout}"
-            else:
-                return f"Команда: {command}\nВыполнена успешно (без вывода)"
-        else:
-            return f"Ошибка выполнения команды '{command}' (код: {result.returncode}):\n{stderr}"
-            
-    except subprocess.TimeoutExpired:
-        return f"Таймаут при выполнении команды '{command}'"
     except Exception as e:
         return f"Ошибка выполнения команды '{command}': {str(e)}"
 
-# Инициализация Gemini LLM с поддержкой code_execution
+# Функция для создания LLM динамически
+def create_llm(provider="gemini", model=None, temperature=0.7):
+    """
+    Создает LLM объект на основе переданных параметров
+    Поддерживает ротацию моделей и провайдеров с использованием системы ротации
+    """
+    try:
+        # Если модель не указана, выбираем динамически
+        if model is None:
+            from llm_rotation_config import select_llm_model_safe
+            model = select_llm_model_safe("dialog")
+            if not model:
+                raise Exception("Нет доступных моделей для динамического выбора")
+        
+        logger.debug(f"🤖 Создание LLM: provider={provider}, model={model}")
+        
+        # Нормализуем модель для CrewAI формата
+        if provider == "gemini" and model and not model.startswith("gemini/"):
+            # Конвертируем UI формат в CrewAI формат
+            if model.startswith("gemini-"):
+                normalized_model = f"gemini/{model}"
+            else:
+                normalized_model = f"gemini/{model}"
+        else:
+            normalized_model = model
+        
+        logger.debug(f"DEBUG: Нормализованная модель: {normalized_model}")
+        
+        # Попробуем сначала использовать запрашиваемую модель
+        try:
+            # Создаем LLM с указанными параметрами
+            llm = LLM(
+                model=normalized_model,
+                temperature=temperature
+            )
+            logger.debug(f"✅ LLM создан успешно: {normalized_model}")
+            return llm
+            
+        except Exception as model_error:
+            logger.warning(f"⚠️ Не удалось создать LLM с моделью {normalized_model}: {model_error}")
+            
+            # Используем систему ротации для выбора альтернативной модели
+            try:
+                logger.info("🔄 Используем систему ротации для выбора альтернативной модели")
+                
+                # Выбираем модель через систему ротации
+                alternative_model = select_llm_model_safe(
+                    task_type="general",
+                    intelligence_priority=False,
+                    exclude_models=[normalized_model]  # Исключаем неработающую модель
+                )
+                
+                if alternative_model:
+                    logger.info(f"🎯 Система ротации предложила модель: {alternative_model}")
+                    
+                    # Создаем LLM с альтернативной моделью
+                    llm = LLM(
+                        model=alternative_model,
+                        temperature=temperature
+                    )
+                    
+                    # Отмечаем использование модели в мониторе
+                    rate_limit_monitor.register_use(alternative_model, tokens=0)
+                    
+                    logger.debug(f"✅ LLM создан с альтернативной моделью: {alternative_model}")
+                    return llm
+                    
+            except Exception as rotation_error:
+                logger.error(f"❌ Ошибка в системе ротации: {rotation_error}")
+        
+    except Exception as e:
+        logger.error(f"❌ Критическая ошибка создания LLM: {e}")
+        logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+        
+    # Fallback на любую доступную модель как последний шанс
+    try:
+        from llm_rotation_config import select_llm_model_safe
+        fallback_model = select_llm_model_safe("simple")  # Попробуем простую задачу
+        if fallback_model:
+            logger.warning(f"🔄 Последний шанс: пробуем fallback модель {fallback_model}")
+            # Нормализуем модель
+            if not fallback_model.startswith("gemini/"):
+                fallback_model = f"gemini/{fallback_model}" if fallback_model.startswith("gemini-") else f"gemini/{fallback_model}"
+            
+            fallback_llm = LLM(
+                model=fallback_model,
+                temperature=temperature
+            )
+            return fallback_llm
+        else:
+            raise Exception("Нет доступных моделей для fallback")
+    except Exception as fallback_error:
+        logger.error(f"❌ Критическая ошибка: нет доступных моделей: {fallback_error}")
+        raise
+
+# Проверка доступности API ключей при старте
 try:
-    logger.info("🤖 Инициализация Gemini LLM с code_execution...")
+    logger.info("🔧 Проверка доступности API...")
     logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
     
-    # Используем новый Gemini провайдер БЕЗ code_execution для работы с CrewAI инструментами
-    gemini_llm = create_crewai_gemini_llm(
-        model="gemini-2.5-flash",
-        enable_code_execution=False,  # Отключаем code execution для работы с инструментами
-        temperature=0.7
-# Инициализация Gemini LLM с поддержкой code_execution
-try:
-    logger.info("🤖 Инициализация Gemini LLM с code_execution...")
-    logger.debug(f"DEBUG: GEMINI_API_KEY начинается с: {os.getenv('GEMINI_API_KEY', 'НЕТ')[:10]}...")
+    # Создаем LLM для тестирования соединения (автоматический выбор)
+    test_llm = create_llm("gemini")
+    logger.info("✅ Проверка API прошла успешно")
     
-    # Используем новый Gemini провайдер БЕЗ code_execution для работы с CrewAI инструментами
-    gemini_llm = create_crewai_gemini_llm(
-        model="gemini-2.5-flash",
-        enable_code_execution=True,
-        temperature=0.7,
-        tool_choice='auto'
-    )
-    logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
-    logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
-    logger.debug("DEBUG: CrewAI Gemini LLM с code_execution инициализирован успешно")
-    logger.info("✅ Gemini LLM с code_execution успешно инициализирован")
 except Exception as e:
-    logger.error(f"❌ Ошибка инициализации Gemini LLM: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
+    logger.error(f"❌ Ошибка проверки API: {e}")
     logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
     exit(1)
 
-# Инициализация Response Refinement Service
-try:
-    logger.info("🔄 Инициализация Response Refinement Service...")
-    refinement_service = ResponseRefinementService(llm=gemini_llm)
-    logger.info("✅ Response Refinement Service успешно инициализирован")
-except Exception as e:
-    logger.error(f"❌ Ошибка инициализации Response Refinement Service: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
-    # Не критическая ошибка, продолжаем работу без refinement
-    refinement_service = None
-    logger.warning("⚠️ Сервер запущен без Response Refinement Service")
-
-# Инициализация Iterative Execution System
-try:
-    logger.info("⚡ Инициализация Iterative Execution System...")
-    iterative_executor = IterativeExecutor()
-    logger.info("✅ Iterative Execution System успешно инициализирован")
-except Exception as e:
-    logger.error(f"❌ Ошибка инициализации Iterative Execution System: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
-    iterative_executor = None
-    logger.warning("⚠️ Сервер запущен без Iterative Execution System")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
-    logger.error("🔍 Проверьте GEMINI_API_KEY в .env файле")
-    exit(1)
-
-# Инициализация Response Refinement Service
-try:
-    logger.info("🔄 Инициализация Response Refinement Service...")
-    refinement_service = ResponseRefinementService(llm=gemini_llm)
-    logger.info("✅ Response Refinement Service успешно инициализирован")
-except Exception as e:
-    logger.error(f"❌ Ошибка инициализации Response Refinement Service: {e}")
-    logger.error(f"DEBUG: Полная ошибка: {traceback.format_exc()}")
-    # Не критическая ошибка, продолжаем работу без refinement
-    refinement_service = None
-    logger.warning("⚠️ Сервер запущен без Response Refinement Service")
+# Response Refinement Service будет создаваться динамически при необходимости
+logger.info("🔄 Response Refinement Service настроен для динамического создания")
+refinement_service = None  # Будет создаваться по запросу
 
 # Инициализация Iterative Execution System
 try:
@@ -709,7 +487,7 @@ try:
     try:
         # website_tool = WebsiteSearchTool()  # Комментирую, модуль не найден
         # all_tools.append(website_tool)
-        # website_tool = None
+        website_tool = None
         pass
     except Exception as e:
         logger.warning(f"⚠️ WebsiteSearchTool failed to initialize: {e}")
@@ -729,10 +507,14 @@ except Exception as e:
     all_tools = [read_file_or_directory, execute_terminal_command]
     logger.warning("⚠️ Работаем с базовыми инструментами (без поиска)")
 
-def create_agent(role, goal, backstory):
+def create_agent(role, goal, backstory, llm=None):
     """Создание агента с обработкой ошибок"""
     try:
         logger.debug(f"👤 Создание агента: {role}")
+        
+        # Если LLM не передан, создаем дефолтный
+        if llm is None:
+            llm = create_llm("gemini")
         
         # Собираем доступные инструменты
         tools = []
@@ -756,7 +538,7 @@ def create_agent(role, goal, backstory):
             backstory=backstory,
             tools=tools,
             verbose=True,
-            llm=gemini_llm
+            llm=llm
         )
         logger.debug(f"✅ Агент {role} успешно создан")
         return agent
@@ -1065,14 +847,25 @@ def iterate_execution():
             
             def generate_response(self, message, metadata):
                 try:
-                    messages = [{"role": "user", "content": message}]
-                    response = self.llm.invoke(messages)
-                    return response.content if hasattr(response, 'content') else str(response)
+                    # CrewAI LLM uses call() method, not invoke()
+                    response = self.llm.call(message)
+                    return str(response)
                 except Exception as e:
                     logger.error(f"Ошибка генерации ответа: {e}")
                     return f"Ошибка: {str(e)}"
         
-        llm_client = LLMClientAdapter(gemini_llm)
+        # Получаем параметры модели из запроса или используем дефолтные
+        provider = data.get('provider', 'gemini')
+        # Выбираем модель динамически если не указана
+        model_name = data.get('model')
+        if not model_name:
+            from llm_rotation_config import select_llm_model_safe
+            model_name = select_llm_model_safe("dialog") or "gemini/gemini-1.5-flash"
+        temperature = data.get('temperature', 0.7)
+        
+        # Создаем динамический LLM для этого запроса
+        llm = create_llm(provider, model_name, temperature)
+        llm_client = LLMClientAdapter(llm)
         
         # Выполняем итеративную обработку
         try:
@@ -1181,7 +974,12 @@ def process_message():
         message = request.json.get('message', '')
         session_id = request.json.get('session_id', str(uuid.uuid4()))
         provider = request.json.get('provider', 'gemini')
-        model = request.json.get('model', 'gemini-2.0-flash')
+        # UI отправляет 'model_id', но также поддерживаем 'model' для обратной совместимости
+        # Получаем модель из запроса или выбираем динамически
+        model = request.json.get('model_id') or request.json.get('model')
+        if not model:
+            from llm_rotation_config import select_llm_model_safe
+            model = select_llm_model_safe("dialog") or "gemini/gemini-1.5-flash"
         
         logger.debug(f"DEBUG: Извлеченные данные - message: '{message[:100]}...', session_id: {session_id}, provider: {provider}, model: {model}")
         
@@ -1243,292 +1041,159 @@ def process_message_async(task_id, request_data):
         
         logger.debug(f"DEBUG: Получена chat_history с {len(chat_history)} сообщениями")
         
-        # Обращение к Gemini LLM для получения реального ответа
-        logger.info(f"🤖 Отправка сообщения в Gemini: '{message[:50]}{'...' if len(message) > 50 else ''}'")
+        # Используем итеративную систему выполнения для обработки сообщения и выполнения tool_code блоков
+        logger.info(f"🤖 Запуск итеративного выполнения для: '{message[:50]}{'...' if len(message) > 50 else ''}'")
         logger.debug(f"DEBUG: Полное сообщение: {message}")
         
         try:
-            logger.debug("DEBUG: Начинается импорт модулей langchain")
-            # Используем инициализированный gemini_llm для обработки сообщения
-            logger.debug("DEBUG: Импорт модулей langchain завершен")
-            
-            # Добавляем системный промпт с личностью ассистента
-            logger.debug("DEBUG: Получение системного промпта")
-            system_prompt = get_default_prompt()
-            logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
-            
-            # Создаём bound LLM с всеми инструментами
-            llm_with_tools = gemini_llm.bind_tools(all_tools)  # all_tools теперь глобальный
-            
-            # Обновляем system_prompt для tool calling
-            system_prompt += "\n\nИнструкция по инструментам: Вызывай инструменты через tool_call, например, для поиска используй TavilySearchTool с аргументами query='твой запрос'. Не пиши сырой Python-код с print() или импортами — система автоматически обработает tool_call и вернёт результат."
-            
-            # Начинаем с системного промпта
-            messages = [SystemMessage(content=system_prompt)]  # Пересоздаём messages с обновлённым промптом
-            logger.debug(f"DEBUG: Инициализировано сообщений с системным промптом: {len(messages)} сообщений")
-            
-            # Добавляем историю чата (последние 20 сообщений)
-            for hist_msg in chat_history:
-                role = hist_msg.get('role')
-                content = hist_msg.get('content', '')
-                if role == 'user':
-                    messages.append(HumanMessage(content=content))
-                elif role == 'assistant':
-                    messages.append(AIMessage(content=content))
-            
-            # Добавляем текущее сообщение пользователя (после перезаписи messages)
-            messages.append(HumanMessage(content=message))
-            
-            logger.debug(f"DEBUG: Сформированы сообщения для отправки: {len(messages)} сообщений (системное + {len(chat_history)} историческое + 1 текущее)")
-            
-            try:
-                logger.debug("DEBUG: Вызов gemini_llm.invoke()")
-                response = llm_with_tools.invoke(messages)
-            except Exception as bind_error:
-                logger.warning(f"⚠️ Bind_tools failed: {bind_error}. Falling back to gemini_llm.")
-                response = gemini_llm.invoke(messages)
-            
-            logger.debug(f"DEBUG: Получен ответ от gemini_llm: type={type(response)}")
-            logger.debug(f"DEBUG: Содержимое ответа: {response.content[:200] if hasattr(response, 'content') else 'НЕТ КОНТЕНТА'}...")
-            
-            logger.info(f"📊 Ответ получен. Tool calls: {len(response.tool_calls) if response.tool_calls else 0}")
-            
-            # Если есть tool calls, выполняем их
-            if response.tool_calls:
-                logger.info(f"🔧 Выполнение {len(response.tool_calls)} tool calls...")
+            # Создаем LLM client adapter для итеративного исполнителя
+            class CrewAILLMAdapter:
+                def __init__(self, llm, provider='gemini', temperature=0.7):
+                    self.llm = llm
+                    self.provider = provider
+                    self.temperature = temperature
+                    self.original_model = getattr(llm, 'model', None)
+                    logger.debug(f"DEBUG: Создан CrewAI LLM адаптер с моделью: {self.original_model}")
                 
-                # Добавляем ответ модели в историю
-                messages.append(response)
-                
-                # Выполняем каждый tool call
-                for tool_call in response.tool_calls:
-                    tool_name = tool_call["name"]
-                    tool_args = tool_call["args"]
-                    tool_id = tool_call["id"]
-                    
-                    logger.info(f"🔧 Выполняем {tool_name} с аргументами: {tool_args}")
-                    
-                    # Выполняем функцию в зависимости от её имени
+                def generate_response(self, message_text, metadata):
                     try:
-                        if tool_name == "read_file_or_directory":
-                            tool_result = read_file_or_directory.invoke(tool_args)
-                        elif tool_name == "execute_terminal_command":
-                            tool_result = execute_terminal_command.invoke(tool_args)
-                        else:
-                            tool_result = f"Неизвестный инструмент: {tool_name}"
+                        logger.debug("DEBUG: Получение системного промпта для итеративного выполнения")
+                        from tools.gopiai_integration.system_prompts import get_iterative_execution_prompt
+                        system_prompt = get_iterative_execution_prompt()
+                        logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
                         
-                        logger.info(f"✅ Результат {tool_name}: {tool_result[:100]}{'...' if len(tool_result) > 100 else ''}")
+                        # Формируем полное сообщение с системным промптом и историей
+                        formatted_message = f"System: {system_prompt}\n"
                         
-                        # Добавляем результат выполнения инструмента
-                        messages.append(ToolMessage(
-                            content=tool_result,
-                            tool_call_id=tool_id
-                        ))
+                        # Добавляем историю чата (последние 10 сообщений для контекста)
+                        recent_history = chat_history[-10:] if len(chat_history) > 10 else chat_history
+                        for hist_msg in recent_history:
+                            role = hist_msg.get('role')
+                            content = hist_msg.get('content', '')
+                            if role == 'user':
+                                formatted_message += f"Human: {content}\n"
+                            elif role == 'assistant':
+                                formatted_message += f"Assistant: {content}\n"
                         
-                    except Exception as tool_error:
-                        logger.error(f"❌ Ошибка выполнения {tool_name}: {tool_error}")
-                        messages.append(ToolMessage(
-                            content=f"Ошибка при выполнении {tool_name}: {str(tool_error)}",
-                            tool_call_id=tool_id
-                        ))
+                        # Добавляем текущее сообщение
+                        formatted_message += f"Human: {message_text}\n"
+                        
+                        logger.debug("DEBUG: Вызов LLM.call() через адаптер")
+                        response = self.llm.call(formatted_message)
+                        
+                        logger.debug(f"DEBUG: Ответ от LLM: {str(response)[:200]}...")
+                        return str(response)
+                        
+                    except Exception as e:
+                        logger.error(f"Ошибка генерации ответа в адаптере: {e}")
+                        
+                        # Проверяем, является ли это ошибкой превышения квоты
+                        error_str = str(e)
+                        is_rate_limit_error = (
+                            "RateLimitError" in error_str or 
+                            "429" in error_str or 
+                            "quota" in error_str.lower() or
+                            "rate limit" in error_str.lower()
+                        )
+                        
+                        if is_rate_limit_error:
+                            logger.warning(f"🚨 Обнаружена ошибка превышения лимитов: {error_str[:200]}")
+                            
+                            # Получаем текущую модель и помечаем как недоступную
+                            try:
+                                from llm_rotation_config import rate_limit_monitor
+                                current_model = getattr(self.llm, 'model', None)
+                                if current_model:
+                                    logger.warning(f"🔄 Помечаем модель {current_model} как недоступную из-за rate limit")
+                                    rate_limit_monitor.mark_model_unavailable(current_model)
+                                else:
+                                    logger.warning("⚠️ Не удалось определить текущую модель для блокировки")
+                            except Exception as mark_error:
+                                logger.error(f"Ошибка маркировки модели как недоступной: {mark_error}")
+                            
+                            # Пытаемся переключиться на другую модель и повторить запрос
+                            if self._switch_to_alternative_model():
+                                logger.info("🔄 Повторяем запрос с новой моделью после rate limit")
+                                try:
+                                    # Повторяем запрос с новой моделью
+                                    response = self.llm.call(formatted_message)
+                                    logger.info(f"✅ Успешный ответ от новой модели: {getattr(self.llm, 'model', 'unknown')}")
+                                    return str(response)
+                                except Exception as retry_error:
+                                    logger.error(f"❌ Ошибка даже с новой моделью: {retry_error}")
+                                    return f"Ошибка: Не удалось получить ответ даже после переключения модели: {str(retry_error)}"
+                            else:
+                                logger.error("❌ Не удалось найти альтернативную модель")
+                                return "Ошибка: Превышены лимиты текущей модели и нет доступных альтернатив"
+                        
+                        # Для других ошибок возвращаем обычное сообщение об ошибке
+                        return f"Ошибка: {str(e)}"
                 
-                # Получаем финальный ответ от модели с учетом результатов инструментов
-                final_response = gemini_llm.invoke(messages)
-                result_text = final_response.content
-                
-            else:
-                # Нет tool calls - используем обычный ответ
-                result_text = response.content
-                
-            logger.info(f"✅ Получен финальный ответ от Gemini: '{result_text[:100]}{'...' if len(result_text) > 100 else ''}'")
-            
-        except Exception as llm_error:
-            logger.error(f"❌ Ошибка при обращении к Gemini LLM: {llm_error}")
-            result_text = f"Извините, произошла ошибка при обработке вашего сообщения: {str(llm_error)}"
-        
-        task['status'] = TaskStatus.COMPLETED
-        task['progress'] = 100
-        task['result'] = result_text
-        task['completed_at'] = time.time()
-        
-        logger.info(f"✅ Задача {task_id} завершена успешно")
-        
-    """Основной endpoint для обработки сообщений"""
-    try:
-        logger.debug("💬 Запрос на обработку сообщения")
-        logger.debug(f"DEBUG: Получен request.json: {request.json}")
-        
-        if not request.json:
-            logger.error("DEBUG: Отсутствует JSON данные в запросе")
-            return jsonify({'error': 'Отсутствует JSON данные'}), 400
-            
-        message = request.json.get('message', '')
-        session_id = request.json.get('session_id', str(uuid.uuid4()))
-        provider = request.json.get('provider', 'gemini')
-        model = request.json.get('model', 'gemini-2.0-flash')
-        
-        logger.debug(f"DEBUG: Извлеченные данные - message: '{message[:100]}...', session_id: {session_id}, provider: {provider}, model: {model}")
-        
-        if not message:
-            logger.error("DEBUG: Сообщение пустое")
-            return jsonify({'error': 'Сообщение не может быть пустым'}), 400
-        
-        # Создаем задачу обработки
-        task_id = str(uuid.uuid4())
-        task_data = {
-            'task_id': task_id,
-            'session_id': session_id,
-            'description': f'Обработка сообщения: {message[:50]}...' if len(message) > 50 else message,
-            'status': TaskStatus.PENDING,
-            'progress': 0,
-            'created_at': time.time(),
-            'message': message
-        }
-        
-        tasks_storage[task_id] = task_data
-        
-        logger.info(f"📝 Создана задача обработки сообщения: {task_id}")
-        
-        # Запускаем обработку в отдельном потоке
-        thread = Thread(target=process_message_async, args=(task_id, request.json))
-        thread.daemon = True
-        thread.start()
-        
-        return jsonify({
-            'task_id': task_id,
-            'session_id': session_id,
-            'status': 'processing',
-            'message': 'Сообщение принято к обработке'
-        }), 202
-        
-    except Exception as e:
-        logger.error(f"❌ Ошибка обработки сообщения: {e}")
-        return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'}), 500
-
-def process_message_async(task_id, request_data):
-    """Асинхронная обработка сообщения с использованием Gemini LLM"""
-    try:
-        logger.debug(f"DEBUG: Входим в process_message_async для task_id: {task_id}")
-        task = tasks_storage.get(task_id)
-        if not task:
-            logger.error(f"DEBUG: Задача {task_id} не найдена в хранилище")
-            return
-            
-        task['status'] = TaskStatus.PROCESSING
-        task['progress'] = 10
-        logger.debug(f"DEBUG: Статус задачи {task_id} изменен на PROCESSING")
-        
-        logger.info(f"🔄 Начата обработка задачи {task_id}")
-        
-        # Извлекаем данные из запроса
-        message = request_data.get('message', '')
-        metadata = request_data.get('metadata', {})
-        chat_history = metadata.get('chat_history', [])
-        
-        logger.debug(f"DEBUG: Получена chat_history с {len(chat_history)} сообщениями")
-        
-        # Обращение к Gemini LLM для получения реального ответа
-        logger.info(f"🤖 Отправка сообщения в Gemini: '{message[:50]}{'...' if len(message) > 50 else ''}'")
-        logger.debug(f"DEBUG: Полное сообщение: {message}")
-        
-        try:
-            logger.debug("DEBUG: Начинается импорт модулей langchain")
-            # Используем инициализированный gemini_llm для обработки сообщения
-            logger.debug("DEBUG: Импорт модулей langchain завершен")
-            
-            # Добавляем системный промпт с личностью ассистента
-            logger.debug("DEBUG: Получение системного промпта")
-            system_prompt = get_default_prompt()
-            logger.debug(f"DEBUG: Системный промпт получен: {system_prompt[:100]}...")
-            
-            # Создаём bound LLM с всеми инструментами
-            llm_with_tools = gemini_llm.bind_tools(all_tools)  # all_tools теперь глобальный
-            
-            # Обновляем system_prompt для tool calling
-            system_prompt += "\n\nИнструкция по инструментам: Вызывай инструменты через tool_call, например, для поиска используй TavilySearchTool с аргументами query='твой запрос'. Не пиши сырой Python-код с print() или импортами — система автоматически обработает tool_call и вернёт результат."
-            
-            # Начинаем с системного промпта
-            messages = [SystemMessage(content=system_prompt)]  # Пересоздаём messages с обновлённым промптом
-            logger.debug(f"DEBUG: Инициализировано сообщений с системным промптом: {len(messages)} сообщений")
-            
-            # Добавляем историю чата (последние 20 сообщений)
-            for hist_msg in chat_history:
-                role = hist_msg.get('role')
-                content = hist_msg.get('content', '')
-                if role == 'user':
-                    messages.append(HumanMessage(content=content))
-                elif role == 'assistant':
-                    messages.append(AIMessage(content=content))
-            
-            # Добавляем текущее сообщение пользователя (после перезаписи messages)
-            messages.append(HumanMessage(content=message))
-            
-            logger.debug(f"DEBUG: Сформированы сообщения для отправки: {len(messages)} сообщений (системное + {len(chat_history)} историческое + 1 текущее)")
-            
-            try:
-                logger.debug("DEBUG: Вызов gemini_llm.invoke()")
-                response = llm_with_tools.invoke(messages)
-            except Exception as bind_error:
-                logger.warning(f"⚠️ Bind_tools failed: {bind_error}. Falling back to gemini_llm.")
-                response = gemini_llm.invoke(messages)
-            
-            logger.debug(f"DEBUG: Получен ответ от gemini_llm: type={type(response)}")
-            logger.debug(f"DEBUG: Содержимое ответа: {response.content[:200] if hasattr(response, 'content') else 'НЕТ КОНТЕНТА'}...")
-            
-            logger.info(f"📊 Ответ получен. Tool calls: {len(response.tool_calls) if response.tool_calls else 0}")
-            
-            # Если есть tool calls, выполняем их
-            if response.tool_calls:
-                logger.info(f"🔧 Выполнение {len(response.tool_calls)} tool calls...")
-                
-                # Добавляем ответ модели в историю
-                messages.append(response)
-                
-                # Выполняем каждый tool call
-                for tool_call in response.tool_calls:
-                    tool_name = tool_call["name"]
-                    tool_args = tool_call["args"]
-                    tool_id = tool_call["id"]
-                    
-                    logger.info(f"🔧 Выполняем {tool_name} с аргументами: {tool_args}")
-                    
-                    # Выполняем функцию в зависимости от её имени
+                def _switch_to_alternative_model(self) -> bool:
+                    """Переключается на альтернативную модель при превышении лимитов"""
                     try:
-                        if tool_name == "read_file_or_directory":
-                            tool_result = read_file_or_directory.invoke(tool_args)
-                        elif tool_name == "execute_terminal_command":
-                            tool_result = execute_terminal_command.invoke(tool_args)
+                        from llm_rotation_config import select_llm_model_safe
+                        
+                        # Выбираем новую модель
+                        new_model = select_llm_model_safe("dialog")
+                        if new_model and new_model != self.original_model:
+                            logger.info(f"🔄 Переключаемся с {self.original_model} на {new_model}")
+                            
+                            # Создаем новый LLM с альтернативной моделью
+                            new_llm = create_llm(self.provider, new_model, self.temperature)
+                            if new_llm:
+                                self.llm = new_llm
+                                logger.info(f"✅ Успешно переключились на модель: {new_model}")
+                                return True
+                            else:
+                                logger.error(f"❌ Не удалось создать LLM для модели: {new_model}")
+                                return False
                         else:
-                            tool_result = f"Неизвестный инструмент: {tool_name}"
-                        
-                        logger.info(f"✅ Результат {tool_name}: {tool_result[:100]}{'...' if len(tool_result) > 100 else ''}")
-                        
-                        # Добавляем результат выполнения инструмента
-                        messages.append(ToolMessage(
-                            content=tool_result,
-                            tool_call_id=tool_id
-                        ))
-                        
-                    except Exception as tool_error:
-                        logger.error(f"❌ Ошибка выполнения {tool_name}: {tool_error}")
-                        messages.append(ToolMessage(
-                            content=f"Ошибка при выполнении {tool_name}: {str(tool_error)}",
-                            tool_call_id=tool_id
-                        ))
-                
-                # Получаем финальный ответ от модели с учетом результатов инструментов
-                final_response = gemini_llm.invoke(messages)
-                result_text = final_response.content
-                
-            else:
-                # Нет tool calls - используем обычный ответ
-                result_text = response.content
-                
-            logger.info(f"✅ Получен финальный ответ от Gemini: '{result_text[:100]}{'...' if len(result_text) > 100 else ''}'")
+                            logger.warning(f"⚠️ Нет доступной альтернативной модели (текущая: {self.original_model})")
+                            return False
+                    except Exception as switch_error:
+                        logger.error(f"❌ Ошибка переключения модели: {switch_error}")
+                        return False
             
-        except Exception as llm_error:
-            logger.error(f"❌ Ошибка при обращении к Gemini LLM: {llm_error}")
-            result_text = f"Извините, произошла ошибка при обработке вашего сообщения: {str(llm_error)}"
+            # Получаем параметры модели из запроса или используем дефолтные
+            provider = request_data.get('provider', 'gemini')
+            # UI отправляет 'model_id', но также поддерживаем 'model' для обратной совместимости
+            # Получаем модель из запроса или выбираем динамически
+            model_name = request_data.get('model_id') or request_data.get('model')
+            if not model_name:
+                from llm_rotation_config import select_llm_model_safe
+                model_name = select_llm_model_safe("dialog") or "gemini/gemini-1.5-flash"
+            temperature = request_data.get('temperature', 0.7)
+            
+            # Создаем динамический LLM для этого запроса
+            llm = create_llm(provider, model_name, temperature)
+            
+            # Создаем адаптер LLM с параметрами для переключения моделей
+            llm_client = CrewAILLMAdapter(llm, provider, temperature)
+            
+            # Запускаем итеративное выполнение
+            logger.info("⚡ Запуск итеративного исполнителя")
+            result = iterative_executor.process_iteratively(
+                message, 
+                llm_client, 
+                metadata
+            )
+            
+            # Получаем финальный результат
+            result_text = result['final_response']
+            logger.info(f"✅ Итеративное выполнение завершено за {result['iterations_count']} итераций")
+            logger.debug(f"DEBUG: История выполнения: {len(result['execution_history'])} команд")
+            
+        except Exception as execution_error:
+            logger.error(f"❌ Ошибка итеративного выполнения: {execution_error}")
+            logger.error(f"🔍 Трассировка: {traceback.format_exc()}")
+            result_text = f'Извините, произошла ошибка при обработке: {str(execution_error)}'
+        
+        # Проверяем, что получили ответ
+        if not result_text:
+            result_text = "Извините, не удалось получить ответ от модели."
+                
+        logger.info(f"✅ Получен финальный ответ: '{result_text[:100]}{'...' if len(result_text) > 100 else ''}')")
         
         task['status'] = TaskStatus.COMPLETED
         task['progress'] = 100
@@ -1544,6 +1209,67 @@ def process_message_async(task_id, request_data):
             task['status'] = TaskStatus.FAILED
             task['error'] = str(e)
 
+# ==========================================
+# Internal endpoints for UI synchronization
+# ==========================================
+
+@app.route('/internal/state', methods=['GET', 'POST'])
+def handle_internal_state():
+    """Управление состоянием UI (провайдер/модель) для синхронизации с model_selector_widget"""
+    global ui_state
+    
+    if request.method == 'GET':
+        logger.debug(f"DEBUG: /internal/state GET - текущее состояние: {ui_state}")
+        return jsonify(ui_state)
+    
+    elif request.method == 'POST':
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({'error': 'Отсутствует JSON данные'}), 400
+            
+            if 'provider' in data:
+                ui_state['provider'] = data['provider']
+            if 'model_id' in data:
+                ui_state['model_id'] = data['model_id']
+                
+            logger.debug(f"DEBUG: /internal/state POST - обновлено состояние: {ui_state}")
+            return jsonify(ui_state)
+            
+        except Exception as e:
+            logger.error(f"Ошибка обновления состояния UI: {e}")
+            return jsonify({'error': 'Ошибка обновления состояния'}), 500
+
+@app.route('/internal/models', methods=['GET'])  
+def handle_internal_models():
+    """Получение списка моделей для указанного провайдера"""
+    try:
+        provider = request.args.get('provider', 'gemini')
+        logger.debug(f"DEBUG: /internal/models GET - провайдер: {provider}")
+        
+        # Получаем модели через систему ротации (с перезагрузкой модуля)
+        import importlib
+        import llm_rotation_config
+        importlib.reload(llm_rotation_config)
+        from llm_rotation_config import get_available_models
+        
+        models = []
+        for model in get_available_models("dialog"):
+            # Поддерживаем оба формата: "gemini" и "google" 
+            if model.get("provider") in [provider, "google"] or (provider == "gemini" and model.get("provider") == "google"):
+                models.append({
+                    "id": model["id"],
+                    "display_name": model.get("name", model["id"]),
+                    "provider": model["provider"]
+                })
+        
+        logger.debug(f"DEBUG: Найдено {len(models)} моделей для провайдера {provider}")
+        return jsonify(models)
+        
+    except Exception as e:
+        logger.error(f"Ошибка получения моделей: {e}")
+        return jsonify({'error': 'Ошибка получения моделей'}), 500
+
 @app.errorhandler(404)
 def not_found(error):
     """Обработчик 404 ошибок"""
@@ -1558,39 +1284,9 @@ def not_found(error):
             '/api/tasks/<id> [GET]',
             '/api/tools [GET]',
             '/api/agents [GET]',
-            '/api/process [POST]'
-        ]
-    }), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    """Обработчик 500 ошибок"""
-    logger.error(f"💥 500: Внутренняя ошибка сервера - {error}")
-    return jsonify({
-        'error': 'Внутренняя ошибка сервера',
-        'message': 'Проверьте логи для получения подробной информации'
-    }), 500
-        logger.error(f"❌ Ошибка при асинхронной обработке задачи {task_id}: {e}")
-        task = tasks_storage.get(task_id)
-        if task:
-            task['status'] = TaskStatus.FAILED
-            task['error'] = str(e)
-
-@app.errorhandler(404)
-def not_found(error):
-    """Обработчик 404 ошибок"""
-    logger.warning(f"🔍 404: Путь не найден - {request.path}")
-    return jsonify({
-        'error': 'Путь не найден',
-        'path': request.path,
-        'available_endpoints': [
-            '/api/health',
-            '/health (legacy)',
-            '/api/tasks [POST, GET]',
-            '/api/tasks/<id> [GET]',
-            '/api/tools [GET]',
-            '/api/agents [GET]',
-            '/api/process [POST]'
+            '/api/process [POST]',
+            '/internal/state [GET, POST]',
+            '/internal/models [GET]'
         ]
     }), 404
 
@@ -1614,38 +1310,8 @@ if __name__ == '__main__':
         logger.info("   GET  /api/tasks/<id> - статус конкретной задачи")
         logger.info("   POST /api/refine - итеративная обработка ответов")
         logger.info("   POST /api/iterate - итеративное выполнение команд")
-        logger.info("")
-        logger.info("🚀 Сервер готов к работе на http://localhost:5052")
-        logger.info(f"📁 Логи сохраняются в: {log_file}")
-        logger.info("⚡ Для остановки нажмите Ctrl+C")
-        
-        app.run(
-            host='0.0.0.0',
-            port=5052,
-            debug=False,
-            threaded=True
-        )
-        
-    except KeyboardInterrupt:
-        logger.info("👋 Получен сигнал остановки (Ctrl+C)")
-        logger.info("🔄 Завершение работы сервера...")
-    except Exception as e:
-        logger.error(f"💥 Критическая ошибка запуска сервера: {e}")
-        logger.error(f"🔍 Трассировка: {traceback.format_exc()}")
-    finally:
-        logger.info("👋 CrewAI API Server остановлен")
-
-# --- END OF FILE crewai_api_server.py ---
-    try:
-        logger.info("✅ Запуск Flask сервера...")
-        logger.info("🔗 Доступные endpoints:")
-        logger.info("   GET  /api/health - проверка здоровья сервера")
-        logger.info("   GET  /health - проверка здоровья сервера (legacy)")
-        logger.info("   POST /api/tasks - создание новой задачи")
-        logger.info("   GET  /api/tasks - список всех задач")
-        logger.info("   GET  /api/tasks/<id> - статус конкретной задачи")
-        logger.info("   POST /api/refine - итеративная обработка ответов")
-        logger.info("   POST /api/iterate - итеративное выполнение команд")
+        logger.info("   GET/POST /internal/state - управление состоянием UI")
+        logger.info("   GET  /internal/models - получение списка моделей")
         logger.info("")
         logger.info("🚀 Сервер готов к работе на http://localhost:5052")
         logger.info(f"📁 Логи сохраняются в: {log_file}")
