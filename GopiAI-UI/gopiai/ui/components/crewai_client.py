@@ -390,13 +390,77 @@ class CrewAIClient:
             att_type = att['type']
             name = os.path.basename(path)
             if att_type == 'image':
-                with open(path, 'rb') as f:
-                    content = base64.b64encode(f.read()).decode('utf-8')
-                processed_attachments.append({'type': 'image', 'content': f'data:image/{os.path.splitext(name)[1][1:]};base64,{content}', 'name': name})
+                try:
+                    with open(path, 'rb') as f:
+                        content = base64.b64encode(f.read()).decode('utf-8')
+                    # Определяем правильный MIME тип
+                    ext = os.path.splitext(name)[1].lower()
+                    mime_types = {'.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.gif': 'gif', '.webp': 'webp', '.bmp': 'bmp'}
+                    image_type = mime_types.get(ext, 'jpeg')  # default to jpeg
+                    
+                    processed_attachments.append({
+                        'type': 'image', 
+                        'content': f'data:image/{image_type};base64,{content}', 
+                        'name': name,
+                        'mime_type': f'image/{image_type}',
+                        'size': len(content) * 3 // 4  # приблизительный размер декодированного файла
+                    })
+                    logger.info(f"[ATTACHMENTS] Изображение {name} конвертировано в base64 (тип: {image_type})")
+                except Exception as e:
+                    logger.error(f"[ATTACHMENTS] Ошибка обработки изображения {name}: {e}")
+                    processed_attachments.append({
+                        'type': 'error',
+                        'content': f'Не удалось обработать изображение: {str(e)}',
+                        'name': name
+                    })
             elif att_type == 'file':
-                with open(path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                processed_attachments.append({'type': 'text', 'content': content, 'name': name})
+                try:
+                    # Определяем является ли файл бинарным или текстовым
+                    with open(path, 'rb') as f:
+                        raw_data = f.read()
+                    
+                    # Проверяем на бинарность (простая эвристика)
+                    is_binary = b'\0' in raw_data[:1024] or len([b for b in raw_data[:1024] if b < 32 and b not in [9, 10, 13]]) > 10
+                    
+                    if is_binary:
+                        # Бинарный файл - конвертируем в base64
+                        content = base64.b64encode(raw_data).decode('utf-8')
+                        processed_attachments.append({
+                            'type': 'binary',
+                            'content': f'data:application/octet-stream;base64,{content}',
+                            'name': name,
+                            'size': len(raw_data)
+                        })
+                        logger.info(f"[ATTACHMENTS] Бинарный файл {name} конвертирован в base64")
+                    else:
+                        # Текстовый файл
+                        try:
+                            content = raw_data.decode('utf-8')
+                        except UnicodeDecodeError:
+                            # Пробуем другие кодировки
+                            for encoding in ['cp1251', 'latin1']:
+                                try:
+                                    content = raw_data.decode(encoding)
+                                    break
+                                except UnicodeDecodeError:
+                                    continue
+                            else:
+                                content = raw_data.decode('utf-8', errors='replace')
+                        
+                        processed_attachments.append({
+                            'type': 'text', 
+                            'content': content, 
+                            'name': name,
+                            'size': len(content)
+                        })
+                        logger.info(f"[ATTACHMENTS] Текстовый файл {name} обработан")
+                except Exception as e:
+                    logger.error(f"[ATTACHMENTS] Ошибка обработки файла {name}: {e}")
+                    processed_attachments.append({
+                        'type': 'error',
+                        'content': f'Не удалось обработать файл: {str(e)}',
+                        'name': name
+                    })
         if processed_attachments:
             message['metadata']['processed_attachments'] = processed_attachments
 

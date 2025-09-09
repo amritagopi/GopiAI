@@ -921,7 +921,9 @@ class ChatWidget(QWidget):
                     path = url.toLocalFile()
                     name = os.path.basename(path)
                     ext = os.path.splitext(name)[1].lower()
-                    att_type = 'image' if ext in ['.png', '.jpg', '.jpeg'] else 'file'
+                    # Расширенный список поддерживаемых форматов изображений
+                    image_exts = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.svg', '.tiff', '.tif']
+                    att_type = 'image' if ext in image_exts else 'file'
                     self.attached_files.append({'path': path, 'type': att_type})
                     self._append_message_with_style('system', f'{att_type.capitalize()} dropped: {name}')
         elif mime.hasImage():
@@ -965,7 +967,9 @@ class ChatWidget(QWidget):
                         path = url.toLocalFile()
                         name = os.path.basename(path)
                         ext = os.path.splitext(name)[1].lower()
-                        att_type = 'image' if ext in ['.png', '.jpg', '.jpeg'] else 'file'
+                        # Расширенный список поддерживаемых форматов изображений
+                        image_exts = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.svg', '.tiff', '.tif']
+                        att_type = 'image' if ext in image_exts else 'file'
                         self.attached_files.append({'path': path, 'type': att_type})
                         self._append_message_with_style('system', f'{att_type.capitalize()} pasted: {name}')
                 event.accept()
@@ -1039,7 +1043,7 @@ class ChatWidget(QWidget):
         """Обработчик прикрепления изображения"""
         image_path, _ = QFileDialog.getOpenFileName(
             self, "Выберите изображение",
-            filter="Images (*.png *.jpg *.jpeg)"
+            filter="Images (*.png *.jpg *.jpeg *.gif *.bmp *.webp *.svg *.tiff *.tif)"
         )
         if image_path:
             logger.info(f"Изображение прикреплено: {os.path.basename(image_path)}")

@@ -853,11 +853,52 @@ def iterate_execution():
             
             def generate_response(self, message, metadata):
                 try:
-                    # CrewAI LLM uses call() method, not invoke()
-                    response = self.llm.call(message)
+                    # Проверяем наличие прикрепленных файлов
+                    processed_attachments = metadata.get('processed_attachments', [])
+                    
+                    if processed_attachments:
+                        logger.info(f"[MULTIMODAL] Обнаружено {len(processed_attachments)} прикрепленных файлов")
+                        
+                        # Формируем мультимодальный контент
+                        multimodal_content = [{"type": "text", "text": message}]
+                        
+                        for attachment in processed_attachments:
+                            if attachment['type'] == 'image':
+                                # Добавляем изображение в формате для Gemini
+                                multimodal_content.append({
+                                    "type": "image_url",
+                                    "image_url": {
+                                        "url": attachment['content']
+                                    }
+                                })
+                                logger.info(f"[MULTIMODAL] Добавлено изображение: {attachment['name']}")
+                            elif attachment['type'] == 'text':
+                                # Добавляем текстовый файл как дополнительный контекст
+                                file_content = f"\n\n--- Содержимое файла {attachment['name']} ---\n{attachment['content']}\n--- Конец файла ---\n"
+                                if isinstance(multimodal_content[0]['text'], str):
+                                    multimodal_content[0]['text'] += file_content
+                                logger.info(f"[MULTIMODAL] Добавлен текстовый файл: {attachment['name']}")
+                            elif attachment['type'] == 'error':
+                                error_info = f"\n\n--- Ошибка обработки файла {attachment['name']} ---\n{attachment['content']}\n--- Конец информации об ошибке ---\n"
+                                if isinstance(multimodal_content[0]['text'], str):
+                                    multimodal_content[0]['text'] += error_info
+                        
+                        # Для мультимодального контента передаем структурированный объект
+                        if len(multimodal_content) > 1:  # Есть не только текст
+                            logger.info(f"[MULTIMODAL] Отправляем мультимодальный запрос в LLM")
+                            response = self.llm.call(multimodal_content)
+                        else:
+                            # Только текст - стандартный вызов
+                            response = self.llm.call(multimodal_content[0]['text'])
+                    else:
+                        # Стандартный текстовый запрос
+                        response = self.llm.call(message)
+                    
                     return str(response)
+                    
                 except Exception as e:
                     logger.error(f"Ошибка генерации ответа: {e}")
+                    logger.error(f"Metadata: {metadata}")
                     return f"Ошибка: {str(e)}"
         
         # Получаем параметры модели из запроса или используем дефолтные
