@@ -3,65 +3,67 @@ import time
 import threading
 # Конфиг моделей Gemini/Gemma для ротации и задач (обновлено согласно официальной документации)
 LLM_MODELS_CONFIG = [
-    # Активные модели (в порядке приоритета)
-    # {
-    #     "name": "Gemma 3",
-    #     "id": "gemini/gemma-3",
-    #     "provider": "google",
-    #     "rpm": 30,  
-    #     "tpm": 15000,  
-    #     "type": ["simple", "lookup", "short_answer"],
-    #     "multimodal": False,
-    #     "embedding": False,
-    #     "priority": 1,
-    #     "rpd": 14400,
-    #     "deprecated": False,
-    #     "base_score": 0.4
-    # },
-    # {
-    #     "name": "Gemma 3n",
-    #     "id": "gemini/gemma-3n",
-    #     "provider": "google",
-    #     "rpm": 30,  
-    #     "tpm": 15000,  
-    #     "type": ["simple", "lookup", "short_answer"],
-    #     "multimodal": False,
-    #     "embedding": False,
-    #     "priority": 2,
-    #     "rpd": 14400,
-    #     "deprecated": False,
-    #     "base_score": 0.4
-    # },
+    # Production-optimized config for Gemini free tier limits
+    # Ordered by reliability and free tier availability
     {
-        "name": "Gemini 2.5 Pro",
-        "id": "gemini/gemini-2.5-pro",
+        "name": "Gemini 1.5 Flash (Free Tier)",
+        "id": "gemini/gemini-1.5-flash",
         "provider": "google",
-        "rpm": 5,
-        "tpm": 250000,  
+        "rpm": 2,  # Conservative for free tier
+        "tpm": 32000,  # Free tier token limit
+        "type": ["simple", "dialog", "code", "summarize"],
+        "multimodal": True,
+        "embedding": False,
+        "priority": 1,  # Highest priority for free tier
+        "rpd": 1500,  # Daily request limit for free tier
+        "deprecated": False,
+        "base_score": 0.7
+    },
+    {
+        "name": "Gemini 1.5 Flash-8B (Free Tier)",
+        "id": "gemini/gemini-1.5-flash-8b",
+        "provider": "google",
+        "rpm": 4,  # Slightly higher for smaller model
+        "tpm": 40000,
+        "type": ["simple", "dialog", "code", "summarize"],
+        "multimodal": False,
+        "embedding": False,
+        "priority": 2,
+        "rpd": 4000,  # Higher daily limit for 8B model
+        "deprecated": False,
+        "base_score": 0.6
+    },
+    {
+        "name": "Gemini 1.5 Pro (Limited)",
+        "id": "gemini/gemini-1.5-pro",
+        "provider": "google",
+        "rpm": 1,  # Very conservative for Pro model
+        "tpm": 128000,
         "type": ["dialog", "code", "complex", "analysis", "long_answer"],
         "multimodal": True,
         "embedding": False,
         "priority": 3,
-        "rpd": 100,  
+        "rpd": 50,  # Very limited daily usage
         "deprecated": False,
         "base_score": 0.9
     },
+    # Fallback to paid tier models (if API key has access)
     {
-        "name": "Gemini 2.5 Flash",
-        "id": "gemini/gemini-2.5-flash",
+        "name": "Gemini 2.0 Flash-Lite (Paid)",
+        "id": "gemini/gemini-2.0-flash-lite",
         "provider": "google",
-        "rpm": 10,
-        "tpm": 250000,
-        "type": ["dialog", "code", "multimodal", "vision", "long_answer"],
-        "multimodal": True,
+        "rpm": 30,
+        "tpm": 1000000,
+        "type": ["simple", "dialog", "code", "summarize"],
+        "multimodal": False,
         "embedding": False,
         "priority": 4,
-        "rpd": 250,
+        "rpd": 200,
         "deprecated": False,
-        "base_score": 0.8
+        "base_score": 0.5
     },
     {
-        "name": "Gemini 2.5 Flash-Lite",
+        "name": "Gemini 2.5 Flash-Lite (Paid)",
         "id": "gemini/gemini-2.5-flash-lite",
         "provider": "google",
         "rpm": 15,
@@ -75,61 +77,32 @@ LLM_MODELS_CONFIG = [
         "base_score": 0.6
     },
     {
-        "name": "Gemini 2.0 Flash",
-        "id": "gemini/gemini-2.0-flash",
+        "name": "Gemini 2.5 Flash (Paid)",
+        "id": "gemini/gemini-2.5-flash",
         "provider": "google",
-        "rpm": 15,
-        "tpm": 1000000,  
-        "type": ["dialog", "code", "multimodal", "vision"],
+        "rpm": 10,
+        "tpm": 250000,
+        "type": ["dialog", "code", "multimodal", "vision", "long_answer"],
         "multimodal": True,
         "embedding": False,
         "priority": 6,
-        "rpd": 200,  
+        "rpd": 250,
         "deprecated": False,
-        "base_score": 0.7
+        "base_score": 0.8
     },
     {
-        "name": "Gemini 2.0 Flash-Lite",
-        "id": "gemini/gemini-2.0-flash-lite",
+        "name": "Gemini 2.5 Pro (Limited Free Tier)",
+        "id": "gemini/gemini-2.5-pro",
         "provider": "google",
-        "rpm": 30,
-        "tpm": 1000000,  
-        "type": ["simple", "dialog", "code", "summarize"],
-        "multimodal": False,
+        "rpm": 1,  # Очень консервативно для free tier
+        "tpm": 32000,  # Ограничения free tier
+        "type": ["dialog", "code", "complex", "analysis", "long_answer"],
+        "multimodal": True,
         "embedding": False,
-        "priority": 7,
-        "rpd": 200,  
+        "priority": 10,  # Очень низкий приоритет для free tier
+        "rpd": 10,  # Очень ограниченное дневное использование
         "deprecated": False,
-        "base_score": 0.5
-    },
-    # Deprecated модели (оставлены для совместимости)
-    {
-        "name": "Gemini 1.5 Flash (Deprecated)",
-        "id": "gemini/gemini-1.5-flash",
-        "provider": "google",
-        "rpm": 15,  
-        "tpm": 250000,  
-        "type": ["simple", "dialog", "code", "summarize"],
-        "multimodal": False,
-        "embedding": False,
-        "priority": 8,
-        "rpd": 50,  
-        "deprecated": True,
-        "base_score": 0.5
-    },
-    {
-        "name": "Gemini 1.5 Flash-8B (Deprecated)",
-        "id": "gemini/gemini-1.5-flash-8b",
-        "provider": "google",
-        "rpm": 15,  
-        "tpm": 250000,  
-        "type": ["simple", "dialog", "code", "summarize"],
-        "multimodal": False,
-        "embedding": False,
-        "priority": 9,
-        "rpd": 50,  
-        "deprecated": True,
-        "base_score": 0.4
+        "base_score": 0.9
     }
 ]
 print(f"DEBUG: LLM_MODELS_CONFIG loaded: {LLM_MODELS_CONFIG}")
@@ -214,14 +187,26 @@ class RateLimitMonitor:
         print("[OK] RateLimitMonitor инициализирован с blacklist механизмом")
     def _reset_if_needed(self, model_id):
         now = time.time()
+        
+        if model_id not in self.usage:
+            self.usage[model_id] = {
+                "rpm": 0, 
+                "tpm": 0, 
+                "rpd": 0, 
+                "last_reset": now, 
+                "last_day_reset": now
+            }
+        
         # Сброс usage каждую минуту
         if now - self.usage[model_id]["last_reset"] > 60:
+            print(f"🔄 [RESET] Сбрасываем минутные лимиты для {model_id}")
             self.usage[model_id]["rpm"] = 0
             self.usage[model_id]["tpm"] = 0
             self.usage[model_id]["last_reset"] = now
         
         # Сброс RPD каждые 24 часа
         if now - self.usage[model_id]["last_day_reset"] > 86400:  # 24 часа
+            print(f"🔄 [RESET] Сбрасываем дневные лимиты для {model_id}")
             self.usage[model_id]["rpd"] = 0
             self.usage[model_id]["last_day_reset"] = now
     # 🚨 НОВОЕ: Проверка блокировки модели
@@ -303,6 +288,7 @@ class RateLimitMonitor:
             self.usage[model_id]["rpm"] += 1
             self.usage[model_id]["tpm"] += tokens
             self.usage[model_id]["rpd"] += 1  # Также увеличиваем счетчик запросов в день
+            print(f"📊 [USAGE] {model_id}: RPM={self.usage[model_id]['rpm']}, TPM={self.usage[model_id]['tpm']}, RPD={self.usage[model_id]['rpd']}")
     def wait_for_slot(self, model_id, tokens=0):
         # Ждать, пока не появится слот для запроса
         while not self.can_use(model_id, tokens):

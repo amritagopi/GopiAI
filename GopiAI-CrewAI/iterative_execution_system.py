@@ -173,7 +173,7 @@ class IterativeExecutor:
             'ps', 'df', 'du', 'free', 'uptime', 'uname', 'which', 'type',
             'echo', 'wc', 'sort', 'uniq', 'mkdir', 'file', 'grep', 'find',
             'tree', 'stat', 'md5sum', 'sha256sum', 'history', 'env',
-            'python3 -c', 'node -e'
+            'python3 -c', 'node -e', 'rm', 'rmdir'
         }
         
         # Также проверяем популярные safe паттерны
@@ -184,6 +184,8 @@ class IterativeExecutor:
             r'^python3? -c ["\'].+["\']$',  # python -c с кодом в кавычках
             r'^find [^|&;<>]+ -name [^|&;<>]+$',  # простой find
             r'^grep [^|&;<>]+ [^|&;<>]+$',  # простой grep
+            r'^rm( -[rf]+)? [^|&;<>]+$',  # rm с флагами -r, -f для файлов/папок
+            r'^rmdir [^|&;<>]+$',         # rmdir для папок
         ]
         
         # Проверяем safe паттерны сначала

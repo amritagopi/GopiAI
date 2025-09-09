@@ -154,11 +154,6 @@ class AgentsTab(QWidget):
         # Кнопки управления
         control_buttons = QHBoxLayout()
         
-        # Кнопка мастера создания команд
-        wizard_btn = create_icon_button("magic-wand", "Мастер создания команды")
-        wizard_btn.clicked.connect(self._open_crew_wizard)
-        control_buttons.addWidget(wizard_btn)
-        
         # Кнопка обновления
         refresh_btn = create_icon_button("refresh-cw", "Обновить список агентов")
         refresh_btn.clicked.connect(self._load_agents)
@@ -196,23 +191,47 @@ class AgentsTab(QWidget):
             if child.widget():
                 child.widget().deleteLater()
         
-        # Группируем по типам
+        # Группируем по типам и категориям
         agents = [a for a in self.agents_data if a.get('type') == 'agent']
         flows = [a for a in self.agents_data if a.get('type') == 'flow']
         
-        # Группа агентов
+        # Группы агентов по категориям
         if agents:
-            agents_group = QGroupBox("Агенты")
-            agents_group_layout = QVBoxLayout(agents_group)
-            agents_group_layout.setContentsMargins(8, 8, 8, 8)
-            agents_group_layout.setSpacing(2)
-            
+            # Группируем агентов по категориям
+            categories = {}
             for agent in agents:
-                agent_widget = AgentItemWidget(agent)
-                agent_widget.agent_attached.connect(self._on_agent_attached)
-                agents_group_layout.addWidget(agent_widget)
+                category = agent.get('category', 'other')
+                if category not in categories:
+                    categories[category] = []
+                categories[category].append(agent)
             
-            self.agents_layout.addWidget(agents_group)
+            # Словарь для красивых названий категорий
+            category_names = {
+                'research': '🔬 Исследование и анализ',
+                'analytics': '📊 Аналитика данных',
+                'content': '✍️ Создание контента',
+                'documentation': '📚 Документация',
+                'development': '💻 Разработка',
+                'security': '🔒 Безопасность',
+                'management': '📋 Управление проектами',
+                'strategy': '🎯 Стратегия и консалтинг',
+                'other': '🔧 Другие'
+            }
+            
+            # Создаем группы для каждой категории
+            for category, category_agents in categories.items():
+                category_name = category_names.get(category, f'📁 {category.title()}')
+                agents_group = QGroupBox(category_name)
+                agents_group_layout = QVBoxLayout(agents_group)
+                agents_group_layout.setContentsMargins(8, 8, 8, 8)
+                agents_group_layout.setSpacing(2)
+                
+                for agent in category_agents:
+                    agent_widget = AgentItemWidget(agent)
+                    agent_widget.agent_attached.connect(self._on_agent_attached)
+                    agents_group_layout.addWidget(agent_widget)
+                
+                self.agents_layout.addWidget(agents_group)
         
         # Группа флоу
         if flows:
@@ -303,39 +322,3 @@ class AgentsTab(QWidget):
     def get_attached_flow(self) -> Optional[Dict]:
         """Возвращает прикрепленный флоу"""
         return self.attached_flow.copy() if self.attached_flow else None
-    
-    def _open_crew_wizard(self):
-        """Открывает мастер создания команды"""
-        try:
-            from gopiai.ui.components.crew_wizard import CrewWizardDialog
-            
-            wizard = CrewWizardDialog(self)
-            wizard.crew_created.connect(self._on_crew_created)
-            wizard.exec()
-            
-        except ImportError as e:
-            logger.error(f"Не удалось загрузить мастер создания команд: {e}")
-            from PySide6.QtWidgets import QMessageBox
-            QMessageBox.warning(
-                self, 
-                "Ошибка", 
-                "Мастер создания команд недоступен.\nПроверьте установку компонентов."
-            )
-        except Exception as e:
-            logger.error(f"Ошибка открытия мастера: {e}")
-            from PySide6.QtWidgets import QMessageBox
-            QMessageBox.critical(
-                self, 
-                "Ошибка", 
-                f"Не удалось открыть мастер создания команд:\n{str(e)}"
-            )
-    
-    def _on_crew_created(self, crew_config: Dict):
-        """Обрабатывает создание новой команды"""
-        logger.info(f"Создана команда: {crew_config['name']}")
-        
-        # Обновляем список агентов
-        self._load_agents()
-        
-        # Показываем уведомление
-        self.status_label.setText(f"Команда '{crew_config['name']}' создана успешно")

@@ -1,0 +1,1302 @@
+Date/Time:       2025-09-09 19:36:09 
+Command line:    .venv/bin/briefcase create linux
+
+OS Release:      Linux 6.8.0-78-generic
+OS Version:      #78-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 11:34:18 UTC 2025
+Architecture:    x86_64
+Platform:        Linux-6.8.0-78-generic-x86_64-with-glibc2.39
+
+Python exe:      /home/amritagopi/GopiAI/.venv/bin/python3
+Python version:  3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   system
+
+Environment Variables:
+	BUNDLED_DEBUGPY_PATH=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/libs/debugpy
+	CHROME_DESKTOP=windsurf.desktop
+	CINNAMON_VERSION=6.4.8
+	CLAUDE_CODE_SSE_PORT=57126
+	COLORTERM=truecolor
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEFAULTS_PATH=/usr/share/gconf/cinnamon.default.path
+	DESKTOP_SESSION=cinnamon
+	DISPLAY=:0
+	ENABLE_IDE_INTEGRATION=true
+	GDK_BACKEND=x11
+	GDMSESSION=cinnamon
+	GDM_LANG=ru_RU
+	GEMINI_CLI_IDE_SERVER_PORT=34771
+	GEMINI_CLI_IDE_WORKSPACE_PATH=/home/amritagopi/GopiAI
+	GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/windsurf.desktop
+	GIO_LAUNCHED_DESKTOP_FILE_PID=100934
+	GIT_ASKPASS=********************
+	GJS_DEBUG_OUTPUT=stderr
+	GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+	GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+	GNOME_KEYRING_CONTROL=********************
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK3_MODULES=xapp-gtk3-module
+	GTK_MODULES=gail:atk-bridge
+	HOME=/home/amritagopi
+	KEY=********************
+	LANG=ru_RU.UTF-8
+	LANGUAGE=ru_RU
+	LC_ADDRESS=anp_IN
+	LC_IDENTIFICATION=anp_IN
+	LC_MEASUREMENT=anp_IN
+	LC_MONETARY=anp_IN
+	LC_NAME=anp_IN
+	LC_NUMERIC=anp_IN
+	LC_PAPER=anp_IN
+	LC_TELEPHONE=anp_IN
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=amritagopi
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+	MANDATORY_PATH=/usr/share/gconf/cinnamon.mandatory.path
+	NVM_BIN=/home/amritagopi/.nvm/versions/node/v20.19.4/bin
+	NVM_CD_FLAGS=
+	NVM_DIR=/home/amritagopi/.nvm
+	NVM_INC=/home/amritagopi/.nvm/versions/node/v20.19.4/include/node
+	OPENROUTER_API_KEY=********************
+	ORIGINAL_XDG_CURRENT_DESKTOP=X-Cinnamon
+	PATH=/home/amritagopi/GopiAI/.venv/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.local/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.nvm/versions/node/v20.19.4/bin:/home/amritagopi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/amritagopi/.local/bin:/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/scripts/noConfigScripts:/home/amritagopi/.local/bin
+	PWD=/home/amritagopi/GopiAI
+	PYDEVD_DISABLE_FILE_VALIDATION=1
+	QT_ACCESSIBILITY=1
+	SESSION_MANAGER=local/amritagopi-MS-7C96:@/tmp/.ICE-unix/1275,unix/amritagopi-MS-7C96:/tmp/.ICE-unix/1275
+	SHELL=/bin/bash
+	SHLVL=2
+	SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+	TERM=xterm-256color
+	TERM_PROGRAM=vscode
+	TERM_PROGRAM_VERSION=1.99.3
+	USER=amritagopi
+	VIRTUAL_ENV=/home/amritagopi/GopiAI/.venv
+	VIRTUAL_ENV_PROMPT=(.venv) 
+	VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-6037e0210cc9a3f1.txt
+	VSCODE_GIT_ASKPASS_EXTRA_ARGS=********************
+	VSCODE_GIT_ASKPASS_MAIN=********************
+	VSCODE_GIT_ASKPASS_NODE=********************
+	VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-49b938ec53.sock
+	XAUTHORITY=/home/amritagopi/.Xauthority
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
+	XDG_CURRENT_DESKTOP=X-Cinnamon
+	XDG_DATA_DIRS=/usr/share/cinnamon:/usr/share/gnome:/home/amritagopi/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/amritagopi
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=cinnamon
+	XDG_SESSION_ID=c1
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	_=.venv/bin/briefcase
+
+pyproject.toml:
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "GopiAI"
+version = "1.0.0"
+description = "Advanced AI Platform with CrewAI Agent Orchestration and Qt-based UI"
+readme = "README.md"
+authors = [
+    {name = "GopiAI Team", email = "noreply@gopiai.dev"},
+]
+license = {file = "LICENSE"}
+keywords = [
+    "ai", "crewai", "agents", "llm", "gemini", "artificial-intelligence", 
+    "automation", "chat", "assistant", "ui", "qt", "python"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Desktop Environment",
+    "Topic :: Software Development :: User Interfaces",
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    # Core dependencies
+    "pyside6>=6.5.0",
+    "requests>=2.28.0",
+    "aiohttp>=3.8.0",
+    
+    # CrewAI dependencies
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",
+    "tavily-python",
+    "google-generativeai",
+    "langchain",
+    "langchain-community",
+    "langchain-google-genai",
+    
+    # UI dependencies
+    "qasync>=0.24.0",
+    "qdarkstyle>=3.1.0",
+    
+    # API Server dependencies
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Utility dependencies
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/amritagopi/GopiAI"
+Documentation = "https://github.com/amritagopi/GopiAI/wiki"
+Repository = "https://github.com/amritagopi/GopiAI"
+Issues = "https://github.com/amritagopi/GopiAI/issues"
+
+[tool.briefcase]
+project_name = "GopiAI"
+bundle = "com.gopiai"
+version = "1.0.0"
+url = "https://github.com/amritagopi/GopiAI"
+license = "MIT"
+author = "GopiAI Team"
+author_email = "noreply@gopiai.dev"
+
+description = "GopiAI is an advanced AI platform featuring CrewAI agent orchestration with an intuitive Qt-based user interface. It provides seamless AI model rotation, intelligent task management, and a comprehensive toolkit for AI-powered automation."
+
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO" # Will try .icns, .ico, .png
+splash = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+[tool.briefcase.app.gopiai]
+formal_name = "GopiAI"
+description = "Advanced AI Platform with Agent Orchestration"
+sources = [
+    "src/gopiai_app",
+    "GopiAI-UI/gopiai", 
+    "GopiAI-CrewAI",
+    "GopiAI-Assets/gopiai/assets",
+]
+test_sources = ["tests"]
+
+requires = [
+    # GUI Framework
+    "pyside6>=6.5.0",
+    
+    # Core AI/ML libraries
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",  
+    "google-generativeai",
+    "tavily-python",
+    "langchain",
+    "langchain-community", 
+    "langchain-google-genai",
+    
+    # API Server
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Async/Network
+    "aiohttp>=3.8.0", 
+    "requests>=2.28.0",
+    "qasync>=0.24.0",
+    
+    # UI Enhancement
+    "qdarkstyle>=3.1.0",
+    
+    # Utilities
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+test_requires = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0", 
+    "pytest-asyncio>=0.21.0",
+]
+
+# Briefcase configuration for different platforms
+[tool.briefcase.app.gopiai.macOS]
+requires = [
+    "toga-cocoa~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+entitlement = "entitlements.plist"
+
+[tool.briefcase.app.gopiai.linux]
+requires = [
+    "toga-gtk~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+system_requires = [
+    # Ubuntu/Debian packages
+    "libgirepository1.0-dev",
+    "libcairo2-dev", 
+    "libpango1.0-dev",
+    "libwebkit2gtk-4.1-dev",
+    # Required for Qt
+    "libxcb-xinerama0",
+    "libxcb1",
+    "libx11-xcb1",
+]
+system_runtime_requires = [
+    "libgirepository-1.0-1",
+    "libcairo-gobject2",
+    "libpango-1.0-0", 
+    "libwebkit2gtk-4.1-0",
+    "libxcb-xinerama0",
+]
+
+[tool.briefcase.app.gopiai.linux.appimage]
+manylinux = "manylinux2014"
+system_requires = [
+    "libgirepository1.0-dev",
+    "libcairo2-dev",
+    "libpango1.0-dev", 
+    "libwebkit2gtk-4.1-dev",
+]
+
+[tool.briefcase.app.gopiai.windows]
+requires = [
+    "toga-winforms~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+
+# Build configurations
+[tool.briefcase.app.gopiai.windows.msi]
+system_installer = true
+
+[tool.briefcase.app.gopiai.macOS.dmg] 
+installer_background = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+# Development tools configuration
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+# PyTest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers", 
+    "--strict-config",
+    "--verbose",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests", 
+    "ui: marks tests as UI tests (require display)",
+]
+
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+Briefcase Log:
+[19:27:16]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "MIT"                                                                                                                                     config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       system.py:134
+           [gopiai] Finalizing application configuration...                                                                                                            system.py:134
+           Targeting linuxmint:xia (Vendor base debian)                                                                                                                system.py:146
+           Determining glibc version... started                                                                                                                        system.py:209
+           Determining glibc version... done                                                                                                                           system.py:209
+           Targeting glibc 2.39                                                                                                                                        system.py:211
+           Targeting Python3.12                                                                                                                                        system.py:215
+                                                                                                                                                                       create.py:920
+[19:27:21] The directory build/gopiai/linuxmint/xia already exists; overwrite [y/N]?                                                                                  console.py:752
+           User input: y                                                                                                                                              console.py:752
+                                                                                                                                                                       create.py:932
+           [gopiai] Removing old application template...                                                                                                               create.py:932
+                                                                                                                                                                       create.py:937
+           [gopiai] Generating application template...                                                                                                                 create.py:937
+           Using app template: https://github.com/beeware/briefcase-linux-system-template.git, branch v0.3.25                                                           base.py:1241
+[19:27:22] Using existing template (sha f6cde732c0fa595756a7028df9e3d25b01f58245, updated Sun Aug 10 10:03:49 2025)                                                     base.py:1146
+                                                                                                                                                                       create.py:952
+           [gopiai] Installing support package...                                                                                                                      create.py:952
+           No support package required.                                                                                                                                create.py:323
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s python3-dev                                                                                                                             subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: python3-dev                                                                                                                            subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: python                                                                                                                                 subprocess.py:838
+           >>>     Installed-Size: 151                                                                                                                             subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:838
+           >>>     Source: python3-defaults                                                                                                                        subprocess.py:838
+           >>>     Version: 3.12.3-0ubuntu2                                                                                                                        subprocess.py:838
+           >>>     Replaces: python3 (<< 3.9.2-1~), python3.1 (<< 3.1.2+20100706-3)                                                                                subprocess.py:838
+           >>>     Depends: python3 (= 3.12.3-0ubuntu2), libpython3-dev (= 3.12.3-0ubuntu2), python3.12-dev (>= 3.12.3-0~), libjs-sphinxdoc (>= 7.2.2)             subprocess.py:838
+           >>>     Breaks: python3 (<< 3.9.2-1~)                                                                                                                   subprocess.py:838
+           >>>     Description: header files and a static library for Python (default)                                                                             subprocess.py:838
+           >>>      Header files, a static library and development tools for building                                                                              subprocess.py:838
+           >>>      Python modules, extending the Python interpreter or embedding Python                                                                           subprocess.py:838
+           >>>      in applications.                                                                                                                               subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This package is a dependency package, which depends on Debian's default                                                                        subprocess.py:838
+           >>>      Python 3 version's headers (currently v3.12).                                                                                                  subprocess.py:838
+           >>>     Built-Using: sphinx (= 7.2.6-6)                                                                                                                 subprocess.py:838
+           >>>     Homepage: https://www.python.org/                                                                                                               subprocess.py:838
+           >>>     Original-Maintainer: Matthias Klose <doko@debian.org>                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s dpkg-dev                                                                                                                                subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: dpkg-dev                                                                                                                               subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: utils                                                                                                                                  subprocess.py:838
+           >>>     Installed-Size: 1720                                                                                                                            subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: all                                                                                                                               subprocess.py:838
+           >>>     Multi-Arch: foreign                                                                                                                             subprocess.py:838
+           >>>     Source: dpkg                                                                                                                                    subprocess.py:838
+           >>>     Version: 1.22.6ubuntu6.1                                                                                                                        subprocess.py:838
+           >>>     Provides: dpkg-build-api (= 0), dpkg-build-api (= 1)                                                                                            subprocess.py:838
+           >>>     Depends: perl:any, libdpkg-perl (= 1.22.6ubuntu6.1), tar (>= 1.28-1), bzip2, xz-utils (>= 5.4.0), patch (>= 2.7), make, binutils,               subprocess.py:838
+           lto-disabled-list                                                                                                                                                        
+           >>>     Recommends: build-essential, gcc | c-compiler, fakeroot, gnupg | sq | sqop | pgpainless-cli | sequoia-chameleon-gnupg, gpgv | sq | sqop |       subprocess.py:838
+           pgpainless-cli | sequoia-chameleon-gnupg, libalgorithm-merge-perl                                                                                                        
+           >>>     Suggests: debian-keyring                                                                                                                        subprocess.py:838
+           >>>     Breaks: debhelper (<< 10.10.1~), libsop-java-java (<< 4.0.7~), pgpainless-cli (<< 1.3.13~), sq (<< 0.33.0~), sqop (<< 0.27.2~)                  subprocess.py:838
+           >>>     Conffiles:                                                                                                                                      subprocess.py:838
+           >>>      /etc/dpkg/shlibs.default 1a2b9d0a869e2aa885ae3621c557fb95                                                                                      subprocess.py:838
+           >>>      /etc/dpkg/shlibs.override 84b1e69080569cc5c613a50887af5200                                                                                     subprocess.py:838
+           >>>     Description: Debian package development tools                                                                                                   subprocess.py:838
+           >>>      This package provides the development tools (including dpkg-source)                                                                            subprocess.py:838
+           >>>      required to unpack, build and upload Debian source packages.                                                                                   subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      Most Debian source packages will require additional tools to build;                                                                            subprocess.py:838
+           >>>      for example, most packages need make and the C compiler gcc.                                                                                   subprocess.py:838
+           >>>     Homepage: https://wiki.debian.org/Teams/Dpkg                                                                                                    subprocess.py:838
+           >>>     Original-Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>                                                                             subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s g++                                                                                                                                     subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: g++                                                                                                                                    subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+[19:27:23] >>>     Section: devel                                                                                                                                  subprocess.py:838
+           >>>     Installed-Size: 13                                                                                                                              subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Source: gcc-defaults (1.214ubuntu1)                                                                                                             subprocess.py:838
+           >>>     Version: 4:13.2.0-7ubuntu1                                                                                                                      subprocess.py:838
+           >>>     Provides: c++-compiler                                                                                                                          subprocess.py:838
+           >>>     Depends: cpp (= 4:13.2.0-7ubuntu1), cpp-x86-64-linux-gnu (= 4:13.2.0-7ubuntu1), gcc (= 4:13.2.0-7ubuntu1), g++-13 (>= 13.2.0-11~),              subprocess.py:838
+           g++-x86-64-linux-gnu (= 4:13.2.0-7ubuntu1), gcc-13 (>= 13.2.0-11~)                                                                                                       
+           >>>     Suggests: g++-multilib                                                                                                                          subprocess.py:838
+           >>>     Description: GNU C++ compiler                                                                                                                   subprocess.py:838
+           >>>      This is the GNU C++ compiler, a fairly portable optimizing compiler for C++.                                                                   subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This is a dependency package providing the default GNU C++ compiler.                                                                           subprocess.py:838
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s gcc                                                                                                                                     subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: gcc                                                                                                                                    subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: devel                                                                                                                                  subprocess.py:838
+           >>>     Installed-Size: 37                                                                                                                              subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Source: gcc-defaults (1.214ubuntu1)                                                                                                             subprocess.py:838
+           >>>     Version: 4:13.2.0-7ubuntu1                                                                                                                      subprocess.py:838
+           >>>     Provides: c-compiler                                                                                                                            subprocess.py:838
+           >>>     Depends: cpp (= 4:13.2.0-7ubuntu1), cpp-x86-64-linux-gnu (= 4:13.2.0-7ubuntu1), gcc-13 (>= 13.2.0-11~), gcc-x86-64-linux-gnu (=                 subprocess.py:838
+           4:13.2.0-7ubuntu1)                                                                                                                                                       
+           >>>     Recommends: libc6-dev | libc-dev                                                                                                                subprocess.py:838
+           >>>     Suggests: gcc-multilib, make, manpages-dev, autoconf, automake, libtool, flex, bison, gdb, gcc-doc                                              subprocess.py:838
+           >>>     Conflicts: gcc-doc (<< 1:2.95.3)                                                                                                                subprocess.py:838
+           >>>     Description: GNU C compiler                                                                                                                     subprocess.py:838
+           >>>      This is the GNU C compiler, a fairly portable optimizing compiler for C.                                                                       subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This is a dependency package providing the default GNU C compiler.                                                                             subprocess.py:838
+           >>>     Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>                                                                       subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libc6-dev                                                                                                                               subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libc6-dev                                                                                                                              subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libdevel                                                                                                                               subprocess.py:838
+           >>>     Installed-Size: 13112                                                                                                                           subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: glibc                                                                                                                                   subprocess.py:838
+           >>>     Version: 2.39-0ubuntu8.5                                                                                                                        subprocess.py:838
+           >>>     Replaces: libc6 (<< 2.38-1ubuntu1)                                                                                                              subprocess.py:838
+           >>>     Provides: libc-dev (= 2.39-0ubuntu8.5)                                                                                                          subprocess.py:838
+           >>>     Depends: libc6 (= 2.39-0ubuntu8.5), libc-dev-bin (= 2.39-0ubuntu8.5), linux-libc-dev, libcrypt-dev, rpcsvc-proto                                subprocess.py:838
+           >>>     Suggests: glibc-doc, manpages-dev                                                                                                               subprocess.py:838
+           >>>     Breaks: binutils (<< 2.38), catch (<< 1.12.2-0.1), heimdal-multidev (<= 7.7.0+dfsg-4), igblast (<= 1.19.0-1), libassimp-dev (<= 5.2.4~ds0-1),   subprocess.py:838
+           libasyncns-dev (<= 0.8-6build2), libatm1-dev (<= 1:2.5.1-4), libaws20-dev (<= 20.2-2+b1), libboinc-app-dev (<= 7.20.2+dfsg-1), libbson-dev (<=                           
+           1.22.0-1), libc6-dev-amd64-cross (<< 2.39~), libcups2-dev (<= 2.4.2-1), libdeal.ii-dev (<= 9.4.0-1), libdkim-dev (<= 1:1.0.21-4build3),                                  
+           libdolfin-dev-common (<= 2019.2.0~git20220407.d29e24d-5), libeckit-dev (<= 1.20.0-1), libfclib-dev (<= 3.1.0+dfsg-2), libfltk1.3-dev (<= 1.3.8-4+b1),                    
+           libghc-resolv-dev (<= 0.1.2.0-3), libghc-resolv-prof (<= 0.1.2.0-3), libglib2.0-dev (<= 2.72.3-1), libgloox-dev (<= 1.0.24-2+b1), libhesiod-dev (<=                      
+           3.2.1-3.1+b1), libinfinity-0.7-dev (<= 0.7.2-1build1), libinsighttoolkit4-dev (<= 4.13.3withdata-dfsg2-3+b1), libinsighttoolkit5-dev (<= 5.2.1-5+b1),                    
+           libismrmrd-dev (<= 1.8.0-2), libldap-dev (<= 2.5.12+dfsg-2), liblog4cplus-dev (<= 2.0.7-1), libloudmouth1-dev (<= 1.5.4-1), libmgl-dev (<= 8.0.1-2),                     
+           libmimalloc2.0 (<= 2.0.6+ds-1), libminc-dev (<= 2.4.03-5), libmongoc-dev (<= 1.22.1-1), libmrpt-ros1bridge-dev (<= 1:2.4.9+ds-4+b2), libmysqlclient-dev                  
+           (<= 8.0.29-1), libnetcdf-dev (<= 1:4.9.0-3), libnetcdf-mpi-dev (<= 1:4.9.0-1), libnetcdf-pnetcdf-dev (<= 1:4.9.0-1), libnfsidmap-dev (<= 1:2.6.1-2),                     
+           libns3-dev (<= 3.36.1+dfsg-4), libola-dev (<= 0.10.8.nojsmin-2), libopenafs-dev (<= 1.8.8.1-3), libopendkim-dev (<= 2.11.0~beta2-7), libopendmarc-dev                    
+           (<= 1.4.2-1), libopenms-dev (<= 2.6.0+cleaned1-3build4), libopenzwave1.6-dev (<= 1.6.1914+ds-1), libpg-query-dev (<= 13-2.1.2-2), librbl-dev (<=                         
+           2.11.0~beta2-7), libre-dev (<= 1.1.0-1build1), libshishi-dev (<= 1.0.2-11), libslurm-dev (<= 21.08.8.2-1), libsocksd0-dev (<= 1.4.2+dfsg-7build7),                       
+           libspf2-dev (<= 1.2.10-7.1+b1), libstrophe-dev (<= 0.12.1-2), libtaningia-dev (<= 0.2.2-2), libtrilinos-amesos-dev (<= 13.2.0-3),                                        
+           libtrilinos-amesos2-dev (<= 13.2.0-3), libtrilinos-anasazi-dev (<= 13.2.0-3), libtrilinos-aztecoo-dev (<= 13.2.0-3), libtrilinos-belos-dev (<=                           
+           13.2.0-3), libtrilinos-epetra-dev (<= 13.2.0-3), libtrilinos-epetraext-dev (<= 13.2.0-3), libtrilinos-galeri-dev (<= 13.2.0-3), libtrilinos-ifpack-dev                   
+           (<= 13.2.0-3), libtrilinos-ifpack2-dev (<= 13.2.0-3), libtrilinos-intrepid-dev (<= 13.2.0-3), libtrilinos-intrepid2-dev (<= 13.2.0-3),                                   
+           libtrilinos-isorropia-dev (<= 13.2.0-3), libtrilinos-kokkos-dev (<= 13.2.0-3), libtrilinos-kokkos-kernels-dev (<= 13.2.0-3), libtrilinos-komplex-dev                     
+           (<= 13.2.0-3), libtrilinos-ml-dev (<= 13.2.0-3), libtrilinos-moertel-dev (<= 13.2.0-3), libtrilinos-muelu-dev (<= 13.2.0-3), libtrilinos-nox-dev (<=                     
+           13.2.0-3), libtrilinos-phalanx-dev (<= 13.2.0-3), libtrilinos-pike-dev (<= 13.2.0-3), libtrilinos-piro-dev (<= 13.2.0-3), libtrilinos-pliris-dev (<=                     
+           13.2.0-3), libtrilinos-rol-dev (<= 13.2.0-3), libtrilinos-rtop-dev (<= 13.2.0-3), libtrilinos-rythmos-dev (<= 13.2.0-3), libtrilinos-sacado-dev (<=                      
+           13.2.0-3), libtrilinos-shylu-dev (<= 13.2.0-3), libtrilinos-stokhos-dev (<= 13.2.0-3), libtrilinos-stratimikos-dev (<= 13.2.0-3), libtrilinos-teko-dev                   
+           (<= 13.2.0-3), libtrilinos-teuchos-dev (<= 13.2.0-3), libtrilinos-thyra-dev (<= 13.2.0-3), libtrilinos-tpetra-dev (<= 13.2.0-3),                                         
+           libtrilinos-trilinoscouplings-dev (<= 13.2.0-3), libtrilinos-triutils-dev (<= 13.2.0-3), libtrilinos-xpetra-dev (<= 13.2.0-3), libtrilinos-zoltan2-dev                   
+           (<= 13.2.0-3), libvbr-dev (<= 2.11.0~beta2-7), libvisp-dev (<= 3.5.0-2+b1), libvotca-dev (<= 2022-3), libvtk6-dev (<= 6.3.0+dfsg2-8.1+b1), libvtk7-dev                   
+           (<= 7.1.1+dfsg2-10.2), open-vm-tools-dev (<= 2:12.0.5-2), pidgin-librvp (<= 0.9.7cvs-3), proftpd-dev (<= 1.3.7d+dfsg-2), slurm-wlm-basic-plugins-dev                     
+           (<= 21.08.8.2-1)                                                                                                                                                         
+           >>>     Conflicts: libc0.3-dev, libc6.1-dev                                                                                                             subprocess.py:838
+           >>>     Description: GNU C Library: Development Libraries and Header Files                                                                              subprocess.py:838
+           >>>      Contains the symlinks, headers, and object files needed to compile                                                                             subprocess.py:838
+           >>>      and link programs which use the standard C library.                                                                                            subprocess.py:838
+           >>>     Homepage: https://www.gnu.org/software/libc/libc.html                                                                                           subprocess.py:838
+           >>>     Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>                                                                       subprocess.py:838
+           >>>     Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc                                                                                 subprocess.py:838
+           >>>     Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git                                                                                 subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s make                                                                                                                                    subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: make                                                                                                                                   subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: devel                                                                                                                                  subprocess.py:838
+           >>>     Installed-Size: 404                                                                                                                             subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: allowed                                                                                                                             subprocess.py:838
+           >>>     Source: make-dfsg                                                                                                                               subprocess.py:838
+           >>>     Version: 4.3-4.1build2                                                                                                                          subprocess.py:838
+           >>>     Replaces: make-guile                                                                                                                            subprocess.py:838
+           >>>     Depends: libc6 (>= 2.38)                                                                                                                        subprocess.py:838
+           >>>     Suggests: make-doc                                                                                                                              subprocess.py:838
+           >>>     Conflicts: make-guile                                                                                                                           subprocess.py:838
+           >>>     Description: utility for directing compilation                                                                                                  subprocess.py:838
+           >>>      GNU Make is a utility which controls the generation of executables                                                                             subprocess.py:838
+           >>>      and other target files of a program from the program's source                                                                                  subprocess.py:838
+           >>>      files. It determines automatically which pieces of a large program                                                                             subprocess.py:838
+           >>>      need to be (re)created, and issues the commands to (re)create                                                                                  subprocess.py:838
+           >>>      them. Make can be used to organize any task in which targets (files)                                                                           subprocess.py:838
+           >>>      are to be automatically updated based on input files whenever the                                                                              subprocess.py:838
+           >>>      corresponding input is newer --- it is not limited to building                                                                                 subprocess.py:838
+           >>>      computer programs. Indeed, Make is a general purpose dependency                                                                                subprocess.py:838
+           >>>      solver.                                                                                                                                        subprocess.py:838
+           >>>     Homepage: https://www.gnu.org/software/make/                                                                                                    subprocess.py:838
+           >>>     Original-Maintainer: Manoj Srivastava <srivasta@debian.org>                                                                                     subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libgirepository1.0-dev                                                                                                                  subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libgirepository1.0-dev                                                                                                                 subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libdevel                                                                                                                               subprocess.py:838
+           >>>     Installed-Size: 75                                                                                                                              subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Source: gobject-introspection                                                                                                                   subprocess.py:838
+           >>>     Version: 1.80.1-1                                                                                                                               subprocess.py:838
+           >>>     Depends: gir1.2-freedesktop (= 1.80.1-1), gir1.2-freedesktop-dev (= 1.80.1-1), gir1.2-girepository-2.0 (= 1.80.1-1),                            subprocess.py:838
+           gir1.2-girepository-2.0-dev (= 1.80.1-1), gir1.2-glib-2.0 (>= 2.80.0), gir1.2-glib-2.0-dev (>= 2.80.0), gobject-introspection (= 1.80.1-1), libffi-dev                   
+           (>= 3.4), libgirepository-1.0-1 (= 1.80.1-1), libgirepository-1.0-dev (= 1.80.1-1), libglib2.0-dev (>= 2.80.0)                                                           
+           >>>     Suggests: libgirepository1.0-doc                                                                                                                subprocess.py:838
+           >>>     Description: Library for handling GObject introspection data (complete development files)                                                       subprocess.py:838
+           >>>      GObject Introspection is a project for providing machine readable                                                                              subprocess.py:838
+           >>>      introspection data of the API of C libraries. This introspection                                                                               subprocess.py:838
+           >>>      data can be used in several different use cases, for example                                                                                   subprocess.py:838
+           >>>      automatic code generation for bindings, API verification and documentation                                                                     subprocess.py:838
+           >>>      generation.                                                                                                                                    subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This metapackage depends on everything needed to use GObject-Introspection.                                                                    subprocess.py:838
+           >>>      It also provides GLib-2.0.gir at its traditional location in /usr/share,                                                                       subprocess.py:838
+           >>>      for compatibility with older code-generation tools which do not read GIR XML                                                                   subprocess.py:838
+           >>>      from /usr/lib/x86_64-linux-gnu/gir-1.0.                                                                                                        subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      Please consider build-depending on gobject-introspection and the appropriate                                                                   subprocess.py:838
+           >>>      gir1.2-*-dev packages in preference to this package, to allow for                                                                              subprocess.py:838
+           >>>      cross-compilation.                                                                                                                             subprocess.py:838
+           >>>     Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>                                                   subprocess.py:838
+           >>>     Homepage: https://wiki.gnome.org/GObjectIntrospection                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libcairo2-dev                                                                                                                           subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libcairo2-dev                                                                                                                          subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libdevel                                                                                                                               subprocess.py:838
+           >>>     Installed-Size: 234                                                                                                                             subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: cairo                                                                                                                                   subprocess.py:838
+           >>>     Version: 1.18.0-3build1                                                                                                                         subprocess.py:838
+           >>>     Provides: libcairo-dev                                                                                                                          subprocess.py:838
+           >>>     Depends: libcairo-gobject2 (= 1.18.0-3build1), libcairo-script-interpreter2 (= 1.18.0-3build1), libcairo2 (= 1.18.0-3build1),                   subprocess.py:838
+           libfontconfig-dev, libfreetype-dev, libglib2.0-dev, libpixman-1-dev, libpng-dev, libsm-dev, libx11-dev, libxcb-render0-dev, libxcb-shm0-dev,                             
+           libxcb1-dev, libxext-dev, libxrender-dev                                                                                                                                 
+           >>>     Suggests: libcairo2-doc                                                                                                                         subprocess.py:838
+           >>>     Description: Development files for the Cairo 2D graphics library                                                                                subprocess.py:838
+           >>>      Cairo is a multi-platform library providing anti-aliased                                                                                       subprocess.py:838
+           >>>      vector-based rendering for multiple target backends.                                                                                           subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This package contains the development libraries, header files needed by                                                                        subprocess.py:838
+           >>>      programs that want to compile with Cairo.                                                                                                      subprocess.py:838
+           >>>     Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>                                                   subprocess.py:838
+           >>>     Homepage: https://cairographics.org/                                                                                                            subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libpango1.0-dev                                                                                                                         subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libpango1.0-dev                                                                                                                        subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libdevel                                                                                                                               subprocess.py:838
+           >>>     Installed-Size: 1592                                                                                                                            subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: pango1.0                                                                                                                                subprocess.py:838
+           >>>     Version: 1.52.1+ds-1build1                                                                                                                      subprocess.py:838
+           >>>     Provides: gir1.2-pango-1.0-dev (= 1.52.1+ds-1build1), gir1.2-pangocairo-1.0-dev (= 1.52.1+ds-1build1), gir1.2-pangofc-1.0-dev (=                subprocess.py:838
+           1.52.1+ds-1build1), gir1.2-pangoft2-1.0-dev (= 1.52.1+ds-1build1), gir1.2-pangoot-1.0-dev (= 1.52.1+ds-1build1), gir1.2-pangoxft-1.0-dev (=                              
+           1.52.1+ds-1build1)                                                                                                                                                       
+           >>>     Depends: gir1.2-pango-1.0 (= 1.52.1+ds-1build1), libcairo2-dev, libfontconfig-dev, libfreetype-dev, libfribidi-dev, libglib2.0-dev,             subprocess.py:838
+           libharfbuzz-dev, libpango-1.0-0 (= 1.52.1+ds-1build1), libpangocairo-1.0-0 (= 1.52.1+ds-1build1), libpangoft2-1.0-0 (= 1.52.1+ds-1build1),                               
+           libpangoxft-1.0-0 (= 1.52.1+ds-1build1), libthai-dev, libx11-dev, libxft-dev, libxrender-dev, pango1.0-tools (= 1.52.1+ds-1build1), pkgconf                              
+           >>>     Suggests: libpango1.0-doc                                                                                                                       subprocess.py:838
+           >>>     Description: Development files for the Pango                                                                                                    subprocess.py:838
+           >>>      Pango is a library for layout and rendering of text, with an emphasis                                                                          subprocess.py:838
+           >>>      on internationalization. Pango can be used anywhere that text layout is                                                                        subprocess.py:838
+           >>>      needed. however, most of the work on Pango-1.0 was done using the GTK+                                                                         subprocess.py:838
+           >>>      widget toolkit as a test platform. Pango forms the core of text and                                                                            subprocess.py:838
+           >>>      font handling for GTK+-2.0.                                                                                                                    subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      Pango is designed to be modular; the core Pango layout can be used with                                                                        subprocess.py:838
+           >>>      four different font backends:                                                                                                                  subprocess.py:838
+           >>>       - Core X windowing system fonts                                                                                                               subprocess.py:838
+           >>>       - Client-side fonts on X using the Xft library                                                                                                subprocess.py:838
+           >>>       - Direct rendering of scalable fonts using the FreeType library                                                                               subprocess.py:838
+           >>>       - Native fonts on Microsoft backends                                                                                                          subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This package contains the header files and some files needed for development                                                                   subprocess.py:838
+           >>>      with Pango.                                                                                                                                    subprocess.py:838
+           >>>     Homepage: https://www.pango.org/                                                                                                                subprocess.py:838
+           >>>     Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>                                                   subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libwebkit2gtk-4.1-dev                                                                                                                   subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libwebkit2gtk-4.1-dev                                                                                                                  subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libdevel                                                                                                                               subprocess.py:838
+           >>>     Installed-Size: 5619                                                                                                                            subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Source: webkit2gtk                                                                                                                              subprocess.py:838
+           >>>     Version: 2.48.5-0ubuntu0.24.04.1                                                                                                                subprocess.py:838
+           >>>     Provides: gir1.2-webkit2-4.1-dev (= 2.48.5-0ubuntu0.24.04.1), gir1.2-webkit2webextension-4.1-dev (= 2.48.5-0ubuntu0.24.04.1)                    subprocess.py:838
+           >>>     Depends: libwebkit2gtk-4.1-0 (= 2.48.5-0ubuntu0.24.04.1), libgtk-3-dev, libsoup-3.0-dev, libjavascriptcoregtk-4.1-dev (=                        subprocess.py:838
+           2.48.5-0ubuntu0.24.04.1), gir1.2-gtk-3.0-dev, gir1.2-soup-3.0-dev, gir1.2-webkit2-4.1 (= 2.48.5-0ubuntu0.24.04.1)                                                        
+           >>>     Description: Web content engine library for GTK - development files                                                                             subprocess.py:838
+           >>>      WebKit is a web content engine, derived from KHTML and KJS from KDE, and                                                                       subprocess.py:838
+           >>>      used primarily in Apple's Safari browser.  It is made to be embedded in                                                                        subprocess.py:838
+           >>>      other applications, such as mail readers, or web browsers.                                                                                     subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      It is able to display content such as HTML, SVG, XML, and others. It also                                                                      subprocess.py:838
+           >>>      supports DOM, XMLHttpRequest, XSLT, CSS, JavaScript/ECMAScript and more.                                                                       subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      WebKitGTK is a WebKit port designed to be used in GTK applications.                                                                            subprocess.py:838
+           >>>      This build provides version 4.1 of the API and uses libsoup v3 for                                                                             subprocess.py:838
+           >>>      the networking stack and the GTK 3 widget toolkit.                                                                                             subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This package contains the development files.                                                                                                   subprocess.py:838
+           >>>     Homepage: https://webkitgtk.org/                                                                                                                subprocess.py:838
+           >>>     Original-Maintainer: Debian WebKit Maintainers <pkg-webkit-maintainers@lists.alioth.debian.org>                                                 subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libxcb-xinerama0                                                                                                                        subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libxcb-xinerama0                                                                                                                       subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libs                                                                                                                                   subprocess.py:838
+           >>>     Installed-Size: 31                                                                                                                              subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: libxcb                                                                                                                                  subprocess.py:838
+           >>>     Version: 1.15-1ubuntu2                                                                                                                          subprocess.py:838
+           >>>     Depends: libc6 (>= 2.4), libxcb1                                                                                                                subprocess.py:838
+           >>>     Description: X C Binding, xinerama extension                                                                                                    subprocess.py:838
+           >>>      This package contains the library files needed to run software using                                                                           subprocess.py:838
+           >>>      libxcb-xinerama, the xinerama extension for the X C Binding.                                                                                   subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      The XCB library provides an interface to the X Window System protocol,                                                                         subprocess.py:838
+           >>>      designed to replace the Xlib interface.  XCB provides several advantages over                                                                  subprocess.py:838
+           >>>      Xlib:                                                                                                                                          subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>       * Size: small library and lower memory footprint                                                                                              subprocess.py:838
+           >>>       * Latency hiding: batch several requests and wait for the replies later                                                                       subprocess.py:838
+           >>>       * Direct protocol access: one-to-one mapping between interface and protocol                                                                   subprocess.py:838
+           >>>       * Thread support: access XCB from multiple threads, with no explicit locking                                                                  subprocess.py:838
+           >>>       * Easy creation of new extensions: automatically generates interface from                                                                     subprocess.py:838
+           >>>         machine-parsable protocol descriptions                                                                                                      subprocess.py:838
+           >>>     Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>                                                                          subprocess.py:838
+           >>>     Homepage: https://xcb.freedesktop.org                                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libxcb1                                                                                                                                 subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libxcb1                                                                                                                                subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libs                                                                                                                                   subprocess.py:838
+           >>>     Installed-Size: 196                                                                                                                             subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: libxcb                                                                                                                                  subprocess.py:838
+           >>>     Version: 1.15-1ubuntu2                                                                                                                          subprocess.py:838
+           >>>     Depends: libc6 (>= 2.38), libxau6 (>= 1:1.0.9), libxdmcp6                                                                                       subprocess.py:838
+           >>>     Breaks: alsa-utils (<< 1.0.24.2-5)                                                                                                              subprocess.py:838
+           >>>     Description: X C Binding                                                                                                                        subprocess.py:838
+           >>>      This package contains the library files needed to run software using libxcb,                                                                   subprocess.py:838
+           >>>      the X C Binding.                                                                                                                               subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      The XCB library provides an interface to the X Window System protocol,                                                                         subprocess.py:838
+           >>>      designed to replace the Xlib interface.  XCB provides several advantages over                                                                  subprocess.py:838
+           >>>      Xlib:                                                                                                                                          subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>       * Size: small library and lower memory footprint                                                                                              subprocess.py:838
+           >>>       * Latency hiding: batch several requests and wait for the replies later                                                                       subprocess.py:838
+           >>>       * Direct protocol access: one-to-one mapping between interface and protocol                                                                   subprocess.py:838
+           >>>       * Thread support: access XCB from multiple threads, with no explicit locking                                                                  subprocess.py:838
+           >>>       * Easy creation of new extensions: automatically generates interface from                                                                     subprocess.py:838
+           >>>         machine-parsable protocol descriptions                                                                                                      subprocess.py:838
+           >>>     Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>                                                                          subprocess.py:838
+           >>>     Homepage: https://xcb.freedesktop.org                                                                                                           subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     dpkg -s libx11-xcb1                                                                                                                             subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Package: libx11-xcb1                                                                                                                            subprocess.py:838
+           >>>     Status: install ok installed                                                                                                                    subprocess.py:838
+           >>>     Priority: optional                                                                                                                              subprocess.py:838
+           >>>     Section: libs                                                                                                                                   subprocess.py:838
+           >>>     Installed-Size: 73                                                                                                                              subprocess.py:838
+           >>>     Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>                                                                           subprocess.py:838
+           >>>     Architecture: amd64                                                                                                                             subprocess.py:838
+           >>>     Multi-Arch: same                                                                                                                                subprocess.py:838
+           >>>     Source: libx11                                                                                                                                  subprocess.py:838
+           >>>     Version: 2:1.8.7-1build1                                                                                                                        subprocess.py:838
+           >>>     Depends: libx11-6 (= 2:1.8.7-1build1)                                                                                                           subprocess.py:838
+           >>>     Description: Xlib/XCB interface library                                                                                                         subprocess.py:838
+           >>>      libX11-xcb provides functions needed by clients which take advantage of                                                                        subprocess.py:838
+           >>>      Xlib/XCB to mix calls to both Xlib and XCB over the same X connection.                                                                         subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      More information about X.Org can be found at:                                                                                                  subprocess.py:838
+           >>>      <URL:https://www.X.org>                                                                                                                        subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      More information about XCB can be found at:                                                                                                    subprocess.py:838
+           >>>      <URL:https://xcb.freedesktop.org>                                                                                                              subprocess.py:838
+           >>>      .                                                                                                                                              subprocess.py:838
+           >>>      This module can be found at                                                                                                                    subprocess.py:838
+           >>>      https://gitlab.freedesktop.org/xorg/lib/libX11                                                                                                 subprocess.py:838
+           >>>     Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>                                                                          subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                       create.py:970
+           [gopiai] Installing application code...                                                                                                                     create.py:970
+           Installing src/gopiai_app... started                                                                                                                        create.py:734
+           Installing src/gopiai_app... done                                                                                                                           create.py:734
+           Installing GopiAI-UI/gopiai... started                                                                                                                      create.py:734
+           Installing GopiAI-UI/gopiai... done                                                                                                                         create.py:734
+           Installing GopiAI-CrewAI... started                                                                                                                         create.py:734
+[19:34:31] Installing GopiAI-CrewAI... done                                                                                                                            create.py:734
+           Installing GopiAI-Assets/gopiai/assets... started                                                                                                           create.py:734
+           Installing GopiAI-Assets/gopiai/assets... done                                                                                                              create.py:734
+                                                                                                                                                                       create.py:973
+           [gopiai] Installing requirements...                                                                                                                         create.py:973
+           Installing app requirements... started                                                                                                                      create.py:660
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     /home/amritagopi/GopiAI/.venv/bin/python3 -u -X utf8 -m pip install --disable-pip-version-check --upgrade --no-user                             subprocess.py:838
+           --target=/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages 'pyside6>=6.5.0' 'requests>=2.28.0'                                 
+           'aiohttp>=3.8.0' 'crewai>=0.165.0' 'litellm>=1.0.0' tavily-python google-generativeai langchain langchain-community langchain-google-genai                               
+           'qasync>=0.24.0' 'qdarkstyle>=3.1.0' 'flask>=2.3.0' 'flask-cors>=4.0.0' 'gunicorn>=21.0.0' 'psutil>=5.9.0' 'pydantic>=2.0.0' 'python-dotenv>=1.0.0'                      
+           'packaging>=23.0' 'platformdirs>=3.0.0' 'pyside6>=6.5.0' 'crewai>=0.165.0' 'litellm>=1.0.0' google-generativeai tavily-python langchain                                  
+           langchain-community langchain-google-genai 'flask>=2.3.0' 'flask-cors>=4.0.0' 'gunicorn>=21.0.0' 'aiohttp>=3.8.0' 'requests>=2.28.0' 'qasync>=0.24.0'                    
+           'qdarkstyle>=3.1.0' 'psutil>=5.9.0' 'pydantic>=2.0.0' 'python-dotenv>=1.0.0' 'packaging>=23.0' 'platformdirs>=3.0.0' 'toga-gtk~=0.4.0'                                   
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+[19:34:37] Collecting pyside6>=6.5.0                                                                                                                               subprocess.py:195
+[19:34:38]   Downloading pyside6-6.9.2-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (5.3 kB)                                                                       subprocess.py:195
+[19:34:39] Collecting requests>=2.28.0                                                                                                                             subprocess.py:195
+             Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)                                                                                        subprocess.py:195
+[19:34:42] Collecting aiohttp>=3.8.0                                                                                                                               subprocess.py:195
+[19:34:43]   Downloading aiohttp-3.12.15-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.7 kB)                                              subprocess.py:195
+[19:34:44] Collecting crewai>=0.165.0                                                                                                                              subprocess.py:195
+             Downloading crewai-0.177.0-py3-none-any.whl.metadata (35 kB)                                                                                          subprocess.py:195
+[19:34:47] Collecting litellm>=1.0.0                                                                                                                               subprocess.py:195
+             Downloading litellm-1.76.3-py3-none-any.whl.metadata (41 kB)                                                                                          subprocess.py:195
+[19:34:49] Collecting tavily-python                                                                                                                                subprocess.py:195
+             Downloading tavily_python-0.7.11-py3-none-any.whl.metadata (7.5 kB)                                                                                   subprocess.py:195
+[19:34:50] Collecting google-generativeai                                                                                                                          subprocess.py:195
+             Downloading google_generativeai-0.8.5-py3-none-any.whl.metadata (3.9 kB)                                                                              subprocess.py:195
+[19:34:51] Collecting langchain                                                                                                                                    subprocess.py:195
+[19:34:52]   Downloading langchain-0.3.27-py3-none-any.whl.metadata (7.8 kB)                                                                                       subprocess.py:195
+[19:34:53] Collecting langchain-community                                                                                                                          subprocess.py:195
+             Downloading langchain_community-0.3.29-py3-none-any.whl.metadata (2.9 kB)                                                                             subprocess.py:195
+[19:34:54] Collecting langchain-google-genai                                                                                                                       subprocess.py:195
+[19:34:55]   Downloading langchain_google_genai-2.1.10-py3-none-any.whl.metadata (7.2 kB)                                                                          subprocess.py:195
+[19:34:56] Collecting qasync>=0.24.0                                                                                                                               subprocess.py:195
+             Downloading qasync-0.28.0-py3-none-any.whl.metadata (4.6 kB)                                                                                          subprocess.py:195
+[19:34:58] Collecting qdarkstyle>=3.1.0                                                                                                                            subprocess.py:195
+             Downloading QDarkStyle-3.2.3-py2.py3-none-any.whl.metadata (3.2 kB)                                                                                   subprocess.py:195
+[19:34:59] Collecting flask>=2.3.0                                                                                                                                 subprocess.py:195
+             Downloading flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)                                                                                            subprocess.py:195
+[19:35:00] Collecting flask-cors>=4.0.0                                                                                                                            subprocess.py:195
+[19:35:01]   Downloading flask_cors-6.0.1-py3-none-any.whl.metadata (5.3 kB)                                                                                       subprocess.py:195
+           Collecting gunicorn>=21.0.0                                                                                                                             subprocess.py:195
+             Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)                                                                                       subprocess.py:195
+[19:35:04] Collecting psutil>=5.9.0                                                                                                                                subprocess.py:195
+             Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)         subprocess.py:195
+[19:35:06] Collecting pydantic>=2.0.0                                                                                                                              subprocess.py:195
+             Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)                                                                                         subprocess.py:195
+[19:35:08] Collecting python-dotenv>=1.0.0                                                                                                                         subprocess.py:195
+             Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)                                                                                     subprocess.py:195
+[19:35:10] Collecting packaging>=23.0                                                                                                                              subprocess.py:195
+             Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)                                                                                         subprocess.py:195
+[19:35:11] Collecting platformdirs>=3.0.0                                                                                                                          subprocess.py:195
+             Downloading platformdirs-4.4.0-py3-none-any.whl.metadata (12 kB)                                                                                      subprocess.py:195
+[19:35:13] Collecting toga-gtk~=0.4.0                                                                                                                              subprocess.py:195
+             Downloading toga_gtk-0.4.9-py3-none-any.whl.metadata (3.1 kB)                                                                                         subprocess.py:195
+[19:35:14] Collecting pycairo>=1.17.0 (from toga-gtk~=0.4.0)                                                                                                       subprocess.py:195
+             Downloading pycairo-1.28.0.tar.gz (662 kB)                                                                                                            subprocess.py:195
+[19:35:18]      ━━━━━━━━━━━━━━━━ 662.5/662.5 kB 200.2 kB/s  0:00:03                                                                                                subprocess.py:195
+             Installing build dependencies: started                                                                                                                subprocess.py:195
+[19:35:32]   Installing build dependencies: finished with status 'done'                                                                                            subprocess.py:195
+             Getting requirements to build wheel: started                                                                                                          subprocess.py:195
+             Getting requirements to build wheel: finished with status 'done'                                                                                      subprocess.py:195
+             Installing backend dependencies: started                                                                                                              subprocess.py:195
+[19:35:37]   Installing backend dependencies: finished with status 'done'                                                                                          subprocess.py:195
+             Preparing metadata (pyproject.toml): started                                                                                                          subprocess.py:195
+[19:35:45]   Preparing metadata (pyproject.toml): finished with status 'done'                                                                                      subprocess.py:195
+           Collecting pygobject>=3.50.0 (from toga-gtk~=0.4.0)                                                                                                     subprocess.py:195
+[19:35:46]   Downloading pygobject-3.54.0.tar.gz (1.3 MB)                                                                                                          subprocess.py:195
+[19:35:49]      ━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 476.2 kB/s  0:00:03                                                                                                subprocess.py:195
+             Installing build dependencies: started                                                                                                                subprocess.py:195
+[19:36:04]   Installing build dependencies: finished with status 'done'                                                                                            subprocess.py:195
+             Getting requirements to build wheel: started                                                                                                          subprocess.py:195
+             Getting requirements to build wheel: finished with status 'done'                                                                                      subprocess.py:195
+             Installing backend dependencies: started                                                                                                              subprocess.py:195
+[19:36:06]   Installing backend dependencies: finished with status 'done'                                                                                          subprocess.py:195
+             Preparing metadata (pyproject.toml): started                                                                                                          subprocess.py:195
+[19:36:08]   Preparing metadata (pyproject.toml): finished with status 'error'                                                                                     subprocess.py:195
+             error: subprocess-exited-with-error                                                                                                                   subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+             × Preparing metadata (pyproject.toml) did not run successfully.                                                                                       subprocess.py:195
+             │ exit code: 1                                                                                                                                        subprocess.py:195
+             ╰─> [23 lines of output]                                                                                                                              subprocess.py:195
+                 + meson setup /tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e                                                                subprocess.py:195
+           /tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e/.mesonpy-0mcaq7ow -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md                            
+           -Dtests=false -Dwheel=true --wrap-mode=nofallback                                                                                                                        
+           --native-file=/tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e/.mesonpy-0mcaq7ow/meson-python-native-file.ini                                        
+                 The Meson build system                                                                                                                            subprocess.py:195
+                 Version: 1.9.0                                                                                                                                    subprocess.py:195
+                 Source dir: /tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e                                                                  subprocess.py:195
+                 Build dir: /tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e/.mesonpy-0mcaq7ow                                                 subprocess.py:195
+                 Build type: native build                                                                                                                          subprocess.py:195
+                 Project name: pygobject                                                                                                                           subprocess.py:195
+                 Project version: 3.54.0                                                                                                                           subprocess.py:195
+                 C compiler for the host machine: cc (gcc 13.3.0 "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0")                                                       subprocess.py:195
+                 C linker for the host machine: cc ld.bfd 2.42                                                                                                     subprocess.py:195
+                 Host machine cpu family: x86_64                                                                                                                   subprocess.py:195
+                 Host machine cpu: x86_64                                                                                                                          subprocess.py:195
+                 Program python3 found: YES (/home/amritagopi/GopiAI/.venv/bin/python3)                                                                            subprocess.py:195
+                 Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1                                                                                                 subprocess.py:195
+                 Run-time dependency python found: YES 3.12                                                                                                        subprocess.py:195
+                 Found CMake: /usr/bin/cmake (3.28.3)                                                                                                              subprocess.py:195
+                 Run-time dependency girepository-2.0 found: NO (tried pkgconfig and cmake)                                                                        subprocess.py:195
+                 Not looking for a fallback subproject for the dependency girepository-2.0 because:                                                                subprocess.py:195
+                 Use of fallback dependencies is disabled.                                                                                                         subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+                 ../meson.build:31:9: ERROR: Dependency 'girepository-2.0' is required but not found.                                                              subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+                 A full log can be found at /tmp/pip-install-vi8mtewv/pygobject_0f3a58571d9140dca92551d702c2cc8e/.mesonpy-0mcaq7ow/meson-logs/meson-log.txt        subprocess.py:195
+                 [end of output]                                                                                                                                   subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+             note: This error originates from a subprocess, and is likely not a problem with pip.                                                                  subprocess.py:195
+           error: metadata-generation-failed                                                                                                                       subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+           × Encountered error while generating package metadata.                                                                                                  subprocess.py:195
+           ╰─> See above for output.                                                                                                                               subprocess.py:195
+                                                                                                                                                                   subprocess.py:195
+           note: This is an issue with the package mentioned above, not pip.                                                                                       subprocess.py:195
+           hint: See above for details.                                                                                                                            subprocess.py:195
+           >>> Return code: 1                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           Installing app requirements... errored                                                                                                                      create.py:660
+                                                                                                                                                                      __main__.py:42
+           Unable to install requirements. This may be because one of your                                                                                            __main__.py:43
+           requirements is invalid, or because pip was unable to connect                                                                                              __main__.py:43
+           to the PyPI server.                                                                                                                                        __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:605 in _pip_install                                                                      │
+│                                                                                                                                                                                  │
+│    602 │   │   │   when invoking pip.                                                                                                                                            │
+│    603 │   │   """                                                                                                                                                               │
+│    604 │   │   try:                                                                                                                                                              │
+│ ❱  605 │   │   │   self.tools[app].app_context.run(                                                                                                                              │
+│    606 │   │   │   │   [                                                                                                                                                         │
+│    607 │   │   │   │   │   sys.executable,                                                                                                                                       │
+│    608 │   │   │   │   │   "-u",                                                                                                                                                 │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                 │
+│ │               app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                     │                                                 │
+│ │ app_packages_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages') │                                                 │
+│ │      install_hint = ''                                                                                                       │                                                 │
+│ │          pip_args = [                                                                                                        │                                                 │
+│ │                     │   'pyside6>=6.5.0',                                                                                    │                                                 │
+│ │                     │   'requests>=2.28.0',                                                                                  │                                                 │
+│ │                     │   'aiohttp>=3.8.0',                                                                                    │                                                 │
+│ │                     │   'crewai>=0.165.0',                                                                                   │                                                 │
+│ │                     │   'litellm>=1.0.0',                                                                                    │                                                 │
+│ │                     │   'tavily-python',                                                                                     │                                                 │
+│ │                     │   'google-generativeai',                                                                               │                                                 │
+│ │                     │   'langchain',                                                                                         │                                                 │
+│ │                     │   'langchain-community',                                                                               │                                                 │
+│ │                     │   'langchain-google-genai',                                                                            │                                                 │
+│ │                     │   ... +31                                                                                              │                                                 │
+│ │                     ]                                                                                                        │                                                 │
+│ │        pip_kwargs = {}                                                                                                       │                                                 │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0>                     │                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                 │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:144 in inner                                                                     │
+│                                                                                                                                                                                  │
+│   141 │   │   │   with sub.tools.console.release_console_control():                                                                                                              │
+│   142 │   │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                              │
+│   143 │   │   else:                                                                                                                                                              │
+│ ❱ 144 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   145 │                                                                                                                                                                          │
+│   146 │   return inner                                                                                                                                                           │
+│   147                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────── locals ──────────────────────────────────────────────╮                                                                            │
+│ │                    args = [                                                                       │                                                                            │
+│ │                           │   '/home/amritagopi/GopiAI/.venv/bin/python3',                        │                                                                            │
+│ │                           │   '-u',                                                               │                                                                            │
+│ │                           │   '-X',                                                               │                                                                            │
+│ │                           │   'utf8',                                                             │                                                                            │
+│ │                           │   '-m',                                                               │                                                                            │
+│ │                           │   'pip',                                                              │                                                                            │
+│ │                           │   'install',                                                          │                                                                            │
+│ │                           │   '--disable-pip-version-check',                                      │                                                                            │
+│ │                           │   '--upgrade',                                                        │                                                                            │
+│ │                           │   '--no-user',                                                        │                                                                            │
+│ │                           │   ... +42                                                             │                                                                            │
+│ │                           ]                                                                       │                                                                            │
+│ │ remove_dynamic_elements = False                                                                   │                                                                            │
+│ │                     sub = <briefcase.integrations.subprocess.Subprocess object at 0x7d68527ccad0> │                                                                            │
+│ │            wrapped_args = ()                                                                      │                                                                            │
+│ │          wrapped_kwargs = {'check': True, 'encoding': 'UTF-8'}                                    │                                                                            │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                            │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:539 in run                                                                       │
+│                                                                                                                                                                                  │
+│   536 │   │   # caller sets stream_output=False, then ensure_console_is_safe() will                                                                                              │
+│   537 │   │   # disable any dynamic console elements while the command runs.                                                                                                     │
+│   538 │   │   if stream_output:                                                                                                                                                  │
+│ ❱ 539 │   │   │   return self._run_and_stream_output(args, filter_func=filter_func, **kwargs)                                                                                    │
+│   540 │   │                                                                                                                                                                      │
+│   541 │   │   # Can't filter non-streamed output.                                                                                                                                │
+│   542 │   │   if filter_func:                                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮  │
+│ │          args = ['/home/amritagopi/GopiAI/.venv/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', ... +42] │  │
+│ │   filter_func = None                                                                                                                                                        │  │
+│ │        kwargs = {'check': True, 'encoding': 'UTF-8'}                                                                                                                        │  │
+│ │          self = <briefcase.integrations.subprocess.Subprocess object at 0x7d68527ccad0>                                                                                     │  │
+│ │ stream_output = True                                                                                                                                                        │  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯  │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:615 in _run_and_stream_output                                                    │
+│                                                                                                                                                                                  │
+│   612 │   │   self._log_return_code(return_code)                                                                                                                                 │
+│   613 │   │                                                                                                                                                                      │
+│   614 │   │   if check and return_code:                                                                                                                                          │
+│ ❱ 615 │   │   │   raise subprocess.CalledProcessError(return_code, args, stderr=stderr)                                                                                          │
+│   616 │   │                                                                                                                                                                      │
+│   617 │   │   return subprocess.CompletedProcess(args, return_code, stderr=stderr)                                                                                               │
+│   618                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────────────────────╮    │
+│ │        args = ['/home/amritagopi/GopiAI/.venv/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', ... +42] │    │
+│ │       check = True                                                                                                                                                        │    │
+│ │ filter_func = None                                                                                                                                                        │    │
+│ │      kwargs = {'encoding': 'UTF-8', 'stdout': -1, 'stderr': -2, 'bufsize': 1}                                                                                             │    │
+│ │     process = <Popen: returncode: 1 args: ['/home/amritagopi/GopiAI/.venv/bin/python3', '-...>                                                                            │    │
+│ │ return_code = 1                                                                                                                                                           │    │
+│ │        self = <briefcase.integrations.subprocess.Subprocess object at 0x7d68527ccad0>                                                                                     │    │
+│ │      stderr = None                                                                                                                                                        │    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯    │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['/home/amritagopi/GopiAI/.venv/bin/python3', '-u', '-X', 'utf8', '-m', 'pip', 'install', '--disable-pip-version-check', '--upgrade', '--no-user', '--target=/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages', 'pyside6>=6.5.0', 'requests>=2.28.0', 'aiohttp>=3.8.0', 'crewai>=0.165.0', 'litellm>=1.0.0', 'tavily-python', 'google-generativeai', 'langchain', 'langchain-community', 'langchain-google-genai', 'qasync>=0.24.0', 'qdarkstyle>=3.1.0', 'flask>=2.3.0', 'flask-cors>=4.0.0', 'gunicorn>=21.0.0', 'psutil>=5.9.0', 'pydantic>=2.0.0', 'python-dotenv>=1.0.0', 'packaging>=23.0', 'platformdirs>=3.0.0', 'pyside6>=6.5.0', 'crewai>=0.165.0', 'litellm>=1.0.0', 'google-generativeai', 'tavily-python', 'langchain', 'langchain-community', 'langchain-google-genai', 'flask>=2.3.0', 'flask-cors>=4.0.0', 'gunicorn>=21.0.0', 'aiohttp>=3.8.0', 'requests>=2.28.0', 'qasync>=0.24.0', 'qdarkstyle>=3.1.0', 'psutil>=5.9.0', 'pydantic>=2.0.0', 'python-dotenv>=1.0.0', 'packaging>=23.0', 'platformdirs>=3.0.0', 'toga-gtk~=0.4.0']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/__main__.py:27 in main                                                                                      │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ───────────────────────────────────────────────╮                                                                         │
+│ │       command = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0> │                                                                         │
+│ │       console = <briefcase.console.Console object at 0x7d68540c7a40>                                 │                                                                         │
+│ │             e = RequirementsInstallError()                                                           │                                                                         │
+│ │ extra_cmdline = []                                                                                   │                                                                         │
+│ │       options = {}                                                                                   │                                                                         │
+│ │     overrides = {}                                                                                   │                                                                         │
+│ │        result = 200                                                                                  │                                                                         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                         │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:1026 in __call__                                                                         │
+│                                                                                                                                                                                  │
+│   1023 │   │                                                                                                                                                                     │
+│   1024 │   │   state = None                                                                                                                                                      │
+│   1025 │   │   for _, app_obj in sorted(apps_to_create.items()):                                                                                                                 │
+│ ❱ 1026 │   │   │   state = self.create_app(                                                                                                                                      │
+│   1027 │   │   │   │   app_obj,                                                                                                                                                  │
+│   1028 │   │   │   │   **full_options(state, options),                                                                                                                           │
+│   1029 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                        │
+│ │              _ = 'gopiai'                                                                             │                                                                        │
+│ │            app = None                                                                                 │                                                                        │
+│ │       app_name = None                                                                                 │                                                                        │
+│ │        app_obj = <com.gopiai.gopiai v1.0.0 AppConfig>                                                 │                                                                        │
+│ │ apps_to_create = {'gopiai': <com.gopiai.gopiai v1.0.0 AppConfig>}                                     │                                                                        │
+│ │        options = {}                                                                                   │                                                                        │
+│ │           self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0> │                                                                        │
+│ │          state = None                                                                                 │                                                                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                        │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:974 in create_app                                                                        │
+│                                                                                                                                                                                  │
+│    971 │   │   │   self.install_app_code(app=app)                                                                                                                                │
+│    972 │   │   │                                                                                                                                                                 │
+│    973 │   │   │   self.console.info("Installing requirements...", prefix=app.app_name)                                                                                          │
+│ ❱  974 │   │   │   self.install_app_requirements(app=app)                                                                                                                        │
+│    975 │   │   │                                                                                                                                                                 │
+│    976 │   │   │   self.console.info(                                                                                                                                            │
+│    977 │   │   │   │   "Installing application resources...", prefix=app.app_name                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────── locals ──────────────────────────────────────────────╮                                                                           │
+│ │         app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                 │                                                                           │
+│ │ bundle_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia')                      │                                                                           │
+│ │     confirm = True                                                                                 │                                                                           │
+│ │     options = {}                                                                                   │                                                                           │
+│ │        self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0> │                                                                           │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                           │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:711 in install_app_requirements                                                          │
+│                                                                                                                                                                                  │
+│    708 │   │   else:                                                                                                                                                             │
+│    709 │   │   │   try:                                                                                                                                                          │
+│    710 │   │   │   │   app_packages_path = self.app_packages_path(app)                                                                                                           │
+│ ❱  711 │   │   │   │   self._install_app_requirements(app, requires, app_packages_path)                                                                                          │
+│    712 │   │   │   except KeyError as e:                                                                                                                                         │
+│    713 │   │   │   │   raise BriefcaseCommandError(                                                                                                                              │
+│    714 │   │   │   │   │   "Application path index file does not define "                                                                                                        │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────────╮                                   │
+│ │                             app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                     │                                   │
+│ │               app_packages_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages') │                                   │
+│ │ requirement_installer_args_path = None                                                                                                     │                                   │
+│ │               requirements_path = None                                                                                                     │                                   │
+│ │                        requires = [                                                                                                        │                                   │
+│ │                                   │   'pyside6>=6.5.0',                                                                                    │                                   │
+│ │                                   │   'requests>=2.28.0',                                                                                  │                                   │
+│ │                                   │   'aiohttp>=3.8.0',                                                                                    │                                   │
+│ │                                   │   'crewai>=0.165.0',                                                                                   │                                   │
+│ │                                   │   'litellm>=1.0.0',                                                                                    │                                   │
+│ │                                   │   'tavily-python',                                                                                     │                                   │
+│ │                                   │   'google-generativeai',                                                                               │                                   │
+│ │                                   │   'langchain',                                                                                         │                                   │
+│ │                                   │   'langchain-community',                                                                               │                                   │
+│ │                                   │   'langchain-google-genai',                                                                            │                                   │
+│ │                                   │   ... +31                                                                                              │                                   │
+│ │                                   ]                                                                                                        │                                   │
+│ │                            self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0>                     │                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                   │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/platforms/linux/__init__.py:194 in _install_app_requirements                                                │
+│                                                                                                                                                                                  │
+│   191 │   │   │   │   │   │   ) from e                                                                                                                                           │
+│   192 │   │                                                                                                                                                                      │
+│   193 │   │   # Continue with the default app requirement handling.                                                                                                              │
+│ ❱ 194 │   │   return super()._install_app_requirements(                                                                                                                          │
+│   195 │   │   │   app,                                                                                                                                                           │
+│   196 │   │   │   requires=requires,                                                                                                                                             │
+│   197 │   │   │   app_packages_path=app_packages_path,                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────── locals ──────────────────────────────────────────────────────────────╮                                           │
+│ │                     app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                     │                                           │
+│ │       app_packages_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages') │                                           │
+│ │                  kwargs = {}                                                                                                       │                                           │
+│ │ local_requirements_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/_requirements')                            │                                           │
+│ │             requirement = 'toga-gtk~=0.4.0'                                                                                        │                                           │
+│ │                requires = [                                                                                                        │                                           │
+│ │                           │   'pyside6>=6.5.0',                                                                                    │                                           │
+│ │                           │   'requests>=2.28.0',                                                                                  │                                           │
+│ │                           │   'aiohttp>=3.8.0',                                                                                    │                                           │
+│ │                           │   'crewai>=0.165.0',                                                                                   │                                           │
+│ │                           │   'litellm>=1.0.0',                                                                                    │                                           │
+│ │                           │   'tavily-python',                                                                                     │                                           │
+│ │                           │   'google-generativeai',                                                                               │                                           │
+│ │                           │   'langchain',                                                                                         │                                           │
+│ │                           │   'langchain-community',                                                                               │                                           │
+│ │                           │   'langchain-google-genai',                                                                            │                                           │
+│ │                           │   ... +31                                                                                              │                                           │
+│ │                           ]                                                                                                        │                                           │
+│ │                    self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0>                     │                                           │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                           │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:661 in _install_app_requirements                                                         │
+│                                                                                                                                                                                  │
+│    658 │   │   # Install requirements                                                                                                                                            │
+│    659 │   │   if requires:                                                                                                                                                      │
+│    660 │   │   │   with self.console.wait_bar(progress_message):                                                                                                                 │
+│ ❱  661 │   │   │   │   self._pip_install(                                                                                                                                        │
+│    662 │   │   │   │   │   app,                                                                                                                                                  │
+│    663 │   │   │   │   │   app_packages_path=app_packages_path,                                                                                                                  │
+│    664 │   │   │   │   │   pip_args=(                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                 │
+│ │               app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                     │                                                 │
+│ │ app_packages_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages') │                                                 │
+│ │      install_hint = ''                                                                                                       │                                                 │
+│ │          pip_args = None                                                                                                     │                                                 │
+│ │        pip_kwargs = None                                                                                                     │                                                 │
+│ │  progress_message = 'Installing app requirements...'                                                                         │                                                 │
+│ │          requires = [                                                                                                        │                                                 │
+│ │                     │   'pyside6>=6.5.0',                                                                                    │                                                 │
+│ │                     │   'requests>=2.28.0',                                                                                  │                                                 │
+│ │                     │   'aiohttp>=3.8.0',                                                                                    │                                                 │
+│ │                     │   'crewai>=0.165.0',                                                                                   │                                                 │
+│ │                     │   'litellm>=1.0.0',                                                                                    │                                                 │
+│ │                     │   'tavily-python',                                                                                     │                                                 │
+│ │                     │   'google-generativeai',                                                                               │                                                 │
+│ │                     │   'langchain',                                                                                         │                                                 │
+│ │                     │   'langchain-community',                                                                               │                                                 │
+│ │                     │   'langchain-google-genai',                                                                            │                                                 │
+│ │                     │   ... +31                                                                                              │                                                 │
+│ │                     ]                                                                                                        │                                                 │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0>                     │                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                 │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:627 in _pip_install                                                                      │
+│                                                                                                                                                                                  │
+│    624 │   │   │   │   **pip_kwargs,                                                                                                                                             │
+│    625 │   │   │   )                                                                                                                                                             │
+│    626 │   │   except subprocess.CalledProcessError as e:                                                                                                                        │
+│ ❱  627 │   │   │   raise RequirementsInstallError(install_hint=install_hint) from e                                                                                              │
+│    628 │                                                                                                                                                                         │
+│    629 │   def _install_app_requirements(                                                                                                                                        │
+│    630 │   │   self,                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────╮                                                 │
+│ │               app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                     │                                                 │
+│ │ app_packages_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linuxmint/xia/gopiai-1.0.0/usr/lib/gopiai/app_packages') │                                                 │
+│ │      install_hint = ''                                                                                                       │                                                 │
+│ │          pip_args = [                                                                                                        │                                                 │
+│ │                     │   'pyside6>=6.5.0',                                                                                    │                                                 │
+│ │                     │   'requests>=2.28.0',                                                                                  │                                                 │
+│ │                     │   'aiohttp>=3.8.0',                                                                                    │                                                 │
+│ │                     │   'crewai>=0.165.0',                                                                                   │                                                 │
+│ │                     │   'litellm>=1.0.0',                                                                                    │                                                 │
+│ │                     │   'tavily-python',                                                                                     │                                                 │
+│ │                     │   'google-generativeai',                                                                               │                                                 │
+│ │                     │   'langchain',                                                                                         │                                                 │
+│ │                     │   'langchain-community',                                                                               │                                                 │
+│ │                     │   'langchain-google-genai',                                                                            │                                                 │
+│ │                     │   ... +31                                                                                              │                                                 │
+│ │                     ]                                                                                                        │                                                 │
+│ │        pip_kwargs = {}                                                                                                       │                                                 │
+│ │              self = <briefcase.platforms.linux.system.LinuxSystemCreateCommand object at 0x7d6853ff9dc0>                     │                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+RequirementsInstallError: Unable to install requirements. This may be because one of your
+requirements is invalid, or because pip was unable to connect
+to the PyPI server.
+

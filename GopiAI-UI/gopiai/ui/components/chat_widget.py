@@ -5,9 +5,9 @@ import time
 import os
 import html
 import re
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QFileDialog, QSizePolicy, QListWidget, QListWidgetItem, QTabWidget
+from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QTextBrowser, QFileDialog, QSizePolicy, QListWidget, QListWidgetItem, QTabWidget
 )
-from PySide6.QtCore import Qt, Slot, QTimer
+from PySide6.QtCore import Qt, Slot, QTimer, Signal
 from PySide6.QtGui import QResizeEvent, QTextCursor, QTextOption
 import uuid
 from datetime import datetime
@@ -37,6 +37,8 @@ except ImportError as e:
 logger = logging.getLogger(__name__)
 
 class ChatWidget(QWidget):
+    # Сигналы
+    link_clicked = Signal(str)  # URL для открытия во встроенном браузере
     
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -136,10 +138,12 @@ class ChatWidget(QWidget):
         chat_area_layout = QVBoxLayout(self.chat_area_widget)
         chat_area_layout.setContentsMargins(0, 0, 0, 0)
 
-        # Используем обычный QTextEdit вместо OptimizedChatWidget (временно)
-        self.history = QTextEdit(self)
+        # Используем QTextBrowser для поддержки кликабельных ссылок
+        self.history = QTextBrowser(self)
         self.history.setObjectName("ChatHistory")
         self.history.setReadOnly(True)
+        # Настройка для обработки кликов по ссылкам
+        self.history.anchorClicked.connect(self._on_link_clicked)  # Подключаем обработчик
         # Добавляем обработчик клавиш для области истории
         self.history.keyPressEvent = self._history_key_press_event
         # Включаем корректные переносы и ограничение ширины
@@ -337,6 +341,25 @@ class ChatWidget(QWidget):
         except Exception as e:
             logger.debug(f"[BROWSER] Ошибка поиска главного окна: {e}")
             return None
+
+    def _on_link_clicked(self, url):
+        """Обработчик кликов по ссылкам в чате."""
+        try:
+            from PySide6.QtCore import QUrl
+            # Проверяем, что это валидная ссылка
+            if url and str(url).strip():
+                # Открываем ссылку во встроенном браузере
+                self._ensure_browser_tab()
+                browser_tab = self._get_main_window().browser_tab
+                if hasattr(browser_tab, 'browser_widget'):
+                    browser_tab.browser_widget.navigate(str(url))
+                    # Переключаемся на вкладку браузера
+                    main_window = self._get_main_window()
+                    if hasattr(main_window, 'tab_widget'):
+                        main_window.tab_widget.setCurrentWidget(browser_tab)
+                logger.info(f"Открыта ссылка во встроенном браузере: {url}")
+        except Exception as e:
+            logger.error(f"Ошибка при обработке клика по ссылке {url}: {e}")
 
     def _on_browser_page_loaded(self, url: str, title: str):
         """Отображает статус загрузки страницы браузера в чате."""

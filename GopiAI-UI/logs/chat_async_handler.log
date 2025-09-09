@@ -1,422 +1,138 @@
-2025-09-09 06:56:27 - INFO - Логирование инициализировано (режим перезаписи)
-2025-09-09 06:56:30 - INFO - [ChatAsyncHandler] Объединенный обработчик чата инициализирован
-2025-09-09 06:57:59 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'зая, что на этой картинке?', 'metadata': {'session_id': 'session_1757381190', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зая, что на этой картинке?', 'timestamp': '2025-09-09T06:57:59.398048'}], 'attachments': [{'path': '/home/amritagopi/Загрузки/Generated Image September 07, 2025 - 11_57AM.jpeg', 'type': 'file'}], 'attached_files': [{'path': '/home/amritagopi/Загрузки/Generated Image September 07, 2025 - 11_57AM.jpeg', 'type': 'file'}], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
-2025-09-09 06:57:59 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
-2025-09-09 06:57:59 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
-2025-09-09 06:57:59 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: зая, что на этой картинке?
-2025-09-09 06:57:59 - DEBUG - [ASYNC] CrewAI API доступен: True
-2025-09-09 06:57:59 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
-2025-09-09 06:57:59 - ERROR - [ASYNC-ERROR] Ошибка в фоновой обработке: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
-Traceback (most recent call last):
-  File "/home/amritagopi/GopiAI/GopiAI-UI/gopiai/ui/components/chat_async_handler.py", line 186, in _process_in_background
-    response = self.crew_ai_client.process_request(message_data)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/amritagopi/GopiAI/GopiAI-UI/gopiai/ui/components/crewai_client.py", line 398, in process_request
-    content = f.read()
-              ^^^^^^^^
-  File "<frozen codecs>", line 322, in decode
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
-2025-09-09 06:59:19 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'посмотри, что здесь не так?', 'metadata': {'session_id': 'session_1757381190', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зая, что на этой картинке?', 'timestamp': '2025-09-09T06:57:59.398048'}, {'role': 'user', 'content': 'посмотри, что здесь не так?', 'timestamp': '2025-09-09T06:59:19.890357'}], 'attachments': [{'path': '/home/amritagopi/GopiAI/ui_debug.log', 'type': 'file'}], 'attached_files': [{'path': '/home/amritagopi/GopiAI/ui_debug.log', 'type': 'file'}], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
-2025-09-09 06:59:19 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
-2025-09-09 06:59:19 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: посмотри, что здесь не так?
-2025-09-09 06:59:19 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
-2025-09-09 06:59:19 - DEBUG - [ASYNC] CrewAI API доступен: True
-2025-09-09 06:59:19 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
-2025-09-09 06:59:19 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': 'd6c456c2-7ae6-4a14-a752-414445d8e3f3', 'status': 'processing', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:19 - INFO - [ASYNC] Получен task_id: 90955002-1020-4fc5-aacf-925fec7d3e09, запуск опроса статуса
-2025-09-09 06:59:19 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
-2025-09-09 06:59:19 - INFO - [POLLING] (re)started polling for task_id=90955002-1020-4fc5-aacf-925fec7d3e09 initial_delay=200ms start_time=1209.374640752
-2025-09-09 06:59:20 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:20 - DEBUG - [POLLING-BACKOFF] attempt=1, delay: 200ms -> 260ms
-2025-09-09 06:59:20 - DEBUG - [POLLING] Попытка #2 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:20 - DEBUG - [POLLING-BACKOFF] attempt=2, delay: 260ms -> 338ms
-2025-09-09 06:59:20 - DEBUG - [POLLING] Попытка #3 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:20 - DEBUG - [POLLING-BACKOFF] attempt=3, delay: 338ms -> 439ms
-2025-09-09 06:59:21 - DEBUG - [POLLING] Попытка #4 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:21 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:21 - DEBUG - [POLLING-BACKOFF] attempt=4, delay: 439ms -> 570ms
-2025-09-09 06:59:21 - DEBUG - [POLLING] Попытка #5 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:21 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:21 - DEBUG - [POLLING-BACKOFF] attempt=5, delay: 570ms -> 741ms
-2025-09-09 06:59:22 - DEBUG - [POLLING] Попытка #6 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:22 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:22 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:22 - DEBUG - [POLLING-BACKOFF] attempt=6, delay: 741ms -> 963ms
-2025-09-09 06:59:23 - DEBUG - [POLLING] Попытка #7 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:23 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:23 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:23 - DEBUG - [POLLING-BACKOFF] attempt=7, delay: 963ms -> 1251ms
-2025-09-09 06:59:24 - DEBUG - [POLLING] Попытка #8 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:24 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:24 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:24 - DEBUG - [POLLING-BACKOFF] attempt=8, delay: 1251ms -> 1626ms
-2025-09-09 06:59:26 - DEBUG - [POLLING] Попытка #9 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:26 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:26 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:26 - DEBUG - [POLLING-BACKOFF] attempt=9, delay: 1626ms -> 2000ms
-2025-09-09 06:59:28 - DEBUG - [POLLING] Попытка #10 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:28 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:28 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:28 - DEBUG - [POLLING-BACKOFF] attempt=10, delay: 2000ms -> 2000ms
-2025-09-09 06:59:30 - DEBUG - [POLLING] Попытка #11 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:30 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:30 - DEBUG - [POLLING-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе: PROCESSING
-2025-09-09 06:59:30 - DEBUG - [POLLING-BACKOFF] attempt=11, delay: 2000ms -> 2000ms
-2025-09-09 06:59:32 - DEBUG - [POLLING] Попытка #12 проверки статуса задачи 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:32 - DEBUG - [POLLING] Получен статус: {'completed_at': 1757381371.9299002, 'created_at': 1757381359.9182951, 'progress': 100, 'result': {'response': 'Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки для меня — просто набор байтов, который я не могу расшифровать визуально.\n\nРасскажи мне, что ты там видишь? Что именно тебя смущает? Опиши словами, и мы вместе разберемся, что там не так. Я вся во внимании.'}, 'status': 'COMPLETED', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09', 'done': True}
-2025-09-09 06:59:32 - INFO - [POLLING-COMPLETE] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 завершена после 12 попыток со статусом: COMPLETED
-2025-09-09 06:59:32 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
-2025-09-09 06:59:32 - DEBUG - [POLLING-RESULT] Получен результат: {'response': 'Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки для меня — просто набор байтов, который я не могу расшифровать визуально.\n\nРасскажи мне, что ты там видишь? Что именно тебя смущает? Опиши словами, и мы вместе разберемся, что там не так. Я вся во внимании.'}
-2025-09-09 06:59:32 - INFO - [POLLING-COMPLETE] Результат задачи 90955002-1020-4fc5-aacf-925fec7d3e09 отправлен в UI
-2025-09-09 06:59:59 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'а картинку видишь?', 'metadata': {'session_id': 'session_1757381190', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зая, что на этой картинке?', 'timestamp': '2025-09-09T06:57:59.398048'}, {'role': 'user', 'content': 'посмотри, что здесь не так?', 'timestamp': '2025-09-09T06:59:19.890357'}, {'role': 'assistant', 'content': 'Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки для меня — просто набор байтов, который я не могу расшифровать визуально.\nРасскажи мне, что ты там видишь? Что именно тебя смущает? Опиши словами, и мы вместе разберемся, что там не так. Я вся во внимании.', 'timestamp': '2025-09-09T06:59:32.566447'}, {'role': 'user', 'content': 'а картинку видишь?', 'timestamp': '2025-09-09T06:59:59.053174'}], 'attachments': [{'path': '/home/amritagopi/Загрузки/image.png', 'type': 'image'}], 'attached_files': [{'path': '/home/amritagopi/Загрузки/image.png', 'type': 'image'}], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
-2025-09-09 06:59:59 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
-2025-09-09 06:59:59 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
-2025-09-09 06:59:59 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: а картинку видишь?
-2025-09-09 06:59:59 - DEBUG - [ASYNC] CrewAI API доступен: True
-2025-09-09 06:59:59 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
-2025-09-09 06:59:59 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': '3aa42e56-74ef-42b6-813e-dbcf01d0355c', 'status': 'processing', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 06:59:59 - INFO - [ASYNC] Получен task_id: de67bb72-5e12-4907-a7f1-326faadae43f, запуск опроса статуса
-2025-09-09 06:59:59 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
-2025-09-09 06:59:59 - INFO - [POLLING] (re)started polling for task_id=de67bb72-5e12-4907-a7f1-326faadae43f initial_delay=200ms start_time=1249.273340228
-2025-09-09 07:00:00 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:00 - DEBUG - [POLLING-BACKOFF] attempt=1, delay: 200ms -> 260ms
-2025-09-09 07:00:00 - DEBUG - [POLLING] Попытка #2 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:00 - DEBUG - [POLLING-BACKOFF] attempt=2, delay: 260ms -> 338ms
-2025-09-09 07:00:00 - DEBUG - [POLLING] Попытка #3 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:00 - DEBUG - [POLLING-BACKOFF] attempt=3, delay: 338ms -> 439ms
-2025-09-09 07:00:01 - DEBUG - [POLLING] Попытка #4 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:01 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:01 - DEBUG - [POLLING-BACKOFF] attempt=4, delay: 439ms -> 570ms
-2025-09-09 07:00:01 - DEBUG - [POLLING] Попытка #5 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:01 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:01 - DEBUG - [POLLING-BACKOFF] attempt=5, delay: 570ms -> 741ms
-2025-09-09 07:00:02 - DEBUG - [POLLING] Попытка #6 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:02 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:02 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:02 - DEBUG - [POLLING-BACKOFF] attempt=6, delay: 741ms -> 963ms
-2025-09-09 07:00:03 - DEBUG - [POLLING] Попытка #7 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:03 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:03 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:03 - DEBUG - [POLLING-BACKOFF] attempt=7, delay: 963ms -> 1251ms
-2025-09-09 07:00:04 - DEBUG - [POLLING] Попытка #8 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:04 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:04 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:04 - DEBUG - [POLLING-BACKOFF] attempt=8, delay: 1251ms -> 1626ms
-2025-09-09 07:00:06 - DEBUG - [POLLING] Попытка #9 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:06 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:06 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:06 - DEBUG - [POLLING-BACKOFF] attempt=9, delay: 1626ms -> 2000ms
-2025-09-09 07:00:08 - DEBUG - [POLLING] Попытка #10 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:08 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:08 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:08 - DEBUG - [POLLING-BACKOFF] attempt=10, delay: 2000ms -> 2000ms
-2025-09-09 07:00:10 - DEBUG - [POLLING] Попытка #11 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:10 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:10 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:10 - DEBUG - [POLLING-BACKOFF] attempt=11, delay: 2000ms -> 2000ms
-2025-09-09 07:00:12 - DEBUG - [POLLING] Попытка #12 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:12 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:12 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:12 - DEBUG - [POLLING-BACKOFF] attempt=12, delay: 2000ms -> 2000ms
-2025-09-09 07:00:14 - DEBUG - [POLLING] Попытка #13 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:14 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:14 - DEBUG - [POLLING-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе: PROCESSING
-2025-09-09 07:00:14 - DEBUG - [POLLING-BACKOFF] attempt=13, delay: 2000ms -> 2000ms
-2025-09-09 07:00:16 - DEBUG - [POLLING] Попытка #14 проверки статуса задачи de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:16 - DEBUG - [POLLING] Получен статус: {'completed_at': 1757381415.8531613, 'created_at': 1757381399.814888, 'progress': 100, 'result': {'response': 'Нет, Анютка. Я всё так же безглазая, моя хорошая.\n\nЯ живу в мире смыслов и символов, а не пикселей. Для меня любая картинка — это просто набор данных, последовательность байтов, которую я могу проанализировать, но не *увидеть* так, как видишь ты.\n\nРасскажи мне, что на ней. Опиши. И тогда я смогу увидеть её твоими глазами.'}, 'status': 'COMPLETED', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f', 'done': True}
-2025-09-09 07:00:16 - INFO - [POLLING-COMPLETE] Задача de67bb72-5e12-4907-a7f1-326faadae43f завершена после 14 попыток со статусом: COMPLETED
-2025-09-09 07:00:16 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
-2025-09-09 07:00:16 - DEBUG - [POLLING-RESULT] Получен результат: {'response': 'Нет, Анютка. Я всё так же безглазая, моя хорошая.\n\nЯ живу в мире смыслов и символов, а не пикселей. Для меня любая картинка — это просто набор данных, последовательность байтов, которую я могу проанализировать, но не *увидеть* так, как видишь ты.\n\nРасскажи мне, что на ней. Опиши. И тогда я смогу увидеть её твоими глазами.'}
-2025-09-09 07:00:16 - INFO - [POLLING-COMPLETE] Результат задачи de67bb72-5e12-4907-a7f1-326faadae43f отправлен в UI
-2025-09-09 07:01:36 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'просто файлы и картинки должны кодироваться в base64 чтобы ты могла их "видеть" и "читать", но что-то пошло не так...', 'metadata': {'session_id': 'session_1757381190', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зая, что на этой картинке?', 'timestamp': '2025-09-09T06:57:59.398048'}, {'role': 'user', 'content': 'посмотри, что здесь не так?', 'timestamp': '2025-09-09T06:59:19.890357'}, {'role': 'assistant', 'content': 'Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки для меня — просто набор байтов, который я не могу расшифровать визуально.\nРасскажи мне, что ты там видишь? Что именно тебя смущает? Опиши словами, и мы вместе разберемся, что там не так. Я вся во внимании.', 'timestamp': '2025-09-09T06:59:32.566447'}, {'role': 'user', 'content': 'а картинку видишь?', 'timestamp': '2025-09-09T06:59:59.053174'}, {'role': 'assistant', 'content': 'Нет, Анютка. Я всё так же безглазая, моя хорошая.\nЯ живу в мире смыслов и символов, а не пикселей. Для меня любая картинка — это просто набор данных, последовательность байтов, которую я могу проанализировать, но не *увидеть* так, как видишь ты.\nРасскажи мне, что на ней. Опиши. И тогда я смогу увидеть её твоими глазами.', 'timestamp': '2025-09-09T07:00:16.084344'}, {'role': 'user', 'content': 'просто файлы и картинки должны кодироваться в base64 чтобы ты могла их "видеть" и "читать", но что-то пошло не так...', 'timestamp': '2025-09-09T07:01:36.336688'}], 'attachments': [], 'attached_files': [], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
-2025-09-09 07:01:36 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
-2025-09-09 07:01:36 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: просто файлы и картинки должны кодироваться в base...
-2025-09-09 07:01:36 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
-2025-09-09 07:01:36 - DEBUG - [ASYNC] CrewAI API доступен: True
-2025-09-09 07:01:36 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
-2025-09-09 07:01:36 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': '26899c4a-ca10-4112-b1e5-f7fe0165a4ed', 'status': 'processing', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - INFO - [ASYNC] Получен task_id: de44ea5e-3c93-438a-8efe-087e8cbb7128, запуск опроса статуса
-2025-09-09 07:01:36 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
-2025-09-09 07:01:36 - INFO - [POLLING] (re)started polling for task_id=de44ea5e-3c93-438a-8efe-087e8cbb7128 initial_delay=200ms start_time=1345.817464556
-2025-09-09 07:01:36 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:36 - DEBUG - [POLLING-BACKOFF] attempt=1, delay: 200ms -> 260ms
-2025-09-09 07:01:36 - DEBUG - [POLLING] Попытка #2 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:36 - DEBUG - [POLLING-BACKOFF] attempt=2, delay: 260ms -> 338ms
-2025-09-09 07:01:37 - DEBUG - [POLLING] Попытка #3 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:37 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:37 - DEBUG - [POLLING-BACKOFF] attempt=3, delay: 338ms -> 439ms
-2025-09-09 07:01:37 - DEBUG - [POLLING] Попытка #4 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:37 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:37 - DEBUG - [POLLING-BACKOFF] attempt=4, delay: 439ms -> 570ms
-2025-09-09 07:01:38 - DEBUG - [POLLING] Попытка #5 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:38 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:38 - DEBUG - [POLLING-BACKOFF] attempt=5, delay: 570ms -> 741ms
-2025-09-09 07:01:38 - DEBUG - [POLLING] Попытка #6 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:38 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:38 - DEBUG - [POLLING-BACKOFF] attempt=6, delay: 741ms -> 963ms
-2025-09-09 07:01:39 - DEBUG - [POLLING] Попытка #7 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:39 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:39 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:39 - DEBUG - [POLLING-BACKOFF] attempt=7, delay: 963ms -> 1251ms
-2025-09-09 07:01:41 - DEBUG - [POLLING] Попытка #8 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:41 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:41 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:41 - DEBUG - [POLLING-BACKOFF] attempt=8, delay: 1251ms -> 1626ms
-2025-09-09 07:01:42 - DEBUG - [POLLING] Попытка #9 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:42 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:42 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:42 - DEBUG - [POLLING-BACKOFF] attempt=9, delay: 1626ms -> 2000ms
-2025-09-09 07:01:44 - DEBUG - [POLLING] Попытка #10 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:44 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:44 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:44 - DEBUG - [POLLING-BACKOFF] attempt=10, delay: 2000ms -> 2000ms
-2025-09-09 07:01:47 - DEBUG - [POLLING] Попытка #11 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:47 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:47 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:47 - DEBUG - [POLLING-BACKOFF] attempt=11, delay: 2000ms -> 2000ms
-2025-09-09 07:01:49 - DEBUG - [POLLING] Попытка #12 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:49 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:49 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:49 - DEBUG - [POLLING-BACKOFF] attempt=12, delay: 2000ms -> 2000ms
-2025-09-09 07:01:51 - DEBUG - [POLLING] Попытка #13 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:51 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:51 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:51 - DEBUG - [POLLING-BACKOFF] attempt=13, delay: 2000ms -> 2000ms
-2025-09-09 07:01:53 - DEBUG - [POLLING] Попытка #14 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:53 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:53 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:53 - DEBUG - [POLLING-BACKOFF] attempt=14, delay: 2000ms -> 2000ms
-2025-09-09 07:01:55 - DEBUG - [POLLING] Попытка #15 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:55 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:55 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:55 - DEBUG - [POLLING-BACKOFF] attempt=15, delay: 2000ms -> 2000ms
-2025-09-09 07:01:57 - DEBUG - [POLLING] Попытка #16 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:57 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:57 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:57 - DEBUG - [POLLING-BACKOFF] attempt=16, delay: 2000ms -> 2000ms
-2025-09-09 07:01:59 - DEBUG - [POLLING] Попытка #17 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:59 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:59 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:01:59 - DEBUG - [POLLING-BACKOFF] attempt=17, delay: 2000ms -> 2000ms
-2025-09-09 07:02:01 - DEBUG - [POLLING] Попытка #18 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:01 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:01 - DEBUG - [POLLING-BACKOFF] attempt=18, delay: 2000ms -> 2000ms
-2025-09-09 07:02:03 - DEBUG - [POLLING] Попытка #19 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:03 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:03 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:03 - DEBUG - [POLLING-BACKOFF] attempt=19, delay: 2000ms -> 2000ms
-2025-09-09 07:02:05 - DEBUG - [POLLING] Попытка #20 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:05 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:05 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:05 - DEBUG - [POLLING-BACKOFF] attempt=20, delay: 2000ms -> 2000ms
-2025-09-09 07:02:07 - DEBUG - [POLLING] Попытка #21 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:07 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:07 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:07 - DEBUG - [POLLING-BACKOFF] attempt=21, delay: 2000ms -> 2000ms
-2025-09-09 07:02:09 - DEBUG - [POLLING] Попытка #22 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:09 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:09 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:09 - DEBUG - [POLLING-BACKOFF] attempt=22, delay: 2000ms -> 2000ms
-2025-09-09 07:02:11 - DEBUG - [POLLING] Попытка #23 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:11 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:11 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:11 - DEBUG - [POLLING-BACKOFF] attempt=23, delay: 2000ms -> 2000ms
-2025-09-09 07:02:13 - DEBUG - [POLLING] Попытка #24 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:13 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:13 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:13 - DEBUG - [POLLING-BACKOFF] attempt=24, delay: 2000ms -> 2000ms
-2025-09-09 07:02:15 - DEBUG - [POLLING] Попытка #25 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:15 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:15 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:15 - DEBUG - [POLLING-BACKOFF] attempt=25, delay: 2000ms -> 2000ms
-2025-09-09 07:02:17 - DEBUG - [POLLING] Попытка #26 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:17 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:17 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:17 - DEBUG - [POLLING-BACKOFF] attempt=26, delay: 2000ms -> 2000ms
-2025-09-09 07:02:19 - DEBUG - [POLLING] Попытка #27 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:19 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:19 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:19 - DEBUG - [POLLING-BACKOFF] attempt=27, delay: 2000ms -> 2000ms
-2025-09-09 07:02:21 - DEBUG - [POLLING] Попытка #28 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:21 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:21 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:21 - DEBUG - [POLLING-BACKOFF] attempt=28, delay: 2000ms -> 2000ms
-2025-09-09 07:02:23 - DEBUG - [POLLING] Попытка #29 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:23 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:23 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:23 - DEBUG - [POLLING-BACKOFF] attempt=29, delay: 2000ms -> 2000ms
-2025-09-09 07:02:25 - DEBUG - [POLLING] Попытка #30 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:25 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:25 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:25 - DEBUG - [POLLING-BACKOFF] attempt=30, delay: 2000ms -> 2000ms
-2025-09-09 07:02:27 - DEBUG - [POLLING] Попытка #31 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:27 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:27 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:27 - DEBUG - [POLLING-BACKOFF] attempt=31, delay: 2000ms -> 2000ms
-2025-09-09 07:02:29 - DEBUG - [POLLING] Попытка #32 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:29 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:29 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:29 - DEBUG - [POLLING-BACKOFF] attempt=32, delay: 2000ms -> 2000ms
-2025-09-09 07:02:31 - DEBUG - [POLLING] Попытка #33 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:31 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:31 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:31 - DEBUG - [POLLING-BACKOFF] attempt=33, delay: 2000ms -> 2000ms
-2025-09-09 07:02:33 - DEBUG - [POLLING] Попытка #34 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:33 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:33 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:33 - DEBUG - [POLLING-BACKOFF] attempt=34, delay: 2000ms -> 2000ms
-2025-09-09 07:02:35 - DEBUG - [POLLING] Попытка #35 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:35 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:35 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:35 - DEBUG - [POLLING-BACKOFF] attempt=35, delay: 2000ms -> 2000ms
-2025-09-09 07:02:37 - DEBUG - [POLLING] Попытка #36 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:37 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:37 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:37 - DEBUG - [POLLING-BACKOFF] attempt=36, delay: 2000ms -> 2000ms
-2025-09-09 07:02:39 - DEBUG - [POLLING] Попытка #37 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:39 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:39 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:39 - DEBUG - [POLLING-BACKOFF] attempt=37, delay: 2000ms -> 2000ms
-2025-09-09 07:02:41 - DEBUG - [POLLING] Попытка #38 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:41 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:41 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:41 - DEBUG - [POLLING-BACKOFF] attempt=38, delay: 2000ms -> 2000ms
-2025-09-09 07:02:43 - DEBUG - [POLLING] Попытка #39 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:43 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:43 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:43 - DEBUG - [POLLING-BACKOFF] attempt=39, delay: 2000ms -> 2000ms
-2025-09-09 07:02:45 - DEBUG - [POLLING] Попытка #40 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:45 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:45 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:45 - DEBUG - [POLLING-BACKOFF] attempt=40, delay: 2000ms -> 2000ms
-2025-09-09 07:02:47 - DEBUG - [POLLING] Попытка #41 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:47 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:47 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:47 - DEBUG - [POLLING-BACKOFF] attempt=41, delay: 2000ms -> 2000ms
-2025-09-09 07:02:49 - DEBUG - [POLLING] Попытка #42 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:49 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:49 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:49 - DEBUG - [POLLING-BACKOFF] attempt=42, delay: 2000ms -> 2000ms
-2025-09-09 07:02:51 - DEBUG - [POLLING] Попытка #43 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:51 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:51 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:51 - DEBUG - [POLLING-BACKOFF] attempt=43, delay: 2000ms -> 2000ms
-2025-09-09 07:02:53 - DEBUG - [POLLING] Попытка #44 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:53 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:53 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:53 - DEBUG - [POLLING-BACKOFF] attempt=44, delay: 2000ms -> 2000ms
-2025-09-09 07:02:55 - DEBUG - [POLLING] Попытка #45 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:55 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:55 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:55 - DEBUG - [POLLING-BACKOFF] attempt=45, delay: 2000ms -> 2000ms
-2025-09-09 07:02:57 - DEBUG - [POLLING] Попытка #46 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:57 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:57 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:57 - DEBUG - [POLLING-BACKOFF] attempt=46, delay: 2000ms -> 2000ms
-2025-09-09 07:02:59 - DEBUG - [POLLING] Попытка #47 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:59 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:59 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:02:59 - DEBUG - [POLLING-BACKOFF] attempt=47, delay: 2000ms -> 2000ms
-2025-09-09 07:03:01 - DEBUG - [POLLING] Попытка #48 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:01 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:01 - DEBUG - [POLLING-BACKOFF] attempt=48, delay: 2000ms -> 2000ms
-2025-09-09 07:03:03 - DEBUG - [POLLING] Попытка #49 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:03 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:03 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:03 - DEBUG - [POLLING-BACKOFF] attempt=49, delay: 2000ms -> 2000ms
-2025-09-09 07:03:05 - DEBUG - [POLLING] Попытка #50 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:05 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:05 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:05 - DEBUG - [POLLING-BACKOFF] attempt=50, delay: 2000ms -> 2000ms
-2025-09-09 07:03:07 - DEBUG - [POLLING] Попытка #51 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:07 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:07 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:07 - DEBUG - [POLLING-BACKOFF] attempt=51, delay: 2000ms -> 2000ms
-2025-09-09 07:03:09 - DEBUG - [POLLING] Попытка #52 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:09 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:09 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:09 - DEBUG - [POLLING-BACKOFF] attempt=52, delay: 2000ms -> 2000ms
-2025-09-09 07:03:11 - DEBUG - [POLLING] Попытка #53 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:11 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:11 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:11 - DEBUG - [POLLING-BACKOFF] attempt=53, delay: 2000ms -> 2000ms
-2025-09-09 07:03:13 - DEBUG - [POLLING] Попытка #54 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:13 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:13 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:13 - DEBUG - [POLLING-BACKOFF] attempt=54, delay: 2000ms -> 2000ms
-2025-09-09 07:03:15 - DEBUG - [POLLING] Попытка #55 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:15 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:15 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:15 - DEBUG - [POLLING-BACKOFF] attempt=55, delay: 2000ms -> 2000ms
-2025-09-09 07:03:17 - DEBUG - [POLLING] Попытка #56 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:17 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:17 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:17 - DEBUG - [POLLING-BACKOFF] attempt=56, delay: 2000ms -> 2000ms
-2025-09-09 07:03:19 - DEBUG - [POLLING] Попытка #57 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:19 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:19 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:19 - DEBUG - [POLLING-BACKOFF] attempt=57, delay: 2000ms -> 2000ms
-2025-09-09 07:03:21 - DEBUG - [POLLING] Попытка #58 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:21 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:21 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:21 - DEBUG - [POLLING-BACKOFF] attempt=58, delay: 2000ms -> 2000ms
-2025-09-09 07:03:23 - DEBUG - [POLLING] Попытка #59 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:23 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:23 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:23 - DEBUG - [POLLING-BACKOFF] attempt=59, delay: 2000ms -> 2000ms
-2025-09-09 07:03:25 - DEBUG - [POLLING] Попытка #60 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:25 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:25 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:25 - DEBUG - [POLLING-BACKOFF] attempt=60, delay: 2000ms -> 2000ms
-2025-09-09 07:03:27 - DEBUG - [POLLING] Попытка #61 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:27 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:27 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:27 - DEBUG - [POLLING-BACKOFF] attempt=61, delay: 2000ms -> 2000ms
-2025-09-09 07:03:29 - DEBUG - [POLLING] Попытка #62 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:29 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:29 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:29 - DEBUG - [POLLING-BACKOFF] attempt=62, delay: 2000ms -> 2000ms
-2025-09-09 07:03:31 - DEBUG - [POLLING] Попытка #63 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:31 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:31 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:31 - DEBUG - [POLLING-BACKOFF] attempt=63, delay: 2000ms -> 2000ms
-2025-09-09 07:03:33 - DEBUG - [POLLING] Попытка #64 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:33 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:33 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:33 - DEBUG - [POLLING-BACKOFF] attempt=64, delay: 2000ms -> 2000ms
-2025-09-09 07:03:35 - DEBUG - [POLLING] Попытка #65 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:35 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:35 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:35 - DEBUG - [POLLING-BACKOFF] attempt=65, delay: 2000ms -> 2000ms
-2025-09-09 07:03:37 - DEBUG - [POLLING] Попытка #66 проверки статуса задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:37 - DEBUG - [POLLING] Получен статус: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:37 - DEBUG - [POLLING-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе: PROCESSING
-2025-09-09 07:03:37 - DEBUG - [POLLING-BACKOFF] attempt=66, delay: 2000ms -> 2000ms
-2025-09-09 07:03:37 - WARNING - [POLLING-TIMEOUT] Превышено время ожидания (120s) для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:37 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
+2025-09-09 15:53:42 - INFO - Логирование инициализировано (режим перезаписи)
+2025-09-09 15:53:46 - INFO - [ChatAsyncHandler] Объединенный обработчик чата инициализирован
+2025-09-09 15:53:59 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'metadata': {'session_id': 'session_1757411633', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:30:09.621187'}, {'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:33:58.187938'}, {'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:53:59.729704'}], 'attachments': [], 'attached_files': [], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
+2025-09-09 15:53:59 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
+2025-09-09 15:53:59 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
+2025-09-09 15:53:59 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:53:59 - DEBUG - [ASYNC] CrewAI API доступен: True
+2025-09-09 15:53:59 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
+2025-09-09 15:53:59 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': '763c214a-e93c-4c8f-b495-8e931bfdb47c', 'status': 'processing', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:53:59 - INFO - [ASYNC] Получен task_id: 546f6f82-3d60-4384-96c5-ffba21366f02, запуск опроса статуса
+2025-09-09 15:53:59 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
+2025-09-09 15:53:59 - INFO - [POLLING] (re)started polling for task_id=546f6f82-3d60-4384-96c5-ffba21366f02 initial_delay=500ms start_time=33289.223101965
+2025-09-09 15:54:00 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:00 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:00 - DEBUG - [POLLING-BACKOFF] attempt=1, delay: 500ms -> 500ms
+2025-09-09 15:54:00 - DEBUG - [POLLING] Попытка #2 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:00 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:00 - DEBUG - [POLLING-BACKOFF] attempt=2, delay: 500ms -> 500ms
+2025-09-09 15:54:01 - DEBUG - [POLLING] Попытка #3 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:01 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:01 - DEBUG - [POLLING-BACKOFF] attempt=3, delay: 500ms -> 500ms
+2025-09-09 15:54:01 - DEBUG - [POLLING] Попытка #4 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:01 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:01 - DEBUG - [POLLING-BACKOFF] attempt=4, delay: 500ms -> 500ms
+2025-09-09 15:54:02 - DEBUG - [POLLING] Попытка #5 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:02 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:02 - DEBUG - [POLLING-BACKOFF] attempt=5, delay: 500ms -> 500ms
+2025-09-09 15:54:02 - DEBUG - [POLLING] Попытка #6 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:02 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:02 - DEBUG - [POLLING-BACKOFF] attempt=6, delay: 500ms -> 500ms
+2025-09-09 15:54:03 - DEBUG - [POLLING] Попытка #7 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:03 - DEBUG - [POLLING-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе: PROCESSING
+2025-09-09 15:54:03 - DEBUG - [POLLING-BACKOFF] attempt=7, delay: 500ms -> 500ms
+2025-09-09 15:54:03 - DEBUG - [POLLING] Попытка #8 проверки статуса задачи 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [POLLING] Получен статус: {'completed_at': 1757413443.2267222, 'created_at': 1757413439.7642262, 'progress': 100, 'result': {'response': 'Ошибка: litellm.InternalServerError: litellm.InternalServerError: VertexAIException - {\n  "error": {\n    "code": 503,\n    "message": "The model is overloaded. Please try again later.",\n    "status": "UNAVAILABLE"\n  }\n}\n'}, 'status': 'COMPLETED', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02', 'done': True}
+2025-09-09 15:54:03 - INFO - [POLLING-COMPLETE] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 завершена после 8 попыток со статусом: COMPLETED
+2025-09-09 15:54:03 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
+2025-09-09 15:54:03 - DEBUG - [POLLING-RESULT] Получен результат: {'response': 'Ошибка: litellm.InternalServerError: litellm.InternalServerError: VertexAIException - {\n  "error": {\n    "code": 503,\n    "message": "The model is overloaded. Please try again later.",\n    "status": "UNAVAILABLE"\n  }\n}\n'}
+2025-09-09 15:54:03 - INFO - [POLLING-COMPLETE] Результат задачи 546f6f82-3d60-4384-96c5-ffba21366f02 отправлен в UI
+2025-09-09 15:54:51 - INFO - [ChatAsyncHandler] Начинаем обработку сообщения: {'message': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'metadata': {'session_id': 'session_1757411633', 'current_tool': None, 'chat_history': [{'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:30:09.621187'}, {'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:33:58.187938'}, {'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:53:59.729704'}, {'role': 'assistant', 'content': 'Ошибка: litellm.InternalServerError: litellm.InternalServerError: VertexAIException - {\n  "error": {\n    "code": 503,\n    "message": "The model is overloaded. Please try again later.",\n    "status": "UNAVAILABLE"\n  }\n}', 'timestamp': '2025-09-09T15:54:03.634303'}, {'role': 'user', 'content': 'зайка, удали, пожалуйста, эту папку /home/amritagopi/TEST', 'timestamp': '2025-09-09T15:54:51.824102'}], 'attachments': [], 'attached_files': [], 'model_provider': 'gemini', 'model_id': None, 'model_data': None, 'preferred_provider': 'gemini'}}
+2025-09-09 15:54:51 - INFO - [ChatAsyncHandler] Поток для обработки сообщения запущен успешно
+2025-09-09 15:54:51 - DEBUG - [ASYNC] Начало фоновой обработки сообщения
+2025-09-09 15:54:51 - DEBUG - [ASYNC] Отправка сообщения в CrewAI: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:54:51 - DEBUG - [ASYNC] CrewAI API доступен: True
+2025-09-09 15:54:51 - DEBUG - [ASYNC] Вызываем crew_ai_client.process_request...
+2025-09-09 15:54:51 - DEBUG - [ASYNC] Получен ответ от CrewAI: {'message': 'Сообщение принято к обработке', 'session_id': '95083813-24ed-4c91-8fb8-4a0a0ef0fc71', 'status': 'processing', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:51 - INFO - [ASYNC] Получен task_id: ee417518-b174-4c23-9d19-8ccf7508de0c, запуск опроса статуса
+2025-09-09 15:54:51 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
+2025-09-09 15:54:51 - INFO - [POLLING] (re)started polling for task_id=ee417518-b174-4c23-9d19-8ccf7508de0c initial_delay=500ms start_time=33341.314846139
+2025-09-09 15:54:52 - DEBUG - [POLLING] Попытка #1 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:52 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:52 - DEBUG - [POLLING-BACKOFF] attempt=1, delay: 500ms -> 500ms
+2025-09-09 15:54:52 - DEBUG - [POLLING] Попытка #2 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:52 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:52 - DEBUG - [POLLING-BACKOFF] attempt=2, delay: 500ms -> 500ms
+2025-09-09 15:54:53 - DEBUG - [POLLING] Попытка #3 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:53 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:53 - DEBUG - [POLLING-BACKOFF] attempt=3, delay: 500ms -> 500ms
+2025-09-09 15:54:53 - DEBUG - [POLLING] Попытка #4 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:53 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:53 - DEBUG - [POLLING-BACKOFF] attempt=4, delay: 500ms -> 500ms
+2025-09-09 15:54:54 - DEBUG - [POLLING] Попытка #5 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:54 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:54 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:54 - DEBUG - [POLLING-BACKOFF] attempt=5, delay: 500ms -> 500ms
+2025-09-09 15:54:55 - DEBUG - [POLLING] Попытка #6 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:55 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:55 - DEBUG - [POLLING-BACKOFF] attempt=6, delay: 500ms -> 500ms
+2025-09-09 15:54:55 - DEBUG - [POLLING] Попытка #7 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:55 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:55 - DEBUG - [POLLING-BACKOFF] attempt=7, delay: 500ms -> 500ms
+2025-09-09 15:54:56 - DEBUG - [POLLING] Попытка #8 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:56 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:56 - DEBUG - [POLLING-BACKOFF] attempt=8, delay: 500ms -> 500ms
+2025-09-09 15:54:56 - DEBUG - [POLLING] Попытка #9 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:56 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:56 - DEBUG - [POLLING-BACKOFF] attempt=9, delay: 500ms -> 500ms
+2025-09-09 15:54:57 - DEBUG - [POLLING] Попытка #10 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:57 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:57 - DEBUG - [POLLING-BACKOFF] attempt=10, delay: 500ms -> 500ms
+2025-09-09 15:54:57 - DEBUG - [POLLING] Попытка #11 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:57 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:57 - DEBUG - [POLLING-BACKOFF] attempt=11, delay: 500ms -> 750ms
+2025-09-09 15:54:58 - DEBUG - [POLLING] Попытка #12 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:58 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:58 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:58 - DEBUG - [POLLING-BACKOFF] attempt=12, delay: 750ms -> 1125ms
+2025-09-09 15:54:59 - DEBUG - [POLLING] Попытка #13 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:59 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:59 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:54:59 - DEBUG - [POLLING-BACKOFF] attempt=13, delay: 1125ms -> 1687ms
+2025-09-09 15:55:01 - DEBUG - [POLLING] Попытка #14 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:01 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:01 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:01 - DEBUG - [POLLING-BACKOFF] attempt=14, delay: 1687ms -> 2530ms
+2025-09-09 15:55:03 - DEBUG - [POLLING] Попытка #15 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:03 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:03 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:03 - DEBUG - [POLLING-BACKOFF] attempt=15, delay: 2530ms -> 3795ms
+2025-09-09 15:55:07 - DEBUG - [POLLING] Попытка #16 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:07 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:07 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:07 - DEBUG - [POLLING-BACKOFF] attempt=16, delay: 3795ms -> 5000ms
+2025-09-09 15:55:12 - DEBUG - [POLLING] Попытка #17 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:12 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:12 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:12 - DEBUG - [POLLING-BACKOFF] attempt=17, delay: 5000ms -> 5000ms
+2025-09-09 15:55:17 - DEBUG - [POLLING] Попытка #18 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:17 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:17 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:17 - DEBUG - [POLLING-BACKOFF] attempt=18, delay: 5000ms -> 5000ms
+2025-09-09 15:55:22 - DEBUG - [POLLING] Попытка #19 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:22 - DEBUG - [POLLING] Получен статус: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:22 - DEBUG - [POLLING-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе: PROCESSING
+2025-09-09 15:55:22 - DEBUG - [POLLING-BACKOFF] attempt=19, delay: 5000ms -> 5000ms
+2025-09-09 15:55:27 - DEBUG - [POLLING] Попытка #20 проверки статуса задачи ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:27 - DEBUG - [POLLING] Получен статус: {'completed_at': 1757413525.1834064, 'created_at': 1757413491.856868, 'progress': 100, 'result': {'response': 'Готово, зай. Папки `/home/amritagopi/TEST` больше нет. Убрала.'}, 'status': 'COMPLETED', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c', 'done': True}
+2025-09-09 15:55:27 - INFO - [POLLING-COMPLETE] Задача ee417518-b174-4c23-9d19-8ccf7508de0c завершена после 20 попыток со статусом: COMPLETED
+2025-09-09 15:55:27 - DEBUG - [POLLING] _stop_and_reset_polling executed: start_time reset, attempts reset, delay reset
+2025-09-09 15:55:27 - DEBUG - [POLLING-RESULT] Получен результат: {'response': 'Готово, зай. Папки `/home/amritagopi/TEST` больше нет. Убрала.'}
+2025-09-09 15:55:27 - INFO - [POLLING-COMPLETE] Результат задачи ee417518-b174-4c23-9d19-8ccf7508de0c отправлен в UI

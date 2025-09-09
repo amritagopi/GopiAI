@@ -1,0 +1,111 @@
+name: Build Cross-Platform Packages
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y libgirepository1.0-dev libgirepository-2.0-dev libwebkit2gtk-4.1-dev
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install briefcase
+        pip install -r requirements.txt
+    - name: Install Docker buildx
+      run: |
+        mkdir -p ~/.docker/cli-plugins
+        curl -SL https://github.com/docker/buildx/releases/download/v0.17.1/buildx-v0.17.1.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx
+        chmod +x ~/.docker/cli-plugins/docker-buildx
+    - name: Build Linux AppImage
+      run: |
+        briefcase create linux
+        briefcase build linux  
+        briefcase package linux appimage
+    - name: Upload Linux package
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-appimage
+        path: dist/*.AppImage
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install briefcase
+        pip install -r requirements.txt
+    - name: Build Windows MSI
+      run: |
+        briefcase create windows
+        briefcase build windows
+        briefcase package windows msi
+    - name: Upload Windows package
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-msi
+        path: dist/*.msi
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install system dependencies
+      run: |
+        brew install cairo pango gdk-pixbuf libffi
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install briefcase
+        pip install -r requirements.txt
+    - name: Build macOS DMG
+      run: |
+        briefcase create macOS
+        briefcase build macOS
+        briefcase package macOS dmg
+    - name: Upload macOS package
+      uses: actions/upload-artifact@v3
+      with:
+        name: macos-dmg
+        path: dist/*.dmg
+
+  create-release:
+    needs: [build-linux, build-windows, build-macos]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+    - name: Download all packages
+      uses: actions/download-artifact@v3
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          linux-appimage/*
+          windows-msi/*
+          macos-dmg/*
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

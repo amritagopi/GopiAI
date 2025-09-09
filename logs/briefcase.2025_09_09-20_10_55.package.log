@@ -1,0 +1,1220 @@
+Date/Time:       2025-09-09 20:10:55 
+Command line:    .venv/bin/briefcase package linux appimage
+
+OS Release:      Linux 6.8.0-78-generic
+OS Version:      #78-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 11:34:18 UTC 2025
+Architecture:    x86_64
+Platform:        Linux-6.8.0-78-generic-x86_64-with-glibc2.39
+
+Python exe:      /home/amritagopi/GopiAI/.venv/bin/python3
+Python version:  3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   appimage
+
+Environment Variables:
+	BUNDLED_DEBUGPY_PATH=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/libs/debugpy
+	CHROME_DESKTOP=windsurf.desktop
+	CINNAMON_VERSION=6.4.8
+	CLAUDECODE=1
+	CLAUDE_CODE_ENTRYPOINT=cli
+	CLAUDE_CODE_SSE_PORT=57126
+	COLORTERM=truecolor
+	COREPACK_ENABLE_AUTO_PIN=0
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEFAULTS_PATH=/usr/share/gconf/cinnamon.default.path
+	DESKTOP_SESSION=cinnamon
+	DISPLAY=:0
+	ENABLE_IDE_INTEGRATION=true
+	GDK_BACKEND=x11
+	GDMSESSION=cinnamon
+	GDM_LANG=ru_RU
+	GEMINI_CLI_IDE_SERVER_PORT=34771
+	GEMINI_CLI_IDE_WORKSPACE_PATH=/home/amritagopi/GopiAI
+	GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/windsurf.desktop
+	GIO_LAUNCHED_DESKTOP_FILE_PID=100934
+	GIT_ASKPASS=********************
+	GIT_EDITOR=true
+	GJS_DEBUG_OUTPUT=stderr
+	GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+	GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+	GNOME_KEYRING_CONTROL=********************
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK3_MODULES=xapp-gtk3-module
+	GTK_MODULES=gail:atk-bridge
+	HOME=/home/amritagopi
+	KEY=********************
+	LANG=ru_RU.UTF-8
+	LANGUAGE=ru_RU
+	LC_ADDRESS=anp_IN
+	LC_IDENTIFICATION=anp_IN
+	LC_MEASUREMENT=anp_IN
+	LC_MONETARY=anp_IN
+	LC_NAME=anp_IN
+	LC_NUMERIC=anp_IN
+	LC_PAPER=anp_IN
+	LC_TELEPHONE=anp_IN
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=amritagopi
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+	MANDATORY_PATH=/usr/share/gconf/cinnamon.mandatory.path
+	NVM_BIN=/home/amritagopi/.nvm/versions/node/v20.19.4/bin
+	NVM_CD_FLAGS=
+	NVM_DIR=/home/amritagopi/.nvm
+	NVM_INC=/home/amritagopi/.nvm/versions/node/v20.19.4/include/node
+	NoDefaultCurrentDirectoryInExePath=1
+	OPENROUTER_API_KEY=********************
+	ORIGINAL_XDG_CURRENT_DESKTOP=X-Cinnamon
+	OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta
+	PATH=/home/amritagopi/GopiAI/.venv/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.local/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.nvm/versions/node/v20.19.4/bin:/home/amritagopi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/amritagopi/.local/bin:/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/scripts/noConfigScripts:/home/amritagopi/.local/bin
+	PWD=/home/amritagopi/GopiAI
+	PYDEVD_DISABLE_FILE_VALIDATION=1
+	QT_ACCESSIBILITY=1
+	SESSION_MANAGER=local/amritagopi-MS-7C96:@/tmp/.ICE-unix/1275,unix/amritagopi-MS-7C96:/tmp/.ICE-unix/1275
+	SHELL=/bin/bash
+	SHLVL=2
+	SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+	TERM=xterm-256color
+	TERM_PROGRAM=vscode
+	TERM_PROGRAM_VERSION=1.99.3
+	USER=amritagopi
+	VIRTUAL_ENV=/home/amritagopi/GopiAI/.venv
+	VIRTUAL_ENV_PROMPT=(.venv) 
+	VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-6037e0210cc9a3f1.txt
+	VSCODE_GIT_ASKPASS_EXTRA_ARGS=********************
+	VSCODE_GIT_ASKPASS_MAIN=********************
+	VSCODE_GIT_ASKPASS_NODE=********************
+	VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-49b938ec53.sock
+	XAUTHORITY=/home/amritagopi/.Xauthority
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
+	XDG_CURRENT_DESKTOP=X-Cinnamon
+	XDG_DATA_DIRS=/usr/share/cinnamon:/usr/share/gnome:/home/amritagopi/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/amritagopi
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=cinnamon
+	XDG_SESSION_ID=c1
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	_=.venv/bin/briefcase
+
+pyproject.toml:
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "GopiAI"
+version = "1.0.0"
+description = "Advanced AI Platform with CrewAI Agent Orchestration and Qt-based UI"
+readme = "README.md"
+authors = [
+    {name = "GopiAI Team", email = "noreply@gopiai.dev"},
+]
+license = {file = "LICENSE"}
+keywords = [
+    "ai", "crewai", "agents", "llm", "gemini", "artificial-intelligence", 
+    "automation", "chat", "assistant", "ui", "qt", "python"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Desktop Environment",
+    "Topic :: Software Development :: User Interfaces",
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    # Core dependencies
+    "pyside6>=6.5.0",
+    "requests>=2.28.0",
+    "aiohttp>=3.8.0",
+    
+    # CrewAI dependencies
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",
+    "tavily-python",
+    "google-generativeai",
+    "langchain",
+    "langchain-community",
+    "langchain-google-genai",
+    
+    # UI dependencies
+    "qasync>=0.24.0",
+    "qdarkstyle>=3.1.0",
+    
+    # API Server dependencies
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Utility dependencies
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/amritagopi/GopiAI"
+Documentation = "https://github.com/amritagopi/GopiAI/wiki"
+Repository = "https://github.com/amritagopi/GopiAI"
+Issues = "https://github.com/amritagopi/GopiAI/issues"
+
+[tool.briefcase]
+project_name = "GopiAI"
+bundle = "com.gopiai"
+version = "1.0.0"
+url = "https://github.com/amritagopi/GopiAI"
+license = "MIT"
+author = "GopiAI Team"
+author_email = "noreply@gopiai.dev"
+
+description = "GopiAI is an advanced AI platform featuring CrewAI agent orchestration with an intuitive Qt-based user interface. It provides seamless AI model rotation, intelligent task management, and a comprehensive toolkit for AI-powered automation."
+
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO" # Will try .icns, .ico, .png
+splash = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+[tool.briefcase.app.gopiai]
+formal_name = "GopiAI"
+description = "Advanced AI Platform with Agent Orchestration"
+sources = [
+    "src/gopiai_app",
+    "GopiAI-UI/gopiai", 
+    "GopiAI-CrewAI",
+    "GopiAI-Assets/gopiai/assets",
+]
+test_sources = ["tests"]
+
+requires = [
+    # GUI Framework
+    "pyside6>=6.5.0",
+    
+    # Core AI/ML libraries
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",  
+    "google-generativeai",
+    "tavily-python",
+    "langchain",
+    "langchain-community", 
+    "langchain-google-genai",
+    
+    # API Server
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Async/Network
+    "aiohttp>=3.8.0", 
+    "requests>=2.28.0",
+    "qasync>=0.24.0",
+    
+    # UI Enhancement
+    "qdarkstyle>=3.1.0",
+    
+    # Utilities
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+test_requires = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0", 
+    "pytest-asyncio>=0.21.0",
+]
+
+# Briefcase configuration for different platforms
+[tool.briefcase.app.gopiai.macOS]
+requires = [
+    "toga-cocoa~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+entitlement = "entitlements.plist"
+
+[tool.briefcase.app.gopiai.linux]
+requires = [
+    "toga-gtk~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+system_requires = [
+    # Ubuntu/Debian packages
+    "libgirepository1.0-dev",
+    "libcairo2-dev", 
+    "libpango1.0-dev",
+    "libwebkit2gtk-4.1-dev",
+    # Required for Qt
+    "libxcb-xinerama0",
+    "libxcb1",
+    "libx11-xcb1",
+]
+system_runtime_requires = [
+    "libgirepository-1.0-1",
+    "libcairo-gobject2",
+    "libpango-1.0-0", 
+    "libwebkit2gtk-4.1-0",
+    "libxcb-xinerama0",
+]
+
+[tool.briefcase.app.gopiai.linux.appimage]
+manylinux = "manylinux2014"
+system_requires = [
+    "libgirepository1.0-dev",
+    "libcairo2-dev",
+    "libpango1.0-dev", 
+    "libwebkit2gtk-4.1-dev",
+]
+
+[tool.briefcase.app.gopiai.windows]
+requires = [
+    "toga-winforms~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+
+# Build configurations
+[tool.briefcase.app.gopiai.windows.msi]
+system_installer = true
+
+[tool.briefcase.app.gopiai.macOS.dmg] 
+installer_background = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+# Development tools configuration
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+# PyTest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers", 
+    "--strict-config",
+    "--verbose",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests", 
+    "ui: marks tests as UI tests (require display)",
+]
+
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+Briefcase Log:
+[20:06:05]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "MIT"                                                                                                                                     config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker --version                                                                                                                                subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Docker version 27.5.1, build 27.5.1-0ubuntu3~24.04.2                                                                                            subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker info                                                                                                                                     subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Client:                                                                                                                                         subprocess.py:838
+           >>>      Version:    27.5.1                                                                                                                             subprocess.py:838
+           >>>      Context:    default                                                                                                                            subprocess.py:838
+           >>>      Debug Mode: false                                                                                                                              subprocess.py:838
+           >>>      Plugins:                                                                                                                                       subprocess.py:838
+           >>>       buildx: Docker Buildx (Docker Inc.)                                                                                                           subprocess.py:838
+           >>>         Version:  v0.17.1                                                                                                                           subprocess.py:838
+           >>>         Path:     /home/amritagopi/.docker/cli-plugins/docker-buildx                                                                                subprocess.py:838
+           >>>                                                                                                                                                     subprocess.py:838
+           >>>     Server:                                                                                                                                         subprocess.py:838
+           >>>      Containers: 12                                                                                                                                 subprocess.py:838
+           >>>       Running: 1                                                                                                                                    subprocess.py:838
+           >>>       Paused: 0                                                                                                                                     subprocess.py:838
+           >>>       Stopped: 11                                                                                                                                   subprocess.py:838
+           >>>      Images: 4                                                                                                                                      subprocess.py:838
+           >>>      Server Version: 27.5.1                                                                                                                         subprocess.py:838
+           >>>      Storage Driver: overlay2                                                                                                                       subprocess.py:838
+           >>>       Backing Filesystem: extfs                                                                                                                     subprocess.py:838
+           >>>       Supports d_type: true                                                                                                                         subprocess.py:838
+           >>>       Using metacopy: false                                                                                                                         subprocess.py:838
+           >>>       Native Overlay Diff: true                                                                                                                     subprocess.py:838
+           >>>       userxattr: false                                                                                                                              subprocess.py:838
+           >>>      Logging Driver: json-file                                                                                                                      subprocess.py:838
+           >>>      Cgroup Driver: systemd                                                                                                                         subprocess.py:838
+           >>>      Cgroup Version: 2                                                                                                                              subprocess.py:838
+           >>>      Plugins:                                                                                                                                       subprocess.py:838
+           >>>       Volume: local                                                                                                                                 subprocess.py:838
+           >>>       Network: bridge host ipvlan macvlan null overlay                                                                                              subprocess.py:838
+           >>>       Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog                                                                      subprocess.py:838
+           >>>      Swarm: inactive                                                                                                                                subprocess.py:838
+           >>>      Runtimes: io.containerd.runc.v2 runc                                                                                                           subprocess.py:838
+           >>>      Default Runtime: runc                                                                                                                          subprocess.py:838
+           >>>      Init Binary: docker-init                                                                                                                       subprocess.py:838
+           >>>      containerd version:                                                                                                                            subprocess.py:838
+           >>>      runc version:                                                                                                                                  subprocess.py:838
+           >>>      init version:                                                                                                                                  subprocess.py:838
+           >>>      Security Options:                                                                                                                              subprocess.py:838
+           >>>       apparmor                                                                                                                                      subprocess.py:838
+           >>>       seccomp                                                                                                                                       subprocess.py:838
+           >>>        Profile: builtin                                                                                                                             subprocess.py:838
+           >>>       cgroupns                                                                                                                                      subprocess.py:838
+           >>>      Kernel Version: 6.8.0-78-generic                                                                                                               subprocess.py:838
+           >>>      Operating System: Linux Mint 22.1                                                                                                              subprocess.py:838
+           >>>      OSType: linux                                                                                                                                  subprocess.py:838
+           >>>      Architecture: x86_64                                                                                                                           subprocess.py:838
+           >>>      CPUs: 4                                                                                                                                        subprocess.py:838
+           >>>      Total Memory: 29.29GiB                                                                                                                         subprocess.py:838
+           >>>      Name: amritagopi-MS-7C96                                                                                                                       subprocess.py:838
+           >>>      ID: dc64debc-601a-4515-af49-13f542802f25                                                                                                       subprocess.py:838
+           >>>      Docker Root Dir: /var/lib/docker                                                                                                               subprocess.py:838
+           >>>      Debug Mode: false                                                                                                                              subprocess.py:838
+           >>>      Experimental: false                                                                                                                            subprocess.py:838
+           >>>      Insecure Registries:                                                                                                                           subprocess.py:838
+           >>>       127.0.0.0/8                                                                                                                                   subprocess.py:838
+           >>>      Live Restore Enabled: false                                                                                                                    subprocess.py:838
+           >>>                                                                                                                                                     subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker buildx version                                                                                                                           subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     github.com/docker/buildx v0.17.1 257815a6fbaee88976808020bf04274388275ae8                                                                       subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker images -q alpine                                                                                                                         subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                       docker.py:371
+           [Docker] Downloading Docker base image for alpine...                                                                                                        docker.py:371
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker pull alpine                                                                                                                              subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+[20:06:16] >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker run --rm --volume /home/amritagopi/GopiAI/build:/host_write_test:z alpine touch /host_write_test/container_write_test                    subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+[20:06:17] >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker run --rm --volume /home/amritagopi/GopiAI/build:/host_write_test:z alpine rm -f /host_write_test/container_write_test                    subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           *************************************************************************                                                                                 appimage.py:111
+           ** WARNING: Use of AppImage is not recommended!                        **                                                                                 appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Briefcase supports AppImage in a best-effort capacity. It has proven                                                                                  appimage.py:111
+               to be highly unreliable as a distribution platform. AppImages cannot                                                                                  appimage.py:111
+               use pre-compiled binary wheels, and has significant problems with                                                                                     appimage.py:111
+               most commonly used GUI toolkits (including GTK and PySide).                                                                                           appimage.py:111
+                                                                                                                                                                     appimage.py:111
+               Consider using system packages or Flatpak for Linux app                                                                                               appimage.py:111
+               distribution.                                                                                                                                         appimage.py:111
+                                                                                                                                                                     appimage.py:111
+           *************************************************************************                                                                                 appimage.py:111
+                                                                                                                                                                       create.py:937
+           [gopiai] Generating application template...                                                                                                                 create.py:937
+           Using app template: https://github.com/beeware/briefcase-linux-appimage-template.git, branch v0.3.25                                                         base.py:1241
+           Cloning template 'https://github.com/beeware/briefcase-linux-appimage-template.git'...                                                                       base.py:1073
+[20:06:22] Using existing template (sha f970441e56f50b434b35b21892c4e8b43cbf7a45, updated Sun Aug 10 10:08:03 2025)                                                     base.py:1146
+[20:06:24]                                                                                                                                                             create.py:952
+           [gopiai] Installing support package...                                                                                                                      create.py:952
+           Using support package                                                                                                                                       create.py:366
+           https://github.com/astral-sh/python-build-standalone/releases/download/20250723/cpython-3.12.11+20250723-x86_64-unknown-linux-gnu-install_only_stripped.tar              
+           .gz                                                                                                                                                                      
+[20:06:27] Downloading cpython-3.12.11+20250723-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz...                                                                 file.py:227
+[20:06:43] Unpacking support package... started                                                                                                                        create.py:281
+[20:06:45] Unpacking support package... done                                                                                                                           create.py:281
+                                                                                                                                                                       docker.py:902
+           [gopiai] Building Docker container image...                                                                                                                 docker.py:902
+           Building Docker image... started                                                                                                                            docker.py:906
+                                                                                                                                                                      console.py:262
+           Entering Docker context...                                                                                                                                 console.py:263
+           Docker| ------------------------------------------------------------------                                                                                 console.py:266
+           Docker|                                                                                                                                                 subprocess.py:838
+           Docker| >>> Running Command:                                                                                                                            subprocess.py:838
+           Docker| >>>     docker buildx build --load --progress plain --tag briefcase/com.gopiai.gopiai:manylinux2014-appimage --file                             subprocess.py:838
+           /home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile --build-arg 'SYSTEM_REQUIRES=libgirepository1.0-dev libcairo2-dev libpango1.0-dev                         
+           libwebkit2gtk-4.1-dev libgirepository-1.0-1 libcairo-gobject2 libpango-1.0-0 libwebkit2gtk-4.1-0 libxcb-xinerama0' --build-arg HOST_UID=1000                             
+           --build-arg HOST_GID=1000 /home/amritagopi/GopiAI/src                                                                                                                    
+           Docker| >>> Working Directory:                                                                                                                          subprocess.py:838
+           Docker| >>>     /home/amritagopi/GopiAI                                                                                                                 subprocess.py:838
+           Docker| #0 building with "default" instance using docker driver                                                                                         subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #1 [internal] load build definition from Dockerfile                                                                                             subprocess.py:195
+           Docker| #1 transferring dockerfile: 1.16kB done                                                                                                         subprocess.py:195
+           Docker| #1 DONE 0.0s                                                                                                                                    subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #2 [internal] load metadata for quay.io/pypa/manylinux2014_x86_64:latest                                                                        subprocess.py:195
+[20:06:49] Docker| #2 DONE 3.8s                                                                                                                                    subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #3 [internal] load .dockerignore                                                                                                                subprocess.py:195
+           Docker| #3 transferring context: 2B done                                                                                                                subprocess.py:195
+           Docker| #3 DONE 0.0s                                                                                                                                    subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #4 [1/5] FROM quay.io/pypa/manylinux2014_x86_64:latest@sha256:fd753fea0aae13c55fd926e9ae9e19455af86090e1242cc8862fa4a9ba862f6d                  subprocess.py:195
+           Docker| #4 resolve quay.io/pypa/manylinux2014_x86_64:latest@sha256:fd753fea0aae13c55fd926e9ae9e19455af86090e1242cc8862fa4a9ba862f6d 0.0s done           subprocess.py:195
+           Docker| #4 sha256:66cefeafbf506fa5894cd3a1df72f0e67e74c50122b154a7ab08fa76067191be 0B / 563B 0.1s                                                       subprocess.py:195
+           Docker| #4 sha256:85864ad6837d1c66ce646c278b1deec865268fdd3cc34fee1e49e97cbcb4f87a 0B / 3.06kB 0.1s                                                     subprocess.py:195
+           Docker| #4 sha256:fd753fea0aae13c55fd926e9ae9e19455af86090e1242cc8862fa4a9ba862f6d 5.13kB / 5.13kB done                                                 subprocess.py:195
+           Docker| #4 sha256:5ca69a3907f76a6764db02fec3f154557510b129381f7dbef3f6303360dff937 13.75kB / 13.75kB done                                               subprocess.py:195
+           Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 0B / 182.69MB 0.3s                                                   subprocess.py:195
+[20:06:50] Docker| #4 sha256:66cefeafbf506fa5894cd3a1df72f0e67e74c50122b154a7ab08fa76067191be 563B / 563B 0.6s done                                                subprocess.py:195
+           Docker| #4 sha256:e9a89bd7d45e06b008508640c8de5a84ec021aeb72ebb954500d19156cb580cf 0B / 83B 0.8s                                                        subprocess.py:195
+[20:06:51] Docker| #4 sha256:85864ad6837d1c66ce646c278b1deec865268fdd3cc34fee1e49e97cbcb4f87a 3.06kB / 3.06kB 1.8s done                                            subprocess.py:195
+           Docker| #4 sha256:e9a89bd7d45e06b008508640c8de5a84ec021aeb72ebb954500d19156cb580cf 83B / 83B 1.9s done                                                  subprocess.py:195
+           Docker| #4 sha256:e3f9a01516a4a0f1abcbb1d8c89f1fea678c43b4cd71fdf13fdb61bd55859562 0B / 370B 2.0s                                                       subprocess.py:195
+           Docker| #4 sha256:7194b6d38e18f5f0e4ae031b1b6db56f6fbf2087630c9ddf2d978c64087466d4 0B / 5.17kB 2.0s                                                     subprocess.py:195
+           Docker| #4 sha256:e3f9a01516a4a0f1abcbb1d8c89f1fea678c43b4cd71fdf13fdb61bd55859562 370B / 370B 2.4s done                                                subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 0B / 11.69MB 2.6s                                                    subprocess.py:195
+           Docker| #4 sha256:c49dcb6f81b4aca38780aa7892f256a88dccd1066923bc387ae52fb92476b02a 0B / 1.56kB 2.6s                                                     subprocess.py:195
+[20:06:52] Docker| #4 sha256:7194b6d38e18f5f0e4ae031b1b6db56f6fbf2087630c9ddf2d978c64087466d4 5.17kB / 5.17kB 2.5s done                                            subprocess.py:195
+           Docker| #4 sha256:a99ed791e6f15a649ec6ce44670746c154bc2c442a54e57198989e861e7e50ea 0B / 914B 3.2s                                                       subprocess.py:195
+           Docker| #4 sha256:c49dcb6f81b4aca38780aa7892f256a88dccd1066923bc387ae52fb92476b02a 1.56kB / 1.56kB 3.2s done                                            subprocess.py:195
+[20:06:53] Docker| #4 sha256:a99ed791e6f15a649ec6ce44670746c154bc2c442a54e57198989e861e7e50ea 914B / 914B 3.8s done                                                subprocess.py:195
+           Docker| #4 sha256:6f82efdf0e03571cd1666100faf4362fea3fbf5c08d742c275b7dc1e279100aa 0B / 1.00MB 4.1s                                                     subprocess.py:195
+[20:06:54] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 2.10MB / 182.69MB 5.5s                                               subprocess.py:195
+[20:06:55] Docker| #4 sha256:6f82efdf0e03571cd1666100faf4362fea3fbf5c08d742c275b7dc1e279100aa 1.00MB / 1.00MB 6.4s done                                            subprocess.py:195
+           Docker| #4 sha256:a77c8e9b700d5900bd9398aaa10ba4ae784b4dfddb5f875d30f7bd586828d25e 0B / 1.03kB 6.4s                                                     subprocess.py:195
+[20:06:56] Docker| #4 sha256:a77c8e9b700d5900bd9398aaa10ba4ae784b4dfddb5f875d30f7bd586828d25e 1.03kB / 1.03kB 7.0s done                                            subprocess.py:195
+           Docker| #4 sha256:1d05c7df3ada2a80220cfec2acd282afd3adff509b7fdfeff88fc95cd7ca130b 0B / 711.65kB 7.1s                                                   subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 0B / 11.69MB 7.7s                                                    subprocess.py:195
+[20:06:58] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 1.05MB / 11.69MB 8.8s                                                subprocess.py:195
+           Docker| #4 sha256:1d05c7df3ada2a80220cfec2acd282afd3adff509b7fdfeff88fc95cd7ca130b 711.65kB / 711.65kB 8.8s done                                        subprocess.py:195
+           Docker| #4 sha256:4418fa0a46538d0341bb125112b31f8413889719d177efedf8e1234cd761ebd6 0B / 571B 8.9s                                                       subprocess.py:195
+           Docker| #4 sha256:4418fa0a46538d0341bb125112b31f8413889719d177efedf8e1234cd761ebd6 571B / 571B 9.5s done                                                subprocess.py:195
+           Docker| #4 sha256:0465c9e233feb8d46e87553cc9ee220ca15b56e06876251a65da8ea6c752126b 0B / 690.09kB 9.5s                                                   subprocess.py:195
+[20:06:59] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 2.10MB / 11.69MB 10.4s                                               subprocess.py:195
+           Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 8.39MB / 182.69MB 10.6s                                              subprocess.py:195
+[20:07:00] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 3.15MB / 11.69MB 11.4s                                               subprocess.py:195
+           Docker| #4 sha256:d7c6444462f8f66796876490eadec12c4b9aaeaf845eb0f995bbc9396bbb074c 0B / 988B 11.5s                                                      subprocess.py:195
+           Docker| #4 sha256:0465c9e233feb8d46e87553cc9ee220ca15b56e06876251a65da8ea6c752126b 690.09kB / 690.09kB 11.4s done                                       subprocess.py:195
+[20:07:01] Docker| #4 sha256:d7c6444462f8f66796876490eadec12c4b9aaeaf845eb0f995bbc9396bbb074c 988B / 988B 12.0s done                                               subprocess.py:195
+           Docker| #4 sha256:3bd4d0149f02a490aa2fb6c278f5350fae60128816aa5e3fa036a2b4564733d1 0B / 357.43kB 12.0s                                                  subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 4.19MB / 11.69MB 12.1s                                               subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 5.24MB / 11.69MB 12.7s                                               subprocess.py:195
+[20:07:02] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 6.29MB / 11.69MB 13.7s                                               subprocess.py:195
+           Docker| #4 sha256:3bd4d0149f02a490aa2fb6c278f5350fae60128816aa5e3fa036a2b4564733d1 357.43kB / 357.43kB 13.5s done                                       subprocess.py:195
+           Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 0B / 4.83MB 13.7s                                                    subprocess.py:195
+[20:07:03] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 17.83MB / 182.69MB 14.6s                                             subprocess.py:195
+[20:07:04] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 7.34MB / 11.69MB 14.9s                                               subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 8.39MB / 11.69MB 15.6s                                               subprocess.py:195
+[20:07:05] Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 1.05MB / 4.83MB 16.0s                                                subprocess.py:195
+[20:07:06] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 9.44MB / 11.69MB 17.0s                                               subprocess.py:195
+           Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 2.10MB / 4.83MB 17.6s                                                subprocess.py:195
+[20:07:07] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 10.49MB / 11.69MB 18.4s                                              subprocess.py:195
+[20:07:08] Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 3.15MB / 4.83MB 18.9s                                                subprocess.py:195
+           Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 25.17MB / 182.69MB 19.6s                                             subprocess.py:195
+[20:07:09] Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 11.53MB / 11.69MB 19.7s                                              subprocess.py:195
+           Docker| #4 sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 11.69MB / 11.69MB 19.9s done                                         subprocess.py:195
+           Docker| #4 sha256:a513fd65a4f26bba206141246ebbebd7d351b7e001e2a6730b78f3f0621f6a69 0B / 82.61kB 20.0s                                                   subprocess.py:195
+           Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 4.19MB / 4.83MB 20.3s                                                subprocess.py:195
+[20:07:10] Docker| #4 sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 4.83MB / 4.83MB 21.3s done                                           subprocess.py:195
+           Docker| #4 sha256:5d40c92a14ebd6f806eed04fdd4f7cfed33c8ded10873e3a636ebb4ad9037416 0B / 1.97MB 21.5s                                                    subprocess.py:195
+           Docker| #4 sha256:a513fd65a4f26bba206141246ebbebd7d351b7e001e2a6730b78f3f0621f6a69 82.61kB / 82.61kB 21.5s done                                         subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 0B / 12.66MB 21.7s                                                   subprocess.py:195
+[20:07:12] Docker| #4 sha256:5d40c92a14ebd6f806eed04fdd4f7cfed33c8ded10873e3a636ebb4ad9037416 1.05MB / 1.97MB 23.5s                                                subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 1.05MB / 12.66MB 23.7s                                               subprocess.py:195
+[20:07:13] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 31.46MB / 182.69MB 24.7s                                             subprocess.py:195
+           Docker| #4 sha256:5d40c92a14ebd6f806eed04fdd4f7cfed33c8ded10873e3a636ebb4ad9037416 1.97MB / 1.97MB 24.6s done                                           subprocess.py:195
+           Docker| #4 sha256:b8b06e9d524cd345a32fef9ccc16cc646cd439a4df5063d4dc209763eebf9420 0B / 23.80kB 24.7s                                                   subprocess.py:195
+[20:07:14] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 2.10MB / 12.66MB 25.1s                                               subprocess.py:195
+           Docker| #4 sha256:b8b06e9d524cd345a32fef9ccc16cc646cd439a4df5063d4dc209763eebf9420 23.80kB / 23.80kB 25.2s done                                         subprocess.py:195
+           Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 0B / 208.37MB 25.3s                                                  subprocess.py:195
+[20:07:15] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 3.15MB / 12.66MB 25.8s                                               subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 4.19MB / 12.66MB 26.7s                                               subprocess.py:195
+[20:07:16] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 5.24MB / 12.66MB 27.5s                                               subprocess.py:195
+[20:07:17] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 6.29MB / 12.66MB 28.0s                                               subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 7.34MB / 12.66MB 28.6s                                               subprocess.py:195
+[20:07:18] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 40.89MB / 182.69MB 29.5s                                             subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 8.39MB / 12.66MB 29.6s                                               subprocess.py:195
+[20:07:19] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 9.44MB / 12.66MB 30.4s                                               subprocess.py:195
+           Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 3.15MB / 208.37MB 30.4s                                              subprocess.py:195
+[20:07:20] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 10.49MB / 12.66MB 31.4s                                              subprocess.py:195
+[20:07:21] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 11.53MB / 12.66MB 32.2s                                              subprocess.py:195
+[20:07:22] Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 12.66MB / 12.66MB 32.9s                                              subprocess.py:195
+           Docker| #4 sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 12.66MB / 12.66MB 32.9s done                                         subprocess.py:195
+           Docker| #4 sha256:993a8cfd6c3686ab3724b3647bb81ef4c975d1228595a5f3df24e0d92986e3c2 0B / 6.05kB 33.1s                                                    subprocess.py:195
+           Docker| #4 sha256:993a8cfd6c3686ab3724b3647bb81ef4c975d1228595a5f3df24e0d92986e3c2 6.05kB / 6.05kB 33.5s done                                           subprocess.py:195
+[20:07:23] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 47.19MB / 182.69MB 34.6s                                             subprocess.py:195
+[20:07:24] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 7.34MB / 208.37MB 35.5s                                              subprocess.py:195
+[20:07:28] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 53.48MB / 182.69MB 39.7s                                             subprocess.py:195
+[20:07:29] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 12.58MB / 208.37MB 40.6s                                             subprocess.py:195
+[20:07:33] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 62.91MB / 182.69MB 44.6s                                             subprocess.py:195
+[20:07:34] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 22.02MB / 208.37MB 45.7s                                             subprocess.py:195
+[20:07:38] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 70.25MB / 182.69MB 49.6s                                             subprocess.py:195
+[20:07:40] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 30.41MB / 208.37MB 50.8s                                             subprocess.py:195
+[20:07:43] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 79.69MB / 182.69MB 54.6s                                             subprocess.py:195
+[20:07:45] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 39.85MB / 208.37MB 56.0s                                             subprocess.py:195
+[20:07:48] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 87.03MB / 182.69MB 59.6s                                             subprocess.py:195
+[20:07:50] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 48.23MB / 208.37MB 61.0s                                             subprocess.py:195
+[20:07:54] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 95.42MB / 182.69MB 64.9s                                             subprocess.py:195
+[20:07:55] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 56.62MB / 208.37MB 66.1s                                             subprocess.py:195
+[20:07:59] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 103.81MB / 182.69MB 70.0s                                            subprocess.py:195
+[20:08:00] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 63.96MB / 208.37MB 71.2s                                             subprocess.py:195
+[20:08:04] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 111.15MB / 182.69MB 75.1s                                            subprocess.py:195
+[20:08:05] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 72.35MB / 208.37MB 76.2s                                             subprocess.py:195
+[20:08:09] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 119.54MB / 182.69MB 80.2s                                            subprocess.py:195
+[20:08:10] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 79.69MB / 208.37MB 81.3s                                             subprocess.py:195
+[20:08:13] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 128.97MB / 182.69MB 84.5s                                            subprocess.py:195
+[20:08:15] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 89.13MB / 208.37MB 86.4s                                             subprocess.py:195
+[20:08:18] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 137.36MB / 182.69MB 89.7s                                            subprocess.py:195
+[20:08:20] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 97.52MB / 208.37MB 91.5s                                             subprocess.py:195
+[20:08:24] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 143.65MB / 182.69MB 94.8s                                            subprocess.py:195
+[20:08:25] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 103.81MB / 208.37MB 96.6s                                            subprocess.py:195
+[20:08:28] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 153.09MB / 182.69MB 99.5s                                            subprocess.py:195
+[20:08:30] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 112.20MB / 208.37MB 101.7s                                           subprocess.py:195
+[20:08:32] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 162.53MB / 182.69MB 103.4s                                           subprocess.py:195
+[20:08:36] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 117.44MB / 208.37MB 106.8s                                           subprocess.py:195
+[20:08:37] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 171.97MB / 182.69MB 108.1s                                           subprocess.py:195
+[20:08:41] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 122.68MB / 208.37MB 111.8s                                           subprocess.py:195
+           Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 181.40MB / 182.69MB 112.3s                                           subprocess.py:195
+[20:08:42] Docker| #4 sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 182.69MB / 182.69MB 113.1s done                                      subprocess.py:195
+           Docker| #4 extracting sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0                                                           subprocess.py:195
+[20:08:46] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 131.07MB / 208.37MB 116.9s                                           subprocess.py:195
+[20:08:47] Docker| #4 extracting sha256:f6196206f9ec0c2e20b5f6a824cf126d86a2f9f12e83abc1a716480df8290ac0 4.7s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:66cefeafbf506fa5894cd3a1df72f0e67e74c50122b154a7ab08fa76067191be                                                           subprocess.py:195
+           Docker| #4 extracting sha256:66cefeafbf506fa5894cd3a1df72f0e67e74c50122b154a7ab08fa76067191be done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:85864ad6837d1c66ce646c278b1deec865268fdd3cc34fee1e49e97cbcb4f87a done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:e9a89bd7d45e06b008508640c8de5a84ec021aeb72ebb954500d19156cb580cf done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:e3f9a01516a4a0f1abcbb1d8c89f1fea678c43b4cd71fdf13fdb61bd55859562 done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:7194b6d38e18f5f0e4ae031b1b6db56f6fbf2087630c9ddf2d978c64087466d4 done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b                                                           subprocess.py:195
+[20:08:48] Docker| #4 extracting sha256:ec12a344d27257e77e1d7c771e5eab2df478f81f91e23ec52a7151a9c884565b 0.6s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:c49dcb6f81b4aca38780aa7892f256a88dccd1066923bc387ae52fb92476b02a done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:a99ed791e6f15a649ec6ce44670746c154bc2c442a54e57198989e861e7e50ea done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:6f82efdf0e03571cd1666100faf4362fea3fbf5c08d742c275b7dc1e279100aa                                                           subprocess.py:195
+           Docker| #4 extracting sha256:6f82efdf0e03571cd1666100faf4362fea3fbf5c08d742c275b7dc1e279100aa 0.0s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:a77c8e9b700d5900bd9398aaa10ba4ae784b4dfddb5f875d30f7bd586828d25e done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:1d05c7df3ada2a80220cfec2acd282afd3adff509b7fdfeff88fc95cd7ca130b 0.0s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:4418fa0a46538d0341bb125112b31f8413889719d177efedf8e1234cd761ebd6 done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:0465c9e233feb8d46e87553cc9ee220ca15b56e06876251a65da8ea6c752126b                                                           subprocess.py:195
+           Docker| #4 extracting sha256:0465c9e233feb8d46e87553cc9ee220ca15b56e06876251a65da8ea6c752126b 0.0s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:d7c6444462f8f66796876490eadec12c4b9aaeaf845eb0f995bbc9396bbb074c done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:3bd4d0149f02a490aa2fb6c278f5350fae60128816aa5e3fa036a2b4564733d1 0.0s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 0.1s                                                      subprocess.py:195
+           Docker| #4 extracting sha256:bec4cabc7c251272fa87ca9739958942fcd92bd175b23e6670956e2dfc3972ef 0.2s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:a513fd65a4f26bba206141246ebbebd7d351b7e001e2a6730b78f3f0621f6a69 done                                                      subprocess.py:195
+           Docker| #4 extracting sha256:5d40c92a14ebd6f806eed04fdd4f7cfed33c8ded10873e3a636ebb4ad9037416 0.0s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 0.1s                                                      subprocess.py:195
+[20:08:49] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 141.56MB / 208.37MB 119.8s                                           subprocess.py:195
+           Docker| #4 extracting sha256:52ae8cf2eb04251511e20a8dd1b2ff1fefa148a0c026abaff9e2dfd1e971250f 0.2s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:b8b06e9d524cd345a32fef9ccc16cc646cd439a4df5063d4dc209763eebf9420 done                                                      subprocess.py:195
+[20:08:51] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 152.04MB / 208.37MB 122.6s                                           subprocess.py:195
+[20:08:55] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 162.53MB / 208.37MB 125.9s                                           subprocess.py:195
+[20:08:59] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 173.02MB / 208.37MB 129.8s                                           subprocess.py:195
+[20:09:02] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 183.50MB / 208.37MB 133.4s                                           subprocess.py:195
+[20:09:06] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 193.99MB / 208.37MB 136.9s                                           subprocess.py:195
+[20:09:09] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 204.47MB / 208.37MB 140.1s                                           subprocess.py:195
+[20:09:10] Docker| #4 sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 208.37MB / 208.37MB 141.4s done                                      subprocess.py:195
+           Docker| #4 extracting sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599                                                           subprocess.py:195
+[20:09:15] Docker| #4 extracting sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 5.2s                                                      subprocess.py:195
+[20:09:18] Docker| #4 extracting sha256:9e4848225e59ec5fd80a454b1fc68b63e146ff3191fb334c450fd080d91c5599 7.6s done                                                 subprocess.py:195
+           Docker| #4 extracting sha256:993a8cfd6c3686ab3724b3647bb81ef4c975d1228595a5f3df24e0d92986e3c2                                                           subprocess.py:195
+           Docker| #4 extracting sha256:993a8cfd6c3686ab3724b3647bb81ef4c975d1228595a5f3df24e0d92986e3c2 done                                                      subprocess.py:195
+           Docker| #4 DONE 149.6s                                                                                                                                  subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #5 [2/5] WORKDIR /app                                                                                                                           subprocess.py:195
+[20:09:22] Docker| #5 DONE 3.3s                                                                                                                                    subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #6 [3/5] RUN yum install -y git file                                                                                                            subprocess.py:195
+           Docker| #6 0.344 Loaded plugins: ovl                                                                                                                    subprocess.py:195
+[20:09:55] Docker| #6 33.77 Package file-5.11-37.el7.x86_64 already installed and latest version                                                                   subprocess.py:195
+           Docker| #6 33.77 Resolving Dependencies                                                                                                                 subprocess.py:195
+[20:09:56] Docker| #6 33.77 --> Running transaction check                                                                                                          subprocess.py:195
+           Docker| #6 33.77 ---> Package git.x86_64 0:1.8.3.1-25.el7_9 will be installed                                                                           subprocess.py:195
+           Docker| #6 33.79 --> Processing Dependency: perl-Git = 1.8.3.1-25.el7_9 for package: git-1.8.3.1-25.el7_9.x86_64                                        subprocess.py:195
+           Docker| #6 34.08 --> Processing Dependency: rsync for package: git-1.8.3.1-25.el7_9.x86_64                                                              subprocess.py:195
+           Docker| #6 34.08 --> Processing Dependency: perl(Term::ReadKey) for package: git-1.8.3.1-25.el7_9.x86_64                                                subprocess.py:195
+           Docker| #6 34.08 --> Processing Dependency: perl(Git) for package: git-1.8.3.1-25.el7_9.x86_64                                                          subprocess.py:195
+           Docker| #6 34.08 --> Processing Dependency: perl(Error) for package: git-1.8.3.1-25.el7_9.x86_64                                                        subprocess.py:195
+           Docker| #6 34.08 --> Processing Dependency: openssh-clients for package: git-1.8.3.1-25.el7_9.x86_64                                                    subprocess.py:195
+           Docker| #6 34.09 --> Processing Dependency: less for package: git-1.8.3.1-25.el7_9.x86_64                                                               subprocess.py:195
+           Docker| #6 34.09 --> Running transaction check                                                                                                          subprocess.py:195
+           Docker| #6 34.09 ---> Package less.x86_64 0:458-10.el7_9 will be installed                                                                              subprocess.py:195
+           Docker| #6 34.09 ---> Package openssh-clients.x86_64 0:7.4p1-23.el7_9 will be installed                                                                 subprocess.py:195
+           Docker| #6 34.10 --> Processing Dependency: openssh = 7.4p1-23.el7_9 for package: openssh-clients-7.4p1-23.el7_9.x86_64                                 subprocess.py:195
+           Docker| #6 34.10 --> Processing Dependency: fipscheck-lib(x86-64) >= 1.3.0 for package: openssh-clients-7.4p1-23.el7_9.x86_64                           subprocess.py:195
+           Docker| #6 34.10 --> Processing Dependency: libfipscheck.so.1()(64bit) for package: openssh-clients-7.4p1-23.el7_9.x86_64                               subprocess.py:195
+           Docker| #6 34.10 --> Processing Dependency: libedit.so.0()(64bit) for package: openssh-clients-7.4p1-23.el7_9.x86_64                                    subprocess.py:195
+           Docker| #6 34.10 ---> Package perl-Error.noarch 1:0.17020-2.el7 will be installed                                                                       subprocess.py:195
+           Docker| #6 34.10 ---> Package perl-Git.noarch 0:1.8.3.1-25.el7_9 will be installed                                                                      subprocess.py:195
+           Docker| #6 34.11 ---> Package perl-TermReadKey.x86_64 0:2.30-20.el7 will be installed                                                                   subprocess.py:195
+           Docker| #6 34.11 ---> Package rsync.x86_64 0:3.1.2-12.el7_9 will be installed                                                                           subprocess.py:195
+           Docker| #6 34.11 --> Running transaction check                                                                                                          subprocess.py:195
+           Docker| #6 34.11 ---> Package fipscheck-lib.x86_64 0:1.4.1-6.el7 will be installed                                                                      subprocess.py:195
+           Docker| #6 34.11 --> Processing Dependency: /usr/bin/fipscheck for package: fipscheck-lib-1.4.1-6.el7.x86_64                                            subprocess.py:195
+           Docker| #6 34.11 ---> Package libedit.x86_64 0:3.0-12.20121213cvs.el7 will be installed                                                                 subprocess.py:195
+           Docker| #6 34.11 ---> Package openssh.x86_64 0:7.4p1-23.el7_9 will be installed                                                                         subprocess.py:195
+           Docker| #6 34.12 --> Running transaction check                                                                                                          subprocess.py:195
+           Docker| #6 34.12 ---> Package fipscheck.x86_64 0:1.4.1-6.el7 will be installed                                                                          subprocess.py:195
+[20:09:57] Docker| #6 34.89 --> Finished Dependency Resolution                                                                                                     subprocess.py:195
+           Docker| #6 35.20                                                                                                                                        subprocess.py:195
+           Docker| #6 35.20 Dependencies Resolved                                                                                                                  subprocess.py:195
+           Docker| #6 35.21                                                                                                                                        subprocess.py:195
+           Docker| #6 35.21 ================================================================================                                                       subprocess.py:195
+           Docker| #6 35.21  Package              Arch       Version                      Repository   Size                                                        subprocess.py:195
+           Docker| #6 35.21 ================================================================================                                                       subprocess.py:195
+           Docker| #6 35.21 Installing:                                                                                                                            subprocess.py:195
+           Docker| #6 35.21  git                  x86_64     1.8.3.1-25.el7_9             updates     4.4 M                                                        subprocess.py:195
+           Docker| #6 35.21 Installing for dependencies:                                                                                                           subprocess.py:195
+           Docker| #6 35.21  fipscheck            x86_64     1.4.1-6.el7                  base         21 k                                                        subprocess.py:195
+           Docker| #6 35.21  fipscheck-lib        x86_64     1.4.1-6.el7                  base         11 k                                                        subprocess.py:195
+           Docker| #6 35.21  less                 x86_64     458-10.el7_9                 updates     120 k                                                        subprocess.py:195
+           Docker| #6 35.21  libedit              x86_64     3.0-12.20121213cvs.el7       base         92 k                                                        subprocess.py:195
+           Docker| #6 35.21  openssh              x86_64     7.4p1-23.el7_9               updates     510 k                                                        subprocess.py:195
+           Docker| #6 35.21  openssh-clients      x86_64     7.4p1-23.el7_9               updates     655 k                                                        subprocess.py:195
+           Docker| #6 35.21  perl-Error           noarch     1:0.17020-2.el7              base         32 k                                                        subprocess.py:195
+           Docker| #6 35.21  perl-Git             noarch     1.8.3.1-25.el7_9             updates      56 k                                                        subprocess.py:195
+           Docker| #6 35.21  perl-TermReadKey     x86_64     2.30-20.el7                  base         31 k                                                        subprocess.py:195
+           Docker| #6 35.21  rsync                x86_64     3.1.2-12.el7_9               updates     408 k                                                        subprocess.py:195
+           Docker| #6 35.21                                                                                                                                        subprocess.py:195
+           Docker| #6 35.21 Transaction Summary                                                                                                                    subprocess.py:195
+           Docker| #6 35.21 ================================================================================                                                       subprocess.py:195
+           Docker| #6 35.21 Install  1 Package (+10 Dependent packages)                                                                                            subprocess.py:195
+           Docker| #6 35.21                                                                                                                                        subprocess.py:195
+           Docker| #6 35.21 Total download size: 6.3 M                                                                                                             subprocess.py:195
+           Docker| #6 35.21 Installed size: 28 M                                                                                                                   subprocess.py:195
+           Docker| #6 35.21 Downloading packages:                                                                                                                  subprocess.py:195
+[20:10:04] Docker| #6 42.13 --------------------------------------------------------------------------------                                                       subprocess.py:195
+           Docker| #6 42.13 Total                                              932 kB/s | 6.3 MB  00:06                                                            subprocess.py:195
+           Docker| #6 42.15 Running transaction check                                                                                                              subprocess.py:195
+           Docker| #6 42.18 Running transaction test                                                                                                               subprocess.py:195
+           Docker| #6 42.21 Transaction test succeeded                                                                                                             subprocess.py:195
+           Docker| #6 42.21 Running transaction                                                                                                                    subprocess.py:195
+[20:10:12] Docker| #6 50.26   Installing : fipscheck-1.4.1-6.el7.x86_64                                1/11                                                        subprocess.py:195
+           Docker| #6 50.30   Installing : fipscheck-lib-1.4.1-6.el7.x86_64                            2/11                                                        subprocess.py:195
+           Docker| #6 50.49   Installing : 1:perl-Error-0.17020-2.el7.noarch                           3/11                                                        subprocess.py:195
+[20:10:13] Docker| #6 50.74   Installing : openssh-7.4p1-23.el7_9.x86_64                               4/11                                                        subprocess.py:195
+           Docker| #6 50.76   Installing : libedit-3.0-12.20121213cvs.el7.x86_64                       5/11                                                        subprocess.py:195
+           Docker| #6 51.00   Installing : openssh-clients-7.4p1-23.el7_9.x86_64                       6/11                                                        subprocess.py:195
+           Docker| #6 51.06   Installing : rsync-3.1.2-12.el7_9.x86_64                                 7/11                                                        subprocess.py:195
+           Docker| #6 51.24   Installing : less-458-10.el7_9.x86_64                                    8/11                                                        subprocess.py:195
+           Docker| #6 51.27   Installing : perl-TermReadKey-2.30-20.el7.x86_64                         9/11                                                        subprocess.py:195
+           Docker| #6 51.29   Installing : perl-Git-1.8.3.1-25.el7_9.noarch                           10/11                                                        subprocess.py:195
+[20:10:16] Docker| #6 51.83   Installing : git-1.8.3.1-25.el7_9.x86_64                                11/11                                                        subprocess.py:195
+[20:10:17] Docker| #6 53.91   Verifying  : fipscheck-lib-1.4.1-6.el7.x86_64                            1/11                                                        subprocess.py:195
+[20:10:18] Docker| #6 55.43   Verifying  : openssh-7.4p1-23.el7_9.x86_64                               2/11                                                        subprocess.py:195
+[20:10:19] Docker| #6 56.29   Verifying  : perl-TermReadKey-2.30-20.el7.x86_64                         3/11                                                        subprocess.py:195
+[20:10:20] Docker| #6 57.14   Verifying  : less-458-10.el7_9.x86_64                                    4/11                                                        subprocess.py:195
+           Docker| #6 57.98   Verifying  : 1:perl-Error-0.17020-2.el7.noarch                           5/11                                                        subprocess.py:195
+[20:10:21] Docker| #6 58.67   Verifying  : rsync-3.1.2-12.el7_9.x86_64                                 6/11                                                        subprocess.py:195
+[20:10:22] Docker| #6 59.50   Verifying  : libedit-3.0-12.20121213cvs.el7.x86_64                       7/11                                                        subprocess.py:195
+[20:10:23] Docker| #6 60.36   Verifying  : perl-Git-1.8.3.1-25.el7_9.noarch                            8/11                                                        subprocess.py:195
+[20:10:24] Docker| #6 61.03   Verifying  : git-1.8.3.1-25.el7_9.x86_64                                 9/11                                                        subprocess.py:195
+           Docker| #6 61.93   Verifying  : openssh-clients-7.4p1-23.el7_9.x86_64                      10/11                                                        subprocess.py:195
+[20:10:26] Docker| #6 62.58   Verifying  : fipscheck-1.4.1-6.el7.x86_64                               11/11                                                        subprocess.py:195
+           Docker| #6 64.63                                                                                                                                        subprocess.py:195
+           Docker| #6 64.63 Installed:                                                                                                                             subprocess.py:195
+           Docker| #6 64.63   git.x86_64 0:1.8.3.1-25.el7_9                                                                                                        subprocess.py:195
+           Docker| #6 64.63                                                                                                                                        subprocess.py:195
+           Docker| #6 64.63 Dependency Installed:                                                                                                                  subprocess.py:195
+           Docker| #6 64.63   fipscheck.x86_64 0:1.4.1-6.el7        fipscheck-lib.x86_64 0:1.4.1-6.el7                                                             subprocess.py:195
+           Docker| #6 64.63   less.x86_64 0:458-10.el7_9            libedit.x86_64 0:3.0-12.20121213cvs.el7                                                        subprocess.py:195
+           Docker| #6 64.63   openssh.x86_64 0:7.4p1-23.el7_9       openssh-clients.x86_64 0:7.4p1-23.el7_9                                                        subprocess.py:195
+           Docker| #6 64.63   perl-Error.noarch 1:0.17020-2.el7     perl-Git.noarch 0:1.8.3.1-25.el7_9                                                             subprocess.py:195
+           Docker| #6 64.63   perl-TermReadKey.x86_64 0:2.30-20.el7 rsync.x86_64 0:3.1.2-12.el7_9                                                                  subprocess.py:195
+           Docker| #6 64.63                                                                                                                                        subprocess.py:195
+           Docker| #6 64.63 Complete!                                                                                                                              subprocess.py:195
+[20:10:31] Docker| #6 DONE 69.2s                                                                                                                                   subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #7 [4/5] RUN groupadd --non-unique --gid 1000 briefcase &&     useradd --non-unique --uid 1000 --gid 1000 brutus --home /home/brutus &&         subprocess.py:195
+           mkdir -p /home/brutus && chown brutus:briefcase /home/brutus                                                                                                             
+[20:10:41] Docker| #7 DONE 10.3s                                                                                                                                   subprocess.py:195
+           Docker|                                                                                                                                                 subprocess.py:195
+           Docker| #8 [5/5] RUN yum install -y gcc make pkgconfig libgirepository1.0-dev libcairo2-dev libpango1.0-dev libwebkit2gtk-4.1-dev libgirepository-1.0-1 subprocess.py:195
+           libcairo-gobject2 libpango-1.0-0 libwebkit2gtk-4.1-0 libxcb-xinerama0                                                                                                    
+[20:10:47] Docker| #8 5.505 Loaded plugins: ovl                                                                                                                    subprocess.py:195
+[20:10:54] Docker| #8 12.58 Package 1:make-3.82-24.el7.x86_64 already installed and latest version                                                                 subprocess.py:195
+           Docker| #8 12.59 Package 1:pkgconfig-0.27.1-4.el7.x86_64 already installed and latest version                                                           subprocess.py:195
+           Docker| #8 12.72 No package libgirepository1.0-dev available.                                                                                           subprocess.py:195
+           Docker| #8 12.90 Error: Not tolerating missing names on install, stopping.                                                                              subprocess.py:195
+           Docker| #8 ERROR: process "/bin/sh -c yum install -y gcc make pkgconfig ${SYSTEM_REQUIRES}" did not complete successfully: exit code: 1                 subprocess.py:195
+           Docker| ------                                                                                                                                          subprocess.py:195
+           Docker|  > [5/5] RUN yum install -y gcc make pkgconfig libgirepository1.0-dev libcairo2-dev libpango1.0-dev libwebkit2gtk-4.1-dev libgirepository-1.0-1 subprocess.py:195
+           libcairo-gobject2 libpango-1.0-0 libwebkit2gtk-4.1-0 libxcb-xinerama0:                                                                                                   
+           Docker| 5.505 Loaded plugins: ovl                                                                                                                       subprocess.py:195
+           Docker| 12.58 Package 1:make-3.82-24.el7.x86_64 already installed and latest version                                                                    subprocess.py:195
+           Docker| 12.59 Package 1:pkgconfig-0.27.1-4.el7.x86_64 already installed and latest version                                                              subprocess.py:195
+           Docker| 12.72 No package libgirepository1.0-dev available.                                                                                              subprocess.py:195
+           Docker| 12.90 Error: Not tolerating missing names on install, stopping.                                                                                 subprocess.py:195
+           Docker| ------                                                                                                                                          subprocess.py:195
+           Docker| Dockerfile:24                                                                                                                                   subprocess.py:195
+           Docker| --------------------                                                                                                                            subprocess.py:195
+           Docker|   22 |     # As root, Install system packages required by app                                                                                   subprocess.py:195
+           Docker|   23 |     ARG SYSTEM_REQUIRES                                                                                                                  subprocess.py:195
+           Docker|   24 | >>> RUN yum install -y gcc make pkgconfig ${SYSTEM_REQUIRES}                                                                             subprocess.py:195
+           Docker|   25 |                                                                                                                                          subprocess.py:195
+           Docker|   26 |     # Use the brutus user for operations in the container                                                                                subprocess.py:195
+[20:10:55] Docker| --------------------                                                                                                                            subprocess.py:195
+           Docker| ERROR: failed to solve: process "/bin/sh -c yum install -y gcc make pkgconfig ${SYSTEM_REQUIRES}" did not complete successfully: exit code: 1   subprocess.py:195
+           Docker| >>> Return code: 1                                                                                                                              subprocess.py:838
+           Docker|                                                                                                                                                 subprocess.py:838
+           Docker| ------------------------------------------------------------------                                                                                 console.py:270
+           Leaving Docker context.                                                                                                                                    console.py:272
+                                                                                                                                                                      console.py:273
+           Building Docker image... errored                                                                                                                            docker.py:906
+                                                                                                                                                                      __main__.py:42
+           Error building Docker container image for gopiai.                                                                                                          __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:914 in prepare                                                                       │
+│                                                                                                                                                                                  │
+│    911 │   │   │                                                                                                                                                                 │
+│    912 │   │   │   with self.tools.console.context("Docker"):                                                                                                                    │
+│    913 │   │   │   │   try:                                                                                                                                                      │
+│ ❱  914 │   │   │   │   │   self.tools.subprocess.run(                                                                                                                            │
+│    915 │   │   │   │   │   │   [                                                                                                                                                 │
+│    916 │   │   │   │   │   │   │   "docker",                                                                                                                                     │
+│    917 │   │   │   │   │   │   │   "buildx",                                                                                                                                     │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ────────────────────────────────────────────╮                                                                               │
+│ │    app_base_path = PosixPath('/home/amritagopi/GopiAI')                                        │                                                                               │
+│ │  dockerfile_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile') │                                                                               │
+│ │ extra_build_args = None                                                                        │                                                                               │
+│ │ host_bundle_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage')            │                                                                               │
+│ │   host_data_path = PosixPath('/home/amritagopi/.cache/briefcase')                              │                                                                               │
+│ │        image_tag = 'briefcase/com.gopiai.gopiai:manylinux2014-appimage'                        │                                                                               │
+│ │   python_version = '3.12'                                                                      │                                                                               │
+│ │             self = <briefcase.integrations.docker.DockerAppContext object at 0x715ba79515e0>   │                                                                               │
+│ │  system_requires = [                                                                           │                                                                               │
+│ │                    │   'libgirepository1.0-dev',                                               │                                                                               │
+│ │                    │   'libcairo2-dev',                                                        │                                                                               │
+│ │                    │   'libpango1.0-dev',                                                      │                                                                               │
+│ │                    │   'libwebkit2gtk-4.1-dev',                                                │                                                                               │
+│ │                    │   'libgirepository-1.0-1',                                                │                                                                               │
+│ │                    │   'libcairo-gobject2',                                                    │                                                                               │
+│ │                    │   'libpango-1.0-0',                                                       │                                                                               │
+│ │                    │   'libwebkit2gtk-4.1-0',                                                  │                                                                               │
+│ │                    │   'libxcb-xinerama0'                                                      │                                                                               │
+│ │                    ]                                                                           │                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                               │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:144 in inner                                                                     │
+│                                                                                                                                                                                  │
+│   141 │   │   │   with sub.tools.console.release_console_control():                                                                                                              │
+│   142 │   │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                              │
+│   143 │   │   else:                                                                                                                                                              │
+│ ❱ 144 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   145 │                                                                                                                                                                          │
+│   146 │   return inner                                                                                                                                                           │
+│   147                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                   │
+│ │                    args = [                                                                                │                                                                   │
+│ │                           │   'docker',                                                                    │                                                                   │
+│ │                           │   'buildx',                                                                    │                                                                   │
+│ │                           │   'build',                                                                     │                                                                   │
+│ │                           │   '--load',                                                                    │                                                                   │
+│ │                           │   '--progress',                                                                │                                                                   │
+│ │                           │   'plain',                                                                     │                                                                   │
+│ │                           │   '--tag',                                                                     │                                                                   │
+│ │                           │   'briefcase/com.gopiai.gopiai:manylinux2014-appimage',                        │                                                                   │
+│ │                           │   '--file',                                                                    │                                                                   │
+│ │                           │   PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile'), │                                                                   │
+│ │                           │   ... +7                                                                       │                                                                   │
+│ │                           ]                                                                                │                                                                   │
+│ │ remove_dynamic_elements = False                                                                            │                                                                   │
+│ │                     sub = <briefcase.integrations.subprocess.Subprocess object at 0x715bad390f20>          │                                                                   │
+│ │            wrapped_args = ()                                                                               │                                                                   │
+│ │          wrapped_kwargs = {'check': True}                                                                  │                                                                   │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                   │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:539 in run                                                                       │
+│                                                                                                                                                                                  │
+│   536 │   │   # caller sets stream_output=False, then ensure_console_is_safe() will                                                                                              │
+│   537 │   │   # disable any dynamic console elements while the command runs.                                                                                                     │
+│   538 │   │   if stream_output:                                                                                                                                                  │
+│ ❱ 539 │   │   │   return self._run_and_stream_output(args, filter_func=filter_func, **kwargs)                                                                                    │
+│   540 │   │                                                                                                                                                                      │
+│   541 │   │   # Can't filter non-streamed output.                                                                                                                                │
+│   542 │   │   if filter_func:                                                                                                                                                    │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                             │
+│ │          args = [                                                                                │                                                                             │
+│ │                 │   'docker',                                                                    │                                                                             │
+│ │                 │   'buildx',                                                                    │                                                                             │
+│ │                 │   'build',                                                                     │                                                                             │
+│ │                 │   '--load',                                                                    │                                                                             │
+│ │                 │   '--progress',                                                                │                                                                             │
+│ │                 │   'plain',                                                                     │                                                                             │
+│ │                 │   '--tag',                                                                     │                                                                             │
+│ │                 │   'briefcase/com.gopiai.gopiai:manylinux2014-appimage',                        │                                                                             │
+│ │                 │   '--file',                                                                    │                                                                             │
+│ │                 │   PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile'), │                                                                             │
+│ │                 │   ... +7                                                                       │                                                                             │
+│ │                 ]                                                                                │                                                                             │
+│ │   filter_func = None                                                                             │                                                                             │
+│ │        kwargs = {'check': True}                                                                  │                                                                             │
+│ │          self = <briefcase.integrations.subprocess.Subprocess object at 0x715bad390f20>          │                                                                             │
+│ │ stream_output = True                                                                             │                                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                             │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:615 in _run_and_stream_output                                                    │
+│                                                                                                                                                                                  │
+│   612 │   │   self._log_return_code(return_code)                                                                                                                                 │
+│   613 │   │                                                                                                                                                                      │
+│   614 │   │   if check and return_code:                                                                                                                                          │
+│ ❱ 615 │   │   │   raise subprocess.CalledProcessError(return_code, args, stderr=stderr)                                                                                          │
+│   616 │   │                                                                                                                                                                      │
+│   617 │   │   return subprocess.CompletedProcess(args, return_code, stderr=stderr)                                                                                               │
+│   618                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ────────────────────────────────────────────╮                                                                               │
+│ │        args = [                                                                                │                                                                               │
+│ │               │   'docker',                                                                    │                                                                               │
+│ │               │   'buildx',                                                                    │                                                                               │
+│ │               │   'build',                                                                     │                                                                               │
+│ │               │   '--load',                                                                    │                                                                               │
+│ │               │   '--progress',                                                                │                                                                               │
+│ │               │   'plain',                                                                     │                                                                               │
+│ │               │   '--tag',                                                                     │                                                                               │
+│ │               │   'briefcase/com.gopiai.gopiai:manylinux2014-appimage',                        │                                                                               │
+│ │               │   '--file',                                                                    │                                                                               │
+│ │               │   PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile'), │                                                                               │
+│ │               │   ... +7                                                                       │                                                                               │
+│ │               ]                                                                                │                                                                               │
+│ │       check = True                                                                             │                                                                               │
+│ │ filter_func = None                                                                             │                                                                               │
+│ │      kwargs = {'stdout': -1, 'stderr': -2, 'bufsize': 1}                                       │                                                                               │
+│ │     process = <Popen: returncode: 1 args: ['docker', 'buildx', 'build', '--load', '--progr...> │                                                                               │
+│ │ return_code = 1                                                                                │                                                                               │
+│ │        self = <briefcase.integrations.subprocess.Subprocess object at 0x715bad390f20>          │                                                                               │
+│ │      stderr = None                                                                             │                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['docker', 'buildx', 'build', '--load', '--progress', 'plain', '--tag', 'briefcase/com.gopiai.gopiai:manylinux2014-appimage', '--file', PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile'), '--build-arg', 'SYSTEM_REQUIRES=libgirepository1.0-dev libcairo2-dev libpango1.0-dev libwebkit2gtk-4.1-dev libgirepository-1.0-1 libcairo-gobject2 libpango-1.0-0 libwebkit2gtk-4.1-0 libxcb-xinerama0', '--build-arg', 'HOST_UID=1000', '--build-arg', 'HOST_GID=1000', PosixPath('/home/amritagopi/GopiAI/src')]' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/__main__.py:27 in main                                                                                      │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │       command = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x715bace7dc40> │                                                                    │
+│ │       console = <briefcase.console.Console object at 0x715bae31df70>                                      │                                                                    │
+│ │             e = BriefcaseCommandError('Error building Docker container image for gopiai.')                │                                                                    │
+│ │ extra_cmdline = []                                                                                        │                                                                    │
+│ │       options = {'update': False, 'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}  │                                                                    │
+│ │     overrides = {}                                                                                        │                                                                    │
+│ │        result = 200                                                                                       │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/package.py:204 in __call__                                                                         │
+│                                                                                                                                                                                  │
+│   201 │   │                                                                                                                                                                      │
+│   202 │   │   state = None                                                                                                                                                       │
+│   203 │   │   for _, app_obj in sorted(apps_to_package.items()):                                                                                                                 │
+│ ❱ 204 │   │   │   state = self._package_app(                                                                                                                                     │
+│   205 │   │   │   │   app_obj,                                                                                                                                                   │
+│   206 │   │   │   │   update=update,                                                                                                                                             │
+│   207 │   │   │   │   **full_options(state, options),                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                  │
+│ │               _ = 'gopiai'                                                                                  │                                                                  │
+│ │             app = None                                                                                      │                                                                  │
+│ │        app_name = None                                                                                      │                                                                  │
+│ │         app_obj = <com.gopiai.gopiai v1.0.0 AppConfig>                                                      │                                                                  │
+│ │ apps_to_package = {'gopiai': <com.gopiai.gopiai v1.0.0 AppConfig>}                                          │                                                                  │
+│ │         options = {'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                   │                                                                  │
+│ │            self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x715bace7dc40> │                                                                  │
+│ │           state = None                                                                                      │                                                                  │
+│ │          update = False                                                                                     │                                                                  │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                  │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/package.py:103 in _package_app                                                                     │
+│                                                                                                                                                                                  │
+│   100 │   │   │   # it will be necessary to confirm deletion of the old folder.                                                                                                  │
+│   101 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   102 │   │   elif not template_file.exists():                                                                                                                                   │
+│ ❱ 103 │   │   │   state = self.create_command(app, **options)                                                                                                                    │
+│   104 │   │   │   state = self.build_command(app, **full_options(state, options))                                                                                                │
+│   105 │   │   elif update:                                                                                                                                                       │
+│   106 │   │   │   # If we're updating for packaging, update everything.                                                                                                          │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────────── locals ─────────────────────────────────────────────────────╮                                                             │
+│ │              app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                          │                                                             │
+│ │      binary_file = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/GopiAI-1.0.0-x86_64.AppImage') │                                                             │
+│ │          options = {'adhoc_sign': False, 'identity': None}                                                       │                                                             │
+│ │ packaging_format = 'appimage'                                                                                    │                                                             │
+│ │             self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x715bace7dc40>     │                                                             │
+│ │    template_file = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage')                              │                                                             │
+│ │           update = False                                                                                         │                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                             │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:1026 in __call__                                                                         │
+│                                                                                                                                                                                  │
+│   1023 │   │                                                                                                                                                                     │
+│   1024 │   │   state = None                                                                                                                                                      │
+│   1025 │   │   for _, app_obj in sorted(apps_to_create.items()):                                                                                                                 │
+│ ❱ 1026 │   │   │   state = self.create_app(                                                                                                                                      │
+│   1027 │   │   │   │   app_obj,                                                                                                                                                  │
+│   1028 │   │   │   │   **full_options(state, options),                                                                                                                           │
+│   1029 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────────── locals ──────────────────────────────────────────────────╮                                                                    │
+│ │              _ = 'gopiai'                                                                                 │                                                                    │
+│ │            app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                     │                                                                    │
+│ │       app_name = None                                                                                     │                                                                    │
+│ │        app_obj = <com.gopiai.gopiai v1.0.0 AppConfig>                                                     │                                                                    │
+│ │ apps_to_create = {'gopiai': <com.gopiai.gopiai v1.0.0 AppConfig>}                                         │                                                                    │
+│ │        options = {'adhoc_sign': False, 'identity': None}                                                  │                                                                    │
+│ │           self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x715bacb7b620> │                                                                    │
+│ │          state = None                                                                                     │                                                                    │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                    │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/create.py:968 in create_app                                                                        │
+│                                                                                                                                                                                  │
+│    965 │   │   │                                                                                                                                                                 │
+│    966 │   │   │   # Verify the app after the app template and support package                                                                                                   │
+│    967 │   │   │   # are in place since the app tools may be dependent on them.                                                                                                  │
+│ ❱  968 │   │   │   self.verify_app(app)                                                                                                                                          │
+│    969 │   │   │                                                                                                                                                                 │
+│    970 │   │   │   self.console.info("Installing application code...", prefix=app.app_name)                                                                                      │
+│    971 │   │   │   self.install_app_code(app=app)                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                       │
+│ │         app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                     │                                                                       │
+│ │ bundle_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage')                         │                                                                       │
+│ │     options = {'adhoc_sign': False, 'identity': None}                                                  │                                                                       │
+│ │        self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x715bacb7b620> │                                                                       │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                       │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/base.py:741 in verify_app                                                                          │
+│                                                                                                                                                                                  │
+│    738 │   │   :param app: app configuration                                                                                                                                     │
+│    739 │   │   """                                                                                                                                                               │
+│    740 │   │   self.verify_app_template(app)                                                                                                                                     │
+│ ❱  741 │   │   self.verify_app_tools(app)                                                                                                                                        │
+│    742 │   │   self.verify_required_python(app)                                                                                                                                  │
+│    743 │                                                                                                                                                                         │
+│    744 │   def verify_app_tools(self, app: AppConfig):                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                              │
+│ │  app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                     │                                                                              │
+│ │ self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x715bacb7b620> │                                                                              │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                              │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/platforms/linux/appimage.py:155 in verify_app_tools                                                         │
+│                                                                                                                                                                                  │
+│   152 │   │   :param app: The application being built                                                                                                                            │
+│   153 │   │   """                                                                                                                                                                │
+│   154 │   │   if self.use_docker:                                                                                                                                                │
+│ ❱ 155 │   │   │   DockerAppContext.verify(                                                                                                                                       │
+│   156 │   │   │   │   tools=self.tools,                                                                                                                                          │
+│   157 │   │   │   │   app=app,                                                                                                                                                   │
+│   158 │   │   │   │   image_tag=self.docker_image_tag(app),                                                                                                                      │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                              │
+│ │  app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                     │                                                                              │
+│ │ self = <briefcase.platforms.linux.appimage.LinuxAppImageCreateCommand object at 0x715bacb7b620> │                                                                              │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                              │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/base.py:78 in verify                                                                           │
+│                                                                                                                                                                                  │
+│    75 │   ) -> ToolT:                                                                                                                                                            │
+│    76 │   │   """Confirm the tool is available and usable on the host platform."""                                                                                               │
+│    77 │   │   cls.verify_host(tools=tools)                                                                                                                                       │
+│ ❱  78 │   │   tool = cls.verify_install(tools=tools, app=app, **kwargs)                                                                                                          │
+│    79 │   │   return tool                                                                                                                                                        │
+│    80 │                                                                                                                                                                          │
+│    81 │   @classmethod                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────── locals ───────────────────────────────────────────────────╮                                                                 │
+│ │    app = <com.gopiai.gopiai v1.0.0 AppConfig>                                                                │                                                                 │
+│ │ kwargs = {                                                                                                   │                                                                 │
+│ │          │   'image_tag': 'briefcase/com.gopiai.gopiai:manylinux2014-appimage',                              │                                                                 │
+│ │          │   'dockerfile_path': PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile'), │                                                                 │
+│ │          │   'app_base_path': PosixPath('/home/amritagopi/GopiAI'),                                          │                                                                 │
+│ │          │   'host_bundle_path': PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage'),           │                                                                 │
+│ │          │   'host_data_path': PosixPath('/home/amritagopi/.cache/briefcase'),                               │                                                                 │
+│ │          │   'python_version': '3.12',                                                                       │                                                                 │
+│ │          │   'extra_build_args': None                                                                        │                                                                 │
+│ │          }                                                                                                   │                                                                 │
+│ │  tools = <briefcase.integrations.base.ToolCache object at 0x715bad27f080>                                    │                                                                 │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                 │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:874 in verify_install                                                                │
+│                                                                                                                                                                                  │
+│    871 │   │   Docker.verify(tools=tools)                                                                                                                                        │
+│    872 │   │                                                                                                                                                                     │
+│    873 │   │   tools[app].app_context = DockerAppContext(tools=tools, app=app)                                                                                                   │
+│ ❱  874 │   │   tools[app].app_context.prepare(                                                                                                                                   │
+│    875 │   │   │   image_tag=image_tag,                                                                                                                                          │
+│    876 │   │   │   dockerfile_path=dockerfile_path,                                                                                                                              │
+│    877 │   │   │   app_base_path=app_base_path,                                                                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ────────────────────────────────────────────╮                                                                               │
+│ │              app = <com.gopiai.gopiai v1.0.0 AppConfig>                                        │                                                                               │
+│ │    app_base_path = PosixPath('/home/amritagopi/GopiAI')                                        │                                                                               │
+│ │  dockerfile_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile') │                                                                               │
+│ │ extra_build_args = None                                                                        │                                                                               │
+│ │ host_bundle_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage')            │                                                                               │
+│ │   host_data_path = PosixPath('/home/amritagopi/.cache/briefcase')                              │                                                                               │
+│ │        image_tag = 'briefcase/com.gopiai.gopiai:manylinux2014-appimage'                        │                                                                               │
+│ │           kwargs = {}                                                                          │                                                                               │
+│ │   python_version = '3.12'                                                                      │                                                                               │
+│ │            tools = <briefcase.integrations.base.ToolCache object at 0x715bad27f080>            │                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                               │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:941 in prepare                                                                       │
+│                                                                                                                                                                                  │
+│    938 │   │   │   │   │   │   check=True,                                                                                                                                       │
+│    939 │   │   │   │   │   )                                                                                                                                                     │
+│    940 │   │   │   │   except subprocess.CalledProcessError as e:                                                                                                                │
+│ ❱  941 │   │   │   │   │   raise BriefcaseCommandError(                                                                                                                          │
+│    942 │   │   │   │   │   │   f"Error building Docker container image for {self.app.app_name}.                                                                                  │
+│    943 │   │   │   │   │   ) from e                                                                                                                                              │
+│    944                                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────── locals ────────────────────────────────────────────╮                                                                               │
+│ │    app_base_path = PosixPath('/home/amritagopi/GopiAI')                                        │                                                                               │
+│ │  dockerfile_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage/Dockerfile') │                                                                               │
+│ │ extra_build_args = None                                                                        │                                                                               │
+│ │ host_bundle_path = PosixPath('/home/amritagopi/GopiAI/build/gopiai/linux/appimage')            │                                                                               │
+│ │   host_data_path = PosixPath('/home/amritagopi/.cache/briefcase')                              │                                                                               │
+│ │        image_tag = 'briefcase/com.gopiai.gopiai:manylinux2014-appimage'                        │                                                                               │
+│ │   python_version = '3.12'                                                                      │                                                                               │
+│ │             self = <briefcase.integrations.docker.DockerAppContext object at 0x715ba79515e0>   │                                                                               │
+│ │  system_requires = [                                                                           │                                                                               │
+│ │                    │   'libgirepository1.0-dev',                                               │                                                                               │
+│ │                    │   'libcairo2-dev',                                                        │                                                                               │
+│ │                    │   'libpango1.0-dev',                                                      │                                                                               │
+│ │                    │   'libwebkit2gtk-4.1-dev',                                                │                                                                               │
+│ │                    │   'libgirepository-1.0-1',                                                │                                                                               │
+│ │                    │   'libcairo-gobject2',                                                    │                                                                               │
+│ │                    │   'libpango-1.0-0',                                                       │                                                                               │
+│ │                    │   'libwebkit2gtk-4.1-0',                                                  │                                                                               │
+│ │                    │   'libxcb-xinerama0'                                                      │                                                                               │
+│ │                    ]                                                                           │                                                                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Error building Docker container image for gopiai.

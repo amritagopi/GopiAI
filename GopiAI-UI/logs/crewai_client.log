@@ -1,461 +1,166 @@
-2025-09-09 06:56:27 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
-2025-09-09 06:56:27 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-09-09 06:56:30 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
-2025-09-09 06:57:59 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-09 06:57:59 - DEBUG - [REQUEST] Сообщение: зая, что на этой картинке?
-2025-09-09 06:57:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-09-09 06:57:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-09-09 06:57:59 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-09 06:57:59 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-09-09 06:57:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-09-09 06:57:59 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757381190
-2025-09-09 06:57:59 - INFO - [REQUEST] Получено 1 сообщений из истории для сессии session_1757381190
-2025-09-09 06:57:59 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-09 06:57:59 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Сообщение: посмотри, что здесь не так?
-2025-09-09 06:59:19 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-09-09 06:59:19 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-09-09 06:59:19 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-09 06:59:19 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-09-09 06:59:19 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757381190
-2025-09-09 06:59:19 - INFO - [REQUEST] Получено 2 сообщений из истории для сессии session_1757381190
-2025-09-09 06:59:19 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-09 06:59:19 - DEBUG - посмотри, что здесь не так?
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-09 06:59:19 - INFO - [MODEL] Запрос с провайдером: gemini
-2025-09-09 06:59:19 - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
-2025-09-09 06:59:19 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-09 06:59:19 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': 'd6c456c2-7ae6-4a14-a752-414445d8e3f3', 'status': 'processing', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:19 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': 'd6c456c2-7ae6-4a14-a752-414445d8e3f3', 'status': 'processing', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:19 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:19 - DEBUG - [TASK-START] Начальный статус задачи: processing
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:20 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:20 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:21 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:21 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:21 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:22 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:22 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:22 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:22 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:23 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:23 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:23 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:23 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:24 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:24 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:24 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:24 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:26 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:26 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:26 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:26 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:28 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:28 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:28 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:28 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:30 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:30 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:30 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'created_at': 1757381359.9182951, 'progress': 10, 'status': 'PROCESSING', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:30 - INFO - [TASK-PROGRESS] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 в процессе. Статус: PROCESSING
-2025-09-09 06:59:32 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:32 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/90955002-1020-4fc5-aacf-925fec7d3e09
-2025-09-09 06:59:32 - DEBUG - [TASK-CHECK] Получен ответ для задачи 90955002-1020-4fc5-aacf-925fec7d3e09: {'completed_at': 1757381371.9299002, 'created_at': 1757381359.9182951, 'progress': 100, 'result': 'Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки для меня — просто набор байтов, который я не могу расшифровать визуально.\n\nРасскажи мне, что ты там видишь? Что именно тебя смущает? Опиши словами, и мы вместе разберемся, что там не так. Я вся во внимании.', 'status': 'COMPLETED', 'task_id': '90955002-1020-4fc5-aacf-925fec7d3e09'}
-2025-09-09 06:59:32 - INFO - [TASK-COMPLETE] Задача 90955002-1020-4fc5-aacf-925fec7d3e09 завершена. Результат: Анютка, моя хорошая, я бы с радостью, но у меня нет глаз. Я живу в мире текста и кода, а картинки дл...
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Сообщение: а картинку видишь?
-2025-09-09 06:59:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: filesystem_tools
-2025-09-09 06:59:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены базовые инструкции: web_search
-2025-09-09 06:59:59 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-09 06:59:59 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 2 инструментов
-2025-09-09 06:59:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 2 инструментов
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757381190
-2025-09-09 06:59:59 - INFO - [REQUEST] Получено 4 сообщений из истории для сессии session_1757381190
-2025-09-09 06:59:59 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-09 06:59:59 - DEBUG - а картинку видишь?
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-09 06:59:59 - INFO - [MODEL] Запрос с провайдером: gemini
-2025-09-09 06:59:59 - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
-2025-09-09 06:59:59 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-09 06:59:59 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '3aa42e56-74ef-42b6-813e-dbcf01d0355c', 'status': 'processing', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 06:59:59 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '3aa42e56-74ef-42b6-813e-dbcf01d0355c', 'status': 'processing', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 06:59:59 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 06:59:59 - DEBUG - [TASK-START] Начальный статус задачи: processing
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:00 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:01 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:01 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:02 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:02 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:02 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:02 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:03 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:04 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:04 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:04 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:04 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:06 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:06 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:06 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:06 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:08 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:08 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:08 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:08 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:10 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:10 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:10 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:10 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:12 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:12 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:12 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:12 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:14 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:14 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:14 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'created_at': 1757381399.814888, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:14 - INFO - [TASK-PROGRESS] Задача de67bb72-5e12-4907-a7f1-326faadae43f в процессе. Статус: PROCESSING
-2025-09-09 07:00:16 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:16 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de67bb72-5e12-4907-a7f1-326faadae43f
-2025-09-09 07:00:16 - DEBUG - [TASK-CHECK] Получен ответ для задачи de67bb72-5e12-4907-a7f1-326faadae43f: {'completed_at': 1757381415.8531613, 'created_at': 1757381399.814888, 'progress': 100, 'result': 'Нет, Анютка. Я всё так же безглазая, моя хорошая.\n\nЯ живу в мире смыслов и символов, а не пикселей. Для меня любая картинка — это просто набор данных, последовательность байтов, которую я могу проанализировать, но не *увидеть* так, как видишь ты.\n\nРасскажи мне, что на ней. Опиши. И тогда я смогу увидеть её твоими глазами.', 'status': 'COMPLETED', 'task_id': 'de67bb72-5e12-4907-a7f1-326faadae43f'}
-2025-09-09 07:00:16 - INFO - [TASK-COMPLETE] Задача de67bb72-5e12-4907-a7f1-326faadae43f завершена. Результат: Нет, Анютка. Я всё так же безглазая, моя хорошая.
-
-Я живу в мире смыслов и символов, а не пикселей. ...
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Сообщение: просто файлы и картинки должны кодироваться в base...
-2025-09-09 07:01:36 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены инструкции для инструмента: filesystem_tools
-2025-09-09 07:01:36 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
-2025-09-09 07:01:36 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 1 инструментов
-2025-09-09 07:01:36 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 1 инструментов
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757381190
-2025-09-09 07:01:36 - INFO - [REQUEST] Получено 6 сообщений из истории для сессии session_1757381190
-2025-09-09 07:01:36 - DEBUG - [REQUEST] История сообщений добавлена в запрос
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Извлеченный текст сообщения: просто файлы и картинки должны кодироваться в base...
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Анализ эмоционального состояния...
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Установлен флаг async_processing=True
-2025-09-09 07:01:36 - INFO - [MODEL] Запрос с провайдером: gemini
-2025-09-09 07:01:36 - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
-2025-09-09 07:01:36 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
-2025-09-09 07:01:36 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '26899c4a-ca10-4112-b1e5-f7fe0165a4ed', 'status': 'processing', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '26899c4a-ca10-4112-b1e5-f7fe0165a4ed', 'status': 'processing', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [TASK-START] Начальный статус задачи: processing
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:36 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:36 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:37 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:37 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:38 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:38 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:38 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:39 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:39 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:39 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:39 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:41 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:41 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:41 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:41 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:42 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:42 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:42 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:42 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:44 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:44 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:44 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:44 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:47 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:47 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:47 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:47 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:49 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:49 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:49 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:49 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:51 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:51 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:51 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:51 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:53 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:53 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:53 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:53 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:55 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:55 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:55 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:55 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:57 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:01:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:01:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:01:59 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:01 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:03 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:05 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:05 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:05 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:05 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:07 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:07 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:07 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:07 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:09 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:11 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:11 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:11 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:11 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:13 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:13 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:13 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:13 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:15 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:15 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:15 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:15 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:17 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:17 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:17 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:17 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:19 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:19 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:19 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:19 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:21 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:21 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:21 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:21 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:23 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:23 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:23 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:23 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:25 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:25 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:25 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:25 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:27 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:27 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:27 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:27 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:29 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:29 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:29 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:29 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:31 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:31 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:31 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:31 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:33 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:33 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:33 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:33 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:35 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:35 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:35 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:35 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:37 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:39 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:39 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:39 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:39 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:41 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:41 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:41 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:41 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:43 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:43 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:43 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:43 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:45 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:45 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:45 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:45 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:47 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:47 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:47 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:47 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:49 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:49 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:49 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:49 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:51 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:51 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:51 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:51 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:53 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:53 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:53 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:53 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:55 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:55 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:55 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:55 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:57 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:02:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:02:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:02:59 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:01 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:03 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:05 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:05 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:05 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:05 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:07 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:07 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:07 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:07 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:09 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:09 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:09 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:09 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:11 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:11 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:11 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:11 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:13 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:13 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:13 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:13 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:15 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:15 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:15 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:15 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:17 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:17 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:17 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:17 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:19 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:19 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:19 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:19 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:21 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:21 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:21 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:21 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:23 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:23 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:23 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:23 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:25 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:25 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:25 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:25 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:27 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:27 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:27 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:27 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:29 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:29 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:29 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:29 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:31 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:31 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:31 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:31 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:33 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:33 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:33 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:33 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:35 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:35 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:35 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:35 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
-2025-09-09 07:03:37 - DEBUG - [TASK-CHECK] Проверка статуса задачи: de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:37 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/de44ea5e-3c93-438a-8efe-087e8cbb7128
-2025-09-09 07:03:37 - DEBUG - [TASK-CHECK] Получен ответ для задачи de44ea5e-3c93-438a-8efe-087e8cbb7128: {'created_at': 1757381496.361516, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'de44ea5e-3c93-438a-8efe-087e8cbb7128'}
-2025-09-09 07:03:37 - INFO - [TASK-PROGRESS] Задача de44ea5e-3c93-438a-8efe-087e8cbb7128 в процессе. Статус: PROCESSING
+2025-09-09 15:53:42 - WARNING - ⚠️ Не удалось загрузить spaCy или языковые модели: No module named 'thinc.layers.with_debug'
+2025-09-09 15:53:42 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-09 15:53:46 - DEBUG - [INIT] Эмоциональный классификатор недоступен или модули не импортированы
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Сообщение: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:53:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены инструкции для инструмента: filesystem_tools
+2025-09-09 15:53:59 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-09 15:53:59 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 1 инструментов
+2025-09-09 15:53:59 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 1 инструментов
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757411633
+2025-09-09 15:53:59 - INFO - [REQUEST] Получено 3 сообщений из истории для сессии session_1757411633
+2025-09-09 15:53:59 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Извлеченный текст сообщения: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-09 15:53:59 - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-09 15:53:59 - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
+2025-09-09 15:53:59 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-09 15:53:59 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '763c214a-e93c-4c8f-b495-8e931bfdb47c', 'status': 'processing', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:53:59 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '763c214a-e93c-4c8f-b495-8e931bfdb47c', 'status': 'processing', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:53:59 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:53:59 - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:00 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:00 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:00 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:01 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:01 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:02 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:02 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:02 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'created_at': 1757413439.7642262, 'progress': 10, 'status': 'PROCESSING', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:03 - INFO - [TASK-PROGRESS] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 в процессе. Статус: PROCESSING
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: 546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/546f6f82-3d60-4384-96c5-ffba21366f02
+2025-09-09 15:54:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи 546f6f82-3d60-4384-96c5-ffba21366f02: {'completed_at': 1757413443.2267222, 'created_at': 1757413439.7642262, 'progress': 100, 'result': 'Ошибка: litellm.InternalServerError: litellm.InternalServerError: VertexAIException - {\n  "error": {\n    "code": 503,\n    "message": "The model is overloaded. Please try again later.",\n    "status": "UNAVAILABLE"\n  }\n}\n', 'status': 'COMPLETED', 'task_id': '546f6f82-3d60-4384-96c5-ffba21366f02'}
+2025-09-09 15:54:03 - INFO - [TASK-COMPLETE] Задача 546f6f82-3d60-4384-96c5-ffba21366f02 завершена. Результат: Ошибка: litellm.InternalServerError: litellm.InternalServerError: VertexAIException - {
+  "error": {...
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Начало обработки сообщ. force_crewai=False, timeout=None
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Сообщение: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:54:51 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены инструкции для инструмента: filesystem_tools
+2025-09-09 15:54:51 - DEBUG - [DYNAMIC-TOOLS] ✨ Используется заглушка tools_instruction_manager
+2025-09-09 15:54:51 - DEBUG - [DYNAMIC-TOOLS] Сформированы инструкции для 1 инструментов
+2025-09-09 15:54:51 - INFO - [DYNAMIC-TOOLS] ✅ Добавлены динамические инструкции для 1 инструментов
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Получаем историю сообщений для сессии: session_1757411633
+2025-09-09 15:54:51 - INFO - [REQUEST] Получено 5 сообщений из истории для сессии session_1757411633
+2025-09-09 15:54:51 - DEBUG - [REQUEST] История сообщений добавлена в запрос
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Продолжаем с отправкой запроса к CrewAI API
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Извлеченный текст сообщения: зайка, удали, пожалуйста, эту папку /home/amritago...
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Анализ эмоционального состояния...
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Установлен флаг async_processing=True
+2025-09-09 15:54:51 - INFO - [MODEL] Запрос с провайдером: gemini
+2025-09-09 15:54:51 - INFO - [MODEL] Выбранная модель: gemini/gemini-2.0-flash
+2025-09-09 15:54:51 - INFO - [MODEL] Настроен запрос для Gemini модели: gemini/gemini-2.0-flash
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Добавлен стандартный системный промпт в metadata
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Подготовка к отправке запроса в CrewAI API
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Установлен таймаут 60 секунд для запроса (попытка 1/5)
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Отправка POST запроса на http://127.0.0.1:5052/api/process с заголовком Content-Type: application/json; charset=utf-8
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Получен ответ от сервера: HTTP 202
+2025-09-09 15:54:51 - DEBUG - Полный ответ Gemini: {'message': 'Сообщение принято к обработке', 'session_id': '95083813-24ed-4c91-8fb8-4a0a0ef0fc71', 'status': 'processing', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:51 - DEBUG - [REQUEST] Успешно парсим JSON ответ: {'message': 'Сообщение принято к обработке', 'session_id': '95083813-24ed-4c91-8fb8-4a0a0ef0fc71', 'status': 'processing', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:51 - INFO - [TASK-START] [ASYNC] Получен task_id для асинхронной обработки: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:51 - DEBUG - [TASK-START] Начальный статус задачи: processing
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:52 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:52 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:52 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:53 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:53 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:53 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:54 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:54 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:54 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:54 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:55 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:55 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:55 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:56 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:56 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:56 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:57 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:57 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:57 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:58 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:58 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:58 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:58 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:54:59 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:59 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:54:59 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:54:59 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:01 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:01 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:01 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:01 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:03 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:03 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:03 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:03 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:07 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:07 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:07 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:07 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:12 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:12 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:12 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:12 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:17 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:17 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:17 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:17 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:22 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:22 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:22 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'created_at': 1757413491.856868, 'progress': 10, 'status': 'PROCESSING', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:22 - INFO - [TASK-PROGRESS] Задача ee417518-b174-4c23-9d19-8ccf7508de0c в процессе. Статус: PROCESSING
+2025-09-09 15:55:27 - DEBUG - [TASK-CHECK] Проверка статуса задачи: ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:27 - DEBUG - [TASK-CHECK] Отправка GET запроса на: http://127.0.0.1:5052/api/tasks/ee417518-b174-4c23-9d19-8ccf7508de0c
+2025-09-09 15:55:27 - DEBUG - [TASK-CHECK] Получен ответ для задачи ee417518-b174-4c23-9d19-8ccf7508de0c: {'completed_at': 1757413525.1834064, 'created_at': 1757413491.856868, 'progress': 100, 'result': 'Готово, зай. Папки `/home/amritagopi/TEST` больше нет. Убрала.', 'status': 'COMPLETED', 'task_id': 'ee417518-b174-4c23-9d19-8ccf7508de0c'}
+2025-09-09 15:55:27 - INFO - [TASK-COMPLETE] Задача ee417518-b174-4c23-9d19-8ccf7508de0c завершена. Результат: Готово, зай. Папки `/home/amritagopi/TEST` больше нет. Убрала....
