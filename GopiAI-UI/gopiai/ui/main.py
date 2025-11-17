@@ -232,6 +232,7 @@ try:
         ChatWidget,
         TerminalWidget,
     )
+    from gopiai.ui.components.command_approval_dialog import CommandApprovalDialog
 
     print("[OK] Все основные модули UI загружены успешно")
     
@@ -376,6 +377,14 @@ class FramelessGopiAIStandaloneWindow(QMainWindow):
             setattr(TerminalWidget, "instance", self.terminal_widget)  # type: ignore[attr-defined]
         except Exception:
             pass  # безопасно игнорируем, если класс не поддерживает атрибут
+
+        # Инициализация диалога подтверждения команд
+        try:
+            self.command_approval_dialog = CommandApprovalDialog(self)
+            print("[OK] Диалог подтверждения команд инициализирован")
+        except Exception as e:
+            print(f"[WARNING] Не удалось инициализировать диалог команд: {e}")
+            self.command_approval_dialog = None
 
         print("[OK] FramelessGopiAIStandaloneWindow готов к работе!")
 

@@ -1,0 +1,725 @@
+Date/Time:       2025-09-09 20:04:30 
+Command line:    .venv/bin/briefcase package linux appimage
+
+OS Release:      Linux 6.8.0-78-generic
+OS Version:      #78-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 11:34:18 UTC 2025
+Architecture:    x86_64
+Platform:        Linux-6.8.0-78-generic-x86_64-with-glibc2.39
+
+Python exe:      /home/amritagopi/GopiAI/.venv/bin/python3
+Python version:  3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0]
+Virtual env:     True
+Conda env:       False
+
+Briefcase:       0.3.25
+Target platform: linux
+Target format:   appimage
+
+Environment Variables:
+	BUNDLED_DEBUGPY_PATH=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/libs/debugpy
+	CHROME_DESKTOP=windsurf.desktop
+	CINNAMON_VERSION=6.4.8
+	CLAUDECODE=1
+	CLAUDE_CODE_ENTRYPOINT=cli
+	CLAUDE_CODE_SSE_PORT=57126
+	COLORTERM=truecolor
+	COREPACK_ENABLE_AUTO_PIN=0
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+	DEFAULTS_PATH=/usr/share/gconf/cinnamon.default.path
+	DESKTOP_SESSION=cinnamon
+	DISPLAY=:0
+	ENABLE_IDE_INTEGRATION=true
+	GDK_BACKEND=x11
+	GDMSESSION=cinnamon
+	GDM_LANG=ru_RU
+	GEMINI_CLI_IDE_SERVER_PORT=34771
+	GEMINI_CLI_IDE_WORKSPACE_PATH=/home/amritagopi/GopiAI
+	GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/windsurf.desktop
+	GIO_LAUNCHED_DESKTOP_FILE_PID=100934
+	GIT_ASKPASS=********************
+	GIT_EDITOR=true
+	GJS_DEBUG_OUTPUT=stderr
+	GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+	GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+	GNOME_KEYRING_CONTROL=********************
+	GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+	GTK3_MODULES=xapp-gtk3-module
+	GTK_MODULES=gail:atk-bridge
+	HOME=/home/amritagopi
+	KEY=********************
+	LANG=ru_RU.UTF-8
+	LANGUAGE=ru_RU
+	LC_ADDRESS=anp_IN
+	LC_IDENTIFICATION=anp_IN
+	LC_MEASUREMENT=anp_IN
+	LC_MONETARY=anp_IN
+	LC_NAME=anp_IN
+	LC_NUMERIC=anp_IN
+	LC_PAPER=anp_IN
+	LC_TELEPHONE=anp_IN
+	LESSCLOSE=/usr/bin/lesspipe %s %s
+	LESSOPEN=| /usr/bin/lesspipe %s
+	LOGNAME=amritagopi
+	LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+	MANDATORY_PATH=/usr/share/gconf/cinnamon.mandatory.path
+	NVM_BIN=/home/amritagopi/.nvm/versions/node/v20.19.4/bin
+	NVM_CD_FLAGS=
+	NVM_DIR=/home/amritagopi/.nvm
+	NVM_INC=/home/amritagopi/.nvm/versions/node/v20.19.4/include/node
+	NoDefaultCurrentDirectoryInExePath=1
+	OPENROUTER_API_KEY=********************
+	ORIGINAL_XDG_CURRENT_DESKTOP=X-Cinnamon
+	OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta
+	PATH=/home/amritagopi/GopiAI/.venv/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.local/bin:/home/amritagopi/.cache/uv/archive-v0/WoGFT2ACVxvl2fX9mWtly/bin:/home/amritagopi/.nvm/versions/node/v20.19.4/bin:/home/amritagopi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/amritagopi/.local/bin:/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/bundled/scripts/noConfigScripts:/home/amritagopi/.local/bin
+	PWD=/home/amritagopi/GopiAI
+	PYDEVD_DISABLE_FILE_VALIDATION=1
+	QT_ACCESSIBILITY=1
+	SESSION_MANAGER=local/amritagopi-MS-7C96:@/tmp/.ICE-unix/1275,unix/amritagopi-MS-7C96:/tmp/.ICE-unix/1275
+	SHELL=/bin/bash
+	SHLVL=2
+	SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+	TERM=xterm-256color
+	TERM_PROGRAM=vscode
+	TERM_PROGRAM_VERSION=1.99.3
+	USER=amritagopi
+	VIRTUAL_ENV=/home/amritagopi/GopiAI/.venv
+	VIRTUAL_ENV_PROMPT=(.venv) 
+	VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-6037e0210cc9a3f1.txt
+	VSCODE_GIT_ASKPASS_EXTRA_ARGS=********************
+	VSCODE_GIT_ASKPASS_MAIN=********************
+	VSCODE_GIT_ASKPASS_NODE=********************
+	VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-49b938ec53.sock
+	XAUTHORITY=/home/amritagopi/.Xauthority
+	XDG_CONFIG_DIRS=/etc/xdg/xdg-cinnamon:/etc/xdg
+	XDG_CURRENT_DESKTOP=X-Cinnamon
+	XDG_DATA_DIRS=/usr/share/cinnamon:/usr/share/gnome:/home/amritagopi/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+	XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/amritagopi
+	XDG_RUNTIME_DIR=/run/user/1000
+	XDG_SEAT=seat0
+	XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+	XDG_SESSION_CLASS=user
+	XDG_SESSION_DESKTOP=cinnamon
+	XDG_SESSION_ID=c1
+	XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+	XDG_SESSION_TYPE=x11
+	XDG_VTNR=7
+	_=.venv/bin/briefcase
+
+pyproject.toml:
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "GopiAI"
+version = "1.0.0"
+description = "Advanced AI Platform with CrewAI Agent Orchestration and Qt-based UI"
+readme = "README.md"
+authors = [
+    {name = "GopiAI Team", email = "noreply@gopiai.dev"},
+]
+license = {file = "LICENSE"}
+keywords = [
+    "ai", "crewai", "agents", "llm", "gemini", "artificial-intelligence", 
+    "automation", "chat", "assistant", "ui", "qt", "python"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Desktop Environment",
+    "Topic :: Software Development :: User Interfaces",
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    # Core dependencies
+    "pyside6>=6.5.0",
+    "requests>=2.28.0",
+    "aiohttp>=3.8.0",
+    
+    # CrewAI dependencies
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",
+    "tavily-python",
+    "google-generativeai",
+    "langchain",
+    "langchain-community",
+    "langchain-google-genai",
+    
+    # UI dependencies
+    "qasync>=0.24.0",
+    "qdarkstyle>=3.1.0",
+    
+    # API Server dependencies
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Utility dependencies
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/amritagopi/GopiAI"
+Documentation = "https://github.com/amritagopi/GopiAI/wiki"
+Repository = "https://github.com/amritagopi/GopiAI"
+Issues = "https://github.com/amritagopi/GopiAI/issues"
+
+[tool.briefcase]
+project_name = "GopiAI"
+bundle = "com.gopiai"
+version = "1.0.0"
+url = "https://github.com/amritagopi/GopiAI"
+license = "MIT"
+author = "GopiAI Team"
+author_email = "noreply@gopiai.dev"
+
+description = "GopiAI is an advanced AI platform featuring CrewAI agent orchestration with an intuitive Qt-based user interface. It provides seamless AI model rotation, intelligent task management, and a comprehensive toolkit for AI-powered automation."
+
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO" # Will try .icns, .ico, .png
+splash = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+[tool.briefcase.app.gopiai]
+formal_name = "GopiAI"
+description = "Advanced AI Platform with Agent Orchestration"
+sources = [
+    "src/gopiai_app",
+    "GopiAI-UI/gopiai", 
+    "GopiAI-CrewAI",
+    "GopiAI-Assets/gopiai/assets",
+]
+test_sources = ["tests"]
+
+requires = [
+    # GUI Framework
+    "pyside6>=6.5.0",
+    
+    # Core AI/ML libraries
+    "crewai>=0.165.0",
+    "litellm>=1.0.0",  
+    "google-generativeai",
+    "tavily-python",
+    "langchain",
+    "langchain-community", 
+    "langchain-google-genai",
+    
+    # API Server
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+    "gunicorn>=21.0.0",
+    
+    # Async/Network
+    "aiohttp>=3.8.0", 
+    "requests>=2.28.0",
+    "qasync>=0.24.0",
+    
+    # UI Enhancement
+    "qdarkstyle>=3.1.0",
+    
+    # Utilities
+    "psutil>=5.9.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "packaging>=23.0",
+    "platformdirs>=3.0.0",
+]
+
+test_requires = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0", 
+    "pytest-asyncio>=0.21.0",
+]
+
+# Briefcase configuration for different platforms
+[tool.briefcase.app.gopiai.macOS]
+requires = [
+    "toga-cocoa~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+entitlement = "entitlements.plist"
+
+[tool.briefcase.app.gopiai.linux]
+requires = [
+    "toga-gtk~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+system_requires = [
+    # Ubuntu/Debian packages
+    "libgirepository1.0-dev",
+    "libcairo2-dev", 
+    "libpango1.0-dev",
+    "libwebkit2gtk-4.1-dev",
+    # Required for Qt
+    "libxcb-xinerama0",
+    "libxcb1",
+    "libx11-xcb1",
+]
+system_runtime_requires = [
+    "libgirepository-1.0-1",
+    "libcairo-gobject2",
+    "libpango-1.0-0", 
+    "libwebkit2gtk-4.1-0",
+    "libxcb-xinerama0",
+]
+
+[tool.briefcase.app.gopiai.linux.appimage]
+manylinux = "manylinux2014"
+system_requires = [
+    "libgirepository1.0-dev",
+    "libcairo2-dev",
+    "libpango1.0-dev", 
+    "libwebkit2gtk-4.1-dev",
+]
+
+[tool.briefcase.app.gopiai.windows]
+requires = [
+    "toga-winforms~=0.4.0",
+]
+icon = "GopiAI-Assets/gopiai/assets/GopiAI_LOGO"
+
+# Build configurations
+[tool.briefcase.app.gopiai.windows.msi]
+system_installer = true
+
+[tool.briefcase.app.gopiai.macOS.dmg] 
+installer_background = "GopiAI-Assets/gopiai/assets/wallpapers.png"
+
+# Development tools configuration
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+# PyTest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers", 
+    "--strict-config",
+    "--verbose",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests", 
+    "ui: marks tests as UI tests (require display)",
+]
+
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+
+Briefcase Log:
+[20:04:15]                                                                                                                                                             config.py:666
+           *************************************************************************                                                                                   config.py:666
+           ** WARNING: License Definition for the Project is Deprecated           **                                                                                   config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                       config.py:666
+               Briefcase now uses PEP 621 format for license definitions.                                                                                              config.py:666
+                                                                                                                                                                       config.py:666
+               Previously, the name of the license was assigned to the 'license'                                                                                       config.py:666
+               field in pyproject.toml. For PEP 621, the name of the license is                                                                                        config.py:666
+               assigned to 'license.text' or the name of the file containing the                                                                                       config.py:666
+               license is assigned to 'license.file'.                                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+               The current configuration for the Project has a 'license' field                                                                                         config.py:666
+               that is specified as a string:                                                                                                                          config.py:666
+                                                                                                                                                                       config.py:666
+                   license = "MIT"                                                                                                                                     config.py:666
+                                                                                                                                                                       config.py:666
+               To use the PEP 621 format (and to remove this warning), specify that                                                                                    config.py:666
+               the LICENSE file contains the license for the Project:                                                                                                  config.py:666
+                                                                                                                                                                       config.py:666
+                   license.file = "LICENSE"                                                                                                                            config.py:666
+                                                                                                                                                                       config.py:666
+           *************************************************************************                                                                                   config.py:666
+                                                                                                                                                                  linuxdeploy.py:130
+           [linuxdeploy] linuxdeploy was not found; downloading and installing...                                                                                 linuxdeploy.py:130
+[20:04:18] Downloading linuxdeploy-x86_64.AppImage...                                                                                                                    file.py:227
+[20:04:30] Installing linuxdeploy-x86_64.AppImage... started                                                                                                      linuxdeploy.py:100
+           Patched ELF header for linuxdeploy-x86_64.AppImage.                                                                                                    linuxdeploy.py:183
+           Installing linuxdeploy-x86_64.AppImage... done                                                                                                         linuxdeploy.py:100
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker --version                                                                                                                                subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Docker version 27.5.1, build 27.5.1-0ubuntu3~24.04.2                                                                                            subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker info                                                                                                                                     subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     Client:                                                                                                                                         subprocess.py:838
+           >>>      Version:    27.5.1                                                                                                                             subprocess.py:838
+           >>>      Context:    default                                                                                                                            subprocess.py:838
+           >>>      Debug Mode: false                                                                                                                              subprocess.py:838
+           >>>                                                                                                                                                     subprocess.py:838
+           >>>     Server:                                                                                                                                         subprocess.py:838
+           >>>      Containers: 12                                                                                                                                 subprocess.py:838
+           >>>       Running: 1                                                                                                                                    subprocess.py:838
+           >>>       Paused: 0                                                                                                                                     subprocess.py:838
+           >>>       Stopped: 11                                                                                                                                   subprocess.py:838
+           >>>      Images: 4                                                                                                                                      subprocess.py:838
+           >>>      Server Version: 27.5.1                                                                                                                         subprocess.py:838
+           >>>      Storage Driver: overlay2                                                                                                                       subprocess.py:838
+           >>>       Backing Filesystem: extfs                                                                                                                     subprocess.py:838
+           >>>       Supports d_type: true                                                                                                                         subprocess.py:838
+           >>>       Using metacopy: false                                                                                                                         subprocess.py:838
+           >>>       Native Overlay Diff: true                                                                                                                     subprocess.py:838
+           >>>       userxattr: false                                                                                                                              subprocess.py:838
+           >>>      Logging Driver: json-file                                                                                                                      subprocess.py:838
+           >>>      Cgroup Driver: systemd                                                                                                                         subprocess.py:838
+           >>>      Cgroup Version: 2                                                                                                                              subprocess.py:838
+           >>>      Plugins:                                                                                                                                       subprocess.py:838
+           >>>       Volume: local                                                                                                                                 subprocess.py:838
+           >>>       Network: bridge host ipvlan macvlan null overlay                                                                                              subprocess.py:838
+           >>>       Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog                                                                      subprocess.py:838
+           >>>      Swarm: inactive                                                                                                                                subprocess.py:838
+           >>>      Runtimes: io.containerd.runc.v2 runc                                                                                                           subprocess.py:838
+           >>>      Default Runtime: runc                                                                                                                          subprocess.py:838
+           >>>      Init Binary: docker-init                                                                                                                       subprocess.py:838
+           >>>      containerd version:                                                                                                                            subprocess.py:838
+           >>>      runc version:                                                                                                                                  subprocess.py:838
+           >>>      init version:                                                                                                                                  subprocess.py:838
+           >>>      Security Options:                                                                                                                              subprocess.py:838
+           >>>       apparmor                                                                                                                                      subprocess.py:838
+           >>>       seccomp                                                                                                                                       subprocess.py:838
+           >>>        Profile: builtin                                                                                                                             subprocess.py:838
+           >>>       cgroupns                                                                                                                                      subprocess.py:838
+           >>>      Kernel Version: 6.8.0-78-generic                                                                                                               subprocess.py:838
+           >>>      Operating System: Linux Mint 22.1                                                                                                              subprocess.py:838
+           >>>      OSType: linux                                                                                                                                  subprocess.py:838
+           >>>      Architecture: x86_64                                                                                                                           subprocess.py:838
+           >>>      CPUs: 4                                                                                                                                        subprocess.py:838
+           >>>      Total Memory: 29.29GiB                                                                                                                         subprocess.py:838
+           >>>      Name: amritagopi-MS-7C96                                                                                                                       subprocess.py:838
+           >>>      ID: dc64debc-601a-4515-af49-13f542802f25                                                                                                       subprocess.py:838
+           >>>      Docker Root Dir: /var/lib/docker                                                                                                               subprocess.py:838
+           >>>      Debug Mode: false                                                                                                                              subprocess.py:838
+           >>>      Experimental: false                                                                                                                            subprocess.py:838
+           >>>      Insecure Registries:                                                                                                                           subprocess.py:838
+           >>>       127.0.0.0/8                                                                                                                                   subprocess.py:838
+           >>>      Live Restore Enabled: false                                                                                                                    subprocess.py:838
+           >>>                                                                                                                                                     subprocess.py:838
+           >>> Return code: 0                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+           >>> Running Command:                                                                                                                                    subprocess.py:838
+           >>>     docker buildx version                                                                                                                           subprocess.py:838
+           >>> Working Directory:                                                                                                                                  subprocess.py:838
+           >>>     /home/amritagopi/GopiAI                                                                                                                         subprocess.py:838
+           >>> Environment Overrides:                                                                                                                              subprocess.py:838
+           >>>     DOCKER_CLI_HINTS=false                                                                                                                          subprocess.py:838
+           >>> Command Output:                                                                                                                                     subprocess.py:838
+           >>>     docker: 'buildx' is not a docker command.                                                                                                       subprocess.py:838
+           >>>     See 'docker --help'                                                                                                                             subprocess.py:838
+           >>> Return code: 1                                                                                                                                      subprocess.py:838
+                                                                                                                                                                   subprocess.py:838
+                                                                                                                                                                      __main__.py:42
+           Docker is installed and available for use but the buildx plugin                                                                                            __main__.py:43
+           is not installed. Briefcase leverages the BuildKit Docker backend                                                                                          __main__.py:43
+           to build Docker images and the buildx plugin makes this available.                                                                                         __main__.py:43
+                                                                                                                                                                      __main__.py:43
+           See https://docs.docker.com/go/buildx/ to install the buildx plugin.                                                                                       __main__.py:43
+           Saving log... started                                                                                                                                      console.py:438
+
+Main thread traceback:
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:231 in _buildx_installed                                                             │
+│                                                                                                                                                                                  │
+│    228 │   def _buildx_installed(cls, tools: ToolCache):                                        ╭───────────────────────────────── locals ─────────────────────────────────╮     │
+│    229 │   │   """Verify the buildx plugin is installed."""                                     │ tools = <briefcase.integrations.base.ToolCache object at 0x7ce719339cd0> │     │
+│    230 │   │   try:                                                                             ╰──────────────────────────────────────────────────────────────────────────╯     │
+│ ❱  231 │   │   │   tools.subprocess.check_output(                                                                                                                                │
+│    232 │   │   │   │   ["docker", "buildx", "version"],                                                                                                                          │
+│    233 │   │   │   │   env=cls.subprocess_env(),                                                                                                                                 │
+│    234 │   │   │   )                                                                                                                                                             │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:124 in inner                                                                     │
+│                                                                                                                                                                                  │
+│   121 │   │   """                                                                                                                                                                │
+│   122 │   │   # Just run the command if no dynamic elements are active                                                                                                           │
+│   123 │   │   if not sub.tools.console.is_console_controlled:                                                                                                                    │
+│ ❱ 124 │   │   │   return sub_method(sub, args, *wrapped_args, **wrapped_kwargs)                                                                                                  │
+│   125 │   │                                                                                                                                                                      │
+│   126 │   │   remove_dynamic_elements = False                                                                                                                                    │
+│   127                                                                                                                                                                            │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────── locals ─────────────────────────────────────────╮                                                                                     │
+│ │           args = ['docker', 'buildx', 'version']                                         │                                                                                     │
+│ │            sub = <briefcase.integrations.subprocess.Subprocess object at 0x7ce71920abd0> │                                                                                     │
+│ │   wrapped_args = ()                                                                      │                                                                                     │
+│ │ wrapped_kwargs = {'env': {'DOCKER_CLI_HINTS': 'false'}}                                  │                                                                                     │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────╯                                                                                     │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/subprocess.py:652 in check_output                                                              │
+│                                                                                                                                                                                  │
+│   649 │   │   │   self._log_environment(kwargs.get("env"))                                                                                                                       │
+│   650 │   │                                                                                                                                                                      │
+│   651 │   │   try:                                                                                                                                                               │
+│ ❱ 652 │   │   │   cmd_output = self._subprocess.check_output(                                                                                                                    │
+│   653 │   │   │   │   [str(arg) for arg in args], **self.final_kwargs(**kwargs)                                                                                                  │
+│   654 │   │   │   )                                                                                                                                                              │
+│   655 │   │   except subprocess.CalledProcessError as e:                                                                                                                         │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────── locals ─────────────────────────────────────╮                                                                                             │
+│ │   args = ['docker', 'buildx', 'version']                                         │                                                                                             │
+│ │ kwargs = {'env': {'DOCKER_CLI_HINTS': 'false'}, 'stderr': -2}                    │                                                                                             │
+│ │  quiet = 0                                                                       │                                                                                             │
+│ │   self = <briefcase.integrations.subprocess.Subprocess object at 0x7ce71920abd0> │                                                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────╯                                                                                             │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3.12/subprocess.py:466 in check_output                                                                                                                            │
+│                                                                                                                                                                                  │
+│    463 │   │   │   empty = b''                                                                                                                                                   │
+│    464 │   │   kwargs['input'] = empty                                                                                                                                           │
+│    465 │                                                                                                                                                                         │
+│ ❱  466 │   return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,                                                                                                      │
+│    467 │   │   │      **kwargs).stdout                                                                                                                                           │
+│    468                                                                                                                                                                           │
+│    469                                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭──────────────────────────────────────────────────────────────────── locals ────────────────────────────────────────────────────────────────────╮                               │
+│ │        kw = 'check'                                                                                                                            │                               │
+│ │    kwargs = {                                                                                                                                  │                               │
+│ │             │   'stderr': -2,                                                                                                                  │                               │
+│ │             │   'env': {                                                                                                                       │                               │
+│ │             │   │   'SHELL': '/bin/bash',                                                                                                      │                               │
+│ │             │   │   'COREPACK_ENABLE_AUTO_PIN': '0',                                                                                           │                               │
+│ │             │   │   'SESSION_MANAGER': 'local/amritagopi-MS-7C96:@/tmp/.ICE-unix/1275,unix/amritagopi-MS-7C96:/tmp/.ICE-'+9,                   │                               │
+│ │             │   │   'QT_ACCESSIBILITY': '1',                                                                                                   │                               │
+│ │             │   │   'COLORTERM': 'truecolor',                                                                                                  │                               │
+│ │             │   │   'XDG_CONFIG_DIRS': '/etc/xdg/xdg-cinnamon:/etc/xdg',                                                                       │                               │
+│ │             │   │   'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noC'+56, │                               │
+│ │             │   │   'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',                                                            │                               │
+│ │             │   │   'NVM_INC': '/home/amritagopi/.nvm/versions/node/v20.19.4/include/node',                                                    │                               │
+│ │             │   │   'TERM_PROGRAM_VERSION': '1.99.3',                                                                                          │                               │
+│ │             │   │   ... +79                                                                                                                    │                               │
+│ │             │   },                                                                                                                             │                               │
+│ │             │   'text': True,                                                                                                                  │                               │
+│ │             │   'encoding': 'UTF-8',                                                                                                           │                               │
+│ │             │   'errors': 'backslashreplace'                                                                                                   │                               │
+│ │             }                                                                                                                                  │                               │
+│ │ popenargs = (['docker', 'buildx', 'version'],)                                                                                                 │                               │
+│ │   timeout = None                                                                                                                               │                               │
+│ ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                               │
+│                                                                                                                                                                                  │
+│ /usr/lib/python3.12/subprocess.py:571 in run                                                                                                                                     │
+│                                                                                                                                                                                  │
+│    568 │   │   │   raise                                                                                                                                                         │
+│    569 │   │   retcode = process.poll()                                                                                                                                          │
+│    570 │   │   if check and retcode:                                                                                                                                             │
+│ ❱  571 │   │   │   raise CalledProcessError(retcode, process.args,                                                                                                               │
+│    572 │   │   │   │   │   │   │   │   │    output=stdout, stderr=stderr)                                                                                                        │
+│    573 │   return CompletedProcess(process.args, retcode, stdout, stderr)                                                                                                        │
+│    574                                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────╮                          │
+│ │ capture_output = False                                                                                                                              │                          │
+│ │          check = True                                                                                                                               │                          │
+│ │          input = None                                                                                                                               │                          │
+│ │         kwargs = {                                                                                                                                  │                          │
+│ │                  │   'stdout': -1,                                                                                                                  │                          │
+│ │                  │   'stderr': -2,                                                                                                                  │                          │
+│ │                  │   'env': {                                                                                                                       │                          │
+│ │                  │   │   'SHELL': '/bin/bash',                                                                                                      │                          │
+│ │                  │   │   'COREPACK_ENABLE_AUTO_PIN': '0',                                                                                           │                          │
+│ │                  │   │   'SESSION_MANAGER': 'local/amritagopi-MS-7C96:@/tmp/.ICE-unix/1275,unix/amritagopi-MS-7C96:/tmp/.ICE-'+9,                   │                          │
+│ │                  │   │   'QT_ACCESSIBILITY': '1',                                                                                                   │                          │
+│ │                  │   │   'COLORTERM': 'truecolor',                                                                                                  │                          │
+│ │                  │   │   'XDG_CONFIG_DIRS': '/etc/xdg/xdg-cinnamon:/etc/xdg',                                                                       │                          │
+│ │                  │   │   'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/amritagopi/.windsurf/extensions/ms-python.debugpy-2025.10.0-linux-x64/.noC'+56, │                          │
+│ │                  │   │   'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0',                                                            │                          │
+│ │                  │   │   'NVM_INC': '/home/amritagopi/.nvm/versions/node/v20.19.4/include/node',                                                    │                          │
+│ │                  │   │   'TERM_PROGRAM_VERSION': '1.99.3',                                                                                          │                          │
+│ │                  │   │   ... +79                                                                                                                    │                          │
+│ │                  │   },                                                                                                                             │                          │
+│ │                  │   'text': True,                                                                                                                  │                          │
+│ │                  │   'encoding': 'UTF-8',                                                                                                           │                          │
+│ │                  │   'errors': 'backslashreplace'                                                                                                   │                          │
+│ │                  }                                                                                                                                  │                          │
+│ │      popenargs = (['docker', 'buildx', 'version'],)                                                                                                 │                          │
+│ │        process = <Popen: returncode: 1 args: ['docker', 'buildx', 'version']>                                                                       │                          │
+│ │        retcode = 1                                                                                                                                  │                          │
+│ │         stderr = None                                                                                                                               │                          │
+│ │         stdout = "docker: 'buildx' is not a docker command.\nSee 'docker --help'\n"                                                                 │                          │
+│ │        timeout = None                                                                                                                               │                          │
+│ ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+CalledProcessError: Command '['docker', 'buildx', 'version']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+╭─────────────────────────────────────────────────────────────────────── Traceback (most recent call last) ────────────────────────────────────────────────────────────────────────╮
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/__main__.py:27 in main                                                                                      │
+│                                                                                                                                                                                  │
+│   24 │   │   │   Path.cwd() / "pyproject.toml",                                                                                                                                  │
+│   25 │   │   │   overrides=overrides,                                                                                                                                            │
+│   26 │   │   )                                                                                                                                                                   │
+│ ❱ 27 │   │   command(**options)                                                                                                                                                  │
+│   28 │   except HelpText as e:                                                                                                                                                   │
+│   29 │   │   console.info()                                                                                                                                                      │
+│   30 │   │   console.info(str(e))                                                                                                                                                │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────────────────────────────────────────── locals ───────────────────────────────────────────────────────────────────────────────────╮ │
+│ │       command = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7ce717ccfb60>                                                                    │ │
+│ │       console = <briefcase.console.Console object at 0x7ce719671460>                                                                                                         │ │
+│ │             e = BriefcaseCommandError('Docker is installed and available for use but the buildx plugin\nis not installed. Briefcase leverages the BuildKit Docker            │ │
+│ │                 backend\nto build Docker images and the buildx plugin makes this available.\n\nSee https://docs.docker.com/go/buildx/ to install the buildx plugin.\n')      │ │
+│ │ extra_cmdline = []                                                                                                                                                           │ │
+│ │       options = {'update': False, 'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                                                                     │ │
+│ │     overrides = {}                                                                                                                                                           │ │
+│ │        result = 200                                                                                                                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/package.py:188 in __call__                                                                         │
+│                                                                                                                                                                                  │
+│   185 │   ) -> dict | None:                                                                                                                                                      │
+│   186 │   │   # Confirm host compatibility, that all required tools are available,                                                                                               │
+│   187 │   │   # and that the app configuration is finalized.                                                                                                                     │
+│ ❱ 188 │   │   self.finalize(app)                                                                                                                                                 │
+│   189 │   │                                                                                                                                                                      │
+│   190 │   │   if app_name:                                                                                                                                                       │
+│   191 │   │   │   try:                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ───────────────────────────────────────────────╮                                                                         │
+│ │      app = None                                                                                      │                                                                         │
+│ │ app_name = None                                                                                      │                                                                         │
+│ │  options = {'packaging_format': 'appimage', 'adhoc_sign': False, 'identity': None}                   │                                                                         │
+│ │     self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7ce717ccfb60> │                                                                         │
+│ │   update = False                                                                                     │                                                                         │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                         │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/commands/base.py:701 in finalize                                                                            │
+│                                                                                                                                                                                  │
+│    698 │   │   │   to finalize. By default, all apps will be finalized.                                                                                                          │
+│    699 │   │   """                                                                                                                                                               │
+│    700 │   │   self.verify_host()                                                                                                                                                │
+│ ❱  701 │   │   self.verify_tools()                                                                                                                                               │
+│    702 │   │                                                                                                                                                                     │
+│    703 │   │   apps = self.apps.values() if app is None else [app]                                                                                                               │
+│    704 │   │   for app in apps:                                                                                                                                                  │
+│                                                                                                                                                                                  │
+│ ╭─────────────────────────────────────────────── locals ────────────────────────────────────────────────╮                                                                        │
+│ │       app = None                                                                                      │                                                                        │
+│ │      self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7ce717ccfb60> │                                                                        │
+│ │ test_mode = False                                                                                     │                                                                        │
+│ ╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                        │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/platforms/linux/appimage.py:144 in verify_tools                                                             │
+│                                                                                                                                                                                  │
+│   141 │   │   """If we're using docker, verify that it is available."""                                                                                                          │
+│   142 │   │   super().verify_tools()                                                                                                                                             │
+│   143 │   │   if self.use_docker:                                                                                                                                                │
+│ ❱ 144 │   │   │   Docker.verify(tools=self.tools)                                                                                                                                │
+│   145 │                                                                                                                                                                          │
+│   146 │   def verify_app_tools(self, app: AppConfig):                                                                                                                            │
+│   147 │   │   """Verify App environment is prepared and available.                                                                                                               │
+│                                                                                                                                                                                  │
+│ ╭───────────────────────────────────────────── locals ─────────────────────────────────────────────╮                                                                             │
+│ │ self = <briefcase.platforms.linux.appimage.LinuxAppImagePackageCommand object at 0x7ce717ccfb60> │                                                                             │
+│ ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯                                                                             │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/base.py:78 in verify                                                                           │
+│                                                                                                                                                                                  │
+│    75 │   ) -> ToolT:                                                                          ╭───────────────────────────────── locals ──────────────────────────────────╮     │
+│    76 │   │   """Confirm the tool is available and usable on the host platform."""             │    app = None                                                             │     │
+│    77 │   │   cls.verify_host(tools=tools)                                                     │ kwargs = {}                                                               │     │
+│ ❱  78 │   │   tool = cls.verify_install(tools=tools, app=app, **kwargs)                        │  tools = <briefcase.integrations.base.ToolCache object at 0x7ce719339cd0> │     │
+│    79 │   │   return tool                                                                      ╰───────────────────────────────────────────────────────────────────────────╯     │
+│    80 │                                                                                                                                                                          │
+│    81 │   @classmethod                                                                                                                                                           │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:158 in verify_install                                                                │
+│                                                                                                                                                                                  │
+│    155 │   │                                                                                    ╭─────────────────────────────────── locals ───────────────────────────────────╮ │
+│    156 │   │   cls._version_compat(tools=tools)                                                 │ image_tag = None                                                             │ │
+│    157 │   │   cls._user_access(tools=tools)                                                    │    kwargs = {'app': None}                                                    │ │
+│ ❱  158 │   │   cls._buildx_installed(tools=tools)                                               │     tools = <briefcase.integrations.base.ToolCache object at 0x7ce719339cd0> │ │
+│    159 │   │                                                                                    ╰──────────────────────────────────────────────────────────────────────────────╯ │
+│    160 │   │   tools.docker = Docker(tools=tools, image_tag=image_tag)                                                                                                           │
+│    161 │   │   return tools.docker                                                                                                                                               │
+│                                                                                                                                                                                  │
+│ /home/amritagopi/GopiAI/.venv/lib/python3.12/site-packages/briefcase/integrations/docker.py:236 in _buildx_installed                                                             │
+│                                                                                                                                                                                  │
+│    233 │   │   │   │   env=cls.subprocess_env(),                                                ╭───────────────────────────────── locals ─────────────────────────────────╮     │
+│    234 │   │   │   )                                                                            │ tools = <briefcase.integrations.base.ToolCache object at 0x7ce719339cd0> │     │
+│    235 │   │   except subprocess.CalledProcessError:                                            ╰──────────────────────────────────────────────────────────────────────────╯     │
+│ ❱  236 │   │   │   raise BriefcaseCommandError(cls.BUILDX_PLUGIN_MISSING)                                                                                                        │
+│    237 │                                                                                                                                                                         │
+│    238 │   def _write_test_path(self) -> Path:                                                                                                                                   │
+│    239 │   │   """Host system filepath to perform write test from a container."""                                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+BriefcaseCommandError: Docker is installed and available for use but the buildx plugin
+is not installed. Briefcase leverages the BuildKit Docker backend
+to build Docker images and the buildx plugin makes this available.
+
+See https://docs.docker.com/go/buildx/ to install the buildx plugin.
+

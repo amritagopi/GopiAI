@@ -56,14 +56,17 @@ class ToolItemWidget(QWidget):
         controls_layout = QHBoxLayout()
         controls_layout.setSpacing(4)
         
-        # Переключатель включен/выключен (иконка)
-        self.toggle_btn = create_icon_button(
-            "power-off" if self.tool_data.get('enabled', True) else "power",
-            "Выключить инструмент" if self.tool_data.get('enabled', True) else "Включить инструмент",
-        )
-        self._update_toggle_button()
-        self.toggle_btn.clicked.connect(self._on_toggle_clicked)
-        controls_layout.addWidget(self.toggle_btn)
+        # Переключатель включен/выключен (иконка) - скрываем для критически важных инструментов
+        if not self._is_critical_tool():
+            self.toggle_btn = create_icon_button(
+                "power-off" if self.tool_data.get('enabled', True) else "power",
+                "Выключить инструмент" if self.tool_data.get('enabled', True) else "Включить инструмент",
+            )
+            self._update_toggle_button()
+            self.toggle_btn.clicked.connect(self._on_toggle_clicked)
+            controls_layout.addWidget(self.toggle_btn)
+        else:
+            self.toggle_btn = None
         
         # Кнопка установки ключа (иконка)
         self.key_btn = create_icon_button("key", "Добавить ключ")
@@ -78,7 +81,20 @@ class ToolItemWidget(QWidget):
         
         layout.addLayout(controls_layout)
     
+    def _is_critical_tool(self) -> bool:
+        """Определяет, является ли инструмент критически важным (нельзя отключать)"""
+        critical_tools = [
+            "Gemini LLM",  # Название инструмента
+            "llm_gemini",  # ID инструмента
+        ]
+        return (self.tool_name in critical_tools or 
+                self.tool_data.get('id', '') in critical_tools or
+                self.tool_data.get('category', '') == 'llm')
+    
     def _update_toggle_button(self):
+        if self.toggle_btn is None:
+            return
+            
         enabled = self.tool_data.get('enabled', True)
         if enabled:
             icon = get_icon("power-off")

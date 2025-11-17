@@ -13,6 +13,8 @@ Iterative Execution System для GopiAI
 import os
 import re
 import ast
+import threading
+import queue
 import json
 import time
 import uuid
@@ -33,6 +35,7 @@ class IterativeExecutor:
         self.pending_commands_store = pending_commands_store if pending_commands_store is not None else {}
         self.pending_commands_lock = None
         self.execution_timeout = 30
+        self.llm_timeout_seconds = 45  # Timeout для LLM вызовов
         self.safe_commands = {
             'ls', 'cat', 'head', 'tail', 'grep', 'find', 'wc', 'pwd', 'date',
             'whoami', 'id', 'ps', 'df', 'du', 'free', 'uptime', 'uname'
@@ -42,24 +45,99 @@ class IterativeExecutor:
         """Извлекает все tool_code блоки из ответа модели"""
         tool_codes = []
         
+        logger.info(f"🔍 Поиск tool_code блоков в ответе: {response[:200]}...")
+        
         # Паттерн для поиска tool_code блоков
         pattern = r'```tool_code\s*\n(.*?)\n```'
         matches = re.findall(pattern, response, re.DOTALL | re.IGNORECASE)
         
+        logger.info(f"🔍 Найдено {len(matches)} tool_code блоков")
+        
         for match in matches:
             try:
+                # Убираем лишние пробелы и переносы строк
+                match = match.strip()
+                
                 # Пытаемся парсить как Python dict/expression
-                if match.strip().startswith('{'):
-                    tool_data = ast.literal_eval(match.strip())
+                if match.startswith('{'):
+                    tool_data = ast.literal_eval(match)
                     tool_codes.append(tool_data)
                 else:
-                    # Fallback для простых команд
-                    tool_codes.append({'tool': 'terminal', 'params': {'command': match.strip()}})
+                    # Парсим как вызов функции (например, "time_helper()" или "time_helper.get_current_time()")
+                    # Ищем паттерн function_name.method_name(args...) или function_name(args...)
+                    func_pattern = r'(\w+)(?:\.[\w_]+)?\((.*?)\)'
+                    func_match = re.match(func_pattern, match)
+                    
+                    if func_match:
+                        func_name = func_match.group(1)
+                        func_args = func_match.group(2)
+                        
+                        # Обрабатываем различные типы инструментов
+                        tool_data = self.parse_tool_call(func_name, func_args)
+                        if tool_data:
+                            tool_codes.append(tool_data)
+                    elif 'datetime' in match and 'now()' in match:
+                        # Обрабатываем Python код для времени как time_helper
+                        tool_codes.append({'tool': 'time_info', 'params': {}})
+                    elif match.startswith('bash:'):
+                        # Обрабатываем команды в формате "bash: команда"
+                        command = match[5:].strip()  # Убираем "bash:" и пробелы
+                        tool_codes.append({'tool': 'terminal', 'params': {'command': command}})
+                        logger.info(f"🔧 Обработана bash команда: {command}")
+                    elif 'print(' in match or 'import ' in match:
+                        # Обрабатываем Python код как terminal команду
+                        # Запускаем через python -c
+                        python_code = match.replace('\n', '; ')
+                        tool_codes.append({'tool': 'terminal', 'params': {'command': f'python3 -c "{python_code}"'}})
+                    else:
+                        # Fallback для простых команд/строк
+                        tool_codes.append({'tool': 'terminal', 'params': {'command': match}})
+                        
             except Exception as e:
                 logger.warning(f"Не удалось распарсить tool_code: {match[:100]}... Error: {e}")
                 continue
                 
         return tool_codes
+    
+    def parse_tool_call(self, func_name: str, func_args: str) -> Dict[str, Any]:
+        """Парсит вызов инструмента в формате function_name(args...)"""
+        try:
+            # Мапим имена функций к инструментам
+            tool_mapping = {
+                'time_helper': 'time_info',
+                'execute_shell': 'terminal',
+                'system_info': 'system_info', 
+                'file_operations': 'file_operations',
+                'web_scraper': 'web_scraper',
+                'api_client': 'api_client',
+                'project_helper': 'project_info'
+            }
+            
+            tool_name = tool_mapping.get(func_name, func_name)
+            
+            # Парсим аргументы
+            if func_args.strip():
+                # Пытаемся безопасно распарсить аргументы
+                try:
+                    # Для простых строковых аргументов в кавычках
+                    if func_args.startswith('"') and func_args.endswith('"'):
+                        args = func_args[1:-1]  # Убираем кавычки
+                        return {'tool': tool_name, 'params': {'command': args}}
+                    elif func_args.startswith("'") and func_args.endswith("'"):
+                        args = func_args[1:-1]  # Убираем кавычки
+                        return {'tool': tool_name, 'params': {'command': args}}
+                    else:
+                        # Для более сложных случаев
+                        return {'tool': tool_name, 'params': {'raw_args': func_args}}
+                except Exception:
+                    return {'tool': tool_name, 'params': {'raw_args': func_args}}
+            else:
+                # Без аргументов
+                return {'tool': tool_name, 'params': {}}
+                
+        except Exception as e:
+            logger.warning(f"Ошибка парсинга вызова инструмента {func_name}({func_args}): {e}")
+            return None
     
     def check_command_approval(self, command: str) -> Dict[str, Any]:
         """
@@ -93,8 +171,33 @@ class IterativeExecutor:
         safe_commands = {
             'ls', 'cat', 'head', 'tail', 'pwd', 'date', 'whoami', 'id', 
             'ps', 'df', 'du', 'free', 'uptime', 'uname', 'which', 'type',
-            'echo', 'wc', 'sort', 'uniq'
+            'echo', 'wc', 'sort', 'uniq', 'mkdir', 'file', 'grep', 'find',
+            'tree', 'stat', 'md5sum', 'sha256sum', 'history', 'env',
+            'python3 -c', 'node -e', 'rm', 'rmdir'
         }
+        
+        # Также проверяем популярные safe паттерны
+        safe_patterns = [
+            r'^ls( -[a-zA-Z]+)?( .+)?$',  # ls с любыми флагами
+            r'^cat [^|&;<>]+$',           # cat одного файла 
+            r'^file [^|&;<>]+$',          # file команда
+            r'^python3? -c ["\'].+["\']$',  # python -c с кодом в кавычках
+            r'^find [^|&;<>]+ -name [^|&;<>]+$',  # простой find
+            r'^grep [^|&;<>]+ [^|&;<>]+$',  # простой grep
+            r'^rm( -[rf]+)? [^|&;<>]+$',  # rm с флагами -r, -f для файлов/папок
+            r'^rmdir [^|&;<>]+$',         # rmdir для папок
+        ]
+        
+        # Проверяем safe паттерны сначала
+        for pattern in safe_patterns:
+            if re.match(pattern, command.strip()):
+                logger.info(f"[APPROVAL] Команда соответствует безопасному паттерну: {pattern}")
+                return {
+                    'needs_approval': False,
+                    'approved': True,
+                    'command_id': None,
+                    'reason': 'Safe pattern'
+                }
         
         # Если команда безопасная и не содержит опасных паттернов
         if cmd in safe_commands:
@@ -156,7 +259,7 @@ class IterativeExecutor:
     def assess_command_risk(self, command: str) -> str:
         """Оценивает уровень риска команды"""
         high_risk_patterns = ['rm', 'del', 'format', 'mkfs', 'dd', 'sudo', 'chmod 777', 'chown']
-        medium_risk_patterns = ['mv', 'cp', 'mkdir', 'chmod', 'chown', '>', '>>', 'wget', 'curl']
+        medium_risk_patterns = ['mv', 'cp', 'chmod', 'chown', '>', '>>', 'wget', 'curl']
         
         command_lower = command.lower()
         
@@ -213,7 +316,7 @@ class IterativeExecutor:
                 logger.info(f"Ожидание подтверждения команды: {command} (ID: {command_id})")
                 
                 # Ожидаем подтверждения
-                if not self.wait_for_approval(command_id, timeout=120):  # 2 минуты
+                if not self.wait_for_approval(command_id, timeout=90):  # 1.5 минуты
                     return {
                         'success': False,
                         'error': f'Команда не подтверждена пользователем или истекло время ожидания: {command}',
@@ -230,15 +333,23 @@ class IterativeExecutor:
                 }
             
         try:
+            cwd_path = os.path.dirname(os.path.abspath(__file__))
             logger.info(f"Выполнение команды: {command}")
+            logger.info(f"Рабочая директория: {cwd_path}")
             result = subprocess.run(
                 command,
                 shell=True,
                 capture_output=True,
                 text=True,
                 timeout=self.execution_timeout,
-                cwd=os.path.expanduser('~')
+                cwd=cwd_path
             )
+            
+            logger.info(f"Результат выполнения: код {result.returncode}")
+            if result.stdout:
+                logger.info(f"Вывод команды: {result.stdout}")
+            if result.stderr:
+                logger.info(f"Ошибка команды: {result.stderr}")
             
             return {
                 'success': result.returncode == 0,
@@ -268,8 +379,10 @@ class IterativeExecutor:
         tool_name = tool_data.get('tool', '').lower()
         params = tool_data.get('params', {})
         
+        logger.info(f"🔧 Выполняем инструмент: {tool_name} с параметрами: {params}")
+        
         if tool_name == 'terminal':
-            command = params.get('command', '')
+            command = params.get('command', params.get('raw_args', ''))
             return self.execute_terminal_command(command)
         
         elif tool_name == 'file_read':
@@ -279,6 +392,20 @@ class IterativeExecutor:
         elif tool_name == 'system_info':
             return self.get_system_info()
             
+        elif tool_name == 'time_info':
+            return self.get_time_info()
+            
+        elif tool_name == 'project_info':
+            return self.get_project_info()
+            
+        elif tool_name == 'file_operations':
+            operation = params.get('raw_args', '').split(',')[0].strip('"\'') if 'raw_args' in params else ''
+            if 'create' in operation:
+                filename = params.get('raw_args', '').split(',')[1].strip().strip('"\'') if ',' in params.get('raw_args', '') else 'test.txt'
+                return self.create_file(filename)
+            else:
+                return {'success': False, 'error': f'Неизвестная файловая операция: {operation}', 'output': ''}
+        
         else:
             return {
                 'success': False,
@@ -353,6 +480,115 @@ class IterativeExecutor:
                 'output': ''
             }
     
+    def get_time_info(self) -> Dict[str, Any]:
+        """Получение текущего времени"""
+        try:
+            from datetime import datetime
+            now = datetime.now()
+            time_info = {
+                'current_time': now.strftime('%Y-%m-%d %H:%M:%S'),
+                'timestamp': time.time(),
+                'timezone': str(now.astimezone().tzinfo),
+                'weekday': now.strftime('%A'),
+                'date': now.strftime('%Y-%m-%d')
+            }
+            
+            formatted_time = f"Текущее время: {time_info['current_time']}\nДата: {time_info['date']}\nДень недели: {time_info['weekday']}"
+            
+            return {
+                'success': True,
+                'error': None,
+                'output': formatted_time,
+                'data': time_info
+            }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': f'Ошибка получения времени: {str(e)}',
+                'output': ''
+            }
+    
+    def get_project_info(self) -> Dict[str, Any]:
+        """Получение информации о текущем проекте"""
+        try:
+            cwd = os.getcwd()
+            project_info = {
+                'working_directory': cwd,
+                'project_name': os.path.basename(cwd),
+                'directory_contents': [],
+                'is_git_repo': os.path.exists(os.path.join(cwd, '.git'))
+            }
+            
+            # Получаем содержимое директории (только первый уровень)
+            try:
+                for item in sorted(os.listdir(cwd))[:20]:  # Ограничиваем до 20 элементов
+                    item_path = os.path.join(cwd, item)
+                    if os.path.isdir(item_path):
+                        project_info['directory_contents'].append(f"📁 {item}/")
+                    else:
+                        project_info['directory_contents'].append(f"📄 {item}")
+            except Exception:
+                project_info['directory_contents'] = ['Не удалось получить содержимое директории']
+            
+            output = f"""Информация о проекте:
+Рабочая директория: {project_info['working_directory']}
+Название проекта: {project_info['project_name']}
+Git репозиторий: {'Да' if project_info['is_git_repo'] else 'Нет'}
+
+Содержимое директории:
+{chr(10).join(project_info['directory_contents'])}"""
+            
+            return {
+                'success': True,
+                'error': None,
+                'output': output,
+                'data': project_info
+            }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': f'Ошибка получения информации о проекте: {str(e)}',
+                'output': ''
+            }
+    
+    def create_file(self, filename: str) -> Dict[str, Any]:
+        """Создание пустого файла"""
+        try:
+            # Безопасная проверка имени файла
+            if not filename or '/' in filename or '\\' in filename:
+                return {
+                    'success': False,
+                    'error': 'Недопустимое имя файла',
+                    'output': ''
+                }
+            
+            file_path = os.path.join(os.getcwd(), filename)
+            
+            # Проверяем, что файл не существует
+            if os.path.exists(file_path):
+                return {
+                    'success': False,
+                    'error': f'Файл {filename} уже существует',
+                    'output': ''
+                }
+            
+            # Создаем пустой файл
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write('')
+            
+            return {
+                'success': True,
+                'error': None,
+                'output': f'Файл {filename} успешно создан',
+                'file_path': file_path
+            }
+        except Exception as e:
+            return {
+                'success': False,
+                'error': f'Ошибка создания файла {filename}: {str(e)}',
+                'output': ''
+            }
+    
     def format_execution_results(self, results: List[Dict[str, Any]]) -> str:
         """Форматирует результаты выполнения для отправки обратно в модель"""
         if not results:
@@ -423,17 +659,59 @@ class IterativeExecutor:
         for iteration in range(self.max_iterations):
             logger.info(f"Итерация {iteration + 1}/{self.max_iterations}")
             
-            # Генерируем ответ от модели
+            # Генерируем ответ от модели с timeout
             try:
-                response = llm_client.generate_response(current_message, metadata or {})
-                conversation_history.append({
-                    'iteration': iteration + 1,
-                    'input': current_message,
-                    'response': response,
-                    'timestamp': time.time()
-                })
+                logger.debug(f"Вызов LLM с timeout {self.llm_timeout_seconds}s")
                 
-                logger.info(f"Получен ответ модели: {response[:200]}...")
+                result_queue = queue.Queue()
+                exception_queue = queue.Queue()
+                
+                def llm_call():
+                    try:
+                        result = llm_client.generate_response(current_message, metadata or {})
+                        result_queue.put(result)
+                    except Exception as e:
+                        exception_queue.put(e)
+                
+                thread = threading.Thread(target=llm_call)
+                thread.daemon = True
+                thread.start()
+                thread.join(timeout=self.llm_timeout_seconds)
+                
+                if thread.is_alive():
+                    logger.error(f"❌ LLM вызов превысил timeout {self.llm_timeout_seconds}s")
+                    # Попытаемся прервать итерацию и дать частичный ответ
+                    if conversation_history:
+                        logger.info("Возвращаем последний доступный ответ из-за timeout")
+                        break
+                    else:
+                        # Первая итерация - дадим базовый ответ
+                        response = "Извините, произошла ошибка с обработкой запроса (timeout). Попробуйте еще раз."
+                        conversation_history.append({
+                            'iteration': iteration + 1,
+                            'input': current_message,
+                            'response': response,
+                            'timestamp': time.time(),
+                            'error': 'timeout'
+                        })
+                        break
+                
+                if not exception_queue.empty():
+                    raise exception_queue.get()
+                    
+                if not result_queue.empty():
+                    response = result_queue.get()
+                    conversation_history.append({
+                        'iteration': iteration + 1,
+                        'input': current_message,
+                        'response': response,
+                        'timestamp': time.time()
+                    })
+                    
+                    logger.info(f"Получен ответ модели: {response[:200]}...")
+                else:
+                    logger.error("LLM не вернул результат")
+                    break
                 
             except Exception as e:
                 logger.error(f"Ошибка получения ответа от модели: {e}")
